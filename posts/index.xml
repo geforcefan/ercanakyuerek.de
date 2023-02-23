@@ -2,5 +2,5 @@
 <p>At this point in time, the simulator does not support a block system or multi-track functionality. However, I am actively working on implementing these features. It is worth noting that the simulator runs in a browser, and has been written in c++ and compiled to WebAssembly. Consequently, a lightweight version of the software is available for use in web browsers, while the desktop version is built using Unreal Engine 5.</p>
 <p>To give you a better idea of the current implementation of the simulator, I have created an interactive example for you to try. You can switch between two coasters from the NoLimits2 library, change the camera perspective, and live adjust gravity and friction. Please note that since the user interface library I am using has no capabilities to allow more than two decimal points, there are no adjustment options for air resistance. Additionally, the track itself is not yet connected, and the sections only provide simple acceleration and deceleration on sections without a block system.</p>
 
-<iframe src="/simulator-1.html" style="border: 0; width: 100%; height: 600px;"></iframe>
+<iframe src="https://geforcefan.github.io/ercanakyuerek.de//simulator-1.html" style="border: 0; width: 100%; height: 600px;"></iframe>
 ]]></content></item></channel></rss>
