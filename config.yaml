@@ -3,17 +3,18 @@ languageCode: en-us
 theme: hello-friend-ng
 paginate: 10
 params:
-  dateform: 'Jan 2, 2006'
-  dateformShort: Jan 2
-  dateformNum: '2006-01-02'
-  dateformNumTime: '2006-01-02 15:04'
   homeSubtitle: exploring the world of software development and sharing my vision.
   disableReadOtherPosts: false
   enableSharingButtons: true
   description: My new homepage or blog
   keywords: 'homepage, blog'
-  images:
-    - ''
+  social:
+    - name: "xing"
+      url: "https://www.xing.com/profile/Ercan_Akyuerek"
+    - name: "linkedin"
+      url: "https://www.linkedin.com/in/ercan-aky%C3%BCrek-732359183/"
+    - name: "github"
+      url: "https://github.com/geforcefan"
 taxonomies:
   category: blog
   tag: tags
@@ -24,9 +25,11 @@ languages:
     params:
       logo:
         logoText: ercanakyuerek.de
-        logoHomeLink: /
 menu:
   main:
+    - identifier: aboutme
+      name: About me
+      url: /about
     - identifier: blog
       name: Blog
       url: /posts
