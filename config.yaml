@@ -1,0 +1,32 @@
+baseURL: 'http://ercanakyuerek.de/'
+languageCode: en-us
+theme: hello-friend-ng
+paginate: 10
+params:
+  dateform: 'Jan 2, 2006'
+  dateformShort: Jan 2
+  dateformNum: '2006-01-02'
+  dateformNumTime: '2006-01-02 15:04'
+  homeSubtitle: exploring the world of software development and sharing my vision.
+  disableReadOtherPosts: false
+  enableSharingButtons: true
+  description: My new homepage or blog
+  keywords: 'homepage, blog'
+  images:
+    - ''
+taxonomies:
+  category: blog
+  tag: tags
+  series: series
+languages:
+  en:
+    title: Ercan Akyürek
+    params:
+      logo:
+        logoText: ercanakyuerek.de
+        logoHomeLink: /
+menu:
+  main:
+    - identifier: blog
+      name: Blog
+      url: /posts
