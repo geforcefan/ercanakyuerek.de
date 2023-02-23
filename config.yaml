@@ -6,7 +6,6 @@ params:
   homeSubtitle: exploring the world of software development and sharing my vision.
   disableReadOtherPosts: false
   enableSharingButtons: true
-  description: My new homepage or blog
   keywords: 'homepage, blog'
   social:
     - name: "email"
