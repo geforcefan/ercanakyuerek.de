@@ -1,4 +1,44 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 23 Feb 2023 16:28:20 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Roller Coaster Simulation - First results</title><link>https://ercanakyuerek.de/posts/open-source-roller-coaster-simulation/first-results/</link><pubDate>Thu, 23 Feb 2023 16:28:20 +0100</pubDate><guid>https://ercanakyuerek.de/posts/open-source-roller-coaster-simulation/first-results/</guid><description>I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.</description><content type="html"><![CDATA[<p>I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.</p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 23 Feb 2023 22:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - Part 1</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/</link><pubDate>Thu, 23 Feb 2023 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/</guid><description>You may have already heard that it&amp;rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.</description><content type="html"><![CDATA[<p>You may have already heard that it&rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.</p>
+<p>However, as of the writing of this article in 2023, there are no final specifications or mature bindings available for the C++ and JavaScript stack. This means that if you choose to use WebAssembly, you will largely be on your own.</p>
+<h2 id="using-webassembly-as-a-regular-javascript-module">Using WebAssembly as a Regular JavaScript Module</h2>
+<p>This is a crucial aspect that I wish to explore. I want to write parts of my application in C++ and use them as regular modules in JavaScript. As previously mentioned, there is no NPM infrastructure available for compiling or generating bindings that can produce JavaScript files that export modules with exposed C++ functions. In this series, we will construct a minimalist infrastructure that emulates familiar module structures.</p>
+<h2 id="building-an-example-library-for-computing-bezier-curves">Building an Example Library for Computing Bezier Curves</h2>
+<p>For this article, we will create a very minimalistic library for computing bezier curves. We will set up this project in a way that the library can be used in a regular C++ application, as well as in a web application.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Please ensure that you have installed both <code>Node.js</code> and <code>Docker</code> on your computer. We will utilize the WASI-SDK Docker image for constructing the WebAssembly library.</p>
+<h2 id="project-structure">Project structure</h2>
+<p>First, let&rsquo;s create a folder named <code>libComputation</code> and run <code>npm init</code> inside the folder, following the input instructions. After initializing an npm project, replicate this folder structure and create the following files:</p>
+<pre tabindex="0"><code>libComputation
+    glue
+        CMakeLists.txt
+        glue.cc
+    src
+        CMakeLists.txt
+    CMakeLists.txt
+    build-wasm.js
+    index.js
+</code></pre><p>As you can see, this resembles a regular CMake project with WebAssembly compilation additions.
+We will use <code>build-wasm.js</code> for compilation purposes, and for that, we need to install some npm
+modules for creating directories and parsing arguments:</p>
+<pre tabindex="0"><code>npm install shelljs args-parser --save-dev
+</code></pre><p>Now, add the following build scripts in the <code>package.json</code> file, which we will use for different use cases:</p>
+<pre tabindex="0"><code>...
+  &#34;scripts&#34;: {
+    &#34;build&#34;: &#34;node build-wasm.js&#34;,
+    &#34;build-run&#34;: &#34;node build-wasm.js --run&#34;,
+    &#34;compile&#34;: &#34;node build-wasm.js --compileOnly&#34;,
+    &#34;compile-run&#34;: &#34;node build-wasm.js --compileOnly --run&#34;
+  },
+...
+</code></pre><p>As you can see, there is a folder named <code>glue</code>. In this subdirectory,
+we will define all exports and bindings to the WebAssembly Module,
+so that all files inside the <code>src</code> folder will be free from WASI artifacts.
+We have intentionally split both directories because our goal is to use the libraries in regular
+desktop applications as well, where <code>WASI SDK</code> is not used to build the library.
+This approach ensures high flexibility when using the library in both the browser and desktop
+environments.</p>
+<p>In the next part, we will create the build script and set up the CMake files.</p>
+]]></content></item><item><title>Roller Coaster Simulation - First results</title><link>https://ercanakyuerek.de/posts/roller-coaster-simulation/first-results/</link><pubDate>Thu, 23 Feb 2023 16:28:20 +0100</pubDate><guid>https://ercanakyuerek.de/posts/roller-coaster-simulation/first-results/</guid><description>I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.</description><content type="html"><![CDATA[<p>I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.</p>
 <p>At this point in time, the simulator does not support a block system or multi-track functionality. However, I am actively working on implementing these features. It is worth noting that the simulator runs in a browser, and has been written in c++ and compiled to WebAssembly. Consequently, a lightweight version of the software is available for use in web browsers, while the desktop version is built using Unreal Engine 5.</p>
 <p>To give you a better idea of the current implementation of the simulator, I have created an interactive example for you to try. You can switch between two coasters from the NoLimits2 library, change the camera perspective, and live adjust gravity and friction. Please note that since the user interface library I am using has no capabilities to allow more than two decimal points, there are no adjustment options for air resistance. Additionally, the track itself is not yet connected, and the sections only provide simple acceleration and deceleration on sections without a block system.</p>
 
