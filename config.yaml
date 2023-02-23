@@ -9,6 +9,8 @@ params:
   description: My new homepage or blog
   keywords: 'homepage, blog'
   social:
+    - name: "email"
+      url: "mailto:ercan.akyuerek@gmail.com"
     - name: "xing"
       url: "https://www.xing.com/profile/Ercan_Akyuerek"
     - name: "linkedin"
