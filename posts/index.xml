@@ -1,4 +1,79 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 23 Feb 2023 22:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - Part 1</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/</link><pubDate>Thu, 23 Feb 2023 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/</guid><description>You may have already heard that it&amp;rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.</description><content type="html"><![CDATA[<p>You may have already heard that it&rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.</p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 24 Feb 2023 00:19:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/</guid><description>If you haven&amp;rsquo;t read the second article of this series, I highly recommend that you do so.
+In this article, we&amp;rsquo;ll be exploring a more interesting example where we&amp;rsquo;ll construct a bezier curve, evaluate nodes on it, and write a function that gives any position on the curve by a length parameter. To explain briefly, a bezier curve is represented by a parameter t, which varies between 0 and 1 and determines the position of nodes on the curve.</description><content type="html"><![CDATA[<p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/">If you haven&rsquo;t read the second article of this series, I highly recommend that you do so.</a></p>
+<p>In this article, we&rsquo;ll be exploring a more interesting example where we&rsquo;ll construct a bezier curve, evaluate nodes on it, and write a function that gives any position on the curve by a length parameter. To explain briefly, a bezier curve is represented by a parameter <code>t</code>, which varies between 0 and 1 and determines the position of nodes on the curve. However, this <code>t</code> value doesn&rsquo;t produce uniform spacing, which is problematic when we want to evaluate a point on the curve based on its distance. To solve this, we can evaluate some nodes along the curve with known distances and then linearly interpolate new nodes between them to find the point we&rsquo;re looking for.</p>
+<p>While this is a specific example, it involves &ldquo;complex&rdquo; types such as custom structs and 3D vectors that will need to be accessed from a web browser. So it should serve as a useful case for testing our library 😄</p>
+<h2 id="adding-a-third-party-library">Adding a third party library</h2>
+<p>I mentioned 3D vectors, so there is a well-known library called <code>glm</code>. I know that this is an overkill library for our &ldquo;simple&rdquo; problem, but it serves the purpose of showing how to add other libraries to our project. Ideally, the 3rd party library also has a CMake ecosystem. Otherwise, we need to be creative, fortunately. <code>glm</code> provides CMake files. My approach is to add a git submodule into the root directory by calling:</p>
+<pre tabindex="0"><code>git submodule add https://github.com/g-truc/glm.git
+</code></pre><p>We must include the glm directory as an include in our root <code>CMakeList.txt</code>, as the glm library is a header-only library and does not need to be linked against anything:</p>
+<pre tabindex="0"><code>include_directories(glm)
+</code></pre><h2 id="spline-implementation">Spline implementation</h2>
+<p>I don&rsquo;t want to go into too much detail, but I have implemented a solution for the problem described above. Stay tuned for the upcoming section where I&rsquo;ll walk you through the implementation step-by-step.</p>
+]]></content></item><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - CMake and build scripts</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/</link><pubDate>Thu, 23 Feb 2023 23:15:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/</guid><description>If you haven&amp;rsquo;t read the first article of this series, I highly recommend that you do so.
+To simplify the building process, we can create a build script. We have already defined some scripts in our package.json file. At this point, the build-wasm.js file is still empty, so we can create a basic script that first deletes an existing build folder, creates a new one, and runs cmake .. inside it.</description><content type="html"><![CDATA[<p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/">If you haven&rsquo;t read the first article of this series, I highly recommend that you do so.</a></p>
+<p>To simplify the building process, we can create a build script. We have already defined some scripts in our <code>package.json</code> file. At this point, the <code>build-wasm.js</code> file is still empty, so we can create a basic script that first deletes an existing <code>build</code> folder, creates a new one, and runs <code>cmake ..</code> inside it. We will be using a WASI-SDK docker image from <code>ghcr.io/webassembly/wasi-sdk</code> to run cmake and eventually compile the project via <code>make</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">rm</span>, <span style="color:#a6e22e">mkdir</span>, <span style="color:#a6e22e">exec</span>, <span style="color:#a6e22e">cp</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;shelljs&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">join</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;path&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">compileOnly</span>, <span style="color:#a6e22e">run</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;args-parser&#34;</span>)(<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">argv</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">paths</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">build</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#34;build&#34;</span>),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">glueSource</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#34;build&#34;</span>, <span style="color:#e6db74">&#34;glue&#34;</span>, <span style="color:#e6db74">&#34;glue&#34;</span>),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">glueDestination</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#34;glue.wasm&#34;</span>),
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">compileOnly</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">rm</span>(<span style="color:#e6db74">&#34;-rf&#34;</span>, <span style="color:#a6e22e">paths</span>.<span style="color:#a6e22e">glueDestination</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">rm</span>(<span style="color:#e6db74">&#34;-rf&#34;</span>, <span style="color:#a6e22e">paths</span>.<span style="color:#a6e22e">build</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mkdir</span>(<span style="color:#a6e22e">paths</span>.<span style="color:#a6e22e">build</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">exec</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;docker run -v `pwd`:/wasi -w /wasi/build ghcr.io/webassembly/wasi-sdk cmake -DCMAKE_BUILD_TYPE=Release ..&#34;</span>
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">exec</span>(
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;docker run -v `pwd`:/wasi -w /wasi/build ghcr.io/webassembly/wasi-sdk make -j 10&#34;</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cp</span>(<span style="color:#a6e22e">paths</span>.<span style="color:#a6e22e">glueSource</span>, <span style="color:#a6e22e">paths</span>.<span style="color:#a6e22e">glueDestination</span>);
+</span></span></code></pre></div><p>We will provide CMake directives for automatically adding all <code>*.cc</code> files in the <code>glue</code> and <code>src</code> directories. If you prefer using the <code>.cpp</code> extension instead, feel free to modify the files accordingly. We will also ensure that we build a static library by using the <code>STATIC</code> keyword in the add_library function. Therefore, the content of the <code>src/CMakeLists.txt</code> file is as follows:</p>
+<pre tabindex="0"><code class="language-editorconfig" data-lang="editorconfig">project(calculation)
+
+file(GLOB_RECURSE SRC_SOURCES *.cc)
+file(GLOB_RECURSE SRC_HEADERS *.h)
+
+add_library(${PROJECT_NAME} STATIC ${SRC_SOURCES} ${SRC_HEADERS})
+add_library(calculation::calculation ALIAS ${PROJECT_NAME})
+</code></pre><p>The <code>glue/CMakeLists.txt</code> file will slightly differ from the one in <code>src</code>. As mentioned earlier, <code>glue</code> will serve as the final WebAssembly &ldquo;application&rdquo; that statically links our <code>calculation</code> library and exposes manually exported functions. We&rsquo;ll need to handle complex data types such as <code>vectors</code> and <code>structs</code>, but we&rsquo;ll cover that in the next chapters. For now, it&rsquo;s important to understand that <code>glue</code> is essentially our end product that links to our <code>calculation</code> library:</p>
+<pre tabindex="0"><code class="language-editorconfig" data-lang="editorconfig">project(glue)
+
+file(GLOB_RECURSE SRC_SOURCES *.cc)
+file(GLOB_RECURSE SRC_HEADERS *.h)
+
+add_executable(${PROJECT_NAME} ${SRC_SOURCES} ${SRC_HEADERS})
+target_link_libraries(glue calculation::calculation)
+</code></pre><p>Now we need to bring everything together in the <code>CMakeList.txt</code> file in our root directory, which basically means adding the directories <code>glue</code> and <code>src</code>, setting some optimization flags for release mode, and disabling exceptions for WASI since exceptions are currently not supported by WASI-SDK. Here&rsquo;s what the file should look like:</p>
+<pre tabindex="0"><code class="language-editorconfig" data-lang="editorconfig">cmake_minimum_required (VERSION 3.9 FATAL_ERROR)
+project (CALCULATION LANGUAGES CXX VERSION 0.1.0)
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS_RELEASE &#34;-O3&#34;)
+
+# Disable exceptions
+if (CMAKE_SYSTEM_NAME STREQUAL &#34;WASI&#34;)
+    string(REGEX REPLACE &#34;-fexceptions&#34; &#34;&#34; CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+    set(CMAKE_CXX_FLAGS &#34;${CMAKE_CXX_FLAGS} -fno-exceptions&#34;)
+endif()
+
+include_directories(src)
+add_subdirectory(src)
+add_subdirectory(glue)
+</code></pre><p>To test our setup, we need to add a main function to the file <code>glue/glue.cc</code>. The files <code>spline.cc</code> and <code>spline.h</code> can remain empty for now as they are not necessary to test our setup:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {}
+</span></span></code></pre></div><p>Finally, we can run our build script and see what happens 😄. To run the build script, simply execute <code>npm run build</code>. After it finishes executing, there should be a newly created file in the root directory named <code>glue.wasm</code>, which confirms that our setup is correct. However, this file does not have any functionality at the moment, <a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/">but that will change in the next chapter.</a></p>
+<p><img src="/wasi-sdk-writing-library-in-cpp-2/final_structure.png" alt="final structure"></p>
+]]></content></item><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - Folder structure</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/</link><pubDate>Thu, 23 Feb 2023 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/</guid><description>You may have already heard that it&amp;rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.</description><content type="html"><![CDATA[<p>You may have already heard that it&rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.</p>
 <p>However, as of the writing of this article in 2023, there are no final specifications or mature bindings available for the C++ and JavaScript stack. This means that if you choose to use WebAssembly, you will largely be on your own.</p>
 <h2 id="using-webassembly-as-a-regular-javascript-module">Using WebAssembly as a Regular JavaScript Module</h2>
 <p>This is a crucial aspect that I wish to explore. I want to write parts of my application in C++ and use them as regular modules in JavaScript. As previously mentioned, there is no NPM infrastructure available for compiling or generating bindings that can produce JavaScript files that export modules with exposed C++ functions. In this series, we will construct a minimalist infrastructure that emulates familiar module structures.</p>
@@ -14,6 +89,8 @@
         glue.cc
     src
         CMakeLists.txt
+        spline.cc
+        spline.h
     CMakeLists.txt
     build-wasm.js
     index.js
@@ -22,22 +99,20 @@ We will use <code>build-wasm.js</code> for compilation purposes, and for that, w
 modules for creating directories and parsing arguments:</p>
 <pre tabindex="0"><code>npm install shelljs args-parser --save-dev
 </code></pre><p>Now, add the following build scripts in the <code>package.json</code> file, which we will use for different use cases:</p>
-<pre tabindex="0"><code>...
-  &#34;scripts&#34;: {
-    &#34;build&#34;: &#34;node build-wasm.js&#34;,
-    &#34;build-run&#34;: &#34;node build-wasm.js --run&#34;,
-    &#34;compile&#34;: &#34;node build-wasm.js --compileOnly&#34;,
-    &#34;compile-run&#34;: &#34;node build-wasm.js --compileOnly --run&#34;
-  },
-...
-</code></pre><p>As you can see, there is a folder named <code>glue</code>. In this subdirectory,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;scripts&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;build&#34;</span>: <span style="color:#e6db74">&#34;node build-wasm.js&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;compile&#34;</span>: <span style="color:#e6db74">&#34;node build-wasm.js --compileOnly&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>As you can see, there is a folder named <code>glue</code>. In this subdirectory,
 we will define all exports and bindings to the WebAssembly Module,
 so that all files inside the <code>src</code> folder will be free from WASI artifacts.
 We have intentionally split both directories because our goal is to use the libraries in regular
 desktop applications as well, where <code>WASI SDK</code> is not used to build the library.
 This approach ensures high flexibility when using the library in both the browser and desktop
 environments.</p>
-<p>In the next part, we will create the build script and set up the CMake files.</p>
+<p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/">In the next part, we will create the build script and set up the CMake files.</a></p>
 ]]></content></item><item><title>Roller Coaster Simulation - First results</title><link>https://ercanakyuerek.de/posts/roller-coaster-simulation/first-results/</link><pubDate>Thu, 23 Feb 2023 16:28:20 +0100</pubDate><guid>https://ercanakyuerek.de/posts/roller-coaster-simulation/first-results/</guid><description>I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.</description><content type="html"><![CDATA[<p>I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.</p>
 <p>At this point in time, the simulator does not support a block system or multi-track functionality. However, I am actively working on implementing these features. It is worth noting that the simulator runs in a browser, and has been written in c++ and compiled to WebAssembly. Consequently, a lightweight version of the software is available for use in web browsers, while the desktop version is built using Unreal Engine 5.</p>
 <p>To give you a better idea of the current implementation of the simulator, I have created an interactive example for you to try. You can switch between two coasters from the NoLimits2 library, change the camera perspective, and live adjust gravity and friction. Please note that since the user interface library I am using has no capabilities to allow more than two decimal points, there are no adjustment options for air resistance. Additionally, the track itself is not yet connected, and the sections only provide simple acceleration and deceleration on sections without a block system.</p>
