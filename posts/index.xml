@@ -8,7 +8,137 @@ In this article, we&amp;rsquo;ll be exploring a more interesting example where w
 </code></pre><p>We must include the glm directory as an include in our root <code>CMakeList.txt</code>, as the glm library is a header-only library and does not need to be linked against anything:</p>
 <pre tabindex="0"><code>include_directories(glm)
 </code></pre><h2 id="spline-implementation">Spline implementation</h2>
-<p>I don&rsquo;t want to go into too much detail, but I have implemented a solution for the problem described above. Stay tuned for the upcoming section where I&rsquo;ll walk you through the implementation step-by-step.</p>
+<p>In summary, I have developed a solution for the problem discussed earlier, but I won&rsquo;t delve too deeply into the technical details. The primary function of my implementation, bezier_fast, computes the position on a bezier curve based on a given t parameter. Additionally, estimate_length is used to calculate the curve&rsquo;s length very quickly with a low step size. This estimation is necessary to determine how many nodes we should evaluate. With this method, we can create densely populated nodes depending on the curve&rsquo;s length. The evaluate function executes the procedure I just described. Naturally, we can always measure the distance between the evaluated position and the previous one to obtain the curve&rsquo;s total length, which we simply pass through the get_length function. Lastly, get_position_at_distance searches for the minimum node at a specified distance and linearly interpolates the position to the next node. We have successfully achieved the ability to evaluate uniformly spaced points on the curve.</p>
+<p><code>src/spline.cc:</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;spline.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;glm/geometric.hpp&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> spline<span style="color:#f92672">::</span>evaluate() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> numberOfNodes <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)(estimate_length() <span style="color:#f92672">*</span> <span style="color:#ae81ff">20.0f</span>);
+</span></span><span style="display:flex;"><span>    glm<span style="color:#f92672">::</span>vec3 lastPos <span style="color:#f92672">=</span> cp1;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> numberOfNodes; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">float</span> t <span style="color:#f92672">=</span> (<span style="color:#66d9ef">float</span>) i <span style="color:#f92672">/</span> (<span style="color:#66d9ef">float</span>) (numberOfNodes <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        glm<span style="color:#f92672">::</span>vec3 position <span style="color:#f92672">=</span> bezier_fast(cp1, cp2, cp3, cp4, t);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">float</span> distance <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>distance(position, lastPos);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        nodes.push_back({
+</span></span><span style="display:flex;"><span>            .position <span style="color:#f92672">=</span> position,
+</span></span><span style="display:flex;"><span>            .distance <span style="color:#f92672">=</span> distance
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        lastPos <span style="color:#f92672">=</span> position;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>glm<span style="color:#f92672">::</span>vec3 spline<span style="color:#f92672">::</span>bezier_fast(glm<span style="color:#f92672">::</span>vec3 p0, glm<span style="color:#f92672">::</span>vec3 p1, glm<span style="color:#f92672">::</span>vec3 p2, glm<span style="color:#f92672">::</span>vec3 p3, <span style="color:#66d9ef">float</span> t) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> t1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0f</span><span style="color:#f92672">-</span>t;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> b0 <span style="color:#f92672">=</span> t1 <span style="color:#f92672">*</span> t1 <span style="color:#f92672">*</span> t1;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> b1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">*</span> t1 <span style="color:#f92672">*</span> t1 <span style="color:#f92672">*</span> t;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> b2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">*</span> t1 <span style="color:#f92672">*</span> t <span style="color:#f92672">*</span> t;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> b3 <span style="color:#f92672">=</span> t <span style="color:#f92672">*</span> t <span style="color:#f92672">*</span> t;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> b0 <span style="color:#f92672">*</span> p0  <span style="color:#f92672">+</span> b1 <span style="color:#f92672">*</span> p1 <span style="color:#f92672">+</span> b2 <span style="color:#f92672">*</span> p2 <span style="color:#f92672">+</span> b3 <span style="color:#f92672">*</span> p3;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> spline<span style="color:#f92672">::</span>estimate_length() {
+</span></span><span style="display:flex;"><span>    glm<span style="color:#f92672">::</span>vec3 lastPos <span style="color:#f92672">=</span> cp1;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> length <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0f</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">15</span>; i<span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">float</span> t <span style="color:#f92672">=</span> (<span style="color:#66d9ef">float</span>) (i) <span style="color:#f92672">/</span> <span style="color:#ae81ff">14.0f</span>;
+</span></span><span style="display:flex;"><span>        glm<span style="color:#f92672">::</span>vec3 pos <span style="color:#f92672">=</span> bezier_fast(cp1, cp2, cp3, cp4, t);
+</span></span><span style="display:flex;"><span>        length <span style="color:#f92672">+=</span> glm<span style="color:#f92672">::</span>distance(pos, lastPos);
+</span></span><span style="display:flex;"><span>        lastPos <span style="color:#f92672">=</span> pos;
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> length;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>glm<span style="color:#f92672">::</span>vec3 spline<span style="color:#f92672">::</span>get_position_at_distance(<span style="color:#66d9ef">float</span> distance) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (nodes.size() <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span> glm<span style="color:#f92672">::</span>vec3(<span style="color:#ae81ff">0.0f</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> nextNode <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>lower_bound(nodes.begin(), nodes.end(), distance, [](<span style="color:#66d9ef">auto</span> a, <span style="color:#66d9ef">double</span> value) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">bool</span> { <span style="color:#66d9ef">return</span> a.distance <span style="color:#f92672">&lt;</span> value; });
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> currentNode <span style="color:#f92672">=</span> nextNode <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> isFirst <span style="color:#f92672">=</span> nextNode <span style="color:#f92672">==</span> nodes.begin();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> isLast <span style="color:#f92672">=</span> currentNode <span style="color:#f92672">==</span> nodes.end();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (isFirst) <span style="color:#66d9ef">return</span> nodes[<span style="color:#ae81ff">0</span>].position;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (isLast) <span style="color:#66d9ef">return</span> nodes[nodes.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>].position;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> t <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (nextNode<span style="color:#f92672">-&gt;</span>distance <span style="color:#f92672">-</span> currentNode<span style="color:#f92672">-&gt;</span>distance <span style="color:#f92672">&gt;</span> std<span style="color:#f92672">::</span>numeric_limits<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;::</span>epsilon()) {
+</span></span><span style="display:flex;"><span>        t <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>max(std<span style="color:#f92672">::</span>min((distance <span style="color:#f92672">-</span> currentNode<span style="color:#f92672">-&gt;</span>distance) <span style="color:#f92672">/</span> (nextNode<span style="color:#f92672">-&gt;</span>distance <span style="color:#f92672">-</span> currentNode<span style="color:#f92672">-&gt;</span>distance), <span style="color:#ae81ff">1.0f</span>), <span style="color:#ae81ff">0.0f</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> glm<span style="color:#f92672">::</span>mix(currentNode<span style="color:#f92672">-&gt;</span>position, nextNode<span style="color:#f92672">-&gt;</span>position, t);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> spline<span style="color:#f92672">::</span>get_length() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>nodes.empty()) <span style="color:#66d9ef">return</span> nodes[nodes.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>].distance;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><code>src/spline.h:</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#ifndef LIBCALCULATION_SPLINE_H
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define LIBCALCULATION_SPLINE_H
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;glm/vec3.hpp&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">node</span> {
+</span></span><span style="display:flex;"><span>    glm<span style="color:#f92672">::</span>vec3 position;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> distance;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">spline</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    spline(<span style="color:#66d9ef">const</span> glm<span style="color:#f92672">::</span>vec3 <span style="color:#f92672">&amp;</span>cp1, <span style="color:#66d9ef">const</span> glm<span style="color:#f92672">::</span>vec3 <span style="color:#f92672">&amp;</span>cp2, <span style="color:#66d9ef">const</span> glm<span style="color:#f92672">::</span>vec3 <span style="color:#f92672">&amp;</span>cp3, <span style="color:#66d9ef">const</span> glm<span style="color:#f92672">::</span>vec3 <span style="color:#f92672">&amp;</span>cp4) <span style="color:#f92672">:</span> cp1(cp1), cp2(cp2),
+</span></span><span style="display:flex;"><span>                                                                                                     cp3(cp3),
+</span></span><span style="display:flex;"><span>                                                                                                     cp4(cp4) {
+</span></span><span style="display:flex;"><span>        evaluate();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    glm<span style="color:#f92672">::</span>vec3 get_position_at_distance(<span style="color:#66d9ef">float</span> distance);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> <span style="color:#a6e22e">get_length</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    glm<span style="color:#f92672">::</span>vec3 cp1, cp2, cp3, cp4;
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>node<span style="color:#f92672">&gt;</span> nodes;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> glm<span style="color:#f92672">::</span>vec3 bezier_fast(glm<span style="color:#f92672">::</span>vec3 p0, glm<span style="color:#f92672">::</span>vec3 p1, glm<span style="color:#f92672">::</span>vec3 p2, glm<span style="color:#f92672">::</span>vec3 p3, <span style="color:#66d9ef">float</span> t);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> <span style="color:#a6e22e">estimate_length</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">evaluate</span>();
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif </span><span style="color:#75715e">//LIBCALCULATION_SPLINE_H
+</span></span></span></code></pre></div><h2 id="gluing-the-pieces-of-our-library">Gluing the Pieces of our library</h2>
+<p>We still cannot use the functions yet, so we need to create glue code to expose them to the outside world. Our goal is to use this spline library in our browser, for example, to draw a uniformly spaced Bezier curve. We will expose three functions: <code>createSpline</code>, <code>getSplineLength</code>, and <code>getSplinePositionAtDistance</code>. Some of these functions return complex types, such as a <code>3D vector</code>, which we will handle on the JavaScript side. There are many techniques to pass complex data from and to our WebAssembly module, which we will discuss in detail later. For now, let&rsquo;s focus on creating some glue code in <code>glue/glue.cc</code>.</p>
+<h3 id="data-types">Data types</h3>
+<p>As mentioned several times before, passing complex data types in and out can be challenging, but it can be managed. Passing 32 and 64 bit integers and decimal numbers is natively supported, so there is no need to worry about those. However, passing types such as a <code>3D vector</code> is a different matter. We need to allocate memory on the JavaScript side, assign the <code>3D vector</code> data (3x <code>floats</code>) to a free memory space, and pass the location (pointer) to the function calls. If we return complex data from the WebAssembly module, we will get a pointer and access the data in memory and &ldquo;demangle&rdquo; it (for example, using <code>Float64Array</code> with the pointer as offset and length of 3 to access x, y, z data). We will delve deeper into this later.</p>
+<h3 id="createspline-function">createSpline function</h3>
+<p>This is a straightforward process. We replicate the original constructor and expose this new function using the <code>attribute((export_name(&quot;createSpline&quot;)))</code> attribute to make it available to the outside world. As shown, we return a pointer, which will be a number on the JavaScript side and can be used to access memory data later. To ensure that we can access the data of the 3d vector in memory on the JavaScript side, it is crucial that the parameters of the vector are also pointers. This is because we allocate memory on the JavaScript side and assign our vector data to that memory location.:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>__attribute__((export_name(<span style="color:#e6db74">&#34;createSpline&#34;</span>)))
+</span></span><span style="display:flex;"><span>spline <span style="color:#f92672">*</span>createSpline(glm<span style="color:#f92672">::</span>vec3 <span style="color:#f92672">*</span>cp1, glm<span style="color:#f92672">::</span>vec3 <span style="color:#f92672">*</span>cp2, glm<span style="color:#f92672">::</span>vec3 <span style="color:#f92672">*</span>cp3, glm<span style="color:#f92672">::</span>vec3 <span style="color:#f92672">*</span>cp4) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">spline</span>(<span style="color:#f92672">*</span>cp1, <span style="color:#f92672">*</span>cp2, <span style="color:#f92672">*</span>cp3, <span style="color:#f92672">*</span>cp4);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="getsplinelength-function">getSplineLength function</h3>
+<p>This function returns a <code>float</code>, so no need to handle any extra complex data stuff on the JavaScript side:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>__attribute__((export_name(<span style="color:#e6db74">&#34;getSplineLength&#34;</span>)))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> getSplineLength(spline <span style="color:#f92672">*</span>s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> s<span style="color:#f92672">-&gt;</span>get_length();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="getsplinepositionatdistance-function">getSplinePositionAtDistance function</h3>
+<p>This function returns a pointer to a <code>3d vector</code>, which allows us to access its data in memory on the <code>JavaScript</code> side. Therefore, we need to allocate a new space for the returned <code>3d vector</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>__attribute__((export_name(<span style="color:#e6db74">&#34;getSplinePositionAtDistance&#34;</span>)))
+</span></span><span style="display:flex;"><span>glm<span style="color:#f92672">::</span>vec3 <span style="color:#f92672">*</span>getSplinePositionAtDistance(spline <span style="color:#f92672">*</span>s, <span style="color:#66d9ef">float</span> distance) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> glm<span style="color:#f92672">::</span>vec3(s<span style="color:#f92672">-&gt;</span>get_position_at_distance(distance));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="build">Build</h2>
+<p>At this point, you can run a build by executing <code>npm run build</code>. It should compile without any errors. In the next section, we will create a small <code>JavaScript</code> module that initializes the <code>WebAssembly</code> module, wraps the exposed functions, and handles incoming and outgoing data types. This <code>JavaScript</code> module can be used in your project just like any other <code>ES6 module</code>.</p>
 ]]></content></item><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - CMake and build scripts</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/</link><pubDate>Thu, 23 Feb 2023 23:15:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/</guid><description>If you haven&amp;rsquo;t read the first article of this series, I highly recommend that you do so.
 To simplify the building process, we can create a build script. We have already defined some scripts in our package.json file. At this point, the build-wasm.js file is still empty, so we can create a basic script that first deletes an existing build folder, creates a new one, and runs cmake .. inside it.</description><content type="html"><![CDATA[<p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/">If you haven&rsquo;t read the first article of this series, I highly recommend that you do so.</a></p>
 <p>To simplify the building process, we can create a build script. We have already defined some scripts in our <code>package.json</code> file. At this point, the <code>build-wasm.js</code> file is still empty, so we can create a basic script that first deletes an existing <code>build</code> folder, creates a new one, and runs <code>cmake ..</code> inside it. We will be using a WASI-SDK docker image from <code>ghcr.io/webassembly/wasi-sdk</code> to run cmake and eventually compile the project via <code>make</code>.</p>
