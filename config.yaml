@@ -3,6 +3,7 @@ languageCode: en-us
 theme: hello-friend-ng
 paginate: 10
 enableEmoji: true
+googleAnalytics: G-WCX2MRFT7Z
 params:
   homeSubtitle: exploring the world of software development and sharing my vision.
   disableReadOtherPosts: false
