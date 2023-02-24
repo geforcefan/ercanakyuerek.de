@@ -1,5 +1,5 @@
 ---
-title: "Writing a Library in C++ and Using it in the Browser with the WASI SDK - Part 1"
+title: "Writing a Library in C++ and Using it in the Browser with the WASI SDK - Folder structure"
 date: 2023-02-23T22:00:00+01:00
 ---
 You may have already heard that it's possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.
@@ -25,6 +25,8 @@ libComputation
         glue.cc
     src
         CMakeLists.txt
+        spline.cc
+        spline.h
     CMakeLists.txt
     build-wasm.js
     index.js
@@ -39,15 +41,13 @@ npm install shelljs args-parser --save-dev
 ```
 Now, add the following build scripts in the ``package.json`` file, which we will use for different use cases:
 
-```
-...
+```json
+{
   "scripts": {
     "build": "node build-wasm.js",
-    "build-run": "node build-wasm.js --run",
-    "compile": "node build-wasm.js --compileOnly",
-    "compile-run": "node build-wasm.js --compileOnly --run"
-  },
-...
+    "compile": "node build-wasm.js --compileOnly"
+  }
+}
 ```
 
 As you can see, there is a folder named ``glue``. In this subdirectory, 
@@ -58,4 +58,4 @@ desktop applications as well, where ``WASI SDK`` is not used to build the librar
 This approach ensures high flexibility when using the library in both the browser and desktop 
 environments.
 
-In the next part, we will create the build script and set up the CMake files.
+[In the next part, we will create the build script and set up the CMake files.]({{< ref "/posts/wasi/wasi-sdk-writing-library-in-cpp-2.md" >}})

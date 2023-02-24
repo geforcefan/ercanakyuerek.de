@@ -2,6 +2,7 @@ baseURL: 'https://ercanakyuerek.de'
 languageCode: en-us
 theme: hello-friend-ng
 paginate: 10
+enableEmoji: true
 params:
   homeSubtitle: exploring the world of software development and sharing my vision.
   disableReadOtherPosts: false
