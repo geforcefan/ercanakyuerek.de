@@ -1,0 +1,13 @@
+.avatar {
+  @media #{$media-size-phone} {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 100px;
+  float: right;
+  margin: 10px;
+}
