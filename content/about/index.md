@@ -10,5 +10,4 @@ My area of expertise is web development, particularly within the React ecosystem
 
 In my free time, I enjoy indulging in my hobby of building roller coasters on my computer using NoLimits Roller Coaster. I experiment with splines, roll interpolations, roller coaster track generation, and have coded many libraries for a couple of games. Additionally, I have taken up playing darts as a substitution for soccer due to knee injuries. Playing the guitar is another passion of mine that I picked up after sustaining a knee injury from a soccer match when I was 18. As a hardcore metal fan, playing the guitar serves as an excellent stress reliever for me.
 
-I am happily married and have a 15-month-old child whom I am already introducing to the world of computers. My family is incredibly important to me, and they have always been supportive of my interests and pursuits. Currently, I am working on an open-source roller coaster simulator that I hope will be a valuable resource for the community.## Skills
-
+I am happily married and have a 15-month-old child whom I am already introducing to the world of computers. My family is incredibly important to me, and they have always been supportive of my interests and pursuits. Currently, I am working on an open-source roller coaster simulator that I hope will be a valuable resource for the community.

@@ -86,4 +86,4 @@ int main() {}
 
 Finally, we can run our build script and see what happens :smile:. To run the build script, simply execute ``npm run build``. After it finishes executing, there should be a newly created file in the root directory named ``glue.wasm``, which confirms that our setup is correct. However, this file does not have any functionality at the moment, [but that will change in the next chapter.]({{< ref "/posts/wasi/wasi-sdk-writing-library-in-cpp-3.md" >}})
 
-![final structure](/wasi-sdk-writing-library-in-cpp-2/final_structure.png)
+![final structure](/wasi-sdk-writing-library-in-cpp/final_structure.png)
