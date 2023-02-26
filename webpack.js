@@ -47,10 +47,9 @@ module.exports = {
       },
     ],
   },
-  plugins: [],
   resolve: {
     fallback: { stream: require.resolve("stream-browserify") },
     modules: [paths.src, "node_modules"],
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx"]
   },
 };

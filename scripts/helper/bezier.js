@@ -1,4 +1,5 @@
 import { Vector3 } from "three";
+import lowerBound from "./lower-bound";
 
 export const bezierFast = (p0, p1, p2, p3, t) => {
   const t1 = 1.0 - t;
@@ -28,7 +29,60 @@ export const estimateLength = (p0, p1, p2, p3) => {
   return length;
 };
 
-export const evaluate = (p0, p1, p2, p3, resolution = 5) => {
+export const length = (nodes) => {
+  if (!nodes.length) return 0;
+  return nodes[nodes.length - 1].distance;
+};
+
+export const getPositionAtDistance = (nodes, at) => {
+  if (nodes.length < 2) return new Vector3(0.0);
+
+  const lowerElement = lowerBound(nodes, at, "distance");
+
+  const nextNode = nodes[lowerElement];
+  const currentNode = nodes[lowerElement - 1];
+
+  const isFirst = nextNode === nodes[0];
+  const isLast = currentNode === nodes[nodes.length - 1];
+
+  if (isFirst) return nodes[0].position;
+  if (isLast) return nodes[nodes.length - 1].position;
+
+  let t = 0.0;
+
+  if (nextNode.dist - currentNode.dist > 0.0001) {
+    t = Math.max(
+      Math.min(
+        (at - currentNode.dist) / (nextNode.dist - currentNode.dist),
+        1.0
+      ),
+      0.0
+    );
+  }
+
+  return currentNode.position.lerp(nextNode.position, t);
+};
+export const evaluateUniform = (p0, p1, p2, p3, resolution = 10) => {
+  const newNodes = [];
+  const nodes = evaluate(p0, p1, p2, p3, 40);
+  const splineLength = length(nodes);
+
+  const numberOfNodes = Math.max(Math.floor(splineLength * resolution), 2);
+  for (let i = 0; i < numberOfNodes; i++) {
+    const at = (i / (numberOfNodes - 1)) * splineLength;
+    const position = getPositionAtDistance(nodes, at);
+
+    newNodes.push({
+      position,
+      distance: at,
+    });
+  }
+
+  return newNodes;
+};
+
+export const evaluate = (p0, p1, p2, p3, resolution = 10) => {
+  let distance = 0;
   const nodes = [];
   const numberOfNodes = Math.max(
     Math.floor(estimateLength(p0, p1, p2, p3) * resolution),
@@ -40,7 +94,7 @@ export const evaluate = (p0, p1, p2, p3, resolution = 5) => {
     const t = i / (numberOfNodes - 1);
 
     const position = bezierFast(p0, p1, p2, p3, t);
-    const distance = position.distanceTo(lastPosition);
+    distance += position.distanceTo(lastPosition);
 
     nodes.push({
       position,

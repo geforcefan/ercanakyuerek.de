@@ -15,37 +15,48 @@ const points = [
 
 const Example = () => {
   const [motion, setMotion] = useState({
-    resolution: 0,
+    resolution: 0.5,
+    uniform: 0,
   });
 
   useEffect(() => {
     const animation = { ...motion };
 
-    const estimationSplineTween = new Tween(animation)
-      .to({ resolution: 0.6 }, 1000)
+    const denseSplineTween = new Tween(animation)
+      .to({ resolution: 2.5 }, 1000)
       .easing(Easing.Linear.None)
       .onUpdate(() => {
         setMotion({ ...animation });
       });
 
-    const denserSplineTween = new Tween(animation)
-      .delay(4000)
-      .to({ resolution: 3 }, 1000)
+    const uniformSplineTween = new Tween(animation)
+      .delay(3000)
+      .to({ uniform: 1 }, 500)
       .onUpdate(() => {
         setMotion({ ...animation });
       });
 
-    estimationSplineTween.chain(denserSplineTween);
-    estimationSplineTween.start();
+    const resetTween = new Tween(animation)
+      .delay(2000)
+      .to({ uniform: 0, resolution: 0.5 }, 1000)
+      .onUpdate(() => {
+        setMotion({ ...animation });
+      })
+      .onComplete(() => {
+        denseSplineTween.start();
+      });
 
-    return () => {
-      estimationSplineTween.stop();
-    };
+    denseSplineTween.chain(uniformSplineTween.chain(resetTween));
+    denseSplineTween.start();
   }, []);
 
   return (
     <>
-      <BezierCurve points={points} resolution={motion.resolution} />
+      <BezierCurve
+        points={points}
+        resolution={motion.resolution}
+        uniform={!!Math.round(motion.uniform)}
+      />
     </>
   );
 };

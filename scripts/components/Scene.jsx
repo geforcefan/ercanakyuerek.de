@@ -1,9 +1,9 @@
 import React from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useDevicePixelRatio } from "use-device-pixel-ratio";
 import { update } from "tween.js";
 
 import useColors from "../hooks/useColors";
+import { useDevicePixelRatio } from "../hooks/useDevicePixelRatio";
 
 const Tween = () => {
   useFrame(() => {
