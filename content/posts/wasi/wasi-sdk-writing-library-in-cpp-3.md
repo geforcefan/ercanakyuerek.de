@@ -33,7 +33,10 @@ In summary, I have developed a solution for the problem discussed earlier, but I
 #include <glm/geometric.hpp>
 
 void spline::evaluate() {
+    nodes.clear();
     int numberOfNodes = (int)(estimate_length() * 20.0f);
+    if(!numberOfNodes) return;
+    
     glm::vec3 lastPos = cp1;
 
     for(int i=0; i < numberOfNodes; i++) {
@@ -173,6 +176,16 @@ This function returns a pointer to a ``3d vector``, which allows us to access it
 __attribute__((export_name("getSplinePositionAtDistance")))
 glm::vec3 *getSplinePositionAtDistance(spline *s, float distance) {
     return new glm::vec3(s->get_position_at_distance(distance));
+}
+```
+
+### malloc
+I understand that this may not be the most optimal approach for memory allocation, but it is currently working for my purposes. I may consider revising my implementation at a later time, but for now, we can utilize the ``malloc`` function from the ``JavaScript`` side. This is necessary for allocating memory to data that we want to pass to the ``WebAssembly`` functions, such as ``3D vectors``.
+
+```cpp
+__attribute__((export_name("malloc")))
+void *allocateMemory(size_t size) {
+    return malloc(size);
 }
 ```
 

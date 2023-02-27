@@ -4,7 +4,7 @@ date: 2023-02-23T22:00:00+01:00
 ---
 You may have already heard that it's possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.
 
-However, as of the writing of this article in 2023, there are no final specifications or mature bindings available for the C++ and JavaScript stack. This means that if you choose to use WebAssembly, you will largely be on your own.
+As of the time of writing this article in 2023, there are available bindings for Rust programming language. However, when it comes to ``C++``, I was not able to find any mature solution except for the [WebIDL Binder for Emscripten](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/WebIDL-Binder.html). Unfortunately, my experience with it did not produce satisfactory results. Perhaps in the future, I will explore other binding solutions and update this series of articles. For now, we will have to manually glue our code. This involves creating bindings to enable the exchange of complex data between WebAssembly modules and exposing functions.
 
 ## Using WebAssembly as a Regular JavaScript Module
 This is a crucial aspect that I wish to explore. I want to write parts of my application in C++ and use them as regular modules in JavaScript. As previously mentioned, there is no NPM infrastructure available for compiling or generating bindings that can produce JavaScript files that export modules with exposed C++ functions. In this series, we will construct a minimalist infrastructure that emulates familiar module structures.
@@ -18,7 +18,7 @@ Please ensure that you have installed both ``Node.js`` and ``Docker`` on your co
 ## Project structure
 First, let's create a folder named ``libComputation`` and run ``npm init`` inside the folder, following the input instructions. After initializing an npm project, replicate this folder structure and create the following files:
 
-```
+```ls
 libComputation
     glue
         CMakeLists.txt
@@ -36,7 +36,7 @@ As you can see, this resembles a regular CMake project with WebAssembly compilat
 We will use ``build-wasm.js`` for compilation purposes, and for that, we need to install some npm 
 modules for creating directories and parsing arguments:
 
-```
+```bash
 npm install shelljs args-parser --save-dev
 ```
 Now, add the following build scripts in the ``package.json`` file, which we will use for different use cases:

@@ -35,7 +35,7 @@ cp(paths.glueSource, paths.glueDestination);
 
 We will provide CMake directives for automatically adding all ``*.cc`` files in the ``glue`` and ``src`` directories. If you prefer using the ``.cpp`` extension instead, feel free to modify the files accordingly. We will also ensure that we build a static library by using the ``STATIC`` keyword in the add_library function. Therefore, the content of the ``src/CMakeLists.txt`` file is as follows:
 
-```editorconfig
+```cmake
 project(calculation)
 
 file(GLOB_RECURSE SRC_SOURCES *.cc)
@@ -47,7 +47,7 @@ add_library(calculation::calculation ALIAS ${PROJECT_NAME})
 
 The ``glue/CMakeLists.txt`` file will slightly differ from the one in ``src``. As mentioned earlier, ``glue`` will serve as the final WebAssembly "application" that statically links our ``calculation`` library and exposes manually exported functions. We'll need to handle complex data types such as ``vectors`` and ``structs``, but we'll cover that in the next chapters. For now, it's important to understand that ``glue`` is essentially our end product that links to our ``calculation`` library:
 
-```editorconfig
+```cmake
 project(glue)
 
 file(GLOB_RECURSE SRC_SOURCES *.cc)
@@ -59,7 +59,7 @@ target_link_libraries(glue calculation::calculation)
 
 Now we need to bring everything together in the ``CMakeList.txt`` file in our root directory, which basically means adding the directories ``glue`` and ``src``, setting some optimization flags for release mode, and disabling exceptions for WASI since exceptions are currently not supported by WASI-SDK. Here's what the file should look like:
 
-```editorconfig
+```cmake
 cmake_minimum_required (VERSION 3.9 FATAL_ERROR)
 project (CALCULATION LANGUAGES CXX VERSION 0.1.0)
 
@@ -84,6 +84,6 @@ To test our setup, we need to add a main function to the file ``glue/glue.cc``. 
 int main() {}
 ```
 
-Finally, we can run our build script and see what happens :smile:. To run the build script, simply execute ``npm run build``. After it finishes executing, there should be a newly created file in the root directory named ``glue.wasm``, which confirms that our setup is correct. However, this file does not have any functionality at the moment, [but that will change in the next chapter.]({{< ref "/posts/wasi/wasi-sdk-writing-library-in-cpp-3.md" >}})
-
 ![final structure](/wasi-sdk-writing-library-in-cpp/final_structure.png)
+
+Finally, we can run our build script and see what happens :smile:. To run the build script, simply execute ``npm run build``. After it finishes executing, there should be a newly created file in the root directory named ``glue.wasm``, which confirms that our setup is correct. However, this file does not have any functionality at the moment, [but that will change in the next chapter.]({{< ref "/posts/wasi/wasi-sdk-writing-library-in-cpp-3.md" >}})
