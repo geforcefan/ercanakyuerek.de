@@ -11,3 +11,18 @@
   float: right;
   margin: 10px;
 }
+
+.embedded-iframe {
+  border: 0;
+  float: right;
+  margin: 10px;
+  width: 200px;
+  height: 200px;
+
+  @media #{$media-size-phone} {
+    float: none;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+  }
+}
