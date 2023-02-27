@@ -16,7 +16,10 @@ In this article, we&amp;rsquo;ll be exploring a more interesting example where w
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;glm/geometric.hpp&gt;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> spline<span style="color:#f92672">::</span>evaluate() {
+</span></span><span style="display:flex;"><span>    nodes.clear();
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> numberOfNodes <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)(estimate_length() <span style="color:#f92672">*</span> <span style="color:#ae81ff">20.0f</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>numberOfNodes) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    glm<span style="color:#f92672">::</span>vec3 lastPos <span style="color:#f92672">=</span> cp1;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> numberOfNodes; i<span style="color:#f92672">++</span>) {
@@ -139,6 +142,12 @@ In this article, we&amp;rsquo;ll be exploring a more interesting example where w
 </span></span><span style="display:flex;"><span>glm<span style="color:#f92672">::</span>vec3 <span style="color:#f92672">*</span>getSplinePositionAtDistance(spline <span style="color:#f92672">*</span>s, <span style="color:#66d9ef">float</span> distance) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> glm<span style="color:#f92672">::</span>vec3(s<span style="color:#f92672">-&gt;</span>get_position_at_distance(distance));
 </span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="malloc">malloc</h3>
+<p>I understand that this may not be the most optimal approach for memory allocation, but it is currently working for my purposes. I may consider revising my implementation at a later time, but for now, we can utilize the <code>malloc</code> function from the <code>JavaScript</code> side. This is necessary for allocating memory to data that we want to pass to the <code>WebAssembly</code> functions, such as <code>3D vectors</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>__attribute__((export_name(<span style="color:#e6db74">&#34;malloc&#34;</span>)))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>allocateMemory(size_t size) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">malloc</span>(size);
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h2 id="build">Build</h2>
 <p>At this point, you can run a build by executing <code>npm run build</code>. It should compile without any errors. In the next section, we will create a small <code>JavaScript</code> module that initializes the <code>WebAssembly</code> module, wraps the exposed functions, and handles incoming and outgoing data types. This <code>JavaScript</code> module can be used in your project just like any other <code>ES6 module</code>.</p>
 ]]></content></item><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - CMake and build scripts</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/</link><pubDate>Thu, 23 Feb 2023 23:15:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/</guid><description>If you haven&amp;rsquo;t read the first article of this series, I highly recommend that you do so.
@@ -169,44 +178,44 @@ To simplify the building process, we can create a build script. We have already 
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">cp</span>(<span style="color:#a6e22e">paths</span>.<span style="color:#a6e22e">glueSource</span>, <span style="color:#a6e22e">paths</span>.<span style="color:#a6e22e">glueDestination</span>);
 </span></span></code></pre></div><p>We will provide CMake directives for automatically adding all <code>*.cc</code> files in the <code>glue</code> and <code>src</code> directories. If you prefer using the <code>.cpp</code> extension instead, feel free to modify the files accordingly. We will also ensure that we build a static library by using the <code>STATIC</code> keyword in the add_library function. Therefore, the content of the <code>src/CMakeLists.txt</code> file is as follows:</p>
-<pre tabindex="0"><code class="language-editorconfig" data-lang="editorconfig">project(calculation)
-
-file(GLOB_RECURSE SRC_SOURCES *.cc)
-file(GLOB_RECURSE SRC_HEADERS *.h)
-
-add_library(${PROJECT_NAME} STATIC ${SRC_SOURCES} ${SRC_HEADERS})
-add_library(calculation::calculation ALIAS ${PROJECT_NAME})
-</code></pre><p>The <code>glue/CMakeLists.txt</code> file will slightly differ from the one in <code>src</code>. As mentioned earlier, <code>glue</code> will serve as the final WebAssembly &ldquo;application&rdquo; that statically links our <code>calculation</code> library and exposes manually exported functions. We&rsquo;ll need to handle complex data types such as <code>vectors</code> and <code>structs</code>, but we&rsquo;ll cover that in the next chapters. For now, it&rsquo;s important to understand that <code>glue</code> is essentially our end product that links to our <code>calculation</code> library:</p>
-<pre tabindex="0"><code class="language-editorconfig" data-lang="editorconfig">project(glue)
-
-file(GLOB_RECURSE SRC_SOURCES *.cc)
-file(GLOB_RECURSE SRC_HEADERS *.h)
-
-add_executable(${PROJECT_NAME} ${SRC_SOURCES} ${SRC_HEADERS})
-target_link_libraries(glue calculation::calculation)
-</code></pre><p>Now we need to bring everything together in the <code>CMakeList.txt</code> file in our root directory, which basically means adding the directories <code>glue</code> and <code>src</code>, setting some optimization flags for release mode, and disabling exceptions for WASI since exceptions are currently not supported by WASI-SDK. Here&rsquo;s what the file should look like:</p>
-<pre tabindex="0"><code class="language-editorconfig" data-lang="editorconfig">cmake_minimum_required (VERSION 3.9 FATAL_ERROR)
-project (CALCULATION LANGUAGES CXX VERSION 0.1.0)
-
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS_RELEASE &#34;-O3&#34;)
-
-# Disable exceptions
-if (CMAKE_SYSTEM_NAME STREQUAL &#34;WASI&#34;)
-    string(REGEX REPLACE &#34;-fexceptions&#34; &#34;&#34; CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
-    set(CMAKE_CXX_FLAGS &#34;${CMAKE_CXX_FLAGS} -fno-exceptions&#34;)
-endif()
-
-include_directories(src)
-add_subdirectory(src)
-add_subdirectory(glue)
-</code></pre><p>To test our setup, we need to add a main function to the file <code>glue/glue.cc</code>. The files <code>spline.cc</code> and <code>spline.h</code> can remain empty for now as they are not necessary to test our setup:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmake" data-lang="cmake"><span style="display:flex;"><span>project(<span style="color:#e6db74">calculation</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>file(<span style="color:#e6db74">GLOB_RECURSE</span> <span style="color:#e6db74">SRC_SOURCES</span> <span style="color:#e6db74">*.cc</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>file(<span style="color:#e6db74">GLOB_RECURSE</span> <span style="color:#e6db74">SRC_HEADERS</span> <span style="color:#e6db74">*.h</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>add_library(<span style="color:#f92672">${</span>PROJECT_NAME<span style="color:#f92672">}</span> <span style="color:#e6db74">STATIC</span> <span style="color:#f92672">${</span>SRC_SOURCES<span style="color:#f92672">}</span> <span style="color:#f92672">${</span>SRC_HEADERS<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>add_library(<span style="color:#e6db74">calculation::calculation</span> <span style="color:#e6db74">ALIAS</span> <span style="color:#f92672">${</span>PROJECT_NAME<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>The <code>glue/CMakeLists.txt</code> file will slightly differ from the one in <code>src</code>. As mentioned earlier, <code>glue</code> will serve as the final WebAssembly &ldquo;application&rdquo; that statically links our <code>calculation</code> library and exposes manually exported functions. We&rsquo;ll need to handle complex data types such as <code>vectors</code> and <code>structs</code>, but we&rsquo;ll cover that in the next chapters. For now, it&rsquo;s important to understand that <code>glue</code> is essentially our end product that links to our <code>calculation</code> library:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmake" data-lang="cmake"><span style="display:flex;"><span>project(<span style="color:#e6db74">glue</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>file(<span style="color:#e6db74">GLOB_RECURSE</span> <span style="color:#e6db74">SRC_SOURCES</span> <span style="color:#e6db74">*.cc</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>file(<span style="color:#e6db74">GLOB_RECURSE</span> <span style="color:#e6db74">SRC_HEADERS</span> <span style="color:#e6db74">*.h</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>add_executable(<span style="color:#f92672">${</span>PROJECT_NAME<span style="color:#f92672">}</span> <span style="color:#f92672">${</span>SRC_SOURCES<span style="color:#f92672">}</span> <span style="color:#f92672">${</span>SRC_HEADERS<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>target_link_libraries(<span style="color:#e6db74">glue</span> <span style="color:#e6db74">calculation::calculation</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>Now we need to bring everything together in the <code>CMakeList.txt</code> file in our root directory, which basically means adding the directories <code>glue</code> and <code>src</code>, setting some optimization flags for release mode, and disabling exceptions for WASI since exceptions are currently not supported by WASI-SDK. Here&rsquo;s what the file should look like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmake" data-lang="cmake"><span style="display:flex;"><span>cmake_minimum_required (<span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">3.9</span> <span style="color:#e6db74">FATAL_ERROR</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>project (<span style="color:#e6db74">CALCULATION</span> <span style="color:#e6db74">LANGUAGES</span> <span style="color:#e6db74">CXX</span> <span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">0.1.0</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD</span> <span style="color:#e6db74">14</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD_REQUIRED</span> <span style="color:#e6db74">ON</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CMAKE_CXX_FLAGS_RELEASE</span> <span style="color:#e6db74">&#34;-O3&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Disable exceptions
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>if (<span style="color:#e6db74">CMAKE_SYSTEM_NAME</span> <span style="color:#e6db74">STREQUAL</span> <span style="color:#e6db74">&#34;WASI&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    string(<span style="color:#e6db74">REGEX</span> <span style="color:#e6db74">REPLACE</span> <span style="color:#e6db74">&#34;-fexceptions&#34;</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#e6db74">CMAKE_CXX_FLAGS</span> <span style="color:#f92672">${</span>CMAKE_CXX_FLAGS<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    set(<span style="color:#e6db74">CMAKE_CXX_FLAGS</span> <span style="color:#e6db74">&#34;${CMAKE_CXX_FLAGS} -fno-exceptions&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>endif()<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>include_directories(<span style="color:#e6db74">src</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>add_subdirectory(<span style="color:#e6db74">src</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>add_subdirectory(<span style="color:#e6db74">glue</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>To test our setup, we need to add a main function to the file <code>glue/glue.cc</code>. The files <code>spline.cc</code> and <code>spline.h</code> can remain empty for now as they are not necessary to test our setup:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {}
-</span></span></code></pre></div><p>Finally, we can run our build script and see what happens 😄. To run the build script, simply execute <code>npm run build</code>. After it finishes executing, there should be a newly created file in the root directory named <code>glue.wasm</code>, which confirms that our setup is correct. However, this file does not have any functionality at the moment, <a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/">but that will change in the next chapter.</a></p>
-<p><img src="/wasi-sdk-writing-library-in-cpp/final_structure.png" alt="final structure"></p>
+</span></span></code></pre></div><p><img src="/wasi-sdk-writing-library-in-cpp/final_structure.png" alt="final structure"></p>
+<p>Finally, we can run our build script and see what happens 😄. To run the build script, simply execute <code>npm run build</code>. After it finishes executing, there should be a newly created file in the root directory named <code>glue.wasm</code>, which confirms that our setup is correct. However, this file does not have any functionality at the moment, <a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/">but that will change in the next chapter.</a></p>
 ]]></content></item><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - Folder structure</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/</link><pubDate>Thu, 23 Feb 2023 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/</guid><description>You may have already heard that it&amp;rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.</description><content type="html"><![CDATA[<p>You may have already heard that it&rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.</p>
-<p>However, as of the writing of this article in 2023, there are no final specifications or mature bindings available for the C++ and JavaScript stack. This means that if you choose to use WebAssembly, you will largely be on your own.</p>
+<p>As of the time of writing this article in 2023, there are available bindings for Rust programming language. However, when it comes to <code>C++</code>, I was not able to find any mature solution except for the <a href="https://emscripten.org/docs/porting/connecting_cpp_and_javascript/WebIDL-Binder.html">WebIDL Binder for Emscripten</a>. Unfortunately, my experience with it did not produce satisfactory results. Perhaps in the future, I will explore other binding solutions and update this series of articles. For now, we will have to manually glue our code. This involves creating bindings to enable the exchange of complex data between WebAssembly modules and exposing functions.</p>
 <h2 id="using-webassembly-as-a-regular-javascript-module">Using WebAssembly as a Regular JavaScript Module</h2>
 <p>This is a crucial aspect that I wish to explore. I want to write parts of my application in C++ and use them as regular modules in JavaScript. As previously mentioned, there is no NPM infrastructure available for compiling or generating bindings that can produce JavaScript files that export modules with exposed C++ functions. In this series, we will construct a minimalist infrastructure that emulates familiar module structures.</p>
 <h2 id="building-an-example-library-for-computing-bezier-curves">Building an Example Library for Computing Bezier Curves</h2>
@@ -215,7 +224,7 @@ add_subdirectory(glue)
 <p>Please ensure that you have installed both <code>Node.js</code> and <code>Docker</code> on your computer. We will utilize the WASI-SDK Docker image for constructing the WebAssembly library.</p>
 <h2 id="project-structure">Project structure</h2>
 <p>First, let&rsquo;s create a folder named <code>libComputation</code> and run <code>npm init</code> inside the folder, following the input instructions. After initializing an npm project, replicate this folder structure and create the following files:</p>
-<pre tabindex="0"><code>libComputation
+<pre tabindex="0"><code class="language-ls" data-lang="ls">libComputation
     glue
         CMakeLists.txt
         glue.cc
@@ -229,8 +238,8 @@ add_subdirectory(glue)
 </code></pre><p>As you can see, this resembles a regular CMake project with WebAssembly compilation additions.
 We will use <code>build-wasm.js</code> for compilation purposes, and for that, we need to install some npm
 modules for creating directories and parsing arguments:</p>
-<pre tabindex="0"><code>npm install shelljs args-parser --save-dev
-</code></pre><p>Now, add the following build scripts in the <code>package.json</code> file, which we will use for different use cases:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npm install shelljs args-parser --save-dev
+</span></span></code></pre></div><p>Now, add the following build scripts in the <code>package.json</code> file, which we will use for different use cases:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;scripts&#34;</span>: {
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;build&#34;</span>: <span style="color:#e6db74">&#34;node build-wasm.js&#34;</span>,
