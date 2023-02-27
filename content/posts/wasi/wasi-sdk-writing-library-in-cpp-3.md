@@ -191,3 +191,5 @@ void *allocateMemory(size_t size) {
 
 ## Build
 At this point, you can run a build by executing ``npm run build``. It should compile without any errors. In the next section, we will create a small ``JavaScript`` module that initializes the ``WebAssembly`` module, wraps the exposed functions, and handles incoming and outgoing data types. This ``JavaScript`` module can be used in your project just like any other ``ES6 module``.
+
+[Now, let's create a small JavaScript module that will be responsible for creating a WebAssembly module, loading our Wasm file, defining some imports for WASI (which will mostly be empty), and creating functions for those that we exported in our C++ glue code.]({{< ref "/posts/wasi/wasi-sdk-writing-library-in-cpp-4.md" >}})
