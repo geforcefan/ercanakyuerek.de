@@ -61,7 +61,7 @@ const Example = () => {
   );
 };
 
-const wasi_sdk_writing_library_in_cpp = () => {
+const wasi_sdk_writing_library_in_cpp1 = () => {
   document.body.innerHTML += `<div id="app"></div>`;
   createRoot(document.getElementById("app")).render(
     <Scene>

@@ -13,13 +13,13 @@ Let's create a small boilerplate code for this purpose in the ``index.js`` file:
 ```javascript
 import glue from "./glue.wasm";
 
-const libCalculation = async () => {
+const libCalculation = async (wasmFileResponsePromise) => {
     const memory = new WebAssembly.Memory({
         initial: 10000,
         maximum: 10000,
     });
 
-    const module = await WebAssembly.compile(glue);
+    const module = await WebAssembly.compileStreaming(wasmFileResponsePromise);
     const instance = await WebAssembly.instantiate(module, {
         wasi_snapshot_preview1: {
             environ_get: () => {},
@@ -91,3 +91,30 @@ export all function :smile:
         getSplineLength
     };
 ```
+
+## Testing our library
+
+For testing purposes, you can create an ``index.html`` file and install the ``http-serve`` package by running the command ``npm install http-serve --save-dev``. To start the server, run the command ``node_modules/.bin/http-server .`` and include the following content in the ``index.html`` file:
+
+```html
+<script type="module">
+    import libCalculation from './index.js';
+    const init = async () => {
+        const { createSpline, getSplineLength, getSplinePositionAtDistance } = await libCalculation(fetch("glue.wasm"));
+        const spline = createSpline([-3, -3, 0], [3, -3, 0], [-3, 3, 0], [3, 3, 0]);
+        const splineLength = getSplineLength(spline);
+        const position = getSplinePositionAtDistance(spline, 0);
+
+        console.log({ splineLength, position });
+    }
+    init();
+</script>
+```
+
+{{< iframe "wasi-sdk-writing-library-in-cpp/wasi-sdk-writing-library-in-cpp/example.html" >}}
+
+Please check the console for a spline with a length of ``10.06``. The position we fetched should return a 3D vector with coordinates of ``[-3, -3, 0]``.
+Next to this text, you can view an advanced test that displays a spline. I have created a [repository](https://github.com/geforcefan/wasi-sdk-writing-library-in-cpp) that contains all the necessary files, including this advanced example that uses Three.js for rendering.
+
+## Conclusion
+That's all! It wasn't that difficult, was it? We haven't yet covered other complex types, such as passing strings to and from WebAssembly modules, or how to log. However, you should have a rough idea of how things work now. In future articles, I will explore data types, memory management, and binding in greater depth. To be honest, gluing code together is not enjoyable. It requires creating glue code on the C++ side and a wrapper JavaScript module that ``serializes`` and ``unserializes`` arguments and return values. Some solutions eliminate the need for writing both code pieces, but for now, this should help you get started, especially if you aim to build a small yet performance-critical library.
