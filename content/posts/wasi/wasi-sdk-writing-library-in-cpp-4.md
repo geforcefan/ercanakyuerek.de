@@ -66,3 +66,28 @@ const getSplinePositionAtDistance = (splinePointer, distance) => {
     return new Float32Array(memory, positionPointer, 3);
 }
 ```
+
+Now we reached an interesting function, createSpline, which takes four parameters of type ``3d vector``. In this case we can just allocate ``4x3x32bit``, four control points, ``x, y, z`` for each point, each point is a float which are ``32bit``, which makes ``48 bytes`` in total. So we first need to allocate ``48 bytes``. For this, we can easily use our malloc function, which we exposed in the webassembly module. I know, this is NOT a perfect solution, and there are some limitations, when I come up with better solutions, there will be some changes. So, at javascript side, we need to allocate ``48 bytes``, put all ``p0 - p1`` coordinates in to the memory and pass the memory pointer to the arguments. We also can allocate for each parameter, so we can all ``4 times malloc`` with ``12 bytes`` each malloc. I decided to do the latter.
+
+```javascript
+const createSpline = (p0, p1, p2, p3) => {
+    const { createSpline : func, malloc, memory } = instance.exports;
+
+    const pointers = [p0, p1, p2, p3].map(point => {
+        const pointer = malloc(3 * 4); // (x, y, z) * 4 bytes
+        new Float32Array(memory.buffer, pointer, 3).set(point);
+        return pointer;
+    })
+
+    return func(pointers[0], pointers[1], pointers[2], pointers[3]);
+}
+```
+export all function :smile:
+
+```javascript
+    return {
+        createSpline,
+        getSplinePositionAtDistance,
+        getSplineLength
+    };
+```

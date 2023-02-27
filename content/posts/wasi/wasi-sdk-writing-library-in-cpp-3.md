@@ -36,14 +36,15 @@ void spline::evaluate() {
     nodes.clear();
     int numberOfNodes = (int)(estimate_length() * 20.0f);
     if(!numberOfNodes) return;
-    
+
+    float distance = 0.0f;
     glm::vec3 lastPos = cp1;
 
     for(int i=0; i < numberOfNodes; i++) {
         float t = (float) i / (float) (numberOfNodes - 1);
 
         glm::vec3 position = bezier_fast(cp1, cp2, cp3, cp4, t);
-        float distance = glm::distance(position, lastPos);
+        distance += glm::distance(position, lastPos);
 
         nodes.push_back({
             .position = position,
