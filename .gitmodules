@@ -1,0 +1,3 @@
+[submodule "static/wasi-sdk-writing-library-in-cpp/wasi-sdk-writing-library-in-cpp"]
+	path = static/wasi-sdk-writing-library-in-cpp/wasi-sdk-writing-library-in-cpp
+	url = https://github.com/geforcefan/wasi-sdk-writing-library-in-cpp
