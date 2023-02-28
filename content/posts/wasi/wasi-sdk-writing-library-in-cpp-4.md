@@ -111,7 +111,7 @@ For testing purposes, you can create an ``index.html`` file and install the ``ht
 </script>
 ```
 
-{{< iframe "wasi-sdk-writing-library-in-cpp/wasi-sdk-writing-library-in-cpp/example.html" >}}
+{{< iframe "wasi-sdk-writing-library-in-cpp/libCalculation/example.html" >}}
 
 Please check the console for a spline with a length of ``10.06``. The position we fetched should return a 3D vector with coordinates of ``[-3, -3, 0]``.
 Next to this text, you can view an advanced test that displays a spline. I have created a [repository](https://github.com/geforcefan/ercanakyuerek.de/tree/main/static/wasi-sdk-writing-library-in-cpp/libCalculation) that contains all the necessary files, including this advanced example that uses Three.js for rendering.
