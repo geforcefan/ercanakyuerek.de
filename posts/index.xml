@@ -82,7 +82,7 @@ This is the point where we will develop our JavaScript library that utilizes the
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">init</span>();
 </span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">script</span>&gt;
 </span></span></code></pre></div>
-<iframe src="https://ercanakyuerek.de/wasi-sdk-writing-library-in-cpp/wasi-sdk-writing-library-in-cpp/example.html" class="embedded-iframe"></iframe>
+<iframe src="https://ercanakyuerek.de/wasi-sdk-writing-library-in-cpp/libCalculation/example.html" class="embedded-iframe"></iframe>
 <p>Please check the console for a spline with a length of <code>10.06</code>. The position we fetched should return a 3D vector with coordinates of <code>[-3, -3, 0]</code>.
 Next to this text, you can view an advanced test that displays a spline. I have created a <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/static/wasi-sdk-writing-library-in-cpp/libCalculation">repository</a> that contains all the necessary files, including this advanced example that uses Three.js for rendering.</p>
 <h2 id="conclusion">Conclusion</h2>
