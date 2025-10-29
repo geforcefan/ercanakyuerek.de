@@ -2,14 +2,14 @@
 title: About me
 ---
 {{< avatar >}}
-Hi, I’m Ercan Akyürek, a tech enthusiast in my early thirties. I grew up in Germany, shaped by both German and Turkish cultures, which gave me a unique perspective on life and technology.
+I’m Ercan Akyürek, 34 years old, born and raised in Germany with roots in Turkey. From an early age, I was endlessly curious about how things worked, taking apart toys, motors, and gadgets just to see if I could rebuild them again. That curiosity for understanding and creating has been with me ever since.
 
-My passion for computers started early with a VTech learning computer. Although I didn’t fully grasp coding at first, I was hooked by the possibilities. I taught myself PHP, later ventured into C++, and by 16, I was working professionally, developing a digital asset management system for a company. Over the years, I’ve refined my skills and stayed deeply passionate about tech.
+My first real dive into computers came with a VTech learning computer that had a BASIC interpreter. I didn’t know much back then, but I was fascinated by the idea that I could make the machine do something just by typing commands. That simple curiosity quickly turned into a passion for coding.
 
-These days, I focus on web development, especially with React and TypeScript. I also use C++ and WebAssembly to create high-performance applications, like simulations and real-time web apps.
+During my teenage years, I taught myself PHP, experimented with C++, and played around with game engines. What started as a hobby soon became my profession. Today, my main focus is web and app development, especially with TypeScript and React. In my spare time, I love working with C++ and WebAssembly to build real-time applications and simulations.
 
-In my free time, I enjoy designing roller coasters virtually with NoLimits Roller Coaster. I work on track layouts, roll interpolations, and other technical details, and I’ve even written libraries for games. After knee injuries forced me to give up soccer, I picked up the guitar at 18 and, more recently, started playing darts. The guitar has become my favorite way to relax, especially since I’m a big fan of metal music.
+One of my biggest interests outside of work is roller coaster design and simulation. I’ve written my own tools and libraries for coaster simulators, and I enjoy sharing my knowledge about splines, track layouts, and motion dynamics with the community.
 
-I’m married and have a wonderful 3-year-old. I’ve already started introducing them to computers because it’s never too early to spark curiosity! My family is my biggest source of support and inspiration. Currently, I’m working on an open-source roller coaster simulator that I hope will benefit the community and fellow enthusiasts.
+When I’m not coding, you’ll probably find me playing the guitar, mostly metal music or throwing darts. After multiple knee injuries forced me to give up soccer, darts became my new passion, and I’ve grown into a dedicated hobby player.
 
-Let’s connect and dive into the world of technology and innovation together!
+I’m married and a proud father of a 4-year-old son, who inspires me every day to keep learning, because he’s learning, too. Watching his curiosity reminds me why I fell in love with technology in the first place.
