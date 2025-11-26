@@ -1,4 +1,137 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 07 Mar 2023 00:30:20 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Roller Coaster Simulation - Improved spline interpolation</title><link>https://ercanakyuerek.de/posts/roller-coaster-simulation/improved-spline-interpolation/</link><pubDate>Tue, 07 Mar 2023 00:30:20 +0100</pubDate><guid>https://ercanakyuerek.de/posts/roller-coaster-simulation/improved-spline-interpolation/</guid><description>&lt;p>In the latest update, a number of bugs were discovered, particularly in the precision of floating point calculations when working with a web assembly module in a browser environment. It was found that the jitters mentioned earlier were actually caused by a bug in the roll interpolation process.&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 26 Nov 2025 12:35:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Writing a Roller Coaster Simulation – Determining Acceleration</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-2/</link><pubDate>Wed, 26 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-2/</guid><description>&lt;h2 id="how-do-we-determine-the-acceleration-of-the-coaster">How do we determine the acceleration of the coaster?&lt;/h2>
+&lt;p>To simplify things, we ignore air resistance, rolling friction and any other additional forces. We also assume Earth’s gravity is &lt;strong>9.81 m/s²&lt;/strong>. This allows us to focus entirely on the fundamental idea:&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>Gravity is the primary source of acceleration.&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;p>On Earth, gravity provides a constant acceleration of:&lt;/p>
+&lt;blockquote>
+&lt;p>g = 9.81 m/s²&lt;/p>
+&lt;/blockquote>
+&lt;p>What does this number actually mean?&lt;/p>
+&lt;blockquote>
+&lt;p>Every second, an object&amp;rsquo;s downward speed increases by &lt;strong>9.81 m/s&lt;/strong>.&lt;/p></description><content type="html"><![CDATA[<h2 id="how-do-we-determine-the-acceleration-of-the-coaster">How do we determine the acceleration of the coaster?</h2>
+<p>To simplify things, we ignore air resistance, rolling friction and any other additional forces. We also assume Earth’s gravity is <strong>9.81 m/s²</strong>. This allows us to focus entirely on the fundamental idea:</p>
+<blockquote>
+<p><strong>Gravity is the primary source of acceleration.</strong></p>
+</blockquote>
+<p>On Earth, gravity provides a constant acceleration of:</p>
+<blockquote>
+<p>g = 9.81 m/s²</p>
+</blockquote>
+<p>What does this number actually mean?</p>
+<blockquote>
+<p>Every second, an object&rsquo;s downward speed increases by <strong>9.81 m/s</strong>.</p>
+</blockquote>
+<p>Some quick examples:</p>
+<ul>
+<li>after <strong>1 second</strong> → 9.81 m/s</li>
+<li>after <strong>2 seconds</strong> → 19.62 m/s</li>
+<li>after <strong>3 seconds</strong> → 29.43 m/s</li>
+</ul>
+<p>In short: <strong>gravity continuously increases an object&rsquo;s speed toward Earth.</strong></p>
+<hr>
+<h2 id="acceleration-on-slopes">Acceleration on slopes</h2>
+<p>Gravity is always pointing straight down.<br>
+But on a slope, only a part of that force helps the coaster move along the track.</p>
+<p>To compute that portion, we use the <strong>downhill-slope acceleration</strong>:</p>
+<blockquote>
+<p><strong>acceleration = g × sin(angle)</strong></p>
+</blockquote>
+<p>Where:</p>
+<ul>
+<li><strong>g</strong> – Earth’s gravity (9.81 m/s²)</li>
+<li><strong>angle</strong> – the tilt of the track</li>
+<li><strong>sin(angle)</strong> – how much of gravity points <em>along</em> the track</li>
+</ul>
+<h3 id="why-sine">Why sine?</h3>
+<p>But for simplification, we only look at <strong>downward slopes</strong> at this point.<br>
+Of course, in a real simulation we also have <strong>negative angles</strong> when the coaster travels uphill, but we will get to that later.</p>
+<p>For these downhill angles, the relevant sine values lie between <strong>0 and 1</strong>:</p>
+<ul>
+<li><strong>sin = 0</strong> → no gravity along the track</li>
+<li><strong>sin = 1</strong> → full gravity along the track</li>
+</ul>
+<h3 id="examples">Examples</h3>
+<h4 id="vertical-drop-90"><strong>Vertical drop (90°)</strong></h4>
+<p>Full gravity acts along the track, essentially free fall.</p>
+<ul>
+<li>sin(90°) = 1 (100% of <strong>gravity</strong>)</li>
+<li>acceleration = <strong>9.81 m/s²</strong></li>
+</ul>
+<p>Velocities:</p>
+<ul>
+<li>1 s → <strong>9.81 m/s</strong></li>
+<li>2 s → <strong>19.62 m/s</strong></li>
+<li>3 s → <strong>29.43 m/s</strong></li>
+</ul>
+<hr>
+<h4 id="45-slope"><strong>45° slope</strong></h4>
+<p>You probably expected to get <strong>half of gravity</strong> here, right? Nope, it&rsquo;s not linear at all :D It’s a sine function.</p>
+<ul>
+<li>sin(45°) ≈ 0.707 (≈ 70% of <strong>gravity</strong>)</li>
+<li>acceleration ≈ <strong>6.93 m/s²</strong></li>
+</ul>
+<p>Velocities:</p>
+<ul>
+<li>1 s → <strong>6.93 m/s</strong></li>
+<li>2 s → <strong>13.86 m/s</strong></li>
+<li>3 s → <strong>20.79 m/s</strong></li>
+</ul>
+<hr>
+<h4 id="flat-track-0"><strong>Flat track (0°)</strong></h4>
+<p>No slope → no downhill force.</p>
+<ul>
+<li>sin(0°) = 0 (0% of <strong>gravity</strong>)</li>
+<li>acceleration = <strong>0 m/s²</strong></li>
+</ul>
+<p>Velocities:</p>
+<ul>
+<li>1 s → <strong>0 m/s</strong></li>
+<li>2 s → <strong>0 m/s</strong></li>
+<li>3 s → <strong>0 m/s</strong></li>
+</ul>
+<hr>
+<h2 id="why-this-matters-for-simulation">Why this matters for simulation</h2>
+<p>As you can see, to simulate our coaster we only need to know:</p>
+<blockquote>
+<p><strong>the angle of the track at each point.</strong></p>
+</blockquote>
+<ul>
+<li>0° → <strong>0 m/s²</strong>, no acceleration</li>
+<li>45° → <strong>6.93 m/s²</strong>, about 70% of gravity</li>
+<li>90° → <strong>9.81 m/s²</strong>, full gravity (free fall)</li>
+</ul>
+<p>And the crucial insight is:</p>
+<blockquote>
+<p><strong>This relationship is not linear, it&rsquo;s governed by sine.</strong></p>
+</blockquote>
+<p>This is why 45° does <em>not</em> give half of Earth&rsquo;s gravity, but roughly <strong>70%</strong>.</p>
+<hr>
+<h2 id="what-comes-next">What comes next?</h2>
+<p>In the next chapter, we’ll write a small piece of code that evaluates the physics and moves a simple object along a linear plane.<br>
+We will set up a tiny example project and apply everything we have learned so far.</p>
+]]></content></item><item><title>Writing a Roller Coaster Simulation – Introduction and Motion Dynamics</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-1/</link><pubDate>Wed, 26 Nov 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-1/</guid><description>&lt;p>You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser. The goal is not to create a full physics engine or a hyper-realistic coaster model, but to understand the core ideas behind motion, acceleration, track geometry and visual rendering.&lt;/p>
+&lt;p>We will use technologies that are easy to access and quick to experiment with. Throughout the series, we will rely on &lt;strong>TypeScript&lt;/strong>, &lt;strong>React&lt;/strong> and &lt;strong>Three.js&lt;/strong>. This combination gives us a clean developer experience and allows us to turn mathematical concepts into visual, interactive 3D scenes with very little overhead.&lt;/p></description><content type="html"><![CDATA[<p>You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser. The goal is not to create a full physics engine or a hyper-realistic coaster model, but to understand the core ideas behind motion, acceleration, track geometry and visual rendering.</p>
+<p>We will use technologies that are easy to access and quick to experiment with. Throughout the series, we will rely on <strong>TypeScript</strong>, <strong>React</strong> and <strong>Three.js</strong>. This combination gives us a clean developer experience and allows us to turn mathematical concepts into visual, interactive 3D scenes with very little overhead.</p>
+<p>The idea behind this series is simple. Instead of reading theory first, we will learn by building something fun. Each chapter focuses on a single concept. By the end, you will understand how a small coaster car can move along a track, how the track itself is defined, and how everything is drawn in the browser.</p>
+<h2 id="motion-dynamics">Motion Dynamics</h2>
+<p>At the end of the day, simulating a roller coaster comes down to one simple question:</p>
+<p><strong>How much distance should the coaster travel in each simulation step?</strong></p>
+<p>To keep things simple, let’s assume our simulation updates roughly every <strong>16 ms</strong>, which is what you would get at about 60 FPS. So the question becomes:</p>
+<p><strong>How far does the coaster need to travel within these 16 ms?</strong></p>
+<p>To answer this, we follow a very straightforward chain of logic:</p>
+<ul>
+<li><strong>To know the distance to travel, we first need the velocity</strong></li>
+<li><strong>To know the velocity, we first need the acceleration</strong></li>
+</ul>
+<p>So everything begins with acceleration.
+Acceleration changes the velocity, <strong>velocity determines the distance to travel</strong>, and the distance to travel tells us where the coaster ends up in the next 16 ms.</p>
+<p>This gives us a simple structure:</p>
+<p>Acceleration → Velocity → Distance</p>
+<p>Once we understand the acceleration acting on the coaster, the rest follows naturally.</p>
+<p>In the next chapter, we will take the first real step of the simulation and answer the core question:</p>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-2/">How do we determine the acceleration of the coaster?</a></p>
+]]></content></item><item><title>Roller Coaster Simulation - Improved spline interpolation</title><link>https://ercanakyuerek.de/posts/rollercoaster-simulation/improved-spline-interpolation/</link><pubDate>Tue, 07 Mar 2023 00:30:20 +0100</pubDate><guid>https://ercanakyuerek.de/posts/rollercoaster-simulation/improved-spline-interpolation/</guid><description>&lt;p>In the latest update, a number of bugs were discovered, particularly in the precision of floating point calculations when working with a web assembly module in a browser environment. It was found that the jitters mentioned earlier were actually caused by a bug in the roll interpolation process.&lt;/p>
 &lt;p>To give a brief overview, track interpolation involves estimating the length of a NURBS track by interpolating with a large step size and evaluating nodes based on the estimated length, resulting in a dense enough interpolation. After this, the normals are calculated and normal angles are applied on the y and x directions but not on the z direction yet, which is essentially the roll. These normals are then applied to the previous matrix and the process continues. A C2 continuous cubic spline is then constructed, and the z angle, which is the result of applying normals in the x and y directions, is applied on each roll point on top of its roll value. The next step is to iterate through all nodes again and apply rotation on the z direction. Finally, to obtain the matrix at any point, we perform a binary search for the minimum and maximum node whose distance lies between the two and interpolate linearly.&lt;/p></description><content type="html"><![CDATA[<p>In the latest update, a number of bugs were discovered, particularly in the precision of floating point calculations when working with a web assembly module in a browser environment. It was found that the jitters mentioned earlier were actually caused by a bug in the roll interpolation process.</p>
 <p>To give a brief overview, track interpolation involves estimating the length of a NURBS track by interpolating with a large step size and evaluating nodes based on the estimated length, resulting in a dense enough interpolation. After this, the normals are calculated and normal angles are applied on the y and x directions but not on the z direction yet, which is essentially the roll. These normals are then applied to the previous matrix and the process continues. A C2 continuous cubic spline is then constructed, and the z angle, which is the result of applying normals in the x and y directions, is applied on each roll point on top of its roll value. The next step is to iterate through all nodes again and apply rotation on the z direction. Finally, to obtain the matrix at any point, we perform a binary search for the minimum and maximum node whose distance lies between the two and interpolate linearly.</p>
 <p>However, a problem arises when the roll is pre-applied, resulting in jitters due to precision issues. To solve this, the roll should not be applied on each node but only when requesting a matrix at a specific distance. Additionally, the performance was optimized by reducing the time for iterating through all nodes to only once.</p>
@@ -355,7 +488,7 @@ desktop applications as well, where <code>WASI SDK</code> is not used to build t
 This approach ensures high flexibility when using the library in both the browser and desktop
 environments.</p>
 <p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/">In the next part, we will create the build script and set up the CMake files.</a></p>
-]]></content></item><item><title>Roller Coaster Simulation - First results</title><link>https://ercanakyuerek.de/posts/roller-coaster-simulation/first-results/</link><pubDate>Thu, 23 Feb 2023 16:28:20 +0100</pubDate><guid>https://ercanakyuerek.de/posts/roller-coaster-simulation/first-results/</guid><description>&lt;p>I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.&lt;/p></description><content type="html"><![CDATA[<p>I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.</p>
+]]></content></item><item><title>Roller Coaster Simulation - First results</title><link>https://ercanakyuerek.de/posts/rollercoaster-simulation/first-results/</link><pubDate>Thu, 23 Feb 2023 16:28:20 +0100</pubDate><guid>https://ercanakyuerek.de/posts/rollercoaster-simulation/first-results/</guid><description>&lt;p>I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.&lt;/p></description><content type="html"><![CDATA[<p>I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.</p>
 <p>At this point in time, the simulator does not support a block system or multi-track functionality. However, I am actively working on implementing these features. It is worth noting that the simulator runs in a browser, and has been written in c++ and compiled to WebAssembly. Consequently, a lightweight version of the software is available for use in web browsers, while the desktop version is built using Unreal Engine 5.</p>
 <p>To give you a better idea of the current implementation of the simulator, I have created an interactive example for you to try. You can switch between two coasters from the NoLimits2 library, change the camera perspective, and live adjust gravity and friction. Please note that since the user interface library I am using has no capabilities to allow more than two decimal points, there are no adjustment options for air resistance. Additionally, the track itself is not yet connected, and the sections only provide simple acceleration and deceleration on sections without a block system.</p>
 
