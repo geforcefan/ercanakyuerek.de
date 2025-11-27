@@ -3,24 +3,18 @@
 &lt;blockquote>
 &lt;p>&lt;strong>Gravity is the primary source of acceleration.&lt;/strong>&lt;/p>
 &lt;/blockquote>
-&lt;p>On Earth, gravity provides a constant acceleration of:&lt;/p>
-&lt;blockquote>
-&lt;p>g = 9.81 m/s²&lt;/p>
-&lt;/blockquote>
+&lt;p>On Earth, gravity provides a constant acceleration of &lt;strong>9.81 m/s²&lt;/strong>.&lt;/p>
 &lt;p>What does this number actually mean?&lt;/p>
 &lt;blockquote>
-&lt;p>Every second, an object&amp;rsquo;s downward speed increases by &lt;strong>9.81 m/s&lt;/strong>.&lt;/p></description><content type="html"><![CDATA[<h2 id="how-do-we-determine-the-acceleration-of-the-coaster">How do we determine the acceleration of the coaster?</h2>
+&lt;p>Every &lt;strong>second&lt;/strong>, an object&amp;rsquo;s speed increases by &lt;strong>9.81 m/s&lt;/strong>.&lt;/p></description><content type="html"><![CDATA[<h2 id="how-do-we-determine-the-acceleration-of-the-coaster">How do we determine the acceleration of the coaster?</h2>
 <p>To simplify things, we ignore air resistance, rolling friction and any other additional forces. We also assume Earth’s gravity is <strong>9.81 m/s²</strong>. This allows us to focus entirely on the fundamental idea:</p>
 <blockquote>
 <p><strong>Gravity is the primary source of acceleration.</strong></p>
 </blockquote>
-<p>On Earth, gravity provides a constant acceleration of:</p>
-<blockquote>
-<p>g = 9.81 m/s²</p>
-</blockquote>
+<p>On Earth, gravity provides a constant acceleration of <strong>9.81 m/s²</strong>.</p>
 <p>What does this number actually mean?</p>
 <blockquote>
-<p>Every second, an object&rsquo;s downward speed increases by <strong>9.81 m/s</strong>.</p>
+<p>Every <strong>second</strong>, an object&rsquo;s speed increases by <strong>9.81 m/s</strong>.</p>
 </blockquote>
 <p>Some quick examples:</p>
 <ul>
@@ -28,7 +22,7 @@
 <li>after <strong>2 seconds</strong> → 19.62 m/s</li>
 <li>after <strong>3 seconds</strong> → 29.43 m/s</li>
 </ul>
-<p>In short: <strong>gravity continuously increases an object&rsquo;s speed toward Earth.</strong></p>
+<p>In short: <strong>acceleration continuously increases an object&rsquo;s speed.</strong></p>
 <hr>
 <h2 id="acceleration-on-slopes">Acceleration on slopes</h2>
 <p>Gravity is always pointing straight down.<br>
@@ -43,8 +37,8 @@ But on a slope, only a part of that force helps the coaster move along the track
 <li><strong>angle</strong> – the tilt of the track</li>
 <li><strong>sin(angle)</strong> – how much of gravity points <em>along</em> the track</li>
 </ul>
-<h3 id="why-sine">Why sine?</h3>
-<p>But for simplification, we only look at <strong>downward slopes</strong> at this point.<br>
+<h3 id="but-why">But why?</h3>
+<p>For simplification, we only look at <strong>downward slopes</strong> at this point.<br>
 Of course, in a real simulation we also have <strong>negative angles</strong> when the coaster travels uphill, but we will get to that later.</p>
 <p>For these downhill angles, the relevant sine values lie between <strong>0 and 1</strong>:</p>
 <ul>
@@ -58,12 +52,6 @@ Of course, in a real simulation we also have <strong>negative angles</strong> wh
 <li>sin(90°) = 1 (100% of <strong>gravity</strong>)</li>
 <li>acceleration = <strong>9.81 m/s²</strong></li>
 </ul>
-<p>Velocities:</p>
-<ul>
-<li>1 s → <strong>9.81 m/s</strong></li>
-<li>2 s → <strong>19.62 m/s</strong></li>
-<li>3 s → <strong>29.43 m/s</strong></li>
-</ul>
 <hr>
 <h4 id="45-slope"><strong>45° slope</strong></h4>
 <p>You probably expected to get <strong>half of gravity</strong> here, right? Nope, it&rsquo;s not linear at all :D It’s a sine function.</p>
@@ -71,24 +59,12 @@ Of course, in a real simulation we also have <strong>negative angles</strong> wh
 <li>sin(45°) ≈ 0.707 (≈ 70% of <strong>gravity</strong>)</li>
 <li>acceleration ≈ <strong>6.93 m/s²</strong></li>
 </ul>
-<p>Velocities:</p>
-<ul>
-<li>1 s → <strong>6.93 m/s</strong></li>
-<li>2 s → <strong>13.86 m/s</strong></li>
-<li>3 s → <strong>20.79 m/s</strong></li>
-</ul>
 <hr>
 <h4 id="flat-track-0"><strong>Flat track (0°)</strong></h4>
 <p>No slope → no downhill force.</p>
 <ul>
 <li>sin(0°) = 0 (0% of <strong>gravity</strong>)</li>
 <li>acceleration = <strong>0 m/s²</strong></li>
-</ul>
-<p>Velocities:</p>
-<ul>
-<li>1 s → <strong>0 m/s</strong></li>
-<li>2 s → <strong>0 m/s</strong></li>
-<li>3 s → <strong>0 m/s</strong></li>
 </ul>
 <hr>
 <h2 id="why-this-matters-for-simulation">Why this matters for simulation</h2>
