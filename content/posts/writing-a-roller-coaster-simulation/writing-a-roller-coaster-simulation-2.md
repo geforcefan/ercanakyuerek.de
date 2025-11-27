@@ -10,13 +10,11 @@ To simplify things, we ignore air resistance, rolling friction and any other add
 
 > **Gravity is the primary source of acceleration.**
 
-On Earth, gravity provides a constant acceleration of:
-
-> g = 9.81 m/s²
+On Earth, gravity provides a constant acceleration of **9.81 m/s²**. 
 
 What does this number actually mean?
 
-> Every second, an object's downward speed increases by **9.81 m/s**.
+> Every **second**, an object's speed increases by **9.81 m/s**.
 
 Some quick examples:
 
@@ -24,7 +22,7 @@ Some quick examples:
 - after **2 seconds** → 19.62 m/s
 - after **3 seconds** → 29.43 m/s
 
-In short: **gravity continuously increases an object's speed toward Earth.**
+In short: **acceleration continuously increases an object's speed.**
 
 ---
 
@@ -43,9 +41,9 @@ Where:
 - **angle** – the tilt of the track
 - **sin(angle)** – how much of gravity points *along* the track
 
-### Why sine?
+### But why?
 
-But for simplification, we only look at **downward slopes** at this point.  
+For simplification, we only look at **downward slopes** at this point.  
 Of course, in a real simulation we also have **negative angles** when the coaster travels uphill, but we will get to that later.
 
 For these downhill angles, the relevant sine values lie between **0 and 1**:
@@ -61,11 +59,6 @@ Full gravity acts along the track, essentially free fall.
 - sin(90°) = 1 (100% of **gravity**)
 - acceleration = **9.81 m/s²**
 
-Velocities:
-- 1 s → **9.81 m/s**
-- 2 s → **19.62 m/s**
-- 3 s → **29.43 m/s**
-
 ---
 
 #### **45° slope**
@@ -74,11 +67,6 @@ You probably expected to get **half of gravity** here, right? Nope, it's not lin
 - sin(45°) ≈ 0.707 (≈ 70% of **gravity**)
 - acceleration ≈ **6.93 m/s²**
 
-Velocities:
-- 1 s → **6.93 m/s**
-- 2 s → **13.86 m/s**
-- 3 s → **20.79 m/s**
-
 ---
 
 #### **Flat track (0°)**
@@ -86,11 +74,6 @@ No slope → no downhill force.
 
 - sin(0°) = 0 (0% of **gravity**)
 - acceleration = **0 m/s²**
-
-Velocities:
-- 1 s → **0 m/s**
-- 2 s → **0 m/s**
-- 3 s → **0 m/s**
 
 ---
 
