@@ -23,9 +23,9 @@ This keeps the examples simple and lets us focus on the physics first.</p>
 <p>Our simulation works by creating a new state based on the previous state.
 Think of it like this:</p>
 <blockquote>
-<p>initial state → evaluate → new state → evaluate → next state → &hellip;</p>
+<p>initial state → evaluate → new state → evaluate → new state → &hellip;</p>
 </blockquote>
-<p>To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from Chapter 2. This formula tells us how much of gravity actually acts in the direction of the slope:</p>
+<p>To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-2/">Chapter 2</a>. This formula tells us how much of gravity actually acts in the direction of the slope:</p>
 <blockquote>
 <p>acceleration = gravity * sin(slopeAngle)</p>
 </blockquote>
@@ -41,7 +41,9 @@ Think of it like this:</p>
 <h2 id="calculating-the-velocity">Calculating the velocity</h2>
 <p>Acceleration is measured in <strong>m/s²</strong>.
 That means:</p>
-<p><strong>m/s²</strong> tells us how much the velocity changes in one full <strong>second</strong>.</p>
+<blockquote>
+<p><strong>m/s²</strong> tells us how much the velocity changes in one <strong>full second</strong>.</p>
+</blockquote>
 <p>So if acceleration is <strong>9.81 m/s²</strong>:</p>
 <ul>
 <li>after <strong>1 second</strong>, velocity increases by <strong>9.81 m/s</strong></li>
@@ -53,19 +55,20 @@ Just multiply it with <strong>0.016</strong> :) that does the trick</li>
 </blockquote>
 <p>We take the previous velocity and add the small increase for this frame.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>
-</span></span></code></pre></div><h2 id="calculating-the-distancetraveled">Calculating the distanceTraveled</h2>
+</span></span></code></pre></div><h2 id="calculating-the-distance-traveled">Calculating the distance traveled</h2>
 <p>Velocity is measured in <strong>m/s</strong>.
 This means:</p>
-<p>velocity tells us how much <strong>distance</strong> is traveled in <strong>one full second</strong>.</p>
+<blockquote>
+<p>velocity tells us how much <strong>distance</strong> is to travel in <strong>one full second</strong>.</p>
+</blockquote>
 <p>Again we only want the part that matches our <strong>0.016 seconds</strong>.</p>
 <blockquote>
-<p>distanceTraveled = velocity × deltaTime</p>
+<p>distanceToTravel = velocity × deltaTime</p>
 </blockquote>
 <p>We take the previous distance traveled and add the small increase for this frame.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">=</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>
-</span></span></code></pre></div><h2 id="final-evaluatemotion-function">Final evaluateMotion function</h2>
-<p>Here is the complete JavaScript version:</p>
+</span></span></code></pre></div><p>So we end up with something like:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">evaluateMotion</span>(<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">slopeAngle</span>, <span style="color:#a6e22e">gravity</span>, <span style="color:#a6e22e">deltaTime</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gravity</span> <span style="color:#f92672">*</span> Math.<span style="color:#a6e22e">sin</span>(<span style="color:#a6e22e">slopeAngle</span>)
 </span></span><span style="display:flex;"><span>
@@ -180,8 +183,7 @@ Of course, in a real simulation we also have <strong>negative angles</strong> wh
 <p>This is why 45° does <em>not</em> give half of Earth&rsquo;s gravity, but roughly <strong>70%</strong>.</p>
 <hr>
 <h2 id="what-comes-next">What comes next?</h2>
-<p>In the next chapter, we’ll write a small piece of code that evaluates the physics and moves a simple object along a linear plane.<br>
-We will set up a tiny example project and apply everything we have learned so far.</p>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-3/">In the next chapter, we’ll write a small piece of code that evaluates the physics and moves a simple object along a linear plane.</a></p>
 ]]></content></item><item><title>Writing a Roller Coaster Simulation – Introduction and Motion Dynamics</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-1/</link><pubDate>Wed, 26 Nov 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-1/</guid><description>&lt;p>You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser. The goal is not to create a full physics engine or a hyper-realistic coaster model, but to understand the core ideas behind motion, acceleration, track geometry and visual rendering.&lt;/p>
 &lt;p>We will use technologies that are easy to access and quick to experiment with. Throughout the series, we will rely on &lt;strong>TypeScript&lt;/strong>, &lt;strong>React&lt;/strong> and &lt;strong>Three.js&lt;/strong>. This combination gives us a clean developer experience and allows us to turn mathematical concepts into visual, interactive 3D scenes with very little overhead.&lt;/p></description><content type="html"><![CDATA[<p>You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser. The goal is not to create a full physics engine or a hyper-realistic coaster model, but to understand the core ideas behind motion, acceleration, track geometry and visual rendering.</p>
 <p>We will use technologies that are easy to access and quick to experiment with. Throughout the series, we will rely on <strong>TypeScript</strong>, <strong>React</strong> and <strong>Three.js</strong>. This combination gives us a clean developer experience and allows us to turn mathematical concepts into visual, interactive 3D scenes with very little overhead.</p>
