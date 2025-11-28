@@ -97,5 +97,4 @@ This is why 45° does *not* give half of Earth's gravity, but roughly **70%**.
 
 ## What comes next?
 
-In the next chapter, we’ll write a small piece of code that evaluates the physics and moves a simple object along a linear plane.  
-We will set up a tiny example project and apply everything we have learned so far.
+[In the next chapter, we’ll write a small piece of code that evaluates the physics and moves a simple object along a linear plane.]({{< ref "/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-3.md" >}})

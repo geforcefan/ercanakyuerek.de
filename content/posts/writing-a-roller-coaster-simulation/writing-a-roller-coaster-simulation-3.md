@@ -34,9 +34,9 @@ At the beginning the coaster does not move and has not travelled any distance.
 Our simulation works by creating a new state based on the previous state.
 Think of it like this:
 
-> initial state → evaluate → new state → evaluate → next state → ...
+> initial state → evaluate → new state → evaluate → new state → ...
 
-To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from Chapter 2. This formula tells us how much of gravity actually acts in the direction of the slope:
+To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from [Chapter 2]({{< ref "/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-2.md" >}}). This formula tells us how much of gravity actually acts in the direction of the slope:
 
 > acceleration = gravity * sin(slopeAngle)
 
@@ -57,7 +57,7 @@ function evaluateMotion(state, slopeAngle, gravity, deltaTime) {
 Acceleration is measured in **m/s²**.
 That means:
 
-**m/s²** tells us how much the velocity changes in one full **second**.
+> **m/s²** tells us how much the velocity changes in one **full second**.
 
 So if acceleration is **9.81 m/s²**:
 
@@ -73,16 +73,16 @@ We take the previous velocity and add the small increase for this frame.
 const velocity = state.velocity + acceleration * deltaTime
 ```
 
-## Calculating the distanceTraveled
+## Calculating the distance traveled
 
 Velocity is measured in **m/s**.
 This means:
 
-velocity tells us how much **distance** is traveled in **one full second**.
+> velocity tells us how much **distance** is to travel in **one full second**.
 
 Again we only want the part that matches our **0.016 seconds**.
 
-> distanceTraveled = velocity × deltaTime
+> distanceToTravel = velocity × deltaTime
 
 We take the previous distance traveled and add the small increase for this frame.
 
@@ -91,9 +91,7 @@ const distanceTraveled =
     state.distanceTraveled + velocity * deltaTime
 ```
 
-## Final evaluateMotion function
-
-Here is the complete JavaScript version:
+So we end up with something like:
 
 ```js
 function evaluateMotion(state, slopeAngle, gravity, deltaTime) {
