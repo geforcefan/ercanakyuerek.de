@@ -117,7 +117,7 @@ Now we run the simulation every 16 ms and log the values.
 let state = { velocity: 0, distanceTraveled: 0 }
 const gravity = 9.81;
 const tickInterval = 0.016; // 16ms
-const slopeAngle = 5 * (Math.PI / 180); // 10°, needs to be in radians
+const slopeAngle = 5 * (Math.PI / 180); // 5°, needs to be in radians
 
 setInterval(() => {
     state = evaluateMotion(state, slopeAngle, gravity, tickInterval)
