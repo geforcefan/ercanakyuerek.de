@@ -38,7 +38,7 @@ Think of it like this:
 
 To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from [Chapter 2]({{< ref "/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-2.md" >}}). This formula tells us how much of gravity actually acts in the direction of the slope:
 
-> acceleration = gravity * sin(slopeAngle)
+$$acceleration = gravity * sin(slopeAngle)$$
 
 So we end up basically with:
 
@@ -62,10 +62,10 @@ That means:
 So if acceleration is **9.81 m/s²**:
 
 - after **1 second**, velocity increases by **9.81 m/s**
-- so after **0.016 seconds**, velocity increases by **9.81 × 0.016**  
+- so after **0.016 seconds**, velocity increases by \\(9.81 * 0.016\\)
   Just multiply it with **0.016** :) that does the trick
 
-> velocity = acceleration × deltaTime
+$$velocity = acceleration * deltaTime$$
 
 We take the previous velocity and add the small increase for this frame.
 
@@ -82,7 +82,7 @@ This means:
 
 Again we only want the part that matches our **0.016 seconds**.
 
-> distanceToTravel = velocity × deltaTime
+$$distanceToTravel = velocity * deltaTime$$
 
 We take the previous distance traveled and add the small increase for this frame.
 

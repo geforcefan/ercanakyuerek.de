@@ -1,6 +1,7 @@
 ---
 title: "Writing a Roller Coaster Simulation – Determining Acceleration"
 date: 2025-11-26T12:35:00+01:00
+math: true
 ---
 
 ## How do we determine the acceleration of the coaster?
@@ -32,7 +33,7 @@ But on a slope, only a part of that force helps the coaster move along the track
 
 To compute that portion, we use the **downhill-slope acceleration**:
 
-> **acceleration = g × sin(angle)**
+$$acceleration = gravity * sin(angle)$$
 
 Where:
 

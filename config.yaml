@@ -39,3 +39,17 @@ menu:
     - identifier: blog
       name: Blog
       url: /posts
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        delimiters:
+          block:
+            - - '\['
+              - '\]'
+            - - $$
+              - $$
+          inline:
+            - - '\('
+              - '\)'
+        enable: true
