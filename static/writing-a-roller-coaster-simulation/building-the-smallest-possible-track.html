@@ -16,51 +16,59 @@
   <script type="module">
     import { Vector2 } from "three";
 
+    const getLength = (cp1, cp2) => {
+      return cp1.distanceTo(cp2);
+    };
+
     const getPositionAtDistance = (cp1, cp2, distance) => {
-      return cp1.clone().lerp(cp2, distance / cp1.distanceTo(cp2));
+      return cp1.clone().lerp(cp2, distance / getLength(cp1, cp2));
     };
 
-    const getDownhillAccelerationAtDistance = (cp1, cp2, distance, gravity) => {
-      const forward = cp2.clone().sub(cp1).normalize();
-      const gravityDir = new Vector2(0, -1);
-      return gravity * forward.dot(gravityDir);
+    const getForwardDirectionAtDistance = (cp1, cp2, distance) => {
+      return cp2.clone().sub(cp1).normalize();
     };
 
-    const evaluateMotion = (state, acceleration, deltaTime) => {
+    const evaluateMotion = (state, forwardDirection, gravity, deltaTime) => {
+      const acceleration = forwardDirection.dot(new Vector2(0, -gravity));
       const velocity = state.velocity + acceleration * deltaTime;
       const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
-      return { velocity, distanceTraveled };
+
+      return { velocity, distanceTraveled, acceleration };
     };
 
     let state = {
       velocity: 0,
       distanceTraveled: 0,
+      acceleration: 0,
     };
 
     const tickInterval = 0.016; // 16ms ≈ 60FPS
     const gravity = 9.81; // earth gravity
 
     // Simple 2D track segment
-    const cp1 = new Vector2(0, 0);
-    const cp2 = new Vector2(10, -1);
+    const cp1 = new Vector2(0, 1);
+    const cp2 = new Vector2(30, 0);
 
     const outputContainer = document.getElementById("output");
     const resetStateButton = document.getElementById("reset-state");
 
     setInterval(() => {
-      const acceleration = getDownhillAccelerationAtDistance(
+      if (state.distanceTraveled > getLength(cp1, cp2)) return;
+
+      const forwardDirection = getForwardDirectionAtDistance(
         cp1,
         cp2,
-        state.distanceTraveled,
-        gravity
+        state.distanceTraveled
       );
 
-      state = evaluateMotion(state, acceleration, tickInterval);
+      state = evaluateMotion(state, forwardDirection, gravity, tickInterval);
       const position = getPositionAtDistance(cp1, cp2, state.distanceTraveled);
 
       outputContainer.innerText = [
         `velocity: ${state.velocity.toFixed(3)} m/s`,
+        `velocity: ${(state.velocity * 3.6).toFixed(3)} km/h`,
         `distance traveled: ${state.distanceTraveled.toFixed(3)} m`,
+        `acceleration: ${state.acceleration.toFixed(3)} ms^2`,
         `position: x: ${position.x.toFixed(2)}m, y: ${position.y.toFixed(2)}m`,
       ].join("\n");
     }, tickInterval * 1000);
@@ -69,6 +77,7 @@
       state = {
         velocity: 0,
         distanceTraveled: 0,
+        acceleration: 0,
       };
     });
   </script>

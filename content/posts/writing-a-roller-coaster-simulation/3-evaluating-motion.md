@@ -98,11 +98,8 @@ So we end up with something like:
 const acceleration = gravity * Math.sin(slopeAngle)
 
 const evaluateMotion = (state, acceleration, deltaTime) => {
-    const velocity =
-        state.velocity + acceleration * deltaTime
-
-    const distanceTraveled =
-        state.distanceTraveled + velocity * deltaTime
+    const velocity = state.velocity + acceleration * deltaTime
+    const distanceTraveled = state.distanceTraveled + velocity * deltaTime
 
     return { velocity, distanceTraveled }
 }
