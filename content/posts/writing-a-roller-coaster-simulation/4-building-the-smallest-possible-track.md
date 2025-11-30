@@ -156,11 +156,8 @@ const getForwardDirectionAtDistance = (cp1, cp2, distance) => {
 };
 ```
 
-## So What Now?
+## Small note
 
-Combine everything, add THREE.js, and run the simulation. Below this point in the article (in your blog) you include a working demo.
-
-A small note:  
 Later, the forward vector will be replaced by a **4x4 matrix**, which contains position, right, up and forward direction all at once. This becomes our single source of truth. But for now, ignore this.
 
 ## Adding Everything Up: Small Demo
