@@ -111,21 +111,7 @@ This is already a complete physics step without friction or air resistance.
 
 Now we run the simulation every 16 ms and log the values.
 
-```js
-let state = { velocity: 0, distanceTraveled: 0 }
-const tickInterval = 0.016; // 16ms
-const slopeAngle = 5 * (Math.PI / 180); // 5°, needs to be in radians
-const acceleration = 9.81 * Math.sin(slopeAngle) // downhill-slope acceleration
-
-setInterval(() => {
-    state = evaluateMotion(state, acceleration, tickInterval)
-
-    console.log("velocity:", state.velocity.toFixed(3), "m/s")
-    console.log("distance:", state.distanceTraveled.toFixed(3), "m")
-}, tickInterval * 1000)
-```
-
-If you now watch your console log, you will see the distance increasing correctly based on the slope and the physics we evaluated. It is a simple loop but it already simulates motion in a physically meaningful way.
+{{< show-static-file-code "writing-a-roller-coaster-simulation/evaluating-motion.html" >}}
 
 ## Next Chapter
 
