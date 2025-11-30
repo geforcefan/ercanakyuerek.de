@@ -36,15 +36,16 @@ Think of it like this:
 
 > initial state → evaluate → new state → evaluate → new state → ...
 
-To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from [Chapter 2]({{< ref "/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-2.md" >}}). This formula tells us how much of gravity actually acts in the direction of the slope:
+To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from [Chapter 2]({{< ref "/posts/writing-a-roller-coaster-simulation/2-determining-acceleration.md" >}}). This formula tells us how much of gravity actually acts in the direction of the slope:
 
 $$acceleration = gravity * sin(slopeAngle)$$
 
 So we end up basically with:
 
 ```js
-function evaluateMotion(state, slopeAngle, gravity, deltaTime) {
-    const acceleration = gravity * Math.sin(slopeAngle)
+const acceleration = gravity * Math.sin(slopeAngle)
+
+const evaluateMotion = (state, acceleration, deltaTime) => {
     /// ...
 }
 ```
@@ -82,7 +83,7 @@ This means:
 
 Again we only want the part that matches our **0.016 seconds**.
 
-$$distanceToTravel = velocity * deltaTime$$
+$$distanceToTravel = velocity \cdot deltaTime$$
 
 We take the previous distance traveled and add the small increase for this frame.
 
@@ -94,9 +95,9 @@ const distanceTraveled =
 So we end up with something like:
 
 ```js
-function evaluateMotion(state, slopeAngle, gravity, deltaTime) {
-    const acceleration = gravity * Math.sin(slopeAngle)
+const acceleration = gravity * Math.sin(slopeAngle)
 
+const evaluateMotion = (state, acceleration, deltaTime) => {
     const velocity =
         state.velocity + acceleration * deltaTime
 
@@ -115,12 +116,12 @@ Now we run the simulation every 16 ms and log the values.
 
 ```js
 let state = { velocity: 0, distanceTraveled: 0 }
-const gravity = 9.81;
 const tickInterval = 0.016; // 16ms
 const slopeAngle = 5 * (Math.PI / 180); // 5°, needs to be in radians
+const acceleration = 9.81 * Math.sin(slopeAngle) // downhill-slope acceleration
 
 setInterval(() => {
-    state = evaluateMotion(state, slopeAngle, gravity, tickInterval)
+    state = evaluateMotion(state, acceleration, tickInterval)
 
     console.log("velocity:", state.velocity.toFixed(3), "m/s")
     console.log("distance:", state.distanceTraveled.toFixed(3), "m")
@@ -131,4 +132,4 @@ If you now watch your console log, you will see the distance increasing correctl
 
 ## Next Chapter
 
-In the next chapter we will build an interactive Three.js demo where we can adjust the slopeAngle and watch how an object moves along a plane. Nothing complicated, just a small visual setup so we can actually see what the simulation looks like in action.
+[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track.md" >}}) we’ll build a small interactive Three.js demo where we can watch the object’s position update in real time. Nothing fancy, just a simple page showing coordinates and velocity so we can finally see the simulation in action.

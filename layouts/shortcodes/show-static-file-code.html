@@ -1,0 +1,23 @@
+{{/* Get file path (positional parameter) */}}
+{{ $file := .Get 0 }}
+{{ $path := printf "static/%s" $file }}
+{{ $content := readFile $path }}
+
+{{ $ext := path.Ext $file }}
+{{ $ext = lower $ext }}
+{{ $ext = trim $ext "." }}
+
+{{ $lang := $ext }}
+{{ if eq $ext "js" }}{{ $lang = "javascript" }}{{ end }}
+{{ if eq $ext "ts" }}{{ $lang = "typescript" }}{{ end }}
+{{ if eq $ext "html" }}{{ $lang = "html" }}{{ end }}
+{{ if eq $ext "css" }}{{ $lang = "css" }}{{ end }}
+{{ if eq $ext "glsl" }}{{ $lang = "glsl" }}{{ end }}
+
+<p>
+    <a href="/{{ $file }}" target="_blank" rel="noopener noreferrer">
+        click to open demo in new tab
+    </a>
+</p>
+
+{{ printf "<pre><code class=\"language-%s\">" $lang | safeHTML }}{{ $content }}{{ "</code></pre>" | safeHTML }}

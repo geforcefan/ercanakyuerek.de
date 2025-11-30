@@ -33,7 +33,7 @@ But on a slope, only a part of that force helps the coaster move along the track
 
 To compute that portion, we use the **downhill-slope acceleration**:
 
-$$acceleration = gravity * sin(angle)$$
+$$acceleration = gravity \cdot sin(angle)$$
 
 Where:
 
@@ -97,4 +97,4 @@ This is why 45° does *not* give half of Earth's gravity, but roughly **70%**.
 
 ## What comes next?
 
-[In the next chapter, we’ll write a small piece of code that evaluates the physics and moves a simple object along a linear plane.]({{< ref "/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-3.md" >}})
+[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/3-evaluating-motion.md" >}}), we’ll write a small piece of code that evaluates the physics and moves a simple object along a linear plane.

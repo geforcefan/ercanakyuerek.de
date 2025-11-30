@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Minimal Roller Coaster Track Simulation</title>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js"
+        }
+      }
+    </script>
+  </head>
+
+  <script type="module">
+    import { Vector2 } from "three";
+
+    const getPositionAtDistance = (cp1, cp2, distance) => {
+      return cp1.clone().lerp(cp2, distance / cp1.distanceTo(cp2));
+    };
+
+    const getDownhillAccelerationAtDistance = (cp1, cp2, distance, gravity) => {
+      const forward = cp2.clone().sub(cp1).normalize();
+      const gravityDir = new Vector2(0, -1);
+      return gravity * forward.dot(gravityDir);
+    };
+
+    const evaluateMotion = (state, acceleration, deltaTime) => {
+      const velocity = state.velocity + acceleration * deltaTime;
+      const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
+      return { velocity, distanceTraveled };
+    };
+
+    let state = {
+      velocity: 0,
+      distanceTraveled: 0,
+    };
+
+    const tickInterval = 0.016; // 16ms ≈ 60FPS
+    const gravity = 9.81; // earth gravity
+
+    // Simple 2D track segment
+    const cp1 = new Vector2(0, 0);
+    const cp2 = new Vector2(10, -1);
+
+    const outputContainer = document.getElementById("output");
+    const resetStateButton = document.getElementById("reset-state");
+
+    setInterval(() => {
+      const acceleration = getDownhillAccelerationAtDistance(
+        cp1,
+        cp2,
+        state.distanceTraveled,
+        gravity
+      );
+
+      state = evaluateMotion(state, acceleration, tickInterval);
+      const position = getPositionAtDistance(cp1, cp2, state.distanceTraveled);
+
+      outputContainer.innerText = [
+        `velocity: ${state.velocity.toFixed(3)} m/s`,
+        `distance traveled: ${state.distanceTraveled.toFixed(3)} m`,
+        `position: x: ${position.x.toFixed(2)}m, y: ${position.y.toFixed(2)}m`,
+      ].join("\n");
+    }, tickInterval * 1000);
+
+    resetStateButton.addEventListener("click", () => {
+      state = {
+        velocity: 0,
+        distanceTraveled: 0,
+      };
+    });
+  </script>
+
+  <body>
+    <p id="output"></p>
+    <button id="reset-state">Reset simulation</button>
+  </body>
+</html>
