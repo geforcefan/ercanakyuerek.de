@@ -25,6 +25,7 @@
           `velocity: ${(state.velocity * 3.6).toFixed(3)} km/h`,
           `distance traveled: ${state.distanceTraveled.toFixed(3)} m`,
           `acceleration: ${acceleration.toFixed(3)} ms^2`,
+          `slope angle: ${(slopeAngle / (Math.PI / 180)).toFixed(3)}°`,
         ].join("\n");
       }, tickInterval * 1000);
     </script>
