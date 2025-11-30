@@ -1,29 +1,194 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 28 Nov 2025 12:35:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Writing a Roller Coaster Simulation – Building the Smallest Possible Track</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-4/</link><pubDate>Fri, 28 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-4/</guid><description>&lt;p>In the last chapter I said we were going to visualize the evaluated motion with a small demo. Technically true, but it was a lie. To visualize motion properly we need something for our object to move on. And that means we need a track. So in this article we’re focusing on a very simplified roller coaster track.&lt;/p>
-&lt;p>We’re not building real coaster geometry yet. &lt;strong>No curves, no banking, no roll.&lt;/strong> Just the simplest possible version: a &lt;strong>straight line&lt;/strong> defined by two control points. Start and end. That’s enough to get the idea across.&lt;/p></description><content type="html"><![CDATA[<p>In the last chapter I said we were going to visualize the evaluated motion with a small demo. Technically true, but it was a lie. To visualize motion properly we need something for our object to move on. And that means we need a track. So in this article we’re focusing on a very simplified roller coaster track.</p>
-<p>We’re not building real coaster geometry yet. <strong>No curves, no banking, no roll.</strong> Just the simplest possible version: a <strong>straight line</strong> defined by two control points. Start and end. That’s enough to get the idea across.</p>
-<p>But even a minimal track has to answer two questions that our physics needs.</p>
-<p>When we evaluate motion, we always need the slope angle. That tells us how gravity affects the coaster. So we need to know:</p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 28 Nov 2025 12:35:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Writing a Roller Coaster Simulation – Building the Smallest Possible Track</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track/</link><pubDate>Fri, 28 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track/</guid><description>&lt;p&gt;In the previous chapter, I said we were going to visualize the evaluated motion with a small demo. Technically true, but also not entirely accurate. To visualize motion properly, we first need something for our object to move along. And that means we need a track.&lt;br&gt;
+In this article, we focus on an extremely simplified roller coaster track.&lt;/p&gt;
+&lt;p&gt;Even the smallest possible track must answer two important questions that our physics and visualization rely on.&lt;/p&gt;</description><content type="html"><![CDATA[<p>In the previous chapter, I said we were going to visualize the evaluated motion with a small demo. Technically true, but also not entirely accurate. To visualize motion properly, we first need something for our object to move along. And that means we need a track.<br>
+In this article, we focus on an extremely simplified roller coaster track.</p>
+<p>Even the smallest possible track must answer two important questions that our physics and visualization rely on.</p>
+<p>From the last chapter, we know how motion evaluation works: the evaluation function receives an acceleration value and returns a new simulation state containing the updated velocity and the total distance traveled along the track:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">evaluateMotion</span>(<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">acceleration</span>, <span style="color:#a6e22e">deltaTime</span>)
+</span></span></code></pre></div><p>It produces something like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;velocity&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;distanceTraveled&#34;</span>: <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Once the physics evaluation step gives us a <strong>distance traveled</strong>, we must convert that number into something the renderer can interpret:</p>
 <blockquote>
-<p>What is the angle at any distance along a curve?</p>
-</blockquote>
-<p>On a straight line that angle never changes, but I’m making a point here. The method we’re building now is the exact method we will use later for real coaster geometry, where the slope actually changes continuously along the curve.</p>
-<p>The same goes for visualization. Once the physics step gives us a distance traveled, we need to turn that number into an actual position in 2D or 3D space. Which means:</p>
-<blockquote>
-<p>Where is the position at any distance along a curve?</p>
-</blockquote>
-<p>If the object has traveled 1 meter, we need the position at 1 meter. If it has traveled 12.4 meters, we need the position at 12.4 meters. It doesn’t matter if the track is straight or completely twisted.</p>
-<p>So in code we need two methods.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">getAngleAtDistance</span>(<span style="color:#a6e22e">distance</span>)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getPositionAtDistance</span>(<span style="color:#a6e22e">distance</span>)
-</span></span></code></pre></div><p>I’m splitting them here so the idea is clear. In later implementations these two methods can be replaced with a single method called <code>getMatrixAtDistance(distance)</code>, where we can extract all this information much more easily once we work with matrices. But more on that later. For now just forget it again :P</p>
-<p>When we later swap our simple line for a real coaster track, this method will immediately work for other types of curves. The evaluation and visualization logic stays exactly the same. Physics still asks for angle at distance, rendering still asks for position at distance. Only the internal curve math changes.</p>
-<p>That’s why we start tiny, but design it like the real deal. More coming soon.</p>
-]]></content></item><item><title>Writing a Roller Coaster Simulation – Evaluating Motion</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-3/</link><pubDate>Thu, 27 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-3/</guid><description>&lt;h2 id="evaluating-motion">Evaluating Motion&lt;/h2>
-&lt;p>Before we implement the function, there&amp;rsquo;s one small simplification we need to mention:
-In this chapter we will always evaluate the motion every &lt;strong>16 ms (0.016 seconds)&lt;/strong>,
-which corresponds to roughly &lt;strong>60 frames per second&lt;/strong>.&lt;/p>
-&lt;p>Using a fixed time step makes the formulas easier to understand for this article.&lt;/p>
-&lt;p>In real simulations or game engines, you usually don’t assume a constant value. Instead, you take the actual delta time from the game loop, so that the motion stays consistent even if the frame rate changes.&lt;/p></description><content type="html"><![CDATA[<h2 id="evaluating-motion">Evaluating Motion</h2>
+<p>Where is the position at any distance along a curve?</p></blockquote>
+<p>It makes no difference whether the track is straight or completely twisted. The computation is simpler on straight lines, but the concept is identical:</p>
+<ul>
+<li>If we’ve traveled <strong>1 meter</strong>, we need the <strong>position at 1 meter</strong>.</li>
+<li>If we’ve traveled <strong>5 meters</strong>, we need the <strong>position at 5 meters</strong>.</li>
+</ul>
+<p>So for visualization we absolutely need a function that returns the position at any distance along the curve:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">getPositionAtDistance</span>(<span style="color:#a6e22e">distance</span>)
+</span></span></code></pre></div><p>Physics uses the same idea. The evaluation step needs to know how much of gravity acts <strong>along the track direction</strong> at a given distance. Previously, we used a fixed <code>slopeAngle</code> and calculated:</p>
+$$acceleration = gravity \cdot sin(slopeAngle)$$<p>Now that the track has actual geometry, we let the track define its own steepness:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">getDownhillAccelerationAtDistance</span>(<span style="color:#a6e22e">distance</span>)
+</span></span></code></pre></div><p>Both of these functions operate purely on the curve geometry. One returns a position. The other returns how gravity influences motion along the track. With these two components, the simulation behaves exactly as described in the previous chapter.</p>
+<h2 id="getpositionatdistance-on-linear-curves">getPositionAtDistance on Linear “Curves”</h2>
+<p>Let’s implement these two functions. For linear curves, the process is very straightforward. Later, in the full implementation, we’ll build a spline system to handle more complex track geometry.</p>
+<p>A linear curve has exactly two control points, which we’ll call <code>cp1</code> and <code>cp2</code>. Both are simple 2D vectors for this demo. We’ll also rely on THREE.js math utilities because they come with many handy helper methods.</p>
+<h3 id="how-do-we-get-the-2d-position-at-a-distance-along-the-curve">How do we get the 2D position at a distance along the curve?</h3>
+<p>Conceptually, we need to <strong>linearly interpolate</strong> between the two control points:</p>
+$$ \vec{pos} = \vec{cp1} + (\vec{cp2} - \vec{cp1}) \cdot t $$<p>The only missing variable is <strong>t</strong>, which represents the fraction of the curve length we’ve traveled:</p>
+<ul>
+<li><strong>0</strong> → 0% → exactly at <code>cp1</code></li>
+<li><strong>1</strong> → 100% → exactly at <code>cp2</code></li>
+<li><strong>0.5</strong> → 50% → halfway between them</li>
+</ul>
+<p>Instead of passing a percentage, we want to pass a real <strong>distance</strong>, so we convert distance into a value between 0 and 1. To do this, we need the total <strong>length</strong> of the segment.</p>
+<p>How do we compute the distance between two points?<br>
+Using Pythagoras:</p>
+$$ a^2 + b^2 = c^2 $$<p>Solved for c:</p>
+$$ c = \sqrt{a^2 + b^2} $$<p>Substitute the x and y differences of the control points:</p>
+$$ length = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} $$<p>Now we can convert any distance into an interpolation factor:</p>
+$$ t = \frac{distance}{length} $$<p>Putting everything together:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getPositionAtDistance</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">cp1</span>, <span style="color:#a6e22e">cp2</span>, <span style="color:#a6e22e">distance</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">length</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">sqrt</span>((<span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">x</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">x</span>) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (<span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">y</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">y</span>) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">t</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">distance</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">length</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">x</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> (<span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">x</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">x</span>) <span style="color:#f92672">*</span> <span style="color:#a6e22e">t</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">y</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">y</span> <span style="color:#f92672">+</span> (<span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">y</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">y</span>) <span style="color:#f92672">*</span> <span style="color:#a6e22e">t</span>
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Or you can just use the <strong>THREE.js</strong> helpers instead of reinventing the wheel again :):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getPositionAtDistance</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">cp1</span>, <span style="color:#a6e22e">cp2</span>, <span style="color:#a6e22e">distance</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">cp2</span>, <span style="color:#a6e22e">distance</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">distanceTo</span>(<span style="color:#a6e22e">cp2</span>));
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Yes, I know, <strong>if the distance is 0</strong>, the universe will supposedly <strong>collapse</strong> due to <strong>division by 0</strong>, but for the sake of simplicity we ignore that here. Add a safety check in real code.</p>
+<h2 id="how-to-calculate-gravitational-acceleration-along-the-curve">How to Calculate Gravitational Acceleration Along the Curve</h2>
+<p>Previously we used a fixed slope angle:</p>
+$$acceleration = gravity \cdot sin(slopeAngle)$$<p>Now the track geometry itself determines how steep it is. Instead of a manual angle, we compute how much of gravity projects onto the track direction.</p>
+<p>Gravity always points downward, so its vector is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">gravityDir</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">THREE</span>.<span style="color:#a6e22e">Vector2</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><p>The forward direction of the track is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">forward</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">sub</span>(<span style="color:#a6e22e">cp1</span>).<span style="color:#a6e22e">normalize</span>();
+</span></span></code></pre></div><p>The gravitational acceleration along the track is simply the <strong>projection</strong> of the gravity vector onto the forward vector.</p>
+$$acceleration = gravity \cdot \cos(forward \times gravityDir)$$<p>Full implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getDownhillAccelerationAtDistance</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">cp1</span>, <span style="color:#a6e22e">cp2</span>, <span style="color:#a6e22e">distance</span>, <span style="color:#a6e22e">gravity</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">forward</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">sub</span>(<span style="color:#a6e22e">cp1</span>).<span style="color:#a6e22e">normalize</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">gravityDir</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">THREE</span>.<span style="color:#a6e22e">Vector2</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gravity</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">forward</span>.<span style="color:#a6e22e">dot</span>(<span style="color:#a6e22e">gravityDir</span>);
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Since this is a <strong>linear</strong> curve, the slope is constant throughout, meaning this function always returns the same acceleration regardless of the distance. But this prepares us for real roller coaster tracks later, where curves, slopes, and radii vary smoothly, then distance becomes essential.</p>
+<h2 id="running-the-simulation">Running the simulation</h2>
+<p>For the first time, here’s a full HTML example that combines everything we’ve covered so far. It also includes the CDN build of <strong>THREE.js</strong>, so you can run it instantly.</p>
+<p>The demo refreshes once every <strong>16 ms</strong> and displays the live state of the simulation:</p>
+<ul>
+<li>the current velocity</li>
+<li>how many distance the coaster has already traveled</li>
+<li>its computed position on the track (both x and y)</li>
+</ul>
+<p>The example uses a relatively flat segment: <strong>over a distance of 10 meters, the track drops by only about 1 meter.</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+    <a href="/writing-a-roller-coaster-simulation/building-the-smallest-possible-track.html" target="_blank" rel="noopener noreferrer">
+        click to open demo in new tab
+    </a>
+</p>
+
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&#34;en&#34;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&#34;UTF-8&#34; /&gt;
+    &lt;title&gt;Minimal Roller Coaster Track Simulation&lt;/title&gt;
+
+    &lt;script type=&#34;importmap&#34;&gt;
+      {
+        &#34;imports&#34;: {
+          &#34;three&#34;: &#34;https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js&#34;
+        }
+      }
+    &lt;/script&gt;
+  &lt;/head&gt;
+
+  &lt;script type=&#34;module&#34;&gt;
+    import { Vector2 } from &#34;three&#34;;
+
+    const getPositionAtDistance = (cp1, cp2, distance) =&gt; {
+      return cp1.clone().lerp(cp2, distance / cp1.distanceTo(cp2));
+    };
+
+    const getDownhillAccelerationAtDistance = (cp1, cp2, distance, gravity) =&gt; {
+      const forward = cp2.clone().sub(cp1).normalize();
+      const gravityDir = new Vector2(0, -1);
+      return gravity * forward.dot(gravityDir);
+    };
+
+    const evaluateMotion = (state, acceleration, deltaTime) =&gt; {
+      const velocity = state.velocity &#43; acceleration * deltaTime;
+      const distanceTraveled = state.distanceTraveled &#43; velocity * deltaTime;
+      return { velocity, distanceTraveled };
+    };
+
+    let state = {
+      velocity: 0,
+      distanceTraveled: 0,
+    };
+
+    const tickInterval = 0.016; // 16ms ≈ 60FPS
+    const gravity = 9.81; // earth gravity
+
+    // Simple 2D track segment
+    const cp1 = new Vector2(0, 0);
+    const cp2 = new Vector2(10, -1);
+
+    const outputContainer = document.getElementById(&#34;output&#34;);
+    const resetStateButton = document.getElementById(&#34;reset-state&#34;);
+
+    setInterval(() =&gt; {
+      const acceleration = getDownhillAccelerationAtDistance(
+        cp1,
+        cp2,
+        state.distanceTraveled,
+        gravity
+      );
+
+      state = evaluateMotion(state, acceleration, tickInterval);
+      const position = getPositionAtDistance(cp1, cp2, state.distanceTraveled);
+
+      outputContainer.innerText = [
+        `velocity: ${state.velocity.toFixed(3)} m/s`,
+        `distance traveled: ${state.distanceTraveled.toFixed(3)} m`,
+        `position: x: ${position.x.toFixed(2)}m, y: ${position.y.toFixed(2)}m`,
+      ].join(&#34;\n&#34;);
+    }, tickInterval * 1000);
+
+    resetStateButton.addEventListener(&#34;click&#34;, () =&gt; {
+      state = {
+        velocity: 0,
+        distanceTraveled: 0,
+      };
+    });
+  &lt;/script&gt;
+
+  &lt;body&gt;
+    &lt;p id=&#34;output&#34;&gt;&lt;/p&gt;
+    &lt;button id=&#34;reset-state&#34;&gt;Reset simulation&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+]]></content></item><item><title>Writing a Roller Coaster Simulation – Evaluating Motion</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/</link><pubDate>Thu, 27 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/</guid><description>&lt;h2 id="evaluating-motion"&gt;Evaluating Motion&lt;/h2&gt;
+&lt;p&gt;Before we implement the function, there&amp;rsquo;s one small simplification we need to mention:
+In this chapter we will always evaluate the motion every &lt;strong&gt;16 ms (0.016 seconds)&lt;/strong&gt;,
+which corresponds to roughly &lt;strong&gt;60 frames per second&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Using a fixed time step makes the formulas easier to understand for this article.&lt;/p&gt;
+&lt;p&gt;In real simulations or game engines, you usually don’t assume a constant value. Instead, you take the actual delta time from the game loop, so that the motion stays consistent even if the frame rate changes.&lt;/p&gt;</description><content type="html"><![CDATA[<h2 id="evaluating-motion">Evaluating Motion</h2>
 <p>Before we implement the function, there&rsquo;s one small simplification we need to mention:
 In this chapter we will always evaluate the motion every <strong>16 ms (0.016 seconds)</strong>,
 which corresponds to roughly <strong>60 frames per second</strong>.</p>
@@ -43,15 +208,12 @@ This keeps the examples simple and lets us focus on the physics first.</p>
 <p>Our simulation works by creating a new state based on the previous state.
 Think of it like this:</p>
 <blockquote>
-<p>initial state → evaluate → new state → evaluate → new state → &hellip;</p>
-</blockquote>
-<p>To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-2/">Chapter 2</a>. This formula tells us how much of gravity actually acts in the direction of the slope:</p>
-<blockquote>
-<p>acceleration = gravity * sin(slopeAngle)</p>
-</blockquote>
-<p>So we end up basically with:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">evaluateMotion</span>(<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">slopeAngle</span>, <span style="color:#a6e22e">gravity</span>, <span style="color:#a6e22e">deltaTime</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gravity</span> <span style="color:#f92672">*</span> Math.<span style="color:#a6e22e">sin</span>(<span style="color:#a6e22e">slopeAngle</span>)
+<p>initial state → evaluate → new state → evaluate → new state → &hellip;</p></blockquote>
+<p>To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/">Chapter 2</a>. This formula tells us how much of gravity actually acts in the direction of the slope:</p>
+$$acceleration = gravity * sin(slopeAngle)$$<p>So we end up basically with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gravity</span> <span style="color:#f92672">*</span> Math.<span style="color:#a6e22e">sin</span>(<span style="color:#a6e22e">slopeAngle</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">evaluateMotion</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">acceleration</span>, <span style="color:#a6e22e">deltaTime</span>) =&gt; {
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// ...
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
 </span></span></code></pre></div><ul>
@@ -62,36 +224,28 @@ Think of it like this:</p>
 <p>Acceleration is measured in <strong>m/s²</strong>.
 That means:</p>
 <blockquote>
-<p><strong>m/s²</strong> tells us how much the velocity changes in one <strong>full second</strong>.</p>
-</blockquote>
+<p><strong>m/s²</strong> tells us how much the velocity changes in one <strong>full second</strong>.</p></blockquote>
 <p>So if acceleration is <strong>9.81 m/s²</strong>:</p>
 <ul>
 <li>after <strong>1 second</strong>, velocity increases by <strong>9.81 m/s</strong></li>
-<li>so after <strong>0.016 seconds</strong>, velocity increases by <strong>9.81 × 0.016</strong><br>
+<li>so after <strong>0.016 seconds</strong>, velocity increases by \(9.81 * 0.016\)
 Just multiply it with <strong>0.016</strong> :) that does the trick</li>
 </ul>
-<blockquote>
-<p>velocity = acceleration × deltaTime</p>
-</blockquote>
-<p>We take the previous velocity and add the small increase for this frame.</p>
+$$velocity = acceleration * deltaTime$$<p>We take the previous velocity and add the small increase for this frame.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>
 </span></span></code></pre></div><h2 id="calculating-the-distance-traveled">Calculating the distance traveled</h2>
 <p>Velocity is measured in <strong>m/s</strong>.
 This means:</p>
 <blockquote>
-<p>velocity tells us how much <strong>distance</strong> is to travel in <strong>one full second</strong>.</p>
-</blockquote>
+<p>velocity tells us how much <strong>distance</strong> is to travel in <strong>one full second</strong>.</p></blockquote>
 <p>Again we only want the part that matches our <strong>0.016 seconds</strong>.</p>
-<blockquote>
-<p>distanceToTravel = velocity × deltaTime</p>
-</blockquote>
-<p>We take the previous distance traveled and add the small increase for this frame.</p>
+$$distanceToTravel = velocity \cdot deltaTime$$<p>We take the previous distance traveled and add the small increase for this frame.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">=</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>
 </span></span></code></pre></div><p>So we end up with something like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">evaluateMotion</span>(<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">slopeAngle</span>, <span style="color:#a6e22e">gravity</span>, <span style="color:#a6e22e">deltaTime</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gravity</span> <span style="color:#f92672">*</span> Math.<span style="color:#a6e22e">sin</span>(<span style="color:#a6e22e">slopeAngle</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gravity</span> <span style="color:#f92672">*</span> Math.<span style="color:#a6e22e">sin</span>(<span style="color:#a6e22e">slopeAngle</span>)
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">evaluateMotion</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">acceleration</span>, <span style="color:#a6e22e">deltaTime</span>) =&gt; {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">=</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>
 </span></span><span style="display:flex;"><span>
@@ -104,37 +258,34 @@ This means:</p>
 <h2 id="running-the-simulation">Running the simulation</h2>
 <p>Now we run the simulation every 16 ms and log the values.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> { <span style="color:#a6e22e">velocity</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">distanceTraveled</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span> }
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">gravity</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">9.81</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">tickInterval</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.016</span>; <span style="color:#75715e">// 16ms
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">slopeAngle</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">*</span> (Math.<span style="color:#a6e22e">PI</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">180</span>); <span style="color:#75715e">// 5°, needs to be in radians
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">9.81</span> <span style="color:#f92672">*</span> Math.<span style="color:#a6e22e">sin</span>(<span style="color:#a6e22e">slopeAngle</span>) <span style="color:#75715e">// downhill-slope acceleration
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">setInterval</span>(() =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">evaluateMotion</span>(<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">slopeAngle</span>, <span style="color:#a6e22e">gravity</span>, <span style="color:#a6e22e">tickInterval</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">evaluateMotion</span>(<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">acceleration</span>, <span style="color:#a6e22e">tickInterval</span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;velocity:&#34;</span>, <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span>.<span style="color:#a6e22e">toFixed</span>(<span style="color:#ae81ff">3</span>), <span style="color:#e6db74">&#34;m/s&#34;</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;distance:&#34;</span>, <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">distanceTraveled</span>.<span style="color:#a6e22e">toFixed</span>(<span style="color:#ae81ff">3</span>), <span style="color:#e6db74">&#34;m&#34;</span>)
 </span></span><span style="display:flex;"><span>}, <span style="color:#a6e22e">tickInterval</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>)
 </span></span></code></pre></div><p>If you now watch your console log, you will see the distance increasing correctly based on the slope and the physics we evaluated. It is a simple loop but it already simulates motion in a physically meaningful way.</p>
 <h2 id="next-chapter">Next Chapter</h2>
-<p>In the next chapter we will build an interactive Three.js demo where we can adjust the slopeAngle and watch how an object moves along a plane. Nothing complicated, just a small visual setup so we can actually see what the simulation looks like in action.</p>
-]]></content></item><item><title>Writing a Roller Coaster Simulation – Determining Acceleration</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-2/</link><pubDate>Wed, 26 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-2/</guid><description>&lt;h2 id="how-do-we-determine-the-acceleration-of-the-coaster">How do we determine the acceleration of the coaster?&lt;/h2>
-&lt;p>To simplify things, we ignore air resistance, rolling friction and any other additional forces. We also assume Earth’s gravity is &lt;strong>9.81 m/s²&lt;/strong>. This allows us to focus entirely on the fundamental idea:&lt;/p>
-&lt;blockquote>
-&lt;p>&lt;strong>Gravity is the primary source of acceleration.&lt;/strong>&lt;/p>
-&lt;/blockquote>
-&lt;p>On Earth, gravity provides a constant acceleration of &lt;strong>9.81 m/s²&lt;/strong>.&lt;/p>
-&lt;p>What does this number actually mean?&lt;/p>
-&lt;blockquote>
-&lt;p>Every &lt;strong>second&lt;/strong>, an object&amp;rsquo;s speed increases by &lt;strong>9.81 m/s&lt;/strong>.&lt;/p></description><content type="html"><![CDATA[<h2 id="how-do-we-determine-the-acceleration-of-the-coaster">How do we determine the acceleration of the coaster?</h2>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track/">In the next chapter</a> we’ll build a small interactive Three.js demo where we can watch the object’s position update in real time. Nothing fancy, just a simple page showing coordinates and velocity so we can finally see the simulation in action.</p>
+]]></content></item><item><title>Writing a Roller Coaster Simulation – Gravity</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/</link><pubDate>Wed, 26 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/</guid><description>&lt;h2 id="how-do-we-determine-the-acceleration-of-the-coaster"&gt;How do we determine the acceleration of the coaster?&lt;/h2&gt;
+&lt;p&gt;To simplify things, we ignore air resistance, rolling friction and any other additional forces. We also assume Earth’s gravity is &lt;strong&gt;9.81 m/s²&lt;/strong&gt;. This allows us to focus entirely on the fundamental idea:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Gravity is the primary source of acceleration.&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;On Earth, gravity provides a constant acceleration of &lt;strong&gt;9.81 m/s²&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;What does this number actually mean?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Every &lt;strong&gt;second&lt;/strong&gt;, an object&amp;rsquo;s speed increases by &lt;strong&gt;9.81 m/s&lt;/strong&gt;.&lt;/p&gt;</description><content type="html"><![CDATA[<h2 id="how-do-we-determine-the-acceleration-of-the-coaster">How do we determine the acceleration of the coaster?</h2>
 <p>To simplify things, we ignore air resistance, rolling friction and any other additional forces. We also assume Earth’s gravity is <strong>9.81 m/s²</strong>. This allows us to focus entirely on the fundamental idea:</p>
 <blockquote>
-<p><strong>Gravity is the primary source of acceleration.</strong></p>
-</blockquote>
+<p><strong>Gravity is the primary source of acceleration.</strong></p></blockquote>
 <p>On Earth, gravity provides a constant acceleration of <strong>9.81 m/s²</strong>.</p>
 <p>What does this number actually mean?</p>
 <blockquote>
-<p>Every <strong>second</strong>, an object&rsquo;s speed increases by <strong>9.81 m/s</strong>.</p>
-</blockquote>
+<p>Every <strong>second</strong>, an object&rsquo;s speed increases by <strong>9.81 m/s</strong>.</p></blockquote>
 <p>Some quick examples:</p>
 <ul>
 <li>after <strong>1 second</strong> → 9.81 m/s</li>
@@ -147,10 +298,7 @@ This means:</p>
 <p>Gravity is always pointing straight down.<br>
 But on a slope, only a part of that force helps the coaster move along the track.</p>
 <p>To compute that portion, we use the <strong>downhill-slope acceleration</strong>:</p>
-<blockquote>
-<p><strong>acceleration = g × sin(angle)</strong></p>
-</blockquote>
-<p>Where:</p>
+$$acceleration = gravity \cdot sin(angle)$$<p>Where:</p>
 <ul>
 <li><strong>g</strong> – Earth’s gravity (9.81 m/s²)</li>
 <li><strong>angle</strong> – the tilt of the track</li>
@@ -189,8 +337,7 @@ Of course, in a real simulation we also have <strong>negative angles</strong> wh
 <h2 id="why-this-matters-for-simulation">Why this matters for simulation</h2>
 <p>As you can see, to simulate our coaster we only need to know:</p>
 <blockquote>
-<p><strong>the angle of the track at each point.</strong></p>
-</blockquote>
+<p><strong>the angle of the track at each point.</strong></p></blockquote>
 <ul>
 <li>0° → <strong>0 m/s²</strong>, no acceleration</li>
 <li>45° → <strong>6.93 m/s²</strong>, about 70% of gravity</li>
@@ -198,14 +345,13 @@ Of course, in a real simulation we also have <strong>negative angles</strong> wh
 </ul>
 <p>And the crucial insight is:</p>
 <blockquote>
-<p><strong>This relationship is not linear, it&rsquo;s governed by sine.</strong></p>
-</blockquote>
+<p><strong>This relationship is not linear, it&rsquo;s governed by sine.</strong></p></blockquote>
 <p>This is why 45° does <em>not</em> give half of Earth&rsquo;s gravity, but roughly <strong>70%</strong>.</p>
 <hr>
 <h2 id="what-comes-next">What comes next?</h2>
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-3/">In the next chapter, we’ll write a small piece of code that evaluates the physics and moves a simple object along a linear plane.</a></p>
-]]></content></item><item><title>Writing a Roller Coaster Simulation – Introduction and Motion Dynamics</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-1/</link><pubDate>Wed, 26 Nov 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-1/</guid><description>&lt;p>You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser. The goal is not to create a full physics engine or a hyper-realistic coaster model, but to understand the core ideas behind motion, acceleration, track geometry and visual rendering.&lt;/p>
-&lt;p>We will use technologies that are easy to access and quick to experiment with. Throughout the series, we will rely on &lt;strong>TypeScript&lt;/strong>, &lt;strong>React&lt;/strong> and &lt;strong>Three.js&lt;/strong>. This combination gives us a clean developer experience and allows us to turn mathematical concepts into visual, interactive 3D scenes with very little overhead.&lt;/p></description><content type="html"><![CDATA[<p>You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser. The goal is not to create a full physics engine or a hyper-realistic coaster model, but to understand the core ideas behind motion, acceleration, track geometry and visual rendering.</p>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/">In the next chapter</a>, we’ll write a small piece of code that evaluates the physics and moves a simple object along a linear plane.</p>
+]]></content></item><item><title>Writing a Roller Coaster Simulation – Introduction and Motion Dynamics</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/1-introduction-and-motion-dynamics/</link><pubDate>Wed, 26 Nov 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/1-introduction-and-motion-dynamics/</guid><description>&lt;p&gt;You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser. The goal is not to create a full physics engine or a hyper-realistic coaster model, but to understand the core ideas behind motion, acceleration, track geometry and visual rendering.&lt;/p&gt;
+&lt;p&gt;We will use technologies that are easy to access and quick to experiment with. Throughout the series, we will rely on &lt;strong&gt;TypeScript&lt;/strong&gt;, &lt;strong&gt;React&lt;/strong&gt; and &lt;strong&gt;Three.js&lt;/strong&gt;. This combination gives us a clean developer experience and allows us to turn mathematical concepts into visual, interactive 3D scenes with very little overhead.&lt;/p&gt;</description><content type="html"><![CDATA[<p>You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser. The goal is not to create a full physics engine or a hyper-realistic coaster model, but to understand the core ideas behind motion, acceleration, track geometry and visual rendering.</p>
 <p>We will use technologies that are easy to access and quick to experiment with. Throughout the series, we will rely on <strong>TypeScript</strong>, <strong>React</strong> and <strong>Three.js</strong>. This combination gives us a clean developer experience and allows us to turn mathematical concepts into visual, interactive 3D scenes with very little overhead.</p>
 <p>The idea behind this series is simple. Instead of reading theory first, we will learn by building something fun. Each chapter focuses on a single concept. By the end, you will understand how a small coaster car can move along a track, how the track itself is defined, and how everything is drawn in the browser.</p>
 <h2 id="motion-dynamics">Motion Dynamics</h2>
@@ -224,9 +370,9 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 <p>Acceleration → Velocity → Distance</p>
 <p>Once we understand the acceleration acting on the coaster, the rest follows naturally.</p>
 <p>In the next chapter, we will take the first real step of the simulation and answer the core question:</p>
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/writing-a-roller-coaster-simulation-2/">How do we determine the acceleration of the coaster?</a></p>
-]]></content></item><item><title>Roller Coaster Simulation - Improved spline interpolation</title><link>https://ercanakyuerek.de/posts/rollercoaster-simulation/improved-spline-interpolation/</link><pubDate>Tue, 07 Mar 2023 00:30:20 +0100</pubDate><guid>https://ercanakyuerek.de/posts/rollercoaster-simulation/improved-spline-interpolation/</guid><description>&lt;p>In the latest update, a number of bugs were discovered, particularly in the precision of floating point calculations when working with a web assembly module in a browser environment. It was found that the jitters mentioned earlier were actually caused by a bug in the roll interpolation process.&lt;/p>
-&lt;p>To give a brief overview, track interpolation involves estimating the length of a NURBS track by interpolating with a large step size and evaluating nodes based on the estimated length, resulting in a dense enough interpolation. After this, the normals are calculated and normal angles are applied on the y and x directions but not on the z direction yet, which is essentially the roll. These normals are then applied to the previous matrix and the process continues. A C2 continuous cubic spline is then constructed, and the z angle, which is the result of applying normals in the x and y directions, is applied on each roll point on top of its roll value. The next step is to iterate through all nodes again and apply rotation on the z direction. Finally, to obtain the matrix at any point, we perform a binary search for the minimum and maximum node whose distance lies between the two and interpolate linearly.&lt;/p></description><content type="html"><![CDATA[<p>In the latest update, a number of bugs were discovered, particularly in the precision of floating point calculations when working with a web assembly module in a browser environment. It was found that the jitters mentioned earlier were actually caused by a bug in the roll interpolation process.</p>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/">How do we determine the acceleration of the coaster?</a></p>
+]]></content></item><item><title>Roller Coaster Simulation - Improved spline interpolation</title><link>https://ercanakyuerek.de/posts/rollercoaster-simulation/improved-spline-interpolation/</link><pubDate>Tue, 07 Mar 2023 00:30:20 +0100</pubDate><guid>https://ercanakyuerek.de/posts/rollercoaster-simulation/improved-spline-interpolation/</guid><description>&lt;p&gt;In the latest update, a number of bugs were discovered, particularly in the precision of floating point calculations when working with a web assembly module in a browser environment. It was found that the jitters mentioned earlier were actually caused by a bug in the roll interpolation process.&lt;/p&gt;
+&lt;p&gt;To give a brief overview, track interpolation involves estimating the length of a NURBS track by interpolating with a large step size and evaluating nodes based on the estimated length, resulting in a dense enough interpolation. After this, the normals are calculated and normal angles are applied on the y and x directions but not on the z direction yet, which is essentially the roll. These normals are then applied to the previous matrix and the process continues. A C2 continuous cubic spline is then constructed, and the z angle, which is the result of applying normals in the x and y directions, is applied on each roll point on top of its roll value. The next step is to iterate through all nodes again and apply rotation on the z direction. Finally, to obtain the matrix at any point, we perform a binary search for the minimum and maximum node whose distance lies between the two and interpolate linearly.&lt;/p&gt;</description><content type="html"><![CDATA[<p>In the latest update, a number of bugs were discovered, particularly in the precision of floating point calculations when working with a web assembly module in a browser environment. It was found that the jitters mentioned earlier were actually caused by a bug in the roll interpolation process.</p>
 <p>To give a brief overview, track interpolation involves estimating the length of a NURBS track by interpolating with a large step size and evaluating nodes based on the estimated length, resulting in a dense enough interpolation. After this, the normals are calculated and normal angles are applied on the y and x directions but not on the z direction yet, which is essentially the roll. These normals are then applied to the previous matrix and the process continues. A C2 continuous cubic spline is then constructed, and the z angle, which is the result of applying normals in the x and y directions, is applied on each roll point on top of its roll value. The next step is to iterate through all nodes again and apply rotation on the z direction. Finally, to obtain the matrix at any point, we perform a binary search for the minimum and maximum node whose distance lies between the two and interpolate linearly.</p>
 <p>However, a problem arises when the roll is pre-applied, resulting in jitters due to precision issues. To solve this, the roll should not be applied on each node but only when requesting a matrix at a specific distance. Additionally, the performance was optimized by reducing the time for iterating through all nodes to only once.</p>
 <h1 id="whats-next">What&rsquo;s Next?</h1>
@@ -234,8 +380,8 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 <p>Lastly, the program has been updated to include another coaster from the NoLimits 2 Library inside the &ldquo;Storm Valley&rdquo; park.</p>
 
 <iframe src="https://ercanakyuerek.de//roller-coaster-simulation/simulator-2.html" style="border: 0; width: 100%; height: 600px;"></iframe>
-]]></content></item><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - JavaScript module</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-4/</link><pubDate>Mon, 27 Feb 2023 17:45:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-4/</guid><description>&lt;p>&lt;a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/">If you haven&amp;rsquo;t read the third article of this series, I highly recommend that you do so.&lt;/a>&lt;/p>
-&lt;p>This is the point where we will develop our &lt;code>JavaScript&lt;/code> library that utilizes the functions exposed in the &lt;code>WebAssembly&lt;/code> module. I have created a simple template for this purpose. You may notice that we are defining some imports for &lt;code>WASI&lt;/code>, but they are all empty. Allow me to explain what &lt;code>WASI&lt;/code> is and what it aims to achieve. &lt;code>WASI&lt;/code> is an attempt to create specifications similar to the &lt;code>POSIX&lt;/code> standard, which can be implemented across different runtimes, such as browsers or regular machines, and provides access to system-specific functions, such as file systems. However, for our library, which only needs to perform calculations, we do not require a complex runtime environment. This is why our functions are empty. Some may argue that we should use the Emscripten SDK instead of the &lt;code>WASI SDK&lt;/code>, but I believe that the &lt;code>WASI SDK&lt;/code> is the future. It produces smaller binaries and has fewer complications compared to &lt;code>Emscripten&lt;/code>. There are official efforts to import standard &lt;code>WASI&lt;/code> functions for the &lt;code>browser&lt;/code>, but unfortunately, they do not seem to work unless a &lt;code>WebAssembly module&lt;/code> is instantiated within a &lt;code>worker&lt;/code>. If there are any changes in the future regarding this matter, I will update my articles accordingly. &lt;a href="https://github.com/wasmerio/wasmer-js">Here&lt;/a> is the mentioned attempt to bring a &lt;code>WASI runtime&lt;/code> to &lt;code>browsers&lt;/code>. If you can load a &lt;code>WASM file&lt;/code> outside the &lt;code>worker&lt;/code>, just email me your solution and I will include it here! &amp;#x1f604;&lt;/p></description><content type="html"><![CDATA[<p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/">If you haven&rsquo;t read the third article of this series, I highly recommend that you do so.</a></p>
+]]></content></item><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - JavaScript module</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-4/</link><pubDate>Mon, 27 Feb 2023 17:45:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-4/</guid><description>&lt;p&gt;&lt;a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/"&gt;If you haven&amp;rsquo;t read the third article of this series, I highly recommend that you do so.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This is the point where we will develop our &lt;code&gt;JavaScript&lt;/code&gt; library that utilizes the functions exposed in the &lt;code&gt;WebAssembly&lt;/code&gt; module. I have created a simple template for this purpose. You may notice that we are defining some imports for &lt;code&gt;WASI&lt;/code&gt;, but they are all empty. Allow me to explain what &lt;code&gt;WASI&lt;/code&gt; is and what it aims to achieve. &lt;code&gt;WASI&lt;/code&gt; is an attempt to create specifications similar to the &lt;code&gt;POSIX&lt;/code&gt; standard, which can be implemented across different runtimes, such as browsers or regular machines, and provides access to system-specific functions, such as file systems. However, for our library, which only needs to perform calculations, we do not require a complex runtime environment. This is why our functions are empty. Some may argue that we should use the Emscripten SDK instead of the &lt;code&gt;WASI SDK&lt;/code&gt;, but I believe that the &lt;code&gt;WASI SDK&lt;/code&gt; is the future. It produces smaller binaries and has fewer complications compared to &lt;code&gt;Emscripten&lt;/code&gt;. There are official efforts to import standard &lt;code&gt;WASI&lt;/code&gt; functions for the &lt;code&gt;browser&lt;/code&gt;, but unfortunately, they do not seem to work unless a &lt;code&gt;WebAssembly module&lt;/code&gt; is instantiated within a &lt;code&gt;worker&lt;/code&gt;. If there are any changes in the future regarding this matter, I will update my articles accordingly. &lt;a href="https://github.com/wasmerio/wasmer-js"&gt;Here&lt;/a&gt; is the mentioned attempt to bring a &lt;code&gt;WASI runtime&lt;/code&gt; to &lt;code&gt;browsers&lt;/code&gt;. If you can load a &lt;code&gt;WASM file&lt;/code&gt; outside the &lt;code&gt;worker&lt;/code&gt;, just email me your solution and I will include it here! &amp;#x1f604;&lt;/p&gt;</description><content type="html"><![CDATA[<p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/">If you haven&rsquo;t read the third article of this series, I highly recommend that you do so.</a></p>
 <p>This is the point where we will develop our <code>JavaScript</code> library that utilizes the functions exposed in the <code>WebAssembly</code> module. I have created a simple template for this purpose. You may notice that we are defining some imports for <code>WASI</code>, but they are all empty. Allow me to explain what <code>WASI</code> is and what it aims to achieve. <code>WASI</code> is an attempt to create specifications similar to the <code>POSIX</code> standard, which can be implemented across different runtimes, such as browsers or regular machines, and provides access to system-specific functions, such as file systems. However, for our library, which only needs to perform calculations, we do not require a complex runtime environment. This is why our functions are empty. Some may argue that we should use the Emscripten SDK instead of the <code>WASI SDK</code>, but I believe that the <code>WASI SDK</code> is the future. It produces smaller binaries and has fewer complications compared to <code>Emscripten</code>. There are official efforts to import standard <code>WASI</code> functions for the <code>browser</code>, but unfortunately, they do not seem to work unless a <code>WebAssembly module</code> is instantiated within a <code>worker</code>. If there are any changes in the future regarding this matter, I will update my articles accordingly. <a href="https://github.com/wasmerio/wasmer-js">Here</a> is the mentioned attempt to bring a <code>WASI runtime</code> to <code>browsers</code>. If you can load a <code>WASM file</code> outside the <code>worker</code>, just email me your solution and I will include it here! &#x1f604;</p>
 <h2 id="instantiate-a-module">Instantiate a module</h2>
 <p>Let&rsquo;s create a small boilerplate code for this purpose in the <code>index.js</code> file:</p>
@@ -323,9 +469,9 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 Next to this text, you can view an advanced test that displays a spline. I have created a <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/static/wasi-sdk-writing-library-in-cpp/libCalculation">repository</a> that contains all the necessary files, including this advanced example that uses Three.js for rendering.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>That&rsquo;s all! It wasn&rsquo;t that difficult, was it? We haven&rsquo;t yet covered other complex types, such as passing strings to and from WebAssembly modules, or how to log. However, you should have a rough idea of how things work now. In future articles, I will explore data types, memory management, and binding in greater depth. To be honest, gluing code together is not enjoyable. It requires creating glue code on the C++ side and a wrapper JavaScript module that <code>serializes</code> and <code>unserializes</code> arguments and return values. Some solutions eliminate the need for writing both code pieces, but for now, this should help you get started, especially if you aim to build a small yet performance-critical library.</p>
-]]></content></item><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/</guid><description>&lt;p>&lt;a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/">If you haven&amp;rsquo;t read the second article of this series, I highly recommend that you do so.&lt;/a>&lt;/p>
-&lt;iframe src="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html" class="embedded-iframe">&lt;/iframe>
-&lt;p>In this article, we&amp;rsquo;ll be exploring a more interesting example where we&amp;rsquo;ll construct a bezier curve, evaluate nodes on it, and write a function that gives any position on the curve by a length parameter. To explain briefly, a bezier curve is represented by a parameter &lt;code>t&lt;/code>, which varies between 0 and 1 and determines the position of nodes on the curve. However, this &lt;code>t&lt;/code> value doesn&amp;rsquo;t produce uniform spacing, which is problematic when we want to evaluate a point on the curve based on its distance. To solve this, we can evaluate some nodes along the curve with known distances and then linearly interpolate new nodes between them to find the point we&amp;rsquo;re looking for.&lt;/p></description><content type="html"><![CDATA[<p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/">If you haven&rsquo;t read the second article of this series, I highly recommend that you do so.</a></p>
+]]></content></item><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/</guid><description>&lt;p&gt;&lt;a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/"&gt;If you haven&amp;rsquo;t read the second article of this series, I highly recommend that you do so.&lt;/a&gt;&lt;/p&gt;
+&lt;iframe src="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html" class="embedded-iframe"&gt;&lt;/iframe&gt;
+&lt;p&gt;In this article, we&amp;rsquo;ll be exploring a more interesting example where we&amp;rsquo;ll construct a bezier curve, evaluate nodes on it, and write a function that gives any position on the curve by a length parameter. To explain briefly, a bezier curve is represented by a parameter &lt;code&gt;t&lt;/code&gt;, which varies between 0 and 1 and determines the position of nodes on the curve. However, this &lt;code&gt;t&lt;/code&gt; value doesn&amp;rsquo;t produce uniform spacing, which is problematic when we want to evaluate a point on the curve based on its distance. To solve this, we can evaluate some nodes along the curve with known distances and then linearly interpolate new nodes between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</description><content type="html"><![CDATA[<p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/">If you haven&rsquo;t read the second article of this series, I highly recommend that you do so.</a></p>
 
 <iframe src="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html" class="embedded-iframe"></iframe>
 <p>In this article, we&rsquo;ll be exploring a more interesting example where we&rsquo;ll construct a bezier curve, evaluate nodes on it, and write a function that gives any position on the curve by a length parameter. To explain briefly, a bezier curve is represented by a parameter <code>t</code>, which varies between 0 and 1 and determines the position of nodes on the curve. However, this <code>t</code> value doesn&rsquo;t produce uniform spacing, which is problematic when we want to evaluate a point on the curve based on its distance. To solve this, we can evaluate some nodes along the curve with known distances and then linearly interpolate new nodes between them to find the point we&rsquo;re looking for.</p>
@@ -478,8 +624,8 @@ Next to this text, you can view an advanced test that displays a spline. I have 
 </span></span></code></pre></div><h2 id="build">Build</h2>
 <p>At this point, you can run a build by executing <code>npm run build</code>. It should compile without any errors. In the next section, we will create a small <code>JavaScript</code> module that initializes the <code>WebAssembly</code> module, wraps the exposed functions, and handles incoming and outgoing data types. This <code>JavaScript</code> module can be used in your project just like any other <code>ES6 module</code>.</p>
 <p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-4/">Now, let&rsquo;s create a small JavaScript module that will be responsible for creating a WebAssembly module, loading our Wasm file, defining some imports for WASI (which will mostly be empty), and creating functions for those that we exported in our C++ glue code.</a></p>
-]]></content></item><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - CMake and build scripts</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/</link><pubDate>Thu, 23 Feb 2023 23:15:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/</guid><description>&lt;p>&lt;a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/">If you haven&amp;rsquo;t read the first article of this series, I highly recommend that you do so.&lt;/a>&lt;/p>
-&lt;p>To simplify the building process, we can create a build script. We have already defined some scripts in our &lt;code>package.json&lt;/code> file. At this point, the &lt;code>build-wasm.js&lt;/code> file is still empty, so we can create a basic script that first deletes an existing &lt;code>build&lt;/code> folder, creates a new one, and runs &lt;code>cmake ..&lt;/code> inside it. We will be using a WASI-SDK docker image from &lt;code>ghcr.io/webassembly/wasi-sdk&lt;/code> to run cmake and eventually compile the project via &lt;code>make&lt;/code>.&lt;/p></description><content type="html"><![CDATA[<p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/">If you haven&rsquo;t read the first article of this series, I highly recommend that you do so.</a></p>
+]]></content></item><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - CMake and build scripts</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/</link><pubDate>Thu, 23 Feb 2023 23:15:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/</guid><description>&lt;p&gt;&lt;a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/"&gt;If you haven&amp;rsquo;t read the first article of this series, I highly recommend that you do so.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;To simplify the building process, we can create a build script. We have already defined some scripts in our &lt;code&gt;package.json&lt;/code&gt; file. At this point, the &lt;code&gt;build-wasm.js&lt;/code&gt; file is still empty, so we can create a basic script that first deletes an existing &lt;code&gt;build&lt;/code&gt; folder, creates a new one, and runs &lt;code&gt;cmake ..&lt;/code&gt; inside it. We will be using a WASI-SDK docker image from &lt;code&gt;ghcr.io/webassembly/wasi-sdk&lt;/code&gt; to run cmake and eventually compile the project via &lt;code&gt;make&lt;/code&gt;.&lt;/p&gt;</description><content type="html"><![CDATA[<p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/">If you haven&rsquo;t read the first article of this series, I highly recommend that you do so.</a></p>
 <p>To simplify the building process, we can create a build script. We have already defined some scripts in our <code>package.json</code> file. At this point, the <code>build-wasm.js</code> file is still empty, so we can create a basic script that first deletes an existing <code>build</code> folder, creates a new one, and runs <code>cmake ..</code> inside it. We will be using a WASI-SDK docker image from <code>ghcr.io/webassembly/wasi-sdk</code> to run cmake and eventually compile the project via <code>make</code>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">rm</span>, <span style="color:#a6e22e">mkdir</span>, <span style="color:#a6e22e">exec</span>, <span style="color:#a6e22e">cp</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;shelljs&#34;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">join</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;path&#34;</span>);
@@ -540,9 +686,9 @@ Next to this text, you can view an advanced test that displays a spline. I have 
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>add_subdirectory(<span style="color:#e6db74">glue</span>)<span style="color:#960050;background-color:#1e0010">
 </span></span></span></code></pre></div><p>To test our setup, we need to add a main function to the file <code>glue/glue.cc</code>. The files <code>spline.cc</code> and <code>spline.h</code> can remain empty for now as they are not necessary to test our setup:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {}
-</span></span></code></pre></div><p><img alt="final structure" src="/wasi-sdk-writing-library-in-cpp/final_structure.png"></p>
+</span></span></code></pre></div><p><img src="/wasi-sdk-writing-library-in-cpp/final_structure.png" alt="final structure"></p>
 <p>Finally, we can run our build script and see what happens &#x1f604;. To run the build script, simply execute <code>npm run build</code>. After it finishes executing, there should be a newly created file in the root directory named <code>glue.wasm</code>, which confirms that our setup is correct. However, this file does not have any functionality at the moment, <a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/">but that will change in the next chapter.</a></p>
-]]></content></item><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - Folder structure</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/</link><pubDate>Thu, 23 Feb 2023 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/</guid><description>&lt;p>You may have already heard that it&amp;rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.&lt;/p></description><content type="html"><![CDATA[<p>You may have already heard that it&rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.</p>
+]]></content></item><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - Folder structure</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/</link><pubDate>Thu, 23 Feb 2023 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/</guid><description>&lt;p&gt;You may have already heard that it&amp;rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.&lt;/p&gt;</description><content type="html"><![CDATA[<p>You may have already heard that it&rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.</p>
 <p>As of the time of writing this article in 2023, there are available bindings for Rust programming language. However, when it comes to <code>C++</code>, I was not able to find any mature solution except for the <a href="https://emscripten.org/docs/porting/connecting_cpp_and_javascript/WebIDL-Binder.html">WebIDL Binder for Emscripten</a>. Unfortunately, my experience with it did not produce satisfactory results. Perhaps in the future, I will explore other binding solutions and update this series of articles. For now, we will have to manually glue our code. This involves creating bindings to enable the exchange of complex data between WebAssembly modules and exposing functions.</p>
 <h2 id="using-webassembly-as-a-regular-javascript-module">Using WebAssembly as a Regular JavaScript Module</h2>
 <p>This is a crucial aspect that I wish to explore. I want to write parts of my application in C++ and use them as regular modules in JavaScript. As previously mentioned, there is no NPM infrastructure available for compiling or generating bindings that can produce JavaScript files that export modules with exposed C++ functions. In this series, we will construct a minimalist infrastructure that emulates familiar module structures.</p>
@@ -582,7 +728,7 @@ desktop applications as well, where <code>WASI SDK</code> is not used to build t
 This approach ensures high flexibility when using the library in both the browser and desktop
 environments.</p>
 <p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/">In the next part, we will create the build script and set up the CMake files.</a></p>
-]]></content></item><item><title>Roller Coaster Simulation - First results</title><link>https://ercanakyuerek.de/posts/rollercoaster-simulation/first-results/</link><pubDate>Thu, 23 Feb 2023 16:28:20 +0100</pubDate><guid>https://ercanakyuerek.de/posts/rollercoaster-simulation/first-results/</guid><description>&lt;p>I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.&lt;/p></description><content type="html"><![CDATA[<p>I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.</p>
+]]></content></item><item><title>Roller Coaster Simulation - First results</title><link>https://ercanakyuerek.de/posts/rollercoaster-simulation/first-results/</link><pubDate>Thu, 23 Feb 2023 16:28:20 +0100</pubDate><guid>https://ercanakyuerek.de/posts/rollercoaster-simulation/first-results/</guid><description>&lt;p&gt;I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.&lt;/p&gt;</description><content type="html"><![CDATA[<p>I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.</p>
 <p>At this point in time, the simulator does not support a block system or multi-track functionality. However, I am actively working on implementing these features. It is worth noting that the simulator runs in a browser, and has been written in c++ and compiled to WebAssembly. Consequently, a lightweight version of the software is available for use in web browsers, while the desktop version is built using Unreal Engine 5.</p>
 <p>To give you a better idea of the current implementation of the simulator, I have created an interactive example for you to try. You can switch between two coasters from the NoLimits2 library, change the camera perspective, and live adjust gravity and friction. Please note that since the user interface library I am using has no capabilities to allow more than two decimal points, there are no adjustment options for air resistance. Additionally, the track itself is not yet connected, and the sections only provide simple acceleration and deceleration on sections without a block system.</p>
 
