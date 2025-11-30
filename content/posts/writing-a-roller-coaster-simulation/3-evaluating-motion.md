@@ -3,9 +3,11 @@ title: "Writing a Roller Coaster Simulation – Evaluating Motion"
 date: 2025-11-27T12:35:00+01:00
 math: true
 ---
+
 ## Evaluating Motion
+
 Before we implement the function, there's one small simplification we need to mention:
-In this chapter we will always evaluate the motion every **16 ms (0.016 seconds)**, 
+In this chapter we will always evaluate the motion every **16 ms (0.016 seconds)**,
 which corresponds to roughly **60 frames per second**.
 
 Using a fixed time step makes the formulas easier to understand for this article.
@@ -22,9 +24,9 @@ We start with a minimal simulation state.
 
 ```js
 const simulationState = {
-    velocity: 0,
-    distanceTraveled: 0
-}
+  velocity: 0,
+  distanceTraveled: 0,
+};
 ```
 
 At the beginning the coaster does not move and has not travelled any distance.
@@ -43,11 +45,11 @@ $$acceleration = gravity * sin(slopeAngle)$$
 So we end up basically with:
 
 ```js
-const acceleration = gravity * Math.sin(slopeAngle)
+const acceleration = gravity * Math.sin(slopeAngle);
 
 const evaluateMotion = (state, acceleration, deltaTime) => {
-    /// ...
-}
+  /// ...
+};
 ```
 
 - slopeAngle controls how steep the slope is
@@ -63,7 +65,7 @@ That means:
 So if acceleration is **9.81 m/s²**:
 
 - after **1 second**, velocity increases by **9.81 m/s**
-- so after **0.016 seconds**, velocity increases by \\(9.81 * 0.016\\)
+- so after **0.016 seconds**, velocity increases by \\(9.81 \* 0.016\\)
   Just multiply it with **0.016** :) that does the trick
 
 $$velocity = acceleration * deltaTime$$
@@ -71,7 +73,7 @@ $$velocity = acceleration * deltaTime$$
 We take the previous velocity and add the small increase for this frame.
 
 ```js
-const velocity = state.velocity + acceleration * deltaTime
+const velocity = state.velocity + acceleration * deltaTime;
 ```
 
 ## Calculating the distance traveled
@@ -88,21 +90,20 @@ $$distanceToTravel = velocity \cdot deltaTime$$
 We take the previous distance traveled and add the small increase for this frame.
 
 ```js
-const distanceTraveled =
-    state.distanceTraveled + velocity * deltaTime
+const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
 ```
 
 So we end up with something like:
 
 ```js
-const acceleration = gravity * Math.sin(slopeAngle)
+const acceleration = gravity * Math.sin(slopeAngle);
 
 const evaluateMotion = (state, acceleration, deltaTime) => {
-    const velocity = state.velocity + acceleration * deltaTime
-    const distanceTraveled = state.distanceTraveled + velocity * deltaTime
+  const velocity = state.velocity + acceleration * deltaTime;
+  const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
 
-    return { velocity, distanceTraveled }
-}
+  return { velocity, distanceTraveled };
+};
 ```
 
 This is already a complete physics step without friction or air resistance.
