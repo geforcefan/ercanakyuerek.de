@@ -36,7 +36,7 @@ Think of it like this:
 
 > initial state → evaluate → new state → evaluate → new state → ...
 
-To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from [Chapter 2]({{< ref "/posts/writing-a-roller-coaster-simulation/2-determining-acceleration.md" >}}). This formula tells us how much of gravity actually acts in the direction of the slope:
+To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from [Chapter 2]({{< ref "/posts/writing-a-roller-coaster-simulation/2-gravity.md" >}}). This formula tells us how much of gravity actually acts in the direction of the slope:
 
 $$acceleration = gravity * sin(slopeAngle)$$
 

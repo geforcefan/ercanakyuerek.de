@@ -1,5 +1,5 @@
 ---
-title: "Writing a Roller Coaster Simulation – Determining Acceleration"
+title: "Writing a Roller Coaster Simulation – Gravity"
 date: 2025-11-26T12:35:00+01:00
 math: true
 ---
