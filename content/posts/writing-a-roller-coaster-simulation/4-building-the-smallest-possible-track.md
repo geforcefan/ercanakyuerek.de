@@ -148,7 +148,7 @@ Since this is a linear curve, the slope is constant. The forward direction is si
 
 $$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} \rVert} $$
 
-In code:
+This is simply a fancy way of describing the following in code:
 
 ```js
 const getForwardDirectionAtDistance = (cp1, cp2, distance) => {
