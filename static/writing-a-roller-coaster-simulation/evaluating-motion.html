@@ -13,7 +13,7 @@
       };
 
       let state = { velocity: 0, distanceTraveled: 0 };
-      const tickInterval = 0.016; // 16ms
+      const tickInterval = 0.016; // 16ms ≈ 60FPS
       const slopeAngle = 2 * (Math.PI / 180); // 2°, needs to be in radians
       const acceleration = 9.81 * Math.sin(slopeAngle); // downhill-slope acceleration
 
