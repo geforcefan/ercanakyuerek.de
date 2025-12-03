@@ -83,6 +83,8 @@ $$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec
 </span></span></code></pre></div><h2 id="small-note">Small note</h2>
 <p>Later, the forward vector will be replaced by a <strong>4×4 matrix</strong>, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called <code>getMatrixAtDistance</code>. I know, yet again a change, but that’s future you’s problem. Ignore it for now.</p>
 <h2 id="adding-everything-up-small-demo">Adding Everything Up: Small Demo</h2>
+<p>Time for a small demo. I built a very simple setup: a visible line segment with draggable control points so you can adjust the slope in real time. On the side, a small panel displays the live simulation state.</p>
+<p>I switched the vectors to 3D instead of 2D, but only because it makes things more convenient in Three.js. The actual calculations from this article are exactly the same.</p>
 
 
 
@@ -97,6 +99,7 @@ $$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec
         style="border:0;"
         class="embedded-iframe "
 ></iframe>
+<p>I’ve polished things a bit and moved the physics and linear interpolation logic into their own files instead of keeping everything as spaghetti code. The complete source code is available in my GitHub repo, feel free to explore and play around with it.</p>
 
 
 
@@ -115,12 +118,13 @@ $$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec
 
 <p>
     <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/scenes/DemoLinearTrackScene.jsx" target="_blank" rel="noopener noreferrer">
-        Click here to view the code on GitHub (opens in a new tab).
+        Click here to view the code on GitHub (opens in a new tab)
     </a>
 </p>
 
-<pre><code class="language-jsx">import React, { useState } from &#34;react&#34;;
+<pre><code class="language-jsx">import React, { useEffect, useState } from &#34;react&#34;;
 import { Matrix4, Vector3 } from &#34;three&#34;;
+import { useControls } from &#34;leva&#34;;
 
 import Scene from &#34;../components/Scene&#34;;
 import Line from &#34;../components/Line&#34;;
@@ -132,47 +136,48 @@ import {
   length,
 } from &#34;../helper/linear&#34;;
 import { evaluateMotionByForwardDirection } from &#34;../helper/physics&#34;;
-import { DragControls } from &#34;@react-three/drei&#34;;
+import { DragControlPosition } from &#34;../components/DragControlPosition&#34;;
+import { ControlPoint } from &#34;../components/ControlPoint&#34;;
 
 const DemoLinearTrack = () =&gt; {
   const colors = useColors();
 
-  const [cp1, setCp1] = useState(new Vector3(-12.5, 3, -1));
-  const [cp2, setCp2] = useState(new Vector3(12.5, -3, -1));
+  const [cp1, setCp1] = useState(new Vector3(-12, 2, 0));
+  const [cp2, setCp2] = useState(new Vector3(2, -1, 0));
 
-  console.log({cp1, cp2})
-  const [simulationState, setSimulationState] = useState({
+  const [simulationState, setSimulationState] = useControls(() =&gt; ({
     velocity: 0,
     distanceTraveled: 0,
     acceleration: 0,
-  });
+  }));
 
   useFrame((state, delta) =&gt; {
-    if (
-      simulationState.distanceTraveled &gt; length(cp1, cp2) ||
-      simulationState.distanceTraveled &lt; 0
-    )
-      setSimulationState({
-        velocity: 0,
-        distanceTraveled: 0,
-        acceleration: 0,
-      });
-
-    const forwardDirection = getForwardDirectionAtDistance(
-      cp1,
-      cp2,
-      simulationState.distanceTraveled
-    );
-
-    setSimulationState((simulationState) =&gt;
+    setSimulationState(
       evaluateMotionByForwardDirection(
         simulationState,
-        forwardDirection,
+        getForwardDirectionAtDistance(
+          cp1,
+          cp2,
+          simulationState.distanceTraveled
+        ),
         9.81,
         delta
       )
     );
   });
+
+  useEffect(() =&gt; {
+    if (
+      simulationState.distanceTraveled &gt; length(cp1, cp2) ||
+      simulationState.distanceTraveled &lt; 0
+    ) {
+      setSimulationState({
+        velocity: 0,
+        distanceTraveled: 0,
+        acceleration: 0,
+      });
+    }
+  }, [simulationState.distanceTraveled]);
 
   const trainPosition = getPositionAtDistance(
     cp1,
@@ -182,38 +187,17 @@ const DemoLinearTrack = () =&gt; {
 
   return (
     &lt;&gt;
+      &lt;DragControlPosition axisLock=&#34;z&#34; position={cp1} onDrag={setCp1}&gt;
+        &lt;ControlPoint /&gt;
+      &lt;/DragControlPosition&gt;
+
+      &lt;DragControlPosition axisLock=&#34;z&#34; position={cp2} onDrag={setCp2}&gt;
+        &lt;ControlPoint /&gt;
+      &lt;/DragControlPosition&gt;
+
       &lt;Line points={[cp1, cp2]} color={colors.secondary} lineWidth={0.02} /&gt;
 
-      &lt;DragControls
-        axisLock=&#34;z&#34;
-        matrix={new Matrix4().setPosition(cp1)}
-        onDrag={(localMatrix) =&gt; {
-          setCp1(new Vector3().setFromMatrixPosition(localMatrix));
-        }}
-      &gt;
-        &lt;mesh&gt;
-          &lt;sphereGeometry attach=&#34;geometry&#34; args={[0.2, 6, 6]} /&gt;
-          &lt;meshBasicMaterial attach=&#34;material&#34; color={colors.secondary} /&gt;
-        &lt;/mesh&gt;
-      &lt;/DragControls&gt;
-
-      &lt;DragControls
-        axisLock=&#34;z&#34;
-        matrix={new Matrix4().setPosition(cp2)}
-        onDrag={(localMatrix) =&gt; {
-          setCp2(new Vector3().setFromMatrixPosition(localMatrix));
-        }}
-      &gt;
-        &lt;mesh&gt;
-          &lt;sphereGeometry attach=&#34;geometry&#34; args={[0.2, 6, 6]} /&gt;
-          &lt;meshBasicMaterial attach=&#34;material&#34; color={colors.secondary} /&gt;
-        &lt;/mesh&gt;
-      &lt;/DragControls&gt;
-
-      &lt;mesh position={trainPosition}&gt;
-        &lt;sphereGeometry attach=&#34;geometry&#34; args={[0.2, 6, 6]} /&gt;
-        &lt;meshBasicMaterial attach=&#34;material&#34; color={colors.secondary} /&gt;
-      &lt;/mesh&gt;
+      &lt;ControlPoint position={trainPosition} /&gt;
     &lt;/&gt;
   );
 };
@@ -315,7 +299,7 @@ $$distanceToTravel = velocity \cdot deltaTime$$<p>We take the previous distance 
 
 <p>
     <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/static/writing-a-roller-coaster-simulation/evaluating-motion.html" target="_blank" rel="noopener noreferrer">
-        Click here to view the code on GitHub (opens in a new tab).
+        Click here to view the code on GitHub (opens in a new tab)
     </a>
 </p>
 
