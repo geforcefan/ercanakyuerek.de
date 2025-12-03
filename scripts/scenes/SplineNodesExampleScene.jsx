@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Vector3 } from "three";
-import { Tween, Easing } from "tween.js";
+import React, { useEffect, useState } from 'react';
+import { Vector3 } from 'three';
+import { Easing, Tween } from 'tween.js';
 
-import BezierCurve from "../components/BezierCurve";
-import Scene from "../components/Scene";
+import BezierCurve from '../components/BezierCurve';
+import Scene from '../components/Scene';
 
 const points = [
   new Vector3(-3, -3, 0),

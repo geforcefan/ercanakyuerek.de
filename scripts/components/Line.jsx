@@ -1,5 +1,5 @@
-import React, { useMemo } from "react";
-import { BufferGeometry } from "three";
+import React, { useMemo } from 'react';
+import { BufferGeometry } from 'three';
 
 const Line = ({ points, color = null }) => {
   const geometry = useMemo(() => {

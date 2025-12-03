@@ -1,12 +1,8 @@
-import { useMedia } from "react-recipes";
-import { useMemo } from "react";
+import { useMemo } from 'react';
+import { useMedia } from 'react-recipes';
 
 const useColors = () => {
-  const prefersDarkMode = useMedia(
-    ["(prefers-color-scheme: dark)"],
-    [true],
-    false
-  );
+  const prefersDarkMode = useMedia(['(prefers-color-scheme: dark)'], [true], false);
 
   return useMemo(() => {
     return {

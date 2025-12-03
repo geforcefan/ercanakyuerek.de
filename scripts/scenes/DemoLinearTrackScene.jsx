@@ -1,23 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Matrix4, Vector3 } from "three";
-import { useControls } from "leva";
+import React, { useEffect, useState } from 'react';
+import { useFrame } from '@react-three/fiber';
+import { useControls } from 'leva';
+import { Vector3 } from 'three';
 
-import Scene from "../components/Scene";
-import Line from "../components/Line";
-import useColors from "../hooks/useColors";
-import { useFrame } from "@react-three/fiber";
-import {
-  getPositionAtDistance,
-  getForwardDirectionAtDistance,
-  length,
-} from "../helper/linear";
-import { evaluateMotionByForwardDirection } from "../helper/physics";
-import { DragControlPosition } from "../components/DragControlPosition";
-import { ControlPoint } from "../components/ControlPoint";
+import { ControlPoint } from '../components/ControlPoint';
+import { DragControlPosition } from '../components/DragControlPosition';
+import Line from '../components/Line';
+import Scene from '../components/Scene';
+import { getForwardDirectionAtDistance, getPositionAtDistance, length } from '../helper/linear';
+import { evaluateMotionByForwardDirection } from '../helper/physics';
+import useColors from '../hooks/useColors';
 
 const DemoLinearTrack = () => {
   const colors = useColors();
 
+  // Control points
   const [cp1, setCp1] = useState(new Vector3(-12, 2, 0));
   const [cp2, setCp2] = useState(new Vector3(2, -1, 0));
 
@@ -27,21 +24,19 @@ const DemoLinearTrack = () => {
     acceleration: 0,
   }));
 
-  useFrame((state, delta) => {
+  // Main motion evaluation per frame
+  useFrame((state, deltaTime) => {
     setSimulationState(
       evaluateMotionByForwardDirection(
         simulationState,
-        getForwardDirectionAtDistance(
-          cp1,
-          cp2,
-          simulationState.distanceTraveled
-        ),
+        getForwardDirectionAtDistance(cp1, cp2, simulationState.distanceTraveled),
         9.81,
-        delta
-      )
+        deltaTime,
+      ),
     );
   });
 
+  // Reset simulation state if train overshoots track
   useEffect(() => {
     if (
       simulationState.distanceTraveled > length(cp1, cp2) ||
@@ -55,11 +50,7 @@ const DemoLinearTrack = () => {
     }
   }, [simulationState.distanceTraveled]);
 
-  const trainPosition = getPositionAtDistance(
-    cp1,
-    cp2,
-    simulationState.distanceTraveled
-  );
+  const trainPosition = getPositionAtDistance(cp1, cp2, simulationState.distanceTraveled);
 
   return (
     <>

@@ -1,9 +1,9 @@
-import { Matrix4, Vector3 } from "three";
-import { DragControls } from "@react-three/drei";
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react';
+import { DragControls } from '@react-three/drei';
+import { Matrix4, Vector3 } from 'three';
 
 export const DragControlPosition = ({
-  axisLock = "z",
+  axisLock = 'z',
   position,
   onDrag = (vec) => {},
   children,

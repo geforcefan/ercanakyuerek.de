@@ -1,4 +1,4 @@
-export function lowerBound(a, x, prop) {
+export const lowerBound = (a, x, prop) => {
   let l = 0;
   let h = a.length;
 

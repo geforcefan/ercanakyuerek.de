@@ -1,12 +1,13 @@
-import useColors from "../hooks/useColors";
-import React from "react";
+import React from 'react';
+
+import useColors from '../hooks/useColors';
 
 const sizes = {
-  sm: "0.1",
-  md: "0.2",
+  sm: '0.1',
+  md: '0.2',
 };
 
-export const ControlPoint = ({ size = "md", ...props }) => {
+export const ControlPoint = ({ size = 'md', ...props }) => {
   const colors = useColors();
 
   return (

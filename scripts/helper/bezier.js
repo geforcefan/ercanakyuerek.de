@@ -1,5 +1,6 @@
-import { Vector3 } from "three";
-import lowerBound from "./lower-bound";
+import { Vector3 } from 'three';
+
+import lowerBound from './lower-bound';
 
 export const bezierFast = (p0, p1, p2, p3, t) => {
   const t1 = 1.0 - t;
@@ -11,7 +12,7 @@ export const bezierFast = (p0, p1, p2, p3, t) => {
   return new Vector3(
     b0 * p0.x + b1 * p1.x + b2 * p2.x + b3 * p3.x,
     b0 * p0.y + b1 * p1.y + b2 * p2.y + b3 * p3.y,
-    b0 * p0.z + b1 * p1.z + b2 * p2.z + b3 * p3.z
+    b0 * p0.z + b1 * p1.z + b2 * p2.z + b3 * p3.z,
   );
 };
 
@@ -37,7 +38,7 @@ export const length = (nodes) => {
 export const getPositionAtDistance = (nodes, at) => {
   if (nodes.length < 2) return new Vector3(0.0);
 
-  const lowerElement = lowerBound(nodes, at, "distance");
+  const lowerElement = lowerBound(nodes, at, 'distance');
 
   const nextNode = nodes[lowerElement];
   const currentNode = nodes[lowerElement - 1];
@@ -51,13 +52,7 @@ export const getPositionAtDistance = (nodes, at) => {
   let t = 0.0;
 
   if (nextNode.dist - currentNode.dist > 0.0001) {
-    t = Math.max(
-      Math.min(
-        (at - currentNode.dist) / (nextNode.dist - currentNode.dist),
-        1.0
-      ),
-      0.0
-    );
+    t = Math.max(Math.min((at - currentNode.dist) / (nextNode.dist - currentNode.dist), 1.0), 0.0);
   }
 
   return currentNode.position.lerp(nextNode.position, t);
@@ -85,10 +80,7 @@ export const evaluateUniform = (p0, p1, p2, p3, resolution = 10) => {
 export const evaluate = (p0, p1, p2, p3, resolution = 10) => {
   let distance = 0;
   const nodes = [];
-  const numberOfNodes = Math.max(
-    Math.floor(estimateLength(p0, p1, p2, p3) * resolution),
-    2
-  );
+  const numberOfNodes = Math.max(Math.floor(estimateLength(p0, p1, p2, p3) * resolution), 2);
   let lastPosition = p0;
 
   for (let i = 0; i < numberOfNodes; i++) {
