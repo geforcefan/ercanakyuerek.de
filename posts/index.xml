@@ -122,26 +122,23 @@ $$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec
     </a>
 </p>
 
-<pre><code class="language-jsx">import React, { useEffect, useState } from &#34;react&#34;;
-import { Matrix4, Vector3 } from &#34;three&#34;;
-import { useControls } from &#34;leva&#34;;
+<pre><code class="language-jsx">import React, { useEffect, useState } from &#39;react&#39;;
+import { useFrame } from &#39;@react-three/fiber&#39;;
+import { useControls } from &#39;leva&#39;;
+import { Vector3 } from &#39;three&#39;;
 
-import Scene from &#34;../components/Scene&#34;;
-import Line from &#34;../components/Line&#34;;
-import useColors from &#34;../hooks/useColors&#34;;
-import { useFrame } from &#34;@react-three/fiber&#34;;
-import {
-  getPositionAtDistance,
-  getForwardDirectionAtDistance,
-  length,
-} from &#34;../helper/linear&#34;;
-import { evaluateMotionByForwardDirection } from &#34;../helper/physics&#34;;
-import { DragControlPosition } from &#34;../components/DragControlPosition&#34;;
-import { ControlPoint } from &#34;../components/ControlPoint&#34;;
+import { ControlPoint } from &#39;../components/ControlPoint&#39;;
+import { DragControlPosition } from &#39;../components/DragControlPosition&#39;;
+import Line from &#39;../components/Line&#39;;
+import Scene from &#39;../components/Scene&#39;;
+import { getForwardDirectionAtDistance, getPositionAtDistance, length } from &#39;../helper/linear&#39;;
+import { evaluateMotionByForwardDirection } from &#39;../helper/physics&#39;;
+import useColors from &#39;../hooks/useColors&#39;;
 
 const DemoLinearTrack = () =&gt; {
   const colors = useColors();
 
+  // Control points
   const [cp1, setCp1] = useState(new Vector3(-12, 2, 0));
   const [cp2, setCp2] = useState(new Vector3(2, -1, 0));
 
@@ -151,21 +148,19 @@ const DemoLinearTrack = () =&gt; {
     acceleration: 0,
   }));
 
-  useFrame((state, delta) =&gt; {
+  // Main motion evaluation per frame
+  useFrame((state, deltaTime) =&gt; {
     setSimulationState(
       evaluateMotionByForwardDirection(
         simulationState,
-        getForwardDirectionAtDistance(
-          cp1,
-          cp2,
-          simulationState.distanceTraveled
-        ),
+        getForwardDirectionAtDistance(cp1, cp2, simulationState.distanceTraveled),
         9.81,
-        delta
-      )
+        deltaTime,
+      ),
     );
   });
 
+  // Reset simulation state if train overshoots track
   useEffect(() =&gt; {
     if (
       simulationState.distanceTraveled &gt; length(cp1, cp2) ||
@@ -179,11 +174,7 @@ const DemoLinearTrack = () =&gt; {
     }
   }, [simulationState.distanceTraveled]);
 
-  const trainPosition = getPositionAtDistance(
-    cp1,
-    cp2,
-    simulationState.distanceTraveled
-  );
+  const trainPosition = getPositionAtDistance(cp1, cp2, simulationState.distanceTraveled);
 
   return (
     &lt;&gt;
@@ -331,7 +322,7 @@ $$distanceToTravel = velocity \cdot deltaTime$$<p>We take the previous distance 
           `distance traveled: ${state.distanceTraveled.toFixed(3)} m`,
           `acceleration: ${acceleration.toFixed(3)} ms^2`,
           `slope angle: ${(slopeAngle / (Math.PI / 180)).toFixed(3)}°`,
-        ].join(&#34;\n&#34;);
+        ].join(&#39;\n&#39;);
       }, tickInterval * 1000);
     &lt;/script&gt;
   &lt;/head&gt;
