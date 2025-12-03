@@ -83,12 +83,20 @@ $$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec
 </span></span></code></pre></div><h2 id="small-note">Small note</h2>
 <p>Later, the forward vector will be replaced by a <strong>4×4 matrix</strong>, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called <code>getMatrixAtDistance</code>. I know, yet again a change, but that’s future you’s problem. Ignore it for now.</p>
 <h2 id="adding-everything-up-small-demo">Adding Everything Up: Small Demo</h2>
-<p>The demo updates every 16 ms and displays:</p>
-<ul>
-<li>current velocity</li>
-<li>traveled distance</li>
-<li>current position on the track</li>
-</ul>
+
+
+
+
+
+
+
+<iframe
+        src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track.html"
+        width="100%"
+        height="200px"
+        style="border:0;"
+        class="embedded-iframe "
+></iframe>
 
 
 
@@ -106,105 +114,121 @@ $$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec
 
 
 <p>
-    <a href="/writing-a-roller-coaster-simulation/building-the-smallest-possible-track.html" target="_blank" rel="noopener noreferrer">
-        click to open demo in new tab
+    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/scenes/DemoLinearTrackScene.jsx" target="_blank" rel="noopener noreferrer">
+        Click here to view the code on GitHub (opens in a new tab).
     </a>
 </p>
 
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&#34;en&#34;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&#34;UTF-8&#34; /&gt;
-    &lt;title&gt;
-      Writing a Roller Coaster Simulation – Building the Easiest Possible Track
-    &lt;/title&gt;
+<pre><code class="language-jsx">import React, { useState } from &#34;react&#34;;
+import { Matrix4, Vector3 } from &#34;three&#34;;
 
-    &lt;script type=&#34;importmap&#34;&gt;
-      {
-        &#34;imports&#34;: {
-          &#34;three&#34;: &#34;https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js&#34;
-        }
-      }
-    &lt;/script&gt;
-  &lt;/head&gt;
+import Scene from &#34;../components/Scene&#34;;
+import Line from &#34;../components/Line&#34;;
+import useColors from &#34;../hooks/useColors&#34;;
+import { useFrame } from &#34;@react-three/fiber&#34;;
+import {
+  getPositionAtDistance,
+  getForwardDirectionAtDistance,
+  length,
+} from &#34;../helper/linear&#34;;
+import { evaluateMotionByForwardDirection } from &#34;../helper/physics&#34;;
+import { DragControls } from &#34;@react-three/drei&#34;;
 
-  &lt;script type=&#34;module&#34;&gt;
-    import { Vector2 } from &#34;three&#34;;
+const gravity = 9.81;
 
-    const getLength = (cp1, cp2) =&gt; {
-      return cp1.distanceTo(cp2);
-    };
+const DemoLinearTrack = () =&gt; {
+  const colors = useColors();
 
-    const getPositionAtDistance = (cp1, cp2, distance) =&gt; {
-      return cp1.clone().lerp(cp2, distance / getLength(cp1, cp2));
-    };
+  const [cp1, setCp1] = useState(new Vector3(-12.5, 3, -1));
+  const [cp2, setCp2] = useState(new Vector3(12.5, -3, -1));
 
-    const getForwardDirectionAtDistance = (cp1, cp2, distance) =&gt; {
-      return cp2.clone().sub(cp1).normalize();
-    };
+  console.log({cp1, cp2})
+  const [simulationState, setSimulationState] = useState({
+    velocity: 0,
+    distanceTraveled: 0,
+    acceleration: 0,
+  });
 
-    const evaluateMotion = (state, forwardDirection, gravity, deltaTime) =&gt; {
-      const acceleration = forwardDirection.dot(new Vector2(0, -gravity));
-      const velocity = state.velocity &#43; acceleration * deltaTime;
-      const distanceTraveled = state.distanceTraveled &#43; velocity * deltaTime;
-
-      return { velocity, distanceTraveled, acceleration };
-    };
-
-    let state = {
-      velocity: 0,
-      distanceTraveled: 0,
-      acceleration: 0,
-    };
-
-    const tickInterval = 0.016; // 16ms ≈ 60FPS
-    const gravity = 9.81; // earth gravity
-
-    // Simple 2D track segment
-    const cp1 = new Vector2(0, 1);
-    const cp2 = new Vector2(30, 0);
-
-    const outputContainer = document.getElementById(&#34;output&#34;);
-    const resetStateButton = document.getElementById(&#34;reset-state&#34;);
-
-    setInterval(() =&gt; {
-      if (state.distanceTraveled &gt; getLength(cp1, cp2)) return;
-
-      const forwardDirection = getForwardDirectionAtDistance(
-        cp1,
-        cp2,
-        state.distanceTraveled
-      );
-
-      state = evaluateMotion(state, forwardDirection, gravity, tickInterval);
-      const position = getPositionAtDistance(cp1, cp2, state.distanceTraveled);
-
-      outputContainer.innerText = [
-        `velocity: ${state.velocity.toFixed(3)} m/s`,
-        `velocity: ${(state.velocity * 3.6).toFixed(3)} km/h`,
-        `distance traveled: ${state.distanceTraveled.toFixed(3)} m`,
-        `acceleration: ${state.acceleration.toFixed(3)} ms^2`,
-        `position: x: ${position.x.toFixed(2)}m, y: ${position.y.toFixed(2)}m`,
-      ].join(&#34;\n&#34;);
-    }, tickInterval * 1000);
-
-    resetStateButton.addEventListener(&#34;click&#34;, () =&gt; {
-      state = {
+  useFrame((state, delta) =&gt; {
+    if (
+      simulationState.distanceTraveled &gt; length(cp1, cp2) ||
+      simulationState.distanceTraveled &lt; 0
+    )
+      setSimulationState({
         velocity: 0,
         distanceTraveled: 0,
         acceleration: 0,
-      };
-    });
-  &lt;/script&gt;
+      });
 
-  &lt;body&gt;
-    &lt;p id=&#34;output&#34;&gt;&lt;/p&gt;
-    &lt;button id=&#34;reset-state&#34;&gt;Reset simulation&lt;/button&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+    const forwardDirection = getForwardDirectionAtDistance(
+      cp1,
+      cp2,
+      simulationState.distanceTraveled
+    );
+
+    setSimulationState((simulationState) =&gt;
+      evaluateMotionByForwardDirection(
+        simulationState,
+        forwardDirection,
+        gravity,
+        delta
+      )
+    );
+  });
+
+  const trainPosition = getPositionAtDistance(
+    cp1,
+    cp2,
+    simulationState.distanceTraveled
+  );
+
+  return (
+    &lt;&gt;
+      &lt;Line points={[cp1, cp2]} color={colors.secondary} lineWidth={0.02} /&gt;
+
+      &lt;DragControls
+        axisLock=&#34;z&#34;
+        matrix={new Matrix4().setPosition(cp1)}
+        onDrag={(localMatrix) =&gt; {
+          setCp1(new Vector3().setFromMatrixPosition(localMatrix));
+        }}
+      &gt;
+        &lt;mesh&gt;
+          &lt;sphereGeometry attach=&#34;geometry&#34; args={[0.2, 6, 6]} /&gt;
+          &lt;meshBasicMaterial attach=&#34;material&#34; color={colors.secondary} /&gt;
+        &lt;/mesh&gt;
+      &lt;/DragControls&gt;
+
+      &lt;DragControls
+        axisLock=&#34;z&#34;
+        matrix={new Matrix4().setPosition(cp2)}
+        onDrag={(localMatrix) =&gt; {
+          setCp2(new Vector3().setFromMatrixPosition(localMatrix));
+        }}
+      &gt;
+        &lt;mesh&gt;
+          &lt;sphereGeometry attach=&#34;geometry&#34; args={[0.2, 6, 6]} /&gt;
+          &lt;meshBasicMaterial attach=&#34;material&#34; color={colors.secondary} /&gt;
+        &lt;/mesh&gt;
+      &lt;/DragControls&gt;
+
+      &lt;mesh position={trainPosition}&gt;
+        &lt;sphereGeometry attach=&#34;geometry&#34; args={[0.2, 6, 6]} /&gt;
+        &lt;meshBasicMaterial attach=&#34;material&#34; color={colors.secondary} /&gt;
+      &lt;/mesh&gt;
+    &lt;/&gt;
+  );
+};
+
+export const DemoLinearTrackScene = () =&gt; {
+  return (
+    &lt;Scene&gt;
+      &lt;DemoLinearTrack /&gt;
+    &lt;/Scene&gt;
+  );
+};
 </code></pre>
 
-<p>In the next chapter, we will finally visualize everything using THREE.js, animate control points, and maybe add friction and air resistance, since both are extremely easy to implement.</p>
 ]]></content></item><item><title>Writing a Roller Coaster Simulation – Evaluating Motion</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/</link><pubDate>Thu, 27 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/</guid><description>&lt;h2 id="evaluating-motion"&gt;Evaluating Motion&lt;/h2&gt;
 &lt;p&gt;Before we implement the function, there&amp;rsquo;s one small simplification we need to mention:
 In this chapter we will always evaluate the motion every &lt;strong&gt;16 ms (0.016 seconds)&lt;/strong&gt;,
@@ -292,8 +316,8 @@ $$distanceToTravel = velocity \cdot deltaTime$$<p>We take the previous distance 
 
 
 <p>
-    <a href="/writing-a-roller-coaster-simulation/evaluating-motion.html" target="_blank" rel="noopener noreferrer">
-        click to open demo in new tab
+    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/static/writing-a-roller-coaster-simulation/evaluating-motion.html" target="_blank" rel="noopener noreferrer">
+        Click here to view the code on GitHub (opens in a new tab).
     </a>
 </p>
 
@@ -527,24 +551,54 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">init</span>();
 </span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">script</span>&gt;
 </span></span></code></pre></div>
-<iframe src="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/libCalculation/example.html" class="embedded-iframe"></iframe>
+
+
+
+
+
+
+<iframe
+        src="https://ercanakyuerek.de//%25!s%28%3cnil%3e%29"
+        width="200px"
+        height="200px"
+        style="border:0;"
+        class="embedded-iframe "
+></iframe>
 <p>Please check the console for a spline with a length of <code>10.06</code>. The position we fetched should return a 3D vector with coordinates of <code>[-3, -3, 0]</code>.
 Next to this text, you can view an advanced test that displays a spline. I have created a <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/static/wasi-sdk-writing-library-in-cpp/libCalculation">repository</a> that contains all the necessary files, including this advanced example that uses Three.js for rendering.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>That&rsquo;s all! It wasn&rsquo;t that difficult, was it? We haven&rsquo;t yet covered other complex types, such as passing strings to and from WebAssembly modules, or how to log. However, you should have a rough idea of how things work now. In future articles, I will explore data types, memory management, and binding in greater depth. To be honest, gluing code together is not enjoyable. It requires creating glue code on the C++ side and a wrapper JavaScript module that <code>serializes</code> and <code>unserializes</code> arguments and return values. Some solutions eliminate the need for writing both code pieces, but for now, this should help you get started, especially if you aim to build a small yet performance-critical library.</p>
 ]]></content></item><item><title>Writing a Library in C++ and Using it in the Browser with the WASI SDK - Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/</guid><description>&lt;p&gt;&lt;a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/"&gt;If you haven&amp;rsquo;t read the second article of this series, I highly recommend that you do so.&lt;/a&gt;&lt;/p&gt;
-&lt;iframe src="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html" class="embedded-iframe"&gt;&lt;/iframe&gt;
+&lt;iframe
+src="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html"
+width="200px"
+height="200px"
+style="border:0;"
+class="embedded-iframe float-right"
+&gt;&lt;/iframe&gt;
 &lt;p&gt;In this article, we&amp;rsquo;ll be exploring a more interesting example where we&amp;rsquo;ll construct a bezier curve, evaluate nodes on it, and write a function that gives any position on the curve by a length parameter. To explain briefly, a bezier curve is represented by a parameter &lt;code&gt;t&lt;/code&gt;, which varies between 0 and 1 and determines the position of nodes on the curve. However, this &lt;code&gt;t&lt;/code&gt; value doesn&amp;rsquo;t produce uniform spacing, which is problematic when we want to evaluate a point on the curve based on its distance. To solve this, we can evaluate some nodes along the curve with known distances and then linearly interpolate new nodes between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</description><content type="html"><![CDATA[<p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/">If you haven&rsquo;t read the second article of this series, I highly recommend that you do so.</a></p>
 
-<iframe src="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html" class="embedded-iframe"></iframe>
+
+
+
+
+
+
+<iframe
+        src="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html"
+        width="200px"
+        height="200px"
+        style="border:0;"
+        class="embedded-iframe float-right"
+></iframe>
 <p>In this article, we&rsquo;ll be exploring a more interesting example where we&rsquo;ll construct a bezier curve, evaluate nodes on it, and write a function that gives any position on the curve by a length parameter. To explain briefly, a bezier curve is represented by a parameter <code>t</code>, which varies between 0 and 1 and determines the position of nodes on the curve. However, this <code>t</code> value doesn&rsquo;t produce uniform spacing, which is problematic when we want to evaluate a point on the curve based on its distance. To solve this, we can evaluate some nodes along the curve with known distances and then linearly interpolate new nodes between them to find the point we&rsquo;re looking for.</p>
 <p>While this is a specific example, it involves &ldquo;complex&rdquo; types such as custom structs and 3D vectors that will need to be accessed from a web browser. So it should serve as a useful case for testing our library &#x1f604;</p>
 <h2 id="adding-a-third-party-library">Adding a third party library</h2>
 <p>I mentioned 3D vectors, so there is a well-known library called <code>glm</code>. I know that this is an overkill library for our &ldquo;simple&rdquo; problem, but it serves the purpose of showing how to add other libraries to our project. Ideally, the 3rd party library also has a CMake ecosystem. Otherwise, we need to be creative, fortunately. <code>glm</code> provides CMake files. My approach is to add a git submodule into the root directory by calling:</p>
-<pre tabindex="0"><code>git submodule add https://github.com/g-truc/glm.git
-</code></pre><p>We must include the glm directory as an include in our root <code>CMakeList.txt</code>, as the glm library is a header-only library and does not need to be linked against anything:</p>
-<pre tabindex="0"><code>include_directories(glm)
-</code></pre><h2 id="spline-implementation">Spline implementation</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git submodule add https://github.com/g-truc/glm.git
+</span></span></code></pre></div><p>We must include the glm directory as an include in our root <code>CMakeList.txt</code>, as the glm library is a header-only library and does not need to be linked against anything:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmake" data-lang="cmake"><span style="display:flex;"><span>include_directories(<span style="color:#e6db74">glm</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><h2 id="spline-implementation">Spline implementation</h2>
 <p>In summary, I have developed a solution for the problem discussed earlier, but I won&rsquo;t delve too deeply into the technical details. The primary function of my implementation, <code>bezier_fast</code>, computes the position on a bezier curve based on a given <code>t</code> parameter. Additionally, <code>estimate_length</code> is used to calculate the curve&rsquo;s length very quickly with a <code>low step size</code>. This estimation is necessary to determine how many nodes we should evaluate. With this method, we can create densely populated nodes depending on the curve&rsquo;s length. The evaluate function executes the procedure I just described. Naturally, we can always measure the distance between the evaluated position and the previous one to obtain the curve&rsquo;s total length, which we simply pass through the <code>get_length</code> function. Lastly, <code>get_position_at_distance</code> searches for the minimum node at a specified distance and linearly interpolates the position to the next node. We have successfully achieved the ability to evaluate uniformly spaced points on the curve.</p>
 <p><code>src/spline.cc:</code></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;spline.h&#34;</span><span style="color:#75715e">
