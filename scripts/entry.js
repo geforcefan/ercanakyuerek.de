@@ -1,3 +1,5 @@
-import wasi_sdk_writing_library_in_cpp from "./wasi-sdk-writing-library-in-cpp";
+import { DemoLinearTrackScene } from "./scenes/DemoLinearTrackScene";
+import { SplineNodesExampleScene } from "./scenes/SplineNodesExampleScene";
+import { createRoot } from "react-dom/client";
 
-export { wasi_sdk_writing_library_in_cpp };
+export { SplineNodesExampleScene, DemoLinearTrackScene, createRoot };

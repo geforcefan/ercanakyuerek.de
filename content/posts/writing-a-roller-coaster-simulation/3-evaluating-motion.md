@@ -112,7 +112,7 @@ This is already a complete physics step without friction or air resistance.
 
 Now we run the simulation every 16 ms and log the values.
 
-{{< show-static-file-code "writing-a-roller-coaster-simulation/evaluating-motion.html" >}}
+{{< show-file-code "static/writing-a-roller-coaster-simulation/evaluating-motion.html" >}}
 
 ## Next Chapter
 

@@ -1,2 +1,14 @@
-<!-- layouts/shortcodes/iframe.html -->
-<iframe src="{{.Site.BaseURL}}/{{ .Get 0 }}" class="embedded-iframe"></iframe>
+{{ $src := .Get "src" }}
+{{ $height := .Get "height" | default "200px" }}
+{{ $width := .Get "width" | default "200px" }}
+{{ $class := .Get "class" }}
+
+{{ $fullPath := printf "%s/%s" .Site.BaseURL $src }}
+
+<iframe
+        src="{{ $fullPath }}"
+        width="{{ $width }}"
+        height="{{ $height }}"
+        style="border:0;"
+        class="embedded-iframe {{ $class }}"
+></iframe>

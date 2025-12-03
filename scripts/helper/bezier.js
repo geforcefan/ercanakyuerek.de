@@ -62,6 +62,7 @@ export const getPositionAtDistance = (nodes, at) => {
 
   return currentNode.position.lerp(nextNode.position, t);
 };
+
 export const evaluateUniform = (p0, p1, p2, p3, resolution = 10) => {
   const newNodes = [];
   const nodes = evaluate(p0, p1, p2, p3, 40);

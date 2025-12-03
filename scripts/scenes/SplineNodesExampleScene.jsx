@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { createRoot } from "react-dom/client";
 import { Vector3 } from "three";
 import { Tween, Easing } from "tween.js";
 
-import BezierCurve from "./components/BezierCurve";
-import Scene from "./components/Scene";
+import BezierCurve from "../components/BezierCurve";
+import Scene from "../components/Scene";
 
 const points = [
   new Vector3(-3, -3, 0),
@@ -61,13 +60,10 @@ const Example = () => {
   );
 };
 
-const wasi_sdk_writing_library_in_cpp1 = () => {
-  document.body.innerHTML += `<div id="app"></div>`;
-  createRoot(document.getElementById("app")).render(
+export const SplineNodesExampleScene = () => {
+  return (
     <Scene>
       <Example />
     </Scene>
   );
 };
-
-export default wasi_sdk_writing_library_in_cpp;

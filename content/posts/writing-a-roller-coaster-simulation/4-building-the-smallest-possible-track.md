@@ -163,13 +163,6 @@ const getForwardDirectionAtDistance = (cp1, cp2, distance) => {
 Later, the forward vector will be replaced by a **4×4 matrix**, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called ``getMatrixAtDistance``. I know, yet again a change, but that’s future you’s problem. Ignore it for now.
 
 ## Adding Everything Up: Small Demo
+{{< iframe src="writing-a-roller-coaster-simulation/demo-linear-track.html" width="100%" height="200px" >}}
 
-The demo updates every 16 ms and displays:
-
-- current velocity
-- traveled distance
-- current position on the track
-
-{{< show-static-file-code "writing-a-roller-coaster-simulation/building-the-smallest-possible-track.html" >}}
-
-In the next chapter, we will finally visualize everything using THREE.js, animate control points, and maybe add friction and air resistance, since both are extremely easy to implement.
+{{< show-file-code "scripts/scenes/DemoLinearTrackScene.jsx" >}}
