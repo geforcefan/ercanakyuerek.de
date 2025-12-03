@@ -13,8 +13,6 @@ import {
 import { evaluateMotionByForwardDirection } from "../helper/physics";
 import { DragControls } from "@react-three/drei";
 
-const gravity = 9.81;
-
 const DemoLinearTrack = () => {
   const colors = useColors();
 
@@ -49,7 +47,7 @@ const DemoLinearTrack = () => {
       evaluateMotionByForwardDirection(
         simulationState,
         forwardDirection,
-        gravity,
+        9.81,
         delta
       )
     );
