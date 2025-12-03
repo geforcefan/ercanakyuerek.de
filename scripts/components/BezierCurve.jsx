@@ -2,6 +2,7 @@ import useColors from "../hooks/useColors";
 import React, { useMemo } from "react";
 import { evaluate, evaluateUniform } from "../helper/bezier";
 import Line from "./Line";
+import { ControlPoint } from "./ControlPoint";
 const BezierCurve = ({ points, resolution = 5, uniform = false }) => {
   const colors = useColors();
 
@@ -20,10 +21,7 @@ const BezierCurve = ({ points, resolution = 5, uniform = false }) => {
   return (
     <>
       {nodes.map((node, i) => (
-        <mesh key={i} position={node.position}>
-          <sphereGeometry attach="geometry" args={[0.1, 6, 6]} />
-          <meshBasicMaterial attach="material" color={colors.secondary} />
-        </mesh>
+        <ControlPoint size="sm" key={i} position={node.position} />
       ))}
 
       <Line points={points} color={colors.silent} lineWidth={0.01} />

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Matrix4, Vector3 } from "three";
+import { useControls } from "leva";
 
 import Scene from "../components/Scene";
 import Line from "../components/Line";
@@ -11,47 +12,48 @@ import {
   length,
 } from "../helper/linear";
 import { evaluateMotionByForwardDirection } from "../helper/physics";
-import { DragControls } from "@react-three/drei";
+import { DragControlPosition } from "../components/DragControlPosition";
+import { ControlPoint } from "../components/ControlPoint";
 
 const DemoLinearTrack = () => {
   const colors = useColors();
 
-  const [cp1, setCp1] = useState(new Vector3(-12.5, 3, -1));
-  const [cp2, setCp2] = useState(new Vector3(12.5, -3, -1));
+  const [cp1, setCp1] = useState(new Vector3(-12, 2, 0));
+  const [cp2, setCp2] = useState(new Vector3(2, -1, 0));
 
-  console.log({cp1, cp2})
-  const [simulationState, setSimulationState] = useState({
+  const [simulationState, setSimulationState] = useControls(() => ({
     velocity: 0,
     distanceTraveled: 0,
     acceleration: 0,
-  });
+  }));
 
   useFrame((state, delta) => {
-    if (
-      simulationState.distanceTraveled > length(cp1, cp2) ||
-      simulationState.distanceTraveled < 0
-    )
-      setSimulationState({
-        velocity: 0,
-        distanceTraveled: 0,
-        acceleration: 0,
-      });
-
-    const forwardDirection = getForwardDirectionAtDistance(
-      cp1,
-      cp2,
-      simulationState.distanceTraveled
-    );
-
-    setSimulationState((simulationState) =>
+    setSimulationState(
       evaluateMotionByForwardDirection(
         simulationState,
-        forwardDirection,
+        getForwardDirectionAtDistance(
+          cp1,
+          cp2,
+          simulationState.distanceTraveled
+        ),
         9.81,
         delta
       )
     );
   });
+
+  useEffect(() => {
+    if (
+      simulationState.distanceTraveled > length(cp1, cp2) ||
+      simulationState.distanceTraveled < 0
+    ) {
+      setSimulationState({
+        velocity: 0,
+        distanceTraveled: 0,
+        acceleration: 0,
+      });
+    }
+  }, [simulationState.distanceTraveled]);
 
   const trainPosition = getPositionAtDistance(
     cp1,
@@ -61,38 +63,17 @@ const DemoLinearTrack = () => {
 
   return (
     <>
+      <DragControlPosition axisLock="z" position={cp1} onDrag={setCp1}>
+        <ControlPoint />
+      </DragControlPosition>
+
+      <DragControlPosition axisLock="z" position={cp2} onDrag={setCp2}>
+        <ControlPoint />
+      </DragControlPosition>
+
       <Line points={[cp1, cp2]} color={colors.secondary} lineWidth={0.02} />
 
-      <DragControls
-        axisLock="z"
-        matrix={new Matrix4().setPosition(cp1)}
-        onDrag={(localMatrix) => {
-          setCp1(new Vector3().setFromMatrixPosition(localMatrix));
-        }}
-      >
-        <mesh>
-          <sphereGeometry attach="geometry" args={[0.2, 6, 6]} />
-          <meshBasicMaterial attach="material" color={colors.secondary} />
-        </mesh>
-      </DragControls>
-
-      <DragControls
-        axisLock="z"
-        matrix={new Matrix4().setPosition(cp2)}
-        onDrag={(localMatrix) => {
-          setCp2(new Vector3().setFromMatrixPosition(localMatrix));
-        }}
-      >
-        <mesh>
-          <sphereGeometry attach="geometry" args={[0.2, 6, 6]} />
-          <meshBasicMaterial attach="material" color={colors.secondary} />
-        </mesh>
-      </DragControls>
-
-      <mesh position={trainPosition}>
-        <sphereGeometry attach="geometry" args={[0.2, 6, 6]} />
-        <meshBasicMaterial attach="material" color={colors.secondary} />
-      </mesh>
+      <ControlPoint position={trainPosition} />
     </>
   );
 };

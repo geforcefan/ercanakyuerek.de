@@ -163,6 +163,12 @@ const getForwardDirectionAtDistance = (cp1, cp2, distance) => {
 Later, the forward vector will be replaced by a **4×4 matrix**, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called ``getMatrixAtDistance``. I know, yet again a change, but that’s future you’s problem. Ignore it for now.
 
 ## Adding Everything Up: Small Demo
+Time for a small demo. I built a very simple setup: a visible line segment with draggable control points so you can adjust the slope in real time. On the side, a small panel displays the live simulation state.
+
+I switched the vectors to 3D instead of 2D, but only because it makes things more convenient in Three.js. The actual calculations from this article are exactly the same.
+
 {{< iframe src="writing-a-roller-coaster-simulation/demo-linear-track.html" width="100%" height="200px" >}}
+
+I’ve polished things a bit and moved the physics and linear interpolation logic into their own files instead of keeping everything as spaghetti code. The complete source code is available in my GitHub repo, feel free to explore and play around with it.
 
 {{< show-file-code "scripts/scenes/DemoLinearTrackScene.jsx" >}}
