@@ -3,7 +3,11 @@ title: "Writing a Roller Coaster Simulation – Introduction  and Motion Dynamic
 date: 2025-11-26T12:30:00+01:00
 ---
 
-You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser. The goal is not to create a full physics engine or a hyper-realistic coaster model, but to understand the core ideas behind motion, acceleration, track geometry and visual rendering.
+You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser.
+
+My goal here isn’t to build some engineering-grade physics engine.  I just want to recreate the kind of coaster **physics** we all know from things like **NoLimits Roller Coaster or coasters in games**. 
+Nothing overly scientific, just the kind of system that behaves the way we intuitively expect. 
+In the end, the physics model will end up pretty close to what NoLimits does anyway, just without all the heavy engineering baggage.
 
 We will use technologies that are easy to access and quick to experiment with. Throughout the series, we will rely on **TypeScript**, **React** and **Three.js**. This combination gives us a clean developer experience and allows us to turn mathematical concepts into visual, interactive 3D scenes with very little overhead.
 

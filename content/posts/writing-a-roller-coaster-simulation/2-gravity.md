@@ -1,5 +1,5 @@
 ---
-title: "Writing a Roller Coaster Simulation – Gravity"
+title: 'Writing a Roller Coaster Simulation – Gravity'
 date: 2025-11-26T12:35:00+01:00
 math: true
 ---
@@ -10,7 +10,7 @@ To simplify things, we ignore air resistance, rolling friction and any other add
 
 > **Gravity is the primary source of acceleration.**
 
-On Earth, gravity provides a constant acceleration of roughly **9.81 m/s²**. 
+On Earth, gravity provides a constant acceleration of roughly **9.81 m/s²**.
 
 What does this number actually mean?
 
@@ -37,9 +37,9 @@ $$acceleration = gravity \cdot sin(angle)$$
 
 Where:
 
-- **g** – Earth’s gravity (9.81 m/s²)
-- **angle** – the tilt of the track
-- **sin(angle)** – how much of gravity points *along* the track
+- **gravity**: Earth’s gravity (9.81 m/s²)
+- **angle**: the tilt of the track
+- **sin(angle)**: how much of gravity points **along** the track
 
 ### But why?
 
@@ -54,6 +54,7 @@ For these downhill angles, the relevant sine values lie between **0 and 1**:
 ### Examples
 
 #### **Vertical drop (90°)**
+
 Full gravity acts along the track, essentially free fall.
 
 - sin(90°) = 1 (100% of **gravity**)
@@ -62,6 +63,7 @@ Full gravity acts along the track, essentially free fall.
 ---
 
 #### **45° slope**
+
 You probably expected to get **half of gravity** here, right? Nope, it's not linear at all :D It’s a sine function.
 
 - sin(45°) ≈ 0.707 (≈ 70% of **gravity**)
@@ -70,6 +72,7 @@ You probably expected to get **half of gravity** here, right? Nope, it's not lin
 ---
 
 #### **Flat track (0°)**
+
 No slope → no downhill force.
 
 - sin(0°) = 0 (0% of **gravity**)
@@ -91,12 +94,29 @@ And the crucial insight is:
 
 > **This relationship is not linear, it's governed by sine.**
 
-This is why 45° does *not* give half of Earth's gravity, but roughly **70%**.
+This is why 45° does _not_ give half of Earth's gravity, but roughly **70%**.
 
 ## Interactive Example
 
-You can play around with **different slopes** and see how they affect the percentage of **gravity applied** to the coaster. 
-Having a visual representation of written concepts really helps me reach that **I got it** moment, 
+When it comes to calculating the acceleration component along the slope, the formula ultimately reduces to:
+
+```typescript
+const acceleration = gravity * Math.sin(slope);
+```
+
+> Keep in mind that `Math.sin` accepts **radians**, not **degrees**.  
+> A **radian** is simply another way of measuring angles, where angles are expressed as multiples of **π**.
+>
+> The range from **−π to π** corresponds to **−180° to 180°**.
+>
+> In code, we almost always work with **radians**, because most math functions expect them. Degrees are typically used only for user input, since they are more intuitive.
+>
+> When converting between the two, use:
+>
+> $$\text{radians} = \text{degrees} \cdot \frac{\pi}{180}$$ > $$\text{degrees} = \text{radians} \cdot \frac{180}{\pi}$$
+
+You can play around with **different slopes** and see how they affect the percentage of **gravity applied** to the coaster.
+Having a visual representation of written concepts really helps me reach that **I got it** moment,
 so it might help you as well.
 
 {{< iframe src="writing-a-roller-coaster-simulation/demo-gravity.html" width="100%" height="300">}}
@@ -104,7 +124,6 @@ so it might help you as well.
 Here is the source code for our little interactive experiment:
 
 {{< show-file-code "scripts/scenes/DemoGravity.tsx" >}}
-
 
 ## What comes next?
 
