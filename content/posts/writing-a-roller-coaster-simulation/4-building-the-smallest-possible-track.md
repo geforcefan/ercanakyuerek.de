@@ -169,7 +169,7 @@ Time for a small demo. I built a very simple setup: a visible line segment with 
 
 I switched the vectors to 3D instead of 2D, but only because it makes things more convenient in Three.js. The actual calculations from this article are exactly the same.
 
-{{< iframe src="writing-a-roller-coaster-simulation/demo-linear-track.html" width="100%" height="250px" >}}
+{{< iframe src="writing-a-roller-coaster-simulation/demo-linear-track.html" width="100%" height="300px" >}}
 
 I’ve polished things a bit and moved the physics and linear interpolation logic into their own files instead of keeping everything as spaghetti code. The complete source code is available in my GitHub repo, feel free to explore and play around with it.
 

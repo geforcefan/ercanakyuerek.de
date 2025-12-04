@@ -117,7 +117,7 @@ Just like in the previous chapter, here is a small interactive demo. This time i
 
 Feel free to move the control points to experiment with the track shape and see how both trains react differently.
 
-{{< iframe src="writing-a-roller-coaster-simulation/demo-linear-track-with-friction.html" width="100%" height="250px" >}}
+{{< iframe src="writing-a-roller-coaster-simulation/demo-linear-track-with-friction.html" width="100%" height="300px" >}}
 
 # What’s next?
 
