@@ -5,24 +5,23 @@
 &lt;/ul&gt;
 &lt;p&gt;Until now our coaster moved in a world without any energy loss. That works for understanding the basics but real coasters slow down over time. Wheels create friction, air pushes against the train, and both effects reduce the acceleration the train can achieve.&lt;/p&gt;
 &lt;p&gt;We will not create a complex physics model. Instead we introduce two simple parameters, very similar to what you may know from &lt;strong&gt;NoLimits Roller Coaster&lt;/strong&gt;.&lt;br&gt;
-&lt;strong&gt;If I understood correctly how everything works in NoLimits Roller Coaster&lt;/strong&gt;, our physics simulation should now behave almost identically, apart from a few edge cases.&lt;/p&gt;</description><content type="html"><![CDATA[<p>This chapter will be quite short and introduces two small but important parts of a more realistic roller coaster simulation:</p>
+Our physics simulation should behave almost identically, apart from a few edge cases.&lt;/p&gt;</description><content type="html"><![CDATA[<p>This chapter will be quite short and introduces two small but important parts of a more realistic roller coaster simulation:</p>
 <ul>
 <li>friction</li>
 <li>air resistance</li>
 </ul>
 <p>Until now our coaster moved in a world without any energy loss. That works for understanding the basics but real coasters slow down over time. Wheels create friction, air pushes against the train, and both effects reduce the acceleration the train can achieve.</p>
 <p>We will not create a complex physics model. Instead we introduce two simple parameters, very similar to what you may know from <strong>NoLimits Roller Coaster</strong>.<br>
-<strong>If I understood correctly how everything works in NoLimits Roller Coaster</strong>, our physics simulation should now behave almost identically, apart from a few edge cases.</p>
-<p>If you have ever used the Pro version, you already know that you can manually configure <strong>friction</strong> and <strong>air resistance</strong>.</p>
+Our physics simulation should behave almost identically, apart from a few edge cases.</p>
 <p>Since both <strong>friction</strong> and <strong>air resistance</strong> represent energy loss, we simply subtract them from the acceleration we calculated from gravity. This is almost correct, but there is one detail to handle when the train moves backward.
 More on that in the section <strong>When riding backward, what happens?</strong>.</p>
 <h2 id="friction">Friction</h2>
 <p>Friction is the permanent resistance between the train and the track. We apply it directly to the acceleration. The idea is very simple:
 multiply the friction constant with gravity and subtract it from the current acceleration.</p>
-<p>A typical friction value in NoLimits Roller Coaster is about <strong>0.03 m/m</strong> (height loss per meter).</p>
+<p>A typical friction value in is about <strong>0.03 m/m</strong> (height loss per meter).</p>
 $$friction \cdot gravity$$<h2 id="air-resistance">Air Resistance</h2>
 <p>Air resistance works differently. It <strong>increases</strong> with <strong>velocity</strong>. The faster the train moves, the more the air pushes back against it.</p>
-<p>A typical air resistance value in <strong>NoLimits Roller Coaster</strong> is around <strong>0.0001 m/s²</strong>.
+<p>A typical air resistance value is around <strong>0.0001 m/s²</strong>.
 We follow the same idea and use this value as the base for our simplified model. The <strong>resistance</strong> grows with <strong>velocity²</strong>, so we multiply it with <strong>velocity²</strong> and the air resistance constant:</p>
 $$airResistance \cdot velocity^2$$<p>This removes more energy when the train moves fast and almost none when it moves slowly.</p>
 <h1 id="when-riding-backward-what-happens">When riding backward, what happens?</h1>
@@ -97,7 +96,7 @@ That is the whole trick.</p>
 ></iframe>
 <h1 id="whats-next">What’s next?</h1>
 <p>In the next chapter we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
-No matter what the underlying geometry is in the end, splines, imported tracks, FVD-based shapes or anything else, the evaluation should always work the same.
+No matter what the underlying geometry is in the end, <strong>splines, imported tracks, FVD-based shapes or anything else, the evaluation should always work the same</strong>.
 The key step is replacing the two functions <code>getPositionAtDistance</code> and <code>getForwardDirectionAtDistance</code>
 with a single <code>getMatrixAtDistance</code> function. Working with <strong>matrices</strong> is more convenient, because we can extract everything we need from them.
 I will also introduce a curve node that stores a full matrix for a given distance along the track.
@@ -738,6 +737,7 @@ so it might help you as well.</p>
 import { useControls } from &#39;leva&#39;;
 import { MathUtils, Vector3 } from &#39;three&#39;;
 
+import { Arrow } from &#39;../components/Arrow&#39;;
 import Line from &#39;../components/Line&#39;;
 import Scene from &#39;../components/Scene&#39;;
 import useColors from &#39;../hooks/useColors&#39;;
@@ -780,11 +780,11 @@ const Demo = () =&gt; {
   return (
     &lt;&gt;
       &lt;group position={[-5, 0, 0]} rotation={[0, 0, MathUtils.degToRad(slope)]}&gt;
-        &lt;mesh position={[-lineLength / 2, 0, 0]} rotation={[0, 0, Math.PI / 2]}&gt;
-          &lt;coneGeometry args={[0.3, 0.5, 5]}&gt;
-            &lt;meshStandardMaterial color={colors.secondary} /&gt;
-          &lt;/coneGeometry&gt;
-        &lt;/mesh&gt;
+        &lt;Arrow
+          position={[-lineLength / 2, 0, 0]}
+          rotation={[0, 0, Math.PI / 2]}
+          color={colors.secondary}
+        /&gt;
 
         &lt;Line
           points={[new Vector3(-lineLength / 2, 0, 0), new Vector3(lineLength / 2, 0, 0)]}
@@ -807,15 +807,23 @@ export const DemoGravity = () =&gt; {
 <h2 id="what-comes-next">What comes next?</h2>
 <p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/">In the next chapter</a>, we’ll write a small piece of code that evaluates the physics and moves a simple object along a linear plane.</p>
 ]]></content></item><item><title>Writing a Roller Coaster Simulation – Introduction and Motion Dynamics</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/1-introduction-and-motion-dynamics/</link><pubDate>Wed, 26 Nov 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/1-introduction-and-motion-dynamics/</guid><description>&lt;p&gt;You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser.&lt;/p&gt;
-&lt;p&gt;My goal here isn’t to build some engineering-grade physics engine. I just want to recreate the kind of coaster &lt;strong&gt;physics&lt;/strong&gt; we all know from things like &lt;strong&gt;NoLimits Roller Coaster or coasters in games&lt;/strong&gt;.
+&lt;p&gt;My goal here isn’t to build some engineering-grade physics engine. I just want to recreate the kind of coaster &lt;strong&gt;physics&lt;/strong&gt; we all know from things like &lt;strong&gt;NoLimits Roller Coaster or other coasters in games&lt;/strong&gt;.
 Nothing overly scientific, just the kind of system that behaves the way we intuitively expect.
-In the end, the physics model will end up pretty close to what NoLimits does anyway, just without all the heavy engineering baggage.&lt;/p&gt;</description><content type="html"><![CDATA[<p>You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser.</p>
-<p>My goal here isn’t to build some engineering-grade physics engine.  I just want to recreate the kind of coaster <strong>physics</strong> we all know from things like <strong>NoLimits Roller Coaster or coasters in games</strong>.
+In the end, the physics model will end up pretty close to what &lt;strong&gt;NoLimits Roller Coaster&lt;/strong&gt; does anyway, just without all the heavy engineering baggage.&lt;/p&gt;</description><content type="html"><![CDATA[<p>You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser.</p>
+<p>My goal here isn’t to build some engineering-grade physics engine. I just want to recreate the kind of coaster <strong>physics</strong> we all know from things like <strong>NoLimits Roller Coaster or other coasters in games</strong>.
 Nothing overly scientific, just the kind of system that behaves the way we intuitively expect.
-In the end, the physics model will end up pretty close to what NoLimits does anyway, just without all the heavy engineering baggage.</p>
+In the end, the physics model will end up pretty close to what <strong>NoLimits Roller Coaster</strong> does anyway, just without all the heavy engineering baggage.</p>
 <p>We will use technologies that are easy to access and quick to experiment with. Throughout the series, we will rely on <strong>TypeScript</strong>, <strong>React</strong> and <strong>Three.js</strong>. This combination gives us a clean developer experience and allows us to turn mathematical concepts into visual, interactive 3D scenes with very little overhead.</p>
 <p>The idea behind this series is simple. Instead of reading theory first, we will learn by building something fun. Each chapter focuses on a single concept. By the end, you will understand how a small coaster car can move along a track, how the track itself is defined, and how everything is drawn in the browser.</p>
-<h2 id="motion-dynamics">Motion Dynamics</h2>
+<h2 id="setting-up-the-project">Setting up the project</h2>
+<p>Before we start, I’ll assume you already have <strong>Node.js</strong> installed. If not, go ahead and download it first.</p>
+<p>Also, a quick heads-up: if some of the scripts or tools I’m covering here don’t work on Windows, I’m sorry. There are ways to get a similar environment on <strong>Windows</strong>, for example using <strong>WSL</strong>, but I’m not a <strong>Windows</strong> user, so I can’t really help there. I’m focusing on <strong>Linux</strong> and <strong>macOS</strong>, where the toolchains are very similar.</p>
+<p>We’ll keep things simple. You can set up your stack however you like, but for this series I’ll just use Create React App with TypeScript and won’t bother with any extra tooling. The goal here is to explain the concepts, not to demonstrate how to engineer a perfectly structured project. That’s a whole different topic.</p>
+<p>If you want to overengineer it, go for it. But for now, something as basic as this is completely fine:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npx create-react-app roller-coaster-simulation --template typescript
+</span></span></code></pre></div><p>Next, install a few useful dependencies. This is all we need for now. If I end up using another package later in the series and forgot to list it here, feel free to install it when you get to that part:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npm i leva three @react-three/drei @react-three/fiber @types/three
+</span></span></code></pre></div><h2 id="motion-dynamics">Motion Dynamics</h2>
 <p>At the end of the day, simulating a roller coaster comes down to one simple question:</p>
 <p><strong>How much distance should the coaster travel in each simulation step?</strong></p>
 <p>To keep things simple, let’s assume our simulation updates roughly every <strong>16 ms</strong>, which is what you would get at about 60 FPS. So the question becomes:</p>
