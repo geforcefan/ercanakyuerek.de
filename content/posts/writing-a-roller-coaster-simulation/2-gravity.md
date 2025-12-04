@@ -105,6 +105,7 @@ const acceleration = gravity * Math.sin(slope);
 ```
 
 > Keep in mind that `Math.sin` accepts **radians**, not **degrees**.  
+> 
 > A **radian** is simply another way of measuring angles, where angles are expressed as multiples of **π**.
 >
 > The range from **−π to π** corresponds to **−180° to 180°**.
