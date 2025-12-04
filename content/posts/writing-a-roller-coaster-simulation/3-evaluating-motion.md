@@ -34,7 +34,7 @@ const simulationState: SimulationState = {
 };
 ```
 
-At the beginning, the coaster does not move and has not traveled any distance.
+In the beginning, the coaster does not move and has not traveled any distance.
 
 ## The evaluateMotion function
 

@@ -32,6 +32,8 @@ Next, install a few useful dependencies. This is all we need for now. If I end u
 npm i leva three @react-three/drei @react-three/fiber @types/three
 ```
 
+> **Important note:** In every article, I’ll show example code and link to the corresponding **GitHub files**. These files live inside my website’s blog repository, which contains a large **shared script collection for all articles**. This means the structure in the repo **will differ** from the snippets shown in the articles. For example, my ``physics.ts`` file contains multiple evaluation functions used across different posts, since we build things step by step from article to article. All iterations end up in the same file. So don’t worry if the repo looks more consolidated or structured differently than the examples shown here.
+
 ## Motion Dynamics
 
 At the end of the day, simulating a roller coaster comes down to one simple question:
