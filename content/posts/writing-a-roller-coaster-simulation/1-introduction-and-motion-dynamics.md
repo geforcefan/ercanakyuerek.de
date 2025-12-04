@@ -34,6 +34,8 @@ npm i leva three @react-three/drei @react-three/fiber @types/three
 
 > **Important note:** In every article, I’ll show example code and link to the corresponding **GitHub files**. These files live inside my website’s blog repository, which contains a large **shared script collection for all articles**. This means the structure in the repo **will differ** from the snippets shown in the articles. For example, my ``physics.ts`` file contains multiple evaluation functions used across different posts, since we build things step by step from article to article. All iterations end up in the same file. So don’t worry if the repo looks more consolidated or structured differently than the examples shown here.
 
+> **Another important note**: The example code in the articles **will** contain components that **I don’t explicitly show or explain in the text**. If you run into something unfamiliar, please check the GitHub repository and follow the imports to see how those components are implemented. **Most of them are small helpers for things like drawing lines, rendering arrows, setting up scenes, and other utilities that would only distract from the main topic in the article itself**.
+
 ## Motion Dynamics
 
 At the end of the day, simulating a roller coaster comes down to one simple question:
