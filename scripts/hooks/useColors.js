@@ -1,16 +1,14 @@
 import { useMemo } from 'react';
-import { useMedia } from 'react-recipes';
 
 const useColors = () => {
-  const prefersDarkMode = useMedia(['(prefers-color-scheme: dark)'], [true], false);
-
   return useMemo(() => {
     return {
-      primary: prefersDarkMode ? 0x232425 : 0xffffff,
-      secondary: prefersDarkMode ? 0xffffff : 0x232425,
-      silent: prefersDarkMode ? 0x3b3d42 : 0xcccccc,
+      primary: 0x2b2b2b,
+      secondary: 0xa9b7c6,
+      silent: 0x3b3d42,
+      highlight: 0xcc7832,
     };
-  }, [prefersDarkMode]);
+  }, []);
 };
 
 export default useColors;

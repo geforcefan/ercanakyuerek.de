@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
-import { Vector3 } from 'three';
+import { MathUtils, Vector3 } from 'three';
 
 import { ControlPoint } from '../components/ControlPoint';
 import { DragControlPosition } from '../components/DragControlPosition';
 import Line from '../components/Line';
 import Scene from '../components/Scene';
 import { getForwardDirectionAtDistance, getPositionAtDistance, length } from '../helper/linear';
-import { evaluateMotionByForwardDirection } from '../helper/physics';
+import {
+  evaluateMotionByForwardDirection,
+  evaluateMotionByForwardDirectionWithFriction,
+} from '../helper/physics';
 import useColors from '../hooks/useColors';
 
 const Demo = () => {
@@ -21,6 +24,14 @@ const Demo = () => {
   const [simulationState, setSimulationState] = useControls(() => ({
     velocity: 0,
     distanceTraveled: 0,
+    friction: {
+      value: 0.03,
+      pad: 5,
+    },
+    airResistance: {
+      value: 0.0001,
+      pad: 6,
+    },
     acceleration: {
       value: 0,
       pad: 5,
@@ -31,12 +42,30 @@ const Demo = () => {
     },
   }));
 
+  const [simulationStateWithoutFriction, setSimulationStateWithoutFriction] = useState(() => ({
+    velocity: 0,
+    distanceTraveled: 0,
+  }));
+
   // Main motion evaluation per frame
   useFrame((state, deltaTime) => {
+    // evaluate with friction and air resistance
     setSimulationState(
-      evaluateMotionByForwardDirection(
+      evaluateMotionByForwardDirectionWithFriction(
         simulationState,
         getForwardDirectionAtDistance(cp1, cp2, simulationState.distanceTraveled),
+        simulationState.friction,
+        simulationState.airResistance,
+        simulationState.gravity,
+        deltaTime,
+      ),
+    );
+
+    // evaluate without energy loss
+    setSimulationStateWithoutFriction(
+      evaluateMotionByForwardDirection(
+        simulationStateWithoutFriction,
+        getForwardDirectionAtDistance(cp1, cp2, simulationStateWithoutFriction.distanceTraveled),
         simulationState.gravity,
         deltaTime,
       ),
@@ -54,10 +83,25 @@ const Demo = () => {
         distanceTraveled: 0,
         acceleration: 0,
       });
+
+      setSimulationStateWithoutFriction({
+        velocity: 0,
+        distanceTraveled: 0,
+      });
     }
   }, [simulationState.distanceTraveled]);
 
-  const trainPosition = getPositionAtDistance(cp1, cp2, simulationState.distanceTraveled);
+  const trainPosition = getPositionAtDistance(
+    cp1,
+    cp2,
+    MathUtils.clamp(simulationState.distanceTraveled, 0, length(cp1, cp2)),
+  );
+
+  const trainPositionWithoutFriction = getPositionAtDistance(
+    cp1,
+    cp2,
+    MathUtils.clamp(simulationStateWithoutFriction.distanceTraveled, 0, length(cp1, cp2)),
+  );
 
   return (
     <>
@@ -72,11 +116,12 @@ const Demo = () => {
       <Line points={[cp1, cp2]} color={colors.secondary} lineWidth={0.02} />
 
       <ControlPoint position={trainPosition} color={colors.highlight} />
+      <ControlPoint position={trainPositionWithoutFriction} />
     </>
   );
 };
 
-export const DemoLinearTrackScene = () => {
+export const DemoLinearTrackSceneWithFriction = () => {
   return (
     <Scene>
       <Demo />

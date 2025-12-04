@@ -10,7 +10,7 @@ To simplify things, we ignore air resistance, rolling friction and any other add
 
 > **Gravity is the primary source of acceleration.**
 
-On Earth, gravity provides a constant acceleration of **9.81 m/s²**. 
+On Earth, gravity provides a constant acceleration of roughly **9.81 m/s²**. 
 
 What does this number actually mean?
 

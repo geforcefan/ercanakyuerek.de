@@ -4,7 +4,7 @@ date: 2025-11-28T12:35:00+01:00
 math: true
 ---
 
-In the previous chapter, I said we were going to visualize the evaluated motion with a small demo. I kind of lied. Not dramatically, but I realized we first need something else. To visualize motion properly, we need something for our little object to move along. And that means we need a track.
+In the previous chapter, I said we were going to visualize the evaluated motion with a small demo, but I realized we first need something else first. To visualize motion properly, we need something for our little object to move along. And that means we need a track.
 
 In this article, we focus on an extremely simplified roller coaster track. And when I say extremely simplified, I really mean it: it's just a plane. A straight line. A first-order curve. Basically the easiest form of track you can possibly build without accidentally creating a real coaster.
 
@@ -162,13 +162,17 @@ const getForwardDirectionAtDistance = (cp1, cp2, distance) => {
 
 Later, the forward vector will be replaced by a **4×4 matrix**, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called ``getMatrixAtDistance``. I know, yet again a change, but that’s future you’s problem. Ignore it for now.
 
+Going forward, we will use **9.81665 m/s²** as the gravitational acceleration, since this is also the value used by **NoLimits Roller Coaster** and **openFVD++**.
+
 ## Adding Everything Up: Small Demo
 Time for a small demo. I built a very simple setup: a visible line segment with draggable control points so you can adjust the slope in real time. On the side, a small panel displays the live simulation state.
 
 I switched the vectors to 3D instead of 2D, but only because it makes things more convenient in Three.js. The actual calculations from this article are exactly the same.
 
-{{< iframe src="writing-a-roller-coaster-simulation/demo-linear-track.html" width="100%" height="200px" >}}
+{{< iframe src="writing-a-roller-coaster-simulation/demo-linear-track.html" width="100%" height="250px" >}}
 
 I’ve polished things a bit and moved the physics and linear interpolation logic into their own files instead of keeping everything as spaghetti code. The complete source code is available in my GitHub repo, feel free to explore and play around with it.
 
 {{< show-file-code "scripts/scenes/DemoLinearTrackScene.jsx" >}}
+
+[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance.md" >}}) we will introduce friction and air resistance. Of course there will be a demo where you can play with the parameters and compare both physics evaluations, with and without energy loss.
