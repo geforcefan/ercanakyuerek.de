@@ -113,7 +113,7 @@ We still compute the gravity acceleration first. After that we subtract the ener
 Just like in the previous chapter, here is a small interactive demo. This time it includes both friction and air resistance so you can see how the coaster behaves when energy loss is part of the simulation.
 
 - The **orange** dot represents a train with friction and air resistance applied.
-- The **other** dot shows the same motion without any energy loss.
+- The **white** dot shows the same motion without any energy loss.
 
 Feel free to move the control points to experiment with the track shape and see how both trains react differently.
 
