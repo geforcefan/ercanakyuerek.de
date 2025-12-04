@@ -1,17 +1,36 @@
 ---
-title: "Writing a Roller Coaster Simulation – Introduction  and Motion Dynamics"
+title: 'Writing a Roller Coaster Simulation – Introduction  and Motion Dynamics'
 date: 2025-11-26T12:30:00+01:00
 ---
 
 You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser.
 
-My goal here isn’t to build some engineering-grade physics engine.  I just want to recreate the kind of coaster **physics** we all know from things like **NoLimits Roller Coaster or coasters in games**. 
-Nothing overly scientific, just the kind of system that behaves the way we intuitively expect. 
-In the end, the physics model will end up pretty close to what NoLimits does anyway, just without all the heavy engineering baggage.
+My goal here isn’t to build some engineering-grade physics engine. I just want to recreate the kind of coaster **physics** we all know from things like **NoLimits Roller Coaster or other coasters in games**.
+Nothing overly scientific, just the kind of system that behaves the way we intuitively expect.
+In the end, the physics model will end up pretty close to what **NoLimits Roller Coaster** does anyway, just without all the heavy engineering baggage.
 
 We will use technologies that are easy to access and quick to experiment with. Throughout the series, we will rely on **TypeScript**, **React** and **Three.js**. This combination gives us a clean developer experience and allows us to turn mathematical concepts into visual, interactive 3D scenes with very little overhead.
 
 The idea behind this series is simple. Instead of reading theory first, we will learn by building something fun. Each chapter focuses on a single concept. By the end, you will understand how a small coaster car can move along a track, how the track itself is defined, and how everything is drawn in the browser.
+
+## Setting up the project
+Before we start, I’ll assume you already have **Node.js** installed. If not, go ahead and download it first.
+
+Also, a quick heads-up: if some of the scripts or tools I’m covering here don’t work on Windows, I’m sorry. There are ways to get a similar environment on **Windows**, for example using **WSL**, but I’m not a **Windows** user, so I can’t really help there. I’m focusing on **Linux** and **macOS**, where the toolchains are very similar.
+
+We’ll keep things simple. You can set up your stack however you like, but for this series I’ll just use Create React App with TypeScript and won’t bother with any extra tooling. The goal here is to explain the concepts, not to demonstrate how to engineer a perfectly structured project. That’s a whole different topic.
+
+If you want to overengineer it, go for it. But for now, something as basic as this is completely fine:
+
+```bash
+npx create-react-app roller-coaster-simulation --template typescript
+```
+
+Next, install a few useful dependencies. This is all we need for now. If I end up using another package later in the series and forgot to list it here, feel free to install it when you get to that part:
+
+```bash
+npm i leva three @react-three/drei @react-three/fiber @types/three
+```
 
 ## Motion Dynamics
 
@@ -38,6 +57,5 @@ This gives us a simple structure:
 Once we understand the acceleration acting on the coaster, the rest follows naturally.
 
 In the next chapter, we will take the first real step of the simulation and answer the core question:
-
 
 [How do we determine the acceleration of the coaster?]({{< ref "/posts/writing-a-roller-coaster-simulation/2-gravity.md" >}})

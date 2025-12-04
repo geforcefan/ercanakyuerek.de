@@ -12,9 +12,7 @@ This chapter will be quite short and introduces two small but important parts of
 Until now our coaster moved in a world without any energy loss. That works for understanding the basics but real coasters slow down over time. Wheels create friction, air pushes against the train, and both effects reduce the acceleration the train can achieve.
 
 We will not create a complex physics model. Instead we introduce two simple parameters, very similar to what you may know from **NoLimits Roller Coaster**.  
-**If I understood correctly how everything works in NoLimits Roller Coaster**, our physics simulation should now behave almost identically, apart from a few edge cases.
-
-If you have ever used the Pro version, you already know that you can manually configure **friction** and **air resistance**.
+Our physics simulation should behave almost identically, apart from a few edge cases.
 
 Since both **friction** and **air resistance** represent energy loss, we simply subtract them from the acceleration we calculated from gravity. This is almost correct, but there is one detail to handle when the train moves backward.
 More on that in the section **When riding backward, what happens?**.
@@ -24,7 +22,7 @@ More on that in the section **When riding backward, what happens?**.
 Friction is the permanent resistance between the train and the track. We apply it directly to the acceleration. The idea is very simple:
 multiply the friction constant with gravity and subtract it from the current acceleration.
 
-A typical friction value in NoLimits Roller Coaster is about **0.03 m/m** (height loss per meter).
+A typical friction value in is about **0.03 m/m** (height loss per meter).
 
 $$friction \cdot gravity$$
 
@@ -32,7 +30,7 @@ $$friction \cdot gravity$$
 
 Air resistance works differently. It **increases** with **velocity**. The faster the train moves, the more the air pushes back against it.
 
-A typical air resistance value in **NoLimits Roller Coaster** is around **0.0001 m/s²**.
+A typical air resistance value is around **0.0001 m/s²**.
 We follow the same idea and use this value as the base for our simplified model. The **resistance** grows with **velocity²**, so we multiply it with **velocity²** and the air resistance constant:
 
 $$airResistance \cdot velocity^2$$
@@ -122,7 +120,7 @@ Feel free to move the control points to experiment with the track shape and see 
 # What’s next?
 
 In the next chapter we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
-No matter what the underlying geometry is in the end, splines, imported tracks, FVD-based shapes or anything else, the evaluation should always work the same.
+No matter what the underlying geometry is in the end, **splines, imported tracks, FVD-based shapes or anything else, the evaluation should always work the same**.
 The key step is replacing the two functions `getPositionAtDistance` and `getForwardDirectionAtDistance`
 with a single `getMatrixAtDistance` function. Working with **matrices** is more convenient, because we can extract everything we need from them.
 I will also introduce a curve node that stores a full matrix for a given distance along the track.

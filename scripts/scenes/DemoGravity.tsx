@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useControls } from 'leva';
 import { MathUtils, Vector3 } from 'three';
 
+import { Arrow } from '../components/Arrow';
 import Line from '../components/Line';
 import Scene from '../components/Scene';
 import useColors from '../hooks/useColors';
@@ -44,11 +45,11 @@ const Demo = () => {
   return (
     <>
       <group position={[-5, 0, 0]} rotation={[0, 0, MathUtils.degToRad(slope)]}>
-        <mesh position={[-lineLength / 2, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-          <coneGeometry args={[0.3, 0.5, 5]}>
-            <meshStandardMaterial color={colors.secondary} />
-          </coneGeometry>
-        </mesh>
+        <Arrow
+          position={[-lineLength / 2, 0, 0]}
+          rotation={[0, 0, Math.PI / 2]}
+          color={colors.secondary}
+        />
 
         <Line
           points={[new Vector3(-lineLength / 2, 0, 0), new Vector3(lineLength / 2, 0, 0)]}
