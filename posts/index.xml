@@ -91,7 +91,7 @@ That is the whole trick.</p>
 <iframe
         src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track-with-friction.html"
         width="100%"
-        height="250px"
+        height="300px"
         style="border:0;"
         class="embedded-iframe "
 ></iframe>
@@ -359,7 +359,7 @@ $$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec
 <iframe
         src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track.html"
         width="100%"
-        height="250px"
+        height="300px"
         style="border:0;"
         class="embedded-iframe "
 ></iframe>
