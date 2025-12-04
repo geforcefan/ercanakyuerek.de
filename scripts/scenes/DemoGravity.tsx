@@ -29,7 +29,7 @@ const Demo = () => {
     },
     acceleration: {
       disabled: true,
-      value: 9.81665,
+      value: 0,
       pad: 5,
     },
   }));
