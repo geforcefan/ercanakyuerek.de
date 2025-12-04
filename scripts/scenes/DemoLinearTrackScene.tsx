@@ -69,7 +69,7 @@ const Demo = () => {
         <ControlPoint />
       </DragControlPosition>
 
-      <Line points={[cp1, cp2]} color={colors.secondary} lineWidth={0.02} />
+      <Line points={[cp1, cp2]} color={colors.secondary} />
 
       <ControlPoint position={trainPosition} color={colors.highlight} />
     </>

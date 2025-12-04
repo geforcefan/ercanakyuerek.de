@@ -1,11 +1,14 @@
 import React, { useMemo } from 'react';
+import { Vector3 } from 'three';
 
 import { evaluate, evaluateUniform } from '../helper/bezier';
 import useColors from '../hooks/useColors';
 import { ControlPoint } from './ControlPoint';
 import Line from './Line';
 
-const BezierCurve = ({ points, resolution = 5, uniform = false }) => {
+const BezierCurve = (props: { points: Vector3[]; resolution?: number; uniform?: boolean }) => {
+  const { points, resolution = 5, uniform = false } = props;
+
   const colors = useColors();
 
   const nodes = useMemo(() => {
@@ -19,13 +22,9 @@ const BezierCurve = ({ points, resolution = 5, uniform = false }) => {
         <ControlPoint size="sm" key={i} position={node.position} />
       ))}
 
-      <Line points={points} color={colors.silent} lineWidth={0.01} />
+      <Line points={points} color={colors.silent} />
       {!!nodes.length && (
-        <Line
-          points={nodes.map((node) => node.position)}
-          color={colors.secondary}
-          lineWidth={0.02}
-        />
+        <Line points={nodes.map((node) => node.position)} color={colors.secondary} />
       )}
     </>
   );

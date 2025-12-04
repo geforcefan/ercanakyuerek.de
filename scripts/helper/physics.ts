@@ -1,6 +1,17 @@
 import { Vector3 } from 'three';
 
-export const evaluateMotionByForwardDirection = (state, forwardDirection, gravity, deltaTime) => {
+export type SimulationState = {
+  velocity: number;
+  distanceTraveled: number;
+  acceleration: number;
+};
+
+export const evaluateMotionByForwardDirection = (
+  state: SimulationState,
+  forwardDirection: Vector3,
+  gravity: number,
+  deltaTime: number,
+): SimulationState => {
   const acceleration = forwardDirection.dot(new Vector3(0, -gravity, 0));
   const velocity = state.velocity + acceleration * deltaTime;
   const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
@@ -9,13 +20,13 @@ export const evaluateMotionByForwardDirection = (state, forwardDirection, gravit
 };
 
 export const evaluateMotionByForwardDirectionWithFriction = (
-  state,
-  forwardDirection,
-  friction,
-  airResistance,
-  gravity,
-  deltaTime,
-) => {
+  state: SimulationState,
+  forwardDirection: Vector3,
+  friction: number,
+  airResistance: number,
+  gravity: number,
+  deltaTime: number,
+): SimulationState => {
   const velocityDirection = state.velocity < 0 ? -1 : 1;
 
   let energyLoss = airResistance * state.velocity * state.velocity;

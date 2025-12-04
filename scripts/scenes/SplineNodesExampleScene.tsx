@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { useFrame } from '@react-three/fiber';
+import { Easing, Group, Tween } from '@tweenjs/tween.js';
 import { Vector3 } from 'three';
-import { Easing, Tween } from 'tween.js';
 
 import BezierCurve from '../components/BezierCurve';
 import Scene from '../components/Scene';
@@ -18,36 +19,36 @@ const Example = () => {
     uniform: 0,
   });
 
-  useEffect(() => {
+  const group = useMemo(() => {
+    const group = new Group();
+
     const animation = { ...motion };
 
-    const denseSplineTween = new Tween(animation)
+    const denseSplineTween = new Tween(animation, group)
       .to({ resolution: 2.5 }, 1000)
       .easing(Easing.Linear.None)
-      .onUpdate(() => {
-        setMotion({ ...animation });
-      });
+      .onUpdate(() => setMotion({ ...animation }));
 
-    const uniformSplineTween = new Tween(animation)
+    const uniformSplineTween = new Tween(animation, group)
       .delay(3000)
       .to({ uniform: 1 }, 500)
-      .onUpdate(() => {
-        setMotion({ ...animation });
-      });
+      .onUpdate(() => setMotion({ ...animation }));
 
-    const resetTween = new Tween(animation)
+    const resetTween = new Tween(animation, group)
       .delay(2000)
       .to({ uniform: 0, resolution: 0.5 }, 1000)
-      .onUpdate(() => {
-        setMotion({ ...animation });
-      })
-      .onComplete(() => {
-        denseSplineTween.start();
-      });
+      .onUpdate(() => setMotion({ ...animation }))
+      .onComplete(() => denseSplineTween.start());
 
     denseSplineTween.chain(uniformSplineTween.chain(resetTween));
     denseSplineTween.start();
+
+    return group;
   }, []);
+
+  useFrame((state) => {
+    group.update(state.clock.getElapsedTime() * 1000);
+  });
 
   return (
     <>

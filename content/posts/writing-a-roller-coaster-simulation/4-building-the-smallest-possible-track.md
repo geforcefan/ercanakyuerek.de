@@ -173,6 +173,6 @@ I switched the vectors to 3D instead of 2D, but only because it makes things mor
 
 I’ve polished things a bit and moved the physics and linear interpolation logic into their own files instead of keeping everything as spaghetti code. The complete source code is available in my GitHub repo, feel free to explore and play around with it.
 
-{{< show-file-code "scripts/scenes/DemoLinearTrackScene.jsx" >}}
+{{< show-file-code "scripts/scenes/DemoLinearTrackScene.tsx" >}}
 
 [In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance.md" >}}) we will introduce friction and air resistance. Of course there will be a demo where you can play with the parameters and compare both physics evaluations, with and without energy loss.

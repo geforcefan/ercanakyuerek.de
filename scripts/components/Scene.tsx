@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { update } from 'tween.js';
+import { update } from '@tweenjs/tween.js';
+import { useDevicePixelRatio } from 'use-device-pixel-ratio';
 
 import useColors from '../hooks/useColors';
-import { useDevicePixelRatio } from '../hooks/useDevicePixelRatio';
 
 const Tween = () => {
   useFrame(() => {
@@ -13,7 +13,7 @@ const Tween = () => {
   return <></>;
 };
 
-const Scene = ({ children }) => {
+const Scene = ({ children }: { children?: ReactElement }) => {
   const colors = useColors();
   const dpr = useDevicePixelRatio();
 

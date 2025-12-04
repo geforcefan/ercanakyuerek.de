@@ -1,8 +1,13 @@
 import { Vector3 } from 'three';
 
-import lowerBound from './lower-bound';
+import { lowerBound } from './lower-bound';
 
-export const bezierFast = (p0, p1, p2, p3, t) => {
+export type CurveNode = {
+  distance: number;
+  position: Vector3;
+};
+
+export const bezierFast = (p0: Vector3, p1: Vector3, p2: Vector3, p3: Vector3, t: number) => {
   const t1 = 1.0 - t;
   const b0 = t1 * t1 * t1;
   const b1 = 3 * t1 * t1 * t;
@@ -16,7 +21,7 @@ export const bezierFast = (p0, p1, p2, p3, t) => {
   );
 };
 
-export const estimateLength = (p0, p1, p2, p3) => {
+export const estimateLength = (p0: Vector3, p1: Vector3, p2: Vector3, p3: Vector3) => {
   let lastPosition = p0;
   let length = 0.0;
 
@@ -30,12 +35,12 @@ export const estimateLength = (p0, p1, p2, p3) => {
   return length;
 };
 
-export const length = (nodes) => {
+export const length = (nodes: CurveNode[]) => {
   if (!nodes.length) return 0;
   return nodes[nodes.length - 1].distance;
 };
 
-export const getPositionAtDistance = (nodes, at) => {
+export const getPositionAtDistance = (nodes: CurveNode[], at: number) => {
   if (nodes.length < 2) return new Vector3(0.0);
 
   const lowerElement = lowerBound(nodes, at, 'distance');
@@ -51,14 +56,23 @@ export const getPositionAtDistance = (nodes, at) => {
 
   let t = 0.0;
 
-  if (nextNode.dist - currentNode.dist > 0.0001) {
-    t = Math.max(Math.min((at - currentNode.dist) / (nextNode.dist - currentNode.dist), 1.0), 0.0);
+  if (nextNode.distance - currentNode.distance > 0.0001) {
+    t = Math.max(
+      Math.min((at - currentNode.distance) / (nextNode.distance - currentNode.distance), 1.0),
+      0.0,
+    );
   }
 
   return currentNode.position.lerp(nextNode.position, t);
 };
 
-export const evaluateUniform = (p0, p1, p2, p3, resolution = 10) => {
+export const evaluateUniform = (
+  p0: Vector3,
+  p1: Vector3,
+  p2: Vector3,
+  p3: Vector3,
+  resolution: number = 10,
+) => {
   const newNodes = [];
   const nodes = evaluate(p0, p1, p2, p3, 40);
   const splineLength = length(nodes);
@@ -77,7 +91,13 @@ export const evaluateUniform = (p0, p1, p2, p3, resolution = 10) => {
   return newNodes;
 };
 
-export const evaluate = (p0, p1, p2, p3, resolution = 10) => {
+export const evaluate = (
+  p0: Vector3,
+  p1: Vector3,
+  p2: Vector3,
+  p3: Vector3,
+  resolution: number = 10,
+) => {
   let distance = 0;
   const nodes = [];
   const numberOfNodes = Math.max(Math.floor(estimateLength(p0, p1, p2, p3) * resolution), 2);

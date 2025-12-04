@@ -133,4 +133,4 @@ While writing this, I realize it is probably best to introduce the concept first
 
 As always, here is the code of the current demo. You can also view it on GitHub.
 
-{{< show-file-code "scripts/scenes/DemoLinearTrackSceneWithFriction.jsx" >}}
+{{< show-file-code "scripts/scenes/DemoLinearTrackSceneWithFriction.tsx" >}}

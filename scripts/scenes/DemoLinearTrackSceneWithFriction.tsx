@@ -45,6 +45,7 @@ const Demo = () => {
   const [simulationStateWithoutFriction, setSimulationStateWithoutFriction] = useState(() => ({
     velocity: 0,
     distanceTraveled: 0,
+    acceleration: 0,
   }));
 
   // Main motion evaluation per frame
@@ -87,6 +88,7 @@ const Demo = () => {
       setSimulationStateWithoutFriction({
         velocity: 0,
         distanceTraveled: 0,
+        acceleration: 0,
       });
     }
   }, [simulationState.distanceTraveled]);
@@ -113,7 +115,7 @@ const Demo = () => {
         <ControlPoint />
       </DragControlPosition>
 
-      <Line points={[cp1, cp2]} color={colors.secondary} lineWidth={0.02} />
+      <Line points={[cp1, cp2]} color={colors.secondary} />
 
       <ControlPoint position={trainPosition} color={colors.highlight} />
       <ControlPoint position={trainPositionWithoutFriction} />
