@@ -686,8 +686,8 @@ Of course, in a real simulation we also have <strong>negative angles</strong> wh
 <p>When it comes to calculating the acceleration component along the slope, the formula ultimately reduces to:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gravity</span> <span style="color:#f92672">*</span> Math.<span style="color:#a6e22e">sin</span>(<span style="color:#a6e22e">slope</span>);
 </span></span></code></pre></div><blockquote>
-<p>Keep in mind that <code>Math.sin</code> accepts <strong>radians</strong>, not <strong>degrees</strong>.<br>
-A <strong>radian</strong> is simply another way of measuring angles, where angles are expressed as multiples of <strong>π</strong>.</p>
+<p>Keep in mind that <code>Math.sin</code> accepts <strong>radians</strong>, not <strong>degrees</strong>.</p>
+<p>A <strong>radian</strong> is simply another way of measuring angles, where angles are expressed as multiples of <strong>π</strong>.</p>
 <p>The range from <strong>−π to π</strong> corresponds to <strong>−180° to 180°</strong>.</p>
 <p>In code, we almost always work with <strong>radians</strong>, because most math functions expect them. Degrees are typically used only for user input, since they are more intuitive.</p>
 <p>When converting between the two, use:</p>
