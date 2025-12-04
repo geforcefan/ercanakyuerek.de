@@ -1,17 +1,8 @@
 import React, { ReactElement } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { update } from '@tweenjs/tween.js';
+import { Canvas } from '@react-three/fiber';
 import { useDevicePixelRatio } from 'use-device-pixel-ratio';
 
 import useColors from '../hooks/useColors';
-
-const Tween = () => {
-  useFrame(() => {
-    update();
-  });
-
-  return <></>;
-};
 
 const Scene = ({ children }: { children?: ReactElement }) => {
   const colors = useColors();
@@ -28,7 +19,6 @@ const Scene = ({ children }: { children?: ReactElement }) => {
       }}
     >
       <Canvas orthographic camera={{ zoom: 30 }} dpr={dpr}>
-        <Tween />
         <color attach="background" args={[colors.primary]} />
         {children}
       </Canvas>

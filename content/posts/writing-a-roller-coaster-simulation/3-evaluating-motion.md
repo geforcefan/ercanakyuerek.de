@@ -1,5 +1,5 @@
 ---
-title: "Writing a Roller Coaster Simulation – Evaluating Motion"
+title: 'Writing a Roller Coaster Simulation – Evaluating Motion'
 date: 2025-11-27T12:35:00+01:00
 math: true
 ---
@@ -22,14 +22,19 @@ Now that we know how acceleration works and how gravity affects the coaster depe
 
 We start with a minimal simulation state.
 
-```js
-const simulationState = {
+```typescript
+type SimulationState = {
+  velocity: number;
+  distanceTraveled: number;
+};
+
+const simulationState: SimulationState = {
   velocity: 0,
   distanceTraveled: 0,
 };
 ```
 
-At the beginning the coaster does not move and has not travelled any distance.
+At the beginning, the coaster does not move and has not traveled any distance.
 
 ## The evaluateMotion function
 
@@ -44,10 +49,10 @@ $$acceleration = gravity * sin(slopeAngle)$$
 
 So we end up basically with:
 
-```js
+```typescript
 const acceleration = gravity * Math.sin(slopeAngle);
 
-const evaluateMotion = (state, acceleration, deltaTime) => {
+const evaluateMotion = (state: SimulationState, acceleration: number, deltaTime: number) => {
   /// ...
 };
 ```
@@ -89,16 +94,14 @@ $$distanceToTravel = velocity \cdot deltaTime$$
 
 We take the previous distance traveled and add the small increase for this frame.
 
-```js
+```typescript
 const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
 ```
 
 So we end up with something like:
 
-```js
-const acceleration = gravity * Math.sin(slopeAngle);
-
-const evaluateMotion = (state, acceleration, deltaTime) => {
+```typescript
+const evaluateMotion = (state: SimulationState, acceleration: number, deltaTime: number) => {
   const velocity = state.velocity + acceleration * deltaTime;
   const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
 

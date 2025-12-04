@@ -28,6 +28,9 @@
   }
 
   &.float-right {
+    @media #{$media-size-phone} {
+      float: none;
+    }
     float: right;
   }
 }

@@ -29,7 +29,7 @@ Acceleration changes the velocity, **velocity determines the distance to travel*
 
 This gives us a simple structure:
 
-Acceleration → Velocity → Distance
+> Acceleration → Velocity → Distance
 
 Once we understand the acceleration acting on the coaster, the rest follows naturally.
 
