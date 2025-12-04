@@ -113,7 +113,8 @@ const acceleration = gravity * Math.sin(slope);
 >
 > When converting between the two, use:
 >
-> $$\text{radians} = \text{degrees} \cdot \frac{\pi}{180}$$ > $$\text{degrees} = \text{radians} \cdot \frac{180}{\pi}$$
+> $$\text{radians} = \text{degrees} \cdot \frac{\pi}{180}$$ 
+> $$\text{degrees} = \text{radians} \cdot \frac{180}{\pi}$$
 
 You can play around with **different slopes** and see how they affect the percentage of **gravity applied** to the coaster.
 Having a visual representation of written concepts really helps me reach that **I got it** moment,
