@@ -1,5 +1,5 @@
 ---
-title: 'Writing a Roller Coaster Simulation – Gravity'
+title: 'Gravity - Writing a Roller Coaster Simulation'
 date: 2025-11-26T12:35:00+01:00
 math: true
 ---

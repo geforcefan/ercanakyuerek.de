@@ -1,5 +1,5 @@
 ---
-title: 'Writing a Roller Coaster Simulation – Introduction  and Motion Dynamics'
+title: 'Introduction and Motion Dynamics - Writing a Roller Coaster Simulation'
 date: 2025-11-26T12:30:00+01:00
 ---
 

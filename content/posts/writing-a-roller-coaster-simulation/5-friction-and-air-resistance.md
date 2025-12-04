@@ -1,5 +1,5 @@
 ---
-title: 'Writing a Roller Coaster Simulation – Friction and Air Resistance'
+title: 'Friction and Air Resistance - Writing a Roller Coaster Simulation'
 date: 2025-11-29T12:35:00+01:00
 math: true
 ---

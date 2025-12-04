@@ -1,5 +1,5 @@
 ---
-title: "Writing a Library in C++ and Using it in the Browser with the WASI SDK - Implementing library functions"
+title: "Implementing library functions - Writing a Library in C++ and Using it in the Browser with the WASI SDK"
 date: 2023-02-24T00:19:00+01:00
 ---
 [If you haven't read the second article of this series, I highly recommend that you do so.]({{< ref "/posts/wasi/wasi-sdk-writing-library-in-cpp-2.md" >}})

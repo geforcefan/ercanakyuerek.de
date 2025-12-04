@@ -1,5 +1,5 @@
 ---
-title: 'Writing a Roller Coaster Simulation – Building the Easiest Possible Track'
+title: 'Building the Easiest Possible Track - Writing a Roller Coaster Simulation'
 date: 2025-11-28T12:35:00+01:00
 math: true
 ---
