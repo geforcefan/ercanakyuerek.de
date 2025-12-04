@@ -1,5 +1,5 @@
 ---
-title: "Writing a Roller Coaster Simulation – Building the Easiest Possible Track"
+title: 'Writing a Roller Coaster Simulation – Building the Easiest Possible Track'
 date: 2025-11-28T12:35:00+01:00
 math: true
 ---
@@ -10,7 +10,7 @@ In this article, we focus on an extremely simplified roller coaster track. And w
 
 From the last chapter, we know how motion evaluation works. The evaluation function receives an acceleration value and returns a new simulation state containing the updated velocity and the total distance traveled:
 
-```js
+```typescript
 evaluateMotion(state, acceleration, deltaTime);
 ```
 
@@ -51,18 +51,30 @@ $$acceleration = gravity * sin(slopeAngle)$$
 
 In code:
 
-```js
+```typescript
 const acceleration = forwardDirection.dot(new Vector2(0, -gravity));
 ```
 
 And our updated evaluateMotion function becomes:
 
-```js
-const evaluateMotion = (state, forwardDirection, gravity, deltaTime) => {
-  const acceleration = forwardDirection.dot(new Vector2(0, -gravity));
+```typescript
+type SimulationState = {
+  velocity: number;
+  distanceTraveled: number;
+  acceleration: number;
+};
+
+const evaluateMotion = (
+  state: SimulationState,
+  forwardDirection: Vector3,
+  gravity: number,
+  deltaTime: number,
+): SimulationState => {
+  const acceleration = forwardDirection.dot(new Vector3(0, -gravity, 0));
   const velocity = state.velocity + acceleration * deltaTime;
   const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
-  return { velocity, distanceTraveled };
+
+  return { velocity, distanceTraveled, acceleration };
 };
 ```
 
@@ -81,7 +93,7 @@ Whether the track is straight or twisting like a crazy pretzel, the logic is the
 
 So we need a function that returns the position at any distance:
 
-```js
+```typescript
 getPositionAtDistance(distance);
 ```
 
@@ -89,7 +101,7 @@ We also need the forward direction at that distance, because the evaluation func
 
 > What is the forward direction at a given distance along a curve?
 
-```js
+```typescript
 getForwardDirectionAtDistance(distance);
 ```
 
@@ -123,8 +135,8 @@ $$ length = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} $$
 
 Putting it all together:
 
-```js
-const getPositionAtDistance = (cp1, cp2, distance) => {
+```typescript
+const getPositionAtDistance = (cp1: Vector3, cp2: Vector3, distance: number) => {
   const length = Math.sqrt((cp2.x - cp1.x) ** 2 + (cp2.y - cp1.y) ** 2);
   const t = distance / length;
   return {
@@ -136,8 +148,8 @@ const getPositionAtDistance = (cp1, cp2, distance) => {
 
 Or using **THREE.js** to save yourself some sanity and avoid reinventing the wheel over and over again. I explained this part without THREE.js as well, but you may just forget it, the articles get way too big if I try to explain every concept of vectors and math in detail. For now we simply know: THREE.js is our friend:
 
-```js
-const getPositionAtDistance = (cp1, cp2, distance) => {
+```typescript
+const getPositionAtDistance = (cp1: Vector3, cp2: Vector3, distance: number) => {
   return cp1.clone().lerp(cp2, distance / cp1.distanceTo(cp2));
 };
 ```
@@ -152,20 +164,21 @@ $$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec
 
 Translated into code:
 
-```js
-const getForwardDirectionAtDistance = (cp1, cp2, distance) => {
+```typescript
+const getForwardDirectionAtDistance = (cp1: Vector3, cp2: Vector3, distance: number) => {
   return cp2.clone().sub(cp1).normalize();
 };
 ```
 
 ## Small note
 
-Later, the forward vector will be replaced by a **4×4 matrix**, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called ``getMatrixAtDistance``. I know, yet again a change, but that’s future you’s problem. Ignore it for now.
+Later the forward vector will be replaced by a **4×4 matrix**, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called `getMatrixAtDistance`. I know, yet again a change, but that’s future you’s problem. Ignore it for now.
 
 Going forward, we will use **9.81665 m/s²** as the gravitational acceleration, since this is also the value used by **NoLimits Roller Coaster** and **openFVD++**.
 
 ## Adding Everything Up: Small Demo
-Time for a small demo. I built a very simple setup: a visible line segment with draggable control points so you can adjust the slope in real time. On the side, a small panel displays the live simulation state.
+
+Time for a small demo. I built a basic setup: a visible line segment with draggable control points so you can adjust the slope in real time. On the side, a small panel displays the live simulation state.
 
 I switched the vectors to 3D instead of 2D, but only because it makes things more convenient in Three.js. The actual calculations from this article are exactly the same.
 

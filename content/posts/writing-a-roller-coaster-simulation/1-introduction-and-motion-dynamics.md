@@ -16,9 +16,9 @@ The idea behind this series is simple. Instead of reading theory first, we will 
 ## Setting up the project
 Before we start, I’ll assume you already have **Node.js** installed. If not, go ahead and download it first.
 
-Also, a quick heads-up: if some of the scripts or tools I’m covering here don’t work on Windows, I’m sorry. There are ways to get a similar environment on **Windows**, for example using **WSL**, but I’m not a **Windows** user, so I can’t really help there. I’m focusing on **Linux** and **macOS**, where the toolchains are very similar.
+Also, a quick heads-up: if some of the scripts or tools I’m covering here don’t work on Windows, I’m sorry. There are ways to get a similar environment on **Windows**, for example, using **WSL**, but I’m not a **Windows** user, so I can’t really help there. I’m focusing on **Linux** and **macOS**, where the toolchains are very similar.
 
-We’ll keep things simple. You can set up your stack however you like, but for this series I’ll just use Create React App with TypeScript and won’t bother with any extra tooling. The goal here is to explain the concepts, not to demonstrate how to engineer a perfectly structured project. That’s a whole different topic.
+We’ll keep things simple. You can set up your stack, however, you like, but for this series I’ll just use **Create React App** with **TypeScript** and won’t bother with any extra tooling. The goal here is to explain the concepts, not to demonstrate how to engineer a perfectly structured project. That’s a whole different topic.
 
 If you want to overengineer it, go for it. But for now, something as basic as this is completely fine:
 

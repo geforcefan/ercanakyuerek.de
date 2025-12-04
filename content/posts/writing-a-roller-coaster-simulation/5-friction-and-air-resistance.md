@@ -52,13 +52,13 @@ So we need a small multiplier that tells us whether the train is moving forward 
 - If the velocity is **negative**, the factor becomes **-1**
 - If the velocity is **positive**, the factor is **1**
 
-```js
+```typescript
 const velocityDirection = state.velocity < 0 ? -1 : 1;
 ```
 
 We can now apply this factor to the total energy loss
 
-```js
+```typescript
 const velocityDirection = state.velocity < 0 ? -1 : 1;
 
 let energyLoss = airResistance * state.velocity * state.velocity;
@@ -71,7 +71,7 @@ That is the whole trick.
 
 Now subtract energy loss from acceleration:
 
-```js
+```typescript
 const acceleration = forwardDirection.dot(new Vector3(0, -gravity, 0)) - energyLoss;
 ```
 
@@ -79,15 +79,15 @@ const acceleration = forwardDirection.dot(new Vector3(0, -gravity, 0)) - energyL
 
 Putting everything together, the full motion evaluation now looks like this:
 
-```js
-export const evaluateMotion = (
-  state,
-  forwardDirection,
-  friction,
-  airResistance,
-  gravity,
-  deltaTime
-) => {
+```typescript
+const evaluateMotion = (
+  state: SimulationState,
+  forwardDirection: Vector3,
+  friction: number,
+  airResistance: number,
+  gravity: number,
+  deltaTime: number,
+): SimulationState => {
   const velocityDirection = state.velocity < 0 ? -1 : 1;
 
   let energyLoss = airResistance * state.velocity * state.velocity;

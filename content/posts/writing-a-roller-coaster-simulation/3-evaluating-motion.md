@@ -77,7 +77,7 @@ $$velocity = acceleration * deltaTime$$
 
 We take the previous velocity and add the small increase for this frame.
 
-```js
+```typescript
 const velocity = state.velocity + acceleration * deltaTime;
 ```
 
@@ -101,7 +101,11 @@ const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
 So we end up with something like:
 
 ```typescript
-const evaluateMotion = (state: SimulationState, acceleration: number, deltaTime: number) => {
+const evaluateMotion = (
+  state: SimulationState,
+  acceleration: number,
+  deltaTime: number,
+): SimulationState => {
   const velocity = state.velocity + acceleration * deltaTime;
   const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
 

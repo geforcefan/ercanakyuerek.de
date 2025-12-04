@@ -6,11 +6,11 @@ export type SimulationState = {
   acceleration: number;
 };
 
-export const evaluateMotionByAcceleration = (state: SimulationState, acceleration: number, deltaTime: number) => {
+export const evaluateMotionByAcceleration = (state: SimulationState, acceleration: number, deltaTime: number) : SimulationState => {
   const velocity = state.velocity + acceleration * deltaTime;
   const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
 
-  return { velocity, distanceTraveled };
+  return { velocity, distanceTraveled, acceleration: 0 };
 };
 
 export const evaluateMotionByForwardDirection = (
