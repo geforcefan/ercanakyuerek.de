@@ -510,7 +510,7 @@ This keeps the examples simple and lets us focus on the physics first.</p>
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">velocity</span>: <span style="color:#66d9ef">0</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">distanceTraveled</span>: <span style="color:#66d9ef">0</span>,
 </span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>At the beginning, the coaster does not move and has not traveled any distance.</p>
+</span></span></code></pre></div><p>In the beginning, the coaster does not move and has not traveled any distance.</p>
 <h2 id="the-evaluatemotion-function">The evaluateMotion function</h2>
 <p>Our simulation works by creating a new state based on the previous state.
 Think of it like this:</p>
@@ -839,7 +839,9 @@ In the end, the physics model will end up pretty close to what <strong>NoLimits 
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npx create-react-app roller-coaster-simulation --template typescript
 </span></span></code></pre></div><p>Next, install a few useful dependencies. This is all we need for now. If I end up using another package later in the series and forgot to list it here, feel free to install it when you get to that part:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npm i leva three @react-three/drei @react-three/fiber @types/three
-</span></span></code></pre></div><h2 id="motion-dynamics">Motion Dynamics</h2>
+</span></span></code></pre></div><blockquote>
+<p><strong>Important note:</strong> In every article, I’ll show example code and link to the corresponding <strong>GitHub files</strong>. These files live inside my website’s blog repository, which contains a large <strong>shared script collection for all articles</strong>. This means the structure in the repo <strong>will differ</strong> from the snippets shown in the articles. For example, my <code>physics.ts</code> file contains multiple evaluation functions used across different posts, since we build things step by step from article to article. All iterations end up in the same file. So don’t worry if the repo looks more consolidated or structured differently than the examples shown here.</p></blockquote>
+<h2 id="motion-dynamics">Motion Dynamics</h2>
 <p>At the end of the day, simulating a roller coaster comes down to one simple question:</p>
 <p><strong>How much distance should the coaster travel in each simulation step?</strong></p>
 <p>To keep things simple, let’s assume our simulation updates roughly every <strong>16 ms</strong>, which is what you would get at about 60 FPS. So the question becomes:</p>
