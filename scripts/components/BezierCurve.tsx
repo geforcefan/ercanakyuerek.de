@@ -22,7 +22,6 @@ const BezierCurve = (props: { points: Vector3[]; resolution?: number; uniform?: 
         <ControlPoint size="sm" key={i} position={node.position} />
       ))}
 
-      <Line points={points} color={colors.silent} />
       {!!nodes.length && (
         <Line points={nodes.map((node) => node.position)} color={colors.secondary} />
       )}

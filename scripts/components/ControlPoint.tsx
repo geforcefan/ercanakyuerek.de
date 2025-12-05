@@ -1,5 +1,5 @@
 import React from 'react';
-import { Vector3 } from 'three';
+import { ThreeElements } from '@react-three/fiber';
 
 import useColors from '../hooks/useColors';
 
@@ -10,7 +10,7 @@ const sizes: Record<Size, number> = {
   md: 0.2,
 };
 
-export const ControlPoint = (props: { size?: Size; color?: number; position?: Vector3 }) => {
+export const ControlPoint = (props: { size?: Size; color?: number } & ThreeElements['mesh']) => {
   const { size = 'md', color = undefined, ...restProps } = props;
 
   const colors = useColors();

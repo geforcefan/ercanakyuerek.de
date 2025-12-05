@@ -10,4 +10,5 @@ At this point in time, the simulator does not support a block system or multi-tr
 
 To give you a better idea of the current implementation of the simulator, I have created an interactive example for you to try. You can switch between two coasters from the NoLimits2 library, change the camera perspective, and live adjust gravity and friction. Please note that since the user interface library I am using has no capabilities to allow more than two decimal points, there are no adjustment options for air resistance. Additionally, the track itself is not yet connected, and the sections only provide simple acceleration and deceleration on sections without a block system.
 
-{{< simulator 1 >}}
+{{< iframe src="roller-coaster-simulation/simulator-1.html" height="600px" >}}
+

@@ -4,11 +4,11 @@ import { Matrix4, Vector3 } from 'three';
 
 export const DragControlPosition = (props: {
   axisLock?: 'x' | 'y' | 'z';
-  position: Vector3;
+  position?: Vector3;
   onDrag: (vec: Vector3) => void;
   children?: React.ReactNode;
 }) => {
-  const { axisLock = 'z', position, onDrag = () => {}, children } = props;
+  const { axisLock = 'z', position = new Vector3(0, 0, 0), onDrag = () => {}, children } = props;
 
   const startMatrix = useMemo(() => {
     return new Matrix4().setPosition(position);

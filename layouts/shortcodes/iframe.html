@@ -1,14 +1,21 @@
 {{ $src := .Get "src" }}
-{{ $height := .Get "height" | default "200px" }}
-{{ $width := .Get "width" | default "200px" }}
+{{ $height := .Get "height" | default "300px" }}
+{{ $width := .Get "width" | default "100%" }}
 {{ $class := .Get "class" }}
+{{ $description := .Get "description" }}
 
 {{ $fullPath := printf "%s/%s" .Site.BaseURL $src }}
 
-<iframe
-        src="{{ $fullPath }}"
-        width="{{ $width }}"
-        height="{{ $height }}"
-        style="border:0;"
-        class="embedded-iframe {{ $class }}"
-></iframe>
+<div class="embedded-iframe {{ $class }}">
+  <iframe
+    src="{{ $fullPath }}"
+    width="{{ $width }}"
+    height="{{ $height }}"
+    style="border: 0"
+    class="iframe"
+  ></iframe>
+
+  {{ if $description }}
+  <div class="description" style="width: {{ $width }}">{{ $description }}</div>
+  {{ end }}
+</div>

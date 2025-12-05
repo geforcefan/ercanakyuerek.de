@@ -1,19 +1,26 @@
 import React, { useMemo, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Easing, Group, Tween } from '@tweenjs/tween.js';
+import set from 'lodash/set';
 import { Vector3 } from 'three';
 
 import BezierCurve from '../components/BezierCurve';
+import { ControlPoint } from '../components/ControlPoint';
+import { DragControlPosition } from '../components/DragControlPosition';
+import Line from '../components/Line';
 import Scene from '../components/Scene';
-
-const points = [
-  new Vector3(-3, -3, 0),
-  new Vector3(3, -3, 0),
-  new Vector3(-3, 3, 0),
-  new Vector3(3, 3, 0),
-];
+import useColors from '../hooks/useColors';
 
 const Example = () => {
+  const colors = useColors();
+
+  const [points, setPoints] = useState([
+    new Vector3(-3, -3, 0),
+    new Vector3(3, -3, 0),
+    new Vector3(-3, 3, 0),
+    new Vector3(3, 3, 0),
+  ]);
+
   const [motion, setMotion] = useState({
     resolution: 0.5,
     uniform: 0,
@@ -52,6 +59,19 @@ const Example = () => {
 
   return (
     <>
+      <Line points={points} color={colors.secondary} />
+
+      {points.map((point, index) => {
+        return (
+          <DragControlPosition
+            position={point}
+            onDrag={(position) => setPoints((points) => set([...points], index, position))}
+          >
+            <ControlPoint />
+          </DragControlPosition>
+        );
+      })}
+
       <BezierCurve
         points={points}
         resolution={motion.resolution}

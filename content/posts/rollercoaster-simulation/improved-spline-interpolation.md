@@ -16,4 +16,4 @@ With a stable track interpolating method in place, work has started on coding mu
 
 Lastly, the program has been updated to include another coaster from the NoLimits 2 Library inside the "Storm Valley" park.
 
-{{< simulator 2 >}}
+{{< iframe src="roller-coaster-simulation/simulator-2.html" height="600px" >}}
