@@ -27,7 +27,7 @@
                                 </span>
                             </a>
                             {{ range .Params.tags  -}}
-                            <a style="margin-top: -24px; font-size: 12px;" href="{{ "tags/" | absLangURL }}{{ . | urlize }}/">#{{.}}</a>
+                            <a class="tag" href="{{ "tags/" | absLangURL }}{{ . | urlize }}/">#{{.}}</a>
                             {{ end }}
                         </li>
                     {{ end }}
