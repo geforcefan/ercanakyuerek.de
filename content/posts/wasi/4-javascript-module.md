@@ -3,8 +3,6 @@ title: "JavaScript module"
 date: 2023-02-27T17:45:00+01:00
 tags: ["writing a library in c++ and using it in the browser with the WASI SDK"]
 ---
-[If you haven't read the third article of this series, I highly recommend that you do so.]({{< ref "/posts/wasi/wasi-sdk-writing-library-in-cpp-3.md" >}})
-
 This is the point where we will develop our ``JavaScript`` library that utilizes the functions exposed in the ``WebAssembly`` module. I have created a simple template for this purpose. You may notice that we are defining some imports for ``WASI``, but they are all empty. Allow me to explain what ``WASI`` is and what it aims to achieve. ``WASI`` is an attempt to create specifications similar to the ``POSIX`` standard, which can be implemented across different runtimes, such as browsers or regular machines, and provides access to system-specific functions, such as file systems. However, for our library, which only needs to perform calculations, we do not require a complex runtime environment. This is why our functions are empty. Some may argue that we should use the Emscripten SDK instead of the ``WASI SDK``, but I believe that the ``WASI SDK`` is the future. It produces smaller binaries and has fewer complications compared to ``Emscripten``. There are official efforts to import standard ``WASI`` functions for the ``browser``, but unfortunately, they do not seem to work unless a ``WebAssembly module`` is instantiated within a ``worker``. If there are any changes in the future regarding this matter, I will update my articles accordingly. [Here](https://github.com/wasmerio/wasmer-js) is the mentioned attempt to bring a ``WASI runtime`` to ``browsers``. If you can load a ``WASM file`` outside the ``worker``, just email me your solution and I will include it here! :smile:
 
 ## Instantiate a module
@@ -112,7 +110,7 @@ For testing purposes, you can create an ``index.html`` file and install the ``ht
 </script>
 ```
 
-{{< iframe "wasi-sdk-writing-library-in-cpp/libCalculation/example.html" >}}
+{{< iframe src="wasi-sdk-writing-library-in-cpp/libCalculation/example.html" >}}
 
 Please check the console for a spline with a length of ``10.06``. The position we fetched should return a 3D vector with coordinates of ``[-3, -3, 0]``.
 Next to this text, you can view an advanced test that displays a spline. I have created a [repository](https://github.com/geforcefan/ercanakyuerek.de/tree/main/static/wasi-sdk-writing-library-in-cpp/libCalculation) that contains all the necessary files, including this advanced example that uses Three.js for rendering.

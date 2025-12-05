@@ -3,8 +3,6 @@ title: "CMake and build scripts"
 date: 2023-02-23T23:15:00+01:00
 tags: ["writing a library in c++ and using it in the browser with the WASI SDK"]
 ---
-[If you haven't read the first article of this series, I highly recommend that you do so.]({{< ref "/posts/wasi/wasi-sdk-writing-library-in-cpp-1.md" >}})
-
 To simplify the building process, we can create a build script. We have already defined some scripts in our ``package.json`` file. At this point, the ``build-wasm.js`` file is still empty, so we can create a basic script that first deletes an existing ``build`` folder, creates a new one, and runs ``cmake ..`` inside it. We will be using a WASI-SDK docker image from ``ghcr.io/webassembly/wasi-sdk`` to run cmake and eventually compile the project via ``make``.
 
 ```javascript
@@ -87,4 +85,4 @@ int main() {}
 
 ![final structure](/wasi-sdk-writing-library-in-cpp/final_structure.png)
 
-Finally, we can run our build script and see what happens :smile:. To run the build script, simply execute ``npm run build``. After it finishes executing, there should be a newly created file in the root directory named ``glue.wasm``, which confirms that our setup is correct. However, this file does not have any functionality at the moment, [but that will change in the next chapter.]({{< ref "/posts/wasi/wasi-sdk-writing-library-in-cpp-3.md" >}})
+Finally, we can run our build script and see what happens :smile:. To run the build script, simply execute ``npm run build``. After it finishes executing, there should be a newly created file in the root directory named ``glue.wasm``, which confirms that our setup is correct. However, this file does not have any functionality at the moment, [but that will change in the next chapter.]({{< ref "/posts/wasi/3-implementing-library-functions.md" >}})
