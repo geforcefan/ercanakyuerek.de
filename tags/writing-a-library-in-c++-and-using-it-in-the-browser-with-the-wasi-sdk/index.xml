@@ -7,12 +7,19 @@
 
 
 
-&lt;iframe
+
+&lt;div class="embedded-iframe float-right"&gt;
+ &lt;iframe
  src="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html"
- width="220"
- height="220"
- style="border:0;"
- class="embedded-iframe float-right"
-&gt;&lt;/iframe&gt;
-&lt;p&gt;In this article, we&amp;rsquo;ll be exploring a more interesting example where we&amp;rsquo;ll construct a bezier curve, evaluate nodes on it, and write a function that gives any position on the curve by a length parameter. To explain briefly, a bezier curve is represented by a parameter &lt;code&gt;t&lt;/code&gt;, which varies between 0 and 1 and determines the position of nodes on the curve. However, this &lt;code&gt;t&lt;/code&gt; value doesn&amp;rsquo;t produce uniform spacing, which is problematic when we want to evaluate a point on the curve based on its distance. To solve this, we can evaluate some nodes along the curve with known distances and then linearly interpolate new nodes between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</description></item><item><title>CMake and build scripts</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/</link><pubDate>Thu, 23 Feb 2023 23:15:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/</guid><description>&lt;p&gt;&lt;a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/"&gt;If you haven&amp;rsquo;t read the first article of this series, I highly recommend that you do so.&lt;/a&gt;&lt;/p&gt;
+ width="225px"
+ height="225px"
+ style="border: 0"
+ class="iframe"
+ &gt;&lt;/iframe&gt;
+
+ 
+ &lt;div class="description" style="width: 225px"&gt;Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.&lt;/div&gt;
+ 
+&lt;/div&gt;
+&lt;p&gt;In this article, we&amp;rsquo;ll be exploring a more interesting example where we&amp;rsquo;ll construct a Bézier curve, evaluate nodes on it, and write a function that gives any position on the curve by a length parameter. To explain briefly, a Bézier curve is represented by a parameter &lt;code&gt;t&lt;/code&gt;, which varies between 0 and 1 and determines the position of nodes on the curve. However, this &lt;code&gt;t&lt;/code&gt; value doesn&amp;rsquo;t produce uniform spacing, which is problematic when we want to evaluate a point on the curve based on its distance. To solve this, we can evaluate some nodes along the curve with known distances and then linearly interpolate new nodes between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</description></item><item><title>CMake and build scripts</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/</link><pubDate>Thu, 23 Feb 2023 23:15:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/</guid><description>&lt;p&gt;&lt;a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/"&gt;If you haven&amp;rsquo;t read the first article of this series, I highly recommend that you do so.&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;To simplify the building process, we can create a build script. We have already defined some scripts in our &lt;code&gt;package.json&lt;/code&gt; file. At this point, the &lt;code&gt;build-wasm.js&lt;/code&gt; file is still empty, so we can create a basic script that first deletes an existing &lt;code&gt;build&lt;/code&gt; folder, creates a new one, and runs &lt;code&gt;cmake ..&lt;/code&gt; inside it. We will be using a WASI-SDK docker image from &lt;code&gt;ghcr.io/webassembly/wasi-sdk&lt;/code&gt; to run cmake and eventually compile the project via &lt;code&gt;make&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>Folder structure</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/</link><pubDate>Thu, 23 Feb 2023 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-1/</guid><description>&lt;p&gt;You may have already heard that it&amp;rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.&lt;/p&gt;</description></item></channel></rss>

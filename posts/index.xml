@@ -87,13 +87,18 @@ That is the whole trick.</p>
 
 
 
-<iframe
-        src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track-with-friction.html"
-        width="100%"
-        height="300px"
-        style="border:0;"
-        class="embedded-iframe "
-></iframe>
+
+<div class="embedded-iframe ">
+  <iframe
+    src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track-with-friction.html"
+    width="100%"
+    height="300px"
+    style="border: 0"
+    class="iframe"
+  ></iframe>
+
+  
+</div>
 <h1 id="whats-next">What’s next?</h1>
 <p>In the next chapter we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
 No matter what the underlying geometry is in the end, <strong>splines, imported tracks, FVD-based shapes or anything else, the evaluation should always work the same</strong>.
@@ -367,13 +372,18 @@ $$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec
 
 
 
-<iframe
-        src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track.html"
-        width="100%"
-        height="300px"
-        style="border:0;"
-        class="embedded-iframe "
-></iframe>
+
+<div class="embedded-iframe ">
+  <iframe
+    src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track.html"
+    width="100%"
+    height="300px"
+    style="border: 0"
+    class="iframe"
+  ></iframe>
+
+  
+</div>
 <p>I’ve polished things a bit and moved the physics and linear interpolation logic into their own files instead of keeping everything as spaghetti code. The complete source code is available in my GitHub repo, feel free to explore and play around with it.</p>
 
 
@@ -717,13 +727,18 @@ so it might help you as well.</p>
 
 
 
-<iframe
-        src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-gravity.html"
-        width="100%"
-        height="300"
-        style="border:0;"
-        class="embedded-iframe "
-></iframe>
+
+<div class="embedded-iframe ">
+  <iframe
+    src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-gravity.html"
+    width="100%"
+    height="300"
+    style="border: 0"
+    class="iframe"
+  ></iframe>
+
+  
+</div>
 <p>Here is the source code for our little interactive experiment:</p>
 
 
@@ -867,7 +882,24 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 <p>With a stable track interpolating method in place, work has started on coding multi-track support. Although it presents some challenges, they are not insurmountable. Once the multi-track support is completed, a basic block system will be developed to create a real simulation environment.</p>
 <p>Lastly, the program has been updated to include another coaster from the NoLimits 2 Library inside the &ldquo;Storm Valley&rdquo; park.</p>
 
-<iframe src="https://ercanakyuerek.de//roller-coaster-simulation/simulator-2.html" style="border: 0; width: 100%; height: 600px;"></iframe>
+
+
+
+
+
+
+
+<div class="embedded-iframe ">
+  <iframe
+    src="https://ercanakyuerek.de//roller-coaster-simulation/simulator-2.html"
+    width="100%"
+    height="600px"
+    style="border: 0"
+    class="iframe"
+  ></iframe>
+
+  
+</div>
 ]]></content></item><item><title>JavaScript module</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-4/</link><pubDate>Mon, 27 Feb 2023 17:45:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-4/</guid><description>&lt;p&gt;&lt;a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/"&gt;If you haven&amp;rsquo;t read the third article of this series, I highly recommend that you do so.&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;This is the point where we will develop our &lt;code&gt;JavaScript&lt;/code&gt; library that utilizes the functions exposed in the &lt;code&gt;WebAssembly&lt;/code&gt; module. I have created a simple template for this purpose. You may notice that we are defining some imports for &lt;code&gt;WASI&lt;/code&gt;, but they are all empty. Allow me to explain what &lt;code&gt;WASI&lt;/code&gt; is and what it aims to achieve. &lt;code&gt;WASI&lt;/code&gt; is an attempt to create specifications similar to the &lt;code&gt;POSIX&lt;/code&gt; standard, which can be implemented across different runtimes, such as browsers or regular machines, and provides access to system-specific functions, such as file systems. However, for our library, which only needs to perform calculations, we do not require a complex runtime environment. This is why our functions are empty. Some may argue that we should use the Emscripten SDK instead of the &lt;code&gt;WASI SDK&lt;/code&gt;, but I believe that the &lt;code&gt;WASI SDK&lt;/code&gt; is the future. It produces smaller binaries and has fewer complications compared to &lt;code&gt;Emscripten&lt;/code&gt;. There are official efforts to import standard &lt;code&gt;WASI&lt;/code&gt; functions for the &lt;code&gt;browser&lt;/code&gt;, but unfortunately, they do not seem to work unless a &lt;code&gt;WebAssembly module&lt;/code&gt; is instantiated within a &lt;code&gt;worker&lt;/code&gt;. If there are any changes in the future regarding this matter, I will update my articles accordingly. &lt;a href="https://github.com/wasmerio/wasmer-js"&gt;Here&lt;/a&gt; is the mentioned attempt to bring a &lt;code&gt;WASI runtime&lt;/code&gt; to &lt;code&gt;browsers&lt;/code&gt;. If you can load a &lt;code&gt;WASM file&lt;/code&gt; outside the &lt;code&gt;worker&lt;/code&gt;, just email me your solution and I will include it here! &amp;#x1f604;&lt;/p&gt;</description><content type="html"><![CDATA[<p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/">If you haven&rsquo;t read the third article of this series, I highly recommend that you do so.</a></p>
 <p>This is the point where we will develop our <code>JavaScript</code> library that utilizes the functions exposed in the <code>WebAssembly</code> module. I have created a simple template for this purpose. You may notice that we are defining some imports for <code>WASI</code>, but they are all empty. Allow me to explain what <code>WASI</code> is and what it aims to achieve. <code>WASI</code> is an attempt to create specifications similar to the <code>POSIX</code> standard, which can be implemented across different runtimes, such as browsers or regular machines, and provides access to system-specific functions, such as file systems. However, for our library, which only needs to perform calculations, we do not require a complex runtime environment. This is why our functions are empty. Some may argue that we should use the Emscripten SDK instead of the <code>WASI SDK</code>, but I believe that the <code>WASI SDK</code> is the future. It produces smaller binaries and has fewer complications compared to <code>Emscripten</code>. There are official efforts to import standard <code>WASI</code> functions for the <code>browser</code>, but unfortunately, they do not seem to work unless a <code>WebAssembly module</code> is instantiated within a <code>worker</code>. If there are any changes in the future regarding this matter, I will update my articles accordingly. <a href="https://github.com/wasmerio/wasmer-js">Here</a> is the mentioned attempt to bring a <code>WASI runtime</code> to <code>browsers</code>. If you can load a <code>WASM file</code> outside the <code>worker</code>, just email me your solution and I will include it here! &#x1f604;</p>
@@ -958,26 +990,34 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 
 
 
-<iframe
-        src="https://ercanakyuerek.de//%25!s%28%3cnil%3e%29"
-        width="200px"
-        height="200px"
-        style="border:0;"
-        class="embedded-iframe "
-></iframe>
+
+<div class="embedded-iframe ">
+  <iframe
+    src="https://ercanakyuerek.de//%25!s%28%3cnil%3e%29"
+    width="100%"
+    height="300px"
+    style="border: 0"
+    class="iframe"
+  ></iframe>
+
+  
+</div>
 <p>Please check the console for a spline with a length of <code>10.06</code>. The position we fetched should return a 3D vector with coordinates of <code>[-3, -3, 0]</code>.
 Next to this text, you can view an advanced test that displays a spline. I have created a <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/static/wasi-sdk-writing-library-in-cpp/libCalculation">repository</a> that contains all the necessary files, including this advanced example that uses Three.js for rendering.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>That&rsquo;s all! It wasn&rsquo;t that difficult, was it? We haven&rsquo;t yet covered other complex types, such as passing strings to and from WebAssembly modules, or how to log. However, you should have a rough idea of how things work now. In future articles, I will explore data types, memory management, and binding in greater depth. To be honest, gluing code together is not enjoyable. It requires creating glue code on the C++ side and a wrapper JavaScript module that <code>serializes</code> and <code>unserializes</code> arguments and return values. Some solutions eliminate the need for writing both code pieces, but for now, this should help you get started, especially if you aim to build a small yet performance-critical library.</p>
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-3/</guid><description>&lt;p&gt;&lt;a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/"&gt;If you haven&amp;rsquo;t read the second article of this series, I highly recommend that you do so.&lt;/a&gt;&lt;/p&gt;
+&lt;div class="embedded-iframe float-right"&gt;
 &lt;iframe
 src="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html"
-width="220"
-height="220"
-style="border:0;"
-class="embedded-iframe float-right"
+width="225px"
+height="225px"
+style="border: 0"
+class="iframe"
 &gt;&lt;/iframe&gt;
-&lt;p&gt;In this article, we&amp;rsquo;ll be exploring a more interesting example where we&amp;rsquo;ll construct a bezier curve, evaluate nodes on it, and write a function that gives any position on the curve by a length parameter. To explain briefly, a bezier curve is represented by a parameter &lt;code&gt;t&lt;/code&gt;, which varies between 0 and 1 and determines the position of nodes on the curve. However, this &lt;code&gt;t&lt;/code&gt; value doesn&amp;rsquo;t produce uniform spacing, which is problematic when we want to evaluate a point on the curve based on its distance. To solve this, we can evaluate some nodes along the curve with known distances and then linearly interpolate new nodes between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</description><content type="html"><![CDATA[<p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/">If you haven&rsquo;t read the second article of this series, I highly recommend that you do so.</a></p>
+&lt;div class="description" style="width: 225px"&gt;Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;In this article, we&amp;rsquo;ll be exploring a more interesting example where we&amp;rsquo;ll construct a Bézier curve, evaluate nodes on it, and write a function that gives any position on the curve by a length parameter. To explain briefly, a Bézier curve is represented by a parameter &lt;code&gt;t&lt;/code&gt;, which varies between 0 and 1 and determines the position of nodes on the curve. However, this &lt;code&gt;t&lt;/code&gt; value doesn&amp;rsquo;t produce uniform spacing, which is problematic when we want to evaluate a point on the curve based on its distance. To solve this, we can evaluate some nodes along the curve with known distances and then linearly interpolate new nodes between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</description><content type="html"><![CDATA[<p><a href="https://ercanakyuerek.de/posts/wasi/wasi-sdk-writing-library-in-cpp-2/">If you haven&rsquo;t read the second article of this series, I highly recommend that you do so.</a></p>
 
 
 
@@ -985,14 +1025,21 @@ class="embedded-iframe float-right"
 
 
 
-<iframe
-        src="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html"
-        width="220"
-        height="220"
-        style="border:0;"
-        class="embedded-iframe float-right"
-></iframe>
-<p>In this article, we&rsquo;ll be exploring a more interesting example where we&rsquo;ll construct a bezier curve, evaluate nodes on it, and write a function that gives any position on the curve by a length parameter. To explain briefly, a bezier curve is represented by a parameter <code>t</code>, which varies between 0 and 1 and determines the position of nodes on the curve. However, this <code>t</code> value doesn&rsquo;t produce uniform spacing, which is problematic when we want to evaluate a point on the curve based on its distance. To solve this, we can evaluate some nodes along the curve with known distances and then linearly interpolate new nodes between them to find the point we&rsquo;re looking for.</p>
+
+<div class="embedded-iframe float-right">
+  <iframe
+    src="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html"
+    width="225px"
+    height="225px"
+    style="border: 0"
+    class="iframe"
+  ></iframe>
+
+  
+  <div class="description" style="width: 225px">Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.</div>
+  
+</div>
+<p>In this article, we&rsquo;ll be exploring a more interesting example where we&rsquo;ll construct a Bézier curve, evaluate nodes on it, and write a function that gives any position on the curve by a length parameter. To explain briefly, a Bézier curve is represented by a parameter <code>t</code>, which varies between 0 and 1 and determines the position of nodes on the curve. However, this <code>t</code> value doesn&rsquo;t produce uniform spacing, which is problematic when we want to evaluate a point on the curve based on its distance. To solve this, we can evaluate some nodes along the curve with known distances and then linearly interpolate new nodes between them to find the point we&rsquo;re looking for.</p>
 <p>While this is a specific example, it involves &ldquo;complex&rdquo; types such as custom structs and 3D vectors that will need to be accessed from a web browser. So it should serve as a useful case for testing our library &#x1f604;</p>
 <h2 id="adding-a-third-party-library">Adding a third party library</h2>
 <p>I mentioned 3D vectors, so there is a well-known library called <code>glm</code>. I know that this is an overkill library for our &ldquo;simple&rdquo; problem, but it serves the purpose of showing how to add other libraries to our project. Ideally, the 3rd party library also has a CMake ecosystem. Otherwise, we need to be creative, fortunately. <code>glm</code> provides CMake files. My approach is to add a git submodule into the root directory by calling:</p>
@@ -1250,5 +1297,22 @@ environments.</p>
 <p>At this point in time, the simulator does not support a block system or multi-track functionality. However, I am actively working on implementing these features. It is worth noting that the simulator runs in a browser, and has been written in c++ and compiled to WebAssembly. Consequently, a lightweight version of the software is available for use in web browsers, while the desktop version is built using Unreal Engine 5.</p>
 <p>To give you a better idea of the current implementation of the simulator, I have created an interactive example for you to try. You can switch between two coasters from the NoLimits2 library, change the camera perspective, and live adjust gravity and friction. Please note that since the user interface library I am using has no capabilities to allow more than two decimal points, there are no adjustment options for air resistance. Additionally, the track itself is not yet connected, and the sections only provide simple acceleration and deceleration on sections without a block system.</p>
 
-<iframe src="https://ercanakyuerek.de//roller-coaster-simulation/simulator-1.html" style="border: 0; width: 100%; height: 600px;"></iframe>
+
+
+
+
+
+
+
+<div class="embedded-iframe ">
+  <iframe
+    src="https://ercanakyuerek.de//roller-coaster-simulation/simulator-1.html"
+    width="100%"
+    height="600px"
+    style="border: 0"
+    class="iframe"
+  ></iframe>
+
+  
+</div>
 ]]></content></item></channel></rss>
