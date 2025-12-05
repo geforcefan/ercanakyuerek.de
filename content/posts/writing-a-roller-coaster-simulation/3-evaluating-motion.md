@@ -5,8 +5,6 @@ math: true
 tags: ["writing a roller coaster simulation"]
 ---
 
-## Evaluating Motion
-
 Before we implement the function, there's one small simplification we need to mention:
 In this chapter we will always evaluate the motion every **16 ms (0.016 seconds)**,
 which corresponds to roughly **60 frames per second**.
