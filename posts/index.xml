@@ -485,13 +485,11 @@ export const DemoLinearTrackScene = () =&gt; {
 </code></pre>
 
 <p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/">In the next chapter</a> we will introduce friction and air resistance. Of course there will be a demo where you can play with the parameters and compare both physics evaluations, with and without energy loss.</p>
-]]></content></item><item><title>Evaluating Motion</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/</link><pubDate>Thu, 27 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/</guid><description>&lt;h2 id="evaluating-motion"&gt;Evaluating Motion&lt;/h2&gt;
-&lt;p&gt;Before we implement the function, there&amp;rsquo;s one small simplification we need to mention:
+]]></content></item><item><title>Evaluating Motion</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/</link><pubDate>Thu, 27 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/</guid><description>&lt;p&gt;Before we implement the function, there&amp;rsquo;s one small simplification we need to mention:
 In this chapter we will always evaluate the motion every &lt;strong&gt;16 ms (0.016 seconds)&lt;/strong&gt;,
 which corresponds to roughly &lt;strong&gt;60 frames per second&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Using a fixed time step makes the formulas easier to understand for this article.&lt;/p&gt;
-&lt;p&gt;In real simulations or game engines, you usually don’t assume a constant value. Instead, you take the actual delta time from the game loop, so that the motion stays consistent even if the frame rate changes.&lt;/p&gt;</description><content type="html"><![CDATA[<h2 id="evaluating-motion">Evaluating Motion</h2>
-<p>Before we implement the function, there&rsquo;s one small simplification we need to mention:
+&lt;p&gt;In real simulations or game engines, you usually don’t assume a constant value. Instead, you take the actual delta time from the game loop, so that the motion stays consistent even if the frame rate changes.&lt;/p&gt;</description><content type="html"><![CDATA[<p>Before we implement the function, there&rsquo;s one small simplification we need to mention:
 In this chapter we will always evaluate the motion every <strong>16 ms (0.016 seconds)</strong>,
 which corresponds to roughly <strong>60 frames per second</strong>.</p>
 <p>Using a fixed time step makes the formulas easier to understand for this article.</p>
