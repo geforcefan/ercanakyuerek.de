@@ -1,6 +1,7 @@
 ---
-title: 'First results - Roller Coaster Simulation'
+title: 'First results'
 date: 2023-02-23T16:28:20+01:00
+tags: ["roller coaster simulation"]
 ---
 
 I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.

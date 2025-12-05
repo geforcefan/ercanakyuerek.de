@@ -1,7 +1,8 @@
 ---
-title: 'Friction and Air Resistance - Writing a Roller Coaster Simulation'
+title: 'Friction and Air Resistance'
 date: 2025-11-29T12:35:00+01:00
 math: true
+tags: ["writing a roller coaster simulation"]
 ---
 
 This chapter will be quite short and introduces two small but important parts of a more realistic roller coaster simulation:

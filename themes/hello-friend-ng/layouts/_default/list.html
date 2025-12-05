@@ -17,6 +17,7 @@
                         <li class="post-item">
                             <a href="{{.Permalink}}">
                                 <span class="post-title">{{.Title}}</span>
+
                                 <span class="post-day">
                                     {{ if .Site.Params.dateformShort }}
                                         {{ .Date.Format .Site.Params.dateformShort }}
@@ -25,6 +26,9 @@
                                     {{ end }}
                                 </span>
                             </a>
+                            {{ range .Params.tags  -}}
+                            <a style="margin-top: -24px; color: rgb(34, 34, 34); font-size: 12px;" href="{{ "tags/" | absLangURL }}{{ . | urlize }}/">#{{.}}</a>
+                            {{ end }}
                         </li>
                     {{ end }}
                 </ul>

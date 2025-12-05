@@ -1,6 +1,7 @@
 ---
-title: "CMake and build scripts - Writing a Library in C++ and Using it in the Browser with the WASI SDK"
+title: "CMake and build scripts"
 date: 2023-02-23T23:15:00+01:00
+tags: ["writing a library in c++ and using it in the browser with the WASI SDK"]
 ---
 [If you haven't read the first article of this series, I highly recommend that you do so.]({{< ref "/posts/wasi/wasi-sdk-writing-library-in-cpp-1.md" >}})
 

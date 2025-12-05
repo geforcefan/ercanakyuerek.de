@@ -1,7 +1,8 @@
 ---
-title: 'Evaluating Motion - Writing a Roller Coaster Simulation'
+title: 'Evaluating Motion'
 date: 2025-11-27T12:35:00+01:00
 math: true
+tags: ["writing a roller coaster simulation"]
 ---
 
 ## Evaluating Motion

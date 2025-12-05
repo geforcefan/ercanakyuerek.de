@@ -1,6 +1,7 @@
 ---
-title: "JavaScript module - Writing a Library in C++ and Using it in the Browser with the WASI SDK"
+title: "JavaScript module"
 date: 2023-02-27T17:45:00+01:00
+tags: ["writing a library in c++ and using it in the browser with the WASI SDK"]
 ---
 [If you haven't read the third article of this series, I highly recommend that you do so.]({{< ref "/posts/wasi/wasi-sdk-writing-library-in-cpp-3.md" >}})
 

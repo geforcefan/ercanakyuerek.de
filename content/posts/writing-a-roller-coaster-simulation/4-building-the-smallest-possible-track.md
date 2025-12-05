@@ -1,7 +1,8 @@
 ---
-title: 'Building the Easiest Possible Track - Writing a Roller Coaster Simulation'
+title: 'Building the Easiest Possible Track'
 date: 2025-11-28T12:35:00+01:00
 math: true
+tags: ["writing a roller coaster simulation"]
 ---
 
 In the previous chapter, I said we were going to visualize the evaluated motion with a small demo, but I realized we first need something else first. To visualize motion properly, we need something for our little object to move along. And that means we need a track.

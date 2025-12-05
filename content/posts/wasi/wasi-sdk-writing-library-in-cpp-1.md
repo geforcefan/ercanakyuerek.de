@@ -1,6 +1,7 @@
 ---
-title: "Folder structure - Writing a Library in C++ and Using it in the Browser with the WASI SDK"
+title: "Folder structure"
 date: 2023-02-23T22:00:00+01:00
+tags: ["writing a library in c++ and using it in the browser with the WASI SDK"]
 ---
 You may have already heard that it's possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.
 

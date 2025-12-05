@@ -1,7 +1,8 @@
 ---
-title: 'Gravity - Writing a Roller Coaster Simulation'
+title: 'Gravity'
 date: 2025-11-26T12:35:00+01:00
 math: true
+tags: ["writing a roller coaster simulation"]
 ---
 
 ## How do we determine the acceleration of the coaster?

@@ -1,6 +1,7 @@
 ---
-title: 'Introduction and Motion Dynamics - Writing a Roller Coaster Simulation'
+title: 'Introduction and Motion Dynamics'
 date: 2025-11-26T12:30:00+01:00
+tags: ["writing a roller coaster simulation"]
 ---
 
 You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser.

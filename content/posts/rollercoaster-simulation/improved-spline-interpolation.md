@@ -1,6 +1,7 @@
 ---
-title: 'Improved spline interpolation - Roller Coaster Simulation'
+title: 'Improved spline interpolation'
 date: 2023-03-07T00:30:20+01:00
+tags: ["roller coaster simulation"]
 ---
 
 In the latest update, a number of bugs were discovered, particularly in the precision of floating point calculations when working with a web assembly module in a browser environment. It was found that the jitters mentioned earlier were actually caused by a bug in the roll interpolation process.
