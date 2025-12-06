@@ -987,13 +987,44 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 <p>Acceleration → Velocity → Distance</p></blockquote>
 <p>Once we understand the acceleration acting on the coaster, the rest follows naturally.</p>
 <p>In the next chapter, we will take the first real step of the simulation and answer the core question: <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/">How do we determine the acceleration of the coaster?</a></p>
-]]></content></item><item><title>Improved spline interpolation</title><link>https://ercanakyuerek.de/posts/rollercoaster-simulation/improved-spline-interpolation/</link><pubDate>Tue, 07 Mar 2023 00:30:20 +0100</pubDate><guid>https://ercanakyuerek.de/posts/rollercoaster-simulation/improved-spline-interpolation/</guid><description>&lt;p&gt;In the latest update, a number of bugs were discovered, particularly in the precision of floating point calculations when working with a web assembly module in a browser environment. It was found that the jitters mentioned earlier were actually caused by a bug in the roll interpolation process.&lt;/p&gt;
-&lt;p&gt;To give a brief overview, track interpolation involves estimating the length of a NURBS track by interpolating with a large step size and evaluating nodes based on the estimated length, resulting in a dense enough interpolation. After this, the normals are calculated and normal angles are applied on the y and x directions but not on the z direction yet, which is essentially the roll. These normals are then applied to the previous matrix and the process continues. A C2 continuous cubic spline is then constructed, and the z angle, which is the result of applying normals in the x and y directions, is applied on each roll point on top of its roll value. The next step is to iterate through all nodes again and apply rotation on the z direction. Finally, to obtain the matrix at any point, we perform a binary search for the minimum and maximum node whose distance lies between the two and interpolate linearly.&lt;/p&gt;</description><content type="html"><![CDATA[<p>In the latest update, a number of bugs were discovered, particularly in the precision of floating point calculations when working with a web assembly module in a browser environment. It was found that the jitters mentioned earlier were actually caused by a bug in the roll interpolation process.</p>
-<p>To give a brief overview, track interpolation involves estimating the length of a NURBS track by interpolating with a large step size and evaluating nodes based on the estimated length, resulting in a dense enough interpolation. After this, the normals are calculated and normal angles are applied on the y and x directions but not on the z direction yet, which is essentially the roll. These normals are then applied to the previous matrix and the process continues. A C2 continuous cubic spline is then constructed, and the z angle, which is the result of applying normals in the x and y directions, is applied on each roll point on top of its roll value. The next step is to iterate through all nodes again and apply rotation on the z direction. Finally, to obtain the matrix at any point, we perform a binary search for the minimum and maximum node whose distance lies between the two and interpolate linearly.</p>
-<p>However, a problem arises when the roll is pre-applied, resulting in jitters due to precision issues. To solve this, the roll should not be applied on each node but only when requesting a matrix at a specific distance. Additionally, the performance was optimized by reducing the time for iterating through all nodes to only once.</p>
-<h1 id="whats-next">What&rsquo;s Next?</h1>
-<p>With a stable track interpolating method in place, work has started on coding multi-track support. Although it presents some challenges, they are not insurmountable. Once the multi-track support is completed, a basic block system will be developed to create a real simulation environment.</p>
-<p>Lastly, the program has been updated to include another coaster from the NoLimits 2 Library inside the &ldquo;Storm Valley&rdquo; park.</p>
+]]></content></item><item><title>First results and improved spline interpolation</title><link>https://ercanakyuerek.de/posts/rollercoaster-simulation/improved-spline-interpolation/</link><pubDate>Tue, 07 Mar 2023 00:30:20 +0100</pubDate><guid>https://ercanakyuerek.de/posts/rollercoaster-simulation/improved-spline-interpolation/</guid><description>&lt;p&gt;In the latest update I tracked down a couple of bugs that caused all those tiny jitters I
+mentioned earlier. At first I thought they were just floating-point problems coming from
+the WebAssembly module in the browser, but the real issue turned out to be the
+&lt;strong&gt;roll interpolation&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Let me give you a quick overview of what’s going on. When we interpolate a NURBS track,
+we first estimate the total track length using a pretty rough step size. Based on that
+estimation, we generate a dense enough set of nodes. After that, we compute normals for
+e very node and apply the normal angles on the &lt;strong&gt;x&lt;/strong&gt; and &lt;strong&gt;y&lt;/strong&gt; axes, the &lt;strong&gt;z&lt;/strong&gt; axis (the roll)
+comes later. These normals get applied to the previous matrix, so the whole orientation
+flows along the track. Once that’s done, we generate a &lt;strong&gt;C2-continuous cubic spline&lt;/strong&gt;, and
+the z-rotation that results from applying the x/y normals is added to the roll value at
+each roll point.&lt;/p&gt;</description><content type="html"><![CDATA[<p>In the latest update I tracked down a couple of bugs that caused all those tiny jitters I
+mentioned earlier. At first I thought they were just floating-point problems coming from
+the WebAssembly module in the browser, but the real issue turned out to be the
+<strong>roll interpolation</strong>.</p>
+<p>Let me give you a quick overview of what’s going on. When we interpolate a NURBS track,
+we first estimate the total track length using a pretty rough step size. Based on that
+estimation, we generate a dense enough set of nodes. After that, we compute normals for
+e very node and apply the normal angles on the <strong>x</strong> and <strong>y</strong> axes, the <strong>z</strong> axis (the roll)
+comes later. These normals get applied to the previous matrix, so the whole orientation
+flows along the track. Once that’s done, we generate a <strong>C2-continuous cubic spline</strong>, and
+the z-rotation that results from applying the x/y normals is added to the roll value at
+each roll point.</p>
+<p>The next step is to run through all nodes again and apply the actual roll (the z rotation).
+And finally, when we want the transformation matrix at some distance along the track,
+we simply binary-search for the two surrounding nodes and linearly interpolate between them.</p>
+<p>This all works, but one thing caused trouble:<br>
+I originally <strong>pre-applied the roll on every node</strong>, and that introduced precision errors
+which showed up as visible jitter. The fix was pretty simple:
+<strong>don’t bake the roll into every node</strong>. Instead, keep it separate and apply the roll
+only when someone asks for a matrix at a specific distance. That completely removes the jitter.</p>
+<p>On top of that, I cleaned up the interpolation loop so we only iterate through
+the nodes <strong>once</strong>, which gave a nice performance boost.</p>
+<h2 id="whats-next">What&rsquo;s Next?</h2>
+<p>Now that the interpolation system is finally stable, I’ve
+started working on <strong>multi-track support</strong>. It’s a bit tricky, but nothing too dramatic.
+Once that’s in place, the next step will be to build a <strong>basic block system</strong>, which will
+finally bring us closer to a real, fully working roller coaster simulation.</p>
 
 
 
@@ -1006,11 +1037,11 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 <div class="embedded-iframe ">
 
   
-  <a href="https://ercanakyuerek.de//roller-coaster-simulation/simulator-2.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
+  <a href="https://ercanakyuerek.de//roller-coaster-simulation/simulator-1.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
   
 
   <iframe
-    src="https://ercanakyuerek.de//roller-coaster-simulation/simulator-2.html"
+    src="https://ercanakyuerek.de//roller-coaster-simulation/simulator-1.html"
     width="100%"
     height="600px"
     style="border: 0"
@@ -1417,32 +1448,4 @@ desktop applications as well, where <code>WASI SDK</code> is not used to build t
 This approach ensures high flexibility when using the library in both the browser and desktop
 environments.</p>
 <p><a href="https://ercanakyuerek.de/posts/wasi/2-cmake-and-build-scripts/">In the next part, we will create the build script and set up the CMake files.</a></p>
-]]></content></item><item><title>First results</title><link>https://ercanakyuerek.de/posts/rollercoaster-simulation/first-results/</link><pubDate>Thu, 23 Feb 2023 16:28:20 +0100</pubDate><guid>https://ercanakyuerek.de/posts/rollercoaster-simulation/first-results/</guid><description>&lt;p&gt;I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.&lt;/p&gt;</description><content type="html"><![CDATA[<p>I am in the process of developing an open source roller coaster simulator that is designed to achieve a high degree of compatibility with NoLimits 2. To this end, I have adopted the same track generation and roll interpolation techniques employed by NoLimits 2. Although there are some bugs associated with loading NoLimits2 Parks at present, I anticipate that these issues will be resolved in due course, as I continue to refine the nl2park loader.</p>
-<p>At this point in time, the simulator does not support a block system or multi-track functionality. However, I am actively working on implementing these features. It is worth noting that the simulator runs in a browser, and has been written in c++ and compiled to WebAssembly. Consequently, a lightweight version of the software is available for use in web browsers, while the desktop version is built using Unreal Engine 5.</p>
-<p>To give you a better idea of the current implementation of the simulator, I have created an interactive example for you to try. You can switch between two coasters from the NoLimits2 library, change the camera perspective, and live adjust gravity and friction. Please note that since the user interface library I am using has no capabilities to allow more than two decimal points, there are no adjustment options for air resistance. Additionally, the track itself is not yet connected, and the sections only provide simple acceleration and deceleration on sections without a block system.</p>
-
-
-
-
-
-
-
-
-
-<div class="embedded-iframe ">
-
-  
-  <a href="https://ercanakyuerek.de//roller-coaster-simulation/simulator-1.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
-  
-
-  <iframe
-    src="https://ercanakyuerek.de//roller-coaster-simulation/simulator-1.html"
-    width="100%"
-    height="600px"
-    style="border: 0"
-    class="iframe"
-  ></iframe>
-
-  
-</div>
 ]]></content></item></channel></rss>
