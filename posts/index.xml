@@ -291,7 +291,7 @@ $$acceleration = gravity \cdot \sin(slopeAngle)$$<p>But we want to move toward r
 <blockquote>
 <p>We simply define a gravity direction vector.</p></blockquote>
 <p>Gravity always points downward to Earth, basically along the negative y-axis:</p>
-$$\vec{gravityDirection} = \begin{bmatrix} 0 \\ -9.81 \end{bmatrix}$$<p>Now what do we do with <code>forwardDirection</code> and <code>gravityDirection</code>?
+$$\vec{gravityDir} = \begin{bmatrix} 0 \\ -9.81 \end{bmatrix}$$<p>Now what do we do with <code>forwardDirection</code> and <code>gravityDirection</code>?
 We take their dot product. That’s it. Really. That’s the whole trick:</p>
 $$acceleration = \vec{forwardDir} \times \vec{gravityDir}$$<p>This one line replaces the entire downhill-slope acceleration formula thing:</p>
 $$acceleration = gravity * sin(slopeAngle)$$<p>In code:</p>
@@ -361,7 +361,7 @@ $$ length = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} $$<p>Putting it all together:</
 </span></span></code></pre></div><h2 id="how-to-calculate-forward-direction-along-the-curve">How to Calculate Forward Direction Along the Curve</h2>
 <p>Since this is a linear curve, the forward direction is constant everywhere. It doesn’t get easier than this.</p>
 <p>Mathematically:</p>
-$$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} \rVert} $$<p>Translated into code:</p>
+$$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} \rVert} $$<p>Translated into code:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getForwardDirectionAtDistance</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">cp1</span>: <span style="color:#66d9ef">Vector3</span>, <span style="color:#a6e22e">cp2</span>: <span style="color:#66d9ef">Vector3</span>, <span style="color:#a6e22e">distance</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">sub</span>(<span style="color:#a6e22e">cp1</span>).<span style="color:#a6e22e">normalize</span>();
 </span></span><span style="display:flex;"><span>};
