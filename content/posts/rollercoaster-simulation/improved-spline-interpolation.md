@@ -1,19 +1,41 @@
 ---
-title: 'Improved spline interpolation'
+title: 'First results and improved spline interpolation'
 date: 2023-03-07T00:30:20+01:00
 tags: ["roller coaster simulation"]
 ---
 
-In the latest update, a number of bugs were discovered, particularly in the precision of floating point calculations when working with a web assembly module in a browser environment. It was found that the jitters mentioned earlier were actually caused by a bug in the roll interpolation process.
+In the latest update I tracked down a couple of bugs that caused all those tiny jitters I 
+mentioned earlier. At first I thought they were just floating-point problems coming from 
+the WebAssembly module in the browser, but the real issue turned out to be the 
+**roll interpolation**.
 
-To give a brief overview, track interpolation involves estimating the length of a NURBS track by interpolating with a large step size and evaluating nodes based on the estimated length, resulting in a dense enough interpolation. After this, the normals are calculated and normal angles are applied on the y and x directions but not on the z direction yet, which is essentially the roll. These normals are then applied to the previous matrix and the process continues. A C2 continuous cubic spline is then constructed, and the z angle, which is the result of applying normals in the x and y directions, is applied on each roll point on top of its roll value. The next step is to iterate through all nodes again and apply rotation on the z direction. Finally, to obtain the matrix at any point, we perform a binary search for the minimum and maximum node whose distance lies between the two and interpolate linearly.
+Let me give you a quick overview of what’s going on. When we interpolate a NURBS track, 
+we first estimate the total track length using a pretty rough step size. Based on that 
+ estimation, we generate a dense enough set of nodes. After that, we compute normals for 
+e very node and apply the normal angles on the **x** and **y** axes, the **z** axis (the roll) 
+comes later. These normals get applied to the previous matrix, so the whole orientation 
+flows along the track. Once that’s done, we generate a **C2-continuous cubic spline**, and 
+the z-rotation that results from applying the x/y normals is added to the roll value at 
+each roll point.
 
-However, a problem arises when the roll is pre-applied, resulting in jitters due to precision issues. To solve this, the roll should not be applied on each node but only when requesting a matrix at a specific distance. Additionally, the performance was optimized by reducing the time for iterating through all nodes to only once.
+The next step is to run through all nodes again and apply the actual roll (the z rotation). 
+And finally, when we want the transformation matrix at some distance along the track, 
+we simply binary-search for the two surrounding nodes and linearly interpolate between them.
 
-# What's Next?
+This all works, but one thing caused trouble:  
+I originally **pre-applied the roll on every node**, and that introduced precision errors 
+which showed up as visible jitter. The fix was pretty simple: 
+**don’t bake the roll into every node**. Instead, keep it separate and apply the roll 
+only when someone asks for a matrix at a specific distance. That completely removes the jitter.
 
-With a stable track interpolating method in place, work has started on coding multi-track support. Although it presents some challenges, they are not insurmountable. Once the multi-track support is completed, a basic block system will be developed to create a real simulation environment.
+On top of that, I cleaned up the interpolation loop so we only iterate through 
+the nodes **once**, which gave a nice performance boost.
 
-Lastly, the program has been updated to include another coaster from the NoLimits 2 Library inside the "Storm Valley" park.
+## What's Next?
 
-{{< iframe src="roller-coaster-simulation/simulator-2.html" height="600px" >}}
+Now that the interpolation system is finally stable, I’ve 
+started working on **multi-track support**. It’s a bit tricky, but nothing too dramatic. 
+Once that’s in place, the next step will be to build a **basic block system**, which will 
+finally bring us closer to a real, fully working roller coaster simulation.
+
+{{< iframe src="roller-coaster-simulation/simulator-1.html" height="600px" >}}
