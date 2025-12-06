@@ -1,6 +1,6 @@
 ---
 title: 'Introduction and Motion Dynamics'
-date: 2025-11-26T12:30:00+01:00
+date: 2025-12-06T12:30:00+01:00
 tags: ["writing a roller coaster simulation"]
 ---
 
