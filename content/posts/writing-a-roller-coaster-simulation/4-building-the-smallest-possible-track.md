@@ -39,7 +39,7 @@ We won't use `gravity * Math.sin(slopeAngle)` anymore, because once we have a fo
 
 Gravity always points downward to Earth, basically along the negative y-axis:
 
-$$\vec{gravityDirection} = \begin{bmatrix} 0 \\ -9.81 \end{bmatrix}$$
+$$\vec{gravityDir} = \begin{bmatrix} 0 \\ -9.81 \end{bmatrix}$$
 
 Now what do we do with `forwardDirection` and `gravityDirection`?
 We take their dot product. That’s it. Really. That’s the whole trick:
@@ -161,7 +161,7 @@ Since this is a linear curve, the forward direction is constant everywhere. It d
 
 Mathematically:
 
-$$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} \rVert} $$
+$$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} \rVert} $$
 
 Translated into code:
 
