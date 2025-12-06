@@ -88,7 +88,13 @@ That is the whole trick.</p>
 
 
 
+
 <div class="embedded-iframe ">
+
+  
+  <a href="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track-with-friction.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
+  
+
   <iframe
     src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track-with-friction.html"
     width="100%"
@@ -99,7 +105,7 @@ That is the whole trick.</p>
 
   
 </div>
-<h1 id="whats-next">What’s next?</h1>
+<h2 id="what-comes-next">What comes next?</h2>
 <p>In the next chapter we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
 No matter what the underlying geometry is in the end, <strong>splines, imported tracks, FVD-based shapes or anything else, the evaluation should always work the same</strong>.
 The key step is replacing the two functions <code>getPositionAtDistance</code> and <code>getForwardDirectionAtDistance</code>
@@ -108,7 +114,6 @@ I will also introduce a curve node that stores a full matrix for a given distanc
 Any geometry system can “fill” these nodes, whether that system is based on splines, imported CSV data, FVD geometries or something entirely different.
 While writing this, I realize it is probably best to introduce the concept first with a simple linear track. Stay tuned.</p>
 <h1 id="demo-code">Demo code</h1>
-<p>As always, here is the code of the current demo. You can also view it on GitHub.</p>
 
 
 
@@ -137,7 +142,7 @@ import { useControls } from &#39;leva&#39;;
 import { MathUtils, Vector3 } from &#39;three&#39;;
 
 import { ControlPoint } from &#39;../components/ControlPoint&#39;;
-import { DragControlPosition } from &#39;../components/DragControlPosition&#39;;
+import { DragControlPoints } from &#39;../components/DragControlPoints&#39;;
 import Line from &#39;../components/Line&#39;;
 import Scene from &#39;../components/Scene&#39;;
 import { getForwardDirectionAtDistance, getPositionAtDistance, length } from &#39;../helper/linear&#39;;
@@ -151,8 +156,7 @@ const Demo = () =&gt; {
   const colors = useColors();
 
   // Control points
-  const [cp1, setCp1] = useState(new Vector3(-11.5, 3.2, 0));
-  const [cp2, setCp2] = useState(new Vector3(1.4, -2.8, 0));
+  const [points, setPoints] = useState([new Vector3(-11.5, 3.2, 0), new Vector3(1.4, -2.8, 0)]);
 
   const [simulationState, setSimulationState] = useControls(() =&gt; ({
     velocity: 0,
@@ -187,7 +191,7 @@ const Demo = () =&gt; {
     setSimulationState(
       evaluateMotionByForwardDirectionWithFriction(
         simulationState,
-        getForwardDirectionAtDistance(cp1, cp2, simulationState.distanceTraveled),
+        getForwardDirectionAtDistance(points[0], points[1], simulationState.distanceTraveled),
         simulationState.friction,
         simulationState.airResistance,
         simulationState.gravity,
@@ -199,7 +203,11 @@ const Demo = () =&gt; {
     setSimulationStateWithoutFriction(
       evaluateMotionByForwardDirection(
         simulationStateWithoutFriction,
-        getForwardDirectionAtDistance(cp1, cp2, simulationStateWithoutFriction.distanceTraveled),
+        getForwardDirectionAtDistance(
+          points[0],
+          points[1],
+          simulationStateWithoutFriction.distanceTraveled,
+        ),
         simulationState.gravity,
         deltaTime,
       ),
@@ -209,7 +217,7 @@ const Demo = () =&gt; {
   // Reset simulation state if train overshoots track
   useEffect(() =&gt; {
     if (
-      simulationState.distanceTraveled &gt; length(cp1, cp2) ||
+      simulationState.distanceTraveled &gt; length(points[0], points[1]) ||
       simulationState.distanceTraveled &lt; 0
     ) {
       setSimulationState({
@@ -227,28 +235,25 @@ const Demo = () =&gt; {
   }, [simulationState.distanceTraveled]);
 
   const trainPosition = getPositionAtDistance(
-    cp1,
-    cp2,
-    MathUtils.clamp(simulationState.distanceTraveled, 0, length(cp1, cp2)),
+    points[0],
+    points[1],
+    MathUtils.clamp(simulationState.distanceTraveled, 0, length(points[0], points[1])),
   );
 
   const trainPositionWithoutFriction = getPositionAtDistance(
-    cp1,
-    cp2,
-    MathUtils.clamp(simulationStateWithoutFriction.distanceTraveled, 0, length(cp1, cp2)),
+    points[0],
+    points[1],
+    MathUtils.clamp(
+      simulationStateWithoutFriction.distanceTraveled,
+      0,
+      length(points[0], points[1]),
+    ),
   );
 
   return (
     &lt;&gt;
-      &lt;DragControlPosition axisLock=&#34;z&#34; position={cp1} onDrag={setCp1}&gt;
-        &lt;ControlPoint /&gt;
-      &lt;/DragControlPosition&gt;
-
-      &lt;DragControlPosition axisLock=&#34;z&#34; position={cp2} onDrag={setCp2}&gt;
-        &lt;ControlPoint /&gt;
-      &lt;/DragControlPosition&gt;
-
-      &lt;Line points={[cp1, cp2]} color={colors.secondary} /&gt;
+      &lt;DragControlPoints points={points} setPoints={setPoints} /&gt;
+      &lt;Line points={points} color={colors.secondary} /&gt;
 
       &lt;ControlPoint position={trainPosition} color={colors.highlight} /&gt;
       &lt;ControlPoint position={trainPositionWithoutFriction} /&gt;
@@ -265,8 +270,9 @@ export const DemoLinearTrackSceneWithFriction = () =&gt; {
 };
 </code></pre>
 
-]]></content></item><item><title>Building the Easiest Possible Track</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track/</link><pubDate>Fri, 28 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track/</guid><description>&lt;p&gt;In the previous chapter, I said we were going to visualize the evaluated motion with a small demo, but I realized we first need something else first. To visualize motion properly, we need something for our little object to move along. And that means we need a track.&lt;/p&gt;
-&lt;p&gt;In this article, we focus on an extremely simplified roller coaster track. And when I say extremely simplified, I really mean it: it&amp;rsquo;s just a plane. A straight line. A first-order curve. Basically the easiest form of track you can possibly build without accidentally creating a real coaster.&lt;/p&gt;</description><content type="html"><![CDATA[<p>In the previous chapter, I said we were going to visualize the evaluated motion with a small demo, but I realized we first need something else first. To visualize motion properly, we need something for our little object to move along. And that means we need a track.</p>
+]]></content></item><item><title>Building the Easiest Possible Track</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track/</link><pubDate>Fri, 28 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track/</guid><description>&lt;p&gt;To visualize motion properly, we need something for our little object to move along. And that means we need a track.&lt;/p&gt;
+&lt;p&gt;In this article, we focus on an extremely simplified roller coaster track. And when I say extremely simplified, I really mean it: it&amp;rsquo;s just a plane. A straight line. A first-order curve. Basically the easiest form of track you can possibly build without accidentally creating a real coaster.&lt;/p&gt;
+&lt;p&gt;From the last chapter, we know how motion evaluation works. The evaluation function receives an acceleration value and returns a new simulation state containing the updated velocity and the total distance traveled:&lt;/p&gt;</description><content type="html"><![CDATA[<p>To visualize motion properly, we need something for our little object to move along. And that means we need a track.</p>
 <p>In this article, we focus on an extremely simplified roller coaster track. And when I say extremely simplified, I really mean it: it&rsquo;s just a plane. A straight line. A first-order curve. Basically the easiest form of track you can possibly build without accidentally creating a real coaster.</p>
 <p>From the last chapter, we know how motion evaluation works. The evaluation function receives an acceleration value and returns a new simulation state containing the updated velocity and the total distance traveled:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#a6e22e">evaluateMotion</span>(<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">acceleration</span>, <span style="color:#a6e22e">deltaTime</span>);
@@ -362,9 +368,10 @@ $$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec
 </span></span></code></pre></div><h2 id="small-note">Small note</h2>
 <p>Later the forward vector will be replaced by a <strong>4×4 matrix</strong>, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called <code>getMatrixAtDistance</code>. I know, yet again a change, but that’s future you’s problem. Ignore it for now.</p>
 <p>Going forward, we will use <strong>9.81665 m/s²</strong> as the gravitational acceleration, since this is also the value used by <strong>NoLimits Roller Coaster</strong> and <strong>openFVD++</strong>.</p>
-<h2 id="adding-everything-up-small-demo">Adding Everything Up: Small Demo</h2>
+<h2 id="adding-everything-up">Adding Everything Up</h2>
 <p>Time for a small demo. I built a basic setup: a visible line segment with draggable control points so you can adjust the slope in real time. On the side, a small panel displays the live simulation state.</p>
-<p>I switched the vectors to 3D instead of 2D, but only because it makes things more convenient in Three.js. The actual calculations from this article are exactly the same.</p>
+<p>I switched the vectors to 3D instead of 2D, but only because it makes things more convenient in THREE.js. The actual calculations from this article are exactly the same.</p>
+
 
 
 
@@ -374,6 +381,11 @@ $$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec
 
 
 <div class="embedded-iframe ">
+
+  
+  <a href="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
+  
+
   <iframe
     src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track.html"
     width="100%"
@@ -385,6 +397,9 @@ $$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec
   
 </div>
 <p>I’ve polished things a bit and moved the physics and linear interpolation logic into their own files instead of keeping everything as spaghetti code. The complete source code is available in my GitHub repo, feel free to explore and play around with it.</p>
+<h2 id="what-comes-next">What comes next?</h2>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/">In the next chapter</a> we will introduce friction and air resistance. You’ll be able to play with the parameters in a demo and compare both physics evaluations, with and without energy loss.</p>
+<h1 id="demo-code">Demo code</h1>
 
 
 
@@ -413,19 +428,22 @@ import { useControls } from &#39;leva&#39;;
 import { Vector3 } from &#39;three&#39;;
 
 import { ControlPoint } from &#39;../components/ControlPoint&#39;;
-import { DragControlPosition } from &#39;../components/DragControlPosition&#39;;
 import Line from &#39;../components/Line&#39;;
 import Scene from &#39;../components/Scene&#39;;
 import { getForwardDirectionAtDistance, getPositionAtDistance, length } from &#39;../helper/linear&#39;;
 import { evaluateMotionByForwardDirection } from &#39;../helper/physics&#39;;
 import useColors from &#39;../hooks/useColors&#39;;
+import { DragControlPoints } from &#39;../components/DragControlPoints&#39;;
 
 const Demo = () =&gt; {
   const colors = useColors();
 
   // Control points
-  const [cp1, setCp1] = useState(new Vector3(-11.5, 3.2, 0));
-  const [cp2, setCp2] = useState(new Vector3(1.4, -2.8, 0));
+  const [points, setPoints] = useState([
+    new Vector3(-11.5, 3.2, 0),
+    new Vector3(1.4, -2.8, 0)
+  ]);
+
 
   const [simulationState, setSimulationState] = useControls(() =&gt; ({
     velocity: 0,
@@ -445,7 +463,7 @@ const Demo = () =&gt; {
     setSimulationState(
       evaluateMotionByForwardDirection(
         simulationState,
-        getForwardDirectionAtDistance(cp1, cp2, simulationState.distanceTraveled),
+        getForwardDirectionAtDistance(points[0], points[1], simulationState.distanceTraveled),
         simulationState.gravity,
         deltaTime,
       ),
@@ -455,7 +473,7 @@ const Demo = () =&gt; {
   // Reset simulation state if train overshoots track
   useEffect(() =&gt; {
     if (
-      simulationState.distanceTraveled &gt; length(cp1, cp2) ||
+      simulationState.distanceTraveled &gt; length(points[0], points[1]) ||
       simulationState.distanceTraveled &lt; 0
     ) {
       setSimulationState({
@@ -466,20 +484,12 @@ const Demo = () =&gt; {
     }
   }, [simulationState.distanceTraveled]);
 
-  const trainPosition = getPositionAtDistance(cp1, cp2, simulationState.distanceTraveled);
+  const trainPosition = getPositionAtDistance(points[0], points[1], simulationState.distanceTraveled);
 
   return (
     &lt;&gt;
-      &lt;DragControlPosition axisLock=&#34;z&#34; position={cp1} onDrag={setCp1}&gt;
-        &lt;ControlPoint /&gt;
-      &lt;/DragControlPosition&gt;
-
-      &lt;DragControlPosition axisLock=&#34;z&#34; position={cp2} onDrag={setCp2}&gt;
-        &lt;ControlPoint /&gt;
-      &lt;/DragControlPosition&gt;
-
-      &lt;Line points={[cp1, cp2]} color={colors.secondary} /&gt;
-
+      &lt;DragControlPoints points={points} setPoints={setPoints}/&gt;
+      &lt;Line points={points} color={colors.secondary} /&gt;
       &lt;ControlPoint position={trainPosition} color={colors.highlight} /&gt;
     &lt;/&gt;
   );
@@ -494,16 +504,17 @@ export const DemoLinearTrackScene = () =&gt; {
 };
 </code></pre>
 
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/">In the next chapter</a> we will introduce friction and air resistance. Of course there will be a demo where you can play with the parameters and compare both physics evaluations, with and without energy loss.</p>
 ]]></content></item><item><title>Evaluating Motion</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/</link><pubDate>Thu, 27 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/</guid><description>&lt;p&gt;Before we implement the function, there&amp;rsquo;s one small simplification we need to mention:
 In this chapter we will always evaluate the motion every &lt;strong&gt;16 ms (0.016 seconds)&lt;/strong&gt;,
 which corresponds to roughly &lt;strong&gt;60 frames per second&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Using a fixed time step makes the formulas easier to understand for this article.&lt;/p&gt;
-&lt;p&gt;In real simulations or game engines, you usually don’t assume a constant value. Instead, you take the actual delta time from the game loop, so that the motion stays consistent even if the frame rate changes.&lt;/p&gt;</description><content type="html"><![CDATA[<p>Before we implement the function, there&rsquo;s one small simplification we need to mention:
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: In real simulations or game engines, you usually don’t assume a constant time value. Instead, you take the actual delta time from the game loop, so that the motion stays consistent even if the frame rate changes. &lt;strong&gt;More on that later&lt;/strong&gt;.&lt;/p&gt;</description><content type="html"><![CDATA[<p>Before we implement the function, there&rsquo;s one small simplification we need to mention:
 In this chapter we will always evaluate the motion every <strong>16 ms (0.016 seconds)</strong>,
 which corresponds to roughly <strong>60 frames per second</strong>.</p>
 <p>Using a fixed time step makes the formulas easier to understand for this article.</p>
-<p>In real simulations or game engines, you usually don’t assume a constant value. Instead, you take the actual delta time from the game loop, so that the motion stays consistent even if the frame rate changes.</p>
+<blockquote>
+<p><strong>Note</strong>: In real simulations or game engines, you usually don’t assume a constant time value. Instead, you take the actual delta time from the game loop, so that the motion stays consistent even if the frame rate changes. <strong>More on that later</strong>.</p></blockquote>
 <p>But for the sake of clarity in this chapter:
 We assume that every update happens exactly every <strong>16 ms</strong>.
 This keeps the examples simple and lets us focus on the physics first.</p>
@@ -568,8 +579,39 @@ $$distanceToTravel = velocity \cdot deltaTime$$<p>We take the previous distance 
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">velocity</span>, <span style="color:#a6e22e">distanceTraveled</span> };
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><p>This is already a complete physics step without friction or air resistance.</p>
-<h2 id="running-the-simulation">Running the simulation</h2>
-<p>Now we run the simulation every 16 ms and log the values.</p>
+<h2 id="interactive-demo">Interactive demo</h2>
+<p>Just like in the last chapter, we again have an interactive demo. This time, we’ve implemented a simple motion-evaluation method that applies basic physics. In this demo you can play around with the slope and already see a physical motion emerging.</p>
+<blockquote>
+<p><strong>Important note:</strong> Earlier in this article I said we would evaluate everything every <strong>16 ms</strong>, right? Well… that was kind of a lie, at least for this demo.<br>
+Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <code>useFrame</code> hook, which gives us the <strong>delta time of the previous frame</strong>, and we benefit from using it. This is the proper way to handle updates, instead of forcing a fixed 16 ms step, which I briefly covered in the introduction of this chapter.</p></blockquote>
+
+
+
+
+
+
+
+
+
+<div class="embedded-iframe ">
+
+  
+  <a href="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-evaluating-motion.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
+  
+
+  <iframe
+    src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-evaluating-motion.html"
+    width="100%"
+    height="300px"
+    style="border: 0"
+    class="iframe"
+  ></iframe>
+
+  
+</div>
+<h2 id="what-comes-next">What comes next?</h2>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track/">In the next chapter</a> we’ll add a basic roller coaster track, just a straight, linear segment. This is preparation for the real coaster curvatures we’ll build later.</p>
+<h1 id="demo-code">Demo code</h1>
 
 
 
@@ -587,48 +629,114 @@ $$distanceToTravel = velocity \cdot deltaTime$$<p>We take the previous distance 
 
 
 <p>
-    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/static/writing-a-roller-coaster-simulation/evaluating-motion.html" target="_blank" rel="noopener noreferrer">
+    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/scenes/DemoEvaluatingMotion.tsx" target="_blank" rel="noopener noreferrer">
         Click here to view the code on GitHub (opens in a new tab)
     </a>
 </p>
 
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&#34;en&#34;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&#34;UTF-8&#34; /&gt;
-    &lt;title&gt;Writing a Roller Coaster Simulation – Evaluating Motion&lt;/title&gt;
+<pre><code class="language-tsx">import React, { useEffect } from &#39;react&#39;;
+import { useFrame } from &#39;@react-three/fiber&#39;;
+import { useControls } from &#39;leva&#39;;
+import { MathUtils, Vector3 } from &#39;three&#39;;
 
-    &lt;script&gt;
-      const evaluateMotion = (state, acceleration, deltaTime) =&gt; {
-        const velocity = state.velocity &#43; acceleration * deltaTime;
-        const distanceTraveled = state.distanceTraveled &#43; velocity * deltaTime;
+import { Arrow } from &#39;../components/Arrow&#39;;
+import { ControlPoint } from &#39;../components/ControlPoint&#39;;
+import Line from &#39;../components/Line&#39;;
+import Scene from &#39;../components/Scene&#39;;
+import { evaluateMotionByAcceleration } from &#39;../helper/physics&#39;;
+import useColors from &#39;../hooks/useColors&#39;;
 
-        return { velocity, distanceTraveled };
-      };
+const Demo = () =&gt; {
+  const colors = useColors();
 
-      let state = { velocity: 0, distanceTraveled: 0 };
-      const tickInterval = 0.016; // 16ms ≈ 60FPS
-      const slopeAngle = 2 * (Math.PI / 180); // 2°, needs to be in radians
-      const acceleration = 9.81 * Math.sin(slopeAngle); // downhill-slope acceleration
+  const [{ slope, gravity, sinSlope, trackLength, ...simulationState }, setSimulationState] = useControls(
+    () =&gt; ({
+      slope: {
+        value: 0,
+        step: 5,
+        min: -180,
+        max: 180,
+      },
+      trackLength: {
+        value: 8,
+        step: 1,
+        min: 0,
+        max: 20,
+      },
+      gravity: {
+        value: 9.81665,
+        pad: 5,
+      },
+      sinSlope: {
+        disabled: true,
+        label: &#39;sin(slope)&#39;,
+        pad: 5,
+        value: 0,
+      },
+      velocity: 0,
+      distanceTraveled: 0,
+      acceleration: {
+        value: 0,
+        pad: 5,
+      },
+    }),
+  );
 
-      setInterval(() =&gt; {
-        state = evaluateMotion(state, acceleration, tickInterval);
+  useEffect(() =&gt; {
+    const sinSlope = Math.sin(MathUtils.degToRad(slope));
+    const acceleration = gravity * sinSlope;
 
-        document.body.innerText = [
-          `velocity: ${state.velocity.toFixed(3)} m/s`,
-          `velocity: ${(state.velocity * 3.6).toFixed(3)} km/h`,
-          `distance traveled: ${state.distanceTraveled.toFixed(3)} m`,
-          `acceleration: ${acceleration.toFixed(3)} ms^2`,
-          `slope angle: ${(slopeAngle / (Math.PI / 180)).toFixed(3)}°`,
-        ].join(&#39;\n&#39;);
-      }, tickInterval * 1000);
-    &lt;/script&gt;
-  &lt;/head&gt;
-&lt;/html&gt;
+    setSimulationState({ acceleration, sinSlope });
+  }, [slope, gravity, setSimulationState]);
+
+  // Main motion evaluation per frame
+  useFrame((state, deltaTime) =&gt; {
+    setSimulationState(
+      evaluateMotionByAcceleration(simulationState, simulationState.acceleration, deltaTime),
+    );
+  });
+
+  // Reset simulation state if train overshoots track
+  useEffect(() =&gt; {
+    if (simulationState.distanceTraveled &lt; 0 || simulationState.distanceTraveled &gt; trackLength) {
+      setSimulationState({
+        velocity: 0,
+        distanceTraveled: 0,
+      });
+    }
+  }, [simulationState.distanceTraveled, trackLength]);
+
+  return (
+    &lt;&gt;
+      &lt;group position={[-5, 0, 0]} rotation={[0, 0, MathUtils.degToRad(slope)]}&gt;
+        &lt;Arrow
+          position={[-trackLength / 2, 0, 0]}
+          rotation={[0, 0, Math.PI / 2]}
+          color={colors.secondary}
+        /&gt;
+
+        &lt;ControlPoint
+          position={new Vector3(trackLength / 2 - simulationState.distanceTraveled, 0, 0)}
+        /&gt;
+
+        &lt;Line
+          points={[new Vector3(-trackLength / 2, 0, 0), new Vector3(trackLength / 2, 0, 0)]}
+          color={colors.secondary}
+        /&gt;
+      &lt;/group&gt;
+    &lt;/&gt;
+  );
+};
+
+export const DemoEvaluatingMotion = () =&gt; {
+  return (
+    &lt;Scene&gt;
+      &lt;Demo /&gt;
+    &lt;/Scene&gt;
+  );
+};
 </code></pre>
 
-<h2 id="next-chapter">Next Chapter</h2>
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track/">In the next chapter</a> we’ll build a small interactive Three.js demo where we can watch the object’s position update in real time. Nothing fancy, just a simple page showing coordinates and velocity so we can finally see the simulation in action.</p>
 ]]></content></item><item><title>Gravity</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/</link><pubDate>Wed, 26 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/</guid><description>&lt;h2 id="how-do-we-determine-the-acceleration-of-the-coaster"&gt;How do we determine the acceleration of the coaster?&lt;/h2&gt;
 &lt;p&gt;To simplify things, we ignore air resistance, rolling friction and any other additional forces. We also assume Earth’s gravity is &lt;strong&gt;9.81 m/s²&lt;/strong&gt;. This allows us to focus entirely on the fundamental idea:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -728,7 +836,13 @@ so it might help you as well.</p>
 
 
 
+
 <div class="embedded-iframe ">
+
+  
+  <a href="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-gravity.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
+  
+
   <iframe
     src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-gravity.html"
     width="100%"
@@ -739,7 +853,9 @@ so it might help you as well.</p>
 
   
 </div>
-<p>Here is the source code for our little interactive experiment:</p>
+<h2 id="what-comes-next">What comes next?</h2>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/">In the next chapter</a>, we’ll add motion evaluation and move a simple object along a linear plane.</p>
+<h1 id="demo-code">Demo code</h1>
 
 
 
@@ -833,8 +949,6 @@ export const DemoGravity = () =&gt; {
 };
 </code></pre>
 
-<h2 id="what-comes-next">What comes next?</h2>
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/">In the next chapter</a>, we’ll write a small piece of code that evaluates the physics and moves a simple object along a linear plane.</p>
 ]]></content></item><item><title>Introduction and Motion Dynamics</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/1-introduction-and-motion-dynamics/</link><pubDate>Wed, 26 Nov 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/1-introduction-and-motion-dynamics/</guid><description>&lt;p&gt;You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser.&lt;/p&gt;
 &lt;p&gt;My goal here isn’t to build some engineering-grade physics engine. I just want to recreate the kind of coaster &lt;strong&gt;physics&lt;/strong&gt; we all know from things like &lt;strong&gt;NoLimits Roller Coaster or other coasters in games&lt;/strong&gt;.
 Nothing overly scientific, just the kind of system that behaves the way we intuitively expect.
@@ -842,7 +956,7 @@ In the end, the physics model will end up pretty close to what &lt;strong&gt;NoL
 <p>My goal here isn’t to build some engineering-grade physics engine. I just want to recreate the kind of coaster <strong>physics</strong> we all know from things like <strong>NoLimits Roller Coaster or other coasters in games</strong>.
 Nothing overly scientific, just the kind of system that behaves the way we intuitively expect.
 In the end, the physics model will end up pretty close to what <strong>NoLimits Roller Coaster</strong> does anyway, just without all the heavy engineering baggage.</p>
-<p>We will use technologies that are easy to access and quick to experiment with. Throughout the series, we will rely on <strong>TypeScript</strong>, <strong>React</strong> and <strong>Three.js</strong>. This combination gives us a clean developer experience and allows us to turn mathematical concepts into visual, interactive 3D scenes with very little overhead.</p>
+<p>We will use technologies that are easy to access and quick to experiment with. Throughout the series, we will rely on <strong>TypeScript</strong>, <strong>React</strong> and <strong>THREE.js</strong>. This combination gives us a clean developer experience and allows us to turn mathematical concepts into visual, interactive 3D scenes with very little overhead.</p>
 <p>The idea behind this series is simple. Instead of reading theory first, we will learn by building something fun. Each chapter focuses on a single concept. By the end, you will understand how a small coaster car can move along a track, how the track itself is defined, and how everything is drawn in the browser.</p>
 <h2 id="setting-up-the-project">Setting up the project</h2>
 <p>Before we start, I’ll assume you already have <strong>Node.js</strong> installed. If not, go ahead and download it first.</p>
@@ -851,7 +965,7 @@ In the end, the physics model will end up pretty close to what <strong>NoLimits 
 <p>If you want to overengineer it, go for it. But for now, something as basic as this is completely fine:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npx create-react-app roller-coaster-simulation --template typescript
 </span></span></code></pre></div><p>Next, install a few useful dependencies. This is all we need for now. If I end up using another package later in the series and forgot to list it here, feel free to install it when you get to that part:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npm i leva three @react-three/drei @react-three/fiber @types/three
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npm i leva three lodash @react-three/drei @react-three/fiber @types/three @types/lodash
 </span></span></code></pre></div><blockquote>
 <p><strong>Important note:</strong> In every article, I’ll show example code and link to the corresponding <strong>GitHub files</strong>. These files live inside my website’s blog repository, which contains a large <strong>shared script collection for all articles</strong>. This means the structure in the repo <strong>will differ</strong> from the snippets shown in the articles. For example, my <code>physics.ts</code> file contains multiple evaluation functions used across different posts, since we build things step by step from article to article. All iterations end up in the same file. So don’t worry if the repo looks more consolidated or structured differently than the examples shown here.</p></blockquote>
 <blockquote>
@@ -872,8 +986,7 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 <blockquote>
 <p>Acceleration → Velocity → Distance</p></blockquote>
 <p>Once we understand the acceleration acting on the coaster, the rest follows naturally.</p>
-<p>In the next chapter, we will take the first real step of the simulation and answer the core question:</p>
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/">How do we determine the acceleration of the coaster?</a></p>
+<p>In the next chapter, we will take the first real step of the simulation and answer the core question: <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/">How do we determine the acceleration of the coaster?</a></p>
 ]]></content></item><item><title>Improved spline interpolation</title><link>https://ercanakyuerek.de/posts/rollercoaster-simulation/improved-spline-interpolation/</link><pubDate>Tue, 07 Mar 2023 00:30:20 +0100</pubDate><guid>https://ercanakyuerek.de/posts/rollercoaster-simulation/improved-spline-interpolation/</guid><description>&lt;p&gt;In the latest update, a number of bugs were discovered, particularly in the precision of floating point calculations when working with a web assembly module in a browser environment. It was found that the jitters mentioned earlier were actually caused by a bug in the roll interpolation process.&lt;/p&gt;
 &lt;p&gt;To give a brief overview, track interpolation involves estimating the length of a NURBS track by interpolating with a large step size and evaluating nodes based on the estimated length, resulting in a dense enough interpolation. After this, the normals are calculated and normal angles are applied on the y and x directions but not on the z direction yet, which is essentially the roll. These normals are then applied to the previous matrix and the process continues. A C2 continuous cubic spline is then constructed, and the z angle, which is the result of applying normals in the x and y directions, is applied on each roll point on top of its roll value. The next step is to iterate through all nodes again and apply rotation on the z direction. Finally, to obtain the matrix at any point, we perform a binary search for the minimum and maximum node whose distance lies between the two and interpolate linearly.&lt;/p&gt;</description><content type="html"><![CDATA[<p>In the latest update, a number of bugs were discovered, particularly in the precision of floating point calculations when working with a web assembly module in a browser environment. It was found that the jitters mentioned earlier were actually caused by a bug in the roll interpolation process.</p>
 <p>To give a brief overview, track interpolation involves estimating the length of a NURBS track by interpolating with a large step size and evaluating nodes based on the estimated length, resulting in a dense enough interpolation. After this, the normals are calculated and normal angles are applied on the y and x directions but not on the z direction yet, which is essentially the roll. These normals are then applied to the previous matrix and the process continues. A C2 continuous cubic spline is then constructed, and the z angle, which is the result of applying normals in the x and y directions, is applied on each roll point on top of its roll value. The next step is to iterate through all nodes again and apply rotation on the z direction. Finally, to obtain the matrix at any point, we perform a binary search for the minimum and maximum node whose distance lies between the two and interpolate linearly.</p>
@@ -889,7 +1002,13 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 
 
 
+
 <div class="embedded-iframe ">
+
+  
+  <a href="https://ercanakyuerek.de//roller-coaster-simulation/simulator-2.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
+  
+
   <iframe
     src="https://ercanakyuerek.de//roller-coaster-simulation/simulator-2.html"
     width="100%"
@@ -989,7 +1108,11 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 
 
 
+
 <div class="embedded-iframe ">
+
+  
+
   <iframe
     src="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/libCalculation/example.html"
     width="100%"
@@ -1001,10 +1124,11 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
   
 </div>
 <p>Please check the console for a spline with a length of <code>10.06</code>. The position we fetched should return a 3D vector with coordinates of <code>[-3, -3, 0]</code>.
-Next to this text, you can view an advanced test that displays a spline. I have created a <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/static/wasi-sdk-writing-library-in-cpp/libCalculation">repository</a> that contains all the necessary files, including this advanced example that uses Three.js for rendering.</p>
+Next to this text, you can view an advanced test that displays a spline. I have created a <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/static/wasi-sdk-writing-library-in-cpp/libCalculation">repository</a> that contains all the necessary files, including this advanced example that uses THREE.js for rendering.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>That&rsquo;s all! It wasn&rsquo;t that difficult, was it? We haven&rsquo;t yet covered other complex types, such as passing strings to and from WebAssembly modules, or how to log. However, you should have a rough idea of how things work now. In future articles, I will explore data types, memory management, and binding in greater depth. To be honest, gluing code together is not enjoyable. It requires creating glue code on the C++ side and a wrapper JavaScript module that <code>serializes</code> and <code>unserializes</code> arguments and return values. Some solutions eliminate the need for writing both code pieces, but for now, this should help you get started, especially if you aim to build a small yet performance-critical library.</p>
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/3-implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/3-implementing-library-functions/</guid><description>&lt;div class="embedded-iframe float-right"&gt;
+&lt;a href="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html" class="openInNewTab" style="width: 225px" target="_blank"&gt;Click here to open in a new tab&lt;/a&gt;
 &lt;iframe
 src="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html"
 width="225px"
@@ -1022,7 +1146,13 @@ class="iframe"
 
 
 
+
 <div class="embedded-iframe float-right">
+
+  
+  <a href="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html" class="openInNewTab" style="width: 225px" target="_blank">Click here to open in a new tab</a>
+  
+
   <iframe
     src="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html"
     width="225px"
@@ -1298,7 +1428,13 @@ environments.</p>
 
 
 
+
 <div class="embedded-iframe ">
+
+  
+  <a href="https://ercanakyuerek.de//roller-coaster-simulation/simulator-1.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
+  
+
   <iframe
     src="https://ercanakyuerek.de//roller-coaster-simulation/simulator-1.html"
     width="100%"
