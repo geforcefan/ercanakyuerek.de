@@ -1,4 +1,471 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 29 Nov 2025 12:35:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Friction and Air Resistance</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/</link><pubDate>Sat, 29 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/</guid><description>&lt;p&gt;This chapter will be quite short and introduces two small but important parts of a more realistic roller coaster simulation:&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 06 Dec 2025 12:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Building the Easiest Possible Track</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track/</link><pubDate>Sat, 06 Dec 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track/</guid><description>&lt;p&gt;To visualize motion properly, we need something for our little object to move along. And that means we need a track.&lt;/p&gt;
+&lt;p&gt;In this article, we focus on an extremely simplified roller coaster track. And when I say extremely simplified, I really mean it: it&amp;rsquo;s just a plane. A straight line. A first-order curve. Basically the easiest form of track you can possibly build without accidentally creating a real coaster.&lt;/p&gt;
+&lt;p&gt;From the last chapter, we know how motion evaluation works. The evaluation function receives an acceleration value and returns a new simulation state containing the updated velocity and the total distance traveled:&lt;/p&gt;</description><content type="html"><![CDATA[<p>To visualize motion properly, we need something for our little object to move along. And that means we need a track.</p>
+<p>In this article, we focus on an extremely simplified roller coaster track. And when I say extremely simplified, I really mean it: it&rsquo;s just a plane. A straight line. A first-order curve. Basically the easiest form of track you can possibly build without accidentally creating a real coaster.</p>
+<p>From the last chapter, we know how motion evaluation works. The evaluation function receives an acceleration value and returns a new simulation state containing the updated velocity and the total distance traveled:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#a6e22e">evaluateMotion</span>(<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">acceleration</span>, <span style="color:#a6e22e">deltaTime</span>);
+</span></span></code></pre></div><p>It returns something like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;velocity&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;distanceTraveled&#34;</span>: <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Now that we introduce a track, things become a bit more interesting. The old <code>evaluateMotion</code> function worked with a fixed slope and gravity using this formula:</p>
+$$acceleration = gravity \cdot \sin(slopeAngle)$$<p>But we want to move toward real coaster geometry later, where slopes change every centimeter. So we replace the <code>acceleration</code> parameter and introduce two new parameters:</p>
+<ul>
+<li><strong>forwardDirection</strong>, a vector pointing forward along the track at the given distance</li>
+<li><strong>gravity</strong>, the classic 9.81 m/s² thing</li>
+</ul>
+<p>We won&rsquo;t use <code>gravity * Math.sin(slopeAngle)</code> anymore, because once we have a forward direction, there is a cleaner way.</p>
+<blockquote>
+<p>We simply define a gravity direction vector.</p></blockquote>
+<p>Gravity always points downward to Earth, basically along the negative y-axis:</p>
+$$\vec{gravityDirection} = \begin{bmatrix} 0 \\ -9.81 \end{bmatrix}$$<p>Now what do we do with <code>forwardDirection</code> and <code>gravityDirection</code>?
+We take their dot product. That’s it. Really. That’s the whole trick:</p>
+$$acceleration = \vec{forwardDirection} \times \vec{gravityDirection}$$<p>This one line replaces the entire downhill-slope acceleration formula thing:</p>
+$$acceleration = gravity * sin(slopeAngle)$$<p>In code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">forwardDirection</span>.<span style="color:#a6e22e">dot</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector2</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#a6e22e">gravity</span>));
+</span></span></code></pre></div><p>And our updated evaluateMotion function becomes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">SimulationState</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">velocity</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">distanceTraveled</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">acceleration</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">evaluateMotion</span> <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">SimulationState</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">forwardDirection</span>: <span style="color:#66d9ef">Vector3</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">gravity</span>: <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">deltaTime</span>: <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">SimulationState</span> <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">forwardDirection</span>.<span style="color:#a6e22e">dot</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#a6e22e">gravity</span>, <span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">velocity</span>, <span style="color:#a6e22e">distanceTraveled</span>, <span style="color:#a6e22e">acceleration</span> };
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h2 id="answering-important-questions">Answering important questions</h2>
+<p>Once the motion step gives us a <strong>distance traveled</strong>, we need to convert this number into something the renderer can actually work with.</p>
+<p>Even the easiest possible track must answer <strong>two important questions</strong> for physics and visualization:</p>
+<blockquote>
+<p>Where is the 2D or 3D position at a given distance along the curve?</p></blockquote>
+<p>Whether the track is straight or twisting like a crazy pretzel, the logic is the same.</p>
+<ul>
+<li>After traveling <strong>1 meter</strong>, we need the <strong>position at 1 meter</strong>.</li>
+<li>After <strong>5 meters</strong>, we need the <strong>position at 5 meters</strong>.</li>
+</ul>
+<p>So we need a function that returns the position at any distance:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#a6e22e">getPositionAtDistance</span>(<span style="color:#a6e22e">distance</span>);
+</span></span></code></pre></div><p>We also need the forward direction at that distance, because the evaluation function requires it as an input, as we introduced just a few sentences above. So we must answer:</p>
+<blockquote>
+<p>What is the forward direction at a given distance along a curve?</p></blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#a6e22e">getForwardDirectionAtDistance</span>(<span style="color:#a6e22e">distance</span>);
+</span></span></code></pre></div><p>Both functions work purely on the curve geometry.</p>
+<h2 id="getpositionatdistance-on-linear-curves">getPositionAtDistance on Linear “Curves”</h2>
+<p>For linear curves, this is as easy as it gets. Later, we will switch to proper splines for real coaster geometry.</p>
+<p>A linear curve has two control points: <code>cp1</code> and <code>cp2</code>, both simple 2D vectors. We use THREE.js for convenience.</p>
+<h3 id="how-do-we-get-the-2d-position-at-a-distance">How do we get the 2D position at a distance?</h3>
+<p>We linearly interpolate between the two points:</p>
+$$ \vec{pos} = \vec{cp1} + (\vec{cp2} - \vec{cp1}) \cdot t $$<p>Where <strong>t</strong> is the fraction of the segment we’ve traveled:</p>
+<ul>
+<li>0 → cp1</li>
+<li>1 → cp2</li>
+<li>0.5 → halfway</li>
+</ul>
+<p><code>t</code> is computed by dividing the traveled distance by the segment length:</p>
+$$ t = \frac{distance}{length} $$<p>Distance between control points:</p>
+$$ length = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} $$<p>Putting it all together:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getPositionAtDistance</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">cp1</span>: <span style="color:#66d9ef">Vector3</span>, <span style="color:#a6e22e">cp2</span>: <span style="color:#66d9ef">Vector3</span>, <span style="color:#a6e22e">distance</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">length</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">sqrt</span>((<span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">x</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">x</span>) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (<span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">y</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">y</span>) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">t</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">distance</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">length</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">x</span>: <span style="color:#66d9ef">cp1.x</span> <span style="color:#f92672">+</span> (<span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">x</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">x</span>) <span style="color:#f92672">*</span> <span style="color:#a6e22e">t</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">y</span>: <span style="color:#66d9ef">cp1.y</span> <span style="color:#f92672">+</span> (<span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">y</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">y</span>) <span style="color:#f92672">*</span> <span style="color:#a6e22e">t</span>,
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Or using <strong>THREE.js</strong> to save yourself some sanity and avoid reinventing the wheel over and over again. I explained this part without THREE.js as well, but you may just forget it, the articles get way too big if I try to explain every concept of vectors and math in detail. For now we simply know: THREE.js is our friend:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getPositionAtDistance</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">cp1</span>: <span style="color:#66d9ef">Vector3</span>, <span style="color:#a6e22e">cp2</span>: <span style="color:#66d9ef">Vector3</span>, <span style="color:#a6e22e">distance</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">cp2</span>, <span style="color:#a6e22e">distance</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">distanceTo</span>(<span style="color:#a6e22e">cp2</span>));
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h2 id="how-to-calculate-forward-direction-along-the-curve">How to Calculate Forward Direction Along the Curve</h2>
+<p>Since this is a linear curve, the forward direction is constant everywhere. It doesn’t get easier than this.</p>
+<p>Mathematically:</p>
+$$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} \rVert} $$<p>Translated into code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getForwardDirectionAtDistance</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">cp1</span>: <span style="color:#66d9ef">Vector3</span>, <span style="color:#a6e22e">cp2</span>: <span style="color:#66d9ef">Vector3</span>, <span style="color:#a6e22e">distance</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">sub</span>(<span style="color:#a6e22e">cp1</span>).<span style="color:#a6e22e">normalize</span>();
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h2 id="small-note">Small note</h2>
+<p>Later the forward vector will be replaced by a <strong>4×4 matrix</strong>, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called <code>getMatrixAtDistance</code>. I know, yet again a change, but that’s future you’s problem. Ignore it for now.</p>
+<p>Going forward, we will use <strong>9.81665 m/s²</strong> as the gravitational acceleration, since this is also the value used by <strong>NoLimits Roller Coaster</strong> and <strong>openFVD++</strong>.</p>
+<h2 id="adding-everything-up">Adding Everything Up</h2>
+<p>Time for a small demo. I built a basic setup: a visible line segment with draggable control points so you can adjust the slope in real time. On the side, a small panel displays the live simulation state.</p>
+<p>I switched the vectors to 3D instead of 2D, but only because it makes things more convenient in THREE.js. The actual calculations from this article are exactly the same.</p>
+
+
+
+
+
+
+
+
+
+<div class="embedded-iframe ">
+
+  
+  <a href="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
+  
+
+  <iframe
+    src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track.html"
+    width="100%"
+    height="300px"
+    style="border: 0"
+    class="iframe"
+  ></iframe>
+
+  
+</div>
+<p>I’ve polished things a bit and moved the physics and linear interpolation logic into their own files instead of keeping everything as spaghetti code. The complete source code is available in my GitHub repo, feel free to explore and play around with it.</p>
+<h2 id="what-comes-next">What comes next?</h2>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/">In the next chapter</a> we will introduce friction and air resistance. You’ll be able to play with the parameters in a demo and compare both physics evaluations, with and without energy loss.</p>
+<h1 id="demo-code">Demo code</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/scenes/DemoLinearTrackScene.tsx" target="_blank" rel="noopener noreferrer">
+        Click here to view the code on GitHub (opens in a new tab)
+    </a>
+</p>
+
+<pre><code class="language-tsx">import React, { useEffect, useState } from &#39;react&#39;;
+import { useFrame } from &#39;@react-three/fiber&#39;;
+import { useControls } from &#39;leva&#39;;
+import { Vector3 } from &#39;three&#39;;
+
+import { ControlPoint } from &#39;../components/ControlPoint&#39;;
+import Line from &#39;../components/Line&#39;;
+import Scene from &#39;../components/Scene&#39;;
+import { getForwardDirectionAtDistance, getPositionAtDistance, length } from &#39;../helper/linear&#39;;
+import { evaluateMotionByForwardDirection } from &#39;../helper/physics&#39;;
+import useColors from &#39;../hooks/useColors&#39;;
+import { DragControlPoints } from &#39;../components/DragControlPoints&#39;;
+
+const Demo = () =&gt; {
+  const colors = useColors();
+
+  // Control points
+  const [points, setPoints] = useState([
+    new Vector3(-11.5, 3.2, 0),
+    new Vector3(1.4, -2.8, 0)
+  ]);
+
+
+  const [simulationState, setSimulationState] = useControls(() =&gt; ({
+    velocity: 0,
+    distanceTraveled: 0,
+    acceleration: {
+      value: 0,
+      pad: 5,
+    },
+    gravity: {
+      value: 9.81665,
+      pad: 5,
+    },
+  }));
+
+  // Main motion evaluation per frame
+  useFrame((state, deltaTime) =&gt; {
+    setSimulationState(
+      evaluateMotionByForwardDirection(
+        simulationState,
+        getForwardDirectionAtDistance(points[0], points[1], simulationState.distanceTraveled),
+        simulationState.gravity,
+        deltaTime,
+      ),
+    );
+  });
+
+  // Reset simulation state if train overshoots track
+  useEffect(() =&gt; {
+    if (
+      simulationState.distanceTraveled &gt; length(points[0], points[1]) ||
+      simulationState.distanceTraveled &lt; 0
+    ) {
+      setSimulationState({
+        velocity: 0,
+        distanceTraveled: 0,
+        acceleration: 0,
+      });
+    }
+  }, [simulationState.distanceTraveled]);
+
+  const trainPosition = getPositionAtDistance(points[0], points[1], simulationState.distanceTraveled);
+
+  return (
+    &lt;&gt;
+      &lt;DragControlPoints points={points} setPoints={setPoints}/&gt;
+      &lt;Line points={points} color={colors.secondary} /&gt;
+      &lt;ControlPoint position={trainPosition} color={colors.highlight} /&gt;
+    &lt;/&gt;
+  );
+};
+
+export const DemoLinearTrackScene = () =&gt; {
+  return (
+    &lt;Scene&gt;
+      &lt;Demo /&gt;
+    &lt;/Scene&gt;
+  );
+};
+</code></pre>
+
+]]></content></item><item><title>Evaluating Motion</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/</link><pubDate>Sat, 06 Dec 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/</guid><description>&lt;p&gt;Before we implement the function, there&amp;rsquo;s one small simplification we need to mention:
+In this chapter we will always evaluate the motion every &lt;strong&gt;16 ms (0.016 seconds)&lt;/strong&gt;,
+which corresponds to roughly &lt;strong&gt;60 frames per second&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Using a fixed time step makes the formulas easier to understand for this article.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: In real simulations or game engines, you usually don’t assume a constant time value. Instead, you take the actual delta time from the game loop, so that the motion stays consistent even if the frame rate changes. &lt;strong&gt;More on that later&lt;/strong&gt;.&lt;/p&gt;</description><content type="html"><![CDATA[<p>Before we implement the function, there&rsquo;s one small simplification we need to mention:
+In this chapter we will always evaluate the motion every <strong>16 ms (0.016 seconds)</strong>,
+which corresponds to roughly <strong>60 frames per second</strong>.</p>
+<p>Using a fixed time step makes the formulas easier to understand for this article.</p>
+<blockquote>
+<p><strong>Note</strong>: In real simulations or game engines, you usually don’t assume a constant time value. Instead, you take the actual delta time from the game loop, so that the motion stays consistent even if the frame rate changes. <strong>More on that later</strong>.</p></blockquote>
+<p>But for the sake of clarity in this chapter:
+We assume that every update happens exactly every <strong>16 ms</strong>.
+This keeps the examples simple and lets us focus on the physics first.</p>
+<p>Now that we know how acceleration works and how gravity affects the coaster depending on the slope, we can finally build the first real part of our simulation. The idea is simple. Every small time step we calculate how much the coaster changes its speed and how much distance it travels.</p>
+<p>We start with a minimal simulation state.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">SimulationState</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">velocity</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">distanceTraveled</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">simulationState</span>: <span style="color:#66d9ef">SimulationState</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">velocity</span>: <span style="color:#66d9ef">0</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">distanceTraveled</span>: <span style="color:#66d9ef">0</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>In the beginning, the coaster does not move and has not traveled any distance.</p>
+<h2 id="the-evaluatemotion-function">The evaluateMotion function</h2>
+<p>Our simulation works by creating a new state based on the previous state.
+Think of it like this:</p>
+<blockquote>
+<p>initial state → evaluate → new state → evaluate → new state → &hellip;</p></blockquote>
+<p>To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/">Chapter 2</a>. This formula tells us how much of gravity actually acts in the direction of the slope:</p>
+$$acceleration = gravity * sin(slopeAngle)$$<p>So we end up basically with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gravity</span> <span style="color:#f92672">*</span> Math.<span style="color:#a6e22e">sin</span>(<span style="color:#a6e22e">slopeAngle</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">evaluateMotion</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">SimulationState</span>, <span style="color:#a6e22e">acceleration</span>: <span style="color:#66d9ef">number</span>, <span style="color:#a6e22e">deltaTime</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span></code></pre></div><ul>
+<li>slopeAngle controls how steep the slope is</li>
+<li>deltaTime is how much time passed since the last calculation (we use 16 ms)</li>
+</ul>
+<h2 id="calculating-the-velocity">Calculating the velocity</h2>
+<p>Acceleration is measured in <strong>m/s²</strong>.
+That means:</p>
+<blockquote>
+<p><strong>m/s²</strong> tells us how much the velocity changes in one <strong>full second</strong>.</p></blockquote>
+<p>So if acceleration is <strong>9.81 m/s²</strong>:</p>
+<ul>
+<li>after <strong>1 second</strong>, velocity increases by <strong>9.81 m/s</strong></li>
+<li>so after <strong>0.016 seconds</strong>, velocity increases by \(9.81 * 0.016\)
+Just multiply it with <strong>0.016</strong> :) that does the trick</li>
+</ul>
+$$velocity = acceleration * deltaTime$$<p>We take the previous velocity and add the small increase for this frame.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>;
+</span></span></code></pre></div><h2 id="calculating-the-distance-traveled">Calculating the distance traveled</h2>
+<p>Velocity is measured in <strong>m/s</strong>.
+This means:</p>
+<blockquote>
+<p>velocity tells us how much <strong>distance</strong> is to travel in <strong>one full second</strong>.</p></blockquote>
+<p>Again we only want the part that matches our <strong>0.016 seconds</strong>.</p>
+$$distanceToTravel = velocity \cdot deltaTime$$<p>We take the previous distance traveled and add the small increase for this frame.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>;
+</span></span></code></pre></div><p>So we end up with something like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">evaluateMotion</span> <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">SimulationState</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">acceleration</span>: <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">deltaTime</span>: <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">SimulationState</span> <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">velocity</span>, <span style="color:#a6e22e">distanceTraveled</span> };
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>This is already a complete physics step without friction or air resistance.</p>
+<h2 id="interactive-demo">Interactive demo</h2>
+<p>Just like in the last chapter, we again have an interactive demo. This time, we’ve implemented a simple motion-evaluation method that applies basic physics. In this demo you can play around with the slope and already see a physical motion emerging.</p>
+<blockquote>
+<p><strong>Important note:</strong> Earlier in this article I said we would evaluate everything every <strong>16 ms</strong>, right? Well… that was kind of a lie, at least for this demo.<br>
+Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <code>useFrame</code> hook, which gives us the <strong>delta time of the previous frame</strong>, and we benefit from using it. This is the proper way to handle updates, instead of forcing a fixed 16 ms step, which I briefly covered in the introduction of this chapter.</p></blockquote>
+
+
+
+
+
+
+
+
+
+<div class="embedded-iframe ">
+
+  
+  <a href="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-evaluating-motion.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
+  
+
+  <iframe
+    src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-evaluating-motion.html"
+    width="100%"
+    height="300px"
+    style="border: 0"
+    class="iframe"
+  ></iframe>
+
+  
+</div>
+<h2 id="what-comes-next">What comes next?</h2>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track/">In the next chapter</a> we’ll add a basic roller coaster track, just a straight, linear segment. This is preparation for the real coaster curvatures we’ll build later.</p>
+<h1 id="demo-code">Demo code</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/scenes/DemoEvaluatingMotion.tsx" target="_blank" rel="noopener noreferrer">
+        Click here to view the code on GitHub (opens in a new tab)
+    </a>
+</p>
+
+<pre><code class="language-tsx">import React, { useEffect } from &#39;react&#39;;
+import { useFrame } from &#39;@react-three/fiber&#39;;
+import { useControls } from &#39;leva&#39;;
+import { MathUtils, Vector3 } from &#39;three&#39;;
+
+import { Arrow } from &#39;../components/Arrow&#39;;
+import { ControlPoint } from &#39;../components/ControlPoint&#39;;
+import Line from &#39;../components/Line&#39;;
+import Scene from &#39;../components/Scene&#39;;
+import { evaluateMotionByAcceleration } from &#39;../helper/physics&#39;;
+import useColors from &#39;../hooks/useColors&#39;;
+
+const Demo = () =&gt; {
+  const colors = useColors();
+
+  const [{ slope, gravity, sinSlope, trackLength, ...simulationState }, setSimulationState] = useControls(
+    () =&gt; ({
+      slope: {
+        value: 0,
+        step: 5,
+        min: -180,
+        max: 180,
+      },
+      trackLength: {
+        value: 8,
+        step: 1,
+        min: 0,
+        max: 20,
+      },
+      gravity: {
+        value: 9.81665,
+        pad: 5,
+      },
+      sinSlope: {
+        disabled: true,
+        label: &#39;sin(slope)&#39;,
+        pad: 5,
+        value: 0,
+      },
+      velocity: 0,
+      distanceTraveled: 0,
+      acceleration: {
+        value: 0,
+        pad: 5,
+      },
+    }),
+  );
+
+  useEffect(() =&gt; {
+    const sinSlope = Math.sin(MathUtils.degToRad(slope));
+    const acceleration = gravity * sinSlope;
+
+    setSimulationState({ acceleration, sinSlope });
+  }, [slope, gravity, setSimulationState]);
+
+  // Main motion evaluation per frame
+  useFrame((state, deltaTime) =&gt; {
+    setSimulationState(
+      evaluateMotionByAcceleration(simulationState, simulationState.acceleration, deltaTime),
+    );
+  });
+
+  // Reset simulation state if train overshoots track
+  useEffect(() =&gt; {
+    if (simulationState.distanceTraveled &lt; 0 || simulationState.distanceTraveled &gt; trackLength) {
+      setSimulationState({
+        velocity: 0,
+        distanceTraveled: 0,
+      });
+    }
+  }, [simulationState.distanceTraveled, trackLength]);
+
+  return (
+    &lt;&gt;
+      &lt;group position={[-5, 0, 0]} rotation={[0, 0, MathUtils.degToRad(slope)]}&gt;
+        &lt;Arrow
+          position={[-trackLength / 2, 0, 0]}
+          rotation={[0, 0, Math.PI / 2]}
+          color={colors.secondary}
+        /&gt;
+
+        &lt;ControlPoint
+          position={new Vector3(trackLength / 2 - simulationState.distanceTraveled, 0, 0)}
+        /&gt;
+
+        &lt;Line
+          points={[new Vector3(-trackLength / 2, 0, 0), new Vector3(trackLength / 2, 0, 0)]}
+          color={colors.secondary}
+        /&gt;
+      &lt;/group&gt;
+    &lt;/&gt;
+  );
+};
+
+export const DemoEvaluatingMotion = () =&gt; {
+  return (
+    &lt;Scene&gt;
+      &lt;Demo /&gt;
+    &lt;/Scene&gt;
+  );
+};
+</code></pre>
+
+]]></content></item><item><title>Friction and Air Resistance</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/</link><pubDate>Sat, 06 Dec 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/</guid><description>&lt;p&gt;This chapter will be quite short and introduces two small but important parts of a more realistic roller coaster simulation:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;friction&lt;/li&gt;
 &lt;li&gt;air resistance&lt;/li&gt;
@@ -270,474 +737,7 @@ export const DemoLinearTrackSceneWithFriction = () =&gt; {
 };
 </code></pre>
 
-]]></content></item><item><title>Building the Easiest Possible Track</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track/</link><pubDate>Fri, 28 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track/</guid><description>&lt;p&gt;To visualize motion properly, we need something for our little object to move along. And that means we need a track.&lt;/p&gt;
-&lt;p&gt;In this article, we focus on an extremely simplified roller coaster track. And when I say extremely simplified, I really mean it: it&amp;rsquo;s just a plane. A straight line. A first-order curve. Basically the easiest form of track you can possibly build without accidentally creating a real coaster.&lt;/p&gt;
-&lt;p&gt;From the last chapter, we know how motion evaluation works. The evaluation function receives an acceleration value and returns a new simulation state containing the updated velocity and the total distance traveled:&lt;/p&gt;</description><content type="html"><![CDATA[<p>To visualize motion properly, we need something for our little object to move along. And that means we need a track.</p>
-<p>In this article, we focus on an extremely simplified roller coaster track. And when I say extremely simplified, I really mean it: it&rsquo;s just a plane. A straight line. A first-order curve. Basically the easiest form of track you can possibly build without accidentally creating a real coaster.</p>
-<p>From the last chapter, we know how motion evaluation works. The evaluation function receives an acceleration value and returns a new simulation state containing the updated velocity and the total distance traveled:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#a6e22e">evaluateMotion</span>(<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">acceleration</span>, <span style="color:#a6e22e">deltaTime</span>);
-</span></span></code></pre></div><p>It returns something like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;velocity&#34;</span>: <span style="color:#ae81ff">10</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;distanceTraveled&#34;</span>: <span style="color:#ae81ff">20</span>
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Now that we introduce a track, things become a bit more interesting. The old <code>evaluateMotion</code> function worked with a fixed slope and gravity using this formula:</p>
-$$acceleration = gravity \cdot \sin(slopeAngle)$$<p>But we want to move toward real coaster geometry later, where slopes change every centimeter. So we replace the <code>acceleration</code> parameter and introduce two new parameters:</p>
-<ul>
-<li><strong>forwardDirection</strong>, a vector pointing forward along the track at the given distance</li>
-<li><strong>gravity</strong>, the classic 9.81 m/s² thing</li>
-</ul>
-<p>We won&rsquo;t use <code>gravity * Math.sin(slopeAngle)</code> anymore, because once we have a forward direction, there is a cleaner way.</p>
-<blockquote>
-<p>We simply define a gravity direction vector.</p></blockquote>
-<p>Gravity always points downward to Earth, basically along the negative y-axis:</p>
-$$\vec{gravityDirection} = \begin{bmatrix} 0 \\ -9.81 \end{bmatrix}$$<p>Now what do we do with <code>forwardDirection</code> and <code>gravityDirection</code>?
-We take their dot product. That’s it. Really. That’s the whole trick:</p>
-$$acceleration = \vec{forwardDirection} \times \vec{gravityDirection}$$<p>This one line replaces the entire downhill-slope acceleration formula thing:</p>
-$$acceleration = gravity * sin(slopeAngle)$$<p>In code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">forwardDirection</span>.<span style="color:#a6e22e">dot</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector2</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#a6e22e">gravity</span>));
-</span></span></code></pre></div><p>And our updated evaluateMotion function becomes:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">SimulationState</span> <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">velocity</span>: <span style="color:#66d9ef">number</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">distanceTraveled</span>: <span style="color:#66d9ef">number</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">acceleration</span>: <span style="color:#66d9ef">number</span>;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">evaluateMotion</span> <span style="color:#f92672">=</span> (
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">SimulationState</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">forwardDirection</span>: <span style="color:#66d9ef">Vector3</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">gravity</span>: <span style="color:#66d9ef">number</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">deltaTime</span>: <span style="color:#66d9ef">number</span>,
-</span></span><span style="display:flex;"><span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">SimulationState</span> <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">forwardDirection</span>.<span style="color:#a6e22e">dot</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#a6e22e">gravity</span>, <span style="color:#ae81ff">0</span>));
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">velocity</span>, <span style="color:#a6e22e">distanceTraveled</span>, <span style="color:#a6e22e">acceleration</span> };
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><h2 id="answering-important-questions">Answering important questions</h2>
-<p>Once the motion step gives us a <strong>distance traveled</strong>, we need to convert this number into something the renderer can actually work with.</p>
-<p>Even the easiest possible track must answer <strong>two important questions</strong> for physics and visualization:</p>
-<blockquote>
-<p>Where is the 2D or 3D position at a given distance along the curve?</p></blockquote>
-<p>Whether the track is straight or twisting like a crazy pretzel, the logic is the same.</p>
-<ul>
-<li>After traveling <strong>1 meter</strong>, we need the <strong>position at 1 meter</strong>.</li>
-<li>After <strong>5 meters</strong>, we need the <strong>position at 5 meters</strong>.</li>
-</ul>
-<p>So we need a function that returns the position at any distance:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#a6e22e">getPositionAtDistance</span>(<span style="color:#a6e22e">distance</span>);
-</span></span></code></pre></div><p>We also need the forward direction at that distance, because the evaluation function requires it as an input, as we introduced just a few sentences above. So we must answer:</p>
-<blockquote>
-<p>What is the forward direction at a given distance along a curve?</p></blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#a6e22e">getForwardDirectionAtDistance</span>(<span style="color:#a6e22e">distance</span>);
-</span></span></code></pre></div><p>Both functions work purely on the curve geometry.</p>
-<h2 id="getpositionatdistance-on-linear-curves">getPositionAtDistance on Linear “Curves”</h2>
-<p>For linear curves, this is as easy as it gets. Later, we will switch to proper splines for real coaster geometry.</p>
-<p>A linear curve has two control points: <code>cp1</code> and <code>cp2</code>, both simple 2D vectors. We use THREE.js for convenience.</p>
-<h3 id="how-do-we-get-the-2d-position-at-a-distance">How do we get the 2D position at a distance?</h3>
-<p>We linearly interpolate between the two points:</p>
-$$ \vec{pos} = \vec{cp1} + (\vec{cp2} - \vec{cp1}) \cdot t $$<p>Where <strong>t</strong> is the fraction of the segment we’ve traveled:</p>
-<ul>
-<li>0 → cp1</li>
-<li>1 → cp2</li>
-<li>0.5 → halfway</li>
-</ul>
-<p><code>t</code> is computed by dividing the traveled distance by the segment length:</p>
-$$ t = \frac{distance}{length} $$<p>Distance between control points:</p>
-$$ length = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} $$<p>Putting it all together:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getPositionAtDistance</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">cp1</span>: <span style="color:#66d9ef">Vector3</span>, <span style="color:#a6e22e">cp2</span>: <span style="color:#66d9ef">Vector3</span>, <span style="color:#a6e22e">distance</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">length</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">sqrt</span>((<span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">x</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">x</span>) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (<span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">y</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">y</span>) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span>);
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">t</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">distance</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">length</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">x</span>: <span style="color:#66d9ef">cp1.x</span> <span style="color:#f92672">+</span> (<span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">x</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">x</span>) <span style="color:#f92672">*</span> <span style="color:#a6e22e">t</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">y</span>: <span style="color:#66d9ef">cp1.y</span> <span style="color:#f92672">+</span> (<span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">y</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">y</span>) <span style="color:#f92672">*</span> <span style="color:#a6e22e">t</span>,
-</span></span><span style="display:flex;"><span>  };
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>Or using <strong>THREE.js</strong> to save yourself some sanity and avoid reinventing the wheel over and over again. I explained this part without THREE.js as well, but you may just forget it, the articles get way too big if I try to explain every concept of vectors and math in detail. For now we simply know: THREE.js is our friend:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getPositionAtDistance</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">cp1</span>: <span style="color:#66d9ef">Vector3</span>, <span style="color:#a6e22e">cp2</span>: <span style="color:#66d9ef">Vector3</span>, <span style="color:#a6e22e">distance</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">cp2</span>, <span style="color:#a6e22e">distance</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">distanceTo</span>(<span style="color:#a6e22e">cp2</span>));
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><h2 id="how-to-calculate-forward-direction-along-the-curve">How to Calculate Forward Direction Along the Curve</h2>
-<p>Since this is a linear curve, the forward direction is constant everywhere. It doesn’t get easier than this.</p>
-<p>Mathematically:</p>
-$$ \vec{forwardDirection} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} \rVert} $$<p>Translated into code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getForwardDirectionAtDistance</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">cp1</span>: <span style="color:#66d9ef">Vector3</span>, <span style="color:#a6e22e">cp2</span>: <span style="color:#66d9ef">Vector3</span>, <span style="color:#a6e22e">distance</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">cp2</span>.<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">sub</span>(<span style="color:#a6e22e">cp1</span>).<span style="color:#a6e22e">normalize</span>();
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><h2 id="small-note">Small note</h2>
-<p>Later the forward vector will be replaced by a <strong>4×4 matrix</strong>, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called <code>getMatrixAtDistance</code>. I know, yet again a change, but that’s future you’s problem. Ignore it for now.</p>
-<p>Going forward, we will use <strong>9.81665 m/s²</strong> as the gravitational acceleration, since this is also the value used by <strong>NoLimits Roller Coaster</strong> and <strong>openFVD++</strong>.</p>
-<h2 id="adding-everything-up">Adding Everything Up</h2>
-<p>Time for a small demo. I built a basic setup: a visible line segment with draggable control points so you can adjust the slope in real time. On the side, a small panel displays the live simulation state.</p>
-<p>I switched the vectors to 3D instead of 2D, but only because it makes things more convenient in THREE.js. The actual calculations from this article are exactly the same.</p>
-
-
-
-
-
-
-
-
-
-<div class="embedded-iframe ">
-
-  
-  <a href="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
-  
-
-  <iframe
-    src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track.html"
-    width="100%"
-    height="300px"
-    style="border: 0"
-    class="iframe"
-  ></iframe>
-
-  
-</div>
-<p>I’ve polished things a bit and moved the physics and linear interpolation logic into their own files instead of keeping everything as spaghetti code. The complete source code is available in my GitHub repo, feel free to explore and play around with it.</p>
-<h2 id="what-comes-next">What comes next?</h2>
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/">In the next chapter</a> we will introduce friction and air resistance. You’ll be able to play with the parameters in a demo and compare both physics evaluations, with and without energy loss.</p>
-<h1 id="demo-code">Demo code</h1>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<p>
-    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/scenes/DemoLinearTrackScene.tsx" target="_blank" rel="noopener noreferrer">
-        Click here to view the code on GitHub (opens in a new tab)
-    </a>
-</p>
-
-<pre><code class="language-tsx">import React, { useEffect, useState } from &#39;react&#39;;
-import { useFrame } from &#39;@react-three/fiber&#39;;
-import { useControls } from &#39;leva&#39;;
-import { Vector3 } from &#39;three&#39;;
-
-import { ControlPoint } from &#39;../components/ControlPoint&#39;;
-import Line from &#39;../components/Line&#39;;
-import Scene from &#39;../components/Scene&#39;;
-import { getForwardDirectionAtDistance, getPositionAtDistance, length } from &#39;../helper/linear&#39;;
-import { evaluateMotionByForwardDirection } from &#39;../helper/physics&#39;;
-import useColors from &#39;../hooks/useColors&#39;;
-import { DragControlPoints } from &#39;../components/DragControlPoints&#39;;
-
-const Demo = () =&gt; {
-  const colors = useColors();
-
-  // Control points
-  const [points, setPoints] = useState([
-    new Vector3(-11.5, 3.2, 0),
-    new Vector3(1.4, -2.8, 0)
-  ]);
-
-
-  const [simulationState, setSimulationState] = useControls(() =&gt; ({
-    velocity: 0,
-    distanceTraveled: 0,
-    acceleration: {
-      value: 0,
-      pad: 5,
-    },
-    gravity: {
-      value: 9.81665,
-      pad: 5,
-    },
-  }));
-
-  // Main motion evaluation per frame
-  useFrame((state, deltaTime) =&gt; {
-    setSimulationState(
-      evaluateMotionByForwardDirection(
-        simulationState,
-        getForwardDirectionAtDistance(points[0], points[1], simulationState.distanceTraveled),
-        simulationState.gravity,
-        deltaTime,
-      ),
-    );
-  });
-
-  // Reset simulation state if train overshoots track
-  useEffect(() =&gt; {
-    if (
-      simulationState.distanceTraveled &gt; length(points[0], points[1]) ||
-      simulationState.distanceTraveled &lt; 0
-    ) {
-      setSimulationState({
-        velocity: 0,
-        distanceTraveled: 0,
-        acceleration: 0,
-      });
-    }
-  }, [simulationState.distanceTraveled]);
-
-  const trainPosition = getPositionAtDistance(points[0], points[1], simulationState.distanceTraveled);
-
-  return (
-    &lt;&gt;
-      &lt;DragControlPoints points={points} setPoints={setPoints}/&gt;
-      &lt;Line points={points} color={colors.secondary} /&gt;
-      &lt;ControlPoint position={trainPosition} color={colors.highlight} /&gt;
-    &lt;/&gt;
-  );
-};
-
-export const DemoLinearTrackScene = () =&gt; {
-  return (
-    &lt;Scene&gt;
-      &lt;Demo /&gt;
-    &lt;/Scene&gt;
-  );
-};
-</code></pre>
-
-]]></content></item><item><title>Evaluating Motion</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/</link><pubDate>Thu, 27 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/</guid><description>&lt;p&gt;Before we implement the function, there&amp;rsquo;s one small simplification we need to mention:
-In this chapter we will always evaluate the motion every &lt;strong&gt;16 ms (0.016 seconds)&lt;/strong&gt;,
-which corresponds to roughly &lt;strong&gt;60 frames per second&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Using a fixed time step makes the formulas easier to understand for this article.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: In real simulations or game engines, you usually don’t assume a constant time value. Instead, you take the actual delta time from the game loop, so that the motion stays consistent even if the frame rate changes. &lt;strong&gt;More on that later&lt;/strong&gt;.&lt;/p&gt;</description><content type="html"><![CDATA[<p>Before we implement the function, there&rsquo;s one small simplification we need to mention:
-In this chapter we will always evaluate the motion every <strong>16 ms (0.016 seconds)</strong>,
-which corresponds to roughly <strong>60 frames per second</strong>.</p>
-<p>Using a fixed time step makes the formulas easier to understand for this article.</p>
-<blockquote>
-<p><strong>Note</strong>: In real simulations or game engines, you usually don’t assume a constant time value. Instead, you take the actual delta time from the game loop, so that the motion stays consistent even if the frame rate changes. <strong>More on that later</strong>.</p></blockquote>
-<p>But for the sake of clarity in this chapter:
-We assume that every update happens exactly every <strong>16 ms</strong>.
-This keeps the examples simple and lets us focus on the physics first.</p>
-<p>Now that we know how acceleration works and how gravity affects the coaster depending on the slope, we can finally build the first real part of our simulation. The idea is simple. Every small time step we calculate how much the coaster changes its speed and how much distance it travels.</p>
-<p>We start with a minimal simulation state.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">SimulationState</span> <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">velocity</span>: <span style="color:#66d9ef">number</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">distanceTraveled</span>: <span style="color:#66d9ef">number</span>;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">simulationState</span>: <span style="color:#66d9ef">SimulationState</span> <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">velocity</span>: <span style="color:#66d9ef">0</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">distanceTraveled</span>: <span style="color:#66d9ef">0</span>,
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>In the beginning, the coaster does not move and has not traveled any distance.</p>
-<h2 id="the-evaluatemotion-function">The evaluateMotion function</h2>
-<p>Our simulation works by creating a new state based on the previous state.
-Think of it like this:</p>
-<blockquote>
-<p>initial state → evaluate → new state → evaluate → new state → &hellip;</p></blockquote>
-<p>To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/">Chapter 2</a>. This formula tells us how much of gravity actually acts in the direction of the slope:</p>
-$$acceleration = gravity * sin(slopeAngle)$$<p>So we end up basically with:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gravity</span> <span style="color:#f92672">*</span> Math.<span style="color:#a6e22e">sin</span>(<span style="color:#a6e22e">slopeAngle</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">evaluateMotion</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">SimulationState</span>, <span style="color:#a6e22e">acceleration</span>: <span style="color:#66d9ef">number</span>, <span style="color:#a6e22e">deltaTime</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/// ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
-</span></span></code></pre></div><ul>
-<li>slopeAngle controls how steep the slope is</li>
-<li>deltaTime is how much time passed since the last calculation (we use 16 ms)</li>
-</ul>
-<h2 id="calculating-the-velocity">Calculating the velocity</h2>
-<p>Acceleration is measured in <strong>m/s²</strong>.
-That means:</p>
-<blockquote>
-<p><strong>m/s²</strong> tells us how much the velocity changes in one <strong>full second</strong>.</p></blockquote>
-<p>So if acceleration is <strong>9.81 m/s²</strong>:</p>
-<ul>
-<li>after <strong>1 second</strong>, velocity increases by <strong>9.81 m/s</strong></li>
-<li>so after <strong>0.016 seconds</strong>, velocity increases by \(9.81 * 0.016\)
-Just multiply it with <strong>0.016</strong> :) that does the trick</li>
-</ul>
-$$velocity = acceleration * deltaTime$$<p>We take the previous velocity and add the small increase for this frame.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>;
-</span></span></code></pre></div><h2 id="calculating-the-distance-traveled">Calculating the distance traveled</h2>
-<p>Velocity is measured in <strong>m/s</strong>.
-This means:</p>
-<blockquote>
-<p>velocity tells us how much <strong>distance</strong> is to travel in <strong>one full second</strong>.</p></blockquote>
-<p>Again we only want the part that matches our <strong>0.016 seconds</strong>.</p>
-$$distanceToTravel = velocity \cdot deltaTime$$<p>We take the previous distance traveled and add the small increase for this frame.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>;
-</span></span></code></pre></div><p>So we end up with something like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">evaluateMotion</span> <span style="color:#f92672">=</span> (
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">SimulationState</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">acceleration</span>: <span style="color:#66d9ef">number</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">deltaTime</span>: <span style="color:#66d9ef">number</span>,
-</span></span><span style="display:flex;"><span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">SimulationState</span> <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">velocity</span>, <span style="color:#a6e22e">distanceTraveled</span> };
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>This is already a complete physics step without friction or air resistance.</p>
-<h2 id="interactive-demo">Interactive demo</h2>
-<p>Just like in the last chapter, we again have an interactive demo. This time, we’ve implemented a simple motion-evaluation method that applies basic physics. In this demo you can play around with the slope and already see a physical motion emerging.</p>
-<blockquote>
-<p><strong>Important note:</strong> Earlier in this article I said we would evaluate everything every <strong>16 ms</strong>, right? Well… that was kind of a lie, at least for this demo.<br>
-Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <code>useFrame</code> hook, which gives us the <strong>delta time of the previous frame</strong>, and we benefit from using it. This is the proper way to handle updates, instead of forcing a fixed 16 ms step, which I briefly covered in the introduction of this chapter.</p></blockquote>
-
-
-
-
-
-
-
-
-
-<div class="embedded-iframe ">
-
-  
-  <a href="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-evaluating-motion.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
-  
-
-  <iframe
-    src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-evaluating-motion.html"
-    width="100%"
-    height="300px"
-    style="border: 0"
-    class="iframe"
-  ></iframe>
-
-  
-</div>
-<h2 id="what-comes-next">What comes next?</h2>
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track/">In the next chapter</a> we’ll add a basic roller coaster track, just a straight, linear segment. This is preparation for the real coaster curvatures we’ll build later.</p>
-<h1 id="demo-code">Demo code</h1>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<p>
-    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/scenes/DemoEvaluatingMotion.tsx" target="_blank" rel="noopener noreferrer">
-        Click here to view the code on GitHub (opens in a new tab)
-    </a>
-</p>
-
-<pre><code class="language-tsx">import React, { useEffect } from &#39;react&#39;;
-import { useFrame } from &#39;@react-three/fiber&#39;;
-import { useControls } from &#39;leva&#39;;
-import { MathUtils, Vector3 } from &#39;three&#39;;
-
-import { Arrow } from &#39;../components/Arrow&#39;;
-import { ControlPoint } from &#39;../components/ControlPoint&#39;;
-import Line from &#39;../components/Line&#39;;
-import Scene from &#39;../components/Scene&#39;;
-import { evaluateMotionByAcceleration } from &#39;../helper/physics&#39;;
-import useColors from &#39;../hooks/useColors&#39;;
-
-const Demo = () =&gt; {
-  const colors = useColors();
-
-  const [{ slope, gravity, sinSlope, trackLength, ...simulationState }, setSimulationState] = useControls(
-    () =&gt; ({
-      slope: {
-        value: 0,
-        step: 5,
-        min: -180,
-        max: 180,
-      },
-      trackLength: {
-        value: 8,
-        step: 1,
-        min: 0,
-        max: 20,
-      },
-      gravity: {
-        value: 9.81665,
-        pad: 5,
-      },
-      sinSlope: {
-        disabled: true,
-        label: &#39;sin(slope)&#39;,
-        pad: 5,
-        value: 0,
-      },
-      velocity: 0,
-      distanceTraveled: 0,
-      acceleration: {
-        value: 0,
-        pad: 5,
-      },
-    }),
-  );
-
-  useEffect(() =&gt; {
-    const sinSlope = Math.sin(MathUtils.degToRad(slope));
-    const acceleration = gravity * sinSlope;
-
-    setSimulationState({ acceleration, sinSlope });
-  }, [slope, gravity, setSimulationState]);
-
-  // Main motion evaluation per frame
-  useFrame((state, deltaTime) =&gt; {
-    setSimulationState(
-      evaluateMotionByAcceleration(simulationState, simulationState.acceleration, deltaTime),
-    );
-  });
-
-  // Reset simulation state if train overshoots track
-  useEffect(() =&gt; {
-    if (simulationState.distanceTraveled &lt; 0 || simulationState.distanceTraveled &gt; trackLength) {
-      setSimulationState({
-        velocity: 0,
-        distanceTraveled: 0,
-      });
-    }
-  }, [simulationState.distanceTraveled, trackLength]);
-
-  return (
-    &lt;&gt;
-      &lt;group position={[-5, 0, 0]} rotation={[0, 0, MathUtils.degToRad(slope)]}&gt;
-        &lt;Arrow
-          position={[-trackLength / 2, 0, 0]}
-          rotation={[0, 0, Math.PI / 2]}
-          color={colors.secondary}
-        /&gt;
-
-        &lt;ControlPoint
-          position={new Vector3(trackLength / 2 - simulationState.distanceTraveled, 0, 0)}
-        /&gt;
-
-        &lt;Line
-          points={[new Vector3(-trackLength / 2, 0, 0), new Vector3(trackLength / 2, 0, 0)]}
-          color={colors.secondary}
-        /&gt;
-      &lt;/group&gt;
-    &lt;/&gt;
-  );
-};
-
-export const DemoEvaluatingMotion = () =&gt; {
-  return (
-    &lt;Scene&gt;
-      &lt;Demo /&gt;
-    &lt;/Scene&gt;
-  );
-};
-</code></pre>
-
-]]></content></item><item><title>Gravity</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/</link><pubDate>Wed, 26 Nov 2025 12:35:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/</guid><description>&lt;h2 id="how-do-we-determine-the-acceleration-of-the-coaster"&gt;How do we determine the acceleration of the coaster?&lt;/h2&gt;
+]]></content></item><item><title>Gravity</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/</link><pubDate>Sat, 06 Dec 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/</guid><description>&lt;h2 id="how-do-we-determine-the-acceleration-of-the-coaster"&gt;How do we determine the acceleration of the coaster?&lt;/h2&gt;
 &lt;p&gt;To simplify things, we ignore air resistance, rolling friction and any other additional forces. We also assume Earth’s gravity is &lt;strong&gt;9.81 m/s²&lt;/strong&gt;. This allows us to focus entirely on the fundamental idea:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Gravity is the primary source of acceleration.&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
@@ -949,7 +949,7 @@ export const DemoGravity = () =&gt; {
 };
 </code></pre>
 
-]]></content></item><item><title>Introduction and Motion Dynamics</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/1-introduction-and-motion-dynamics/</link><pubDate>Wed, 26 Nov 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/1-introduction-and-motion-dynamics/</guid><description>&lt;p&gt;You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser.&lt;/p&gt;
+]]></content></item><item><title>Introduction and Motion Dynamics</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/1-introduction-and-motion-dynamics/</link><pubDate>Sat, 06 Dec 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/1-introduction-and-motion-dynamics/</guid><description>&lt;p&gt;You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser.&lt;/p&gt;
 &lt;p&gt;My goal here isn’t to build some engineering-grade physics engine. I just want to recreate the kind of coaster &lt;strong&gt;physics&lt;/strong&gt; we all know from things like &lt;strong&gt;NoLimits Roller Coaster or other coasters in games&lt;/strong&gt;.
 Nothing overly scientific, just the kind of system that behaves the way we intuitively expect.
 In the end, the physics model will end up pretty close to what &lt;strong&gt;NoLimits Roller Coaster&lt;/strong&gt; does anyway, just without all the heavy engineering baggage.&lt;/p&gt;</description><content type="html"><![CDATA[<p>You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser.</p>
