@@ -44,7 +44,7 @@ $$\vec{gravityDirection} = \begin{bmatrix} 0 \\ -9.81 \end{bmatrix}$$
 Now what do we do with `forwardDirection` and `gravityDirection`?
 We take their dot product. That’s it. Really. That’s the whole trick:
 
-$$acceleration = \vec{forwardDirection} \times \vec{gravityDirection}$$
+$$acceleration = \vec{forwardDir} \times \vec{gravityDir}$$
 
 This one line replaces the entire downhill-slope acceleration formula thing:
 
