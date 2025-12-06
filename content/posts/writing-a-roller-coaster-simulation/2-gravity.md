@@ -1,6 +1,6 @@
 ---
 title: 'Gravity'
-date: 2025-12-06T12:30:00+01:00
+date: 2025-12-06T09:30:00+01:00
 math: true
 tags: ["writing a roller coaster simulation"]
 ---
