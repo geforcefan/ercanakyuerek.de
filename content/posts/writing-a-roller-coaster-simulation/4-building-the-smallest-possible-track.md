@@ -5,7 +5,7 @@ math: true
 tags: ["writing a roller coaster simulation"]
 ---
 
-In the previous chapter, I said we were going to visualize the evaluated motion with a small demo, but I realized we first need something else first. To visualize motion properly, we need something for our little object to move along. And that means we need a track.
+To visualize motion properly, we need something for our little object to move along. And that means we need a track.
 
 In this article, we focus on an extremely simplified roller coaster track. And when I say extremely simplified, I really mean it: it's just a plane. A straight line. A first-order curve. Basically the easiest form of track you can possibly build without accidentally creating a real coaster.
 
@@ -177,16 +177,20 @@ Later the forward vector will be replaced by a **4×4 matrix**, which includes p
 
 Going forward, we will use **9.81665 m/s²** as the gravitational acceleration, since this is also the value used by **NoLimits Roller Coaster** and **openFVD++**.
 
-## Adding Everything Up: Small Demo
+## Adding Everything Up
 
 Time for a small demo. I built a basic setup: a visible line segment with draggable control points so you can adjust the slope in real time. On the side, a small panel displays the live simulation state.
 
-I switched the vectors to 3D instead of 2D, but only because it makes things more convenient in Three.js. The actual calculations from this article are exactly the same.
+I switched the vectors to 3D instead of 2D, but only because it makes things more convenient in THREE.js. The actual calculations from this article are exactly the same.
 
 {{< iframe src="writing-a-roller-coaster-simulation/demo-linear-track.html" width="100%" height="300px" >}}
 
 I’ve polished things a bit and moved the physics and linear interpolation logic into their own files instead of keeping everything as spaghetti code. The complete source code is available in my GitHub repo, feel free to explore and play around with it.
 
-{{< show-file-code "scripts/scenes/DemoLinearTrackScene.tsx" >}}
+## What comes next?
 
-[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance.md" >}}) we will introduce friction and air resistance. Of course there will be a demo where you can play with the parameters and compare both physics evaluations, with and without energy loss.
+[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance.md" >}}) we will introduce friction and air resistance. You’ll be able to play with the parameters in a demo and compare both physics evaluations, with and without energy loss.
+
+# Demo code
+
+{{< show-file-code "scripts/scenes/DemoLinearTrackScene.tsx" >}}

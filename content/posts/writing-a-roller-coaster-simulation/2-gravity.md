@@ -124,10 +124,10 @@ so it might help you as well.
 
 {{< iframe src="writing-a-roller-coaster-simulation/demo-gravity.html" width="100%" height="300">}}
 
-Here is the source code for our little interactive experiment:
-
-{{< show-file-code "scripts/scenes/DemoGravity.tsx" >}}
-
 ## What comes next?
 
-[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/3-evaluating-motion.md" >}}), we’ll write a small piece of code that evaluates the physics and moves a simple object along a linear plane.
+[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/3-evaluating-motion.md" >}}), we’ll add motion evaluation and move a simple object along a linear plane.
+
+# Demo code
+
+{{< show-file-code "scripts/scenes/DemoGravity.tsx" >}}

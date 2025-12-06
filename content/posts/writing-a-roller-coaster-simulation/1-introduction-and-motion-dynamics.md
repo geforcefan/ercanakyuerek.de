@@ -10,7 +10,7 @@ My goal here isn’t to build some engineering-grade physics engine. I just want
 Nothing overly scientific, just the kind of system that behaves the way we intuitively expect.
 In the end, the physics model will end up pretty close to what **NoLimits Roller Coaster** does anyway, just without all the heavy engineering baggage.
 
-We will use technologies that are easy to access and quick to experiment with. Throughout the series, we will rely on **TypeScript**, **React** and **Three.js**. This combination gives us a clean developer experience and allows us to turn mathematical concepts into visual, interactive 3D scenes with very little overhead.
+We will use technologies that are easy to access and quick to experiment with. Throughout the series, we will rely on **TypeScript**, **React** and **THREE.js**. This combination gives us a clean developer experience and allows us to turn mathematical concepts into visual, interactive 3D scenes with very little overhead.
 
 The idea behind this series is simple. Instead of reading theory first, we will learn by building something fun. Each chapter focuses on a single concept. By the end, you will understand how a small coaster car can move along a track, how the track itself is defined, and how everything is drawn in the browser.
 
@@ -30,7 +30,7 @@ npx create-react-app roller-coaster-simulation --template typescript
 Next, install a few useful dependencies. This is all we need for now. If I end up using another package later in the series and forgot to list it here, feel free to install it when you get to that part:
 
 ```bash
-npm i leva three @react-three/drei @react-three/fiber @types/three
+npm i leva three lodash @react-three/drei @react-three/fiber @types/three @types/lodash
 ```
 
 > **Important note:** In every article, I’ll show example code and link to the corresponding **GitHub files**. These files live inside my website’s blog repository, which contains a large **shared script collection for all articles**. This means the structure in the repo **will differ** from the snippets shown in the articles. For example, my ``physics.ts`` file contains multiple evaluation functions used across different posts, since we build things step by step from article to article. All iterations end up in the same file. So don’t worry if the repo looks more consolidated or structured differently than the examples shown here.
@@ -61,6 +61,4 @@ This gives us a simple structure:
 
 Once we understand the acceleration acting on the coaster, the rest follows naturally.
 
-In the next chapter, we will take the first real step of the simulation and answer the core question:
-
-[How do we determine the acceleration of the coaster?]({{< ref "/posts/writing-a-roller-coaster-simulation/2-gravity.md" >}})
+In the next chapter, we will take the first real step of the simulation and answer the core question: [How do we determine the acceleration of the coaster?]({{< ref "/posts/writing-a-roller-coaster-simulation/2-gravity.md" >}})

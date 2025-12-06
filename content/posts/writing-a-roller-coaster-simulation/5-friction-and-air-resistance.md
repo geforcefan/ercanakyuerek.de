@@ -118,7 +118,7 @@ Feel free to move the control points to experiment with the track shape and see 
 
 {{< iframe src="writing-a-roller-coaster-simulation/demo-linear-track-with-friction.html" width="100%" height="300px" >}}
 
-# What’s next?
+## What comes next?
 
 In the next chapter we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
 No matter what the underlying geometry is in the end, **splines, imported tracks, FVD-based shapes or anything else, the evaluation should always work the same**.
@@ -129,7 +129,5 @@ Any geometry system can “fill” these nodes, whether that system is based on 
 While writing this, I realize it is probably best to introduce the concept first with a simple linear track. Stay tuned.
 
 # Demo code
-
-As always, here is the code of the current demo. You can also view it on GitHub.
 
 {{< show-file-code "scripts/scenes/DemoLinearTrackSceneWithFriction.tsx" >}}

@@ -11,7 +11,7 @@ which corresponds to roughly **60 frames per second**.
 
 Using a fixed time step makes the formulas easier to understand for this article.
 
-In real simulations or game engines, you usually don’t assume a constant value. Instead, you take the actual delta time from the game loop, so that the motion stays consistent even if the frame rate changes.
+> **Note**: In real simulations or game engines, you usually don’t assume a constant time value. Instead, you take the actual delta time from the game loop, so that the motion stays consistent even if the frame rate changes. **More on that later**.
 
 But for the sake of clarity in this chapter:
 We assume that every update happens exactly every **16 ms**.
@@ -114,12 +114,20 @@ const evaluateMotion = (
 
 This is already a complete physics step without friction or air resistance.
 
-## Running the simulation
+## Interactive demo
 
-Now we run the simulation every 16 ms and log the values.
+Just like in the last chapter, we again have an interactive demo. This time, we’ve implemented a simple motion-evaluation method that applies basic physics. In this demo you can play around with the slope and already see a physical motion emerging.
 
-{{< show-file-code "static/writing-a-roller-coaster-simulation/evaluating-motion.html" >}}
+> **Important note:** Earlier in this article I said we would evaluate everything every **16 ms**, right? Well… that was kind of a lie, at least for this demo.  
+> Since we’re using **THREE.js**, we *can* make use of the `useFrame` hook, which gives us the **delta time of the previous frame**, and we benefit from using it. This is the proper way to handle updates, instead of forcing a fixed 16 ms step, which I briefly covered in the introduction of this chapter.
 
-## Next Chapter
 
-[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track.md" >}}) we’ll build a small interactive Three.js demo where we can watch the object’s position update in real time. Nothing fancy, just a simple page showing coordinates and velocity so we can finally see the simulation in action.
+{{< iframe src="writing-a-roller-coaster-simulation/demo-evaluating-motion.html" width="100%" height="300px" >}}
+
+## What comes next?
+
+[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track.md" >}}) we’ll add a basic roller coaster track, just a straight, linear segment. This is preparation for the real coaster curvatures we’ll build later.
+
+# Demo code
+
+{{< show-file-code "scripts/scenes/DemoEvaluatingMotion.tsx" >}}

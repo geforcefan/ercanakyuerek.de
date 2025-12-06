@@ -110,10 +110,10 @@ For testing purposes, you can create an ``index.html`` file and install the ``ht
 </script>
 ```
 
-{{< iframe src="wasi-sdk-writing-library-in-cpp/libCalculation/example.html" >}}
+{{< iframe src="wasi-sdk-writing-library-in-cpp/libCalculation/example.html" openInNewTab="false" >}}
 
 Please check the console for a spline with a length of ``10.06``. The position we fetched should return a 3D vector with coordinates of ``[-3, -3, 0]``.
-Next to this text, you can view an advanced test that displays a spline. I have created a [repository](https://github.com/geforcefan/ercanakyuerek.de/tree/main/static/wasi-sdk-writing-library-in-cpp/libCalculation) that contains all the necessary files, including this advanced example that uses Three.js for rendering.
+Next to this text, you can view an advanced test that displays a spline. I have created a [repository](https://github.com/geforcefan/ercanakyuerek.de/tree/main/static/wasi-sdk-writing-library-in-cpp/libCalculation) that contains all the necessary files, including this advanced example that uses THREE.js for rendering.
 
 ## Conclusion
 That's all! It wasn't that difficult, was it? We haven't yet covered other complex types, such as passing strings to and from WebAssembly modules, or how to log. However, you should have a rough idea of how things work now. In future articles, I will explore data types, memory management, and binding in greater depth. To be honest, gluing code together is not enjoyable. It requires creating glue code on the C++ side and a wrapper JavaScript module that ``serializes`` and ``unserializes`` arguments and return values. Some solutions eliminate the need for writing both code pieces, but for now, this should help you get started, especially if you aim to build a small yet performance-critical library.

@@ -4,19 +4,22 @@ import { useControls } from 'leva';
 import { Vector3 } from 'three';
 
 import { ControlPoint } from '../components/ControlPoint';
-import { DragControlPosition } from '../components/DragControlPosition';
 import Line from '../components/Line';
 import Scene from '../components/Scene';
 import { getForwardDirectionAtDistance, getPositionAtDistance, length } from '../helper/linear';
 import { evaluateMotionByForwardDirection } from '../helper/physics';
 import useColors from '../hooks/useColors';
+import { DragControlPoints } from '../components/DragControlPoints';
 
 const Demo = () => {
   const colors = useColors();
 
   // Control points
-  const [cp1, setCp1] = useState(new Vector3(-11.5, 3.2, 0));
-  const [cp2, setCp2] = useState(new Vector3(1.4, -2.8, 0));
+  const [points, setPoints] = useState([
+    new Vector3(-11.5, 3.2, 0),
+    new Vector3(1.4, -2.8, 0)
+  ]);
+
 
   const [simulationState, setSimulationState] = useControls(() => ({
     velocity: 0,
@@ -36,7 +39,7 @@ const Demo = () => {
     setSimulationState(
       evaluateMotionByForwardDirection(
         simulationState,
-        getForwardDirectionAtDistance(cp1, cp2, simulationState.distanceTraveled),
+        getForwardDirectionAtDistance(points[0], points[1], simulationState.distanceTraveled),
         simulationState.gravity,
         deltaTime,
       ),
@@ -46,7 +49,7 @@ const Demo = () => {
   // Reset simulation state if train overshoots track
   useEffect(() => {
     if (
-      simulationState.distanceTraveled > length(cp1, cp2) ||
+      simulationState.distanceTraveled > length(points[0], points[1]) ||
       simulationState.distanceTraveled < 0
     ) {
       setSimulationState({
@@ -57,20 +60,12 @@ const Demo = () => {
     }
   }, [simulationState.distanceTraveled]);
 
-  const trainPosition = getPositionAtDistance(cp1, cp2, simulationState.distanceTraveled);
+  const trainPosition = getPositionAtDistance(points[0], points[1], simulationState.distanceTraveled);
 
   return (
     <>
-      <DragControlPosition axisLock="z" position={cp1} onDrag={setCp1}>
-        <ControlPoint />
-      </DragControlPosition>
-
-      <DragControlPosition axisLock="z" position={cp2} onDrag={setCp2}>
-        <ControlPoint />
-      </DragControlPosition>
-
-      <Line points={[cp1, cp2]} color={colors.secondary} />
-
+      <DragControlPoints points={points} setPoints={setPoints}/>
+      <Line points={points} color={colors.secondary} />
       <ControlPoint position={trainPosition} color={colors.highlight} />
     </>
   );

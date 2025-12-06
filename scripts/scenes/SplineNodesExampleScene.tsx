@@ -1,15 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Easing, Group, Tween } from '@tweenjs/tween.js';
-import set from 'lodash/set';
 import { Vector3 } from 'three';
 
 import BezierCurve from '../components/BezierCurve';
-import { ControlPoint } from '../components/ControlPoint';
-import { DragControlPosition } from '../components/DragControlPosition';
 import Line from '../components/Line';
 import Scene from '../components/Scene';
 import useColors from '../hooks/useColors';
+import { DragControlPoints } from '../components/DragControlPoints';
 
 const Example = () => {
   const colors = useColors();
@@ -60,18 +58,7 @@ const Example = () => {
   return (
     <>
       <Line points={points} color={colors.secondary} />
-
-      {points.map((point, index) => {
-        return (
-          <DragControlPosition
-            position={point}
-            onDrag={(position) => setPoints((points) => set([...points], index, position))}
-          >
-            <ControlPoint />
-          </DragControlPosition>
-        );
-      })}
-
+      <DragControlPoints points={points} setPoints={setPoints} />
       <BezierCurve
         points={points}
         resolution={motion.resolution}

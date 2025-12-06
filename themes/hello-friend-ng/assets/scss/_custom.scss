@@ -14,7 +14,6 @@
 
 .embedded-iframe {
   border: 0;
-  margin: 10px;
 
   iframe {
     padding: 1em;
@@ -23,7 +22,13 @@
   }
 
   .description {
+    display: block;
     font-size: 12px;
+  }
+
+  .openInNewTab {
+    display: block;
+    margin-bottom: 1em;
   }
 
   @media #{$media-size-phone} {
@@ -32,12 +37,18 @@
     margin-right: auto;
     margin-left: auto;
     display: block;
+
+    iframe, .description, .openInNewTab {
+      width: 100% !important;
+    }
   }
 
   &.float-right {
     @media #{$media-size-phone} {
       float: none;
+      margin: inherit;
     }
     float: right;
+    margin: 10px;
   }
 }
