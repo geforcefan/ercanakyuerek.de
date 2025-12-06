@@ -36,8 +36,8 @@ menu:
     - identifier: aboutme
       name: About me
       url: /about
-    - identifier: blog
-      name: Blog
+    - identifier: posts
+      name: Posts
       url: /posts
 markup:
   goldmark:
