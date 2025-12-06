@@ -126,7 +126,7 @@ Just like in the last chapter, we again have an interactive demo. This time, we�
 
 ## What comes next?
 
-[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/4-building-the-smallest-possible-track.md" >}}) we’ll add a basic roller coaster track, just a straight, linear segment. This is preparation for the real coaster curvatures we’ll build later.
+[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/4-basic-linear-roller-coaster-track.md" >}}) we’ll add a basic roller coaster track, just a straight, linear segment. This is a preparation for the real coaster curvatures we’ll build later.
 
 # Demo code
 
