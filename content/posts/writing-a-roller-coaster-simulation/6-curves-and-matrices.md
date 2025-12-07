@@ -1,5 +1,5 @@
 ---
-title: 'Tracks, Curves and Matrices'
+title: 'Curves and Matrices'
 date: 2025-12-06T13:30:00+01:00
 math: true
 draft: true
@@ -21,7 +21,7 @@ This already gives us a unified interface, but we can go one step further.
 
 # Matrices
 
-Till now we treated position and forward direction as separate values.
+Till now, we treated position and forward direction as separate values.
 A 4×4 matrix gives us a much nicer representation. It stores:
 
 - position
@@ -80,3 +80,5 @@ And that's pretty much it, for now. In the future, there will be other useful in
 this is all we need.
 
 > **Note**: Keep in mind, we don't take **banking / roll** into account
+
+{{< iframe src="writing-a-roller-coaster-simulation/curves-and-matrices.html" width="100%" height="300px" >}}
