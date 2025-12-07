@@ -124,8 +124,8 @@ In the next chapter we will make a few changes to the track itself, preparing ev
 No matter what the underlying geometry is in the end, **splines, imported tracks, FVD-based shapes or anything else, the evaluation should always work the same**.
 The key step is replacing the two functions `getPositionAtDistance` and `getForwardDirectionAtDistance`
 with a single `getMatrixAtDistance` function. Working with **matrices** is more convenient, because we can extract everything we need from them.
-I will also introduce a curve node that stores a full matrix for a given distance along the track.
-Any geometry system can “fill” these nodes, whether that system is based on splines, imported CSV data, FVD geometries or something entirely different.
+I will also introduce a **curve node** that stores a full matrix for a given distance along the track.
+Any geometry system can “fill” these **curve nodes**, whether that system is based on splines, imported CSV data, FVD geometries or something entirely different.
 While writing this, I realize it is probably best to introduce the concept first with a simple linear track. Stay tuned.
 
 # Demo code
