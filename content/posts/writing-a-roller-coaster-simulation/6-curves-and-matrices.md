@@ -59,7 +59,7 @@ type CurveNode = {
 We need a way to query a matrix at a given distance in our interface, like described above:
 
 ```typescript
-const getMatrixAtDistance = (curve: CurveNode[], distance: number) => Matrix4;
+const getMatrixAtDistance = (curve: CurveNode[], distance: number) : Matrix4 => {};
 ```
 
 Now we also need a way to add a node to a curve. We need a little utility function which creates a matrix
@@ -67,13 +67,13 @@ from a point and calculates the normals (direction vectors essentially) accordin
 automatically in one utility function:
 
 ```typescript
-const insertPoint = (curve : CurveNode[]) => CurveNode[]
+const insertPoint = (curve : CurveNode[]) : CurveNode[] => { };
 ```
 
 of course we will also need to get the total length of a curve:
 
 ```typescript
-const getLength = (curve: CurveNode[]) => double;
+const getLength = (curve: CurveNode[]) : double => {};
 ```
 
 And that's pretty much it, for now. In the future, there will be other useful information needed in our nodes, but for now
