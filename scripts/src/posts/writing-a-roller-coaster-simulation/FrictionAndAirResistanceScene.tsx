@@ -94,7 +94,12 @@ const FrictionAndAirResistance = () => {
         acceleration: 0,
       });
     }
-  }, [simulationState.distanceTraveled]);
+  }, [
+    simulationState.distanceTraveled,
+    points,
+    setSimulationState,
+    setSimulationStateWithoutFriction,
+  ]);
 
   const trainPosition = getPositionAtDistance(
     points[0],

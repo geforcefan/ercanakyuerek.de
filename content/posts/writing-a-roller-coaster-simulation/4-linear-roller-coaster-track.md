@@ -193,4 +193,4 @@ I’ve polished things a bit and moved the physics and linear interpolation logi
 
 # Demo code
 
-{{< show-file-code "scripts/posts/writing-a-roller-coaster-simulation/LinearRollerCoasterTrackScene.tsx" >}}
+{{< show-script-code "/posts/writing-a-roller-coaster-simulation/LinearRollerCoasterTrackScene.tsx" >}}

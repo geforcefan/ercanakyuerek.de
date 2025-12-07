@@ -130,4 +130,4 @@ Just like in the last chapter, we again have an interactive demo. This time, weâ
 
 # Demo code
 
-{{< show-file-code "scripts/posts/writing-a-roller-coaster-simulation/EvaluatingMotionScene.tsx" >}}
+{{< show-script-code "/posts/writing-a-roller-coaster-simulation/EvaluatingMotionScene.tsx" >}}

@@ -1,6 +1,6 @@
 {{/* Get file path (positional parameter) */}}
 {{ $file := .Get 0 }}
-{{ $path := printf "%s" $file }}
+{{ $path := printf "scripts/src/%s" $file }}
 {{ $content := readFile $path }}
 
 {{ $ext := path.Ext $file }}
@@ -15,7 +15,7 @@
 {{ if eq $ext "glsl" }}{{ $lang = "glsl" }}{{ end }}
 
 <p>
-    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/{{ $file }}" target="_blank" rel="noopener noreferrer">
+    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/{{ $path }}" target="_blank" rel="noopener noreferrer">
         Click here to view the code on GitHub (opens in a new tab)
     </a>
 </p>

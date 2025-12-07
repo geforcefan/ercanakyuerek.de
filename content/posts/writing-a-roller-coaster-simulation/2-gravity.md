@@ -130,4 +130,4 @@ so it might help you as well.
 
 # Demo code
 
-{{< show-file-code "scripts/posts/writing-a-roller-coaster-simulation/GravityScene.tsx" >}}
+{{< show-script-code "/posts/writing-a-roller-coaster-simulation/GravityScene.tsx" >}}

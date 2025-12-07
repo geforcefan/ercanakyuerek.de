@@ -130,4 +130,4 @@ While writing this, I realize it is probably best to introduce the concept first
 
 # Demo code
 
-{{< show-file-code "scripts/posts/writing-a-roller-coaster-simulation/FrictionAndAirResistanceScene.tsx" >}}
+{{< show-script-code "/posts/writing-a-roller-coaster-simulation/FrictionAndAirResistanceScene.tsx" >}}

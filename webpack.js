@@ -1,12 +1,12 @@
 const path = require("path");
 
 const paths = {
-  src: path.resolve(__dirname, "scripts"),
+  src: path.resolve(__dirname, "scripts/src"),
   build: path.resolve(__dirname, "static"),
 };
 
 module.exports = {
-  entry: [paths.src + "/entry.ts"],
+  entry: [paths.src + "/module-exports.ts"],
   mode: "production",
   devtool: false,
   output: {
