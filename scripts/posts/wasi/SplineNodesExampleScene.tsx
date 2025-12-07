@@ -3,11 +3,11 @@ import { useFrame } from '@react-three/fiber';
 import { Easing, Group, Tween } from '@tweenjs/tween.js';
 import { Vector3 } from 'three';
 
-import BezierCurve from '../components/BezierCurve';
-import Line from '../components/Line';
-import Scene from '../components/Scene';
-import useColors from '../hooks/useColors';
-import { DragControlPoints } from '../components/DragControlPoints';
+import BezierCurve from '../../components/BezierCurve';
+import Line from '../../components/Line';
+import Scene from '../../components/Scene';
+import useColors from '../../hooks/useColors';
+import { DragControlPoints } from '../../components/DragControlPoints';
 
 const Example = () => {
   const colors = useColors();

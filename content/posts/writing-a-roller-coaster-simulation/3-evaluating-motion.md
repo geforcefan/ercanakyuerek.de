@@ -122,12 +122,12 @@ Just like in the last chapter, we again have an interactive demo. This time, we�
 > Since we’re using **THREE.js**, we *can* make use of the `useFrame` hook, which gives us the **delta time of the previous frame**, and we benefit from using it. This is the proper way to handle updates, instead of forcing a fixed 16 ms step, which I briefly covered in the introduction of this chapter.
 
 
-{{< iframe src="writing-a-roller-coaster-simulation/demo-evaluating-motion.html" width="100%" height="300px" >}}
+{{< iframe src="writing-a-roller-coaster-simulation/evaluating-motion.html" width="100%" height="320px" >}}
 
 ## What comes next?
 
-[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/4-basic-linear-roller-coaster-track.md" >}}) we’ll add a basic roller coaster track, just a straight, linear segment. This is a preparation for the real coaster curvatures we’ll build later.
+[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/4-linear-roller-coaster-track.md" >}}) we’ll add a basic roller coaster track, just a straight, linear segment. This is a preparation for the real coaster curvatures we’ll build later.
 
 # Demo code
 
-{{< show-file-code "scripts/scenes/DemoEvaluatingMotion.tsx" >}}
+{{< show-file-code "scripts/posts/writing-a-roller-coaster-simulation/EvaluatingMotionScene.tsx" >}}

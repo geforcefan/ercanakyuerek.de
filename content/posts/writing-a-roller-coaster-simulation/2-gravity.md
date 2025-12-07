@@ -122,7 +122,7 @@ You can play around with **different slopes** and see how they affect the percen
 Having a visual representation of written concepts really helps me reach that **I got it** moment,
 so it might help you as well.
 
-{{< iframe src="writing-a-roller-coaster-simulation/demo-gravity.html" width="100%" height="300">}}
+{{< iframe src="writing-a-roller-coaster-simulation/gravity.html" width="100%" height="300">}}
 
 ## What comes next?
 
@@ -130,4 +130,4 @@ so it might help you as well.
 
 # Demo code
 
-{{< show-file-code "scripts/scenes/DemoGravity.tsx" >}}
+{{< show-file-code "scripts/posts/writing-a-roller-coaster-simulation/GravityScene.tsx" >}}

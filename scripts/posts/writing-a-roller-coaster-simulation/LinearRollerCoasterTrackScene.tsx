@@ -3,15 +3,15 @@ import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
 import { Vector3 } from 'three';
 
-import { ControlPoint } from '../components/ControlPoint';
-import Line from '../components/Line';
-import Scene from '../components/Scene';
-import { getForwardDirectionAtDistance, getPositionAtDistance, length } from '../helper/linear';
-import { evaluateMotionByForwardDirection } from '../helper/physics';
-import useColors from '../hooks/useColors';
-import { DragControlPoints } from '../components/DragControlPoints';
+import { ControlPoint } from '../../components/ControlPoint';
+import Line from '../../components/Line';
+import Scene from '../../components/Scene';
+import { getForwardDirectionAtDistance, getPositionAtDistance, length } from '../../helper/linear';
+import { evaluateMotionByForwardDirection } from '../../helper/physics';
+import useColors from '../../hooks/useColors';
+import { DragControlPoints } from '../../components/DragControlPoints';
 
-const Demo = () => {
+const LinearRollerCoasterTrack = () => {
   const colors = useColors();
 
   // Control points
@@ -71,10 +71,10 @@ const Demo = () => {
   );
 };
 
-export const DemoLinearTrackScene = () => {
+export const LinearRollerCoasterTrackScene = () => {
   return (
     <Scene>
-      <Demo />
+      <LinearRollerCoasterTrack />
     </Scene>
   );
 };

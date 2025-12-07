@@ -1,5 +1,5 @@
 ---
-title: 'Basic Linear Roller Coaster Track'
+title: 'Linear Roller Coaster Track'
 date: 2025-12-06T11:30:00+01:00
 math: true
 tags: ["writing a roller coaster simulation"]
@@ -183,7 +183,7 @@ Time for a small demo. I built a basic setup: a visible line segment with dragga
 
 I switched the vectors to 3D instead of 2D, but only because it makes things more convenient in THREE.js. The actual calculations from this article are exactly the same.
 
-{{< iframe src="writing-a-roller-coaster-simulation/demo-linear-track.html" width="100%" height="300px" >}}
+{{< iframe src="writing-a-roller-coaster-simulation/linear-roller-coaster-track.html" width="100%" height="300px" >}}
 
 I’ve polished things a bit and moved the physics and linear interpolation logic into their own files instead of keeping everything as spaghetti code. The complete source code is available in my GitHub repo, feel free to explore and play around with it.
 
@@ -193,4 +193,4 @@ I’ve polished things a bit and moved the physics and linear interpolation logi
 
 # Demo code
 
-{{< show-file-code "scripts/scenes/DemoLinearTrackScene.tsx" >}}
+{{< show-file-code "scripts/posts/writing-a-roller-coaster-simulation/LinearRollerCoasterTrackScene.tsx" >}}

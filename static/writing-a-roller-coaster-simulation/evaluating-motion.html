@@ -1,33 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Writing a Roller Coaster Simulation – Evaluating Motion</title>
+<script type="module">
+  import { createRoot, EvaluatingMotionScene } from '../scripts.js';
 
-    <script>
-      const evaluateMotion = (state, acceleration, deltaTime) => {
-        const velocity = state.velocity + acceleration * deltaTime;
-        const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
+  createRoot(document.getElementById('root')).render(EvaluatingMotionScene());
+</script>
 
-        return { velocity, distanceTraveled };
-      };
-
-      let state = { velocity: 0, distanceTraveled: 0 };
-      const tickInterval = 0.016; // 16ms ≈ 60FPS
-      const slopeAngle = 2 * (Math.PI / 180); // 2°, needs to be in radians
-      const acceleration = 9.81 * Math.sin(slopeAngle); // downhill-slope acceleration
-
-      setInterval(() => {
-        state = evaluateMotion(state, acceleration, tickInterval);
-
-        document.body.innerText = [
-          `velocity: ${state.velocity.toFixed(3)} m/s`,
-          `velocity: ${(state.velocity * 3.6).toFixed(3)} km/h`,
-          `distance traveled: ${state.distanceTraveled.toFixed(3)} m`,
-          `acceleration: ${acceleration.toFixed(3)} ms^2`,
-          `slope angle: ${(slopeAngle / (Math.PI / 180)).toFixed(3)}°`,
-        ].join('\n');
-      }, tickInterval * 1000);
-    </script>
-  </head>
-</html>
+<div id="root"></div>

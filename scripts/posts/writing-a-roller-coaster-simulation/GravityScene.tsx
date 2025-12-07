@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { useControls } from 'leva';
 import { MathUtils, Vector3 } from 'three';
 
-import { Arrow } from '../components/Arrow';
-import Line from '../components/Line';
-import Scene from '../components/Scene';
-import useColors from '../hooks/useColors';
+import { Arrow } from '../../components/Arrow';
+import Line from '../../components/Line';
+import Scene from '../../components/Scene';
+import useColors from '../../hooks/useColors';
 
-const Demo = () => {
+const Gravity = () => {
   const colors = useColors();
   const lineLength = 8;
 
@@ -60,10 +60,10 @@ const Demo = () => {
   );
 };
 
-export const DemoGravity = () => {
+export const GravityScene = () => {
   return (
     <Scene>
-      <Demo />
+      <Gravity />
     </Scene>
   );
 };

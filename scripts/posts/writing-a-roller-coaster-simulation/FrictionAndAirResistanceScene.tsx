@@ -3,18 +3,18 @@ import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
 import { MathUtils, Vector3 } from 'three';
 
-import { ControlPoint } from '../components/ControlPoint';
-import { DragControlPoints } from '../components/DragControlPoints';
-import Line from '../components/Line';
-import Scene from '../components/Scene';
-import { getForwardDirectionAtDistance, getPositionAtDistance, length } from '../helper/linear';
+import { ControlPoint } from '../../components/ControlPoint';
+import { DragControlPoints } from '../../components/DragControlPoints';
+import Line from '../../components/Line';
+import Scene from '../../components/Scene';
+import { getForwardDirectionAtDistance, getPositionAtDistance, length } from '../../helper/linear';
 import {
   evaluateMotionByForwardDirection,
   evaluateMotionByForwardDirectionWithFriction,
-} from '../helper/physics';
-import useColors from '../hooks/useColors';
+} from '../../helper/physics';
+import useColors from '../../hooks/useColors';
 
-const Demo = () => {
+const FrictionAndAirResistance = () => {
   const colors = useColors();
 
   // Control points
@@ -123,10 +123,10 @@ const Demo = () => {
   );
 };
 
-export const DemoLinearTrackSceneWithFriction = () => {
+export const FrictionAndAirResistanceScene = () => {
   return (
     <Scene>
-      <Demo />
+      <FrictionAndAirResistance />
     </Scene>
   );
 };

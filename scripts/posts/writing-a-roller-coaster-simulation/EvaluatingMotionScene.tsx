@@ -3,14 +3,14 @@ import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
 import { MathUtils, Vector3 } from 'three';
 
-import { Arrow } from '../components/Arrow';
-import { ControlPoint } from '../components/ControlPoint';
-import Line from '../components/Line';
-import Scene from '../components/Scene';
-import { evaluateMotionByAcceleration } from '../helper/physics';
-import useColors from '../hooks/useColors';
+import { Arrow } from '../../components/Arrow';
+import { ControlPoint } from '../../components/ControlPoint';
+import Line from '../../components/Line';
+import Scene from '../../components/Scene';
+import { evaluateMotionByAcceleration } from '../../helper/physics';
+import useColors from '../../hooks/useColors';
 
-const Demo = () => {
+const EvaluatingMotion = () => {
   const colors = useColors();
 
   const [{ slope, gravity, sinSlope, trackLength, ...simulationState }, setSimulationState] = useControls(
@@ -92,10 +92,10 @@ const Demo = () => {
   );
 };
 
-export const DemoEvaluatingMotion = () => {
+export const EvaluatingMotionScene = () => {
   return (
     <Scene>
-      <Demo />
+      <EvaluatingMotion />
     </Scene>
   );
 };
