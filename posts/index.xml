@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 06 Dec 2025 12:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Friction and Air Resistance</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/</link><pubDate>Sat, 06 Dec 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/</guid><description>&lt;p&gt;This chapter will be quite short and introduces two small but important parts of a more realistic roller coaster simulation:&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 06 Dec 2025 13:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Friction and Air Resistance</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/</link><pubDate>Sat, 06 Dec 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/</guid><description>&lt;p&gt;This chapter will be quite short and introduces two small but important parts of a more realistic roller coaster simulation:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;friction&lt;/li&gt;
 &lt;li&gt;air resistance&lt;/li&gt;
@@ -92,11 +92,11 @@ That is the whole trick.</p>
 <div class="embedded-iframe ">
 
   
-  <a href="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track-with-friction.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
+  <a href="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/friction-and-air-resistance.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
   
 
   <iframe
-    src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track-with-friction.html"
+    src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/friction-and-air-resistance.html"
     width="100%"
     height="300px"
     style="border: 0"
@@ -131,7 +131,7 @@ While writing this, I realize it is probably best to introduce the concept first
 
 
 <p>
-    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/scenes/DemoLinearTrackSceneWithFriction.tsx" target="_blank" rel="noopener noreferrer">
+    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/posts/writing-a-roller-coaster-simulation/FrictionAndAirResistanceScene.tsx" target="_blank" rel="noopener noreferrer">
         Click here to view the code on GitHub (opens in a new tab)
     </a>
 </p>
@@ -141,18 +141,18 @@ import { useFrame } from &#39;@react-three/fiber&#39;;
 import { useControls } from &#39;leva&#39;;
 import { MathUtils, Vector3 } from &#39;three&#39;;
 
-import { ControlPoint } from &#39;../components/ControlPoint&#39;;
-import { DragControlPoints } from &#39;../components/DragControlPoints&#39;;
-import Line from &#39;../components/Line&#39;;
-import Scene from &#39;../components/Scene&#39;;
-import { getForwardDirectionAtDistance, getPositionAtDistance, length } from &#39;../helper/linear&#39;;
+import { ControlPoint } from &#39;../../components/ControlPoint&#39;;
+import { DragControlPoints } from &#39;../../components/DragControlPoints&#39;;
+import Line from &#39;../../components/Line&#39;;
+import Scene from &#39;../../components/Scene&#39;;
+import { getForwardDirectionAtDistance, getPositionAtDistance, length } from &#39;../../helper/linear&#39;;
 import {
   evaluateMotionByForwardDirection,
   evaluateMotionByForwardDirectionWithFriction,
-} from &#39;../helper/physics&#39;;
-import useColors from &#39;../hooks/useColors&#39;;
+} from &#39;../../helper/physics&#39;;
+import useColors from &#39;../../hooks/useColors&#39;;
 
-const Demo = () =&gt; {
+const FrictionAndAirResistance = () =&gt; {
   const colors = useColors();
 
   // Control points
@@ -261,16 +261,16 @@ const Demo = () =&gt; {
   );
 };
 
-export const DemoLinearTrackSceneWithFriction = () =&gt; {
+export const FrictionAndAirResistanceScene = () =&gt; {
   return (
     &lt;Scene&gt;
-      &lt;Demo /&gt;
+      &lt;FrictionAndAirResistance /&gt;
     &lt;/Scene&gt;
   );
 };
 </code></pre>
 
-]]></content></item><item><title>Basic Linear Roller Coaster Track</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-basic-linear-roller-coaster-track/</link><pubDate>Sat, 06 Dec 2025 11:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-basic-linear-roller-coaster-track/</guid><description>&lt;p&gt;To visualize motion properly, we need something for our little object to move along. And that means we need a track.&lt;/p&gt;
+]]></content></item><item><title>Linear Roller Coaster Track</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-linear-roller-coaster-track/</link><pubDate>Sat, 06 Dec 2025 11:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-linear-roller-coaster-track/</guid><description>&lt;p&gt;To visualize motion properly, we need something for our little object to move along. And that means we need a track.&lt;/p&gt;
 &lt;p&gt;In this article, we focus on an extremely simplified roller coaster track. And when I say extremely simplified, I really mean it: it&amp;rsquo;s just a plane. A straight line. A first-order curve. Basically the easiest form of track you can possibly build without accidentally creating a real coaster.&lt;/p&gt;
 &lt;p&gt;From the last chapter, we know how motion evaluation works. The evaluation function receives an acceleration value and returns a new simulation state containing the updated velocity and the total distance traveled:&lt;/p&gt;</description><content type="html"><![CDATA[<p>To visualize motion properly, we need something for our little object to move along. And that means we need a track.</p>
 <p>In this article, we focus on an extremely simplified roller coaster track. And when I say extremely simplified, I really mean it: it&rsquo;s just a plane. A straight line. A first-order curve. Basically the easiest form of track you can possibly build without accidentally creating a real coaster.</p>
@@ -383,11 +383,11 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 <div class="embedded-iframe ">
 
   
-  <a href="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
+  <a href="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/linear-roller-coaster-track.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
   
 
   <iframe
-    src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-linear-track.html"
+    src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/linear-roller-coaster-track.html"
     width="100%"
     height="300px"
     style="border: 0"
@@ -417,7 +417,7 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 
 
 <p>
-    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/scenes/DemoLinearTrackScene.tsx" target="_blank" rel="noopener noreferrer">
+    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/posts/writing-a-roller-coaster-simulation/LinearRollerCoasterTrackScene.tsx" target="_blank" rel="noopener noreferrer">
         Click here to view the code on GitHub (opens in a new tab)
     </a>
 </p>
@@ -427,15 +427,15 @@ import { useFrame } from &#39;@react-three/fiber&#39;;
 import { useControls } from &#39;leva&#39;;
 import { Vector3 } from &#39;three&#39;;
 
-import { ControlPoint } from &#39;../components/ControlPoint&#39;;
-import Line from &#39;../components/Line&#39;;
-import Scene from &#39;../components/Scene&#39;;
-import { getForwardDirectionAtDistance, getPositionAtDistance, length } from &#39;../helper/linear&#39;;
-import { evaluateMotionByForwardDirection } from &#39;../helper/physics&#39;;
-import useColors from &#39;../hooks/useColors&#39;;
-import { DragControlPoints } from &#39;../components/DragControlPoints&#39;;
+import { ControlPoint } from &#39;../../components/ControlPoint&#39;;
+import Line from &#39;../../components/Line&#39;;
+import Scene from &#39;../../components/Scene&#39;;
+import { getForwardDirectionAtDistance, getPositionAtDistance, length } from &#39;../../helper/linear&#39;;
+import { evaluateMotionByForwardDirection } from &#39;../../helper/physics&#39;;
+import useColors from &#39;../../hooks/useColors&#39;;
+import { DragControlPoints } from &#39;../../components/DragControlPoints&#39;;
 
-const Demo = () =&gt; {
+const LinearRollerCoasterTrack = () =&gt; {
   const colors = useColors();
 
   // Control points
@@ -495,10 +495,10 @@ const Demo = () =&gt; {
   );
 };
 
-export const DemoLinearTrackScene = () =&gt; {
+export const LinearRollerCoasterTrackScene = () =&gt; {
   return (
     &lt;Scene&gt;
-      &lt;Demo /&gt;
+      &lt;LinearRollerCoasterTrack /&gt;
     &lt;/Scene&gt;
   );
 };
@@ -596,13 +596,13 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
 <div class="embedded-iframe ">
 
   
-  <a href="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-evaluating-motion.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
+  <a href="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/evaluating-motion.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
   
 
   <iframe
-    src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-evaluating-motion.html"
+    src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/evaluating-motion.html"
     width="100%"
-    height="300px"
+    height="320px"
     style="border: 0"
     class="iframe"
   ></iframe>
@@ -610,7 +610,7 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
   
 </div>
 <h2 id="what-comes-next">What comes next?</h2>
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-basic-linear-roller-coaster-track/">In the next chapter</a> we’ll add a basic roller coaster track, just a straight, linear segment. This is a preparation for the real coaster curvatures we’ll build later.</p>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-linear-roller-coaster-track/">In the next chapter</a> we’ll add a basic roller coaster track, just a straight, linear segment. This is a preparation for the real coaster curvatures we’ll build later.</p>
 <h1 id="demo-code">Demo code</h1>
 
 
@@ -629,7 +629,7 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
 
 
 <p>
-    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/scenes/DemoEvaluatingMotion.tsx" target="_blank" rel="noopener noreferrer">
+    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/posts/writing-a-roller-coaster-simulation/EvaluatingMotionScene.tsx" target="_blank" rel="noopener noreferrer">
         Click here to view the code on GitHub (opens in a new tab)
     </a>
 </p>
@@ -639,14 +639,14 @@ import { useFrame } from &#39;@react-three/fiber&#39;;
 import { useControls } from &#39;leva&#39;;
 import { MathUtils, Vector3 } from &#39;three&#39;;
 
-import { Arrow } from &#39;../components/Arrow&#39;;
-import { ControlPoint } from &#39;../components/ControlPoint&#39;;
-import Line from &#39;../components/Line&#39;;
-import Scene from &#39;../components/Scene&#39;;
-import { evaluateMotionByAcceleration } from &#39;../helper/physics&#39;;
-import useColors from &#39;../hooks/useColors&#39;;
+import { Arrow } from &#39;../../components/Arrow&#39;;
+import { ControlPoint } from &#39;../../components/ControlPoint&#39;;
+import Line from &#39;../../components/Line&#39;;
+import Scene from &#39;../../components/Scene&#39;;
+import { evaluateMotionByAcceleration } from &#39;../../helper/physics&#39;;
+import useColors from &#39;../../hooks/useColors&#39;;
 
-const Demo = () =&gt; {
+const EvaluatingMotion = () =&gt; {
   const colors = useColors();
 
   const [{ slope, gravity, sinSlope, trackLength, ...simulationState }, setSimulationState] = useControls(
@@ -728,10 +728,10 @@ const Demo = () =&gt; {
   );
 };
 
-export const DemoEvaluatingMotion = () =&gt; {
+export const EvaluatingMotionScene = () =&gt; {
   return (
     &lt;Scene&gt;
-      &lt;Demo /&gt;
+      &lt;EvaluatingMotion /&gt;
     &lt;/Scene&gt;
   );
 };
@@ -840,11 +840,11 @@ so it might help you as well.</p>
 <div class="embedded-iframe ">
 
   
-  <a href="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-gravity.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
+  <a href="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/gravity.html" class="openInNewTab" style="width: 100%" target="_blank">Click here to open in a new tab</a>
   
 
   <iframe
-    src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/demo-gravity.html"
+    src="https://ercanakyuerek.de//writing-a-roller-coaster-simulation/gravity.html"
     width="100%"
     height="300"
     style="border: 0"
@@ -873,7 +873,7 @@ so it might help you as well.</p>
 
 
 <p>
-    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/scenes/DemoGravity.tsx" target="_blank" rel="noopener noreferrer">
+    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/posts/writing-a-roller-coaster-simulation/GravityScene.tsx" target="_blank" rel="noopener noreferrer">
         Click here to view the code on GitHub (opens in a new tab)
     </a>
 </p>
@@ -882,12 +882,12 @@ so it might help you as well.</p>
 import { useControls } from &#39;leva&#39;;
 import { MathUtils, Vector3 } from &#39;three&#39;;
 
-import { Arrow } from &#39;../components/Arrow&#39;;
-import Line from &#39;../components/Line&#39;;
-import Scene from &#39;../components/Scene&#39;;
-import useColors from &#39;../hooks/useColors&#39;;
+import { Arrow } from &#39;../../components/Arrow&#39;;
+import Line from &#39;../../components/Line&#39;;
+import Scene from &#39;../../components/Scene&#39;;
+import useColors from &#39;../../hooks/useColors&#39;;
 
-const Demo = () =&gt; {
+const Gravity = () =&gt; {
   const colors = useColors();
   const lineLength = 8;
 
@@ -940,10 +940,10 @@ const Demo = () =&gt; {
   );
 };
 
-export const DemoGravity = () =&gt; {
+export const GravityScene = () =&gt; {
   return (
     &lt;Scene&gt;
-      &lt;Demo /&gt;
+      &lt;Gravity /&gt;
     &lt;/Scene&gt;
   );
 };
