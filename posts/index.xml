@@ -131,7 +131,7 @@ While writing this, I realize it is probably best to introduce the concept first
 
 
 <p>
-    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/posts/writing-a-roller-coaster-simulation/FrictionAndAirResistanceScene.tsx" target="_blank" rel="noopener noreferrer">
+    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/src//posts/writing-a-roller-coaster-simulation/FrictionAndAirResistanceScene.tsx" target="_blank" rel="noopener noreferrer">
         Click here to view the code on GitHub (opens in a new tab)
     </a>
 </p>
@@ -232,7 +232,12 @@ const FrictionAndAirResistance = () =&gt; {
         acceleration: 0,
       });
     }
-  }, [simulationState.distanceTraveled]);
+  }, [
+    simulationState.distanceTraveled,
+    points,
+    setSimulationState,
+    setSimulationStateWithoutFriction,
+  ]);
 
   const trainPosition = getPositionAtDistance(
     points[0],
@@ -417,7 +422,7 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 
 
 <p>
-    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/posts/writing-a-roller-coaster-simulation/LinearRollerCoasterTrackScene.tsx" target="_blank" rel="noopener noreferrer">
+    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/src//posts/writing-a-roller-coaster-simulation/LinearRollerCoasterTrackScene.tsx" target="_blank" rel="noopener noreferrer">
         Click here to view the code on GitHub (opens in a new tab)
     </a>
 </p>
@@ -629,7 +634,7 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
 
 
 <p>
-    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/posts/writing-a-roller-coaster-simulation/EvaluatingMotionScene.tsx" target="_blank" rel="noopener noreferrer">
+    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/src//posts/writing-a-roller-coaster-simulation/EvaluatingMotionScene.tsx" target="_blank" rel="noopener noreferrer">
         Click here to view the code on GitHub (opens in a new tab)
     </a>
 </p>
@@ -873,7 +878,7 @@ so it might help you as well.</p>
 
 
 <p>
-    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/posts/writing-a-roller-coaster-simulation/GravityScene.tsx" target="_blank" rel="noopener noreferrer">
+    <a href="https://github.com/geforcefan/ercanakyuerek.de/tree/main/scripts/src//posts/writing-a-roller-coaster-simulation/GravityScene.tsx" target="_blank" rel="noopener noreferrer">
         Click here to view the code on GitHub (opens in a new tab)
     </a>
 </p>
