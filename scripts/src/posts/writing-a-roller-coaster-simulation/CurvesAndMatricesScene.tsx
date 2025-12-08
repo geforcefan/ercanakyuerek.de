@@ -73,7 +73,7 @@ const CurvesAndMatrices = () => {
         distanceTraveled: 0,
       });
     }
-  }, [simulationState.distanceTraveled, points, setSimulationState, curve]);
+  }, [simulationState.distanceTraveled, setSimulationState, curve]);
 
   const matrix = getMatrixAtDistance(
     curve,

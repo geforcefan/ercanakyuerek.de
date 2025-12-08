@@ -16,6 +16,7 @@ export const DragControlPoints = (props: {
     <>
       {points.map((point, index) => (
         <DragControlPosition
+          key={index}
           axisLock={axisLock}
           position={point}
           onDrag={(position) => setPoints(set([...points], index, position))}
