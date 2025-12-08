@@ -19,22 +19,15 @@ import PerspectiveScene from '../../scenes/PerspectiveScene';
 const CurvesAndMatrices = () => {
   const colors = useColors();
 
-  const [points, setPoints] = useState([
-    new Vector3(-5, 15, 0),
-    new Vector3(0, 0, 0),
-    new Vector3(15, 0, 0),
-    new Vector3(20, 10, 0),
-  ]);
-
   const [simulationState, setSimulationState] = useControls(() => ({
     velocity: 0,
     distanceTraveled: 0,
     friction: {
-      value: 0.03,
+      value: 0.0,
       pad: 5,
     },
     airResistance: {
-      value: 0.0001,
+      value: 0.000,
       pad: 6,
     },
     acceleration: {
@@ -47,13 +40,29 @@ const CurvesAndMatrices = () => {
     },
   }));
 
-  const curve = useMemo(() => evaluate(points[0], points[1], points[2], points[3], 2.5), [points]);
+  const [points, setPoints] = useState([
+    new Vector3(0, 15, 0),
+    new Vector3(5, 0, 0),
+    new Vector3(25, 0, 0),
+    new Vector3(30, 15, 0),
+  ]);
+
+  const curve = useMemo(() => evaluate(points[0], points[1], points[2], points[3], 8), [points]);
+
+  const evaluatedMatrix = useMemo(
+    () =>
+      getMatrixAtDistance(
+        curve,
+        MathUtils.clamp(simulationState.distanceTraveled, 0, getLength(curve)),
+      ),
+    [curve, simulationState.distanceTraveled],
+  );
 
   useFrame((state, deltaTime) => {
     setSimulationState(
       evaluateMotionByMatrixWithEnergyLoss(
         simulationState,
-        getMatrixAtDistance(curve, simulationState.distanceTraveled),
+        evaluatedMatrix,
         simulationState.friction,
         simulationState.airResistance,
         simulationState.gravity,
@@ -75,17 +84,10 @@ const CurvesAndMatrices = () => {
     }
   }, [simulationState.distanceTraveled, setSimulationState, curve]);
 
-  const matrix = getMatrixAtDistance(
-    curve,
-    MathUtils.clamp(simulationState.distanceTraveled, 0, getLength(curve)),
-  );
-
-  const trainPosition = fromMatrix4(matrix);
-
   return (
     <>
-      <MatrixArrowHelper matrix={matrix} />
-      <ControlPoint position={trainPosition} color={colors.highlight} />
+      <MatrixArrowHelper matrix={evaluatedMatrix} />
+      <ControlPoint position={fromMatrix4(evaluatedMatrix)} color={colors.highlight} />
 
       <Line points={points} color={colors.secondary} />
       <CurveWireframe color={colors.secondary} curve={curve} />
