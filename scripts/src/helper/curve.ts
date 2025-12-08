@@ -3,7 +3,6 @@ import { MathUtils, Matrix4, Vector3 } from 'three';
 
 import { lowerBound } from './lower-bound';
 import { distance, interpolate as interpolateMatrix4, lookRelativeAt } from './matrix4';
-import { fromMatrix4 } from './vector3';
 
 export type CurveNode = {
   matrix: Matrix4;
@@ -67,16 +66,16 @@ export const insertMatrix = (curve: CurveNode[], matrix: Matrix4): void => {
 
 export const insertPosition = (curve: CurveNode[], position: Vector3) => {
   const lastNode = last(curve);
-  const hasSingleNode = curve.length === 1;
 
   if (lastNode) {
-    const lastNodePosition = fromMatrix4(lastNode.matrix);
-    if (hasSingleNode) {
-      lastNode.matrix = lookRelativeAt(lastNode.matrix, position);
+    if (curve.length === 1) {
+      lookRelativeAt(lastNode.matrix, position);
     }
-    lastNode.matrix = lookRelativeAt(lastNode.matrix, position);
-    lastNode.matrix.setPosition(lastNodePosition);
+    lookRelativeAt(lastNode.matrix, position);
+
+    insertMatrix(curve, lastNode.matrix.clone().setPosition(position));
+    return;
   }
 
-  insertMatrix(curve, (lastNode?.matrix.clone() || new Matrix4()).setPosition(position));
+  insertMatrix(curve, new Matrix4().setPosition(position));
 };
