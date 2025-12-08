@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useDevicePixelRatio } from 'use-device-pixel-ratio';
 
 import useColors from '../hooks/useColors';
 
-const Scene = ({ children }: { children?: ReactElement }) => {
+const PerspectiveScene = ({ children }: { children?: ReactNode }) => {
   const colors = useColors();
   const dpr = useDevicePixelRatio();
 
@@ -18,7 +18,7 @@ const Scene = ({ children }: { children?: ReactElement }) => {
         left: 0,
       }}
     >
-      <Canvas orthographic camera={{ zoom: 30 }} dpr={dpr}>
+      <Canvas dpr={dpr}>
         <color attach="background" args={[colors.primary]} />
         {children}
       </Canvas>
@@ -26,4 +26,4 @@ const Scene = ({ children }: { children?: ReactElement }) => {
   );
 };
 
-export default Scene;
+export default PerspectiveScene;

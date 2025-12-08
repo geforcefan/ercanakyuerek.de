@@ -6,15 +6,15 @@ import { MathUtils, Vector3 } from 'three';
 import { Arrow } from '../../components/Arrow';
 import { ControlPoint } from '../../components/ControlPoint';
 import Line from '../../components/Line';
-import Scene from '../../components/Scene';
 import { evaluateMotionByAcceleration } from '../../helper/physics';
 import useColors from '../../hooks/useColors';
+import OrthographicScene from '../../scenes/OrthographicScene';
 
 const EvaluatingMotion = () => {
   const colors = useColors();
 
-  const [{ slope, gravity, sinSlope, trackLength, ...simulationState }, setSimulationState] = useControls(
-    () => ({
+  const [{ slope, gravity, sinSlope, trackLength, ...simulationState }, setSimulationState] =
+    useControls(() => ({
       slope: {
         value: 0,
         step: 5,
@@ -43,8 +43,7 @@ const EvaluatingMotion = () => {
         value: 0,
         pad: 5,
       },
-    }),
-  );
+    }));
 
   useEffect(() => {
     const sinSlope = Math.sin(MathUtils.degToRad(slope));
@@ -68,7 +67,7 @@ const EvaluatingMotion = () => {
         distanceTraveled: 0,
       });
     }
-  }, [simulationState.distanceTraveled, trackLength]);
+  }, [simulationState.distanceTraveled, trackLength, setSimulationState]);
 
   return (
     <>
@@ -94,8 +93,8 @@ const EvaluatingMotion = () => {
 
 export const EvaluatingMotionScene = () => {
   return (
-    <Scene>
+    <OrthographicScene>
       <EvaluatingMotion />
-    </Scene>
+    </OrthographicScene>
   );
 };

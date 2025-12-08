@@ -1,11 +1,6 @@
 import { Vector3 } from 'three';
 
-import { lowerBound } from './lower-bound';
-
-export type CurveNode = {
-  distance: number;
-  position: Vector3;
-};
+import { CurveNode, getLength, getMatrixAtDistance, insertMatrix, insertPosition } from './curve';
 
 export const bezierFast = (p0: Vector3, p1: Vector3, p2: Vector3, p3: Vector3, t: number) => {
   const t1 = 1.0 - t;
@@ -35,37 +30,6 @@ export const estimateLength = (p0: Vector3, p1: Vector3, p2: Vector3, p3: Vector
   return length;
 };
 
-export const length = (nodes: CurveNode[]) => {
-  if (!nodes.length) return 0;
-  return nodes[nodes.length - 1].distance;
-};
-
-export const getPositionAtDistance = (nodes: CurveNode[], at: number) => {
-  if (nodes.length < 2) return new Vector3(0.0);
-
-  const lowerElement = lowerBound(nodes, at, 'distance');
-
-  const nextNode = nodes[lowerElement];
-  const currentNode = nodes[lowerElement - 1];
-
-  const isFirst = nextNode === nodes[0];
-  const isLast = currentNode === nodes[nodes.length - 1];
-
-  if (isFirst) return nodes[0].position;
-  if (isLast) return nodes[nodes.length - 1].position;
-
-  let t = 0.0;
-
-  if (nextNode.distance - currentNode.distance > 0.0001) {
-    t = Math.max(
-      Math.min((at - currentNode.distance) / (nextNode.distance - currentNode.distance), 1.0),
-      0.0,
-    );
-  }
-
-  return currentNode.position.lerp(nextNode.position, t);
-};
-
 export const evaluateUniform = (
   p0: Vector3,
   p1: Vector3,
@@ -73,22 +37,17 @@ export const evaluateUniform = (
   p3: Vector3,
   resolution: number = 10,
 ) => {
-  const newNodes = [];
+  const curve: CurveNode[] = [];
   const nodes = evaluate(p0, p1, p2, p3, 40);
-  const splineLength = length(nodes);
-
+  const splineLength = getLength(nodes);
   const numberOfNodes = Math.max(Math.floor(splineLength * resolution), 2);
+
   for (let i = 0; i < numberOfNodes; i++) {
     const at = (i / (numberOfNodes - 1)) * splineLength;
-    const position = getPositionAtDistance(nodes, at);
-
-    newNodes.push({
-      position,
-      distance: at,
-    });
+    insertMatrix(curve, getMatrixAtDistance(nodes, at));
   }
 
-  return newNodes;
+  return curve;
 };
 
 export const evaluate = (
@@ -98,24 +57,13 @@ export const evaluate = (
   p3: Vector3,
   resolution: number = 10,
 ) => {
-  let distance = 0;
-  const nodes = [];
+  const curve: CurveNode[] = [];
   const numberOfNodes = Math.max(Math.floor(estimateLength(p0, p1, p2, p3) * resolution), 2);
-  let lastPosition = p0;
 
   for (let i = 0; i < numberOfNodes; i++) {
     const t = i / (numberOfNodes - 1);
-
-    const position = bezierFast(p0, p1, p2, p3, t);
-    distance += position.distanceTo(lastPosition);
-
-    nodes.push({
-      position,
-      distance,
-    });
-
-    lastPosition = position;
+    insertPosition(curve, bezierFast(p0, p1, p2, p3, t));
   }
 
-  return nodes;
+  return curve;
 };

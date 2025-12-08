@@ -8,7 +8,7 @@ export const DragControlPosition = (props: {
   onDrag: (vec: Vector3) => void;
   children?: React.ReactNode;
 }) => {
-  const { axisLock = 'z', position = new Vector3(0, 0, 0), onDrag = () => {}, children } = props;
+  const { axisLock, position = new Vector3(0, 0, 0), onDrag = () => {}, children } = props;
 
   const startMatrix = useMemo(() => {
     return new Matrix4().setPosition(position);

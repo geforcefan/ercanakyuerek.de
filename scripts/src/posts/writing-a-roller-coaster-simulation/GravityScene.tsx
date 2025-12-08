@@ -4,8 +4,8 @@ import { MathUtils, Vector3 } from 'three';
 
 import { Arrow } from '../../components/Arrow';
 import Line from '../../components/Line';
-import Scene from '../../components/Scene';
 import useColors from '../../hooks/useColors';
+import OrthographicScene from '../../scenes/OrthographicScene';
 
 const Gravity = () => {
   const colors = useColors();
@@ -62,8 +62,8 @@ const Gravity = () => {
 
 export const GravityScene = () => {
   return (
-    <Scene>
+    <OrthographicScene>
       <Gravity />
-    </Scene>
+    </OrthographicScene>
   );
 };

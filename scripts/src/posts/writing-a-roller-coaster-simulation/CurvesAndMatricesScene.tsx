@@ -1,69 +1,45 @@
-import React, { useEffect } from 'react';
-import { useControls } from 'leva';
-import { MathUtils, Vector3 } from 'three';
+import React, { useState } from 'react';
+import { CameraControls } from '@react-three/drei';
+import { Color, Vector3 } from 'three';
 
-import { Arrow } from '../../components/Arrow';
+import BezierCurve from '../../components/BezierCurve';
+import { DragControlPoints } from '../../components/DragControlPoints';
 import Line from '../../components/Line';
-import Scene from '../../components/Scene';
 import useColors from '../../hooks/useColors';
+import PerspectiveScene from '../../scenes/PerspectiveScene';
 
 const CurvesAndMatrices = () => {
   const colors = useColors();
-  const lineLength = 8;
 
-  const [{ slope, gravity }, setState] = useControls(() => ({
-    slope: {
-      value: 0,
-      step: 5,
-      min: -180,
-      max: 180,
-    },
-    gravity: {
-      value: 9.81665,
-      pad: 5,
-    },
-    sinSlope: {
-      disabled: true,
-      label: 'sin(slope)',
-      pad: 5,
-      value: 0,
-    },
-    acceleration: {
-      disabled: true,
-      value: 0,
-      pad: 5,
-    },
-  }));
-
-  useEffect(() => {
-    const sinSlope = Math.sin(MathUtils.degToRad(slope));
-    const acceleration = gravity * sinSlope;
-
-    setState({ acceleration, sinSlope });
-  }, [slope, gravity, setState]);
+  const [points, setPoints] = useState([
+    new Vector3(-3, -3, 0),
+    new Vector3(3, -3, 0),
+    new Vector3(-3, 3, 0),
+    new Vector3(3, 3, 0),
+  ]);
 
   return (
     <>
-      <group position={[-5, 0, 0]} rotation={[0, 0, MathUtils.degToRad(slope)]}>
-        <Arrow
-          position={[-lineLength / 2, 0, 0]}
-          rotation={[0, 0, Math.PI / 2]}
-          color={colors.secondary}
-        />
-
-        <Line
-          points={[new Vector3(-lineLength / 2, 0, 0), new Vector3(lineLength / 2, 0, 0)]}
-          color={colors.secondary}
-        />
-      </group>
+      <Line points={points} color={colors.secondary} />
+      <BezierCurve points={points} resolution={2.5} />
+      <DragControlPoints points={points} setPoints={setPoints} />
     </>
   );
 };
 
 export const CurvesAndMatricesScene = () => {
   return (
-    <Scene>
+    <PerspectiveScene>
+      <gridHelper
+        args={[
+          100,
+          100,
+          new Color(0xdddddd).convertSRGBToLinear(),
+          new Color(0xdddddd).convertSRGBToLinear(),
+        ]}
+      />
+      <CameraControls makeDefault dollyToCursor={true} />
       <CurvesAndMatrices />
-    </Scene>
+    </PerspectiveScene>
   );
 };

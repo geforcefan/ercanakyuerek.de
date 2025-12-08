@@ -6,13 +6,13 @@ import { MathUtils, Vector3 } from 'three';
 import { ControlPoint } from '../../components/ControlPoint';
 import { DragControlPoints } from '../../components/DragControlPoints';
 import Line from '../../components/Line';
-import Scene from '../../components/Scene';
 import { getForwardDirectionAtDistance, getPositionAtDistance, length } from '../../helper/linear';
 import {
   evaluateMotionByForwardDirection,
   evaluateMotionByForwardDirectionWithFriction,
 } from '../../helper/physics';
 import useColors from '../../hooks/useColors';
+import OrthographicScene from '../../scenes/OrthographicScene';
 
 const FrictionAndAirResistance = () => {
   const colors = useColors();
@@ -119,7 +119,7 @@ const FrictionAndAirResistance = () => {
 
   return (
     <>
-      <DragControlPoints points={points} setPoints={setPoints} />
+      <DragControlPoints axisLock="z" points={points} setPoints={setPoints} />
       <Line points={points} color={colors.secondary} />
 
       <ControlPoint position={trainPosition} color={colors.highlight} />
@@ -130,8 +130,8 @@ const FrictionAndAirResistance = () => {
 
 export const FrictionAndAirResistanceScene = () => {
   return (
-    <Scene>
+    <OrthographicScene>
       <FrictionAndAirResistance />
-    </Scene>
+    </OrthographicScene>
   );
 };

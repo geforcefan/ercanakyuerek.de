@@ -16,15 +16,18 @@ const BezierCurve = (props: { points: Vector3[]; resolution?: number; uniform?: 
     return evaluate(points[0], points[1], points[2], points[3], resolution);
   }, [points, resolution, uniform]);
 
+  const positions = useMemo(
+    () => nodes.map((node) => new Vector3().setFromMatrixPosition(node.matrix)),
+    [nodes],
+  );
+
   return (
     <>
-      {nodes.map((node, i) => (
-        <ControlPoint size="sm" key={i} position={node.position} />
+      {positions.map((position, i) => (
+        <ControlPoint size="sm" key={i} position={position} />
       ))}
 
-      {!!nodes.length && (
-        <Line points={nodes.map((node) => node.position)} color={colors.secondary} />
-      )}
+      {!!positions.length && <Line points={positions} color={colors.secondary} />}
     </>
   );
 };

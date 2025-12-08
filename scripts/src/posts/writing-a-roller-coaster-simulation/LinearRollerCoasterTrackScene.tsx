@@ -4,22 +4,18 @@ import { useControls } from 'leva';
 import { Vector3 } from 'three';
 
 import { ControlPoint } from '../../components/ControlPoint';
+import { DragControlPoints } from '../../components/DragControlPoints';
 import Line from '../../components/Line';
-import Scene from '../../components/Scene';
 import { getForwardDirectionAtDistance, getPositionAtDistance, length } from '../../helper/linear';
 import { evaluateMotionByForwardDirection } from '../../helper/physics';
 import useColors from '../../hooks/useColors';
-import { DragControlPoints } from '../../components/DragControlPoints';
+import OrthographicScene from '../../scenes/OrthographicScene';
 
 const LinearRollerCoasterTrack = () => {
   const colors = useColors();
 
   // Control points
-  const [points, setPoints] = useState([
-    new Vector3(-11.5, 3.2, 0),
-    new Vector3(1.4, -2.8, 0)
-  ]);
-
+  const [points, setPoints] = useState([new Vector3(-11.5, 3.2, 0), new Vector3(1.4, -2.8, 0)]);
 
   const [simulationState, setSimulationState] = useControls(() => ({
     velocity: 0,
@@ -58,13 +54,17 @@ const LinearRollerCoasterTrack = () => {
         acceleration: 0,
       });
     }
-  }, [simulationState.distanceTraveled]);
+  }, [simulationState.distanceTraveled, setSimulationState, points]);
 
-  const trainPosition = getPositionAtDistance(points[0], points[1], simulationState.distanceTraveled);
+  const trainPosition = getPositionAtDistance(
+    points[0],
+    points[1],
+    simulationState.distanceTraveled,
+  );
 
   return (
     <>
-      <DragControlPoints points={points} setPoints={setPoints}/>
+      <DragControlPoints axisLock="z" points={points} setPoints={setPoints} />
       <Line points={points} color={colors.secondary} />
       <ControlPoint position={trainPosition} color={colors.highlight} />
     </>
@@ -73,8 +73,8 @@ const LinearRollerCoasterTrack = () => {
 
 export const LinearRollerCoasterTrackScene = () => {
   return (
-    <Scene>
+    <OrthographicScene>
       <LinearRollerCoasterTrack />
-    </Scene>
+    </OrthographicScene>
   );
 };

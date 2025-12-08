@@ -4,10 +4,10 @@ import { Easing, Group, Tween } from '@tweenjs/tween.js';
 import { Vector3 } from 'three';
 
 import BezierCurve from '../../components/BezierCurve';
-import Line from '../../components/Line';
-import Scene from '../../components/Scene';
-import useColors from '../../hooks/useColors';
 import { DragControlPoints } from '../../components/DragControlPoints';
+import Line from '../../components/Line';
+import useColors from '../../hooks/useColors';
+import OrthographicScene from '../../scenes/OrthographicScene';
 
 const Example = () => {
   const colors = useColors();
@@ -49,7 +49,7 @@ const Example = () => {
     denseSplineTween.start();
 
     return group;
-  }, []);
+  }, [motion]);
 
   useFrame((state) => {
     group.update(state.clock.getElapsedTime() * 1000);
@@ -58,20 +58,16 @@ const Example = () => {
   return (
     <>
       <Line points={points} color={colors.secondary} />
-      <DragControlPoints points={points} setPoints={setPoints} />
-      <BezierCurve
-        points={points}
-        resolution={motion.resolution}
-        uniform={!!Math.round(motion.uniform)}
-      />
+      <DragControlPoints axisLock="z" points={points} setPoints={setPoints} />
+      <BezierCurve points={points} resolution={2.5} uniform={true} />
     </>
   );
 };
 
 export const SplineNodesExampleScene = () => {
   return (
-    <Scene>
+    <OrthographicScene>
       <Example />
-    </Scene>
+    </OrthographicScene>
   );
 };
