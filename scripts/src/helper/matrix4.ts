@@ -1,7 +1,7 @@
 import { Matrix4, Quaternion, Vector2, Vector3 } from 'three';
 
-import { fromVector3 } from './vector4';
 import { fromMatrix4 } from './vector3';
+import { fromVector3 } from './vector4';
 
 export const interpolate = (matrixA: Matrix4, matrixB: Matrix4, t: number) => {
   const fromQuaternion = new Quaternion();
@@ -35,14 +35,12 @@ export const lookRelativeAt = (matrix: Matrix4, lookAt: Vector3) => {
   const inverseMatrix = new Matrix4().copy(matrix).invert();
   const transformedNormal = normal.clone().applyMatrix4(inverseMatrix);
 
-  const normalLength = new Vector2(transformedNormal.x, transformedNormal.z).length()
+  const normalLength = new Vector2(transformedNormal.x, transformedNormal.z).length();
 
   const rotationY = new Matrix4().makeRotationY(
     Math.atan2(-transformedNormal.x, -transformedNormal.z),
   );
-  const rotationX = new Matrix4().makeRotationX(
-    Math.atan2(transformedNormal.y, normalLength),
-  );
+  const rotationX = new Matrix4().makeRotationX(Math.atan2(transformedNormal.y, normalLength));
 
   matrix.multiply(rotationY);
   matrix.multiply(rotationX);
@@ -51,3 +49,5 @@ export const lookRelativeAt = (matrix: Matrix4, lookAt: Vector3) => {
 
   return matrix;
 };
+
+export const getRoll = (m: Matrix4) => Math.atan2(m.elements[1], m.elements[5]);
