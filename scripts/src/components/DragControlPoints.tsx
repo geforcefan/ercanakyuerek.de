@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import set from 'lodash/set';
 import { Vector3 } from 'three';
 
+import useColors from '../hooks/useColors';
 import { ControlPoint } from './ControlPoint';
 import { DragControlPosition } from './DragControlPosition';
 
@@ -12,6 +13,9 @@ export const DragControlPoints = (props: {
 }) => {
   const { points, setPoints, axisLock } = props;
 
+  const colors = useColors();
+  const [hover, setHover] = useState<number>();
+
   return (
     <>
       {points.map((point, index) => (
@@ -21,7 +25,11 @@ export const DragControlPoints = (props: {
           position={point}
           onDrag={(position) => setPoints(set([...points], index, position))}
         >
-          <ControlPoint />
+          <ControlPoint
+            color={index === hover ? colors.highlight : colors.secondary}
+            onPointerEnter={() => setHover(index)}
+            onPointerLeave={() => setHover(undefined)}
+          />
         </DragControlPosition>
       ))}
     </>

@@ -23,11 +23,11 @@ const CurvesAndMatrices = () => {
     velocity: 0,
     distanceTraveled: 0,
     friction: {
-      value: 0.0,
+      value: 0.03,
       pad: 5,
     },
     airResistance: {
-      value: 0.000,
+      value: 0.0001,
       pad: 6,
     },
     acceleration: {
