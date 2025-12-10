@@ -1163,7 +1163,6 @@ Next to this text, you can view an advanced test that displays a spline. I have 
 <h2 id="conclusion">Conclusion</h2>
 <p>That&rsquo;s all! It wasn&rsquo;t that difficult, was it? We haven&rsquo;t yet covered other complex types, such as passing strings to and from WebAssembly modules, or how to log. However, you should have a rough idea of how things work now. In future articles, I will explore data types, memory management, and binding in greater depth. To be honest, gluing code together is not enjoyable. It requires creating glue code on the C++ side and a wrapper JavaScript module that <code>serializes</code> and <code>unserializes</code> arguments and return values. Some solutions eliminate the need for writing both code pieces, but for now, this should help you get started, especially if you aim to build a small yet performance-critical library.</p>
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/3-implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/3-implementing-library-functions/</guid><description>&lt;div class="embedded-iframe float-right"&gt;
-&lt;a href="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html" class="openInNewTab" style="width: 225px" target="_blank"&gt;Click here to open in a new tab&lt;/a&gt;
 &lt;iframe
 src="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html"
 width="225px"
@@ -1184,8 +1183,6 @@ class="iframe"
 
 <div class="embedded-iframe float-right">
 
-  
-  <a href="https://ercanakyuerek.de//wasi-sdk-writing-library-in-cpp/spline.html" class="openInNewTab" style="width: 225px" target="_blank">Click here to open in a new tab</a>
   
 
   <iframe
