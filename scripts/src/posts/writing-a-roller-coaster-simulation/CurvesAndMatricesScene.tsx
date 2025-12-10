@@ -97,11 +97,7 @@ export const CurvesAndMatricesScene = () => {
   const [cubicPoints, setCubicPoints] = useState([
     new Vector3(0, 0, 0),
     new Vector3(10, 1, 0),
-    new Vector3(15, 1, 0),
-    new Vector3(20, 1, 0),
-    new Vector3(25, 1, 0),
-    new Vector3(30, 1, 0),
-    new Vector3(40, 0, 0),
+    new Vector3(20, 0, 0),
   ]);
 
   const [points, setPoints] = useState([

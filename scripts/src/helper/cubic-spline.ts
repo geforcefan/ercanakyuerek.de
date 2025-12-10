@@ -19,14 +19,13 @@ export function makeCubicSpline(points: Vector2[]): CubicSpline {
   const h = Array.from({ length: n }, (_, i) => x[i + 1] - x[i]);
   const alpha = Array(n + 1).fill(0);
 
-  // alpha[i] für i = 1..n-1
   for (let i = 1; i < n; i++) {
     const sR = (y[i + 1] - y[i]) / h[i];
     const sL = (y[i] - y[i - 1]) / h[i - 1];
     alpha[i] = 3 * (sR - sL);
   }
 
-  // Tridiagonalsystem lösen
+  // solve tridiagonal system
   const c = Array(n + 1).fill(0);
   const d = [...c];
   const b = Array(n).fill(0);
