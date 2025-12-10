@@ -1,0 +1,18 @@
+.plot-viewport,
+.spline-viewport {
+  width: calc(50vw - 20px);
+  height: 300px;
+  bottom: 0;
+  position: absolute;
+  overflow: hidden;
+}
+
+.spline-viewport {
+  left: 0;
+  right: auto;
+}
+
+.plot-viewport {
+  right: 0;
+  left: auto;
+}

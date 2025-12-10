@@ -10,51 +10,66 @@ export interface CubicSpline {
   d: number[];
 }
 
-export function makeCubicSpline(points: Vector2[]): CubicSpline {
+export function makeClampedCubicSpline(
+  points: Vector2[],
+  startSlope: number = 0,
+  endSlope: number = 0,
+): CubicSpline {
   const n = points.length - 1;
 
   const x = points.map((p) => p.x);
   const y = points.map((p) => p.y);
+  const dx = Array.from({ length: n }, (_, i) => x[i + 1] - x[i]);
 
-  const h = Array.from({ length: n }, (_, i) => x[i + 1] - x[i]);
   const alpha = Array(n + 1).fill(0);
 
+  // clamped
+  alpha[0] = 3 * ((y[1] - y[0]) / dx[0] + startSlope);
+  alpha[n] = 3 * (endSlope - (y[n] - y[n - 1]) / dx[n - 1]);
+
   for (let i = 1; i < n; i++) {
-    const sR = (y[i + 1] - y[i]) / h[i];
-    const sL = (y[i] - y[i - 1]) / h[i - 1];
+    const sR = (y[i + 1] - y[i]) / dx[i];
+    const sL = (y[i] - y[i - 1]) / dx[i - 1];
     alpha[i] = 3 * (sR - sL);
   }
 
   // solve tridiagonal system
   const c = Array(n + 1).fill(0);
-  const d = [...c];
-  const b = Array(n).fill(0);
+  const b = Array(n + 1).fill(0);
+  const d = Array(n + 1).fill(0);
 
   const l = Array(n + 1).fill(0);
   const mu = Array(n + 1).fill(0);
   const z = Array(n + 1).fill(0);
 
-  l[0] = 1;
+  // start
+  l[0] = 2 * dx[0];
+  mu[0] = 0.5;
+  z[0] = alpha[0] / l[0];
 
+  // inner
   for (let i = 1; i < n; i++) {
-    l[i] = 2 * (x[i + 1] - x[i - 1]) - h[i - 1] * mu[i - 1];
-    mu[i] = h[i] / l[i];
-    z[i] = (alpha[i] - h[i - 1] * z[i - 1]) / l[i];
+    l[i] = 2 * (x[i + 1] - x[i - 1]) - dx[i - 1] * mu[i - 1];
+    mu[i] = dx[i] / l[i];
+    z[i] = (alpha[i] - dx[i - 1] * z[i - 1]) / l[i];
   }
 
-  l[n] = 1;
+  // end
+  l[n] = dx[n - 1] * (2 - mu[n - 1]);
+  z[n] = (alpha[n] - dx[n - 1] * z[n - 1]) / l[n];
+  c[n] = z[n];
 
-  // Back substitution
-  for (let i = n - 1; i >= 0; i--) {
-    c[i] = z[i] - mu[i] * c[i + 1];
-    b[i] = (y[i + 1] - y[i]) / h[i] - (h[i] * (2 * c[i] + c[i + 1])) / 3;
-    d[i] = (c[i + 1] - c[i]) / (3 * h[i]);
+  // back substitution
+  for (let j = n - 1; j >= 0; j--) {
+    c[j] = z[j] - mu[j] * c[j + 1];
+    b[j] = (y[j + 1] - y[j]) / dx[j] - (dx[j] * (c[j + 1] + 2 * c[j])) / 3;
+    d[j] = (c[j + 1] - c[j]) / (3 * dx[j]);
   }
 
   return { x, y, b, c, d };
 }
 
-export function evaluateSpline(s: CubicSpline, t: number): number {
+export function evaluate(s: CubicSpline, t: number): number {
   const j = lowerBound(s.x, t, (v) => v);
   const i = Math.max(0, j - 1);
   const dx = t - s.x[i];

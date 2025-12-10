@@ -21,6 +21,10 @@ module.exports = {
       { test: /\.wasm$/, loader: "arraybuffer-loader" },
       { test: /\.nl2park$/, loader: "arraybuffer-loader" },
       {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
         test: /\.(ts|tsx|js|jsx)$/,
         exclude: /node_modules/,
         use: {

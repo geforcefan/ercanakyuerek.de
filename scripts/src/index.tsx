@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import { CurvesAndMatricesScene } from './posts/writing-a-roller-coaster-simulation/CurvesAndMatricesScene';
+import "./styles/common.css"
+
+import { CurvesAndMatricesScene } from './experiments/CurvesAndMatricesScene';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
