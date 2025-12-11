@@ -1,6 +1,12 @@
 import { Vector3 } from 'three';
 
-import { CurveNode, getLength, getMatrixAtDistance, insertMatrix, insertPosition } from './curve';
+import {
+  createFromUniformSample,
+  CurveNode,
+  getLength,
+  getMatrixAtDistance,
+  insertMatrix,
+} from './curve';
 
 export const bezierFast = (p0: Vector3, p1: Vector3, p2: Vector3, p3: Vector3, t: number) => {
   const t1 = 1.0 - t;
@@ -38,7 +44,7 @@ export const evaluateUniform = (
   resolution: number = 10,
 ) => {
   const curve: CurveNode[] = [];
-  const nodes = evaluate(p0, p1, p2, p3, 40);
+  const nodes = makeBezierSplineCurve(p0, p1, p2, p3, 40);
   const splineLength = getLength(nodes);
   const numberOfNodes = Math.max(Math.floor(splineLength * resolution), 2);
 
@@ -50,20 +56,14 @@ export const evaluateUniform = (
   return curve;
 };
 
-export const evaluate = (
+export const makeBezierSplineCurve = (
   p0: Vector3,
   p1: Vector3,
   p2: Vector3,
   p3: Vector3,
   resolution: number = 10,
 ) => {
-  const curve: CurveNode[] = [];
-  const numberOfNodes = Math.max(Math.floor(estimateLength(p0, p1, p2, p3) * resolution), 2);
-
-  for (let i = 0; i < numberOfNodes; i++) {
-    const t = i / (numberOfNodes - 1);
-    insertPosition(curve, bezierFast(p0, p1, p2, p3, t));
-  }
-
-  return curve;
+  return createFromUniformSample(0, estimateLength(p0, p1, p2, p3), resolution, (at, t) =>
+    bezierFast(p0, p1, p2, p3, t),
+  );
 };

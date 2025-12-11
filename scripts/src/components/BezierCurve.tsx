@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Vector3 } from 'three';
 
-import { evaluate, evaluateUniform } from '../helper/bezier';
+import { makeBezierSplineCurve, evaluateUniform } from '../maths/bezier';
 import useColors from '../hooks/useColors';
 import { ControlPoint } from './ControlPoint';
 import Line from './Line';
@@ -13,7 +13,7 @@ const BezierCurve = (props: { points: Vector3[]; resolution?: number; uniform?: 
 
   const nodes = useMemo(() => {
     if (uniform) return evaluateUniform(points[0], points[1], points[2], points[3], resolution);
-    return evaluate(points[0], points[1], points[2], points[3], resolution);
+    return makeBezierSplineCurve(points[0], points[1], points[2], points[3], resolution);
   }, [points, resolution, uniform]);
 
   const positions = useMemo(

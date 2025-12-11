@@ -6,7 +6,7 @@ import { MathUtils, Vector3 } from 'three';
 import { ControlPoint } from '../../components/ControlPoint';
 import { DragControlPoints } from '../../components/DragControlPoints';
 import Line from '../../components/Line';
-import { getForwardDirectionAtDistance, getPositionAtDistance, length } from '../../helper/linear';
+import { getForwardDirectionAtDistance, getPositionAtDistance, length } from '../../maths/linear';
 import {
   evaluateMotionByForwardDirection,
   evaluateMotionByForwardDirectionWithFriction,
@@ -49,7 +49,7 @@ const FrictionAndAirResistance = () => {
 
   // Main motion evaluation per frame
   useFrame((state, deltaTime) => {
-    // evaluate with friction and air resistance
+    // makeBezierSplineCurve with friction and air resistance
     setSimulationState(
       evaluateMotionByForwardDirectionWithFriction(
         simulationState,
@@ -61,7 +61,7 @@ const FrictionAndAirResistance = () => {
       ),
     );
 
-    // evaluate without energy loss
+    // makeBezierSplineCurve without energy loss
     setSimulationStateWithoutFriction(
       evaluateMotionByForwardDirection(
         simulationStateWithoutFriction,

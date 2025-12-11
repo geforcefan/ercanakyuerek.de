@@ -6,7 +6,7 @@ tags: ["writing a roller coaster simulation"]
 ---
 
 Before we implement the function, there's one small simplification we need to mention:
-In this chapter we will always evaluate the motion every **16 ms (0.016 seconds)**,
+In this chapter we will always makeBezierSplineCurve the motion every **16 ms (0.016 seconds)**,
 which corresponds to roughly **60 frames per second**.
 
 Using a fixed time step makes the formulas easier to understand for this article.
@@ -40,7 +40,7 @@ In the beginning, the coaster does not move and has not traveled any distance.
 Our simulation works by creating a new state based on the previous state.
 Think of it like this:
 
-> initial state → evaluate → new state → evaluate → new state → ...
+> initial state → makeBezierSplineCurve → new state → makeBezierSplineCurve → new state → ...
 
 To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from [Chapter 2]({{< ref "/posts/writing-a-roller-coaster-simulation/2-gravity.md" >}}). This formula tells us how much of gravity actually acts in the direction of the slope:
 
@@ -118,7 +118,7 @@ This is already a complete physics step without friction or air resistance.
 
 Just like in the last chapter, we again have an interactive demo. This time, we’ve implemented a simple motion-evaluation method that applies basic physics. In this demo you can play around with the slope and already see a physical motion emerging.
 
-> **Important note:** Earlier in this article I said we would evaluate everything every **16 ms**, right? Well… that was kind of a lie, at least for this demo.  
+> **Important note:** Earlier in this article I said we would makeBezierSplineCurve everything every **16 ms**, right? Well… that was kind of a lie, at least for this demo.  
 > Since we’re using **THREE.js**, we *can* make use of the `useFrame` hook, which gives us the **delta time of the previous frame**, and we benefit from using it. This is the proper way to handle updates, instead of forcing a fixed 16 ms step, which I briefly covered in the introduction of this chapter.
 
 

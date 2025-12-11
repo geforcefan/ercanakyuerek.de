@@ -1,6 +1,7 @@
-import { Vector2 } from 'three';
+import { Vector2, Vector3 } from 'three';
 
-import { lowerBound } from './lower-bound';
+import { createFromUniformSample } from './curve';
+import { lowerBound } from '../helper/lower-bound';
 
 export interface CubicSpline {
   x: number[];
@@ -76,3 +77,21 @@ export function evaluate(s: CubicSpline, t: number): number {
 
   return s.y[i] + s.b[i] * dx + s.c[i] * dx * dx + s.d[i] * dx * dx * dx;
 }
+
+export const makeClampedCubicSplineCurve = (
+  points: Vector2[],
+  startSlope: number = 0,
+  endSlope: number = 0,
+  resolution: number = 8,
+) => {
+  if (points.length < 2) return [];
+
+  const spline = makeClampedCubicSpline(points, startSlope, endSlope);
+
+  return createFromUniformSample(
+    points[0].x,
+    points[points.length - 1].x,
+    resolution,
+    (at) => new Vector3(at, evaluate(spline, at), 0),
+  );
+};

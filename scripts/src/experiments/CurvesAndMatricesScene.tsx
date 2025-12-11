@@ -2,8 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { CameraControls, CameraControlsImpl } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
-import { first } from 'lodash';
-import last from 'lodash/last';
 import Plot from 'react-plotly.js';
 import { MathUtils, Vector2, Vector3 } from 'three';
 
@@ -12,22 +10,21 @@ import CurveWireframe from '../components/CurveWireframe';
 import { DragControlPoints } from '../components/DragControlPoints';
 import Line from '../components/Line';
 import MatrixArrowHelper from '../components/MatrixArrowHelper';
-import { evaluate as evaluateBezier } from '../helper/bezier';
-import { evaluate as evaluateCubicSpline, makeClampedCubicSpline } from '../helper/cubic-spline';
-import { CurveNode, getLength, getMatrixAtDistance } from '../helper/curve';
 import { evaluateMotionByMatrixWithEnergyLoss } from '../helper/physics';
-import { plotDataFromPoints } from '../helper/plot';
-import { uniformMap } from '../helper/uniform-map';
-import { fromMatrix4 } from '../helper/vector3';
 import useColors from '../hooks/useColors';
 import { useMeasure } from '../hooks/useMeasure';
+import { makeBezierSplineCurve } from '../maths/bezier';
+import { makeClampedCubicSplineCurve } from '../maths/cubic-spline';
+import { applyRollCurve, CurveNode, getLength, getMatrixAtDistance } from '../maths/curve';
+import { fromMatrix4 } from '../maths/vector3';
 import OrthographicScene from '../scenes/OrthographicScene';
 import PerspectiveScene from '../scenes/PerspectiveScene';
+import { plotDataFromPoints } from './plot';
 
 import './curves-and-matrices.css';
 
-import { getRoll } from '../helper/matrix4';
 import { numberToHexString } from '../helper/numberToHexString';
+import { getRoll } from '../maths/matrix4';
 
 const gravity = 9.81665;
 const friction = 0.03;
@@ -39,6 +36,7 @@ const TrainWithPhysics = (props: { curve: CurveNode[] }) => {
 
   const [simulationState, setSimulationState] = useControls(() => ({
     velocity: 0,
+    fps: 0,
     distanceTraveled: 0,
     acceleration: {
       value: 0,
@@ -56,8 +54,8 @@ const TrainWithPhysics = (props: { curve: CurveNode[] }) => {
   );
 
   useFrame((state, deltaTime) => {
-    setSimulationState(
-      evaluateMotionByMatrixWithEnergyLoss(
+    setSimulationState({
+      ...evaluateMotionByMatrixWithEnergyLoss(
         simulationState,
         evaluatedMatrix,
         friction,
@@ -65,7 +63,8 @@ const TrainWithPhysics = (props: { curve: CurveNode[] }) => {
         gravity,
         deltaTime,
       ),
-    );
+      fps: 1 / deltaTime,
+    });
   });
 
   useEffect(() => {
@@ -95,37 +94,47 @@ export const CurvesAndMatricesScene = () => {
 
   const [cubicPoints, setCubicPoints] = useState([
     new Vector3(0, 0),
-    new Vector3(8, 0),
-    new Vector3(20, 0),
+    new Vector3(750, 50),
+    new Vector3(1500, 0),
   ]);
 
   const [points, setPoints] = useState([
-    new Vector3(0, 15, 0),
+    new Vector3(-1500, 300, 0),
     new Vector3(5, 0, 0),
     new Vector3(25, 0, 0),
-    new Vector3(30, 15, 0),
+    new Vector3(1500, 300, 0),
   ]);
 
-  const cubicSpline = useMemo(
-    () => makeClampedCubicSpline(cubicPoints.map((v) => new Vector2(v.x, v.y))),
+  const cubicCurve = useMemo(
+    () =>
+      makeClampedCubicSplineCurve(
+        cubicPoints.map((v) => new Vector2(v.x, v.y)),
+        0,
+        0,
+        2,
+      ),
     [cubicPoints],
   );
 
-  const cubicSplineNodes = useMemo(
+  const curve = useMemo(
     () =>
-      uniformMap(
-        first(cubicPoints)?.x || 0,
-        last(cubicPoints)?.x || 0,
-        8,
-        (t) => new Vector2(t, evaluateCubicSpline(cubicSpline, t)),
+      applyRollCurve(
+        makeBezierSplineCurve(points[0], points[1], points[2], points[3], 2),
+        cubicCurve,
       ),
-    [cubicSpline, cubicPoints],
+    [points, cubicCurve],
   );
 
-  const curve = useMemo(
-    () => evaluateBezier(points[0], points[1], points[2], points[3], 8),
-    [points],
-  );
+  useEffect(() => {
+    setCubicPoints((cubicPoints) => {
+      const length = getLength(curve);
+      return [
+        new Vector3(0, cubicPoints[0].y, 0),
+        ...cubicPoints.slice(1, cubicPoints.length - 1),
+        new Vector3(length, cubicPoints[cubicPoints.length - 1].y, 0),
+      ];
+    });
+  }, [curve]);
 
   const rollNodes = useMemo(
     () =>
@@ -137,10 +146,6 @@ export const CurvesAndMatricesScene = () => {
   );
 
   const data = [
-    {
-      name: 'cubic spline',
-      ...plotDataFromPoints(cubicSplineNodes),
-    },
     {
       name: 'track roll',
       ...plotDataFromPoints(rollNodes),
@@ -194,7 +199,7 @@ export const CurvesAndMatricesScene = () => {
           />
           <DragControlPoints points={cubicPoints} setPoints={setCubicPoints} axisLock="z" />
           <Line
-            points={cubicSplineNodes.map((v) => new Vector3(v.x, v.y, 0))}
+            points={cubicCurve.map((n) => new Vector3().setFromMatrixPosition(n.matrix))}
             color={colors.secondary}
           />
         </OrthographicScene>

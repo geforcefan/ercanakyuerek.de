@@ -1,9 +1,9 @@
-import { Matrix4, Vector2 } from 'three';
+import { Matrix4, Vector2, Vector3, Vector4 } from 'three';
 
-import { CurveNode, getLength, getMatrixAtDistance } from './curve';
-import { uniformMap } from './uniform-map';
+import { CurveNode, getLength, getMatrixAtDistance } from '../maths/curve';
+import { uniformMap } from '../helper/uniform-map';
 
-export const plotDataFromPoints = (nodes: Vector2[]) => ({
+export const plotDataFromPoints = (nodes: (Vector2 | Vector3 | Vector4)[]) => ({
   x: nodes.map((v) => v.x),
   y: nodes.map((v) => v.y),
 });

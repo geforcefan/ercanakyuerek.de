@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import * as THREE from 'three';
 import { Vector3, Vector4 } from 'three';
 
-import { CurveNode, getLength, getMatrixAtDistance } from '../helper/curve';
+import { CurveNode, getLength, getMatrixAtDistance } from '../maths/curve';
 
 const CurveWireframe = (props: {
   curve: CurveNode[],

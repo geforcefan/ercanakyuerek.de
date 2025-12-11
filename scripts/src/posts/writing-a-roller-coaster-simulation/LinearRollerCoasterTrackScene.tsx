@@ -6,7 +6,7 @@ import { Vector3 } from 'three';
 import { ControlPoint } from '../../components/ControlPoint';
 import { DragControlPoints } from '../../components/DragControlPoints';
 import Line from '../../components/Line';
-import { getForwardDirectionAtDistance, getPositionAtDistance, length } from '../../helper/linear';
+import { getForwardDirectionAtDistance, getPositionAtDistance, length } from '../../maths/linear';
 import { evaluateMotionByForwardDirection } from '../../helper/physics';
 import useColors from '../../hooks/useColors';
 import OrthographicScene from '../../scenes/OrthographicScene';

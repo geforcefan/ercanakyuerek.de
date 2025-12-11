@@ -26,7 +26,7 @@ export const distance = (from: Matrix4, to: Matrix4) => {
   return fromMatrix4(from).distanceTo(fromMatrix4(to));
 };
 
-export const lookRelativeAt = (matrix: Matrix4, lookAt: Vector3) => {
+export const applyLookRelativeAt = (matrix: Matrix4, lookAt: Vector3) => {
   const translation = new Vector3().setFromMatrixPosition(matrix);
   const normal = fromVector3(translation.clone().sub(lookAt).normalize(), 1.0);
 
@@ -51,3 +51,8 @@ export const lookRelativeAt = (matrix: Matrix4, lookAt: Vector3) => {
 };
 
 export const getRoll = (m: Matrix4) => Math.atan2(m.elements[1], m.elements[5]);
+
+export const applyRotationZ = (m: Matrix4, roll: number) => {
+  m.multiply(new Matrix4().makeRotationZ(roll));
+  return m;
+};
