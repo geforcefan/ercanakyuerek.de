@@ -40,7 +40,7 @@ In the beginning, the coaster does not move and has not traveled any distance.
 Our simulation works by creating a new state based on the previous state.
 Think of it like this:
 
-> initial state → bezierSplineCurve → new state → bezierSplineCurve → new state → ...
+> initial state → evaluate → new state → evaluate → new state → ...
 
 To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from [Chapter 2]({{< ref "/posts/writing-a-roller-coaster-simulation/2-gravity.md" >}}). This formula tells us how much of gravity actually acts in the direction of the slope:
 
