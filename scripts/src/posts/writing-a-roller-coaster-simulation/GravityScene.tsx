@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { useControls } from 'leva';
 import { MathUtils, Vector3 } from 'three';
 
+import { useColors } from '../../hooks/useColors';
+
 import { Arrow } from '../../components/Arrow';
-import Line from '../../components/Line';
-import useColors from '../../hooks/useColors';
-import OrthographicScene from '../../scenes/OrthographicScene';
+import { Line } from '../../components/Line';
+import { OrthographicScene } from '../../scenes/OrthographicScene';
 
 const Gravity = () => {
   const colors = useColors();
@@ -44,7 +45,10 @@ const Gravity = () => {
 
   return (
     <>
-      <group position={[-5, 0, 0]} rotation={[0, 0, MathUtils.degToRad(slope)]}>
+      <group
+        position={[-5, 0, 0]}
+        rotation={[0, 0, MathUtils.degToRad(slope)]}
+      >
         <Arrow
           position={[-lineLength / 2, 0, 0]}
           rotation={[0, 0, Math.PI / 2]}
@@ -52,7 +56,10 @@ const Gravity = () => {
         />
 
         <Line
-          points={[new Vector3(-lineLength / 2, 0, 0), new Vector3(lineLength / 2, 0, 0)]}
+          points={[
+            new Vector3(-lineLength / 2, 0, 0),
+            new Vector3(lineLength / 2, 0, 0),
+          ]}
           color={colors.secondary}
         />
       </group>

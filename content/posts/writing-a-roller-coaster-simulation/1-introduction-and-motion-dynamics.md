@@ -1,7 +1,7 @@
 ---
 title: 'Introduction and Motion Dynamics'
 date: 2025-12-06T08:30:00+01:00
-tags: ["writing a roller coaster simulation"]
+tags: ['writing a roller coaster simulation']
 ---
 
 You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser.
@@ -15,6 +15,7 @@ We will use technologies that are easy to access and quick to experiment with. T
 The idea behind this series is simple. Instead of reading theory first, we will learn by building something fun. Each chapter focuses on a single concept. By the end, you will understand how a small coaster car can move along a track, how the track itself is defined, and how everything is drawn in the browser.
 
 ## Setting up the project
+
 Before we start, I’ll assume you already have **Node.js** installed. If not, go ahead and download it first.
 
 Also, a quick heads-up: if some of the scripts or tools I’m covering here don’t work on Windows, I’m sorry. There are ways to get a similar environment on **Windows**, for example, using **WSL**, but I’m not a **Windows** user, so I can’t really help there. I’m focusing on **Linux** and **macOS**, where the toolchains are very similar.
@@ -33,7 +34,7 @@ Next, install a few useful dependencies. This is all we need for now. If I end u
 npm i leva three lodash @react-three/drei @react-three/fiber @types/three @types/lodash
 ```
 
-> **Important note:** In every article, I’ll show example code and link to the corresponding **GitHub files**. These files live inside my website’s blog repository, which contains a large **shared script collection for all articles**. This means the structure in the repo **will differ** from the snippets shown in the articles. For example, my ``physics.ts`` file contains multiple evaluation functions used across different posts, since we build things step by step from article to article. All iterations end up in the same file. So don’t worry if the repo looks more consolidated or structured differently than the examples shown here.
+> **Important note:** In every article, I’ll show example code and link to the corresponding **GitHub files**. These files live inside my website’s blog repository, which contains a large **shared script collection for all articles**. This means the structure in the repo **will differ** from the snippets shown in the articles. For example, my `physics.ts` file contains multiple evaluation functions used across different posts, since we build things step by step from article to article. All iterations end up in the same file. So don’t worry if the repo looks more consolidated or structured differently than the examples shown here.
 
 > **Another important note**: The example code in the articles **will** contain components that **I don’t explicitly show or explain in the text**. If you run into something unfamiliar, please check the GitHub repository and follow the imports to see how those components are implemented. **Most of them are small helpers for things like drawing lines, rendering arrows, setting up scenes, and other utilities that would only distract from the main topic in the article itself**.
 

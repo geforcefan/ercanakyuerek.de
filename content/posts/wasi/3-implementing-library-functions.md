@@ -5,7 +5,7 @@ tags: ["writing a library in c++ and using it in the browser with the WASI SDK"]
 ---
 {{< iframe src="wasi-sdk-writing-library-in-cpp/spline.html" class="float-right" width="225px" height="225px" openInNewTab="false" description="Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable." >}}
 
-In this article, we'll be exploring a more interesting example where we'll construct a Bézier curve, makeBezierSplineCurve nodes on it, and write a function that gives any position on the curve by a length parameter. To explain briefly, a Bézier curve is represented by a parameter ``t``, which varies between 0 and 1 and determines the position of nodes on the curve. However, this ``t`` value doesn't produce uniform spacing, which is problematic when we want to makeBezierSplineCurve a point on the curve based on its distance. To solve this, we can makeBezierSplineCurve some nodes along the curve with known distances and then linearly interpolate new nodes between them to find the point we're looking for.
+In this article, we'll be exploring a more interesting example where we'll construct a Bézier curve, bezierSplineCurve nodes on it, and write a function that gives any position on the curve by a length parameter. To explain briefly, a Bézier curve is represented by a parameter ``t``, which varies between 0 and 1 and determines the position of nodes on the curve. However, this ``t`` value doesn't produce uniform spacing, which is problematic when we want to bezierSplineCurve a point on the curve based on its distance. To solve this, we can bezierSplineCurve some nodes along the curve with known distances and then linearly interpolate new nodes between them to find the point we're looking for.
 
 While this is a specific example, it involves "complex" types such as custom structs and 3D vectors that will need to be accessed from a web browser. So it should serve as a useful case for testing our library :smile:
 
@@ -23,7 +23,7 @@ include_directories(glm)
 ```
 
 ## Spline implementation
-In summary, I have developed a solution for the problem discussed earlier, but I won't delve too deeply into the technical details. The primary function of my implementation, ``bezier_fast``, computes the position on a bezier curve based on a given ``t`` parameter. Additionally, ``estimate_length`` is used to calculate the curve's length very quickly with a ``low step size``. This estimation is necessary to determine how many nodes we should makeBezierSplineCurve. With this method, we can create densely populated nodes depending on the curve's length. The makeBezierSplineCurve function executes the procedure I just described. Naturally, we can always measure the distance between the evaluated position and the previous one to obtain the curve's total length, which we simply pass through the ``get_length`` function. Lastly, ``get_position_at_distance`` searches for the minimum node at a specified distance and linearly interpolates the position to the next node. We have successfully achieved the ability to makeBezierSplineCurve uniformly spaced points on the curve.
+In summary, I have developed a solution for the problem discussed earlier, but I won't delve too deeply into the technical details. The primary function of my implementation, ``bezier_fast``, computes the position on a bezier curve based on a given ``t`` parameter. Additionally, ``estimate_length`` is used to calculate the curve's length very quickly with a ``low step size``. This estimation is necessary to determine how many nodes we should bezierSplineCurve. With this method, we can create densely populated nodes depending on the curve's length. The `bezierSplineCurve` function executes the procedure I just described. Naturally, we can always measure the distance between the evaluated position and the previous one to obtain the curve's total length, which we simply pass through the ``get_length`` function. Lastly, ``get_position_at_distance`` searches for the minimum node at a specified distance and linearly interpolates the position to the next node. We have successfully achieved the ability to bezierSplineCurve uniformly spaced points on the curve.
 
 ``src/spline.cc:``
 
@@ -31,7 +31,7 @@ In summary, I have developed a solution for the problem discussed earlier, but I
 #include "spline.h"
 #include <glm/geometric.hpp>
 
-void spline::makeBezierSplineCurve() {
+void spline::bezierSplineCurve() {
     nodes.clear();
     int numberOfNodes = (int)(estimate_length() * 20.0f);
     if(!numberOfNodes) return;
@@ -125,7 +125,7 @@ public:
     spline(const glm::vec3 &cp1, const glm::vec3 &cp2, const glm::vec3 &cp3, const glm::vec3 &cp4) : cp1(cp1), cp2(cp2),
                                                                                                      cp3(cp3),
                                                                                                      cp4(cp4) {
-        makeBezierSplineCurve();
+        bezierSplineCurve();
     }
 
     glm::vec3 get_position_at_distance(float distance);
@@ -137,7 +137,7 @@ private:
 
     static glm::vec3 bezier_fast(glm::vec3 p0, glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, float t);
     float estimate_length();
-    void makeBezierSplineCurve();
+    void bezierSplineCurve();
 };
 
 #endif //LIBCALCULATION_SPLINE_H

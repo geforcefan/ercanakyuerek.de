@@ -2,9 +2,13 @@ import React, { ReactNode } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useDevicePixelRatio } from 'use-device-pixel-ratio';
 
-import useColors from '../hooks/useColors';
+import { useColors } from '../hooks/useColors';
 
-const PerspectiveScene = ({ children }: { children?: ReactNode }) => {
+export const PerspectiveScene = ({
+  children,
+}: {
+  children?: ReactNode;
+}) => {
   const colors = useColors();
   const dpr = useDevicePixelRatio();
 
@@ -15,5 +19,3 @@ const PerspectiveScene = ({ children }: { children?: ReactNode }) => {
     </Canvas>
   );
 };
-
-export default PerspectiveScene;

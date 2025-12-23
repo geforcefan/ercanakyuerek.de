@@ -1,59 +1,55 @@
 import React, { useEffect, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { useControls } from 'leva';
 import { MathUtils, Vector3 } from 'three';
 
-import { ControlPoint } from '../../components/ControlPoint';
-import { DragControlPoints } from '../../components/DragControlPoints';
-import Line from '../../components/Line';
-import { getForwardDirectionAtDistance, getPositionAtDistance, length } from '../../maths/linear';
+import {
+  forwardDirectionAtDistance,
+  length,
+  positionAtDistance,
+} from '../../maths/linear';
 import {
   evaluateMotionByForwardDirection,
   evaluateMotionByForwardDirectionWithFriction,
 } from '../../helper/physics';
-import useColors from '../../hooks/useColors';
-import OrthographicScene from '../../scenes/OrthographicScene';
+import { useColors } from '../../hooks/useColors';
+import { useSimulationStateControls } from '../../hooks/useSimulationStateControls';
+
+import { ControlPoint } from '../../components/ControlPoint';
+import { DragControlPoints } from '../../components/DragControlPoints';
+import { Line } from '../../components/Line';
+import { OrthographicScene } from '../../scenes/OrthographicScene';
 
 const FrictionAndAirResistance = () => {
   const colors = useColors();
 
-  // Control points
-  const [points, setPoints] = useState([new Vector3(-11.5, 3.2, 0), new Vector3(1.4, -2.8, 0)]);
+  // control points
+  const [points, setPoints] = useState([
+    new Vector3(-11.5, 3.2, 0),
+    new Vector3(1.4, -2.8, 0),
+  ]);
 
-  const [simulationState, setSimulationState] = useControls(() => ({
-    velocity: 0,
-    distanceTraveled: 0,
-    friction: {
-      value: 0.03,
-      pad: 5,
-    },
-    airResistance: {
-      value: 0.0001,
-      pad: 6,
-    },
-    acceleration: {
-      value: 0,
-      pad: 5,
-    },
-    gravity: {
-      value: 9.81665,
-      pad: 5,
-    },
-  }));
+  const [simulationState, setSimulationState] =
+    useSimulationStateControls();
 
-  const [simulationStateWithoutFriction, setSimulationStateWithoutFriction] = useState(() => ({
+  const [
+    simulationStateWithoutFriction,
+    setSimulationStateWithoutFriction,
+  ] = useState(() => ({
     velocity: 0,
     distanceTraveled: 0,
     acceleration: 0,
   }));
 
-  // Main motion evaluation per frame
   useFrame((state, deltaTime) => {
-    // makeBezierSplineCurve with friction and air resistance
+    // with friction and air resistance
     setSimulationState(
       evaluateMotionByForwardDirectionWithFriction(
         simulationState,
-        getForwardDirectionAtDistance(points[0], points[1], simulationState.distanceTraveled),
+        forwardDirectionAtDistance(
+          points[0],
+          points[1],
+          simulationState.distanceTraveled,
+        ),
         simulationState.friction,
         simulationState.airResistance,
         simulationState.gravity,
@@ -61,11 +57,11 @@ const FrictionAndAirResistance = () => {
       ),
     );
 
-    // makeBezierSplineCurve without energy loss
+    // without energy loss
     setSimulationStateWithoutFriction(
       evaluateMotionByForwardDirection(
         simulationStateWithoutFriction,
-        getForwardDirectionAtDistance(
+        forwardDirectionAtDistance(
           points[0],
           points[1],
           simulationStateWithoutFriction.distanceTraveled,
@@ -76,10 +72,11 @@ const FrictionAndAirResistance = () => {
     );
   });
 
-  // Reset simulation state if train overshoots track
+  // reset simulation state if train overshoots track
   useEffect(() => {
     if (
-      simulationState.distanceTraveled > length(points[0], points[1]) ||
+      simulationState.distanceTraveled >
+        length(points[0], points[1]) ||
       simulationState.distanceTraveled < 0
     ) {
       setSimulationState({
@@ -101,13 +98,17 @@ const FrictionAndAirResistance = () => {
     setSimulationStateWithoutFriction,
   ]);
 
-  const trainPosition = getPositionAtDistance(
+  const trainPosition = positionAtDistance(
     points[0],
     points[1],
-    MathUtils.clamp(simulationState.distanceTraveled, 0, length(points[0], points[1])),
+    MathUtils.clamp(
+      simulationState.distanceTraveled,
+      0,
+      length(points[0], points[1]),
+    ),
   );
 
-  const trainPositionWithoutFriction = getPositionAtDistance(
+  const trainPositionWithoutFriction = positionAtDistance(
     points[0],
     points[1],
     MathUtils.clamp(
@@ -119,10 +120,17 @@ const FrictionAndAirResistance = () => {
 
   return (
     <>
-      <DragControlPoints axisLock="z" points={points} setPoints={setPoints} />
+      <DragControlPoints
+        axisLock="z"
+        points={points}
+        setPoints={setPoints}
+      />
       <Line points={points} color={colors.secondary} />
 
-      <ControlPoint position={trainPosition} color={colors.highlight} />
+      <ControlPoint
+        position={trainPosition}
+        color={colors.highlight}
+      />
       <ControlPoint position={trainPositionWithoutFriction} />
     </>
   );

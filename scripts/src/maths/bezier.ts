@@ -1,14 +1,20 @@
 import { Vector3 } from 'three';
 
 import {
-  createFromUniformSample,
+  fromUniformSample,
   CurveNode,
-  getLength,
-  getMatrixAtDistance,
+  length,
+  matrixAtDistance,
   insertMatrix,
 } from './curve';
 
-export const bezierFast = (p0: Vector3, p1: Vector3, p2: Vector3, p3: Vector3, t: number) => {
+export const bezierFast = (
+  p0: Vector3,
+  p1: Vector3,
+  p2: Vector3,
+  p3: Vector3,
+  t: number,
+) => {
   const t1 = 1.0 - t;
   const b0 = t1 * t1 * t1;
   const b1 = 3 * t1 * t1 * t;
@@ -22,7 +28,12 @@ export const bezierFast = (p0: Vector3, p1: Vector3, p2: Vector3, p3: Vector3, t
   );
 };
 
-export const estimateLength = (p0: Vector3, p1: Vector3, p2: Vector3, p3: Vector3) => {
+export const estimateLength = (
+  p0: Vector3,
+  p1: Vector3,
+  p2: Vector3,
+  p3: Vector3,
+) => {
   let lastPosition = p0;
   let length = 0.0;
 
@@ -44,26 +55,32 @@ export const evaluateUniform = (
   resolution: number = 10,
 ) => {
   const curve: CurveNode[] = [];
-  const nodes = makeBezierSplineCurve(p0, p1, p2, p3, 40);
-  const splineLength = getLength(nodes);
-  const numberOfNodes = Math.max(Math.floor(splineLength * resolution), 2);
+  const nodes = bezierSplineCurve(p0, p1, p2, p3, 40);
+  const splineLength = length(nodes);
+  const numberOfNodes = Math.max(
+    Math.floor(splineLength * resolution),
+    2,
+  );
 
   for (let i = 0; i < numberOfNodes; i++) {
     const at = (i / (numberOfNodes - 1)) * splineLength;
-    insertMatrix(curve, getMatrixAtDistance(nodes, at));
+    insertMatrix(curve, matrixAtDistance(nodes, at));
   }
 
   return curve;
 };
 
-export const makeBezierSplineCurve = (
+export const bezierSplineCurve = (
   p0: Vector3,
   p1: Vector3,
   p2: Vector3,
   p3: Vector3,
   resolution: number = 10,
 ) => {
-  return createFromUniformSample(0, estimateLength(p0, p1, p2, p3), resolution, (at, t) =>
-    bezierFast(p0, p1, p2, p3, t),
+  return fromUniformSample(
+    0,
+    estimateLength(p0, p1, p2, p3),
+    resolution,
+    (at, t) => bezierFast(p0, p1, p2, p3, t),
   );
 };

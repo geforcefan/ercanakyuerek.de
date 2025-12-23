@@ -1,23 +1,47 @@
 import React, { useMemo } from 'react';
 import { Vector3 } from 'three';
 
-import { makeBezierSplineCurve, evaluateUniform } from '../maths/bezier';
-import useColors from '../hooks/useColors';
-import { ControlPoint } from './ControlPoint';
-import Line from './Line';
+import {
+  evaluateUniform,
+  bezierSplineCurve,
+} from '../maths/bezier';
+import { useColors } from '../hooks/useColors';
 
-const BezierCurve = (props: { points: Vector3[]; resolution?: number; uniform?: boolean }) => {
+import { ControlPoint } from './ControlPoint';
+import { Line } from './Line';
+
+export const BezierCurve = (props: {
+  points: Vector3[];
+  resolution?: number;
+  uniform?: boolean;
+}) => {
   const { points, resolution = 5, uniform = false } = props;
 
   const colors = useColors();
 
   const nodes = useMemo(() => {
-    if (uniform) return evaluateUniform(points[0], points[1], points[2], points[3], resolution);
-    return makeBezierSplineCurve(points[0], points[1], points[2], points[3], resolution);
+    if (uniform)
+      return evaluateUniform(
+        points[0],
+        points[1],
+        points[2],
+        points[3],
+        resolution,
+      );
+    return bezierSplineCurve(
+      points[0],
+      points[1],
+      points[2],
+      points[3],
+      resolution,
+    );
   }, [points, resolution, uniform]);
 
   const positions = useMemo(
-    () => nodes.map((node) => new Vector3().setFromMatrixPosition(node.matrix)),
+    () =>
+      nodes.map((node) =>
+        new Vector3().setFromMatrixPosition(node.matrix),
+      ),
     [nodes],
   );
 
@@ -27,9 +51,9 @@ const BezierCurve = (props: { points: Vector3[]; resolution?: number; uniform?: 
         <ControlPoint size="sm" key={i} position={position} />
       ))}
 
-      {!!positions.length && <Line points={positions} color={colors.secondary} />}
+      {!!positions.length && (
+        <Line points={positions} color={colors.secondary} />
+      )}
     </>
   );
 };
-
-export default BezierCurve;

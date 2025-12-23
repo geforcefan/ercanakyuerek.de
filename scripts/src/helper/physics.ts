@@ -12,7 +12,8 @@ export const evaluateMotionByAcceleration = (
   deltaTime: number,
 ): SimulationState => {
   const velocity = state.velocity + acceleration * deltaTime;
-  const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
+  const distanceTraveled =
+    state.distanceTraveled + velocity * deltaTime;
 
   return { velocity, distanceTraveled, acceleration };
 };
@@ -23,9 +24,12 @@ export const evaluateMotionByForwardDirection = (
   gravity: number,
   deltaTime: number,
 ): SimulationState => {
-  const acceleration = forwardDirection.dot(new Vector3(0, -gravity, 0));
+  const acceleration = forwardDirection.dot(
+    new Vector3(0, -gravity, 0),
+  );
   const velocity = state.velocity + acceleration * deltaTime;
-  const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
+  const distanceTraveled =
+    state.distanceTraveled + velocity * deltaTime;
 
   return { velocity, distanceTraveled, acceleration };
 };
@@ -44,11 +48,14 @@ export const evaluateMotionByForwardDirectionWithFriction = (
   energyLoss += friction * gravity;
   energyLoss *= velocityDirection;
 
-  let acceleration = forwardDirection.dot(new Vector3(0, -gravity, 0));
+  let acceleration = forwardDirection.dot(
+    new Vector3(0, -gravity, 0),
+  );
   acceleration -= energyLoss;
 
   const velocity = state.velocity + acceleration * deltaTime;
-  const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
+  const distanceTraveled =
+    state.distanceTraveled + velocity * deltaTime;
 
   return { velocity, distanceTraveled, acceleration };
 };
@@ -61,18 +68,23 @@ export const evaluateMotionByMatrixWithEnergyLoss = (
   gravity: number,
   deltaTime: number,
 ): SimulationState => {
-  const forwardDirection = new Vector4(0, 0, 1, 0).applyMatrix4(matrix).normalize()
+  const forwardDirection = new Vector4(0, 0, 1, 0)
+    .applyMatrix4(matrix)
+    .normalize();
   const velocityDirection = state.velocity < 0 ? -1 : 1;
 
   let energyLoss = airResistance * state.velocity * state.velocity;
   energyLoss += friction * gravity;
   energyLoss *= velocityDirection;
 
-  let acceleration = forwardDirection.dot(new Vector4(0, -gravity, 0, 0));
+  let acceleration = forwardDirection.dot(
+    new Vector4(0, -gravity, 0, 0),
+  );
   acceleration -= energyLoss;
 
   const velocity = state.velocity + acceleration * deltaTime;
-  const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
+  const distanceTraveled =
+    state.distanceTraveled + velocity * deltaTime;
 
   return { velocity, distanceTraveled, acceleration };
 };

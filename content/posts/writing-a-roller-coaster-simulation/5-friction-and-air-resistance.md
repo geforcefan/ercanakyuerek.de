@@ -2,7 +2,7 @@
 title: 'Friction and Air Resistance'
 date: 2025-12-06T12:30:00+01:00
 math: true
-tags: ["writing a roller coaster simulation"]
+tags: ['writing a roller coaster simulation']
 ---
 
 This chapter will be quite short and introduces two small but important parts of a more realistic roller coaster simulation:
@@ -10,7 +10,7 @@ This chapter will be quite short and introduces two small but important parts of
 - friction
 - air resistance
 
-Until now our coaster moved in a world without any energy loss. That works for understanding the basics but real coasters slow down over time. Wheels create friction, air pushes against the train, and both effects reduce the acceleration the train can achieve.
+Until now, our coaster moved in a world without any energy loss. That works for understanding the basics but real coasters slow down over time. Wheels create friction, air pushes against the train, and both effects reduce the acceleration the train can achieve.
 
 We will not create a complex physics model. Instead we introduce two simple parameters, very similar to what you may know from **NoLimits Roller Coaster**.  
 Our physics simulation should behave almost identically, apart from a few edge cases.
@@ -73,7 +73,8 @@ That is the whole trick.
 Now subtract energy loss from acceleration:
 
 ```typescript
-const acceleration = forwardDirection.dot(new Vector3(0, -gravity, 0)) - energyLoss;
+const acceleration =
+  forwardDirection.dot(new Vector3(0, -gravity, 0)) - energyLoss;
 ```
 
 ## Updated evaluateMotion function
@@ -95,11 +96,14 @@ const evaluateMotion = (
   energyLoss += friction * gravity;
   energyLoss *= velocityDirection;
 
-  let acceleration = forwardDirection.dot(new Vector3(0, -gravity, 0));
+  let acceleration = forwardDirection.dot(
+    new Vector3(0, -gravity, 0),
+  );
   acceleration -= energyLoss;
 
   const velocity = state.velocity + acceleration * deltaTime;
-  const distanceTraveled = state.distanceTraveled + velocity * deltaTime;
+  const distanceTraveled =
+    state.distanceTraveled + velocity * deltaTime;
 
   return { velocity, distanceTraveled, acceleration };
 };
@@ -120,10 +124,10 @@ Feel free to move the control points to experiment with the track shape and see 
 
 ## What comes next?
 
-In the next chapter we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
+[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/6-matrices.md" >}}) we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
 No matter what the underlying geometry is in the end, **splines, imported tracks, FVD-based shapes or anything else, the evaluation should always work the same**.
-The key step is replacing the two functions `getPositionAtDistance` and `getForwardDirectionAtDistance`
-with a single `getMatrixAtDistance` function. Working with **matrices** is more convenient, because we can extract everything we need from them.
+The key step is replacing the two functions `positionAtDistance` and `forwardDirectionAtDistance`
+with a single `matrixAtDistance` function. Working with **matrices** is more convenient, because we can extract everything we need from them.
 I will also introduce a **curve node** that stores a full matrix for a given distance along the track.
 Any geometry system can “fill” these **curve nodes**, whether that system is based on splines, imported CSV data, FVD geometries or something entirely different.
 While writing this, I realize it is probably best to introduce the concept first with a simple linear track. Stay tuned.

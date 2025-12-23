@@ -1,30 +1,40 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { CameraControls, CameraControlsImpl } from '@react-three/drei';
+import {
+  CameraControls,
+  CameraControlsImpl,
+} from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
 import Plot from 'react-plotly.js';
 import { MathUtils, Vector2, Vector3 } from 'three';
 
-import { ControlPoint } from '../components/ControlPoint';
-import CurveWireframe from '../components/CurveWireframe';
-import { DragControlPoints } from '../components/DragControlPoints';
-import Line from '../components/Line';
-import MatrixArrowHelper from '../components/MatrixArrowHelper';
-import { evaluateMotionByMatrixWithEnergyLoss } from '../helper/physics';
-import useColors from '../hooks/useColors';
-import { useMeasure } from '../hooks/useMeasure';
-import { makeBezierSplineCurve } from '../maths/bezier';
-import { makeClampedCubicSplineCurve } from '../maths/cubic-spline';
-import { applyRollCurve, CurveNode, getLength, getMatrixAtDistance } from '../maths/curve';
+import { bezierSplineCurve } from '../maths/bezier';
+import { clampedCubicSplineCurve } from '../maths/cubic-spline';
+import {
+  applyRollFromCurve,
+  CurveNode,
+  length,
+  matrixAtDistance,
+} from '../maths/curve';
 import { fromMatrix4 } from '../maths/vector3';
-import OrthographicScene from '../scenes/OrthographicScene';
-import PerspectiveScene from '../scenes/PerspectiveScene';
+import { evaluateMotionByMatrixWithEnergyLoss } from '../helper/physics';
+import { useColors } from '../hooks/useColors';
+import { useMeasure } from '../hooks/useMeasure';
+
+import { ControlPoint } from '../components/ControlPoint';
+import { CurveWireframe } from '../components/CurveWireframe';
+import { DragControlPoints } from '../components/DragControlPoints';
+import { Line } from '../components/Line';
+import { MatrixArrowHelper } from '../components/MatrixArrowHelper';
+import { OrthographicScene } from '../scenes/OrthographicScene';
+import { PerspectiveScene } from '../scenes/PerspectiveScene';
+
 import { plotDataFromPoints } from './plot';
 
 import './curves-and-matrices.css';
 
+import { zRotation } from '../maths/matrix4';
 import { numberToHexString } from '../helper/numberToHexString';
-import { getRoll } from '../maths/matrix4';
 
 const gravity = 9.81665;
 const friction = 0.03;
@@ -46,9 +56,13 @@ const TrainWithPhysics = (props: { curve: CurveNode[] }) => {
 
   const evaluatedMatrix = useMemo(
     () =>
-      getMatrixAtDistance(
+      matrixAtDistance(
         curve,
-        MathUtils.clamp(simulationState.distanceTraveled, 0, getLength(curve)),
+        MathUtils.clamp(
+          simulationState.distanceTraveled,
+          0,
+          length(curve),
+        ),
       ),
     [curve, simulationState.distanceTraveled],
   );
@@ -69,7 +83,7 @@ const TrainWithPhysics = (props: { curve: CurveNode[] }) => {
 
   useEffect(() => {
     if (
-      simulationState.distanceTraveled > getLength(curve) ||
+      simulationState.distanceTraveled > length(curve) ||
       simulationState.distanceTraveled < 0
     ) {
       setSimulationState({
@@ -82,14 +96,19 @@ const TrainWithPhysics = (props: { curve: CurveNode[] }) => {
   return (
     <>
       <MatrixArrowHelper matrix={evaluatedMatrix} />
-      <ControlPoint position={fromMatrix4(evaluatedMatrix)} color={colors.highlight} />
+      <ControlPoint
+        position={fromMatrix4(evaluatedMatrix)}
+        color={colors.highlight}
+      />
     </>
   );
 };
 
 export const CurvesAndMatricesScene = () => {
-  const { ref: plotContainerRef, dimensions: plotContainerDimensions } =
-    useMeasure<HTMLDivElement>();
+  const {
+    ref: plotContainerRef,
+    dimensions: plotContainerDimensions,
+  } = useMeasure<HTMLDivElement>();
   const colors = useColors();
 
   const [cubicPoints, setCubicPoints] = useState([
@@ -107,7 +126,7 @@ export const CurvesAndMatricesScene = () => {
 
   const cubicCurve = useMemo(
     () =>
-      makeClampedCubicSplineCurve(
+      clampedCubicSplineCurve(
         cubicPoints.map((v) => new Vector2(v.x, v.y)),
         0,
         0,
@@ -118,8 +137,14 @@ export const CurvesAndMatricesScene = () => {
 
   const curve = useMemo(
     () =>
-      applyRollCurve(
-        makeBezierSplineCurve(points[0], points[1], points[2], points[3], 2),
+      applyRollFromCurve(
+        bezierSplineCurve(
+          points[0],
+          points[1],
+          points[2],
+          points[3],
+          2,
+        ),
         cubicCurve,
       ),
     [points, cubicCurve],
@@ -127,11 +152,11 @@ export const CurvesAndMatricesScene = () => {
 
   useEffect(() => {
     setCubicPoints((cubicPoints) => {
-      const length = getLength(curve);
+      const curveLength = length(curve);
       return [
         new Vector3(0, cubicPoints[0].y, 0),
         ...cubicPoints.slice(1, cubicPoints.length - 1),
-        new Vector3(length, cubicPoints[cubicPoints.length - 1].y, 0),
+        new Vector3(curveLength, cubicPoints[cubicPoints.length - 1].y, 0),
       ];
     });
   }, [curve]);
@@ -140,7 +165,10 @@ export const CurvesAndMatricesScene = () => {
     () =>
       curve.map(
         ({ matrix, distanceAtCurve }) =>
-          new Vector2(distanceAtCurve, MathUtils.radToDeg(getRoll(matrix))),
+          new Vector2(
+            distanceAtCurve,
+            MathUtils.radToDeg(zRotation(matrix)),
+          ),
       ),
     [curve],
   );
@@ -155,7 +183,11 @@ export const CurvesAndMatricesScene = () => {
   return (
     <>
       <PerspectiveScene>
-        <mesh receiveShadow={true} position={[0, -1, 0]} rotation-x={-Math.PI / 2}>
+        <mesh
+          receiveShadow={true}
+          position={[0, -1, 0]}
+          rotation-x={-Math.PI / 2}
+        >
           <planeGeometry args={[1000, 1000]} />
           <meshBasicMaterial color={colors.silent} />
         </mesh>
@@ -197,9 +229,15 @@ export const CurvesAndMatricesScene = () => {
             dollyToCursor={true}
             draggingSmoothTime={0.03}
           />
-          <DragControlPoints points={cubicPoints} setPoints={setCubicPoints} axisLock="z" />
+          <DragControlPoints
+            points={cubicPoints}
+            setPoints={setCubicPoints}
+            axisLock="z"
+          />
           <Line
-            points={cubicCurve.map((n) => new Vector3().setFromMatrixPosition(n.matrix))}
+            points={cubicCurve.map((n) =>
+              new Vector3().setFromMatrixPosition(n.matrix),
+            )}
             color={colors.secondary}
           />
         </OrthographicScene>
