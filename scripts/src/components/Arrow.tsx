@@ -1,7 +1,9 @@
 import React from 'react';
 import { ThreeElements } from '@react-three/fiber';
 
-export const Arrow = (props: { color?: number } & ThreeElements['mesh']) => {
+export const Arrow = (
+  props: { color?: number } & ThreeElements['mesh'],
+) => {
   const { color, ...restProps } = props;
 
   return (

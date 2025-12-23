@@ -17,7 +17,8 @@ export const useMeasure = <T extends Element>() => {
     if (node?.nodeType === Node.ELEMENT_NODE) {
       const observer = new ResizeObserver(([entry]) => {
         if (entry && entry.borderBoxSize) {
-          const { inlineSize: width, blockSize: height } = entry.borderBoxSize[0];
+          const { inlineSize: width, blockSize: height } =
+            entry.borderBoxSize[0];
 
           setDimensions({ width, height });
         }

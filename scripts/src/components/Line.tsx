@@ -1,8 +1,13 @@
 import React, { useMemo } from 'react';
 import { BufferGeometry, Vector3 } from 'three';
 
-const Line = (props: { points: Vector3[]; color?: number }) => {
+export const Line = (props: {
+  points: Vector3[];
+  color?: number;
+}) => {
   const { points, color } = props;
+
+  // todo(ercan.akyuerek): memory leak!
   const geometry = useMemo(() => {
     return new BufferGeometry().setFromPoints(points);
   }, [points]);
@@ -15,5 +20,3 @@ const Line = (props: { points: Vector3[]; color?: number }) => {
     </line>
   );
 };
-
-export default Line;

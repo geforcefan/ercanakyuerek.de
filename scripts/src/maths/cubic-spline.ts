@@ -1,7 +1,8 @@
 import { Vector2, Vector3 } from 'three';
 
-import { createFromUniformSample } from './curve';
-import { lowerBound } from '../helper/lower-bound';
+import { lowerBound } from '../helper/binary-search';
+
+import { fromUniformSample } from './curve';
 
 export interface CubicSpline {
   x: number[];
@@ -11,7 +12,7 @@ export interface CubicSpline {
   d: number[];
 }
 
-export function makeClampedCubicSpline(
+export function clampedCubicSpline(
   points: Vector2[],
   startSlope: number = 0,
   endSlope: number = 0,
@@ -63,22 +64,25 @@ export function makeClampedCubicSpline(
   // back substitution
   for (let j = n - 1; j >= 0; j--) {
     c[j] = z[j] - mu[j] * c[j + 1];
-    b[j] = (y[j + 1] - y[j]) / dx[j] - (dx[j] * (c[j + 1] + 2 * c[j])) / 3;
+    b[j] =
+      (y[j + 1] - y[j]) / dx[j] - (dx[j] * (c[j + 1] + 2 * c[j])) / 3;
     d[j] = (c[j + 1] - c[j]) / (3 * dx[j]);
   }
 
   return { x, y, b, c, d };
 }
 
-export function evaluate(s: CubicSpline, t: number): number {
+function evaluate(s: CubicSpline, t: number): number {
   const j = lowerBound(s.x, t, (v) => v);
   const i = Math.max(0, j - 1);
   const dx = t - s.x[i];
 
-  return s.y[i] + s.b[i] * dx + s.c[i] * dx * dx + s.d[i] * dx * dx * dx;
+  return (
+    s.y[i] + s.b[i] * dx + s.c[i] * dx * dx + s.d[i] * dx * dx * dx
+  );
 }
 
-export const makeClampedCubicSplineCurve = (
+export const clampedCubicSplineCurve = (
   points: Vector2[],
   startSlope: number = 0,
   endSlope: number = 0,
@@ -86,9 +90,9 @@ export const makeClampedCubicSplineCurve = (
 ) => {
   if (points.length < 2) return [];
 
-  const spline = makeClampedCubicSpline(points, startSlope, endSlope);
+  const spline = clampedCubicSpline(points, startSlope, endSlope);
 
-  return createFromUniformSample(
+  return fromUniformSample(
     points[0].x,
     points[points.length - 1].x,
     resolution,

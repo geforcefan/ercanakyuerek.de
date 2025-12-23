@@ -2,7 +2,7 @@
 title: 'Gravity'
 date: 2025-12-06T09:30:00+01:00
 math: true
-tags: ["writing a roller coaster simulation"]
+tags: ['writing a roller coaster simulation']
 ---
 
 ## How do we determine the acceleration of the coaster?
@@ -105,8 +105,8 @@ When it comes to calculating the acceleration component along the slope, the for
 const acceleration = gravity * Math.sin(slope);
 ```
 
-> Keep in mind that `Math.sin` accepts **radians**, not **degrees**.  
-> 
+> Keep in mind that `Math.sin` accepts **radians**, not **degrees**.
+>
 > A **radian** is simply another way of measuring angles, where angles are expressed as multiples of **π**.
 >
 > The range from **−π to π** corresponds to **−180° to 180°**.
@@ -115,7 +115,7 @@ const acceleration = gravity * Math.sin(slope);
 >
 > When converting between the two, use:
 >
-> $$\text{radians} = \text{degrees} \cdot \frac{\pi}{180}$$ 
+> $$\text{radians} = \text{degrees} \cdot \frac{\pi}{180}$$
 > $$\text{degrees} = \text{radians} \cdot \frac{180}{\pi}$$
 
 You can play around with **different slopes** and see how they affect the percentage of **gravity applied** to the coaster.

@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { useControls } from 'leva';
-import { Vector3 } from 'three';
+import { MathUtils, Vector3 } from 'three';
 
-import {
-  forwardDirectionAtDistance,
-  positionAtDistance,
-  length,
-} from '../../maths/linear';
-import { evaluateMotionByForwardDirection } from '../../helper/physics';
+import { length, matrixAtDistance } from '../../maths/linear';
+import { evaluateMotionByMatrixWithEnergyLoss } from '../../helper/physics';
 import { useColors } from '../../hooks/useColors';
+import { useSimulationStateControls } from '../../hooks/useSimulationStateControls';
 
 import { ControlPoint } from '../../components/ControlPoint';
 import { DragControlPoints } from '../../components/DragControlPoints';
 import { Line } from '../../components/Line';
+import { MatrixArrowHelper } from '../../components/MatrixArrowHelper';
 import { OrthographicScene } from '../../scenes/OrthographicScene';
 
-const LinearRollerCoasterTrack = () => {
+const Matrices = () => {
   const colors = useColors();
 
   // control points
@@ -25,28 +22,20 @@ const LinearRollerCoasterTrack = () => {
     new Vector3(1.4, -2.8, 0),
   ]);
 
-  const [simulationState, setSimulationState] = useControls(() => ({
-    velocity: 0,
-    distanceTraveled: 0,
-    acceleration: {
-      value: 0,
-      pad: 5,
-    },
-    gravity: {
-      value: 9.81665,
-      pad: 5,
-    },
-  }));
+  const [simulationState, setSimulationState] =
+    useSimulationStateControls();
 
   useFrame((state, deltaTime) => {
     setSimulationState(
-      evaluateMotionByForwardDirection(
+      evaluateMotionByMatrixWithEnergyLoss(
         simulationState,
-        forwardDirectionAtDistance(
+        matrixAtDistance(
           points[0],
           points[1],
           simulationState.distanceTraveled,
         ),
+        simulationState.friction,
+        simulationState.airResistance,
         simulationState.gravity,
         deltaTime,
       ),
@@ -66,12 +55,16 @@ const LinearRollerCoasterTrack = () => {
         acceleration: 0,
       });
     }
-  }, [simulationState.distanceTraveled, setSimulationState, points]);
+  }, [simulationState.distanceTraveled, points, setSimulationState]);
 
-  const trainPosition = positionAtDistance(
+  const trainMatrix = matrixAtDistance(
     points[0],
     points[1],
-    simulationState.distanceTraveled,
+    MathUtils.clamp(
+      simulationState.distanceTraveled,
+      0,
+      length(points[0], points[1]),
+    ),
   );
 
   return (
@@ -82,18 +75,18 @@ const LinearRollerCoasterTrack = () => {
         setPoints={setPoints}
       />
       <Line points={points} color={colors.secondary} />
-      <ControlPoint
-        position={trainPosition}
-        color={colors.highlight}
-      />
+      <group matrixAutoUpdate={false} matrix={trainMatrix}>
+        <MatrixArrowHelper />
+        <ControlPoint color={colors.highlight} />
+      </group>
     </>
   );
 };
 
-export const LinearRollerCoasterTrackScene = () => {
+export const MatricesScene = () => {
   return (
     <OrthographicScene>
-      <LinearRollerCoasterTrack />
+      <Matrices />
     </OrthographicScene>
   );
 };

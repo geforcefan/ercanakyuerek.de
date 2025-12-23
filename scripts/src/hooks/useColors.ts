@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-const useColors = () => {
+export const useColors = () => {
   return useMemo(() => {
     return {
       primary: 0x2b2b2b,
@@ -10,5 +10,3 @@ const useColors = () => {
     };
   }, []);
 };
-
-export default useColors;

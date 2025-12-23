@@ -1,12 +1,13 @@
 import last from 'lodash/last';
 import { MathUtils, Matrix4, Vector3 } from 'three';
 
-import { lowerBound } from '../helper/lower-bound';
+import { findBoundingIndices } from '../helper/binary-search';
+
 import {
+  applyLookRelativeAt,
   applyRotationZ,
   distance,
-  interpolate as interpolateMatrix4,
-  applyLookRelativeAt,
+  lerp,
 } from './matrix4';
 import { fromMatrix4 } from './vector3';
 
@@ -15,85 +16,113 @@ export type CurveNode = {
   distanceAtCurve: number;
 };
 
-export const getLength = (curve: CurveNode[]) => {
+export const length = (curve: CurveNode[]) => {
   return last(curve)?.distanceAtCurve || 0;
 };
 
-export const findCurveNodeIndices = (
-  curve: CurveNode[],
-  findValue: number,
-  findFn: (node: CurveNode) => number,
-) => {
-  if (curve.length < 2) return;
-
-  // Binary search to find the first node
-  const lowerNodeIndex = lowerBound(curve, findValue, findFn);
-
-  let nextNodeIndex = lowerNodeIndex; // Node after the queried value
-  let currentNodeIndex = lowerNodeIndex - 1; // Node before the queried value
-
-  // Handle edge cases: if at the start or end of the curve
-  const isFirst = nextNodeIndex === 0;
-  const isLast = currentNodeIndex === curve.length - 1;
-
-  if (isFirst) return [0, 1]; // If `value` is at the very beginning
-  if (isLast) return [curve.length - 2, curve.length - 1]; // If `value` is at the very end
-
-  // Return indices of the nodes that sandwich the value
-  return [currentNodeIndex, nextNodeIndex];
-};
-
-export const getMatrixAtDistance = (curve: CurveNode[], at: number) => {
-  const nodes = findCurveNodeIndices(curve, at, (node) => node.distanceAtCurve);
+export const matrixAtDistance = (curve: CurveNode[], at: number) => {
+  const nodes = findBoundingIndices(
+    curve,
+    at,
+    (node) => node.distanceAtCurve,
+  );
   if (!nodes) return new Matrix4();
 
-  const [from, to] = nodes.map((index) => curve[index]);
+  const left = curve[nodes[0]];
+  const right = curve[nodes[1]];
 
-  const deltaDistanceAtCurve = to.distanceAtCurve - from.distanceAtCurve;
+  const length = right.distanceAtCurve - left.distanceAtCurve;
 
-  // Calculate the interpolation factor `t` based on relative distance
-  if (deltaDistanceAtCurve > Number.EPSILON) {
-    const t = MathUtils.clamp((at - from.distanceAtCurve) / deltaDistanceAtCurve, 0.0, 1.0);
-    return interpolateMatrix4(from.matrix, to.matrix, t);
+  if (length > Number.EPSILON) {
+    const t = MathUtils.clamp(
+      (at - left.distanceAtCurve) / length,
+      0.0,
+      1.0,
+    );
+    return lerp(left.matrix, right.matrix, t);
   }
 
-  return from.matrix.clone();
+  return left.matrix.clone();
 };
 
-export const getPositionAtX = (curve: CurveNode[], at: number) => {
-  const nodes = findCurveNodeIndices(curve, at, (node) => node.matrix.elements[12]);
+export const matrixAtDistanceWithoutTransition = (
+  curve: CurveNode[],
+  at: number,
+) => {
+  const nodes = findBoundingIndices(
+    curve,
+    at,
+    (node) => node.distanceAtCurve,
+  );
+  if (!nodes) return new Matrix4();
+
+  const left = curve[nodes[0]];
+  const right = curve[nodes[1]];
+
+  const length = right.distanceAtCurve - left.distanceAtCurve;
+
+  if (length > Number.EPSILON) {
+    const t = MathUtils.clamp(
+      (at - left.distanceAtCurve) / length,
+      0.0,
+      1.0,
+    );
+
+    return left.matrix
+      .clone()
+      .setPosition(
+        fromMatrix4(left.matrix).lerp(fromMatrix4(right.matrix), t),
+      );
+  }
+
+  return left.matrix.clone();
+};
+
+export const positionAtX = (curve: CurveNode[], at: number) => {
+  const nodes = findBoundingIndices(
+    curve,
+    at,
+    (node) => node.matrix.elements[12],
+  );
   if (!nodes) return new Vector3();
 
-  const [from, to] = nodes.map((index) => curve[index]);
+  const left = fromMatrix4(curve[nodes[0]].matrix);
+  const right = fromMatrix4(curve[nodes[1]].matrix);
 
-  const fromPosition = fromMatrix4(from.matrix);
-  const toPosition = fromMatrix4(to.matrix);
+  const length = right.x - left.x;
 
-  const deltaXAtCurve = toPosition.x - fromPosition.x;
-
-  if (deltaXAtCurve > Number.EPSILON) {
-    const t = MathUtils.clamp((at - fromPosition.x) / deltaXAtCurve, 0.0, 1.0);
-    return fromPosition.clone().lerp(toPosition, t);
+  if (length > Number.EPSILON) {
+    return left.lerp(
+      right,
+      MathUtils.clamp((at - left.x) / length, 0.0, 1.0),
+    );
   }
 
-  return fromPosition;
+  return left;
 };
 
-export const insertMatrix = (curve: CurveNode[], matrix: Matrix4): void => {
+export const insertMatrix = (
+  curve: CurveNode[],
+  matrix: Matrix4,
+): void => {
   const lastNode = last(curve);
+  let distanceAtCurve = 0;
 
-  // Calculate distance between the new matrix and the last node's matrix
-  const distanceToLastNode = lastNode ? distance(lastNode.matrix, matrix) : 0;
-  const distanceAtCurve = (lastNode?.distanceAtCurve || 0) + distanceToLastNode;
+  if (lastNode) {
+    distanceAtCurve =
+      lastNode.distanceAtCurve + distance(lastNode.matrix, matrix);
+  }
 
-  // Push the new node onto the curve
   curve.push({
     distanceAtCurve,
     matrix: matrix.clone(),
   });
 };
 
-export const insertPosition = (curve: CurveNode[], position: Vector3) => {
+export const insertPosition = (
+  curve: CurveNode[],
+  position: Vector3,
+) => {
   const lastNode = last(curve);
 
   if (lastNode) {
@@ -102,14 +131,72 @@ export const insertPosition = (curve: CurveNode[], position: Vector3) => {
     }
     applyLookRelativeAt(lastNode.matrix, position);
 
-    insertMatrix(curve, lastNode.matrix.clone().setPosition(position));
+    insertMatrix(
+      curve,
+      lastNode.matrix.clone().setPosition(position),
+    );
     return;
   }
 
   insertMatrix(curve, new Matrix4().setPosition(position));
 };
 
-export const createFromUniformSample = (
+export const applyRollFromCurve = (
+  curve: CurveNode[],
+  rollCurve: CurveNode[],
+) => {
+  curve.forEach(({ matrix, distanceAtCurve }) =>
+    applyRotationZ(
+      matrix,
+      -positionAtX(rollCurve, distanceAtCurve).y,
+    ),
+  );
+
+  return curve;
+};
+
+export const fromPointsBasic = (points: Vector3[]) => {
+  const curve: CurveNode[] = [];
+  if (points.length < 2) return curve;
+
+  let distanceAtCurve = 0;
+
+  for (let i = 0; i < points.length - 1; i++) {
+    const left = points[i];
+    const right = points[i + 1];
+
+    curve.push({
+      matrix: new Matrix4()
+        .lookAt(right, left, new Vector3(0, 1, 0))
+        .setPosition(left),
+      distanceAtCurve,
+    });
+
+    distanceAtCurve += left.distanceTo(right);
+  }
+
+  const lastNode = last(curve)!;
+  const lastPoint = last(points)!;
+
+  curve.push({
+    matrix: lastNode.matrix.clone().setPosition(lastPoint),
+    distanceAtCurve,
+  });
+
+  return curve;
+};
+
+export const fromPoints = (points: Vector3[]) => {
+  const curve: CurveNode[] = [];
+
+  points.forEach((point) => {
+    insertPosition(curve, point);
+  });
+
+  return curve;
+};
+
+export const fromUniformSample = (
   from: number = 0,
   to: number = 0,
   resolution: number = 8,
@@ -125,13 +212,5 @@ export const createFromUniformSample = (
     const at = from + t * length;
     insertPosition(curve, positionFn(at, t));
   }
-  return curve;
-};
-
-export const applyRollCurve = (curve: CurveNode[], roll: CurveNode[]) => {
-  curve.forEach(({ matrix, distanceAtCurve }) =>
-    applyRotationZ(matrix, -getPositionAtX(roll, distanceAtCurve).y),
-  );
-
   return curve;
 };

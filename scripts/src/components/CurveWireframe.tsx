@@ -1,16 +1,19 @@
-import React, { useMemo } from 'react';
-import * as THREE from 'three';
-import { Vector3, Vector4 } from 'three';
+import React, { useEffect, useMemo, useRef } from 'react';
+import { BufferGeometry, Vector3, Vector4 } from 'three';
 
-import { CurveNode, getLength, getMatrixAtDistance } from '../maths/curve';
+import {
+  CurveNode,
+  length,
+  matrixAtDistance,
+} from '../maths/curve';
 
-const CurveWireframe = (props: {
-  curve: CurveNode[],
-  railSpacing?: number,
-  tieSpacing?: number,
-  rails?: Vector4[],
-  tie?: Vector4[],
-  loopTie?: boolean,
+export const CurveWireframe = (props: {
+  curve: CurveNode[];
+  railSpacing?: number;
+  tieSpacing?: number;
+  rails?: Vector4[];
+  tie?: Vector4[];
+  loopTie?: boolean;
   color?: number;
 }) => {
   const wireFrameParts = [
@@ -20,45 +23,68 @@ const CurveWireframe = (props: {
   ];
 
   const {
-    railSpacing= 0.5,
+    railSpacing = 0.5,
     tieSpacing = 1,
     loopTie = true,
-    tie= wireFrameParts,
+    tie = wireFrameParts,
     rails = wireFrameParts,
     curve = [],
     color = 0x0000ff,
   } = props;
 
   const points = useMemo(() => {
-
-    const curveLength = getLength(curve);
+    const curveLength = length(curve);
     const numNodes = Math.floor(curveLength / railSpacing);
 
     const points: Vector3[] = [];
     let tieDist = 0;
 
     for (let k = 0; k < numNodes - 1; k++) {
-      const currentDistance: number = (k / (numNodes - 1)) * curveLength;
-      const currentMatrixAtDistance = getMatrixAtDistance(curve, currentDistance);
+      const currentDistance: number =
+        (k / (numNodes - 1)) * curveLength;
+      const currentMatrixAtDistance = matrixAtDistance(
+        curve,
+        currentDistance,
+      );
 
-      const nextDistance: number = ((k + 1) / (numNodes - 1)) * curveLength;
-      const nextMatrixAtDistance = getMatrixAtDistance(curve, nextDistance);
+      const nextDistance: number =
+        ((k + 1) / (numNodes - 1)) * curveLength;
+      const nextMatrixAtDistance = matrixAtDistance(
+        curve,
+        nextDistance,
+      );
 
       for (let k = 0; k < rails.length; k++) {
-        const currentPos = rails[k].clone().applyMatrix4(currentMatrixAtDistance);
-        const nextPos = rails[k].clone().applyMatrix4(nextMatrixAtDistance);
+        const currentPos = rails[k]
+          .clone()
+          .applyMatrix4(currentMatrixAtDistance);
+        const nextPos = rails[k]
+          .clone()
+          .applyMatrix4(nextMatrixAtDistance);
 
-        points.push(new Vector3(currentPos.x, currentPos.y, currentPos.z));
+        points.push(
+          new Vector3(currentPos.x, currentPos.y, currentPos.z),
+        );
         points.push(new Vector3(nextPos.x, nextPos.y, nextPos.z));
       }
 
       if (tieDist > tieSpacing) {
-        for (let k = 0; k < (loopTie ? tie.length : tie.length - 1); k++) {
-          const currentPos = tie[k % tie.length].clone().applyMatrix4(currentMatrixAtDistance);
+        for (
+          let k = 0;
+          k < (loopTie ? tie.length : tie.length - 1);
+          k++
+        ) {
+          const currentPos = tie[k % tie.length]
+            .clone()
+            .applyMatrix4(currentMatrixAtDistance);
 
-          const nextPos = tie[(k + 1) % tie.length].clone().applyMatrix4(currentMatrixAtDistance);
+          const nextPos = tie[(k + 1) % tie.length]
+            .clone()
+            .applyMatrix4(currentMatrixAtDistance);
 
-          points.push(new Vector3(currentPos.x, currentPos.y, currentPos.z));
+          points.push(
+            new Vector3(currentPos.x, currentPos.y, currentPos.z),
+          );
           points.push(new Vector3(nextPos.x, nextPos.y, nextPos.z));
         }
 
@@ -72,10 +98,8 @@ const CurveWireframe = (props: {
   }, [curve, loopTie, railSpacing, rails, tie, tieSpacing]);
 
   return (
-    <lineSegments geometry={new THREE.BufferGeometry().setFromPoints(points)}>
+    <lineSegments geometry={new BufferGeometry().setFromPoints(points)}>
       <lineBasicMaterial attach="material" color={color} />
     </lineSegments>
   );
 };
-
-export default CurveWireframe;
