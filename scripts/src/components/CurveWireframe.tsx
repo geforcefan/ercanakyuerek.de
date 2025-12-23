@@ -32,8 +32,6 @@ export const CurveWireframe = (props: {
     color = 0x0000ff,
   } = props;
 
-  const geometry = useRef<BufferGeometry>(new BufferGeometry());
-
   const points = useMemo(() => {
     const curveLength = length(curve);
     const numNodes = Math.floor(curveLength / railSpacing);
@@ -99,14 +97,8 @@ export const CurveWireframe = (props: {
     return points;
   }, [curve, loopTie, railSpacing, rails, tie, tieSpacing]);
 
-  useEffect(() => {
-    geometry.current.dispose();
-    geometry.current = new BufferGeometry();
-    geometry.current.setFromPoints(points);
-  }, [points]);
-
   return (
-    <lineSegments geometry={geometry.current}>
+    <lineSegments geometry={new BufferGeometry().setFromPoints(points)}>
       <lineBasicMaterial attach="material" color={color} />
     </lineSegments>
   );
