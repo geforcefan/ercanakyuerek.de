@@ -1,4 +1,7 @@
 baseURL: 'https://ercanakyuerek.de'
+contentDir: src/content
+publishDir: build
+staticDir: public
 languageCode: en-us
 theme: hello-friend-ng
 pagination:

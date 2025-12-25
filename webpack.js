@@ -1,47 +1,60 @@
-const path = require("path");
+const path = require('path');
 
 const paths = {
-  src: path.resolve(__dirname, "scripts/src"),
-  build: path.resolve(__dirname, "static"),
+  src: path.resolve(__dirname, 'src'),
+  build: path.resolve(__dirname, 'public', 'scripts'),
 };
 
 module.exports = {
-  entry: [paths.src + "/module-exports.ts"],
-  mode: "production",
+  entry: [paths.src + '/helper/render-content-component.tsx'],
+  mode: 'production',
   devtool: false,
   output: {
     environment: { module: true },
     path: paths.build,
-    filename: "scripts.js",
-    library: { type: "module" },
+    filename: 'render-content-component.js',
+    library: { type: 'module' },
   },
   experiments: { outputModule: true },
   module: {
     rules: [
-      { test: /\.wasm$/, loader: "arraybuffer-loader" },
-      { test: /\.nl2park$/, loader: "arraybuffer-loader" },
+      {
+        test: /\.wasm$/,
+        type: 'asset/resource'
+      },
+      { test: /\.nl2park$/, loader: 'arraybuffer-loader' },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(scss|sass)$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
+          'sass-loader',
+        ],
       },
       {
         test: /\.(ts|tsx|js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: [
-              "@babel/react",
-              "@babel/preset-typescript"
-            ]
+            presets: ['@babel/react', '@babel/preset-typescript'],
           },
         },
       },
     ],
   },
   resolve: {
-    fallback: { stream: require.resolve("stream-browserify") },
-    modules: [paths.src, "node_modules"],
-    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    fallback: { stream: require.resolve('stream-browserify') },
+    modules: [paths.src, 'node_modules'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
 };

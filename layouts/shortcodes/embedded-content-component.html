@@ -1,0 +1,35 @@
+{{ $src := .Get "src" }}
+{{ $height := .Get "height" | default "300px" }}
+{{ $width := .Get "width" | default "100%" }}
+{{ $class := .Get "class" }}
+{{ $path := .Get "path" }}
+{{ $description := .Get "description" }}
+{{ $rootID := printf "react-root-%s" (md5 (printf "%s" $path)) }}
+
+<div class="embedded {{ $class }}">
+  <iframe id="{{ $rootID }}" width="{{ $width }}" height="{{ $height }}" style="border: 0" class="frame"></iframe>
+
+  {{ if $description }}
+  <div class="description" style="width: {{ $width }}">
+    {{ $description }}
+  </div>
+  {{ end }}
+
+  <script>
+    document.getElementById('{{ $rootID }}').srcdoc = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <base href="${location.origin}/">
+      </head>
+      <body>
+        <div id="root" class="full-screen"></div>
+        <script type="module">
+          import { renderContentComponentByPath } from '/scripts/render-content-component.js';
+          renderContentComponentByPath('root', '{{ $path }}');
+        <\/script>
+      </body>
+    </html>
+  `;
+  </script>
+</div>

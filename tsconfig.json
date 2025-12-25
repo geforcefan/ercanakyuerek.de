@@ -9,6 +9,12 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
   },
-  "include": ["scripts/**/*"],
-  "exclude": ["node_modules", "static", "build", "dist"]
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    "**/CMakeFiles/**",
+    "**/build/**",
+    "**/dist/**",
+    "**/public/**"
+  ]
 }

@@ -1,0 +1,8 @@
+@import "normalize";
+@import "variables";
+@import "mixins";
+@import "fonts";
+@include inter-fonts("../../static/fonts");
+@import "_main";
+@import "list";
+@import "custom";
