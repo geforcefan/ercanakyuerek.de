@@ -12,7 +12,7 @@
  &lt;script&gt;
  document.getElementById('react-root-a58499091e91abebdf7ee8091642196c').srcdoc = `
  &lt;!DOCTYPE html&gt;
- &lt;html&gt;
+ &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
  &lt;base href="${location.origin}/"&gt;
  &lt;/head&gt;

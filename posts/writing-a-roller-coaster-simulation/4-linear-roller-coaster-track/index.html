@@ -71,11 +71,11 @@ We take their dot product. That’s it. Really. That’s the whole trick:</p>$$a
 </span></span></code></pre></div><h2 id=small-note>Small note</h2><p>Later the forward vector will be replaced by a <strong>4×4 matrix</strong>, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called <code>matrixAtDistance</code>. I know, yet again a change, but that’s future you’s problem. Ignore it for now.</p><p>Going forward, we will use <strong>9.81665 m/s²</strong> as the gravitational acceleration, since this is also the value used by <strong>NoLimits Roller Coaster</strong> and <strong>openFVD++</strong>.</p><h2 id=adding-everything-up>Adding Everything Up</h2><p>Time for a small demo. I built a basic setup: a visible line segment with draggable control points so you can adjust the slope in real time. On the side, a small panel displays the live simulation state.</p><p>I switched the vectors to 3D instead of 2D, but only because it makes things more convenient in THREE.js. The actual calculations from this article are exactly the same.</p><div class=embedded><iframe id=react-root-0f34d2fa5ac0e3c996cfb52e85706915 width=100% height=300px style=border:0 class=frame></iframe>
 <script>document.getElementById("react-root-0f34d2fa5ac0e3c996cfb52e85706915").srcdoc=`
     <!DOCTYPE html>
-    <html>
+    <html lang="en" data-theme="dark">
       <head>
-        <base href="${location.origin}/">
+          <base href="${location.origin}/">
       </head>
-      <body>
+        <body>
         <div id="root" class="full-screen"></div>
         <script type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';

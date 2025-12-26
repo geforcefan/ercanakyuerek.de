@@ -31,11 +31,11 @@
   <script>
     document.getElementById('react-root-349c729d6df2fe00de637718bb468b31').srcdoc = `
     <!DOCTYPE html>
-    <html>
+    <html lang="en" data-theme="dark">
       <head>
-        <base href="${location.origin}/">
+          <base href="${location.origin}/">
       </head>
-      <body>
+        <body>
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -261,11 +261,11 @@
   <script>
     document.getElementById('react-root-5258c7e0fe78a1fa36db790eb8d34c04').srcdoc = `
     <!DOCTYPE html>
-    <html>
+    <html lang="en" data-theme="dark">
       <head>
-        <base href="${location.origin}/">
+          <base href="${location.origin}/">
       </head>
-      <body>
+        <body>
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -454,11 +454,11 @@ export const MotionEvaluationDemoScene = () =&gt; {
   <script>
     document.getElementById('react-root-27fa8bf2addae285184fdbd50648585e').srcdoc = `
     <!DOCTYPE html>
-    <html>
+    <html lang="en" data-theme="dark">
       <head>
-        <base href="${location.origin}/">
+          <base href="${location.origin}/">
       </head>
-      <body>
+        <body>
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -691,11 +691,11 @@ That is the whole trick.</p>
   <script>
     document.getElementById('react-root-c069d7e2f566db415e79c510205dba10').srcdoc = `
     <!DOCTYPE html>
-    <html>
+    <html lang="en" data-theme="dark">
       <head>
-        <base href="${location.origin}/">
+          <base href="${location.origin}/">
       </head>
-      <body>
+        <body>
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -1022,11 +1022,11 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
   <script>
     document.getElementById('react-root-0f34d2fa5ac0e3c996cfb52e85706915').srcdoc = `
     <!DOCTYPE html>
-    <html>
+    <html lang="en" data-theme="dark">
       <head>
-        <base href="${location.origin}/">
+          <base href="${location.origin}/">
       </head>
-      <body>
+        <body>
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -1270,11 +1270,11 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
   <script>
     document.getElementById('react-root-f0b2d72026ec29c44e8c23715f14ad8c').srcdoc = `
     <!DOCTYPE html>
-    <html>
+    <html lang="en" data-theme="dark">
       <head>
-        <base href="${location.origin}/">
+          <base href="${location.origin}/">
       </head>
-      <body>
+        <body>
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -1548,11 +1548,11 @@ so it might help you as well.</p>
   <script>
     document.getElementById('react-root-8e12f9506258ee81e5ce43c1101a94e4').srcdoc = `
     <!DOCTYPE html>
-    <html>
+    <html lang="en" data-theme="dark">
       <head>
-        <base href="${location.origin}/">
+          <base href="${location.origin}/">
       </head>
-      <body>
+        <body>
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -1865,11 +1865,11 @@ finally bring us closer to a real, fully working roller coaster simulation.</p>
   <script>
     document.getElementById('react-root-790ed3495fdb95e9122dc43ce3a51b8a').srcdoc = `
     <!DOCTYPE html>
-    <html>
+    <html lang="en" data-theme="dark">
       <head>
-        <base href="${location.origin}/">
+          <base href="${location.origin}/">
       </head>
-      <body>
+        <body>
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -1969,7 +1969,7 @@ Transition from parameter-based non-uniform to uniform node spacing. The control
 &lt;script&gt;
 document.getElementById('react-root-a58499091e91abebdf7ee8091642196c').srcdoc = `
 &lt;!DOCTYPE html&gt;
-&lt;html&gt;
+&lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
 &lt;base href="${location.origin}/"&gt;
 &lt;/head&gt;
@@ -2004,11 +2004,11 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/3-implementing-library-fun
   <script>
     document.getElementById('react-root-a58499091e91abebdf7ee8091642196c').srcdoc = `
     <!DOCTYPE html>
-    <html>
+    <html lang="en" data-theme="dark">
       <head>
-        <base href="${location.origin}/">
+          <base href="${location.origin}/">
       </head>
-      <body>
+        <body>
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';

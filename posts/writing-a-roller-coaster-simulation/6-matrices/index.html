@@ -56,11 +56,11 @@ A matrix can hold position and directions at the same time. This is exactly what
 </span></span></code></pre></div><h2 id=what-comes-next>What comes next?</h2><p>These changes are mostly structural. Visually, nothing changes yet. Under the hood, however, the simulation now works entirely with <strong>matrices</strong>, which will make later changes easier.</p><p><a href=https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/7-curve-nodes/>In the next chapter</a>, we move away from linear segments and introduce a more general way to describe <strong>curves</strong>. That will require a new implementation of <code>matrixAtDistance</code>, but the rest of the simulation can stay as it is.</p><p>This is the kind of refactor we want. We change how the track is described without rewriting everything built on top of it.</p><h2 id=interactive-demo-and-code>Interactive demo and code</h2><p>There is no visible difference in the demo. The train behaves exactly as before. The only change is that the simulation now uses <code>matrixAtDistance</code> internally.</p><p>For completeness, the full demo is shown below.</p><div class=embedded><iframe id=react-root-27fa8bf2addae285184fdbd50648585e width=100% height=320px style=border:0 class=frame></iframe>
 <script>document.getElementById("react-root-27fa8bf2addae285184fdbd50648585e").srcdoc=`
     <!DOCTYPE html>
-    <html>
+    <html lang="en" data-theme="dark">
       <head>
-        <base href="${location.origin}/">
+          <base href="${location.origin}/">
       </head>
-      <body>
+        <body>
         <div id="root" class="full-screen"></div>
         <script type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';

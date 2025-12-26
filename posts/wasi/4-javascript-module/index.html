@@ -67,11 +67,11 @@ I have created a very basic template for this. You may notice that we define a n
 </span></span></code></pre></div><h1 id=demo>Demo</h1><p>To make this less abstract, there is an interactive demo where you can drag control points around and see the Bezier calculations happen inside the WebAssembly module.</p><div class=embedded><iframe id=react-root-790ed3495fdb95e9122dc43ce3a51b8a width=100% height=300px style=border:0 class=frame></iframe>
 <script>document.getElementById("react-root-790ed3495fdb95e9122dc43ce3a51b8a").srcdoc=`
     <!DOCTYPE html>
-    <html>
+    <html lang="en" data-theme="dark">
       <head>
-        <base href="${location.origin}/">
+          <base href="${location.origin}/">
       </head>
-      <body>
+        <body>
         <div id="root" class="full-screen"></div>
         <script type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';

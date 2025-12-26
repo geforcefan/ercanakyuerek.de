@@ -55,11 +55,11 @@ That is the whole trick.</p><p>Now subtract energy loss from acceleration:</p><d
 </span></span></code></pre></div><p>We still compute the gravity acceleration first. After that we subtract the energy losses from friction and air resistance. Even though this is a very simple model, the difference becomes immediately visible. The train will no longer accelerate forever or keep moving at impossible speeds.</p><h2 id=demo-with-friction-and-air-resistance>Demo with friction and air resistance</h2><p>Just like in the previous chapter, here is a small interactive demo. This time it includes both friction and air resistance so you can see how the coaster behaves when energy loss is part of the simulation.</p><ul><li>The <strong>orange</strong> dot represents a train with friction and air resistance applied.</li><li>The <strong>white</strong> dot shows the same motion without any energy loss.</li></ul><p>Feel free to move the control points to experiment with the track shape and see how both trains react differently.</p><div class=embedded><iframe id=react-root-c069d7e2f566db415e79c510205dba10 width=100% height=300px style=border:0 class=frame></iframe>
 <script>document.getElementById("react-root-c069d7e2f566db415e79c510205dba10").srcdoc=`
     <!DOCTYPE html>
-    <html>
+    <html lang="en" data-theme="dark">
       <head>
-        <base href="${location.origin}/">
+          <base href="${location.origin}/">
       </head>
-      <body>
+        <body>
         <div id="root" class="full-screen"></div>
         <script type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
