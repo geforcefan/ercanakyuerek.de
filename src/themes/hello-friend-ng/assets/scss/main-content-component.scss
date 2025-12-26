@@ -1,2 +1,5 @@
-@import "variables";
-@import "content-component";
+@import 'main-webpack.scss';
+
+.content-component {
+  background: none !important;
+}

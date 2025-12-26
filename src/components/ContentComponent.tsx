@@ -15,7 +15,7 @@ export const ContentComponent = ({ path }: { path: string }) => {
   );
 
   return (
-    <Suspense>
+    <Suspense fallback={<>Loading...</>}>
       <LazyComponent />
     </Suspense>
   );
