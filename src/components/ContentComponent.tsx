@@ -1,6 +1,7 @@
 import React, { lazy, Suspense, useMemo } from 'react';
 
 import { contentComponents } from '../helper/render-content-component';
+import { LoadingScreen } from './LoadingScreen';
 
 export const ContentComponent = ({ path }: { path: string }) => {
   const LazyComponent = useMemo(
@@ -15,7 +16,7 @@ export const ContentComponent = ({ path }: { path: string }) => {
   );
 
   return (
-    <Suspense fallback={<>Loading...</>}>
+    <Suspense fallback={<LoadingScreen/>}>
       <LazyComponent />
     </Suspense>
   );
