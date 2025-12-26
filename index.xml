@@ -56,7 +56,7 @@ each roll point.&lt;/p&gt;</description></item><item><title>JavaScript module</t
  &lt;head&gt;
  &lt;base href="${location.origin}/"&gt;
  &lt;/head&gt;
- &lt;body&gt;
+ &lt;body class="content-component"&gt;
  &lt;div id="root" class="full-screen"&gt;&lt;/div&gt;
  \x3Cscript type="module"&gt;
  import { renderContentComponentByPath } from '/scripts/render-content-component.js';

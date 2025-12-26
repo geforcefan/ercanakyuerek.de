@@ -35,7 +35,7 @@
       <head>
           <base href="${location.origin}/">
       </head>
-        <body>
+        <body class="content-component">
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -265,7 +265,7 @@
       <head>
           <base href="${location.origin}/">
       </head>
-        <body>
+        <body class="content-component">
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -458,7 +458,7 @@ export const MotionEvaluationDemoScene = () =&gt; {
       <head>
           <base href="${location.origin}/">
       </head>
-        <body>
+        <body class="content-component">
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -695,7 +695,7 @@ That is the whole trick.</p>
       <head>
           <base href="${location.origin}/">
       </head>
-        <body>
+        <body class="content-component">
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -1026,7 +1026,7 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
       <head>
           <base href="${location.origin}/">
       </head>
-        <body>
+        <body class="content-component">
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -1274,7 +1274,7 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
       <head>
           <base href="${location.origin}/">
       </head>
-        <body>
+        <body class="content-component">
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -1552,7 +1552,7 @@ so it might help you as well.</p>
       <head>
           <base href="${location.origin}/">
       </head>
-        <body>
+        <body class="content-component">
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -1869,7 +1869,7 @@ finally bring us closer to a real, fully working roller coaster simulation.</p>
       <head>
           <base href="${location.origin}/">
       </head>
-        <body>
+        <body class="content-component">
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -1973,7 +1973,7 @@ document.getElementById('react-root-a58499091e91abebdf7ee8091642196c').srcdoc = 
 &lt;head&gt;
 &lt;base href="${location.origin}/"&gt;
 &lt;/head&gt;
-&lt;body&gt;
+&lt;body class="content-component"&gt;
 &lt;div id="root" class="full-screen"&gt;&lt;/div&gt;
 \x3Cscript type="module"&gt;
 import { renderContentComponentByPath } from '/scripts/render-content-component.js';
@@ -2008,7 +2008,7 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/3-implementing-library-fun
       <head>
           <base href="${location.origin}/">
       </head>
-        <body>
+        <body class="content-component">
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
