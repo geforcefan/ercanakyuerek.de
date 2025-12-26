@@ -19,7 +19,7 @@
   .frame {
     border: 0;
     padding: 1em;
-    background: #2b2b2b;
+    background: $embedded-frame-background;
     border-radius: 8px;
   }
 
@@ -55,21 +55,4 @@
     float: right;
     margin: 10px;
   }
-}
-
-.full-screen {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.viewport {
-  margin: 10px;
-  box-sizing: border-box;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  border: 1px solid #cc7832;
 }

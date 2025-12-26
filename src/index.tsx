@@ -1,34 +1,24 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-
 import { createBrowserRouter, RouterProvider } from 'react-router';
 
 import { contentComponents } from './helper/render-content-component';
 
+import { ContentComponent } from './components/ContentComponent';
+
+import { ContentComponentsListPage } from './pages/ContentComponentsListPage';
+
+import './themes/hello-friend-ng/assets/scss/main-webpack.scss';
+
 const router = createBrowserRouter([
   {
     path: '/',
-    Component: () => {
-      return (
-        <ul>
-          {contentComponents.keys().map((path: string) => (
-            <li>
-              <a href={path}>{path}</a>
-            </li>
-          ))}
-        </ul>
-      );
-    },
+    Component: ContentComponentsListPage,
   },
   ...contentComponents.keys().map((path: string) => {
     return {
       path: path.replace('./', ''),
-      Component: lazy(async () => {
-        const module = await contentComponents(path);
-        return {
-          default: module.default ?? Object.values(module).pop(),
-        };
-      }),
+      Component: () => <ContentComponent path={path} />,
     };
   }),
 ]);
