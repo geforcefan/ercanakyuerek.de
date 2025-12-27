@@ -1,8 +1,6 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 25 Dec 2025 14:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Curve Nodes</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/7-curve-nodes/</link><pubDate>Sun, 21 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/7-curve-nodes/</guid><description>&lt;hr&gt;
-&lt;p&gt;In this chapter, we try to make our lives a bit easier by using a more flexible way to describe &lt;strong&gt;curves&lt;/strong&gt; in general.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 25 Dec 2025 14:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Curve Nodes</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/7-curve-nodes/</link><pubDate>Sun, 21 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/7-curve-nodes/</guid><description>&lt;p&gt;In this chapter, we try to make our lives a bit easier by using a more flexible way to describe &lt;strong&gt;curves&lt;/strong&gt; in general.&lt;/p&gt;
 &lt;p&gt;This article is a bit longer than usual. The topic is hard to split into smaller pieces without losing context, so we keep everything in one place. I will try to keep things as simple as possible, but yes, there is a bit going on here.&lt;/p&gt;
-&lt;p&gt;Up to this point, everything was built around a very basic &lt;strong&gt;linear track&lt;/strong&gt; with two control points. Functions like &lt;code&gt;matrixAtDistance&lt;/code&gt; only had to deal with a single segment. That worked fine for learning and experimenting, but it starts to feel limiting very quickly. A real roller coaster does not consist of exactly one straight line.&lt;/p&gt;</description><content type="html"><![CDATA[<hr>
-<p>In this chapter, we try to make our lives a bit easier by using a more flexible way to describe <strong>curves</strong> in general.</p>
+&lt;p&gt;Up to this point, everything was built around a very basic &lt;strong&gt;linear track&lt;/strong&gt; with two control points. Functions like &lt;code&gt;matrixAtDistance&lt;/code&gt; only had to deal with a single segment. That worked fine for learning and experimenting, but it starts to feel limiting very quickly. A real roller coaster does not consist of exactly one straight line.&lt;/p&gt;</description><content type="html"><![CDATA[<p>In this chapter, we try to make our lives a bit easier by using a more flexible way to describe <strong>curves</strong> in general.</p>
 <p>This article is a bit longer than usual. The topic is hard to split into smaller pieces without losing context, so we keep everything in one place. I will try to keep things as simple as possible, but yes, there is a bit going on here.</p>
 <p>Up to this point, everything was built around a very basic <strong>linear track</strong> with two control points. Functions like <code>matrixAtDistance</code> only had to deal with a single segment. That worked fine for learning and experimenting, but it starts to feel limiting very quickly. A real roller coaster does not consist of exactly one straight line.</p>
 <p>For now, we do not jump straight to <strong>NURBS</strong> or anything fancy. That will come later. We just want more segments. To do that, we need a way to describe curves that is not tied to a specific curve type, whether that is linear tracks, splines, geometric sections.</p>
@@ -129,8 +127,6 @@
 </span></span></code></pre></div><p>This is exactly what you were already seeing in the interactive example at the beginning of the chapter, just written down in code form.</p>
 <h1 id="interpolate-between-curve-nodes">Interpolate between curve nodes</h1>
 <p>Now we move on to the more interesting part: <strong>interpolation between the left and right curve nodes</strong>.</p>
-<blockquote>
-<p><strong>Note:</strong> For now, we only interpolate the <strong>position</strong>, not the orientation. This means direction changes will be hard instead of smooth. This is intentional. We will fix this later when things start to matter.</p></blockquote>
 <p>To find the <strong>left and right nodes</strong>, we use the <strong>binary search helper</strong> we just built:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">nodes</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">findBoundingIndices</span>(
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">curve</span>,
@@ -165,12 +161,36 @@
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// ...interpolation between left and right node goes here
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><p>Since this is still a simplified implementation with linear segments, we only interpolate the <strong>position</strong>. We keep the <strong>orientation from the left node</strong>, so direction changes are hard at segment transitions. Later, as mentioned above, we will switch to smooth transitions using spherical linear interpolation.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">matrix</span>
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">clone</span>()
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">setPosition</span>(
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fromMatrix4</span>(<span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">matrix</span>).<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">fromMatrix4</span>(<span style="color:#a6e22e">right</span>.<span style="color:#a6e22e">matrix</span>), <span style="color:#a6e22e">t</span>),
+</span></span></code></pre></div><p>We need a small utility function that interpolates between two matrices.</p>
+<p>Unfortunately, there is no built-in helper for this in <strong>THREE.js</strong>. <strong>THREE.js</strong> does have helpers to interpolate <strong>vectors</strong> and <strong>quaternions</strong> though, which is exactly what we need here.</p>
+<p>A matrix contains position and rotation. We extract those parts, interpolate them separately, and then build a new matrix again.
+<strong>Position</strong> is interpolated <strong>linearly</strong>. <strong>Rotation</strong> is interpolated using <strong>spherical linear interpolation</strong> on <strong>quaternions</strong>.</p>
+<p>If you already know what <strong>quaternions</strong> are, great. If not, also fine. This is not important at this point. I will write dedicated articles about <strong>vectors, matrices, euler and quaternions</strong> later.</p>
+<p>The helper looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lerp</span> <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">matrixA</span>: <span style="color:#66d9ef">Matrix4</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">matrixB</span>: <span style="color:#66d9ef">Matrix4</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">t</span>: <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fromQuaternion</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Quaternion</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">toQuaternion</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Quaternion</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fromPosition</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">toPosition</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">scale</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">matrixA</span>.<span style="color:#a6e22e">decompose</span>(<span style="color:#a6e22e">fromPosition</span>, <span style="color:#a6e22e">fromQuaternion</span>, <span style="color:#a6e22e">scale</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">matrixB</span>.<span style="color:#a6e22e">decompose</span>(<span style="color:#a6e22e">toPosition</span>, <span style="color:#a6e22e">toQuaternion</span>, <span style="color:#a6e22e">scale</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Matrix4</span>().<span style="color:#a6e22e">compose</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fromPosition</span>.<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">toPosition</span>, <span style="color:#a6e22e">t</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fromQuaternion</span>.<span style="color:#a6e22e">slerp</span>(<span style="color:#a6e22e">toQuaternion</span>, <span style="color:#a6e22e">t</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">scale</span>,
 </span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Now we can use this to interpolate between the <strong>left</strong> and <strong>right</strong> matrix:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">matrix</span>, <span style="color:#a6e22e">right</span>.<span style="color:#a6e22e">matrix</span>, <span style="color:#a6e22e">t</span>);
 </span></span></code></pre></div><p>If the distance between the nodes is <code>0</code>, things are easy. We just return a copy of the left node’s matrix:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">matrix</span>.<span style="color:#a6e22e">clone</span>();
 </span></span></code></pre></div><p>Putting everything together, the full function looks like this:</p>
@@ -194,11 +214,7 @@
 </span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">1.0</span>,
 </span></span><span style="display:flex;"><span>    );
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">matrix</span>
-</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">clone</span>()
-</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">setPosition</span>(
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fromMatrix4</span>(<span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">matrix</span>).<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">fromMatrix4</span>(<span style="color:#a6e22e">right</span>.<span style="color:#a6e22e">matrix</span>), <span style="color:#a6e22e">t</span>),
-</span></span><span style="display:flex;"><span>      );
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">matrix</span>, <span style="color:#a6e22e">right</span>.<span style="color:#a6e22e">matrix</span>, <span style="color:#a6e22e">t</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">matrix</span>.<span style="color:#a6e22e">clone</span>();
@@ -206,8 +222,9 @@
 </span></span></code></pre></div><h1 id="linear-track-with-more-segments">Linear track with more segments</h1>
 <p>To actually see this in motion, we need a small helper that constructs curve nodes from a list of points. This is only here to make the demo work and will be improved later.</p>
 <blockquote>
-<p><strong>Note:</strong> This helper ignores proper roll handling and only produces something usable for now. This is fine. We are still early.</p></blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fromPoints</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[]) <span style="color:#f92672">=&gt;</span> {
+<p><strong>Note</strong>: Points are duplicated to create hard transitions between segments. For linear track segments, smooth rotation transitions do not really make sense physically. Duplicating points is an easy way to fake the behavior we want.</p>
+<p><strong>Important</strong>: This is temporary junk. It exists only to make the demo work quickly and will be replaced by a proper implementation with correct normals and roll handling.</p></blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">curveFromPoints</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[]) <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">curve</span>: <span style="color:#66d9ef">CurveNode</span>[] <span style="color:#f92672">=</span> [];
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">points</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">curve</span>;
 </span></span><span style="display:flex;"><span>
@@ -216,6 +233,13 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">points</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">points</span>[<span style="color:#a6e22e">i</span>];
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">points</span>[<span style="color:#a6e22e">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">prevNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curve</span>[<span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">prevNode</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">push</span>({
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">matrix</span>: <span style="color:#66d9ef">prevNode.matrix.clone</span>().<span style="color:#a6e22e">setPosition</span>(<span style="color:#a6e22e">left</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">distanceAtCurve</span>,
+</span></span><span style="display:flex;"><span>      });
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">push</span>({
 </span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">matrix</span>: <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Matrix4</span>()
@@ -304,16 +328,54 @@
 
 <pre><code class="language-tsx">import React, { useMemo, useState } from &#39;react&#39;;
 import { Line } from &#39;@react-three/drei&#39;;
-import { Vector3 } from &#39;three&#39;;
+import last from &#39;lodash/last&#39;;
+import { Matrix4, Vector3 } from &#39;three&#39;;
 
-import { fromPointsBasic } from &#39;../../../../maths/curve&#39;;
+import { CurveNode } from &#39;../../../../maths/curve&#39;;
 import { useColors } from &#39;../../../../hooks/useColors&#39;;
-import { useSimulationMotion } from &#39;../../../../hooks/useSimulationMotion&#39;;
+import { useMotionSimulation } from &#39;../../../../hooks/useMotionSimulation&#39;;
 
-import { ControlPoint } from &#39;../../../../components/ControlPoint&#39;;
 import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
-import { MatrixArrowHelper } from &#39;../../../../components/MatrixArrowHelper&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
+import { PointWithMatrixArrows } from &#39;../../../../components/PointWithMatrixArrows&#39;;
+
+const curveFromPoints = (points: Vector3[]) =&gt; {
+  const curve: CurveNode[] = [];
+  if (points.length &lt; 2) return curve;
+
+  let distanceAtCurve = 0;
+
+  for (let i = 0; i &lt; points.length - 1; i&#43;&#43;) {
+    const left = points[i];
+    const right = points[i &#43; 1];
+    const prevNode = curve[curve.length - 1];
+
+    if (prevNode)
+      curve.push({
+        matrix: prevNode.matrix.clone().setPosition(left),
+        distanceAtCurve,
+      });
+
+    curve.push({
+      matrix: new Matrix4()
+        .lookAt(right, left, new Vector3(0, 1, 0))
+        .setPosition(left),
+      distanceAtCurve,
+    });
+
+    distanceAtCurve &#43;= left.distanceTo(right);
+  }
+
+  const lastNode = last(curve)!;
+  const lastPoint = last(points)!;
+
+  curve.push({
+    matrix: lastNode.matrix.clone().setPosition(lastPoint),
+    distanceAtCurve,
+  });
+
+  return curve;
+};
 
 const MotionEvaluationDemo = () =&gt; {
   const colors = useColors();
@@ -327,8 +389,8 @@ const MotionEvaluationDemo = () =&gt; {
     new Vector3(-0.5, -2.5, 0),
   ]);
 
-  const curve = useMemo(() =&gt; fromPointsBasic(points), [points]);
-  const motionMatrix = useSimulationMotion(curve);
+  const curve = useMemo(() =&gt; curveFromPoints(points), [points]);
+  const motionMatrix = useMotionSimulation(curve);
 
   return (
     &lt;&gt;
@@ -338,11 +400,7 @@ const MotionEvaluationDemo = () =&gt; {
         setPoints={setPoints}
       /&gt;
       &lt;Line points={points} color={colors.secondary} /&gt;
-
-      &lt;group matrixAutoUpdate={false} matrix={motionMatrix}&gt;
-        &lt;MatrixArrowHelper /&gt;
-        &lt;ControlPoint color={colors.highlight} /&gt;
-      &lt;/group&gt;
+      &lt;PointWithMatrixArrows matrix={motionMatrix}/&gt;
     &lt;/&gt;
   );
 };
@@ -483,13 +541,12 @@ import { useFrame } from &#39;@react-three/fiber&#39;;
 import { MathUtils, Vector3 } from &#39;three&#39;;
 
 import { length, matrixAtDistance } from &#39;../../../../maths/linear&#39;;
-import { evaluateMotionByMatrixWithEnergyLoss } from &#39;../../../../helper/physics&#39;;
+import { evaluateMotion } from &#39;../../../../helper/physics&#39;;
 import { useColors } from &#39;../../../../hooks/useColors&#39;;
 import { useSimulationStateControls } from &#39;../../../../hooks/useSimulationStateControls&#39;;
 
-import { ControlPoint } from &#39;../../../../components/ControlPoint&#39;;
 import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
-import { MatrixArrowHelper } from &#39;../../../../components/MatrixArrowHelper&#39;;
+import { PointWithMatrixArrows } from &#39;../../../../components/PointWithMatrixArrows&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
 const MatricesDemo = () =&gt; {
@@ -506,7 +563,7 @@ const MatricesDemo = () =&gt; {
 
   useFrame((state, deltaTime) =&gt; {
     setSimulationState(
-      evaluateMotionByMatrixWithEnergyLoss(
+      evaluateMotion(
         simulationState,
         matrixAtDistance(
           points[0],
@@ -536,7 +593,7 @@ const MatricesDemo = () =&gt; {
     }
   }, [simulationState.distanceTraveled, points, setSimulationState]);
 
-  const trainMatrix = matrixAtDistance(
+  const motionMatrix = matrixAtDistance(
     points[0],
     points[1],
     MathUtils.clamp(
@@ -554,10 +611,7 @@ const MatricesDemo = () =&gt; {
         setPoints={setPoints}
       /&gt;
       &lt;Line points={points} color={colors.secondary} /&gt;
-      &lt;group matrixAutoUpdate={false} matrix={trainMatrix}&gt;
-        &lt;MatrixArrowHelper /&gt;
-        &lt;ControlPoint color={colors.highlight} /&gt;
-      &lt;/group&gt;
+      &lt;PointWithMatrixArrows matrix={motionMatrix} /&gt;
     &lt;/&gt;
   );
 };

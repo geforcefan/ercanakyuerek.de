@@ -18,7 +18,7 @@ import {
   matrixAtDistance,
 } from '../../maths/curve';
 import { fromMatrix4 } from '../../maths/vector3';
-import { evaluateMotionByMatrixWithEnergyLoss } from '../../helper/physics';
+import { evaluateMotion } from '../../helper/physics';
 import { useColors } from '../../hooks/useColors';
 import { useMeasure } from '../../hooks/useMeasure';
 
@@ -69,7 +69,7 @@ const TrainWithPhysics = (props: { curve: CurveNode[] }) => {
 
   useFrame((state, deltaTime) => {
     setSimulationState({
-      ...evaluateMotionByMatrixWithEnergyLoss(
+      ...evaluateMotion(
         simulationState,
         evaluatedMatrix,
         friction,
