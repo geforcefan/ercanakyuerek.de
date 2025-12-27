@@ -2,7 +2,7 @@ import { Vector2, Vector3 } from 'three';
 
 import { lowerBound } from '../helper/binary-search';
 
-import { fromUniformSample } from './curve';
+import { fromUniformSampledPositions } from './curve';
 
 export interface CubicSpline {
   x: number[];
@@ -92,7 +92,7 @@ export const clampedCubicSplineCurve = (
 
   const spline = clampedCubicSpline(points, startSlope, endSlope);
 
-  return fromUniformSample(
+  return fromUniformSampledPositions(
     points[0].x,
     points[points.length - 1].x,
     resolution,

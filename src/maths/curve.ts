@@ -1,15 +1,16 @@
 import last from 'lodash/last';
 import { MathUtils, Matrix4, Vector3 } from 'three';
 
-import { findBoundingIndices } from '../helper/binary-search';
 
-import {
-  applyLookRelativeAt,
-  applyRotationZ,
-  distance,
-  lerp,
-} from './matrix4';
+
+import { findBoundingIndices } from '../helper/binary-search';
+import { uniformSample } from '../helper/uniform-sample';
+
+
+
+import { applyLookRelativeAt, applyRotationZ, distance, lerp } from './matrix4';
 import { fromMatrix4 } from './vector3';
+
 
 export type CurveNode = {
   matrix: Matrix4;
@@ -196,7 +197,7 @@ export const fromPoints = (points: Vector3[]) => {
   return curve;
 };
 
-export const fromUniformSample = (
+export const fromUniformSampledPositions = (
   from: number = 0,
   to: number = 0,
   resolution: number = 8,
@@ -204,13 +205,13 @@ export const fromUniformSample = (
 ) => {
   const curve: CurveNode[] = [];
 
-  const length = to - from;
-  const numberOfNodes = Math.max(Math.floor(length * resolution), 2);
-
-  for (let i = 0; i < numberOfNodes; i++) {
-    const t = i / (numberOfNodes - 1);
-    const at = from + t * length;
+  uniformSample(from, to, resolution, (at, t) => {
     insertPosition(curve, positionFn(at, t));
-  }
+  });
+
   return curve;
+};
+
+export const toPoints = (curve: CurveNode[]) => {
+  return curve.map((node) => fromMatrix4(node.matrix));
 };

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
+import { Line } from '@react-three/drei';
 import { useControls } from 'leva';
 import { MathUtils, Vector3 } from 'three';
 
 import { useColors } from '../../../../hooks/useColors';
 
 import { Arrow } from '../../../../components/Arrow';
-import { Line } from '../../../../components/Line';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 
 const GravityDemo = () => {

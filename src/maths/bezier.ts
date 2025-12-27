@@ -1,12 +1,8 @@
 import { Vector3 } from 'three';
 
-import {
-  fromUniformSample,
-  CurveNode,
-  length,
-  matrixAtDistance,
-  insertMatrix,
-} from './curve';
+import { uniformSampleMap } from '../helper/uniform-sample';
+
+import { fromUniformSampledPositions } from './curve';
 
 export const bezierFast = (
   p0: Vector3,
@@ -34,40 +30,17 @@ export const estimateLength = (
   p2: Vector3,
   p3: Vector3,
 ) => {
-  let lastPosition = p0;
-  let length = 0.0;
-
-  for (let i = 0; i < 15; i += 2) {
-    const t = i / 14.0;
-    const position = bezierFast(p0, p1, p2, p3, t);
-    length += position.distanceTo(lastPosition);
-    lastPosition = position;
-  }
-
-  return length;
-};
-
-export const evaluateUniform = (
-  p0: Vector3,
-  p1: Vector3,
-  p2: Vector3,
-  p3: Vector3,
-  resolution: number = 10,
-) => {
-  const curve: CurveNode[] = [];
-  const nodes = bezierSplineCurve(p0, p1, p2, p3, 40);
-  const splineLength = length(nodes);
-  const numberOfNodes = Math.max(
-    Math.floor(splineLength * resolution),
-    2,
+  const points = uniformSampleMap(0, 1, 8, (t) =>
+    bezierFast(p0, p1, p2, p3, t),
   );
 
-  for (let i = 0; i < numberOfNodes; i++) {
-    const at = (i / (numberOfNodes - 1)) * splineLength;
-    insertMatrix(curve, matrixAtDistance(nodes, at));
-  }
-
-  return curve;
+  return points
+    .slice(1)
+    .reduce(
+      (totalLength, point, i) =>
+        totalLength + point.distanceTo(points[i]),
+      0,
+    );
 };
 
 export const bezierSplineCurve = (
@@ -77,7 +50,7 @@ export const bezierSplineCurve = (
   p3: Vector3,
   resolution: number = 10,
 ) => {
-  return fromUniformSample(
+  return fromUniformSampledPositions(
     0,
     estimateLength(p0, p1, p2, p3),
     resolution,

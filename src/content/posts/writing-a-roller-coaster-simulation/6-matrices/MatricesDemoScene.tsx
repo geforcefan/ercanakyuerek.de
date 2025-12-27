@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Line } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { MathUtils, Vector3 } from 'three';
 
@@ -9,7 +10,6 @@ import { useSimulationStateControls } from '../../../../hooks/useSimulationState
 
 import { ControlPoint } from '../../../../components/ControlPoint';
 import { DragControlPoints } from '../../../../components/DragControlPoints';
-import { Line } from '../../../../components/Line';
 import { MatrixArrowHelper } from '../../../../components/MatrixArrowHelper';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 

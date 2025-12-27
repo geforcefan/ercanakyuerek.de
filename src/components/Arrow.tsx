@@ -8,9 +8,8 @@ export const Arrow = (
 
   return (
     <mesh {...restProps}>
-      <coneGeometry args={[0.3, 0.5, 5]}>
-        <meshStandardMaterial color={color} />
-      </coneGeometry>
+      <coneGeometry args={[0.3, 0.5, 5]} />
+      <meshBasicMaterial color={color} />
     </mesh>
   );
 };

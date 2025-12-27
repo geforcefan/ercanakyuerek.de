@@ -1,17 +1,13 @@
 import React, { useMemo, useState } from 'react';
-import { MathUtils, Vector3 } from 'three';
+import { Line } from '@react-three/drei';
+import { Vector3 } from 'three';
 
-import {
-  fromPointsBasic,
-  length,
-  matrixAtDistanceWithoutTransition,
-} from '../../../../maths/curve';
+import { fromPointsBasic } from '../../../../maths/curve';
 import { useColors } from '../../../../hooks/useColors';
-import { useSimulation } from '../../../../hooks/useSimulation';
+import { useSimulationMotion } from '../../../../hooks/useSimulationMotion';
 
 import { ControlPoint } from '../../../../components/ControlPoint';
 import { DragControlPoints } from '../../../../components/DragControlPoints';
-import { Line } from '../../../../components/Line';
 import { MatrixArrowHelper } from '../../../../components/MatrixArrowHelper';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 
@@ -28,20 +24,7 @@ const MotionEvaluationDemo = () => {
   ]);
 
   const curve = useMemo(() => fromPointsBasic(points), [points]);
-  const simulationState = useSimulation(curve);
-
-  const trainMatrix = useMemo(
-    () =>
-      matrixAtDistanceWithoutTransition(
-        curve,
-        MathUtils.clamp(
-          simulationState.distanceTraveled,
-          0,
-          length(curve),
-        ),
-      ),
-    [curve, simulationState.distanceTraveled],
-  );
+  const motionMatrix = useSimulationMotion(curve);
 
   return (
     <>
@@ -52,7 +35,7 @@ const MotionEvaluationDemo = () => {
       />
       <Line points={points} color={colors.secondary} />
 
-      <group matrixAutoUpdate={false} matrix={trainMatrix}>
+      <group matrixAutoUpdate={false} matrix={motionMatrix}>
         <MatrixArrowHelper />
         <ControlPoint color={colors.highlight} />
       </group>

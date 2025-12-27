@@ -5,7 +5,7 @@ import {
   length,
   matrixAtDistance,
 } from '../../maths/curve';
-import { uniformMap } from '../../helper/uniform-map';
+import { uniformSampleMap } from '../../helper/uniform-sample';
 
 export const plotDataFromPoints = (
   nodes: (Vector2 | Vector3 | Vector4)[],
@@ -19,7 +19,7 @@ export const plotDataFromCurve = (
   resolution: number = 8,
   fn: (m: Matrix4) => number,
 ) => {
-  const points = uniformMap(
+  const points = uniformSampleMap(
     0,
     length(curve),
     resolution,
