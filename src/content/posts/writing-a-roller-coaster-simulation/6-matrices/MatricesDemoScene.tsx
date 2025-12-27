@@ -4,13 +4,12 @@ import { useFrame } from '@react-three/fiber';
 import { MathUtils, Vector3 } from 'three';
 
 import { length, matrixAtDistance } from '../../../../maths/linear';
-import { evaluateMotionByMatrixWithEnergyLoss } from '../../../../helper/physics';
+import { evaluateMotion } from '../../../../helper/physics';
 import { useColors } from '../../../../hooks/useColors';
 import { useSimulationStateControls } from '../../../../hooks/useSimulationStateControls';
 
-import { ControlPoint } from '../../../../components/ControlPoint';
 import { DragControlPoints } from '../../../../components/DragControlPoints';
-import { MatrixArrowHelper } from '../../../../components/MatrixArrowHelper';
+import { PointWithMatrixArrows } from '../../../../components/PointWithMatrixArrows';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 
 const MatricesDemo = () => {
@@ -27,7 +26,7 @@ const MatricesDemo = () => {
 
   useFrame((state, deltaTime) => {
     setSimulationState(
-      evaluateMotionByMatrixWithEnergyLoss(
+      evaluateMotion(
         simulationState,
         matrixAtDistance(
           points[0],
@@ -57,7 +56,7 @@ const MatricesDemo = () => {
     }
   }, [simulationState.distanceTraveled, points, setSimulationState]);
 
-  const trainMatrix = matrixAtDistance(
+  const motionMatrix = matrixAtDistance(
     points[0],
     points[1],
     MathUtils.clamp(
@@ -75,10 +74,7 @@ const MatricesDemo = () => {
         setPoints={setPoints}
       />
       <Line points={points} color={colors.secondary} />
-      <group matrixAutoUpdate={false} matrix={trainMatrix}>
-        <MatrixArrowHelper />
-        <ControlPoint color={colors.highlight} />
-      </group>
+      <PointWithMatrixArrows matrix={motionMatrix} />
     </>
   );
 };

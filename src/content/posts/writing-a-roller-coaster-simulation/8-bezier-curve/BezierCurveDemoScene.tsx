@@ -4,13 +4,12 @@ import { Vector3 } from 'three';
 
 import { bezierSplineCurve } from '../../../../maths/bezier';
 import { useColors } from '../../../../hooks/useColors';
-import { useSimulationMotion } from '../../../../hooks/useSimulationMotion';
+import { useMotionSimulation } from '../../../../hooks/useMotionSimulation';
 
-import { ControlPoint } from '../../../../components/ControlPoint';
 import { CurveLine } from '../../../../components/CurveLine';
 import { DragControlPoints } from '../../../../components/DragControlPoints';
-import { MatrixArrowHelper } from '../../../../components/MatrixArrowHelper';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
+import { PointWithMatrixArrows } from '../../../../components/PointWithMatrixArrows';
 
 const BezierCurveDemo = () => {
   const colors = useColors();
@@ -24,17 +23,11 @@ const BezierCurveDemo = () => {
 
   const curve = useMemo(
     () =>
-      bezierSplineCurve(
-        points[0],
-        points[1],
-        points[2],
-        points[3],
-        10,
-      ),
+      bezierSplineCurve(points[0], points[1], points[2], points[3]),
     [points],
   );
 
-  const motionMatrix = useSimulationMotion(curve);
+  const motionMatrix = useMotionSimulation(curve);
 
   return (
     <>
@@ -49,11 +42,7 @@ const BezierCurveDemo = () => {
         setPoints={setPoints}
       />
 
-      <group matrixAutoUpdate={false} matrix={motionMatrix}>
-        <MatrixArrowHelper />
-        <ControlPoint color={colors.highlight} />
-      </group>
-
+      <PointWithMatrixArrows matrix={motionMatrix}/>
       <CurveLine curve={curve} color={colors.secondary} />
     </>
   );

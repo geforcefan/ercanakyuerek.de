@@ -60,7 +60,7 @@ export const evaluateMotionByForwardDirectionWithFriction = (
   return { velocity, distanceTraveled, acceleration };
 };
 
-export const evaluateMotionByMatrixWithEnergyLoss = (
+export const evaluateMotion = (
   state: SimulationState,
   matrix: Matrix4,
   friction: number,

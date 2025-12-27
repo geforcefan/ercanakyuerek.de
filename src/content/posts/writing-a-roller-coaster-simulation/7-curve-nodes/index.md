@@ -1,10 +1,9 @@
 ---
-
 title: 'Curve Nodes'
 date: 2025-12-21T14:30:00+01:00
 math: true
 tags: ['writing a roller coaster simulation']
----------------------------------------------
+---
 
 In this chapter, we try to make our lives a bit easier by using a more flexible way to describe **curves** in general.
 
@@ -118,10 +117,10 @@ A small concrete example helps here. Assume we have these node distances:
 
 If we request a distance:
 
-* **10** → we get index `1`, because `10` exists exactly at index `1`
-* **0** → we get index `0`, because the first node already matches
-* **15** → we get index `2`, because `20` is the first value greater than `15`
-* **45** → we get index `5`, which is past the last node. That is why clamping exists.
+- **10** → we get index `1`, because `10` exists exactly at index `1`
+- **0** → we get index `0`, because the first node already matches
+- **15** → we get index `2`, because `20` is the first value greater than `15`
+- **45** → we get index `5`, which is past the last node. That is why clamping exists.
 
 In all cases, the returned index represents the **right** node of the sandwich:
 
@@ -156,8 +155,6 @@ This is exactly what you were already seeing in the interactive example at the b
 
 Now we move on to the more interesting part: **interpolation between the left and right curve nodes**.
 
-> **Note:** For now, we only interpolate the **position**, not the orientation. This means direction changes will be hard instead of smooth. This is intentional. We will fix this later when things start to matter.
-
 To find the **left and right nodes**, we use the **binary search helper** we just built:
 
 ```typescript
@@ -184,13 +181,13 @@ Lets now prepare for interpolation between the found nodes. Assume we have the f
 [0, 10, 30, 50, 60]
 ```
 
-If we request `20`, it is clearly sandwiched between `10` and `30`. No surprises there. For linear interpolation, we need to know *how far* `20` lies between those two values.
+If we request `20`, it is clearly sandwiched between `10` and `30`. No surprises there. For linear interpolation, we need to know _how far_ `20` lies between those two values.
 
 We do this step by step. Nothing fancy:
 
-* Distance between **left** and **right** node: `30 - 10 = 20`
-* Distance from **left** node to requested distance: `20 - 10 = 10`
-* `10 / 20 = 0.5`, so we are **50%** between the two nodes
+- Distance between **left** and **right** node: `30 - 10 = 20`
+- Distance from **left** node to requested distance: `20 - 10 = 10`
+- `10 / 20 = 0.5`, so we are **50%** between the two nodes
 
 For safety, we clamp this value between `0` and `1`, because values outside that range are rarely what we want.
 
@@ -210,14 +207,46 @@ if (length > Number.EPSILON) {
 }
 ```
 
-Since this is still a simplified implementation with linear segments, we only interpolate the **position**. We keep the **orientation from the left node**, so direction changes are hard at segment transitions. Later, as mentioned above, we will switch to smooth transitions using spherical linear interpolation.
+We need a small utility function that interpolates between two matrices.
+
+Unfortunately, there is no built-in helper for this in **THREE.js**. **THREE.js** does have helpers to interpolate **vectors** and **quaternions** though, which is exactly what we need here.
+
+A matrix contains position and rotation. We extract those parts, interpolate them separately, and then build a new matrix again.
+**Position** is interpolated **linearly**. **Rotation** is interpolated using **spherical linear interpolation** on **quaternions**.
+
+If you already know what **quaternions** are, great. If not, also fine. This is not important at this point. I will write dedicated articles about **vectors, matrices, euler and quaternions** later.
+
+The helper looks like this:
 
 ```typescript
-return left.matrix
-  .clone()
-  .setPosition(
-    fromMatrix4(left.matrix).lerp(fromMatrix4(right.matrix), t),
+export const lerp = (
+  matrixA: Matrix4,
+  matrixB: Matrix4,
+  t: number,
+) => {
+  const fromQuaternion = new Quaternion();
+  const toQuaternion = new Quaternion();
+
+  const fromPosition = new Vector3();
+  const toPosition = new Vector3();
+
+  const scale = new Vector3();
+
+  matrixA.decompose(fromPosition, fromQuaternion, scale);
+  matrixB.decompose(toPosition, toQuaternion, scale);
+
+  return new Matrix4().compose(
+    fromPosition.clone().lerp(toPosition, t),
+    fromQuaternion.slerp(toQuaternion, t),
+    scale,
   );
+};
+```
+
+Now we can use this to interpolate between the **left** and **right** matrix:
+
+```typescript
+return lerp(left.matrix, right.matrix, t);
 ```
 
 If the distance between the nodes is `0`, things are easy. We just return a copy of the left node’s matrix:
@@ -249,11 +278,7 @@ export const matrixAtDistance = (curve: CurveNode[], at: number) => {
       1.0,
     );
 
-    return left.matrix
-      .clone()
-      .setPosition(
-        fromMatrix4(left.matrix).lerp(fromMatrix4(right.matrix), t),
-      );
+    return lerp(left.matrix, right.matrix, t);
   }
 
   return left.matrix.clone();
@@ -264,10 +289,12 @@ export const matrixAtDistance = (curve: CurveNode[], at: number) => {
 
 To actually see this in motion, we need a small helper that constructs curve nodes from a list of points. This is only here to make the demo work and will be improved later.
 
-> **Note:** This helper ignores proper roll handling and only produces something usable for now. This is fine. We are still early.
+> **Note**: Points are duplicated to create hard transitions between segments. For linear track segments, smooth rotation transitions do not really make sense physically. Duplicating points is an easy way to fake the behavior we want.
+>
+> **Important**: This is temporary junk. It exists only to make the demo work quickly and will be replaced by a proper implementation with correct normals and roll handling.
 
 ```typescript
-export const fromPoints = (points: Vector3[]) => {
+const curveFromPoints = (points: Vector3[]) => {
   const curve: CurveNode[] = [];
   if (points.length < 2) return curve;
 
@@ -276,6 +303,13 @@ export const fromPoints = (points: Vector3[]) => {
   for (let i = 0; i < points.length - 1; i++) {
     const left = points[i];
     const right = points[i + 1];
+    const prevNode = curve[curve.length - 1];
+
+    if (prevNode)
+      curve.push({
+        matrix: prevNode.matrix.clone().setPosition(left),
+        distanceAtCurve,
+      });
 
     curve.push({
       matrix: new Matrix4()

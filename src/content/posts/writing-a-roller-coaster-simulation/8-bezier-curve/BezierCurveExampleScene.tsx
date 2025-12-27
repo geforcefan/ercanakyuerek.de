@@ -20,7 +20,7 @@ export const BezierCurveExampleScene = () => {
 
   return (
     <OrthographicScene>
-      <Line points={points} color={colors.secondary} segments={true} />
+      <Line points={points} color={colors.highlight} segments={true} />
       <DragControlPoints
         axisLock="z"
         points={points}

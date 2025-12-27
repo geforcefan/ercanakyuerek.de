@@ -1,16 +1,16 @@
 import last from 'lodash/last';
 import { MathUtils, Matrix4, Vector3 } from 'three';
 
-
-
 import { findBoundingIndices } from '../helper/binary-search';
 import { uniformSample } from '../helper/uniform-sample';
 
-
-
-import { applyLookRelativeAt, applyRotationZ, distance, lerp } from './matrix4';
+import {
+  applyLookRelativeAt,
+  applyRotationZ,
+  distance,
+  lerp,
+} from './matrix4';
 import { fromMatrix4 } from './vector3';
-
 
 export type CurveNode = {
   matrix: Matrix4;
@@ -41,39 +41,6 @@ export const matrixAtDistance = (curve: CurveNode[], at: number) => {
       1.0,
     );
     return lerp(left.matrix, right.matrix, t);
-  }
-
-  return left.matrix.clone();
-};
-
-export const matrixAtDistanceWithoutTransition = (
-  curve: CurveNode[],
-  at: number,
-) => {
-  const nodes = findBoundingIndices(
-    curve,
-    at,
-    (node) => node.distanceAtCurve,
-  );
-  if (!nodes) return new Matrix4();
-
-  const left = curve[nodes[0]];
-  const right = curve[nodes[1]];
-
-  const length = right.distanceAtCurve - left.distanceAtCurve;
-
-  if (length > Number.EPSILON) {
-    const t = MathUtils.clamp(
-      (at - left.distanceAtCurve) / length,
-      0.0,
-      1.0,
-    );
-
-    return left.matrix
-      .clone()
-      .setPosition(
-        fromMatrix4(left.matrix).lerp(fromMatrix4(right.matrix), t),
-      );
   }
 
   return left.matrix.clone();
@@ -152,37 +119,6 @@ export const applyRollFromCurve = (
       -positionAtX(rollCurve, distanceAtCurve).y,
     ),
   );
-
-  return curve;
-};
-
-export const fromPointsBasic = (points: Vector3[]) => {
-  const curve: CurveNode[] = [];
-  if (points.length < 2) return curve;
-
-  let distanceAtCurve = 0;
-
-  for (let i = 0; i < points.length - 1; i++) {
-    const left = points[i];
-    const right = points[i + 1];
-
-    curve.push({
-      matrix: new Matrix4()
-        .lookAt(right, left, new Vector3(0, 1, 0))
-        .setPosition(left),
-      distanceAtCurve,
-    });
-
-    distanceAtCurve += left.distanceTo(right);
-  }
-
-  const lastNode = last(curve)!;
-  const lastPoint = last(points)!;
-
-  curve.push({
-    matrix: lastNode.matrix.clone().setPosition(lastPoint),
-    distanceAtCurve,
-  });
 
   return curve;
 };
