@@ -303,19 +303,15 @@
 </p>
 
 <pre><code class="language-tsx">import React, { useMemo, useState } from &#39;react&#39;;
-import { MathUtils, Vector3 } from &#39;three&#39;;
+import { Line } from &#39;@react-three/drei&#39;;
+import { Vector3 } from &#39;three&#39;;
 
-import {
-  fromPointsBasic,
-  length,
-  matrixAtDistanceWithoutTransition,
-} from &#39;../../../../maths/curve&#39;;
+import { fromPointsBasic } from &#39;../../../../maths/curve&#39;;
 import { useColors } from &#39;../../../../hooks/useColors&#39;;
-import { useSimulation } from &#39;../../../../hooks/useSimulation&#39;;
+import { useSimulationMotion } from &#39;../../../../hooks/useSimulationMotion&#39;;
 
 import { ControlPoint } from &#39;../../../../components/ControlPoint&#39;;
 import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
-import { Line } from &#39;../../../../components/Line&#39;;
 import { MatrixArrowHelper } from &#39;../../../../components/MatrixArrowHelper&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
@@ -332,20 +328,7 @@ const MotionEvaluationDemo = () =&gt; {
   ]);
 
   const curve = useMemo(() =&gt; fromPointsBasic(points), [points]);
-  const simulationState = useSimulation(curve);
-
-  const trainMatrix = useMemo(
-    () =&gt;
-      matrixAtDistanceWithoutTransition(
-        curve,
-        MathUtils.clamp(
-          simulationState.distanceTraveled,
-          0,
-          length(curve),
-        ),
-      ),
-    [curve, simulationState.distanceTraveled],
-  );
+  const motionMatrix = useSimulationMotion(curve);
 
   return (
     &lt;&gt;
@@ -356,7 +339,7 @@ const MotionEvaluationDemo = () =&gt; {
       /&gt;
       &lt;Line points={points} color={colors.secondary} /&gt;
 
-      &lt;group matrixAutoUpdate={false} matrix={trainMatrix}&gt;
+      &lt;group matrixAutoUpdate={false} matrix={motionMatrix}&gt;
         &lt;MatrixArrowHelper /&gt;
         &lt;ControlPoint color={colors.highlight} /&gt;
       &lt;/group&gt;
@@ -495,6 +478,7 @@ export const MotionEvaluationDemoScene = () =&gt; {
 </p>
 
 <pre><code class="language-tsx">import React, { useEffect, useState } from &#39;react&#39;;
+import { Line } from &#39;@react-three/drei&#39;;
 import { useFrame } from &#39;@react-three/fiber&#39;;
 import { MathUtils, Vector3 } from &#39;three&#39;;
 
@@ -505,7 +489,6 @@ import { useSimulationStateControls } from &#39;../../../../hooks/useSimulationS
 
 import { ControlPoint } from &#39;../../../../components/ControlPoint&#39;;
 import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
-import { Line } from &#39;../../../../components/Line&#39;;
 import { MatrixArrowHelper } from &#39;../../../../components/MatrixArrowHelper&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
@@ -741,6 +724,7 @@ While writing this, I realize it is probably best to introduce the concept first
 </p>
 
 <pre><code class="language-tsx">import React, { useEffect, useState } from &#39;react&#39;;
+import { Line } from &#39;@react-three/drei&#39;;
 import { useFrame } from &#39;@react-three/fiber&#39;;
 import { MathUtils, Vector3 } from &#39;three&#39;;
 
@@ -758,7 +742,6 @@ import { useSimulationStateControls } from &#39;../../../../hooks/useSimulationS
 
 import { ControlPoint } from &#39;../../../../components/ControlPoint&#39;;
 import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
-import { Line } from &#39;../../../../components/Line&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
 const FrictionAndAirResistanceDemo = () =&gt; {
@@ -1067,21 +1050,21 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 </p>
 
 <pre><code class="language-tsx">import React, { useEffect, useState } from &#39;react&#39;;
+import { Line } from &#39;@react-three/drei&#39;;
 import { useFrame } from &#39;@react-three/fiber&#39;;
 import { useControls } from &#39;leva&#39;;
 import { Vector3 } from &#39;three&#39;;
 
 import {
   forwardDirectionAtDistance,
-  positionAtDistance,
   length,
+  positionAtDistance,
 } from &#39;../../../../maths/linear&#39;;
 import { evaluateMotionByForwardDirection } from &#39;../../../../helper/physics&#39;;
 import { useColors } from &#39;../../../../hooks/useColors&#39;;
 
 import { ControlPoint } from &#39;../../../../components/ControlPoint&#39;;
 import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
-import { Line } from &#39;../../../../components/Line&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
 const LinearRollerCoasterTrackDemo = () =&gt; {
@@ -1314,6 +1297,7 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
 </p>
 
 <pre><code class="language-tsx">import React, { useEffect } from &#39;react&#39;;
+import { Line } from &#39;@react-three/drei&#39;;
 import { useFrame } from &#39;@react-three/fiber&#39;;
 import { useControls } from &#39;leva&#39;;
 import { MathUtils, Vector3 } from &#39;three&#39;;
@@ -1323,7 +1307,6 @@ import { useColors } from &#39;../../../../hooks/useColors&#39;;
 
 import { Arrow } from &#39;../../../../components/Arrow&#39;;
 import { ControlPoint } from &#39;../../../../components/ControlPoint&#39;;
-import { Line } from &#39;../../../../components/Line&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
 const MotionEvaluationDemo = () =&gt; {
@@ -1410,6 +1393,7 @@ const MotionEvaluationDemo = () =&gt; {
         /&gt;
 
         &lt;ControlPoint
+          color={colors.highlight}
           position={
             new Vector3(
               trackLength / 2 - simulationState.distanceTraveled,
@@ -1592,13 +1576,13 @@ so it might help you as well.</p>
 </p>
 
 <pre><code class="language-tsx">import React, { useEffect } from &#39;react&#39;;
+import { Line } from &#39;@react-three/drei&#39;;
 import { useControls } from &#39;leva&#39;;
 import { MathUtils, Vector3 } from &#39;three&#39;;
 
 import { useColors } from &#39;../../../../hooks/useColors&#39;;
 
 import { Arrow } from &#39;../../../../components/Arrow&#39;;
-import { Line } from &#39;../../../../components/Line&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
 const GravityDemo = () =&gt; {
@@ -1912,13 +1896,13 @@ finally bring us closer to a real, fully working roller coaster simulation.</p>
 </p>
 
 <pre><code class="language-tsx">import React, { useMemo } from &#39;react&#39;;
+import { Line } from &#39;@react-three/drei&#39;;
 import { Vector3 } from &#39;three&#39;;
 
-import { uniformMap } from &#39;../../../../helper/uniform-map&#39;;
+import { uniformSampleMap } from &#39;../../../../helper/uniform-sample&#39;;
 import { useColors } from &#39;../../../../hooks/useColors&#39;;
 
 import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
-import { Line } from &#39;../../../../components/Line&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
 import {
@@ -1945,7 +1929,7 @@ export const WasiLibraryExampleScene = () =&gt; {
       points[3].toArray(),
     );
 
-    return uniformMap(0, bezierLength(bezier), 5, (at) =&gt;
+    return uniformSampleMap(0, bezierLength(bezier), 5, (at) =&gt;
       new Vector3().fromArray(bezierPositionAtDistance(bezier, at)),
     );
   }, [points]);
@@ -1953,7 +1937,7 @@ export const WasiLibraryExampleScene = () =&gt; {
   return (
     &lt;OrthographicScene&gt;
       &lt;DragControlPoints points={points} setPoints={setPoints} /&gt;
-      &lt;Line color={colors.secondary} points={points} /&gt;
+      &lt;Line color={colors.highlight} points={points} segments={true} /&gt;
       &lt;Line color={colors.secondary} points={nodes} /&gt;
     &lt;/OrthographicScene&gt;
   );

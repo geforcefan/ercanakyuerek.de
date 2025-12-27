@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
+import { Line } from '@react-three/drei';
 import { Vector3 } from 'three';
 
-import { uniformMap } from '../../../../helper/uniform-map';
+import { uniformSampleMap } from '../../../../helper/uniform-sample';
 import { useColors } from '../../../../hooks/useColors';
 
 import { DragControlPoints } from '../../../../components/DragControlPoints';
-import { Line } from '../../../../components/Line';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 
 import {
@@ -32,7 +32,7 @@ export const WasiLibraryExampleScene = () => {
       points[3].toArray(),
     );
 
-    return uniformMap(0, bezierLength(bezier), 5, (at) =>
+    return uniformSampleMap(0, bezierLength(bezier), 5, (at) =>
       new Vector3().fromArray(bezierPositionAtDistance(bezier, at)),
     );
   }, [points]);
@@ -40,7 +40,7 @@ export const WasiLibraryExampleScene = () => {
   return (
     <OrthographicScene>
       <DragControlPoints points={points} setPoints={setPoints} />
-      <Line color={colors.secondary} points={points} />
+      <Line color={colors.highlight} points={points} segments={true} />
       <Line color={colors.secondary} points={nodes} />
     </OrthographicScene>
   );

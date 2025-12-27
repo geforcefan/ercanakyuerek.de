@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { Line } from '@react-three/drei';
 import { useControls } from 'leva';
 import { Vector3 } from 'three';
 
@@ -13,7 +14,6 @@ import { useColors } from '../../../../hooks/useColors';
 
 import { ControlPoint } from '../../../../components/ControlPoint';
 import { DragControlPoints } from '../../../../components/DragControlPoints';
-import { Line } from '../../../../components/Line';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 
 const BinarySearchDemo = () => {

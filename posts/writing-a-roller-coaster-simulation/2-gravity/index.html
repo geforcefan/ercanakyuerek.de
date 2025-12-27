@@ -42,13 +42,13 @@ run <code>npm install</code> and <code>npm run dev-scripts</code>,
 then open this
 <a href=http://localhost:3000/posts/writing-a-roller-coaster-simulation/2-gravity/GravityDemoScene.tsx target=_blank>link</a>
 in your browser.</p><pre><code class=language-tsx>import React, { useEffect } from &#39;react&#39;;
+import { Line } from &#39;@react-three/drei&#39;;
 import { useControls } from &#39;leva&#39;;
 import { MathUtils, Vector3 } from &#39;three&#39;;
 
 import { useColors } from &#39;../../../../hooks/useColors&#39;;
 
 import { Arrow } from &#39;../../../../components/Arrow&#39;;
-import { Line } from &#39;../../../../components/Line&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
 const GravityDemo = () =&gt; {

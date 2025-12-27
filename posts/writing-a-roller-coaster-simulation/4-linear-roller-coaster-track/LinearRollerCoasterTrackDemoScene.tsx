@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { Line } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
 import { Vector3 } from 'three';
 
 import {
   forwardDirectionAtDistance,
-  positionAtDistance,
   length,
+  positionAtDistance,
 } from '../../../../maths/linear';
 import { evaluateMotionByForwardDirection } from '../../../../helper/physics';
 import { useColors } from '../../../../hooks/useColors';
 
 import { ControlPoint } from '../../../../components/ControlPoint';
 import { DragControlPoints } from '../../../../components/DragControlPoints';
-import { Line } from '../../../../components/Line';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 
 const LinearRollerCoasterTrackDemo = () => {

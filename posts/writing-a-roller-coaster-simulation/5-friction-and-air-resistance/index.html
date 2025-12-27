@@ -79,6 +79,7 @@ run <code>npm install</code> and <code>npm run dev-scripts</code>,
 then open this
 <a href=http://localhost:3000/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/FrictionAndAirResistanceDemoScene.tsx target=_blank>link</a>
 in your browser.</p><pre><code class=language-tsx>import React, { useEffect, useState } from &#39;react&#39;;
+import { Line } from &#39;@react-three/drei&#39;;
 import { useFrame } from &#39;@react-three/fiber&#39;;
 import { MathUtils, Vector3 } from &#39;three&#39;;
 
@@ -96,7 +97,6 @@ import { useSimulationStateControls } from &#39;../../../../hooks/useSimulationS
 
 import { ControlPoint } from &#39;../../../../components/ControlPoint&#39;;
 import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
-import { Line } from &#39;../../../../components/Line&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
 const FrictionAndAirResistanceDemo = () =&gt; {

@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import {
   CameraControls,
   CameraControlsImpl,
+  Line,
 } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
@@ -24,7 +25,6 @@ import { useMeasure } from '../../hooks/useMeasure';
 import { ControlPoint } from '../../components/ControlPoint';
 import { CurveWireframe } from '../../components/CurveWireframe';
 import { DragControlPoints } from '../../components/DragControlPoints';
-import { Line } from '../../components/Line';
 import { MatrixArrowHelper } from '../../components/MatrixArrowHelper';
 import { OrthographicScene } from '../../scenes/OrthographicScene';
 import { PerspectiveScene } from '../../scenes/PerspectiveScene';
