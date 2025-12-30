@@ -16,7 +16,7 @@ import { ControlPoint } from '../../../../components/ControlPoint';
 import { DragControlPoints } from '../../../../components/DragControlPoints';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 
-const LinearRollerCoasterTrackDemo = () => {
+const LinearTrackDemo = () => {
   const colors = useColors();
 
   // control points
@@ -90,10 +90,10 @@ const LinearRollerCoasterTrackDemo = () => {
   );
 };
 
-export const LinearRollerCoasterTrackDemoScene = () => {
+export const LinearTrackDemoScene = () => {
   return (
     <OrthographicScene>
-      <LinearRollerCoasterTrackDemo />
+      <LinearTrackDemo />
     </OrthographicScene>
   );
 };

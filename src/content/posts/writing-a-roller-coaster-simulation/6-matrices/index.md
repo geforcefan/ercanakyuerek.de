@@ -13,7 +13,7 @@ A matrix can hold **position** and **directions** at the same time. This is exac
 
 For that reason, we make a small but important change. From now on, we work with **matrices** and remove those two functions entirely.
 
-If it helps, it is worth rereading the chapter on [linear roller coaster tracks]({{< ref "/posts/writing-a-roller-coaster-simulation/4-linear-roller-coaster-track.md" >}}), where `forwardDirectionAtDistance` and `positionAtDistance` were introduced. Both are now replaced by a single function called `matrixAtDistance`.
+If it helps, it is worth rereading the chapter on [linear roller coaster tracks]({{< ref "/posts/writing-a-roller-coaster-simulation/4-linear-track.md" >}}), where `forwardDirectionAtDistance` and `positionAtDistance` were introduced. Both are now replaced by a single function called `matrixAtDistance`.
 
 For a linear track segment, this is straightforward. We compute the **position** exactly like before using linear interpolation. For orientation, we let **THREE.js** build a matrix that `lookAt`s from one control point to the other. This gives us a correct **forward direction** without any extra work.
 
