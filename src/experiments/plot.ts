@@ -4,8 +4,8 @@ import {
   CurveNode,
   length,
   matrixAtDistance,
-} from '../../maths/curve';
-import { uniformSampleMap } from '../../helper/uniform-sample';
+} from '../maths/curve';
+import { uniformSampleMap } from '../helper/uniform-sample';
 
 export const plotDataFromPoints = (
   nodes: (Vector2 | Vector3 | Vector4)[],

@@ -9,32 +9,32 @@ import { useControls } from 'leva';
 import Plot from 'react-plotly.js';
 import { MathUtils, Vector2, Vector3 } from 'three';
 
-import { bezierSplineCurve } from '../../maths/bezier';
-import { clampedCubicSplineCurve } from '../../maths/cubic-spline';
+import { bezierSplineCurve } from '../maths/bezier';
+import { clampedCubicSplineCurve } from '../maths/cubic-spline';
 import {
   applyRollFromCurve,
   CurveNode,
   length,
   matrixAtDistance,
-} from '../../maths/curve';
-import { fromMatrix4 } from '../../maths/vector3';
-import { evaluateMotion } from '../../helper/physics';
-import { useColors } from '../../hooks/useColors';
-import { useMeasure } from '../../hooks/useMeasure';
+} from '../maths/curve';
+import { fromMatrix4 } from '../maths/vector3';
+import { evaluateMotion } from '../helper/physics';
+import { useColors } from '../hooks/useColors';
+import { useMeasure } from '../hooks/useMeasure';
 
-import { ControlPoint } from '../../components/ControlPoint';
-import { CurveWireframe } from '../../components/CurveWireframe';
-import { DragControlPoints } from '../../components/DragControlPoints';
-import { MatrixArrowHelper } from '../../components/MatrixArrowHelper';
-import { OrthographicScene } from '../../scenes/OrthographicScene';
-import { PerspectiveScene } from '../../scenes/PerspectiveScene';
+import { ControlPoint } from '../components/ControlPoint';
+import { CurveWireframe } from '../components/CurveWireframe';
+import { DragControlPoints } from '../components/DragControlPoints';
+import { MatrixArrowHelper } from '../components/MatrixArrowHelper';
+import { OrthographicScene } from '../scenes/OrthographicScene';
+import { PerspectiveScene } from '../scenes/PerspectiveScene';
 
 import { plotDataFromPoints } from './plot';
 
 import './curves-and-matrices.css';
 
-import { zRotation } from '../../maths/matrix4';
-import { numberToHexString } from '../../helper/numberToHexString';
+import { zRotation } from '../maths/matrix4';
+import { numberToHexString } from '../helper/numberToHexString';
 
 const gravity = 9.81665;
 const friction = 0.03;
