@@ -765,7 +765,7 @@ export const MotionEvaluationDemoScene = () =&gt; {
 <p>Earlier we mentioned that there is a better way to describe this kind of information. That better way is a <strong>4x4 matrix</strong>.</p>
 <p>A matrix can hold <strong>position</strong> and <strong>directions</strong> at the same time. This is exactly what we need to describe a <strong>node</strong> along the track. Once we switch to <strong>matrices</strong>, the two existing functions <code>forwardDirectionAtDistance</code> and <code>positionAtDistance</code> naturally collapse into one. Instead of asking the track for separate pieces of data, we ask for a <strong>matrix</strong> at a distance along the curve and extract whatever information we need from it.</p>
 <p>For that reason, we make a small but important change. From now on, we work with <strong>matrices</strong> and remove those two functions entirely.</p>
-<p>If it helps, it is worth rereading the chapter on <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-linear-roller-coaster-track/">linear roller coaster tracks</a>, where <code>forwardDirectionAtDistance</code> and <code>positionAtDistance</code> were introduced. Both are now replaced by a single function called <code>matrixAtDistance</code>.</p>
+<p>If it helps, it is worth rereading the chapter on <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-linear-track/">linear roller coaster tracks</a>, where <code>forwardDirectionAtDistance</code> and <code>positionAtDistance</code> were introduced. Both are now replaced by a single function called <code>matrixAtDistance</code>.</p>
 <p>For a linear track segment, this is straightforward. We compute the <strong>position</strong> exactly like before using linear interpolation. For orientation, we let <strong>THREE.js</strong> build a matrix that <code>lookAt</code>s from one control point to the other. This gives us a correct <strong>forward direction</strong> without any extra work.</p>
 <blockquote>
 <p><strong>Note:</strong> At this stage, we only need a valid <strong>forward direction</strong>. There is no need to complicate things with <strong>roll</strong>, so we ignore it for now.</p></blockquote>
@@ -1269,7 +1269,7 @@ export const FrictionAndAirResistanceDemoScene = () =&gt; {
 </code></pre>
 
 
-]]></content></item><item><title>Linear Roller Coaster Track</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-linear-roller-coaster-track/</link><pubDate>Sat, 06 Dec 2025 11:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-linear-roller-coaster-track/</guid><description>&lt;p&gt;To visualize motion properly, we need something for our little object to move along. And that means we need a track.&lt;/p&gt;
+]]></content></item><item><title>Linear Track</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-linear-track/</link><pubDate>Sat, 06 Dec 2025 11:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-linear-track/</guid><description>&lt;p&gt;To visualize motion properly, we need something for our little object to move along. And that means we need a track.&lt;/p&gt;
 &lt;p&gt;In this article, we focus on an extremely simplified roller coaster track. And when I say extremely simplified, I really mean it: it&amp;rsquo;s just a plane. A straight line. A first-order curve. Basically the easiest form of track you can possibly build without accidentally creating a real coaster.&lt;/p&gt;
 &lt;p&gt;From the last chapter, we know how motion evaluation works. The evaluation function receives an acceleration value and returns a new simulation state containing the updated velocity and the total distance traveled:&lt;/p&gt;</description><content type="html"><![CDATA[<p>To visualize motion properly, we need something for our little object to move along. And that means we need a track.</p>
 <p>In this article, we focus on an extremely simplified roller coaster track. And when I say extremely simplified, I really mean it: it&rsquo;s just a plane. A straight line. A first-order curve. Basically the easiest form of track you can possibly build without accidentally creating a real coaster.</p>
@@ -1396,12 +1396,12 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 
 
 <div class="embedded ">
-  <iframe id="react-root-0f34d2fa5ac0e3c996cfb52e85706915" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-79323148099d32abab47527cd9bf9c95" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-0f34d2fa5ac0e3c996cfb52e85706915').srcdoc = `
+    document.getElementById('react-root-79323148099d32abab47527cd9bf9c95').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1411,7 +1411,7 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/4-linear-roller-coaster-track\/LinearRollerCoasterTrackDemoScene.tsx');
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/4-linear-track\/LinearTrackDemoScene.tsx');
         <\/script>
       </body>
     </html>
@@ -1443,7 +1443,7 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
     <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
     run <code>npm install</code> and <code>npm run dev-scripts</code>,
     then open this
-    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/4-linear-roller-coaster-track/LinearRollerCoasterTrackDemoScene.tsx" target="_blank">link</a>
+    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/4-linear-track/LinearTrackDemoScene.tsx" target="_blank">link</a>
     in your browser.
 </p>
 
@@ -1465,7 +1465,7 @@ import { ControlPoint } from &#39;../../../../components/ControlPoint&#39;;
 import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
-const LinearRollerCoasterTrackDemo = () =&gt; {
+const LinearTrackDemo = () =&gt; {
   const colors = useColors();
 
   // control points
@@ -1539,10 +1539,10 @@ const LinearRollerCoasterTrackDemo = () =&gt; {
   );
 };
 
-export const LinearRollerCoasterTrackDemoScene = () =&gt; {
+export const LinearTrackDemoScene = () =&gt; {
   return (
     &lt;OrthographicScene&gt;
-      &lt;LinearRollerCoasterTrackDemo /&gt;
+      &lt;LinearTrackDemo /&gt;
     &lt;/OrthographicScene&gt;
   );
 };
@@ -1667,7 +1667,7 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
   </script>
 </div>
 <h2 id="what-comes-next">What comes next?</h2>
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-linear-roller-coaster-track/">In the next chapter</a> we’ll add a basic roller coaster track, just a straight, linear segment. This is a preparation for the real coaster curvatures we’ll build later.</p>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-linear-track/">In the next chapter</a> we’ll add a basic roller coaster track, just a straight, linear segment. This is a preparation for the real coaster curvatures we’ll build later.</p>
 <h1 id="demo-code">Demo code</h1>
 
 
