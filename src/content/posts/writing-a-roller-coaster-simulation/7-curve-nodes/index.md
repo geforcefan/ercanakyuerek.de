@@ -175,11 +175,7 @@ const left = curve[nodes[0]];
 const right = curve[nodes[1]];
 ```
 
-Lets now prepare for interpolation between the found nodes. Assume we have the following node distances:
-
-```plain
-[0, 10, 30, 50, 60]
-```
+Lets now prepare for interpolation between the found nodes. Assume we have the following node distances: `[0, 10, 30, 50, 60]`
 
 If we request `20`, it is clearly sandwiched between `10` and `30`. No surprises there. For linear interpolation, we need to know _how far_ `20` lies between those two values.
 
@@ -294,7 +290,7 @@ To actually see this in motion, we need a small helper that constructs curve nod
 > **Important**: This is temporary junk. It exists only to make the demo work quickly and will be replaced by a proper implementation with correct normals and roll handling.
 
 ```typescript
-const curveFromPoints = (points: Vector3[]) => {
+const fromPoints = (points: Vector3[]) => {
   const curve: CurveNode[] = [];
   if (points.length < 2) return curve;
 

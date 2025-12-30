@@ -6,14 +6,14 @@ import { useColors } from '../hooks/useColors';
 
 import { ControlPoint } from './ControlPoint';
 import { DragControlPosition } from './DragControlPosition';
+import { DragControlsProps } from '@react-three/drei/web/DragControls';
 
 export const DragControlPoints = memo(
   (props: {
-    axisLock?: 'x' | 'y' | 'z';
     points: Vector3[];
     setPoints: (points: Vector3[]) => void;
-  }) => {
-    const { points, setPoints, axisLock } = props;
+  } & Omit<DragControlsProps, "onDrag" | "children">) => {
+    const { points, setPoints, ...rest } = props;
 
     const colors = useColors();
     const [hover, setHover] = useState<number>();
@@ -23,11 +23,11 @@ export const DragControlPoints = memo(
         {points.map((point, index) => (
           <DragControlPosition
             key={index}
-            axisLock={axisLock}
             position={point}
             onDrag={(position) =>
               setPoints(set([...points], index, position))
             }
+            {...rest}
           >
             <ControlPoint
               color={

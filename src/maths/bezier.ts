@@ -1,59 +1,50 @@
 import { Vector3 } from 'three';
 
-import { uniformSampleMap } from '../helper/uniform-sample';
+import {
+  uniformSample,
+} from '../helper/uniform-sample';
 
-import { fromUniformSampledPositions } from './curve';
+import { CurveNode, insertPosition } from './curve';
 
-export const bezierFast = (
-  p0: Vector3,
-  p1: Vector3,
-  p2: Vector3,
-  p3: Vector3,
-  t: number,
-) => {
-  const t1 = 1.0 - t;
-  const b0 = t1 * t1 * t1;
-  const b1 = 3 * t1 * t1 * t;
-  const b2 = 3 * t1 * t * t;
-  const b3 = t * t * t;
+export const deCasteljau = (points: Vector3[], t: number) => {
+  if (points.length < 1)
+    throw new Error(`Expected control points, got ${points.length}`);
 
-  return new Vector3(
-    b0 * p0.x + b1 * p1.x + b2 * p2.x + b3 * p3.x,
-    b0 * p0.y + b1 * p1.y + b2 * p2.y + b3 * p3.y,
-    b0 * p0.z + b1 * p1.z + b2 * p2.z + b3 * p3.z,
-  );
+  const p = points.map((v) => v.clone());
+
+  for (let k = points.length - 1; k > 0; k--) {
+    for (let i = 0; i < k; i++) {
+      p[i].lerp(p[i + 1], t);
+    }
+  }
+
+  return p[0];
 };
 
-export const estimateLength = (
-  p0: Vector3,
-  p1: Vector3,
-  p2: Vector3,
-  p3: Vector3,
-) => {
-  const points = uniformSampleMap(0, 1, 8, (t) =>
-    bezierFast(p0, p1, p2, p3, t),
+export const estimateLength = (points: Vector3[]) => {
+  const positions: Vector3[] = [];
+  uniformSample(0, 8, 1, (at, t) =>
+    positions.push(deCasteljau(points, t)),
   );
 
-  return points
+  return positions
     .slice(1)
     .reduce(
-      (totalLength, point, i) =>
-        totalLength + point.distanceTo(points[i]),
+      (totalLength, position, i) =>
+        totalLength + position.distanceTo(positions[i]),
       0,
     );
 };
 
 export const bezierSplineCurve = (
-  p0: Vector3,
-  p1: Vector3,
-  p2: Vector3,
-  p3: Vector3,
-  resolution: number = 10,
+  points: Vector3[],
+  resolution: number = 20,
 ) => {
-  return fromUniformSampledPositions(
-    0,
-    estimateLength(p0, p1, p2, p3),
-    resolution,
-    (at, t) => bezierFast(p0, p1, p2, p3, t),
-  );
+  const curve: CurveNode[] = [];
+
+  uniformSample(0, estimateLength(points), resolution, (at, t) => {
+    insertPosition(curve, deCasteljau(points, t));
+  });
+
+  return curve;
 };

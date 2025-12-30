@@ -2,14 +2,14 @@ import React, { useMemo, useState } from 'react';
 import { Line } from '@react-three/drei';
 import { Vector3 } from 'three';
 
-import { bezierSplineCurve } from '../../../../maths/bezier';
 import { useColors } from '../../../../hooks/useColors';
 import { useMotionSimulation } from '../../../../hooks/useMotionSimulation';
 
 import { CurveLine } from '../../../../components/CurveLine';
 import { DragControlPoints } from '../../../../components/DragControlPoints';
-import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 import { PointWithMatrixArrows } from '../../../../components/PointWithMatrixArrows';
+import { OrthographicScene } from '../../../../scenes/OrthographicScene';
+import { bezierSplineCurve } from '../../../../maths/bezier';
 
 const BezierCurveDemo = () => {
   const colors = useColors();
@@ -18,12 +18,11 @@ const BezierCurveDemo = () => {
     new Vector3(-11.3, 3.9, 0),
     new Vector3(-6.6, 2.7, 0),
     new Vector3(-5.8, -3.8, 0),
-    new Vector3(1.6, -2.4, 0),
+    new Vector3(0, -2.4, 0),
   ]);
 
   const curve = useMemo(
-    () =>
-      bezierSplineCurve(points[0], points[1], points[2], points[3]),
+    () => bezierSplineCurve(points),
     [points],
   );
 
@@ -36,13 +35,14 @@ const BezierCurveDemo = () => {
         color={colors.highlight}
         segments={true}
       />
+
       <DragControlPoints
         axisLock="z"
         points={points}
         setPoints={setPoints}
       />
 
-      <PointWithMatrixArrows matrix={motionMatrix}/>
+      <PointWithMatrixArrows matrix={motionMatrix} />
       <CurveLine curve={curve} color={colors.secondary} />
     </>
   );

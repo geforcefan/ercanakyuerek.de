@@ -25,7 +25,7 @@ const FrictionAndAirResistanceDemo = () => {
   // control points
   const [points, setPoints] = useState([
     new Vector3(-11.5, 3.2, 0),
-    new Vector3(1.4, -2.8, 0),
+    new Vector3(0, -2.8, 0),
   ]);
 
   const [simulationState, setSimulationState] =

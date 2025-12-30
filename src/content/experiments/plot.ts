@@ -23,7 +23,7 @@ export const plotDataFromCurve = (
     0,
     length(curve),
     resolution,
-    (at : number) => new Vector2(at, fn(matrixAtDistance(curve, at))),
+    (at: number) => new Vector2(at, fn(matrixAtDistance(curve, at))),
   );
 
   return plotDataFromPoints(points);

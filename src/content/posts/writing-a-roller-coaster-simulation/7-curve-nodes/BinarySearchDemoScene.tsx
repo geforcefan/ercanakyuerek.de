@@ -20,10 +20,10 @@ const BinarySearchDemo = () => {
   const colors = useColors();
 
   const [points, setPoints] = useState([
-    new Vector3(-10, -2, 0),
-    new Vector3(-2, 2, 0),
-    new Vector3(4, -2, 0),
-    new Vector3(10, -2, 0),
+    new Vector3(-11, -2, 0),
+    new Vector3(-3, 2, 0),
+    new Vector3(3, -2, 0),
+    new Vector3(9, -2, 0),
   ]);
 
   const curve = useMemo(() => fromPoints(points), [points]);

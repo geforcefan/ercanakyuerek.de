@@ -18,7 +18,7 @@ export const BezierCurve = (props: {
 }) => {
   const {
     points,
-    resolution = 5,
+    resolution = 20,
     uniform = false,
     showNodes = false,
   } = props;
@@ -26,13 +26,7 @@ export const BezierCurve = (props: {
   const colors = useColors();
 
   const nodes = useMemo(() => {
-    const curve = bezierSplineCurve(
-      points[0],
-      points[1],
-      points[2],
-      points[3],
-      resolution,
-    );
+    const curve = bezierSplineCurve(points, resolution);
 
     const parametricNodes = curve.map((node) =>
       fromMatrix4(node.matrix),

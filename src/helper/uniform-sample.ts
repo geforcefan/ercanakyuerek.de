@@ -1,8 +1,8 @@
 export const uniformSample = (
   from: number,
   to: number,
-  resolution: number = 10,
-  fn: (at: number, t: number, nodeIndex: number) => void,
+  resolution: number = 20,
+  fn: (at: number, t: number) => void,
 ) => {
   const length = to - from;
   const numberOfNodes = Math.max(Math.floor(length * resolution), 2);
@@ -10,14 +10,14 @@ export const uniformSample = (
   for (let i = 0; i < numberOfNodes; i++) {
     const t = i / (numberOfNodes - 1);
     const at = from + t * length;
-    fn(at, t, i);
+    fn(at, t);
   }
 };
 
 export const uniformSampleMap = <T>(
   from: number,
   to: number,
-  resolution: number = 10,
+  resolution: number = 20,
   mapFn: (at: number, t: number) => T,
 ) => {
   const out: T[] = [];

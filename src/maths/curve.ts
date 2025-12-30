@@ -113,11 +113,13 @@ export const applyRollFromCurve = (
   curve: CurveNode[],
   rollCurve: CurveNode[],
 ) => {
-  curve.forEach(({ matrix, distanceAtCurve }) =>
-    applyRotationZ(
-      matrix,
-      -positionAtX(rollCurve, distanceAtCurve).y,
-    ),
+  const curveLength = length(curve);
+  curve.forEach(({ matrix, distanceAtCurve }) => {
+      return applyRotationZ(
+        matrix,
+        -positionAtX(rollCurve, distanceAtCurve / curveLength).y,
+      )
+    }
   );
 
   return curve;
@@ -136,13 +138,51 @@ export const fromPoints = (points: Vector3[]) => {
 export const fromUniformSampledPositions = (
   from: number = 0,
   to: number = 0,
-  resolution: number = 8,
+  resolution: number = 20,
   positionFn: (at: number, t: number) => Vector3,
 ) => {
   const curve: CurveNode[] = [];
 
   uniformSample(from, to, resolution, (at, t) => {
     insertPosition(curve, positionFn(at, t));
+  });
+
+  return curve;
+};
+
+export const fromPointsWithBasicNormals = (points: Vector3[]) => {
+  const curve: CurveNode[] = [];
+  if (points.length < 2) return curve;
+
+  let distanceAtCurve = 0;
+
+  for (let i = 0; i < points.length - 1; i++) {
+    const left = points[i];
+    const right = points[i + 1];
+    const prevNode = curve[curve.length - 1];
+
+    if (prevNode)
+      curve.push({
+        matrix: prevNode.matrix.clone().setPosition(left),
+        distanceAtCurve,
+      });
+
+    curve.push({
+      matrix: new Matrix4()
+        .lookAt(right, left, new Vector3(0, 1, 0))
+        .setPosition(left),
+      distanceAtCurve,
+    });
+
+    distanceAtCurve += left.distanceTo(right);
+  }
+
+  const lastNode = last(curve)!;
+  const lastPoint = last(points)!;
+
+  curve.push({
+    matrix: lastNode.matrix.clone().setPosition(lastPoint),
+    distanceAtCurve,
   });
 
   return curve;
