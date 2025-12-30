@@ -1,4 +1,385 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 25 Dec 2025 14:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Curve Nodes</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/7-curve-nodes/</link><pubDate>Sun, 21 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/7-curve-nodes/</guid><description>&lt;p&gt;In this chapter, we try to make our lives a bit easier by using a more flexible way to describe &lt;strong&gt;curves&lt;/strong&gt; in general.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 25 Dec 2025 14:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/8-bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/8-bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
+&lt;iframe id="react-root-cf898ffc7aa41960773a58e4ebb376aa" width="225px" height="225px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
+&lt;div class="description" style="width: 225px"&gt;
+An interactive example of a Bézier curve, drag the controls around to see changes in shape
+&lt;/div&gt;
+&lt;script&gt;
+document.getElementById('react-root-cf898ffc7aa41960773a58e4ebb376aa').srcdoc = `
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en" data-theme="dark"&gt;
+&lt;head&gt;
+&lt;base href="${location.origin}/"&gt;
+&lt;/head&gt;
+&lt;body class="content-component"&gt;
+&lt;div id="root" class="full-screen"&gt;&lt;/div&gt;
+\x3Cscript type="module"&gt;
+import { renderContentComponentByPath } from '/scripts/render-content-component.js';
+renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/8-bezier-curve\/BezierCurveExampleScene.tsx');
+&lt;\/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+`;
+&lt;/script&gt;
+&lt;/div&gt;
+&lt;p&gt;So, now it is finally time to build an actual &lt;strong&gt;Bézier curve&lt;/strong&gt; instead of only linear segments.&lt;/p&gt;
+&lt;p&gt;I do not think Bézier curves are particularly well suited for hand-building real roller coaster tracks. But they are simple to implement, easy to visualize, and most importantly, they finally give us &lt;em&gt;real curvature&lt;/em&gt; instead of straight lines everywhere. And honestly, we have been staring at straight lines long enough.&lt;/p&gt;</description><content type="html"><![CDATA[
+
+
+
+
+
+
+
+<div class="embedded float-right">
+  <iframe id="react-root-cf898ffc7aa41960773a58e4ebb376aa" width="225px" height="225px" style="border: 0" class="frame"></iframe>
+
+  
+  <div class="description" style="width: 225px">
+    An interactive example of a Bézier curve, drag the controls around to see changes in shape
+  </div>
+  
+
+  <script>
+    document.getElementById('react-root-cf898ffc7aa41960773a58e4ebb376aa').srcdoc = `
+    <!DOCTYPE html>
+    <html lang="en" data-theme="dark">
+      <head>
+          <base href="${location.origin}/">
+      </head>
+        <body class="content-component">
+        <div id="root" class="full-screen"></div>
+        \x3Cscript type="module">
+          import { renderContentComponentByPath } from '/scripts/render-content-component.js';
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/8-bezier-curve\/BezierCurveExampleScene.tsx');
+        <\/script>
+      </body>
+    </html>
+  `;
+  </script>
+</div>
+<p>So, now it is finally time to build an actual <strong>Bézier curve</strong> instead of only linear segments.</p>
+<p>I do not think Bézier curves are particularly well suited for hand-building real roller coaster tracks. But they are simple to implement, easy to visualize, and most importantly, they finally give us <em>real curvature</em> instead of straight lines everywhere. And honestly, we have been staring at straight lines long enough.</p>
+<p>The nice part is that we already did the hard work earlier. Since we introduced an agnostic way to describe curves using <strong>curve nodes</strong>, all we need to do now is generate nodes that follow a Bézier curve and feed them into the simulation.</p>
+<p>The physics simulation does not care where the shape comes from. It does not know whether the curve is <strong>linear</strong>, <strong>Bézier</strong>, <strong>NURBS</strong>, <strong>FVD</strong>, or built from <strong>geometric shapes</strong>. It really does not care. It just consumes curve nodes and keeps going. That was the whole point of the abstraction.</p>
+<p>This time, I will first show you a demo with a Bézier curve, just to spoil the ending a bit:</p>
+
+
+
+
+
+
+
+
+<div class="embedded ">
+  <iframe id="react-root-b279724a792ada3802b0fa1d79389e0a" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+
+  
+
+  <script>
+    document.getElementById('react-root-b279724a792ada3802b0fa1d79389e0a').srcdoc = `
+    <!DOCTYPE html>
+    <html lang="en" data-theme="dark">
+      <head>
+          <base href="${location.origin}/">
+      </head>
+        <body class="content-component">
+        <div id="root" class="full-screen"></div>
+        \x3Cscript type="module">
+          import { renderContentComponentByPath } from '/scripts/render-content-component.js';
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/8-bezier-curve\/BezierCurveDemoScene.tsx');
+        <\/script>
+      </body>
+    </html>
+  `;
+  </script>
+</div>
+<h1 id="multiple-algorithms">Multiple algorithms</h1>
+<p>A Bézier curve can be evaluated in different ways. In practice, there are multiple algorithms to compute points on the curve.</p>
+<p>A very common choice is the <strong>de Casteljau</strong> algorithm. It is known for its excellent numerical stability, but more importantly for us, it is much easier to reason about. You can almost see the curve being constructed step by step.</p>
+<p>There are other options. Evaluating a Bézier curve via <strong>Bernstein polynomials</strong> is usually a bit faster and better suited when you want to evaluate many points per frame. The tradeoff is slightly worse numerical stability and, more importantly here, a less intuitive mental model.</p>
+<p>We choose <strong>de Casteljau</strong> on purpose. Not because it is the fastest option, but because it makes it much clearer how a Bézier curve is actually constructed. For readability and understanding, this matters more right now than raw performance. We can always optimize later, once the idea is clear.</p>
+<blockquote>
+<p><strong>Important:</strong> I will <strong>not</strong> go deep into the theory of Bézier curves, NURBS, or splines in general. That topic is a rabbit hole with no clear exit. Seriously. You will run into C0, C1, and C2 continuity, knot vectors, basis functions, and many strong opinions.</p>
+<p>If you want to dive into that world, go for it. It is interesting, but also confusing in equal parts. We will eventually implement NURBS in this series as well, but without getting lost in the math. For now, we keep things simple and practical. Your future self will thank you.</p></blockquote>
+<h1 id="bézier-evaluation-via-de-casteljau">Bézier evaluation via de Casteljau</h1>
+<p>I will explain very quickly how the <strong>de Casteljau</strong> algorithm works.</p>
+<p>Assume we have <strong>4 control points</strong> and we want to know the <strong>position</strong> for a parameter <code>t</code> in the range <code>[0, 1]</code>. What we actually do is nothing more than repeated <strong>linear interpolation</strong>.</p>
+
+
+
+
+
+
+
+
+<div class="embedded float-right">
+  <iframe id="react-root-df9be18f560ec4939ed0d5924867be50" width="355px" height="500px" style="border: 0" class="frame"></iframe>
+
+  
+  <div class="description" style="width: 355px">
+    Each animation loop shows one iteration of linear interpolations in the de Casteljau algorithm. After all three iterations described in the article, the Bézier curve is drawn. 
+  </div>
+  
+
+  <script>
+    document.getElementById('react-root-df9be18f560ec4939ed0d5924867be50').srcdoc = `
+    <!DOCTYPE html>
+    <html lang="en" data-theme="dark">
+      <head>
+          <base href="${location.origin}/">
+      </head>
+        <body class="content-component">
+        <div id="root" class="full-screen"></div>
+        \x3Cscript type="module">
+          import { renderContentComponentByPath } from '/scripts/render-content-component.js';
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/8-bezier-curve\/DeCasteljauVisualizationScene.tsx');
+        <\/script>
+      </body>
+    </html>
+  `;
+  </script>
+</div>
+<p>First, we interpolate between the control points:</p>
+<ul>
+<li><code>a</code> = interpolate between <code>p0</code> and <code>p1</code></li>
+<li><code>b</code> = interpolate between <code>p1</code> and <code>p2</code></li>
+<li><code>c</code> = interpolate between <code>p2</code> and <code>p3</code></li>
+</ul>
+<p>At this point, we have three new points lying on those straight lines.</p>
+<p>Next, we connect these points. What happens? We now get two new straight lines, called <code>d</code> and <code>e</code>. And yes, we interpolate again:</p>
+<ul>
+<li><code>d</code> = interpolate between <code>a</code> and <code>b</code></li>
+<li><code>e</code> = interpolate between <code>b</code> and <code>c</code></li>
+</ul>
+<p>Now we are left with two points. We connect them once more, which gives us a new line <code>f</code>, and interpolate again:</p>
+<ul>
+<li><code>f</code> = interpolate between <code>d</code> and <code>e</code></li>
+</ul>
+<p>Now there is only <strong>one point left</strong> and nothing left to connect. That point is what we return. It is the evaluated position on the Bézier curve.</p>
+<p>So in the end, the algorithm is really just linear interpolation over and over again until only a single point remains.</p>
+<p>In code, this would look like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">1</span>], <span style="color:#a6e22e">t</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">1</span>].<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">2</span>], <span style="color:#a6e22e">t</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">c</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">2</span>].<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">3</span>], <span style="color:#a6e22e">t</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">d</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">t</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">e</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">c</span>, <span style="color:#a6e22e">t</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">f</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">e</span>, <span style="color:#a6e22e">t</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">f</span>;
+</span></span></code></pre></div><p>As you can see, the function itself is just a bunch of linear interpolations chained together. Nothing fancy.</p>
+<p>Of course, this version is limited to exactly <strong>4 control points</strong>. If we had <strong>3 control points</strong>, the exact same logic would apply. Instead of three lines <code>a</code>, <code>b</code>, and <code>c</code>, we would only have two lines, <code>a</code> and <code>b</code>, and in the next iteration we would simply interpolate between those two. Same idea, fewer steps.</p>
+<p>So instead of writing out every single <code>lerp</code> by hand for a fixed number of control points, we can just use loops and make the algorithm work for <strong>any number of control points</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">p</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">points</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">v</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">clone</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">k</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">points</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">k</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">k</span><span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">k</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">p</span>[<span style="color:#a6e22e">i</span>].<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">p</span>[<span style="color:#a6e22e">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>], <span style="color:#a6e22e">t</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><blockquote>
+<p><strong>Note</strong>: In practice, it usually makes sense to stop at <strong>four</strong> control points, because everything beyond that tends to get unstable pretty quickly. But the function itself does not limit stupidity. That part is still up to us 🙂</p></blockquote>
+<p>So we end up with a general version that works for any number of control points. Add a small guard at the beginning and we are ready to use it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">deCasteljau</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[], <span style="color:#a6e22e">t</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">points</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`Expected control points, got </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">points</span>.<span style="color:#a6e22e">length</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">p</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">points</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">v</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">clone</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">k</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">points</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">k</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">k</span><span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">k</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">p</span>[<span style="color:#a6e22e">i</span>].<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">p</span>[<span style="color:#a6e22e">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>], <span style="color:#a6e22e">t</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">p</span>[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h2 id="how-many-curve-nodes-do-we-need">How many curve nodes do we need?</h2>
+<p>Now that we can evaluate a Bézier curve for a parameter <code>t</code> in the range <code>[0, 1]</code>, the next question is:
+how many <strong>curve nodes</strong> do we actually want to generate along that curve?</p>
+<p>In the end, we just need to sample the curve and turn those samples into curve nodes that follow the curvature.</p>
+<p>More nodes mean better precision. Fewer nodes mean better performance. We clearly do not need perfect precision here, so we need to find a reasonable <strong>sweet spot</strong>.</p>
+<p>In practice, this is what I usually do:</p>
+<ul>
+<li>
+<p>First, estimate the length of the Bézier curve by uniformly evaluating a small number of points on it. I normally pick <strong>8 points</strong> and sum up the distances between them.</p>
+</li>
+<li>
+<p>Then, use this estimated length to compute the number of curve nodes by multiplying it with a <strong>resolution</strong> value. I usually use something like <code>20</code>.</p>
+<ul>
+<li>Example: a roughly <strong>20 meter</strong> long curve multiplied by a resolution of <code>20</code> gives us <strong>400 nodes</strong>.</li>
+<li>We then evaluate the Bézier curve at those 400 positions and construct curve nodes from them.</li>
+<li>It will make sense to clamp the number of nodes in the <strong>editor</strong> in the future, where <strong>performance matters while dragging control points around</strong>. In the simulation, this is much less critical.</li>
+</ul>
+</li>
+</ul>
+<p>To make this easier, we start with a small helper that lets us <strong>uniformly sample</strong> a range with a given resolution. It gives us both the actual value and a normalized<code>t</code> in <code>[0, 1]</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">uniformSample</span> <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">from</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">to</span>: <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolution</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fn</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">at</span>: <span style="color:#66d9ef">number</span>, <span style="color:#a6e22e">t</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">void</span>,
+</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">length</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">to</span> <span style="color:#f92672">-</span> <span style="color:#66d9ef">from</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">numberOfNodes</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">max</span>(Math.<span style="color:#a6e22e">floor</span>(<span style="color:#a6e22e">length</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">resolution</span>), <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">numberOfNodes</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">t</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">/</span> (<span style="color:#a6e22e">numberOfNodes</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">at</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">from</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">length</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fn</span>(<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>If this feels a bit abstract, here is a concrete example.</p>
+<p>Assume we want to sample from <code>1</code> to <code>6</code> with a resolution of <code>1</code>. That means we will get <strong>5 evenly distributed values</strong>:</p>
+<ul>
+<li>actual values: <code>[1, 2.25, 3.5, 4.75, 6]</code></li>
+<li>normalized values: <code>[0, 0.25, 0.5, 0.75, 1]</code></li>
+</ul>
+<h2 id="estimating-the-bézier-curve-length">Estimating the Bézier curve length</h2>
+<p>Now that we have <code>uniformSample</code>, estimating the curve length is straightforward.</p>
+<p>We simply pick <strong>8 evenly distributed values</strong> in the range <code>[0, 8]</code> and evaluate the Bézier curve at those normalized values:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">positions</span>: <span style="color:#66d9ef">Vector3</span>[] <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">uniformSample</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">1</span>, (<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>) <span style="color:#f92672">=&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">positions</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">deCasteljau</span>(<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">t</span>)),
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><p>At this point, <code>positions</code> contains 8 points along the Bézier curve.</p>
+<p>From here, it is extremely easy to iterate over these points and sum up the distances between positions to get an <strong>estimated curve length</strong>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">positions</span>
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">reduce</span>(
+</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">totalLength</span>, <span style="color:#a6e22e">position</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">totalLength</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">position</span>.<span style="color:#a6e22e">distanceTo</span>(<span style="color:#a6e22e">positions</span>[<span style="color:#a6e22e">i</span>]),
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>  );
+</span></span></code></pre></div><p>Now we end up with this estimate function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">estimateLength</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[]) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">positions</span>: <span style="color:#66d9ef">Vector3</span>[] <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">uniformSample</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">1</span>, (<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>) <span style="color:#f92672">=&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">positions</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">deCasteljau</span>(<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">t</span>)),
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">positions</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">reduce</span>(
+</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">totalLength</span>, <span style="color:#a6e22e">position</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">totalLength</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">position</span>.<span style="color:#a6e22e">distanceTo</span>(<span style="color:#a6e22e">positions</span>[<span style="color:#a6e22e">i</span>]),
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h1 id="constructing-a-bézier-curve">Constructing a Bézier curve</h1>
+<p>This part is almost stupidly simple, so I will just paste the code and explain it briefly.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bezierSplineCurve</span> <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[],
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolution</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">positions</span>: <span style="color:#66d9ef">Vector3</span>[] <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">uniformSample</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">estimateLength</span>(<span style="color:#a6e22e">points</span>), <span style="color:#a6e22e">resolution</span>, (<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">positions</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">deCasteljau</span>(<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">t</span>));
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fromPoints</span>(<span style="color:#a6e22e">positions</span>);
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>What happens here is straightforward:</p>
+<ul>
+<li>We sample from <code>0</code> to the <strong>estimated length</strong> of the Bézier curve.</li>
+<li>We use a default resolution of <code>20</code>.</li>
+<li>For each sample, we evaluate the curve using the <strong>de Casteljau</strong> algorithm with <code>t</code> in the range <code>[0, 1]</code>.</li>
+<li>The resulting positions are then turned into a curve using <code>fromPoints</code>, which we implemented earlier.</li>
+</ul>
+<p>There is nothing more going on here. We sample the curve, evaluate it, and turn the result into curve nodes.</p>
+<p>Below is the demo code from the interactive example shown at the very beginning of this chapter.</p>
+<h2 id="whats-next">What’s next?</h2>
+<p>In the next article, we will eventually and finally fix our normal problems and create a good <code>fromPoints</code> function that calculates normals in a way that nothing breaks on loopings or slopes close to 90°.</p>
+<p>Right now, our <code>fromPoints</code> is a temporary junk implementation with hard transitions on the edges. That was fine while we only had linear segments, but now we actually have curvature, so the problems are much easier to see.</p>
+<p>So we will solve that next. Stay tuned.</p>
+<blockquote>
+<p><strong>Note</strong>: In the demo, I already intentionally use the correct way of inserting positions on the curve with proper normal calculation, so the demo does not jitter. Do not be confused by this. I am basically taking things a bit ahead of time here.</p></blockquote>
+<h1 id="demo-code">Demo code</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+    If you want to run the demo locally, clone this
+    <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
+    run <code>npm install</code> and <code>npm run dev-scripts</code>,
+    then open this
+    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/8-bezier-curve/BezierCurveDemoScene.tsx" target="_blank">link</a>
+    in your browser.
+</p>
+
+<pre><code class="language-tsx">import React, { useMemo, useState } from &#39;react&#39;;
+import { Line } from &#39;@react-three/drei&#39;;
+import { Vector3 } from &#39;three&#39;;
+
+import { useColors } from &#39;../../../../hooks/useColors&#39;;
+import { useMotionSimulation } from &#39;../../../../hooks/useMotionSimulation&#39;;
+
+import { CurveLine } from &#39;../../../../components/CurveLine&#39;;
+import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
+import { PointWithMatrixArrows } from &#39;../../../../components/PointWithMatrixArrows&#39;;
+import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
+import { bezierSplineCurve } from &#39;../../../../maths/bezier&#39;;
+
+const BezierCurveDemo = () =&gt; {
+  const colors = useColors();
+
+  const [points, setPoints] = useState([
+    new Vector3(-11.3, 3.9, 0),
+    new Vector3(-6.6, 2.7, 0),
+    new Vector3(-5.8, -3.8, 0),
+    new Vector3(0, -2.4, 0),
+  ]);
+
+  const curve = useMemo(
+    () =&gt; bezierSplineCurve(points),
+    [points],
+  );
+
+  const motionMatrix = useMotionSimulation(curve);
+
+  return (
+    &lt;&gt;
+      &lt;Line
+        points={points}
+        color={colors.highlight}
+        segments={true}
+      /&gt;
+
+      &lt;DragControlPoints
+        axisLock=&#34;z&#34;
+        points={points}
+        setPoints={setPoints}
+      /&gt;
+
+      &lt;PointWithMatrixArrows matrix={motionMatrix} /&gt;
+      &lt;CurveLine curve={curve} color={colors.secondary} /&gt;
+    &lt;/&gt;
+  );
+};
+
+export const BezierCurveDemoScene = () =&gt; {
+  return (
+    &lt;OrthographicScene&gt;
+      &lt;BezierCurveDemo /&gt;
+    &lt;/OrthographicScene&gt;
+  );
+};
+</code></pre>
+
+
+]]></content></item><item><title>Curve Nodes</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/7-curve-nodes/</link><pubDate>Sun, 21 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/7-curve-nodes/</guid><description>&lt;p&gt;In this chapter, we try to make our lives a bit easier by using a more flexible way to describe &lt;strong&gt;curves&lt;/strong&gt; in general.&lt;/p&gt;
 &lt;p&gt;This article is a bit longer than usual. The topic is hard to split into smaller pieces without losing context, so we keep everything in one place. I will try to keep things as simple as possible, but yes, there is a bit going on here.&lt;/p&gt;
 &lt;p&gt;Up to this point, everything was built around a very basic &lt;strong&gt;linear track&lt;/strong&gt; with two control points. Functions like &lt;code&gt;matrixAtDistance&lt;/code&gt; only had to deal with a single segment. That worked fine for learning and experimenting, but it starts to feel limiting very quickly. A real roller coaster does not consist of exactly one straight line.&lt;/p&gt;</description><content type="html"><![CDATA[<p>In this chapter, we try to make our lives a bit easier by using a more flexible way to describe <strong>curves</strong> in general.</p>
 <p>This article is a bit longer than usual. The topic is hard to split into smaller pieces without losing context, so we keep everything in one place. I will try to keep things as simple as possible, but yes, there is a bit going on here.</p>
@@ -139,9 +520,8 @@
 <p>Once we have the indices, we fetch the actual nodes:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curve</span>[<span style="color:#a6e22e">nodes</span>[<span style="color:#ae81ff">0</span>]];
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curve</span>[<span style="color:#a6e22e">nodes</span>[<span style="color:#ae81ff">1</span>]];
-</span></span></code></pre></div><p>Lets now prepare for interpolation between the found nodes. Assume we have the following node distances:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[0, 10, 30, 50, 60]
-</span></span></code></pre></div><p>If we request <code>20</code>, it is clearly sandwiched between <code>10</code> and <code>30</code>. No surprises there. For linear interpolation, we need to know <em>how far</em> <code>20</code> lies between those two values.</p>
+</span></span></code></pre></div><p>Lets now prepare for interpolation between the found nodes. Assume we have the following node distances: <code>[0, 10, 30, 50, 60]</code></p>
+<p>If we request <code>20</code>, it is clearly sandwiched between <code>10</code> and <code>30</code>. No surprises there. For linear interpolation, we need to know <em>how far</em> <code>20</code> lies between those two values.</p>
 <p>We do this step by step. Nothing fancy:</p>
 <ul>
 <li>Distance between <strong>left</strong> and <strong>right</strong> node: <code>30 - 10 = 20</code></li>
@@ -224,7 +604,7 @@
 <blockquote>
 <p><strong>Note</strong>: Points are duplicated to create hard transitions between segments. For linear track segments, smooth rotation transitions do not really make sense physically. Duplicating points is an easy way to fake the behavior we want.</p>
 <p><strong>Important</strong>: This is temporary junk. It exists only to make the demo work quickly and will be replaced by a proper implementation with correct normals and roll handling.</p></blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">curveFromPoints</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[]) <span style="color:#f92672">=&gt;</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fromPoints</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[]) <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">curve</span>: <span style="color:#66d9ef">CurveNode</span>[] <span style="color:#f92672">=</span> [];
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">points</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">curve</span>;
 </span></span><span style="display:flex;"><span>
@@ -328,54 +708,15 @@
 
 <pre><code class="language-tsx">import React, { useMemo, useState } from &#39;react&#39;;
 import { Line } from &#39;@react-three/drei&#39;;
-import last from &#39;lodash/last&#39;;
-import { Matrix4, Vector3 } from &#39;three&#39;;
+import { Vector3 } from &#39;three&#39;;
 
-import { CurveNode } from &#39;../../../../maths/curve&#39;;
+import { fromPointsWithBasicNormals } from &#39;../../../../maths/curve&#39;;
 import { useColors } from &#39;../../../../hooks/useColors&#39;;
 import { useMotionSimulation } from &#39;../../../../hooks/useMotionSimulation&#39;;
 
 import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
-import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 import { PointWithMatrixArrows } from &#39;../../../../components/PointWithMatrixArrows&#39;;
-
-const curveFromPoints = (points: Vector3[]) =&gt; {
-  const curve: CurveNode[] = [];
-  if (points.length &lt; 2) return curve;
-
-  let distanceAtCurve = 0;
-
-  for (let i = 0; i &lt; points.length - 1; i&#43;&#43;) {
-    const left = points[i];
-    const right = points[i &#43; 1];
-    const prevNode = curve[curve.length - 1];
-
-    if (prevNode)
-      curve.push({
-        matrix: prevNode.matrix.clone().setPosition(left),
-        distanceAtCurve,
-      });
-
-    curve.push({
-      matrix: new Matrix4()
-        .lookAt(right, left, new Vector3(0, 1, 0))
-        .setPosition(left),
-      distanceAtCurve,
-    });
-
-    distanceAtCurve &#43;= left.distanceTo(right);
-  }
-
-  const lastNode = last(curve)!;
-  const lastPoint = last(points)!;
-
-  curve.push({
-    matrix: lastNode.matrix.clone().setPosition(lastPoint),
-    distanceAtCurve,
-  });
-
-  return curve;
-};
+import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
 const MotionEvaluationDemo = () =&gt; {
   const colors = useColors();
@@ -389,7 +730,10 @@ const MotionEvaluationDemo = () =&gt; {
     new Vector3(-0.5, -2.5, 0),
   ]);
 
-  const curve = useMemo(() =&gt; curveFromPoints(points), [points]);
+  const curve = useMemo(
+    () =&gt; fromPointsWithBasicNormals(points),
+    [points],
+  );
   const motionMatrix = useMotionSimulation(curve);
 
   return (
@@ -400,7 +744,7 @@ const MotionEvaluationDemo = () =&gt; {
         setPoints={setPoints}
       /&gt;
       &lt;Line points={points} color={colors.secondary} /&gt;
-      &lt;PointWithMatrixArrows matrix={motionMatrix}/&gt;
+      &lt;PointWithMatrixArrows matrix={motionMatrix} /&gt;
     &lt;/&gt;
   );
 };
@@ -555,7 +899,7 @@ const MatricesDemo = () =&gt; {
   // control points
   const [points, setPoints] = useState([
     new Vector3(-11.5, 3.2, 0),
-    new Vector3(1.4, -2.8, 0),
+    new Vector3(0, -2.8, 0),
   ]);
 
   const [simulationState, setSimulationState] =
@@ -747,7 +1091,7 @@ That is the whole trick.</p>
 <p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/6-matrices/">In the next chapter</a> we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
 No matter what the underlying geometry is in the end, <strong>splines, imported tracks, FVD-based shapes or anything else, the evaluation should always work the same</strong>.
 The key step is replacing the two functions <code>positionAtDistance</code> and <code>forwardDirectionAtDistance</code>
-with a single <code>matrixAtDis[FrictionAndAirResistanceDemoScene.tsx](FrictionAndAirResistanceDemoScene.tsx)tance</code> function. Working with <strong>matrices</strong> is more convenient, because we can extract everything we need from them.
+with a single <code>matrixAtDistance</code> function. Working with <strong>matrices</strong> is more convenient, because we can extract everything we need from them.
 I will also introduce a <strong>curve node</strong> that stores a full matrix for a given distance along the track.
 Any geometry system can “fill” these <strong>curve nodes</strong>, whether that system is based on splines, imported CSV data, FVD geometries or something entirely different.
 While writing this, I realize it is probably best to introduce the concept first with a simple linear track. Stay tuned.</p>
@@ -804,7 +1148,7 @@ const FrictionAndAirResistanceDemo = () =&gt; {
   // control points
   const [points, setPoints] = useState([
     new Vector3(-11.5, 3.2, 0),
-    new Vector3(1.4, -2.8, 0),
+    new Vector3(0, -2.8, 0),
   ]);
 
   const [simulationState, setSimulationState] =
@@ -1127,7 +1471,7 @@ const LinearRollerCoasterTrackDemo = () =&gt; {
   // control points
   const [points, setPoints] = useState([
     new Vector3(-11.5, 3.2, 0),
-    new Vector3(1.4, -2.8, 0),
+    new Vector3(0, -2.8, 0),
   ]);
 
   const [simulationState, setSimulationState] = useControls(() =&gt; ({

@@ -70,7 +70,7 @@ That is the whole trick.</p><p>Now subtract energy loss from acceleration:</p><d
   `</script></div><h2 id=what-comes-next>What comes next?</h2><p><a href=https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/6-matrices/>In the next chapter</a> we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
 No matter what the underlying geometry is in the end, <strong>splines, imported tracks, FVD-based shapes or anything else, the evaluation should always work the same</strong>.
 The key step is replacing the two functions <code>positionAtDistance</code> and <code>forwardDirectionAtDistance</code>
-with a single <code>matrixAtDis[FrictionAndAirResistanceDemoScene.tsx](FrictionAndAirResistanceDemoScene.tsx)tance</code> function. Working with <strong>matrices</strong> is more convenient, because we can extract everything we need from them.
+with a single <code>matrixAtDistance</code> function. Working with <strong>matrices</strong> is more convenient, because we can extract everything we need from them.
 I will also introduce a <strong>curve node</strong> that stores a full matrix for a given distance along the track.
 Any geometry system can “fill” these <strong>curve nodes</strong>, whether that system is based on splines, imported CSV data, FVD geometries or something entirely different.
 While writing this, I realize it is probably best to introduce the concept first with a simple linear track. Stay tuned.</p><h1 id=demo-code>Demo code</h1><p>If you want to run the demo locally, clone this
@@ -105,7 +105,7 @@ const FrictionAndAirResistanceDemo = () =&gt; {
   // control points
   const [points, setPoints] = useState([
     new Vector3(-11.5, 3.2, 0),
-    new Vector3(1.4, -2.8, 0),
+    new Vector3(0, -2.8, 0),
   ]);
 
   const [simulationState, setSimulationState] =

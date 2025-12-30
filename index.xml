@@ -1,4 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ercan Akyürek</title><link>https://ercanakyuerek.de/</link><description>Recent content on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Sun, 21 Dec 2025 14:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/index.xml" rel="self" type="application/rss+xml"/><item><title>Curve Nodes</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/7-curve-nodes/</link><pubDate>Sun, 21 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/7-curve-nodes/</guid><description>&lt;p&gt;In this chapter, we try to make our lives a bit easier by using a more flexible way to describe &lt;strong&gt;curves&lt;/strong&gt; in general.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ercan Akyürek</title><link>https://ercanakyuerek.de/</link><description>Recent content on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Thu, 25 Dec 2025 14:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/index.xml" rel="self" type="application/rss+xml"/><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/8-bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/8-bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
+ &lt;iframe id="react-root-cf898ffc7aa41960773a58e4ebb376aa" width="225px" height="225px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
+
+ 
+ &lt;div class="description" style="width: 225px"&gt;
+ An interactive example of a Bézier curve, drag the controls around to see changes in shape
+ &lt;/div&gt;
+ 
+
+ &lt;script&gt;
+ document.getElementById('react-root-cf898ffc7aa41960773a58e4ebb376aa').srcdoc = `
+ &lt;!DOCTYPE html&gt;
+ &lt;html lang="en" data-theme="dark"&gt;
+ &lt;head&gt;
+ &lt;base href="${location.origin}/"&gt;
+ &lt;/head&gt;
+ &lt;body class="content-component"&gt;
+ &lt;div id="root" class="full-screen"&gt;&lt;/div&gt;
+ \x3Cscript type="module"&gt;
+ import { renderContentComponentByPath } from '/scripts/render-content-component.js';
+ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/8-bezier-curve\/BezierCurveExampleScene.tsx');
+ &lt;\/script&gt;
+ &lt;/body&gt;
+ &lt;/html&gt;
+ `;
+ &lt;/script&gt;
+&lt;/div&gt;
+&lt;p&gt;So, now it is finally time to build an actual &lt;strong&gt;Bézier curve&lt;/strong&gt; instead of only linear segments.&lt;/p&gt;
+&lt;p&gt;I do not think Bézier curves are particularly well suited for hand-building real roller coaster tracks. But they are simple to implement, easy to visualize, and most importantly, they finally give us &lt;em&gt;real curvature&lt;/em&gt; instead of straight lines everywhere. And honestly, we have been staring at straight lines long enough.&lt;/p&gt;</description></item><item><title>Curve Nodes</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/7-curve-nodes/</link><pubDate>Sun, 21 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/7-curve-nodes/</guid><description>&lt;p&gt;In this chapter, we try to make our lives a bit easier by using a more flexible way to describe &lt;strong&gt;curves&lt;/strong&gt; in general.&lt;/p&gt;
 &lt;p&gt;This article is a bit longer than usual. The topic is hard to split into smaller pieces without losing context, so we keep everything in one place. I will try to keep things as simple as possible, but yes, there is a bit going on here.&lt;/p&gt;
 &lt;p&gt;Up to this point, everything was built around a very basic &lt;strong&gt;linear track&lt;/strong&gt; with two control points. Functions like &lt;code&gt;matrixAtDistance&lt;/code&gt; only had to deal with a single segment. That worked fine for learning and experimenting, but it starts to feel limiting very quickly. A real roller coaster does not consist of exactly one straight line.&lt;/p&gt;</description></item><item><title>Matrices</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/6-matrices/</link><pubDate>Sun, 21 Dec 2025 13:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/6-matrices/</guid><description>&lt;p&gt;Right now, when we want to know the &lt;strong&gt;position&lt;/strong&gt; and &lt;strong&gt;forward direction&lt;/strong&gt; along a curve, we ask two separate functions. This works, but having two separate functions for the same &lt;strong&gt;node&lt;/strong&gt; on the track is odd and adds more complexity than we actually need.&lt;/p&gt;
 &lt;p&gt;Earlier we mentioned that there is a better way to describe this kind of information. That better way is a &lt;strong&gt;4x4 matrix&lt;/strong&gt;.&lt;/p&gt;

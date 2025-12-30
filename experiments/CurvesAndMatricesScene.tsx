@@ -40,13 +40,36 @@ const gravity = 9.81665;
 const friction = 0.03;
 const airResistance = 0.0001;
 
+const useFPS = () => {
+  const fpsSamplesRef = React.useRef<number[]>([]);
+
+  const [, setState] = useControls(() => ({
+    fps: {
+      value: 0,
+      disabled: true,
+    },
+  }));
+
+  useFrame((state, deltaTime) => {
+    const samples = fpsSamplesRef.current;
+    samples.push(1 / deltaTime);
+
+    if (samples.length > 30) {
+      setState({
+        fps: samples.reduce((sum, v) => sum + v, 0) / samples.length,
+      });
+      fpsSamplesRef.current = [];
+    }
+  });
+};
+
 const TrainWithPhysics = (props: { curve: CurveNode[] }) => {
+  useFPS();
   const colors = useColors();
   const { curve } = props;
 
   const [simulationState, setSimulationState] = useControls(() => ({
     velocity: 0,
-    fps: 0,
     distanceTraveled: 0,
     acceleration: {
       value: 0,
@@ -77,7 +100,6 @@ const TrainWithPhysics = (props: { curve: CurveNode[] }) => {
         gravity,
         deltaTime,
       ),
-      fps: 1 / deltaTime,
     });
   });
 
@@ -111,10 +133,13 @@ export const CurvesAndMatricesScene = () => {
   } = useMeasure<HTMLDivElement>();
   const colors = useColors();
 
+  const [isDraggingControlPoints, setIsDraggingControlPoints] =
+    useState(false);
+
   const [cubicPoints, setCubicPoints] = useState([
     new Vector3(0, 0),
-    new Vector3(750, 50),
-    new Vector3(1500, 0),
+    new Vector3(0.5, 50),
+    new Vector3(1, 0),
   ]);
 
   const [points, setPoints] = useState([
@@ -130,7 +155,7 @@ export const CurvesAndMatricesScene = () => {
         cubicPoints.map((v) => new Vector2(v.x, v.y)),
         0,
         0,
-        2,
+        100,
       ),
     [cubicPoints],
   );
@@ -138,32 +163,11 @@ export const CurvesAndMatricesScene = () => {
   const curve = useMemo(
     () =>
       applyRollFromCurve(
-        bezierSplineCurve(
-          points[0],
-          points[1],
-          points[2],
-          points[3],
-          2,
-        ),
+        bezierSplineCurve(points, isDraggingControlPoints ? 1 : 20),
         cubicCurve,
       ),
-    [points, cubicCurve],
+    [points, isDraggingControlPoints, cubicCurve],
   );
-
-  useEffect(() => {
-    setCubicPoints((cubicPoints) => {
-      const curveLength = length(curve);
-      return [
-        new Vector3(0, cubicPoints[0].y, 0),
-        ...cubicPoints.slice(1, cubicPoints.length - 1),
-        new Vector3(
-          curveLength,
-          cubicPoints[cubicPoints.length - 1].y,
-          0,
-        ),
-      ];
-    });
-  }, [curve]);
 
   const rollNodes = useMemo(
     () =>
@@ -216,7 +220,12 @@ export const CurvesAndMatricesScene = () => {
 
         <Line points={points} color={colors.secondary} />
         <CurveWireframe color={colors.secondary} curve={curve} />
-        <DragControlPoints points={points} setPoints={setPoints} />
+        <DragControlPoints
+          onDragStart={() => setIsDraggingControlPoints(true)}
+          onDragEnd={() => setIsDraggingControlPoints(false)}
+          points={points}
+          setPoints={setPoints}
+        />
       </PerspectiveScene>
 
       <div className="viewport spline-viewport">
