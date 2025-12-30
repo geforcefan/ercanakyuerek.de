@@ -1,10 +1,10 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 25 Dec 2025 14:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/8-bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/8-bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
-&lt;iframe id="react-root-cf898ffc7aa41960773a58e4ebb376aa" width="225px" height="225px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 25 Dec 2025 14:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
+&lt;iframe id="react-root-c704053efcd2dfc33333077ae972f49a" width="225px" height="225px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
 &lt;div class="description" style="width: 225px"&gt;
 An interactive example of a Bézier curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-cf898ffc7aa41960773a58e4ebb376aa').srcdoc = `
+document.getElementById('react-root-c704053efcd2dfc33333077ae972f49a').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -14,7 +14,7 @@ document.getElementById('react-root-cf898ffc7aa41960773a58e4ebb376aa').srcdoc = 
 &lt;div id="root" class="full-screen"&gt;&lt;/div&gt;
 \x3Cscript type="module"&gt;
 import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/8-bezier-curve\/BezierCurveExampleScene.tsx');
+renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/bezier-curve\/BezierCurveExampleScene.tsx');
 &lt;\/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -31,7 +31,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-cf898ffc7aa41960773a58e4ebb376aa" width="225px" height="225px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-c704053efcd2dfc33333077ae972f49a" width="225px" height="225px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 225px">
@@ -40,7 +40,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
   
 
   <script>
-    document.getElementById('react-root-cf898ffc7aa41960773a58e4ebb376aa').srcdoc = `
+    document.getElementById('react-root-c704053efcd2dfc33333077ae972f49a').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -50,7 +50,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/8-bezier-curve\/BezierCurveExampleScene.tsx');
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/bezier-curve\/BezierCurveExampleScene.tsx');
         <\/script>
       </body>
     </html>
@@ -71,12 +71,12 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded ">
-  <iframe id="react-root-b279724a792ada3802b0fa1d79389e0a" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-37f0f4da82a1567aaca4b8be8b0a7184" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-b279724a792ada3802b0fa1d79389e0a').srcdoc = `
+    document.getElementById('react-root-37f0f4da82a1567aaca4b8be8b0a7184').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -86,7 +86,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/8-bezier-curve\/BezierCurveDemoScene.tsx');
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/bezier-curve\/BezierCurveDemoScene.tsx');
         <\/script>
       </body>
     </html>
@@ -113,7 +113,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-df9be18f560ec4939ed0d5924867be50" width="355px" height="500px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-323a392291c5682df4c666da9e7d3b37" width="355px" height="500px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 355px">
@@ -122,7 +122,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
   
 
   <script>
-    document.getElementById('react-root-df9be18f560ec4939ed0d5924867be50').srcdoc = `
+    document.getElementById('react-root-323a392291c5682df4c666da9e7d3b37').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -132,7 +132,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/8-bezier-curve\/DeCasteljauVisualizationScene.tsx');
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/bezier-curve\/DeCasteljauVisualizationScene.tsx');
         <\/script>
       </body>
     </html>
@@ -206,7 +206,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-eb1684130e1e12adbd933fca7f083d71" width="355px" height="425px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-126dbd9c16cf7a53782b8bafc819c3f0" width="355px" height="425px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 355px">
@@ -215,7 +215,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
   
 
   <script>
-    document.getElementById('react-root-eb1684130e1e12adbd933fca7f083d71').srcdoc = `
+    document.getElementById('react-root-126dbd9c16cf7a53782b8bafc819c3f0').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -225,7 +225,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/8-bezier-curve\/EstimateLengthScene.tsx');
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/bezier-curve\/EstimateLengthScene.tsx');
         <\/script>
       </body>
     </html>
@@ -358,7 +358,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
     <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
     run <code>npm install</code> and <code>npm run dev-scripts</code>,
     then open this
-    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/8-bezier-curve/BezierCurveDemoScene.tsx" target="_blank">link</a>
+    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/bezier-curve/BezierCurveDemoScene.tsx" target="_blank">link</a>
     in your browser.
 </p>
 
@@ -422,7 +422,7 @@ export const BezierCurveDemoScene = () =&gt; {
 </code></pre>
 
 
-]]></content></item><item><title>Curve Nodes</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/7-curve-nodes/</link><pubDate>Sun, 21 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/7-curve-nodes/</guid><description>&lt;p&gt;In this chapter, we try to make our lives a bit easier by using a more flexible way to describe &lt;strong&gt;curves&lt;/strong&gt; in general.&lt;/p&gt;
+]]></content></item><item><title>Curve Nodes</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-nodes/</link><pubDate>Sun, 21 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-nodes/</guid><description>&lt;p&gt;In this chapter, we try to make our lives a bit easier by using a more flexible way to describe &lt;strong&gt;curves&lt;/strong&gt; in general.&lt;/p&gt;
 &lt;p&gt;This article is a bit longer than usual. The topic is hard to split into smaller pieces without losing context, so we keep everything in one place. I will try to keep things as simple as possible, but yes, there is a bit going on here.&lt;/p&gt;
 &lt;p&gt;Up to this point, everything was built around a very basic &lt;strong&gt;linear track&lt;/strong&gt; with two control points. Functions like &lt;code&gt;matrixAtDistance&lt;/code&gt; only had to deal with a single segment. That worked fine for learning and experimenting, but it starts to feel limiting very quickly. A real roller coaster does not consist of exactly one straight line.&lt;/p&gt;</description><content type="html"><![CDATA[<p>In this chapter, we try to make our lives a bit easier by using a more flexible way to describe <strong>curves</strong> in general.</p>
 <p>This article is a bit longer than usual. The topic is hard to split into smaller pieces without losing context, so we keep everything in one place. I will try to keep things as simple as possible, but yes, there is a bit going on here.</p>
@@ -442,7 +442,7 @@ export const BezierCurveDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-349c729d6df2fe00de637718bb468b31" width="100%" height="200px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-c554a26ff75070a035b68f216134a7ff" width="100%" height="200px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -451,7 +451,7 @@ export const BezierCurveDemoScene = () =&gt; {
   
 
   <script>
-    document.getElementById('react-root-349c729d6df2fe00de637718bb468b31').srcdoc = `
+    document.getElementById('react-root-c554a26ff75070a035b68f216134a7ff').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -461,7 +461,7 @@ export const BezierCurveDemoScene = () =&gt; {
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/7-curve-nodes\/BinarySearchDemoScene.tsx');
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/curve-nodes\/BinarySearchDemoScene.tsx');
         <\/script>
       </body>
     </html>
@@ -697,7 +697,7 @@ export const BezierCurveDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-5258c7e0fe78a1fa36db790eb8d34c04" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-6b78ef7f656576c61eb87645281a090c" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -706,7 +706,7 @@ export const BezierCurveDemoScene = () =&gt; {
   
 
   <script>
-    document.getElementById('react-root-5258c7e0fe78a1fa36db790eb8d34c04').srcdoc = `
+    document.getElementById('react-root-6b78ef7f656576c61eb87645281a090c').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -716,7 +716,7 @@ export const BezierCurveDemoScene = () =&gt; {
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/7-curve-nodes\/MotionEvaluationDemoScene.tsx');
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/curve-nodes\/MotionEvaluationDemoScene.tsx');
         <\/script>
       </body>
     </html>
@@ -745,7 +745,7 @@ export const BezierCurveDemoScene = () =&gt; {
     <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
     run <code>npm install</code> and <code>npm run dev-scripts</code>,
     then open this
-    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/7-curve-nodes/MotionEvaluationDemoScene.tsx" target="_blank">link</a>
+    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/curve-nodes/MotionEvaluationDemoScene.tsx" target="_blank">link</a>
     in your browser.
 </p>
 
@@ -802,13 +802,13 @@ export const MotionEvaluationDemoScene = () =&gt; {
 </code></pre>
 
 
-]]></content></item><item><title>Matrices</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/6-matrices/</link><pubDate>Sun, 21 Dec 2025 13:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/6-matrices/</guid><description>&lt;p&gt;Right now, when we want to know the &lt;strong&gt;position&lt;/strong&gt; and &lt;strong&gt;forward direction&lt;/strong&gt; along a curve, we ask two separate functions. This works, but having two separate functions for the same &lt;strong&gt;node&lt;/strong&gt; on the track is odd and adds more complexity than we actually need.&lt;/p&gt;
+]]></content></item><item><title>Matrices</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/matrices/</link><pubDate>Sun, 21 Dec 2025 13:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/matrices/</guid><description>&lt;p&gt;Right now, when we want to know the &lt;strong&gt;position&lt;/strong&gt; and &lt;strong&gt;forward direction&lt;/strong&gt; along a curve, we ask two separate functions. This works, but having two separate functions for the same &lt;strong&gt;node&lt;/strong&gt; on the track is odd and adds more complexity than we actually need.&lt;/p&gt;
 &lt;p&gt;Earlier we mentioned that there is a better way to describe this kind of information. That better way is a &lt;strong&gt;4x4 matrix&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;A matrix can hold &lt;strong&gt;position&lt;/strong&gt; and &lt;strong&gt;directions&lt;/strong&gt; at the same time. This is exactly what we need to describe a &lt;strong&gt;node&lt;/strong&gt; along the track. Once we switch to &lt;strong&gt;matrices&lt;/strong&gt;, the two existing functions &lt;code&gt;forwardDirectionAtDistance&lt;/code&gt; and &lt;code&gt;positionAtDistance&lt;/code&gt; naturally collapse into one. Instead of asking the track for separate pieces of data, we ask for a &lt;strong&gt;matrix&lt;/strong&gt; at a distance along the curve and extract whatever information we need from it.&lt;/p&gt;</description><content type="html"><![CDATA[<p>Right now, when we want to know the <strong>position</strong> and <strong>forward direction</strong> along a curve, we ask two separate functions. This works, but having two separate functions for the same <strong>node</strong> on the track is odd and adds more complexity than we actually need.</p>
 <p>Earlier we mentioned that there is a better way to describe this kind of information. That better way is a <strong>4x4 matrix</strong>.</p>
 <p>A matrix can hold <strong>position</strong> and <strong>directions</strong> at the same time. This is exactly what we need to describe a <strong>node</strong> along the track. Once we switch to <strong>matrices</strong>, the two existing functions <code>forwardDirectionAtDistance</code> and <code>positionAtDistance</code> naturally collapse into one. Instead of asking the track for separate pieces of data, we ask for a <strong>matrix</strong> at a distance along the curve and extract whatever information we need from it.</p>
 <p>For that reason, we make a small but important change. From now on, we work with <strong>matrices</strong> and remove those two functions entirely.</p>
-<p>If it helps, it is worth rereading the chapter on <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-linear-track/">linear roller coaster tracks</a>, where <code>forwardDirectionAtDistance</code> and <code>positionAtDistance</code> were introduced. Both are now replaced by a single function called <code>matrixAtDistance</code>.</p>
+<p>If it helps, it is worth rereading the chapter on <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/linear-track/">linear roller coaster tracks</a>, where <code>forwardDirectionAtDistance</code> and <code>positionAtDistance</code> were introduced. Both are now replaced by a single function called <code>matrixAtDistance</code>.</p>
 <p>For a linear track segment, this is straightforward. We compute the <strong>position</strong> exactly like before using linear interpolation. For orientation, we let <strong>THREE.js</strong> build a matrix that <code>lookAt</code>s from one control point to the other. This gives us a correct <strong>forward direction</strong> without any extra work.</p>
 <blockquote>
 <p><strong>Note:</strong> At this stage, we only need a valid <strong>forward direction</strong>. There is no need to complicate things with <strong>roll</strong>, so we ignore it for now.</p></blockquote>
@@ -861,7 +861,7 @@ export const MotionEvaluationDemoScene = () =&gt; {
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><h2 id="what-comes-next">What comes next?</h2>
 <p>These changes are mostly structural. Visually, nothing changes yet. Under the hood, however, the simulation now works entirely with <strong>matrices</strong>, which will make later changes easier.</p>
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/7-curve-nodes/">In the next chapter</a>, we move away from linear segments and introduce a more general way to describe <strong>curves</strong>. That will require a new implementation of <code>matrixAtDistance</code>, but the rest of the simulation can stay as it is.</p>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-nodes/">In the next chapter</a>, we move away from linear segments and introduce a more general way to describe <strong>curves</strong>. That will require a new implementation of <code>matrixAtDistance</code>, but the rest of the simulation can stay as it is.</p>
 <p>This is the kind of refactor we want. We change how the track is described without rewriting everything built on top of it.</p>
 <h2 id="interactive-demo-and-code">Interactive demo and code</h2>
 <p>There is no visible difference in the demo. The train behaves exactly as before. The only change is that the simulation now uses <code>matrixAtDistance</code> internally.</p>
@@ -875,12 +875,12 @@ export const MotionEvaluationDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-27fa8bf2addae285184fdbd50648585e" width="100%" height="320px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-9ea1f4cc5058185b55cc7c7a7f583c03" width="100%" height="320px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-27fa8bf2addae285184fdbd50648585e').srcdoc = `
+    document.getElementById('react-root-9ea1f4cc5058185b55cc7c7a7f583c03').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -890,7 +890,7 @@ export const MotionEvaluationDemoScene = () =&gt; {
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/6-matrices\/MatricesDemoScene.tsx');
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/matrices\/MatricesDemoScene.tsx');
         <\/script>
       </body>
     </html>
@@ -918,7 +918,7 @@ export const MotionEvaluationDemoScene = () =&gt; {
     <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
     run <code>npm install</code> and <code>npm run dev-scripts</code>,
     then open this
-    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/6-matrices/MatricesDemoScene.tsx" target="_blank">link</a>
+    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/matrices/MatricesDemoScene.tsx" target="_blank">link</a>
     in your browser.
 </p>
 
@@ -1013,7 +1013,7 @@ export const MatricesDemoScene = () =&gt; {
 </code></pre>
 
 
-]]></content></item><item><title>Friction and Air Resistance</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/</link><pubDate>Sat, 06 Dec 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/</guid><description>&lt;p&gt;This chapter will be quite short and introduces two small but important parts of a more realistic roller coaster simulation:&lt;/p&gt;
+]]></content></item><item><title>Friction and Air Resistance</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/friction-and-air-resistance/</link><pubDate>Sat, 06 Dec 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/friction-and-air-resistance/</guid><description>&lt;p&gt;This chapter will be quite short and introduces two small but important parts of a more realistic roller coaster simulation:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;friction&lt;/li&gt;
 &lt;li&gt;air resistance&lt;/li&gt;
@@ -1108,12 +1108,12 @@ That is the whole trick.</p>
 
 
 <div class="embedded ">
-  <iframe id="react-root-c069d7e2f566db415e79c510205dba10" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-e3773fb7e06be259b324bbdaecc60e4d" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-c069d7e2f566db415e79c510205dba10').srcdoc = `
+    document.getElementById('react-root-e3773fb7e06be259b324bbdaecc60e4d').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1123,7 +1123,7 @@ That is the whole trick.</p>
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/5-friction-and-air-resistance\/FrictionAndAirResistanceDemoScene.tsx');
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/friction-and-air-resistance\/FrictionAndAirResistanceDemoScene.tsx');
         <\/script>
       </body>
     </html>
@@ -1131,7 +1131,7 @@ That is the whole trick.</p>
   </script>
 </div>
 <h2 id="what-comes-next">What comes next?</h2>
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/6-matrices/">In the next chapter</a> we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/matrices/">In the next chapter</a> we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
 No matter what the underlying geometry is in the end, <strong>splines, imported tracks, FVD-based shapes or anything else, the evaluation should always work the same</strong>.
 The key step is replacing the two functions <code>positionAtDistance</code> and <code>forwardDirectionAtDistance</code>
 with a single <code>matrixAtDistance</code> function. Working with <strong>matrices</strong> is more convenient, because we can extract everything we need from them.
@@ -1160,7 +1160,7 @@ While writing this, I realize it is probably best to introduce the concept first
     <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
     run <code>npm install</code> and <code>npm run dev-scripts</code>,
     then open this
-    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/FrictionAndAirResistanceDemoScene.tsx" target="_blank">link</a>
+    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/friction-and-air-resistance/FrictionAndAirResistanceDemoScene.tsx" target="_blank">link</a>
     in your browser.
 </p>
 
@@ -1312,7 +1312,7 @@ export const FrictionAndAirResistanceDemoScene = () =&gt; {
 </code></pre>
 
 
-]]></content></item><item><title>Linear Track</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-linear-track/</link><pubDate>Sat, 06 Dec 2025 11:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-linear-track/</guid><description>&lt;p&gt;To visualize motion properly, we need something for our little object to move along. And that means we need a track.&lt;/p&gt;
+]]></content></item><item><title>Linear Track</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/linear-track/</link><pubDate>Sat, 06 Dec 2025 11:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/linear-track/</guid><description>&lt;p&gt;To visualize motion properly, we need something for our little object to move along. And that means we need a track.&lt;/p&gt;
 &lt;p&gt;In this article, we focus on an extremely simplified roller coaster track. And when I say extremely simplified, I really mean it: it&amp;rsquo;s just a plane. A straight line. A first-order curve. Basically the easiest form of track you can possibly build without accidentally creating a real coaster.&lt;/p&gt;
 &lt;p&gt;From the last chapter, we know how motion evaluation works. The evaluation function receives an acceleration value and returns a new simulation state containing the updated velocity and the total distance traveled:&lt;/p&gt;</description><content type="html"><![CDATA[<p>To visualize motion properly, we need something for our little object to move along. And that means we need a track.</p>
 <p>In this article, we focus on an extremely simplified roller coaster track. And when I say extremely simplified, I really mean it: it&rsquo;s just a plane. A straight line. A first-order curve. Basically the easiest form of track you can possibly build without accidentally creating a real coaster.</p>
@@ -1439,12 +1439,12 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 
 
 <div class="embedded ">
-  <iframe id="react-root-79323148099d32abab47527cd9bf9c95" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-60e4fd07f490fc6413752ebbd663bf8c" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-79323148099d32abab47527cd9bf9c95').srcdoc = `
+    document.getElementById('react-root-60e4fd07f490fc6413752ebbd663bf8c').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1454,7 +1454,7 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/4-linear-track\/LinearTrackDemoScene.tsx');
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/linear-track\/LinearTrackDemoScene.tsx');
         <\/script>
       </body>
     </html>
@@ -1463,7 +1463,7 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 </div>
 <p>I’ve polished things a bit and moved the physics and linear interpolation logic into their own files instead of keeping everything as spaghetti code. The complete source code is available in my GitHub repo, feel free to explore and play around with it.</p>
 <h2 id="what-comes-next">What comes next?</h2>
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/">In the next chapter</a> we will introduce friction and air resistance. You’ll be able to play with the parameters in a demo and compare both physics evaluations, with and without energy loss.</p>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/friction-and-air-resistance/">In the next chapter</a> we will introduce friction and air resistance. You’ll be able to play with the parameters in a demo and compare both physics evaluations, with and without energy loss.</p>
 <h1 id="demo-code">Demo code</h1>
 
 
@@ -1486,7 +1486,7 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
     <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
     run <code>npm install</code> and <code>npm run dev-scripts</code>,
     then open this
-    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/4-linear-track/LinearTrackDemoScene.tsx" target="_blank">link</a>
+    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/linear-track/LinearTrackDemoScene.tsx" target="_blank">link</a>
     in your browser.
 </p>
 
@@ -1592,7 +1592,7 @@ export const LinearTrackDemoScene = () =&gt; {
 </code></pre>
 
 
-]]></content></item><item><title>Evaluating Motion</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/</link><pubDate>Sat, 06 Dec 2025 10:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/</guid><description>&lt;p&gt;Before we implement the function, there&amp;rsquo;s one small simplification we need to mention:
+]]></content></item><item><title>Evaluating Motion</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/evaluating-motion/</link><pubDate>Sat, 06 Dec 2025 10:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/evaluating-motion/</guid><description>&lt;p&gt;Before we implement the function, there&amp;rsquo;s one small simplification we need to mention:
 In this chapter we will always evaluate the motion every &lt;strong&gt;16 ms (0.016 seconds)&lt;/strong&gt;,
 which corresponds to roughly &lt;strong&gt;60 frames per second&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Using a fixed time step makes the formulas easier to understand for this article.&lt;/p&gt;
@@ -1623,7 +1623,7 @@ This keeps the examples simple and lets us focus on the physics first.</p>
 Think of it like this:</p>
 <blockquote>
 <p>initial state → evaluate → new state → evaluate → new state → &hellip;</p></blockquote>
-<p>To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/">Chapter 2</a>. This formula tells us how much of gravity actually acts in the direction of the slope:</p>
+<p>To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/gravity/">Chapter 2</a>. This formula tells us how much of gravity actually acts in the direction of the slope:</p>
 $$acceleration = gravity * sin(slopeAngle)$$<p>So we end up basically with:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gravity</span> <span style="color:#f92672">*</span> Math.<span style="color:#a6e22e">sin</span>(<span style="color:#a6e22e">slopeAngle</span>);
 </span></span><span style="display:flex;"><span>
@@ -1687,12 +1687,12 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
 
 
 <div class="embedded ">
-  <iframe id="react-root-f0b2d72026ec29c44e8c23715f14ad8c" width="100%" height="320px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-cf9da0552fe3cabc2e16f3ecaaed7aa7" width="100%" height="320px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-f0b2d72026ec29c44e8c23715f14ad8c').srcdoc = `
+    document.getElementById('react-root-cf9da0552fe3cabc2e16f3ecaaed7aa7').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1702,7 +1702,7 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/3-evaluating-motion\/MotionEvaluationDemoScene.tsx');
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/evaluating-motion\/MotionEvaluationDemoScene.tsx');
         <\/script>
       </body>
     </html>
@@ -1710,7 +1710,7 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
   </script>
 </div>
 <h2 id="what-comes-next">What comes next?</h2>
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/4-linear-track/">In the next chapter</a> we’ll add a basic roller coaster track, just a straight, linear segment. This is a preparation for the real coaster curvatures we’ll build later.</p>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/linear-track/">In the next chapter</a> we’ll add a basic roller coaster track, just a straight, linear segment. This is a preparation for the real coaster curvatures we’ll build later.</p>
 <h1 id="demo-code">Demo code</h1>
 
 
@@ -1733,7 +1733,7 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
     <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
     run <code>npm install</code> and <code>npm run dev-scripts</code>,
     then open this
-    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/MotionEvaluationDemoScene.tsx" target="_blank">link</a>
+    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/evaluating-motion/MotionEvaluationDemoScene.tsx" target="_blank">link</a>
     in your browser.
 </p>
 
@@ -1866,7 +1866,7 @@ export const MotionEvaluationDemoScene = () =&gt; {
 </code></pre>
 
 
-]]></content></item><item><title>Gravity</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/</link><pubDate>Sat, 06 Dec 2025 09:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/</guid><description>&lt;h2 id="how-do-we-determine-the-acceleration-of-the-coaster"&gt;How do we determine the acceleration of the coaster?&lt;/h2&gt;
+]]></content></item><item><title>Gravity</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/gravity/</link><pubDate>Sat, 06 Dec 2025 09:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/gravity/</guid><description>&lt;h2 id="how-do-we-determine-the-acceleration-of-the-coaster"&gt;How do we determine the acceleration of the coaster?&lt;/h2&gt;
 &lt;p&gt;To simplify things, we ignore air resistance, rolling friction and any other additional forces. We also assume Earth’s gravity is &lt;strong&gt;9.81 m/s²&lt;/strong&gt;. This allows us to focus entirely on the fundamental idea:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Gravity is the primary source of acceleration.&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
@@ -1966,12 +1966,12 @@ so it might help you as well.</p>
 
 
 <div class="embedded ">
-  <iframe id="react-root-8e12f9506258ee81e5ce43c1101a94e4" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-75eab6b1ea1079a149b8d57e233c976d" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-8e12f9506258ee81e5ce43c1101a94e4').srcdoc = `
+    document.getElementById('react-root-75eab6b1ea1079a149b8d57e233c976d').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1981,7 +1981,7 @@ so it might help you as well.</p>
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/2-gravity\/GravityDemoScene.tsx');
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/gravity\/GravityDemoScene.tsx');
         <\/script>
       </body>
     </html>
@@ -1989,7 +1989,7 @@ so it might help you as well.</p>
   </script>
 </div>
 <h2 id="what-comes-next">What comes next?</h2>
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/3-evaluating-motion/">In the next chapter</a>, we’ll add motion evaluation and move a simple object along a linear plane.</p>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/evaluating-motion/">In the next chapter</a>, we’ll add motion evaluation and move a simple object along a linear plane.</p>
 <h1 id="demo-code">Demo code</h1>
 
 
@@ -2012,7 +2012,7 @@ so it might help you as well.</p>
     <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
     run <code>npm install</code> and <code>npm run dev-scripts</code>,
     then open this
-    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/2-gravity/GravityDemoScene.tsx" target="_blank">link</a>
+    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/gravity/GravityDemoScene.tsx" target="_blank">link</a>
     in your browser.
 </p>
 
@@ -2095,7 +2095,7 @@ export const GravityDemoScene = () =&gt; {
 </code></pre>
 
 
-]]></content></item><item><title>Introduction and Motion Dynamics</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/1-introduction-and-motion-dynamics/</link><pubDate>Sat, 06 Dec 2025 08:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/1-introduction-and-motion-dynamics/</guid><description>&lt;p&gt;You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser.&lt;/p&gt;
+]]></content></item><item><title>Introduction and Motion Dynamics</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/introduction-and-motion-dynamics/</link><pubDate>Sat, 06 Dec 2025 08:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/introduction-and-motion-dynamics/</guid><description>&lt;p&gt;You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser.&lt;/p&gt;
 &lt;p&gt;My goal here isn’t to build some engineering-grade physics engine. I just want to recreate the kind of coaster &lt;strong&gt;physics&lt;/strong&gt; we all know from things like &lt;strong&gt;NoLimits Roller Coaster or other coasters in games&lt;/strong&gt;.
 Nothing overly scientific, just the kind of system that behaves the way we intuitively expect.
 In the end, the physics model will end up pretty close to what &lt;strong&gt;NoLimits Roller Coaster&lt;/strong&gt; does anyway, just without all the heavy engineering baggage.&lt;/p&gt;</description><content type="html"><![CDATA[<p>You might have played around with JavaScript animations or small physics experiments before, but in this series we are going to take things a step further. We will build a simplified roller coaster simulation directly in the browser.</p>
@@ -2132,7 +2132,7 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 <blockquote>
 <p>Acceleration → Velocity → Distance</p></blockquote>
 <p>Once we understand the acceleration acting on the coaster, the rest follows naturally.</p>
-<p>In the next chapter, we will take the first real step of the simulation and answer the core question: <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/2-gravity/">How do we determine the acceleration of the coaster?</a></p>
+<p>In the next chapter, we will take the first real step of the simulation and answer the core question: <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/gravity/">How do we determine the acceleration of the coaster?</a></p>
 ]]></content></item><item><title>First results and improved spline interpolation</title><link>https://ercanakyuerek.de/posts/rollercoaster-simulation/improved-spline-interpolation/</link><pubDate>Tue, 07 Mar 2023 00:30:20 +0100</pubDate><guid>https://ercanakyuerek.de/posts/rollercoaster-simulation/improved-spline-interpolation/</guid><description>&lt;p&gt;In the latest update I tracked down a couple of bugs that caused all those tiny jitters I
 mentioned earlier. At first I thought they were just floating-point problems coming from
 the WebAssembly module in the browser, but the real issue turned out to be the
@@ -2196,7 +2196,7 @@ finally bring us closer to a real, fully working roller coaster simulation.</p>
 
   
 </div>
-]]></content></item><item><title>JavaScript module</title><link>https://ercanakyuerek.de/posts/wasi/4-javascript-module/</link><pubDate>Mon, 27 Feb 2023 17:45:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/4-javascript-module/</guid><description>&lt;p&gt;This is the point where we start writing the &lt;strong&gt;JavaScript&lt;/strong&gt; side of the library that talks to our &lt;strong&gt;WebAssembly&lt;/strong&gt; module.&lt;/p&gt;
+]]></content></item><item><title>JavaScript module</title><link>https://ercanakyuerek.de/posts/wasi/javascript-module/</link><pubDate>Mon, 27 Feb 2023 17:45:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/javascript-module/</guid><description>&lt;p&gt;This is the point where we start writing the &lt;strong&gt;JavaScript&lt;/strong&gt; side of the library that talks to our &lt;strong&gt;WebAssembly&lt;/strong&gt; module.&lt;/p&gt;
 &lt;p&gt;At this stage, the WebAssembly part already exists and exposes a couple of useful functions. What we need now is a small JavaScript wrapper that loads the module, wires things together, and gives us a nicer API to work with.&lt;/p&gt;
 &lt;p&gt;I have created a very basic template for this. You may notice that we define a number of imports for &lt;strong&gt;WASI&lt;/strong&gt;, but all of them are empty. This looks suspicious at first, so let us talk about that.&lt;/p&gt;</description><content type="html"><![CDATA[<p>This is the point where we start writing the <strong>JavaScript</strong> side of the library that talks to our <strong>WebAssembly</strong> module.</p>
 <p>At this stage, the WebAssembly part already exists and exposes a couple of useful functions. What we need now is a small JavaScript wrapper that loads the module, wires things together, and gives us a nicer API to work with.</p>
@@ -2283,12 +2283,12 @@ finally bring us closer to a real, fully working roller coaster simulation.</p>
 
 
 <div class="embedded ">
-  <iframe id="react-root-790ed3495fdb95e9122dc43ce3a51b8a" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-a7a0ca2f11dbb72fa694cc59635ab3ab" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-790ed3495fdb95e9122dc43ce3a51b8a').srcdoc = `
+    document.getElementById('react-root-a7a0ca2f11dbb72fa694cc59635ab3ab').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2298,7 +2298,7 @@ finally bring us closer to a real, fully working roller coaster simulation.</p>
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-          renderContentComponentByPath('root', '.\/posts\/wasi\/4-javascript-module\/WasiLibraryExampleScene.tsx');
+          renderContentComponentByPath('root', '.\/posts\/wasi\/javascript-module\/WasiLibraryExampleScene.tsx');
         <\/script>
       </body>
     </html>
@@ -2332,7 +2332,7 @@ finally bring us closer to a real, fully working roller coaster simulation.</p>
     <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
     run <code>npm install</code> and <code>npm run dev-scripts</code>,
     then open this
-    <a href="http://localhost:3000/posts/wasi/4-javascript-module/WasiLibraryExampleScene.tsx" target="_blank">link</a>
+    <a href="http://localhost:3000/posts/wasi/javascript-module/WasiLibraryExampleScene.tsx" target="_blank">link</a>
     in your browser.
 </p>
 
@@ -2386,13 +2386,13 @@ export const WasiLibraryExampleScene = () =&gt; {
 </code></pre>
 
 
-]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/3-implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/3-implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
-&lt;iframe id="react-root-a58499091e91abebdf7ee8091642196c" width="225px" height="225px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
+]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
+&lt;iframe id="react-root-39cee7960873307a02b33d1227313df7" width="225px" height="225px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
 &lt;div class="description" style="width: 225px"&gt;
 Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-a58499091e91abebdf7ee8091642196c').srcdoc = `
+document.getElementById('react-root-39cee7960873307a02b33d1227313df7').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -2402,7 +2402,7 @@ document.getElementById('react-root-a58499091e91abebdf7ee8091642196c').srcdoc = 
 &lt;div id="root" class="full-screen"&gt;&lt;/div&gt;
 \x3Cscript type="module"&gt;
 import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-renderContentComponentByPath('root', '.\/posts\/wasi\/3-implementing-library-functions\/BezierNodesExampleScene.tsx');
+renderContentComponentByPath('root', '.\/posts\/wasi\/implementing-library-functions\/BezierNodesExampleScene.tsx');
 &lt;\/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -2418,7 +2418,7 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/3-implementing-library-fun
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-a58499091e91abebdf7ee8091642196c" width="225px" height="225px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-39cee7960873307a02b33d1227313df7" width="225px" height="225px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 225px">
@@ -2427,7 +2427,7 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/3-implementing-library-fun
   
 
   <script>
-    document.getElementById('react-root-a58499091e91abebdf7ee8091642196c').srcdoc = `
+    document.getElementById('react-root-39cee7960873307a02b33d1227313df7').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2437,7 +2437,7 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/3-implementing-library-fun
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-          renderContentComponentByPath('root', '.\/posts\/wasi\/3-implementing-library-functions\/BezierNodesExampleScene.tsx');
+          renderContentComponentByPath('root', '.\/posts\/wasi\/implementing-library-functions\/BezierNodesExampleScene.tsx');
         <\/script>
       </body>
     </html>
@@ -2594,8 +2594,8 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/3-implementing-library-fun
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h2 id="build">Build</h2>
 <p>At this point, you can run a build by executing <code>npm run build</code>. It should compile without any errors. In the next section, we will create a small <code>JavaScript</code> module that initializes the <code>WebAssembly</code> module, wraps the exposed functions, and handles incoming and outgoing data types. This <code>JavaScript</code> module can be used in your project just like any other <code>ES6 module</code>.</p>
-<p><a href="https://ercanakyuerek.de/posts/wasi/4-javascript-module/">Now, let&rsquo;s create a small JavaScript module that will be responsible for creating a WebAssembly module, loading our Wasm file, defining some imports for WASI (which will mostly be empty), and creating functions for those that we exported in our C++ glue code.</a></p>
-]]></content></item><item><title>CMake and build scripts</title><link>https://ercanakyuerek.de/posts/wasi/2-cmake-and-build-scripts/</link><pubDate>Thu, 23 Feb 2023 23:15:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/2-cmake-and-build-scripts/</guid><description>&lt;p&gt;To simplify the building process, we can create a build script. We have already defined some scripts in our &lt;code&gt;package.json&lt;/code&gt; file. At this point, the &lt;code&gt;build-wasm.js&lt;/code&gt; file is still empty, so we can create a basic script that first deletes an existing &lt;code&gt;build&lt;/code&gt; folder, creates a new one, and runs &lt;code&gt;cmake ..&lt;/code&gt; inside it. We will be using a WASI-SDK docker image from &lt;code&gt;ghcr.io/webassembly/wasi-sdk&lt;/code&gt; to run cmake and eventually compile the project via &lt;code&gt;make&lt;/code&gt;.&lt;/p&gt;</description><content type="html"><![CDATA[<p>To simplify the building process, we can create a build script. We have already defined some scripts in our <code>package.json</code> file. At this point, the <code>build-wasm.js</code> file is still empty, so we can create a basic script that first deletes an existing <code>build</code> folder, creates a new one, and runs <code>cmake ..</code> inside it. We will be using a WASI-SDK docker image from <code>ghcr.io/webassembly/wasi-sdk</code> to run cmake and eventually compile the project via <code>make</code>.</p>
+<p><a href="https://ercanakyuerek.de/posts/wasi/javascript-module/">Now, let&rsquo;s create a small JavaScript module that will be responsible for creating a WebAssembly module, loading our Wasm file, defining some imports for WASI (which will mostly be empty), and creating functions for those that we exported in our C++ glue code.</a></p>
+]]></content></item><item><title>CMake and build scripts</title><link>https://ercanakyuerek.de/posts/wasi/cmake-and-build-scripts/</link><pubDate>Thu, 23 Feb 2023 23:15:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/cmake-and-build-scripts/</guid><description>&lt;p&gt;To simplify the building process, we can create a build script. We have already defined some scripts in our &lt;code&gt;package.json&lt;/code&gt; file. At this point, the &lt;code&gt;build-wasm.js&lt;/code&gt; file is still empty, so we can create a basic script that first deletes an existing &lt;code&gt;build&lt;/code&gt; folder, creates a new one, and runs &lt;code&gt;cmake ..&lt;/code&gt; inside it. We will be using a WASI-SDK docker image from &lt;code&gt;ghcr.io/webassembly/wasi-sdk&lt;/code&gt; to run cmake and eventually compile the project via &lt;code&gt;make&lt;/code&gt;.&lt;/p&gt;</description><content type="html"><![CDATA[<p>To simplify the building process, we can create a build script. We have already defined some scripts in our <code>package.json</code> file. At this point, the <code>build-wasm.js</code> file is still empty, so we can create a basic script that first deletes an existing <code>build</code> folder, creates a new one, and runs <code>cmake ..</code> inside it. We will be using a WASI-SDK docker image from <code>ghcr.io/webassembly/wasi-sdk</code> to run cmake and eventually compile the project via <code>make</code>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">rm</span>, <span style="color:#a6e22e">mkdir</span>, <span style="color:#a6e22e">exec</span>, <span style="color:#a6e22e">cp</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;shelljs&#34;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">join</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;path&#34;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">compileOnly</span>, <span style="color:#a6e22e">run</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;args-parser&#34;</span>)(<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">argv</span>);
@@ -2655,9 +2655,8 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/3-implementing-library-fun
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>add_subdirectory(<span style="color:#e6db74">glue</span>)<span style="color:#960050;background-color:#1e0010">
 </span></span></span></code></pre></div><p>To test our setup, we need to add a main function to the file <code>glue/glue.cc</code>. The files <code>bezier.cc</code> and <code>bezier.h</code> can remain empty for now as they are not necessary to test our setup:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {}
-</span></span></code></pre></div><p><img src="/wasi-sdk-writing-library-in-cpp/final_structure.png" alt="final structure"></p>
-<p>Finally, we can run our build script and see what happens &#x1f604;. To run the build script, simply execute <code>npm run build</code>. After it finishes executing, there should be a newly created file in the root directory named <code>glue.wasm</code>, which confirms that our setup is correct. However, this file does not have any functionality at the moment, <a href="https://ercanakyuerek.de/posts/wasi/3-implementing-library-functions/">but that will change in the next chapter.</a></p>
-]]></content></item><item><title>Folder structure</title><link>https://ercanakyuerek.de/posts/wasi/1-folder-structure/</link><pubDate>Thu, 23 Feb 2023 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/1-folder-structure/</guid><description>&lt;p&gt;You may have already heard that it&amp;rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.&lt;/p&gt;</description><content type="html"><![CDATA[<p>You may have already heard that it&rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.</p>
+</span></span></code></pre></div><p>Finally, we can run our build script and see what happens &#x1f604;. To run the build script, simply execute <code>npm run build</code>. After it finishes executing, there should be a newly created file in the root directory named <code>glue.wasm</code>, which confirms that our setup is correct. However, this file does not have any functionality at the moment, <a href="https://ercanakyuerek.de/posts/wasi/implementing-library-functions/">but that will change in the next chapter.</a></p>
+]]></content></item><item><title>Folder structure</title><link>https://ercanakyuerek.de/posts/wasi/folder-structure/</link><pubDate>Thu, 23 Feb 2023 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/folder-structure/</guid><description>&lt;p&gt;You may have already heard that it&amp;rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.&lt;/p&gt;</description><content type="html"><![CDATA[<p>You may have already heard that it&rsquo;s possible to write certain parts of your web application using languages like C++ or Rust and compile them into WebAssembly. WebAssembly is a binary format that allows code to be executed on the web and is designed to be efficient, secure, and portable. There are use cases where WebAssembly can be particularly beneficial, such as performing complex and resource-intensive computations for real-time applications or mathematical operations.</p>
 <p>As of the time of writing this article in 2023, there are available bindings for Rust programming language. However, when it comes to <code>C++</code>, I was not able to find any mature solution except for the <a href="https://emscripten.org/docs/porting/connecting_cpp_and_javascript/WebIDL-Binder.html">WebIDL Binder for Emscripten</a>. Unfortunately, my experience with it did not produce satisfactory results. Perhaps in the future, I will explore other binding solutions and update this series of articles. For now, we will have to manually glue our code. This involves creating bindings to enable the exchange of complex data between WebAssembly modules and exposing functions.</p>
 <h2 id="using-webassembly-as-a-regular-javascript-module">Using WebAssembly as a Regular JavaScript Module</h2>
 <p>This is a crucial aspect that I wish to explore. I want to write parts of my application in C++ and use them as regular modules in JavaScript. As previously mentioned, there is no NPM infrastructure available for compiling or generating bindings that can produce JavaScript files that export modules with exposed C++ functions. In this series, we will construct a minimalist infrastructure that emulates familiar module structures.</p>
@@ -2696,5 +2695,5 @@ We have intentionally split both directories because our goal is to use the libr
 desktop applications as well, where <code>WASI SDK</code> is not used to build the library.
 This approach ensures high flexibility when using the library in both the browser and desktop
 environments.</p>
-<p><a href="https://ercanakyuerek.de/posts/wasi/2-cmake-and-build-scripts/">In the next part, we will create the build script and set up the CMake files.</a></p>
+<p><a href="https://ercanakyuerek.de/posts/wasi/cmake-and-build-scripts/">In the next part, we will create the build script and set up the CMake files.</a></p>
 ]]></content></item></channel></rss>
