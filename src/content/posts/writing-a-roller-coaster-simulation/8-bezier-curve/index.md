@@ -117,18 +117,17 @@ export const deCasteljau = (points: Vector3[], t: number) => {
 Now that we can evaluate a Bézier curve for a parameter `t` in the range `[0, 1]`, the next question is:
 how many **curve nodes** do we actually want to generate along that curve?
 
-In the end, we just need to sample the curve and turn those samples into curve nodes that follow the curvature.
+More nodes mean better precision. Fewer nodes mean better performance. We do not need perfect precision here, so we need to find a reasonable **sweet spot**.
 
-More nodes mean better precision. Fewer nodes mean better performance. We clearly do not need perfect precision here, so we need to find a reasonable **sweet spot**.
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/8-bezier-curve/EstimateLengthScene.tsx" class="float-right" width="355px" height="425px" description="Interactive visualization of curve length estimation using uniformly sampled points. Try different sample counts and Bézier shapes to see when the estimate becomes good enough. This is how I settled on 8 points as a reasonable sweet spot." >}}
 
 In practice, this is what I usually do:
 
 - First, estimate the length of the Bézier curve by uniformly evaluating a small number of points on it. I normally pick **8 points** and sum up the distances between them.
 - Then, use this estimated length to compute the number of curve nodes by multiplying it with a **resolution** value. I usually use something like `20`.
-
-  - Example: a roughly **20 meter** long curve multiplied by a resolution of `20` gives us **400 nodes**.
-  - We then evaluate the Bézier curve at those 400 positions and construct curve nodes from them.
-  - It will make sense to clamp the number of nodes in the **editor** in the future, where **performance matters while dragging control points around**. In the simulation, this is much less critical.
+- **Example**: a roughly **20 meter** long curve multiplied by a resolution of `20` gives us **400 nodes**.
+- We then evaluate the Bézier curve at those 400 positions and construct curve nodes from them.
+- It will make sense to clamp the number of nodes in the **editor** in the future, where **performance matters while dragging control points around**. In the simulation, this is much less critical.
 
 To make this easier, we start with a small helper that lets us **uniformly sample** a range with a given resolution. It gives us both the actual value and a normalized`t` in `[0, 1]`.
 
@@ -203,6 +202,33 @@ export const estimateLength = (points: Vector3[]) => {
 };
 ```
 
+Do not be confused if you see `uniformSampleMap` used instead of `uniformSample` in the repository. It does exactly the same thing, it just exists for convenience so the call can be reduced to:
+
+```typescript
+const positions = uniformSampleMap(0, 8, 1, (at, t) =>
+  deCasteljau(points, t),
+);
+```
+
+Here is the `uniformSampleMap` function. Just use it, it is very convenient and will be used here and there:
+
+```typescript
+export const uniformSampleMap = <T>(
+  from: number,
+  to: number,
+  resolution: number = 20,
+  mapFn: (at: number, t: number) => T,
+) => {
+  const out: T[] = [];
+
+  uniformSample(from, to, resolution, (at, t) => {
+    out.push(mapFn(at, t));
+  });
+
+  return out;
+};
+```
+
 # Constructing a Bézier curve
 
 This part is almost stupidly simple, so I will just paste the code and explain it briefly.
@@ -211,14 +237,12 @@ This part is almost stupidly simple, so I will just paste the code and explain i
 export const bezierSplineCurve = (
   points: Vector3[],
   resolution: number = 20,
-) => {
-  const positions: Vector3[] = [];
-  uniformSample(0, estimateLength(points), resolution, (at, t) => {
-    positions.push(deCasteljau(points, t));
-  });
-
-  return fromPoints(positions);
-};
+) =>
+  fromPoints(
+    uniformSampleMap(0, estimateLength(points), resolution, (at, t) =>
+      deCasteljau(points, t),
+    ),
+  );
 ```
 
 What happens here is straightforward:
@@ -230,17 +254,13 @@ What happens here is straightforward:
 
 There is nothing more going on here. We sample the curve, evaluate it, and turn the result into curve nodes.
 
-Below is the demo code from the interactive example shown at the very beginning of this chapter.
-
 ## What’s next?
 
 In the next article, we will eventually and finally fix our normal problems and create a good `fromPoints` function that calculates normals in a way that nothing breaks on loopings or slopes close to 90°.
 
 Right now, our `fromPoints` is a temporary junk implementation with hard transitions on the edges. That was fine while we only had linear segments, but now we actually have curvature, so the problems are much easier to see.
 
-So we will solve that next. Stay tuned.
-
-> **Note**: In the demo, I already intentionally use the correct way of inserting positions on the curve with proper normal calculation, so the demo does not jitter. Do not be confused by this. I am basically taking things a bit ahead of time here.
+> **Note**: In the demo, I already intentionally use the correct way of inserting positions (by using `fromUniformSampledPositions` instead of `fromPoints` from the last chapter) on the curve with proper normal calculation, so the demo does not jitter. Do not be confused by this. I am basically taking things a bit ahead of time here.
 
 # Demo code
 

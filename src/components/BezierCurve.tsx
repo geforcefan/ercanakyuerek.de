@@ -15,12 +15,14 @@ export const BezierCurve = (props: {
   resolution?: number;
   uniform?: boolean;
   showNodes?: boolean;
+  color?: number;
 }) => {
   const {
     points,
     resolution = 20,
     uniform = false,
     showNodes = false,
+    color
   } = props;
 
   const colors = useColors();
@@ -50,7 +52,7 @@ export const BezierCurve = (props: {
         ))}
 
       {!!nodes.length && (
-        <Line points={nodes} color={colors.secondary} />
+        <Line points={nodes} color={color || colors.secondary} />
       )}
     </>
   );
