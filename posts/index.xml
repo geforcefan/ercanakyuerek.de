@@ -196,21 +196,49 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 </span></span></code></pre></div><h2 id="how-many-curve-nodes-do-we-need">How many curve nodes do we need?</h2>
 <p>Now that we can evaluate a Bézier curve for a parameter <code>t</code> in the range <code>[0, 1]</code>, the next question is:
 how many <strong>curve nodes</strong> do we actually want to generate along that curve?</p>
-<p>In the end, we just need to sample the curve and turn those samples into curve nodes that follow the curvature.</p>
-<p>More nodes mean better precision. Fewer nodes mean better performance. We clearly do not need perfect precision here, so we need to find a reasonable <strong>sweet spot</strong>.</p>
+<p>More nodes mean better precision. Fewer nodes mean better performance. We do not need perfect precision here, so we need to find a reasonable <strong>sweet spot</strong>.</p>
+
+
+
+
+
+
+
+
+<div class="embedded float-right">
+  <iframe id="react-root-eb1684130e1e12adbd933fca7f083d71" width="355px" height="425px" style="border: 0" class="frame"></iframe>
+
+  
+  <div class="description" style="width: 355px">
+    Interactive visualization of curve length estimation using uniformly sampled points. Try different sample counts and Bézier shapes to see when the estimate becomes good enough. This is how I settled on 8 points as a reasonable sweet spot.
+  </div>
+  
+
+  <script>
+    document.getElementById('react-root-eb1684130e1e12adbd933fca7f083d71').srcdoc = `
+    <!DOCTYPE html>
+    <html lang="en" data-theme="dark">
+      <head>
+          <base href="${location.origin}/">
+      </head>
+        <body class="content-component">
+        <div id="root" class="full-screen"></div>
+        \x3Cscript type="module">
+          import { renderContentComponentByPath } from '/scripts/render-content-component.js';
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/8-bezier-curve\/EstimateLengthScene.tsx');
+        <\/script>
+      </body>
+    </html>
+  `;
+  </script>
+</div>
 <p>In practice, this is what I usually do:</p>
 <ul>
-<li>
-<p>First, estimate the length of the Bézier curve by uniformly evaluating a small number of points on it. I normally pick <strong>8 points</strong> and sum up the distances between them.</p>
-</li>
-<li>
-<p>Then, use this estimated length to compute the number of curve nodes by multiplying it with a <strong>resolution</strong> value. I usually use something like <code>20</code>.</p>
-<ul>
-<li>Example: a roughly <strong>20 meter</strong> long curve multiplied by a resolution of <code>20</code> gives us <strong>400 nodes</strong>.</li>
+<li>First, estimate the length of the Bézier curve by uniformly evaluating a small number of points on it. I normally pick <strong>8 points</strong> and sum up the distances between them.</li>
+<li>Then, use this estimated length to compute the number of curve nodes by multiplying it with a <strong>resolution</strong> value. I usually use something like <code>20</code>.</li>
+<li><strong>Example</strong>: a roughly <strong>20 meter</strong> long curve multiplied by a resolution of <code>20</code> gives us <strong>400 nodes</strong>.</li>
 <li>We then evaluate the Bézier curve at those 400 positions and construct curve nodes from them.</li>
 <li>It will make sense to clamp the number of nodes in the <strong>editor</strong> in the future, where <strong>performance matters while dragging control points around</strong>. In the simulation, this is much less critical.</li>
-</ul>
-</li>
 </ul>
 <p>To make this easier, we start with a small helper that lets us <strong>uniformly sample</strong> a range with a given resolution. It gives us both the actual value and a normalized<code>t</code> in <code>[0, 1]</code>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">uniformSample</span> <span style="color:#f92672">=</span> (
@@ -265,19 +293,36 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
 </span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">0</span>,
 </span></span><span style="display:flex;"><span>    );
 </span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Do not be confused if you see <code>uniformSampleMap</code> used instead of <code>uniformSample</code> in the repository. It does exactly the same thing, it just exists for convenience so the call can be reduced to:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">positions</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">uniformSampleMap</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">1</span>, (<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>) <span style="color:#f92672">=&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">deCasteljau</span>(<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">t</span>),
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><p>Here is the <code>uniformSampleMap</code> function. Just use it, it is very convenient and will be used here and there:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">uniformSampleMap</span> <span style="color:#f92672">=</span> &lt;<span style="color:#f92672">T</span>&gt;(
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">from</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">to</span>: <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolution</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mapFn</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">at</span>: <span style="color:#66d9ef">number</span>, <span style="color:#a6e22e">t</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">T</span>,
+</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">out</span>: <span style="color:#66d9ef">T</span>[] <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">uniformSample</span>(<span style="color:#66d9ef">from</span>, <span style="color:#a6e22e">to</span>, <span style="color:#a6e22e">resolution</span>, (<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">mapFn</span>(<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>));
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>;
+</span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><h1 id="constructing-a-bézier-curve">Constructing a Bézier curve</h1>
 <p>This part is almost stupidly simple, so I will just paste the code and explain it briefly.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bezierSplineCurve</span> <span style="color:#f92672">=</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[],
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolution</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
-</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">positions</span>: <span style="color:#66d9ef">Vector3</span>[] <span style="color:#f92672">=</span> [];
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">uniformSample</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">estimateLength</span>(<span style="color:#a6e22e">points</span>), <span style="color:#a6e22e">resolution</span>, (<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>) <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">positions</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">deCasteljau</span>(<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">t</span>));
-</span></span><span style="display:flex;"><span>  });
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fromPoints</span>(<span style="color:#a6e22e">positions</span>);
-</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fromPoints</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">uniformSampleMap</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">estimateLength</span>(<span style="color:#a6e22e">points</span>), <span style="color:#a6e22e">resolution</span>, (<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>) <span style="color:#f92672">=&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">deCasteljau</span>(<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">t</span>),
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>  );
 </span></span></code></pre></div><p>What happens here is straightforward:</p>
 <ul>
 <li>We sample from <code>0</code> to the <strong>estimated length</strong> of the Bézier curve.</li>
@@ -286,13 +331,11 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
 <li>The resulting positions are then turned into a curve using <code>fromPoints</code>, which we implemented earlier.</li>
 </ul>
 <p>There is nothing more going on here. We sample the curve, evaluate it, and turn the result into curve nodes.</p>
-<p>Below is the demo code from the interactive example shown at the very beginning of this chapter.</p>
 <h2 id="whats-next">What’s next?</h2>
 <p>In the next article, we will eventually and finally fix our normal problems and create a good <code>fromPoints</code> function that calculates normals in a way that nothing breaks on loopings or slopes close to 90°.</p>
 <p>Right now, our <code>fromPoints</code> is a temporary junk implementation with hard transitions on the edges. That was fine while we only had linear segments, but now we actually have curvature, so the problems are much easier to see.</p>
-<p>So we will solve that next. Stay tuned.</p>
 <blockquote>
-<p><strong>Note</strong>: In the demo, I already intentionally use the correct way of inserting positions on the curve with proper normal calculation, so the demo does not jitter. Do not be confused by this. I am basically taking things a bit ahead of time here.</p></blockquote>
+<p><strong>Note</strong>: In the demo, I already intentionally use the correct way of inserting positions (by using <code>fromUniformSampledPositions</code> instead of <code>fromPoints</code> from the last chapter) on the curve with proper normal calculation, so the demo does not jitter. Do not be confused by this. I am basically taking things a bit ahead of time here.</p></blockquote>
 <h1 id="demo-code">Demo code</h1>
 
 
