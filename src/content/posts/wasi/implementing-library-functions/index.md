@@ -3,7 +3,7 @@ title: "Implementing library functions"
 date: 2023-02-24T00:19:00+01:00
 tags: ["writing a library in c++ and using it in the browser with the WASI SDK"]
 ---
-{{< embedded-content-component path="./posts/wasi/3-implementing-library-functions/BezierNodesExampleScene.tsx" class="float-right" width="225px" height="225px" description="Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable." >}}
+{{< embedded-content-component path="./posts/wasi/implementing-library-functions/BezierNodesExampleScene.tsx" class="float-right" width="225px" height="225px" description="Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable." >}}
 
 In this article, we'll be exploring a more interesting example where we'll construct a Bézier curve, evaluate nodes on it, and write a function that gives any position on the curve by a length parameter. To explain briefly, a Bézier curve is represented by a parameter ``t``, which varies between 0 and 1 and determines the position of nodes on the curve. However, this ``t`` value doesn't produce uniform spacing, which is problematic when we want to evaluate a point on the curve based on its distance. To solve this, we can evaluate some nodes along the curve with known distances and then linearly interpolate new nodes between them to find the point we're looking for.
 
@@ -193,4 +193,4 @@ void *allocateMemory(size_t size) {
 ## Build
 At this point, you can run a build by executing ``npm run build``. It should compile without any errors. In the next section, we will create a small ``JavaScript`` module that initializes the ``WebAssembly`` module, wraps the exposed functions, and handles incoming and outgoing data types. This ``JavaScript`` module can be used in your project just like any other ``ES6 module``.
 
-[Now, let's create a small JavaScript module that will be responsible for creating a WebAssembly module, loading our Wasm file, defining some imports for WASI (which will mostly be empty), and creating functions for those that we exported in our C++ glue code.]({{< ref "/posts/wasi/4-javascript-module.md" >}})
+[Now, let's create a small JavaScript module that will be responsible for creating a WebAssembly module, loading our Wasm file, defining some imports for WASI (which will mostly be empty), and creating functions for those that we exported in our C++ glue code.]({{< ref "/posts/wasi/javascript-module.md" >}})

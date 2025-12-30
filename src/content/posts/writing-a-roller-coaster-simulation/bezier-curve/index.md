@@ -5,7 +5,7 @@ math: true
 tags: ['writing a roller coaster simulation']
 ---
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/8-bezier-curve/BezierCurveExampleScene.tsx" class="float-right" width="225px" height="225px" description="An interactive example of a Bézier curve, drag the controls around to see changes in shape" >}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/bezier-curve/BezierCurveExampleScene.tsx" class="float-right" width="225px" height="225px" description="An interactive example of a Bézier curve, drag the controls around to see changes in shape" >}}
 
 So, now it is finally time to build an actual **Bézier curve** instead of only linear segments.
 
@@ -17,7 +17,7 @@ The physics simulation does not care where the shape comes from. It does not kno
 
 This time, I will first show you a demo with a Bézier curve, just to spoil the ending a bit:
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/8-bezier-curve/BezierCurveDemoScene.tsx" width="100%" height="300px" >}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/bezier-curve/BezierCurveDemoScene.tsx" width="100%" height="300px" >}}
 
 # Multiple algorithms
 
@@ -39,7 +39,7 @@ I will explain very quickly how the **de Casteljau** algorithm works.
 
 Assume we have **4 control points** and we want to know the **position** for a parameter `t` in the range `[0, 1]`. What we actually do is nothing more than repeated **linear interpolation**.
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/8-bezier-curve/DeCasteljauVisualizationScene.tsx" class="float-right" width="355px" height="500px" description="Each animation loop shows one iteration of linear interpolations in the de Casteljau algorithm. After all three iterations described in the article, the Bézier curve is drawn. " >}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/bezier-curve/DeCasteljauVisualizationScene.tsx" class="float-right" width="355px" height="500px" description="Each animation loop shows one iteration of linear interpolations in the de Casteljau algorithm. After all three iterations described in the article, the Bézier curve is drawn. " >}}
 
 First, we interpolate between the control points:
 
@@ -119,7 +119,7 @@ how many **curve nodes** do we actually want to generate along that curve?
 
 More nodes mean better precision. Fewer nodes mean better performance. We do not need perfect precision here, so we need to find a reasonable **sweet spot**.
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/8-bezier-curve/EstimateLengthScene.tsx" class="float-right" width="355px" height="425px" description="Interactive visualization of curve length estimation using uniformly sampled points. Try different sample counts and Bézier shapes to see when the estimate becomes good enough. This is how I settled on 8 points as a reasonable sweet spot." >}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/bezier-curve/EstimateLengthScene.tsx" class="float-right" width="355px" height="425px" description="Interactive visualization of curve length estimation using uniformly sampled points. Try different sample counts and Bézier shapes to see when the estimate becomes good enough. This is how I settled on 8 points as a reasonable sweet spot." >}}
 
 In practice, this is what I usually do:
 
@@ -264,4 +264,4 @@ Right now, our `fromPoints` is a temporary junk implementation with hard transit
 
 # Demo code
 
-{{< show-content-script "posts/writing-a-roller-coaster-simulation/8-bezier-curve/BezierCurveDemoScene.tsx" >}}
+{{< show-content-script "posts/writing-a-roller-coaster-simulation/bezier-curve/BezierCurveDemoScene.tsx" >}}

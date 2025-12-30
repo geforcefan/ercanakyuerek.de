@@ -42,7 +42,7 @@ Think of it like this:
 
 > initial state → evaluate → new state → evaluate → new state → ...
 
-To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from [Chapter 2]({{< ref "/posts/writing-a-roller-coaster-simulation/2-gravity.md" >}}). This formula tells us how much of gravity actually acts in the direction of the slope:
+To calculate the acceleration along the slope, we now implement the downhill-slope acceleration formula from [Chapter 2]({{< ref "/posts/writing-a-roller-coaster-simulation/gravity.md" >}}). This formula tells us how much of gravity actually acts in the direction of the slope:
 
 $$acceleration = gravity * sin(slopeAngle)$$
 
@@ -127,12 +127,12 @@ Just like in the last chapter, we again have an interactive demo. This time, we�
 > **Important note:** Earlier in this article I said we would evaluate everything every **16 ms**, right? Well… that was kind of a lie, at least for this demo.  
 > Since we’re using **THREE.js**, we _can_ make use of the `useFrame` hook, which gives us the **delta time of the previous frame**, and we benefit from using it. This is the proper way to handle updates, instead of forcing a fixed 16 ms step, which I briefly covered in the introduction of this chapter.
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/3-evaluating-motion/MotionEvaluationDemoScene.tsx" width="100%" height="320px">}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/evaluating-motion/MotionEvaluationDemoScene.tsx" width="100%" height="320px">}}
 
 ## What comes next?
 
-[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/4-linear-track.md" >}}) we’ll add a basic roller coaster track, just a straight, linear segment. This is a preparation for the real coaster curvatures we’ll build later.
+[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/linear-track.md" >}}) we’ll add a basic roller coaster track, just a straight, linear segment. This is a preparation for the real coaster curvatures we’ll build later.
 
 # Demo code
 
-{{< show-content-script "posts/writing-a-roller-coaster-simulation/3-evaluating-motion/MotionEvaluationDemoScene.tsx" >}}
+{{< show-content-script "posts/writing-a-roller-coaster-simulation/evaluating-motion/MotionEvaluationDemoScene.tsx" >}}

@@ -62,4 +62,4 @@ This gives us a simple structure:
 
 Once we understand the acceleration acting on the coaster, the rest follows naturally.
 
-In the next chapter, we will take the first real step of the simulation and answer the core question: [How do we determine the acceleration of the coaster?]({{< ref "/posts/writing-a-roller-coaster-simulation/2-gravity.md" >}})
+In the next chapter, we will take the first real step of the simulation and answer the core question: [How do we determine the acceleration of the coaster?]({{< ref "/posts/writing-a-roller-coaster-simulation/gravity.md" >}})

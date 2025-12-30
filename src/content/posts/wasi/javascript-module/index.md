@@ -117,7 +117,7 @@ export const bezierFromPoints = (
 
 To make this less abstract, there is an interactive demo where you can drag control points around and see the Bezier calculations happen inside the WebAssembly module.
 
-{{< embedded-content-component path="./posts/wasi/4-javascript-module/WasiLibraryExampleScene.tsx" width="100%" height="300px">}}
+{{< embedded-content-component path="./posts/wasi/javascript-module/WasiLibraryExampleScene.tsx" width="100%" height="300px">}}
 
 ## Conclusion
 
@@ -131,4 +131,4 @@ In the next articles, we will dig deeper into memory, data types, and better bin
 
 # Demo code
 
-{{< show-content-script "posts/wasi/4-javascript-module/WasiLibraryExampleScene.tsx" >}}
+{{< show-content-script "posts/wasi/javascript-module/WasiLibraryExampleScene.tsx" >}}

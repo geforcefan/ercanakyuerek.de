@@ -122,12 +122,12 @@ You can play around with **different slopes** and see how they affect the percen
 Having a visual representation of written concepts really helps me reach that **I got it** moment,
 so it might help you as well.
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/2-gravity/GravityDemoScene.tsx" width="100%" height="300px">}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/gravity/GravityDemoScene.tsx" width="100%" height="300px">}}
 
 ## What comes next?
 
-[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/3-evaluating-motion.md" >}}), we’ll add motion evaluation and move a simple object along a linear plane.
+[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/evaluating-motion.md" >}}), we’ll add motion evaluation and move a simple object along a linear plane.
 
 # Demo code
 
-{{< show-content-script "posts/writing-a-roller-coaster-simulation/2-gravity/GravityDemoScene.tsx" >}}
+{{< show-content-script "posts/writing-a-roller-coaster-simulation/gravity/GravityDemoScene.tsx" >}}

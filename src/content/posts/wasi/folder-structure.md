@@ -59,4 +59,4 @@ desktop applications as well, where ``WASI SDK`` is not used to build the librar
 This approach ensures high flexibility when using the library in both the browser and desktop 
 environments.
 
-[In the next part, we will create the build script and set up the CMake files.]({{< ref "/posts/wasi/2-cmake-and-build-scripts.md" >}})
+[In the next part, we will create the build script and set up the CMake files.]({{< ref "/posts/wasi/cmake-and-build-scripts.md" >}})

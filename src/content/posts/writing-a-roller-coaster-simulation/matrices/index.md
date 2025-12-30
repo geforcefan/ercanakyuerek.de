@@ -13,7 +13,7 @@ A matrix can hold **position** and **directions** at the same time. This is exac
 
 For that reason, we make a small but important change. From now on, we work with **matrices** and remove those two functions entirely.
 
-If it helps, it is worth rereading the chapter on [linear roller coaster tracks]({{< ref "/posts/writing-a-roller-coaster-simulation/4-linear-track.md" >}}), where `forwardDirectionAtDistance` and `positionAtDistance` were introduced. Both are now replaced by a single function called `matrixAtDistance`.
+If it helps, it is worth rereading the chapter on [linear roller coaster tracks]({{< ref "/posts/writing-a-roller-coaster-simulation/linear-track.md" >}}), where `forwardDirectionAtDistance` and `positionAtDistance` were introduced. Both are now replaced by a single function called `matrixAtDistance`.
 
 For a linear track segment, this is straightforward. We compute the **position** exactly like before using linear interpolation. For orientation, we let **THREE.js** build a matrix that `lookAt`s from one control point to the other. This gives us a correct **forward direction** without any extra work.
 
@@ -83,7 +83,7 @@ export const evaluateMotion = (
 
 These changes are mostly structural. Visually, nothing changes yet. Under the hood, however, the simulation now works entirely with **matrices**, which will make later changes easier.
 
-[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/7-curve-nodes.md" >}}), we move away from linear segments and introduce a more general way to describe **curves**. That will require a new implementation of `matrixAtDistance`, but the rest of the simulation can stay as it is.
+[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/curve-nodes.md" >}}), we move away from linear segments and introduce a more general way to describe **curves**. That will require a new implementation of `matrixAtDistance`, but the rest of the simulation can stay as it is.
 
 This is the kind of refactor we want. We change how the track is described without rewriting everything built on top of it.
 
@@ -93,6 +93,6 @@ There is no visible difference in the demo. The train behaves exactly as before.
 
 For completeness, the full demo is shown below.
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/6-matrices/MatricesDemoScene.tsx" width="100%" height="320px">}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/matrices/MatricesDemoScene.tsx" width="100%" height="320px">}}
 
-{{< show-content-script "posts/writing-a-roller-coaster-simulation/6-matrices/MatricesDemoScene.tsx" >}}
+{{< show-content-script "posts/writing-a-roller-coaster-simulation/matrices/MatricesDemoScene.tsx" >}}

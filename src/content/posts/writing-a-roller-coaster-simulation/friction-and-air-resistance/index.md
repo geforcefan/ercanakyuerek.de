@@ -120,11 +120,11 @@ Just like in the previous chapter, here is a small interactive demo. This time i
 
 Feel free to move the control points to experiment with the track shape and see how both trains react differently.
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/FrictionAndAirResistanceDemoScene.tsx" width="100%" height="300px">}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/friction-and-air-resistance/FrictionAndAirResistanceDemoScene.tsx" width="100%" height="300px">}}
 
 ## What comes next?
 
-[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/6-matrices.md" >}}) we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
+[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/matrices.md" >}}) we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
 No matter what the underlying geometry is in the end, **splines, imported tracks, FVD-based shapes or anything else, the evaluation should always work the same**.
 The key step is replacing the two functions `positionAtDistance` and `forwardDirectionAtDistance`
 with a single `matrixAtDistance` function. Working with **matrices** is more convenient, because we can extract everything we need from them.
@@ -134,4 +134,4 @@ While writing this, I realize it is probably best to introduce the concept first
 
 # Demo code
 
-{{< show-content-script "posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance/FrictionAndAirResistanceDemoScene.tsx" >}}
+{{< show-content-script "posts/writing-a-roller-coaster-simulation/friction-and-air-resistance/FrictionAndAirResistanceDemoScene.tsx" >}}

@@ -200,14 +200,14 @@ Time for a small demo. I built a basic setup: a visible line segment with dragga
 
 I switched the vectors to 3D instead of 2D, but only because it makes things more convenient in THREE.js. The actual calculations from this article are exactly the same.
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/4-linear-track/LinearTrackDemoScene.tsx" width="100%" height="300px">}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/linear-track/LinearTrackDemoScene.tsx" width="100%" height="300px">}}
 
 I’ve polished things a bit and moved the physics and linear interpolation logic into their own files instead of keeping everything as spaghetti code. The complete source code is available in my GitHub repo, feel free to explore and play around with it.
 
 ## What comes next?
 
-[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/5-friction-and-air-resistance.md" >}}) we will introduce friction and air resistance. You’ll be able to play with the parameters in a demo and compare both physics evaluations, with and without energy loss.
+[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/friction-and-air-resistance.md" >}}) we will introduce friction and air resistance. You’ll be able to play with the parameters in a demo and compare both physics evaluations, with and without energy loss.
 
 # Demo code
 
-{{< show-content-script "posts/writing-a-roller-coaster-simulation/4-linear-track/LinearTrackDemoScene.tsx" >}}
+{{< show-content-script "posts/writing-a-roller-coaster-simulation/linear-track/LinearTrackDemoScene.tsx" >}}

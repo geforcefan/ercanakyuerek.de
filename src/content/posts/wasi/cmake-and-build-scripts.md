@@ -83,6 +83,4 @@ To test our setup, we need to add a main function to the file ``glue/glue.cc``. 
 int main() {}
 ```
 
-![final structure](/wasi-sdk-writing-library-in-cpp/final_structure.png)
-
-Finally, we can run our build script and see what happens :smile:. To run the build script, simply execute ``npm run build``. After it finishes executing, there should be a newly created file in the root directory named ``glue.wasm``, which confirms that our setup is correct. However, this file does not have any functionality at the moment, [but that will change in the next chapter.]({{< ref "/posts/wasi/3-implementing-library-functions.md" >}})
+Finally, we can run our build script and see what happens :smile:. To run the build script, simply execute ``npm run build``. After it finishes executing, there should be a newly created file in the root directory named ``glue.wasm``, which confirms that our setup is correct. However, this file does not have any functionality at the moment, [but that will change in the next chapter.]({{< ref "/posts/wasi/implementing-library-functions.md" >}})
