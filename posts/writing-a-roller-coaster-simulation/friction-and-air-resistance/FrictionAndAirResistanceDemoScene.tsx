@@ -4,9 +4,9 @@ import { useFrame } from '@react-three/fiber';
 import { MathUtils, Vector3 } from 'three';
 
 import {
-  forwardDirectionAtDistance,
-  length,
-  positionAtDistance,
+  forwardDirectionAtArcLength,
+  positionAtArcLength,
+  totalArcLength,
 } from '../../../../maths/linear';
 import {
   evaluateMotionByForwardDirection,
@@ -45,7 +45,7 @@ const FrictionAndAirResistanceDemo = () => {
     setSimulationState(
       evaluateMotionByForwardDirectionWithFriction(
         simulationState,
-        forwardDirectionAtDistance(
+        forwardDirectionAtArcLength(
           points[0],
           points[1],
           simulationState.distanceTraveled,
@@ -61,7 +61,7 @@ const FrictionAndAirResistanceDemo = () => {
     setSimulationStateWithoutFriction(
       evaluateMotionByForwardDirection(
         simulationStateWithoutFriction,
-        forwardDirectionAtDistance(
+        forwardDirectionAtArcLength(
           points[0],
           points[1],
           simulationStateWithoutFriction.distanceTraveled,
@@ -76,7 +76,7 @@ const FrictionAndAirResistanceDemo = () => {
   useEffect(() => {
     if (
       simulationState.distanceTraveled >
-        length(points[0], points[1]) ||
+        totalArcLength(points[0], points[1]) ||
       simulationState.distanceTraveled < 0
     ) {
       setSimulationState({
@@ -98,23 +98,23 @@ const FrictionAndAirResistanceDemo = () => {
     setSimulationStateWithoutFriction,
   ]);
 
-  const trainPosition = positionAtDistance(
+  const trainPosition = positionAtArcLength(
     points[0],
     points[1],
     MathUtils.clamp(
       simulationState.distanceTraveled,
       0,
-      length(points[0], points[1]),
+      totalArcLength(points[0], points[1]),
     ),
   );
 
-  const trainPositionWithoutFriction = positionAtDistance(
+  const trainPositionWithoutFriction = positionAtArcLength(
     points[0],
     points[1],
     MathUtils.clamp(
       simulationStateWithoutFriction.distanceTraveled,
       0,
-      length(points[0], points[1]),
+      totalArcLength(points[0], points[1]),
     ),
   );
 
