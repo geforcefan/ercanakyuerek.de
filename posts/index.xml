@@ -1,10 +1,63 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 25 Dec 2025 14:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
-&lt;iframe id="react-root-c704053efcd2dfc33333077ae972f49a" width="225px" height="225px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 30 Dec 2025 14:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Curve normals</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-normals/</link><pubDate>Tue, 30 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-normals/</guid><description>&lt;hr&gt;
+&lt;h1 id="the-lookat-problem"&gt;The lookAt problem&lt;/h1&gt;
+&lt;p&gt;We already did some basic normal calculations in previous chapters, and that mostly worked fine. However, there is a problem when we rely too much on a simple &lt;code&gt;lookAt&lt;/code&gt; from &lt;strong&gt;THREE.js&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The issue is &lt;strong&gt;roll&lt;/strong&gt;, also known as rotation around the Z axis.&lt;/p&gt;
+&lt;p&gt;When we use &lt;code&gt;lookAt&lt;/code&gt;, we have to provide an up vector. So far, we have always used &lt;code&gt;(0, 1, 0)&lt;/code&gt;. This works well for gentle slopes, but it starts to break down when the track approaches angles close to 90 degrees.&lt;/p&gt;</description><content type="html"><![CDATA[<hr>
+<h1 id="the-lookat-problem">The lookAt problem</h1>
+<p>We already did some basic normal calculations in previous chapters, and that mostly worked fine. However, there is a problem when we rely too much on a simple <code>lookAt</code> from <strong>THREE.js</strong>.</p>
+<p>The issue is <strong>roll</strong>, also known as rotation around the Z axis.</p>
+<p>When we use <code>lookAt</code>, we have to provide an up vector. So far, we have always used <code>(0, 1, 0)</code>. This works well for gentle slopes, but it starts to break down when the track approaches angles close to 90 degrees.</p>
+<p>At that point, the curve direction points almost straight up. The up vector also points up. Now both vectors look into the sky, and the matrix becomes unstable.</p>
+<p>When the track points straight up, roll is no longer uniquely defined. Rotating around that direction does not change where the track is pointing, so <code>lookAt</code> has no stable orientation to choose.</p>
+<p>Mathematically, this happens because <code>lookAt</code> builds an orientation using cross products. When the forward direction becomes parallel, or nearly parallel, to the up vector, the cross product between them approaches zero. That means the remaining axes of the matrix cannot be constructed reliably anymore.</p>
+<p>The result is sudden flips, jitter, or strange twisting along the track, especially around slopes close to 90 degrees.</p>
+<h1 id="solution">Solution</h1>
+<p>To fix this, we need a slightly different approach. Instead of computing each orientation in isolation, we build it <strong>incrementally</strong>. We start from the matrix of the previous node and apply a small rotation that follows the curve direction. In other words, we still use a <code>lookAt</code>-like idea, but we guide it using the orientation from the previous node.</p>
+<p>This way, the up direction is not reset every time. It slowly rotates along with the curve, respecting the existing roll instead of fighting against it.</p>
+<p>The exact math and geometry behind this is not trivial, and explaining it properly would easily double the length of this chapter. For now, it is enough to think of it like this: <em>we incrementally add rotation while respecting the orientation of the previous node</em>.</p>
+<p>In this chapter, we will not go into mathematical details. Instead, we focus on the implementation and simply compare the two approaches in the following interactive demo by switching the lookAt method between a fixed up direction and an incremental rotation based on the previous node:</p>
+
+
+
+
+
+
+
+
+<div class="embedded ">
+  <iframe id="react-root-255c29e6c0b4c85885efe5969a50ba14" width="100%" height="450px" style="border: 0" class="frame"></iframe>
+
+  
+  <div class="description" style="width: 100%">
+    <strong>Fixed up direction</strong>: Roll becomes unstable near 90° slopes. <strong>Incremental rotation</strong>: Stable roll and smooth orientation along the curve.
+  </div>
+  
+
+  <script>
+    document.getElementById('react-root-255c29e6c0b4c85885efe5969a50ba14').srcdoc = `
+    <!DOCTYPE html>
+    <html lang="en" data-theme="dark">
+      <head>
+          <base href="${location.origin}/">
+      </head>
+        <body class="content-component">
+        <div id="root" class="full-screen"></div>
+        \x3Cscript type="module">
+          import { renderContentComponentByPath } from '/scripts/render-content-component.js';
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/curve-normals\/LookAtExampleScene.tsx');
+        <\/script>
+      </body>
+    </html>
+  `;
+  </script>
+</div>
+]]></content></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
+&lt;iframe id="react-root-b8cadacb49174da63dbba9f8bbb152f0" width="225px" height="225px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
 &lt;div class="description" style="width: 225px"&gt;
 An interactive example of a Bézier curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-c704053efcd2dfc33333077ae972f49a').srcdoc = `
+document.getElementById('react-root-b8cadacb49174da63dbba9f8bbb152f0').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -31,7 +84,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-c704053efcd2dfc33333077ae972f49a" width="225px" height="225px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-b8cadacb49174da63dbba9f8bbb152f0" width="225px" height="225px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 225px">
@@ -40,7 +93,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
   
 
   <script>
-    document.getElementById('react-root-c704053efcd2dfc33333077ae972f49a').srcdoc = `
+    document.getElementById('react-root-b8cadacb49174da63dbba9f8bbb152f0').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -71,12 +124,12 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded ">
-  <iframe id="react-root-37f0f4da82a1567aaca4b8be8b0a7184" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-28b557b3c16d812abe8daf4ee60b8926" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-37f0f4da82a1567aaca4b8be8b0a7184').srcdoc = `
+    document.getElementById('react-root-28b557b3c16d812abe8daf4ee60b8926').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -113,16 +166,16 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-323a392291c5682df4c666da9e7d3b37" width="355px" height="500px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-5ccd384e74e4bf613a6237488a5e8c4c" width="355px" height="500px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 355px">
-    Each animation loop shows one iteration of linear interpolations in the de Casteljau algorithm. After all three iterations described in the article, the Bézier curve is drawn. 
+    Each animation loop shows one iteration of linear interpolations in the de Casteljau algorithm. After all three iterations described in the article, the Bézier curve is drawn.
   </div>
   
 
   <script>
-    document.getElementById('react-root-323a392291c5682df4c666da9e7d3b37').srcdoc = `
+    document.getElementById('react-root-5ccd384e74e4bf613a6237488a5e8c4c').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -206,7 +259,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-126dbd9c16cf7a53782b8bafc819c3f0" width="355px" height="425px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-0cb84cac7025bd305b2569d07244adaf" width="355px" height="425px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 355px">
@@ -215,7 +268,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
   
 
   <script>
-    document.getElementById('react-root-126dbd9c16cf7a53782b8bafc819c3f0').srcdoc = `
+    document.getElementById('react-root-0cb84cac7025bd305b2569d07244adaf').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -442,7 +495,7 @@ export const BezierCurveDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-c554a26ff75070a035b68f216134a7ff" width="100%" height="200px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-df1d531c7a74a6928e9d0d619bbb62ed" width="100%" height="200px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -451,7 +504,7 @@ export const BezierCurveDemoScene = () =&gt; {
   
 
   <script>
-    document.getElementById('react-root-c554a26ff75070a035b68f216134a7ff').srcdoc = `
+    document.getElementById('react-root-df1d531c7a74a6928e9d0d619bbb62ed').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -697,7 +750,7 @@ export const BezierCurveDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-6b78ef7f656576c61eb87645281a090c" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-6181e1677856e59de9d20ef95629a45e" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -706,7 +759,7 @@ export const BezierCurveDemoScene = () =&gt; {
   
 
   <script>
-    document.getElementById('react-root-6b78ef7f656576c61eb87645281a090c').srcdoc = `
+    document.getElementById('react-root-6181e1677856e59de9d20ef95629a45e').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -875,12 +928,12 @@ export const MotionEvaluationDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-9ea1f4cc5058185b55cc7c7a7f583c03" width="100%" height="320px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-d2d4ad34b2b43c39a588bb82911c81b1" width="100%" height="320px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-9ea1f4cc5058185b55cc7c7a7f583c03').srcdoc = `
+    document.getElementById('react-root-d2d4ad34b2b43c39a588bb82911c81b1').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1108,12 +1161,12 @@ That is the whole trick.</p>
 
 
 <div class="embedded ">
-  <iframe id="react-root-e3773fb7e06be259b324bbdaecc60e4d" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-2389c5736fdb57c0075a16bf0448d722" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-e3773fb7e06be259b324bbdaecc60e4d').srcdoc = `
+    document.getElementById('react-root-2389c5736fdb57c0075a16bf0448d722').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1439,12 +1492,12 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 
 
 <div class="embedded ">
-  <iframe id="react-root-60e4fd07f490fc6413752ebbd663bf8c" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-322db11e2baaea210f79bebc1da7cd6d" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-60e4fd07f490fc6413752ebbd663bf8c').srcdoc = `
+    document.getElementById('react-root-322db11e2baaea210f79bebc1da7cd6d').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1687,12 +1740,12 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
 
 
 <div class="embedded ">
-  <iframe id="react-root-cf9da0552fe3cabc2e16f3ecaaed7aa7" width="100%" height="320px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-dab593ef07ada2a21496db44aa8806b1" width="100%" height="320px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-cf9da0552fe3cabc2e16f3ecaaed7aa7').srcdoc = `
+    document.getElementById('react-root-dab593ef07ada2a21496db44aa8806b1').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1966,12 +2019,12 @@ so it might help you as well.</p>
 
 
 <div class="embedded ">
-  <iframe id="react-root-75eab6b1ea1079a149b8d57e233c976d" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-c3aed087eca16edeb8c4b2fc01fde5fd" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-75eab6b1ea1079a149b8d57e233c976d').srcdoc = `
+    document.getElementById('react-root-c3aed087eca16edeb8c4b2fc01fde5fd').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2283,12 +2336,12 @@ finally bring us closer to a real, fully working roller coaster simulation.</p>
 
 
 <div class="embedded ">
-  <iframe id="react-root-a7a0ca2f11dbb72fa694cc59635ab3ab" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-0f8260460a43f40ed3eced650d953ef9" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-a7a0ca2f11dbb72fa694cc59635ab3ab').srcdoc = `
+    document.getElementById('react-root-0f8260460a43f40ed3eced650d953ef9').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2387,12 +2440,12 @@ export const WasiLibraryExampleScene = () =&gt; {
 
 
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
-&lt;iframe id="react-root-39cee7960873307a02b33d1227313df7" width="225px" height="225px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
+&lt;iframe id="react-root-16dbb4ec6276bb7247b15f2d5b22629e" width="225px" height="225px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
 &lt;div class="description" style="width: 225px"&gt;
 Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-39cee7960873307a02b33d1227313df7').srcdoc = `
+document.getElementById('react-root-16dbb4ec6276bb7247b15f2d5b22629e').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -2418,7 +2471,7 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/implementing-library-funct
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-39cee7960873307a02b33d1227313df7" width="225px" height="225px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-16dbb4ec6276bb7247b15f2d5b22629e" width="225px" height="225px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 225px">
@@ -2427,7 +2480,7 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/implementing-library-funct
   
 
   <script>
-    document.getElementById('react-root-39cee7960873307a02b33d1227313df7').srcdoc = `
+    document.getElementById('react-root-16dbb4ec6276bb7247b15f2d5b22629e').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
