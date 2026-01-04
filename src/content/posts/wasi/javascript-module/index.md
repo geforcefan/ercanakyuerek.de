@@ -53,29 +53,29 @@ const instance = await WebAssembly.instantiate(module, {
 
 We will talk about memory later, especially linear memory. For now, we can already start wrapping exported WebAssembly functions.
 
-We begin with a very simple one: `bezierLength`. We grab the function from `instance.exports` and call it with a pointer to a Bezier curve. Since the function returns a single float, there is nothing special to do here.
+We begin with a very simple one: `bezierTotalArcLength`. We grab the function from `instance.exports` and call it with a pointer to a Bezier curve. Since the function returns a single float, there is nothing special to do here.
 
 ```typescript
-export const bezierLength = (bezierPointer: number) => {
-  const { bezierLength: func } = instance.exports as any;
+export const bezierTotalArcLength = (bezierPointer: number) => {
+  const { bezierTotalArcLength: func } = instance.exports as any;
   return func(bezierPointer);
 };
 ```
 
-Next is a slightly more interesting function: `bezierPositionAtDistance`.
+Next is a slightly more interesting function: `bezierPositionAtArcLength`.
 
 This function also lives in the exports and takes a Bezier pointer plus a distance. The difference is that it returns a pointer to a **3D vector** instead of a plain number.
 
 A 3D vector here is just three `float` values laid out next to each other in linear memory. Because these are `32-bit` floats, we use a `Float32Array` to read them back. The pointer returned from WebAssembly is simply an offset into the memory buffer.
 
 ```typescript
-export const bezierPositionAtDistance = (
+export const bezierPositionAtArcLength = (
   bezierPointer: number,
-  distance: number,
+  at: number,
 ) => {
-  const { bezierPositionAtDistance: func, memory } =
+  const { bezierPositionAtArcLength: func, memory } =
     instance.exports as any;
-  const positionPointer = func(bezierPointer, distance);
+  const positionPointer = func(bezierPointer, at);
   return new Float32Array(memory.buffer, positionPointer, 3);
 };
 ```

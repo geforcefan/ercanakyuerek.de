@@ -39,7 +39,7 @@ We won't use `gravity * Math.sin(slopeAngle)` anymore, because once we have a fo
 
 Gravity always points downward to Earth, basically along the negative y-axis:
 
-$$\vec{gravityDir} = \begin{bmatrix} 0 \\ -9.81 \end{bmatrix}$$
+$$\vec{gravityDir} = \begin{bmatrix} 0 \\ -9.81 \\ 0 \end{bmatrix}$$
 
 Now what do we do with `forwardDirection` and `gravityDirection`?
 We take their dot product. That’s it. Really. That’s the whole trick:
@@ -53,7 +53,7 @@ $$acceleration = gravity * sin(slopeAngle)$$
 In code:
 
 ```typescript
-const acceleration = forwardDirection.dot(new Vector2(0, -gravity));
+const acceleration = forwardDirection.dot(new Vector3(0, -gravity, 0));
 ```
 
 And our updated evaluateMotion function becomes:
@@ -88,7 +88,7 @@ Once the motion step gives us a **distance traveled**, we need to convert this n
 
 Even the easiest possible track must answer **two important questions** for physics and visualization:
 
-> Where is the 2D or 3D position at a given distance along the curve?
+> Where is the 3D position at a given distance along the curve?
 
 Whether the track is straight or twisting like a crazy pretzel, the logic is the same.
 
@@ -98,7 +98,7 @@ Whether the track is straight or twisting like a crazy pretzel, the logic is the
 So we need a function that returns the position at any distance:
 
 ```typescript
-positionAtDistance(distance);
+positionAtArcLength(at);
 ```
 
 We also need the forward direction at that distance, because the evaluation function requires it as an input, as we introduced just a few sentences above. So we must answer:
@@ -106,18 +106,18 @@ We also need the forward direction at that distance, because the evaluation func
 > What is the forward direction at a given distance along a curve?
 
 ```typescript
-forwardDirectionAtDistance(distance);
+forwardDirectionAtArcLength(at);
 ```
 
 Both functions work purely on the curve geometry.
 
-## positionAtDistance on Linear “Curves”
+## positionAtArcLength on Linear “Curves”
 
 For linear curves, this is as easy as it gets. Later, we will switch to proper splines for real coaster geometry.
 
-A linear curve has two control points: `cp1` and `cp2`, both simple 2D vectors. We use THREE.js for convenience.
+A linear curve has two control points: `cp1` and `cp2`, both simple 3D vectors. We use THREE.js for convenience.
 
-### How do we get the 2D position at a distance?
+### How do we get the 3D position at a distance?
 
 We linearly interpolate between the two points:
 
@@ -140,15 +140,15 @@ $$ length = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} $$
 Putting it all together:
 
 ```typescript
-const positionAtDistance = (
+const positionAtArcLength = (
   cp1: Vector3,
   cp2: Vector3,
-  distance: number,
+  at: number,
 ) => {
   const length = Math.sqrt(
     (cp2.x - cp1.x) ** 2 + (cp2.y - cp1.y) ** 2,
   );
-  const t = distance / length;
+  const t = at / length;
   return {
     x: cp1.x + (cp2.x - cp1.x) * t,
     y: cp1.y + (cp2.y - cp1.y) * t,
@@ -159,12 +159,12 @@ const positionAtDistance = (
 Or using **THREE.js** to save yourself some sanity and avoid reinventing the wheel over and over again. I explained this part without THREE.js as well, but you may just forget it, the articles get way too big if I try to explain every concept of vectors and math in detail. For now we simply know: THREE.js is our friend:
 
 ```typescript
-const positionAtDistance = (
+const positionAtArcLength = (
   cp1: Vector3,
   cp2: Vector3,
-  distance: number,
+  at: number,
 ) => {
-  return cp1.clone().lerp(cp2, distance / cp1.distanceTo(cp2));
+  return cp1.clone().lerp(cp2, at / cp1.distanceTo(cp2));
 };
 ```
 
@@ -179,10 +179,10 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 Translated into code:
 
 ```typescript
-const forwardDirectionAtDistance = (
+const forwardDirectionAtArcLength = (
   cp1: Vector3,
   cp2: Vector3,
-  distance: number,
+  at: number, // unused for now
 ) => {
   return cp2.clone().sub(cp1).normalize();
 };
@@ -190,15 +190,13 @@ const forwardDirectionAtDistance = (
 
 ## Small note
 
-Later the forward vector will be replaced by a **4×4 matrix**, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called `matrixAtDistance`. I know, yet again a change, but that’s future you’s problem. Ignore it for now.
+Later the forward vector will be replaced by a **4×4 matrix**, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called `matrixAtArcLength`. I know, yet again a change, but that’s future you’s problem. Ignore it for now.
 
 Going forward, we will use **9.81665 m/s²** as the gravitational acceleration, since this is also the value used by **NoLimits Roller Coaster** and **openFVD++**.
 
 ## Adding Everything Up
 
 Time for a small demo. I built a basic setup: a visible line segment with draggable control points so you can adjust the slope in real time. On the side, a small panel displays the live simulation state.
-
-I switched the vectors to 3D instead of 2D, but only because it makes things more convenient in THREE.js. The actual calculations from this article are exactly the same.
 
 {{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/linear-track/LinearTrackDemoScene.tsx" width="100%" height="300px">}}
 

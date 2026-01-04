@@ -3,21 +3,21 @@
 
 void bezier::evaluate() {
     nodes.clear();
-    int numberOfNodes = (int)(estimate_length() * 20.0f);
+    int numberOfNodes = (int)(estimate_total_arc_length() * 20.0f);
     if(!numberOfNodes) return;
 
-    float distance = 0.0f;
+    float arcLength = 0.0f;
     glm::vec3 lastPos = cp1;
 
     for(int i=0; i < numberOfNodes; i++) {
         float t = (float) i / (float) (numberOfNodes - 1);
 
         glm::vec3 position = bezier_fast(cp1, cp2, cp3, cp4, t);
-        distance += glm::distance(position, lastPos);
+        arcLength += glm::distance(position, lastPos);
 
         nodes.push_back({
             .position = position,
-            .distance = distance
+            .arcLength = arcLength
         });
 
         lastPos = position;
@@ -34,24 +34,24 @@ glm::vec3 bezier::bezier_fast(glm::vec3 p0, glm::vec3 p1, glm::vec3 p2, glm::vec
     return b0 * p0  + b1 * p1 + b2 * p2 + b3 * p3;
 }
 
-float bezier::estimate_length() {
+float bezier::estimate_total_arc_length() {
     glm::vec3 lastPos = cp1;
-    float length = 0.0f;
+    float arcLength = 0.0f;
 
     for(int i=0; i < 15; i+= 2) {
         float t = (float) (i) / 14.0f;
         glm::vec3 pos = bezier_fast(cp1, cp2, cp3, cp4, t);
-        length += glm::distance(pos, lastPos);
+        arcLength += glm::distance(pos, lastPos);
         lastPos = pos;
     };
 
-    return length;
+    return arcLength;
 }
 
-glm::vec3 bezier::position_at_distance(float distance) {
+glm::vec3 bezier::position_at_arc_length(float at) {
     if (nodes.size() < 2) return glm::vec3(0.0f);
 
-    auto nextNode = std::lower_bound(nodes.begin(), nodes.end(), distance, [](auto a, double value) -> bool { return a.distance < value; });
+    auto nextNode = std::lower_bound(nodes.begin(), nodes.end(), at, [](auto a, double value) -> bool { return a.arcLength < value; });
     auto currentNode = nextNode - 1;
 
     auto isFirst = nextNode == nodes.begin();
@@ -62,15 +62,15 @@ glm::vec3 bezier::position_at_distance(float distance) {
 
     double t = 0.0;
 
-    if (nextNode->distance - currentNode->distance > std::numeric_limits<double>::epsilon()) {
-        t = std::max(std::min((distance - currentNode->distance) / (nextNode->distance - currentNode->distance), 1.0f), 0.0f);
+    if (nextNode->arcLength - currentNode->arcLength > std::numeric_limits<double>::epsilon()) {
+        t = std::max(std::min((at - currentNode->arcLength) / (nextNode->arcLength - currentNode->arcLength), 1.0f), 0.0f);
     }
 
     return glm::mix(currentNode->position, nextNode->position, t);
 }
 
-float bezier::length() {
-    if(!nodes.empty()) return nodes[nodes.size() - 1].distance;
+float bezier::total_arc_length() {
+    if(!nodes.empty()) return nodes[nodes.size() - 1].arcLength;
 
     return 0;
 }

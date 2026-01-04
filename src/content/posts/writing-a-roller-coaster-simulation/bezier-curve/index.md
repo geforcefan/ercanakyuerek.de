@@ -123,7 +123,7 @@ More nodes mean better precision. Fewer nodes mean better performance. We do not
 
 In practice, this is what I usually do:
 
-- First, estimate the length of the Bézier curve by uniformly evaluating a small number of points on it. I normally pick **8 points** and sum up the distances between them.
+- First, estimate the arc length of the Bézier curve by uniformly evaluating a small number of points on it. I normally pick **8 points** and sum up the distances between them.
 - Then, use this estimated length to compute the number of curve nodes by multiplying it with a **resolution** value. I usually use something like `20`.
 - **Example**: a roughly **20 meter** long curve multiplied by a resolution of `20` gives us **400 nodes**.
 - We then evaluate the Bézier curve at those 400 positions and construct curve nodes from them.
@@ -171,14 +171,14 @@ uniformSample(0, 8, 1, (at, t) =>
 
 At this point, `positions` contains 8 points along the Bézier curve.
 
-From here, it is extremely easy to iterate over these points and sum up the distances between positions to get an **estimated curve length**.
+From here, it is extremely easy to iterate over these points and sum up the distances between positions to get an **estimated total arc length**.
 
 ```typescript
 return positions
   .slice(1)
   .reduce(
-    (totalLength, position, i) =>
-      totalLength + position.distanceTo(positions[i]),
+    (arcLength, position, i) =>
+        arcLength + position.distanceTo(positions[i]),
     0,
   );
 ```
@@ -186,7 +186,7 @@ return positions
 Now we end up with this estimate function:
 
 ```typescript
-export const estimateLength = (points: Vector3[]) => {
+export const estimateTotalArcLength = (points: Vector3[]) => {
   const positions: Vector3[] = [];
   uniformSample(0, 8, 1, (at, t) =>
     positions.push(deCasteljau(points, t)),
@@ -195,8 +195,8 @@ export const estimateLength = (points: Vector3[]) => {
   return positions
     .slice(1)
     .reduce(
-      (totalLength, position, i) =>
-        totalLength + position.distanceTo(positions[i]),
+      (arcLength, position, i) =>
+          arcLength + position.distanceTo(positions[i]),
       0,
     );
 };
@@ -239,7 +239,7 @@ export const bezierSplineCurve = (
   resolution: number = 20,
 ) =>
   fromPoints(
-    uniformSampleMap(0, estimateLength(points), resolution, (at, t) =>
+    uniformSampleMap(0, estimateTotalArcLength(points), resolution, (at, t) =>
       deCasteljau(points, t),
     ),
   );

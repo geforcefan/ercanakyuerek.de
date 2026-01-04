@@ -5,8 +5,8 @@ import { Vector3 } from 'three';
 
 import {
   fromPoints,
-  length,
-  matrixAtDistance,
+  matrixAtArcLength,
+  totalArcLength,
 } from '../../../../maths/curve';
 import { fromMatrix4 } from '../../../../maths/vector3';
 import { findBoundingIndices } from '../../../../helper/binary-search';
@@ -27,11 +27,11 @@ const BinarySearchDemo = () => {
   ]);
 
   const curve = useMemo(() => fromPoints(points), [points]);
-  const curveLength = length(curve);
+  const curveLength = totalArcLength(curve);
 
-  const { distance } = useControls(
+  const { atArcLength } = useControls(
     {
-      distance: {
+      atArcLength: {
         min: 0 - 1,
         max: curveLength + 1,
         value: 5,
@@ -41,12 +41,12 @@ const BinarySearchDemo = () => {
     [curveLength],
   );
 
-  const position = fromMatrix4(matrixAtDistance(curve, distance));
+  const position = fromMatrix4(matrixAtArcLength(curve, atArcLength));
 
   const nodes = findBoundingIndices(
     curve,
-    distance,
-    (node) => node.distanceAtCurve,
+    atArcLength,
+    (node) => node.arcLength,
   )?.map((index) => fromMatrix4(curve[index].matrix));
 
   return (

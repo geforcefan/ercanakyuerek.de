@@ -10,14 +10,14 @@ bezier *bezierFromPoints(glm::vec3 *cp1, glm::vec3 *cp2, glm::vec3 *cp3, glm::ve
     return new bezier(*cp1, *cp2, *cp3, *cp4);
 }
 
-__attribute__((export_name("bezierPositionAtDistance")))
-glm::vec3 *bezierPositionAtDistance(bezier *s, float distance) {
-    return new glm::vec3(s->position_at_distance(distance));
+__attribute__((export_name("bezierPositionAtArcLength")))
+glm::vec3 *bezierPositionAtArcLength(bezier *s, float at) {
+    return new glm::vec3(s->position_at_arc_length(at));
 }
 
-__attribute__((export_name("bezierLength")))
-float bezierLength(bezier *s) {
-    return s->length();
+__attribute__((export_name("bezierTotalArcLength")))
+float bezierTotalArcLength(bezier *s) {
+    return s->total_arc_length();
 }
 
 int main() {}

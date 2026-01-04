@@ -1,15 +1,14 @@
 import { MathUtils, Vector2, Vector4 } from 'three';
 
-import { clampedCubicSplineCurve } from '../maths/cubic-spline';
+import { clampedCubicSplineCurve } from '../maths/cubic';
 import {
   applyRollFromCurve,
-  CurveNode, distanceAtCurveAtOffset,
-  matrixAtDistance, toSegmentOffsets,
+  CurveNode, arcLengthAtOffset,
+  matrixAtArcLength, toSegmentOffsets,
 } from '../maths/curve';
 
 import { readCustomTrack } from './nl2park/track/custom-track';
 import { isRollPoint } from './nl2park/track/roll';
-import { isSeparatorPoint } from './nl2park/track/separator';
 
 export const applyRollFromCustomTrack = (
   curve: CurveNode[],
@@ -20,17 +19,12 @@ export const applyRollFromCustomTrack = (
 
   const segmentOffsets = toSegmentOffsets(curve, customTrack.vertices.length)
 
-
-  console.log(customTrack?.points
-    .filter(isSeparatorPoint)
-    .map(p => [p.position, distanceAtCurveAtOffset(p.position, segmentOffsets)]))
-
   const rolls = customTrack?.points
     .filter(isRollPoint)
     .sort((a, b) => a.position - b.position)
     .map((p) => {
-      const distanceAt = distanceAtCurveAtOffset(p.position, segmentOffsets)
-      const matrix = matrixAtDistance(curve, distanceAt);
+      const arcLength = arcLengthAtOffset(p.position, segmentOffsets)
+      const matrix = matrixAtArcLength(curve, arcLength);
 
       let roll = MathUtils.degToRad(p.roll);
 
@@ -55,7 +49,7 @@ export const applyRollFromCustomTrack = (
 
       roll += offset;
 
-      return new Vector2(distanceAt, roll);
+      return new Vector2(arcLength, roll);
     });
 
   applyRollFromCurve(curve, clampedCubicSplineCurve(rolls, 0, 0, 20));

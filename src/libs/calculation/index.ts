@@ -20,18 +20,18 @@ const instance = await WebAssembly.instantiate(module, {
   },
 });
 
-export const bezierLength = (bezierPointer: number) => {
-  const { bezierLength: func } = instance.exports as any;
+export const bezierTotalArcLength = (bezierPointer: number) => {
+  const { bezierTotalArcLength: func } = instance.exports as any;
   return func(bezierPointer);
 };
 
-export const bezierPositionAtDistance = (
+export const bezierPositionAtArcLength = (
   bezierPointer: number,
-  distance: number,
+  at: number,
 ) => {
-  const { bezierPositionAtDistance: func, memory } =
+  const { bezierPositionAtArcLength: func, memory } =
     instance.exports as any;
-  const positionPointer = func(bezierPointer, distance);
+  const positionPointer = func(bezierPointer, at);
   return new Float32Array(memory.buffer, positionPointer, 3);
 };
 

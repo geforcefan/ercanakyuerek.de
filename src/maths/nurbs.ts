@@ -106,8 +106,8 @@ export const estimateLength = (
   return positions
     .slice(1)
     .reduce(
-      (totalLength, position, i) =>
-        totalLength + position.distanceTo(positions[i]),
+      (arcLength, position, i) =>
+        arcLength + position.distanceTo(positions[i]),
       0,
     );
 };

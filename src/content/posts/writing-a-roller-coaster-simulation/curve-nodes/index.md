@@ -9,11 +9,11 @@ In this chapter, we try to make our lives a bit easier by using a more flexible 
 
 This article is a bit longer than usual. The topic is hard to split into smaller pieces without losing context, so we keep everything in one place. I will try to keep things as simple as possible, but yes, there is a bit going on here.
 
-Up to this point, everything was built around a very basic **linear track** with two control points. Functions like `matrixAtDistance` only had to deal with a single segment. That worked fine for learning and experimenting, but it starts to feel limiting very quickly. A real roller coaster does not consist of exactly one straight line.
+Up to this point, everything was built around a very basic **linear track** with two control points. Functions like `matrixAtArcLength` only had to deal with a single segment. That worked fine for learning and experimenting, but it starts to feel limiting very quickly. A real roller coaster does not consist of exactly one straight line.
 
 For now, we do not jump straight to **NURBS** or anything fancy. That will come later. We just want more segments. To do that, we need a way to describe curves that is not tied to a specific curve type, whether that is linear tracks, splines, geometric sections.
 
-The solution is a very basic concept called **curve nodes**. A curve node stores where it is in **space**, its **orientation** as a **4x4 matrix**, and the **distance** at which it appears along the curve. Nothing more than that.
+The solution is a very basic concept called **curve nodes**. A curve node stores where it is in **space**, its **orientation** as a **4x4 matrix**, and the **arc length** at which it appears along the curve. Nothing more than that.
 
 # Curve Node
 
@@ -21,7 +21,7 @@ Before we write any code, we need to understand the idea first.
 
 Imagine a linear track defined by four points. In that case, we also have four nodes. Nothing surprising so far. If we want to know the **position** at a certain distance along the track, we search for the two nodes between which that distance lies. One node on the left, one on the right. Everything in between is just interpolation.
 
-This can be hard to visualize just by reading, so the example below shows four points and a slider. You can also move the control points to see what happens when the requested distance overshoots a segment. Just play around a bit.
+This can be hard to visualize just by reading, so the example below shows four points and a slider. You can also move the control points to see what happens when the requested distance overshoots a segment.
 
 {{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-nodes/BinarySearchDemoScene.tsx" width="100%" height="200px" description="As you move the slider, you request a distance along the track. You can immediately see between which two nodes that distance is sandwiched." >}}
 
@@ -38,7 +38,7 @@ With that in mind, we can start by defining what a **curve node** looks like:
 ```typescript
 type CurveNode = {
   matrix: Matrix4;
-  distanceAtCurve: number;
+  arcLength: number;
 };
 ```
 
@@ -46,7 +46,7 @@ That is it. A **matrix** and its **distance** along the curve.
 
 Next, we need a way to find the two nodes that sandwich any requested distance along the curve. There are many algorithms for this, but a simple binary search works very well here. It is fast, easy to implement, and more than good enough for what we need right now.
 
-The only real requirement is that the nodes are sorted by `distanceAtCurve`, which we will make sure of.
+The only real requirement is that the nodes are sorted by `arcLength`, which we will make sure of.
 
 If you want, you can read more about [binary search](https://en.wikipedia.org/wiki/Binary_search). To be honest, you do not need to understand every detail here.
 
@@ -161,7 +161,7 @@ To find the **left and right nodes**, we use the **binary search helper** we jus
 const nodes = findBoundingIndices(
   curve,
   at,
-  (node) => node.distanceAtCurve,
+  (node) => node.arcLength,
 );
 if (!nodes) return new Matrix4();
 ```
@@ -192,10 +192,10 @@ For safety, we clamp this value between `0` and `1`, because values outside that
 In code, this looks like this:
 
 ```typescript
-const length = right.distanceAtCurve - left.distanceAtCurve;
+const length = right.arcLength - left.arcLength;
 if (length > Number.EPSILON) {
   const t = MathUtils.clamp(
-    (at - left.distanceAtCurve) / length,
+    (at - left.arcLength) / length,
     0.0,
     1.0,
   );
@@ -254,22 +254,22 @@ return left.matrix.clone();
 Putting everything together, the full function looks like this:
 
 ```typescript
-export const matrixAtDistance = (curve: CurveNode[], at: number) => {
+export const matrixAtArcLength = (curve: CurveNode[], at: number) => {
   const nodes = findBoundingIndices(
     curve,
     at,
-    (node) => node.distanceAtCurve,
+    (node) => node.arcLength,
   );
   if (!nodes) return new Matrix4();
 
   const left = curve[nodes[0]];
   const right = curve[nodes[1]];
 
-  const length = right.distanceAtCurve - left.distanceAtCurve;
+  const length = right.arcLength - left.arcLength;
 
   if (length > Number.EPSILON) {
     const t = MathUtils.clamp(
-      (at - left.distanceAtCurve) / length,
+      (at - left.arcLength) / length,
       0.0,
       1.0,
     );
@@ -294,7 +294,7 @@ const fromPoints = (points: Vector3[]) => {
   const curve: CurveNode[] = [];
   if (points.length < 2) return curve;
 
-  let distanceAtCurve = 0;
+  let arcLength = 0;
 
   for (let i = 0; i < points.length - 1; i++) {
     const left = points[i];
@@ -304,17 +304,17 @@ const fromPoints = (points: Vector3[]) => {
     if (prevNode)
       curve.push({
         matrix: prevNode.matrix.clone().setPosition(left),
-        distanceAtCurve,
+        arcLength,
       });
 
     curve.push({
       matrix: new Matrix4()
         .lookAt(right, left, new Vector3(0, 1, 0))
         .setPosition(left),
-      distanceAtCurve,
+      arcLength,
     });
 
-    distanceAtCurve += left.distanceTo(right);
+    arcLength += left.distanceTo(right);
   }
 
   const lastNode = last(curve)!;
@@ -322,7 +322,7 @@ const fromPoints = (points: Vector3[]) => {
 
   curve.push({
     matrix: lastNode.matrix.clone().setPosition(lastPoint),
-    distanceAtCurve,
+    arcLength,
   });
 
   return curve;

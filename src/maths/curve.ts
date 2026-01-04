@@ -15,30 +15,30 @@ import { fromMatrix4 } from './vector3';
 
 export type CurveNode = {
   matrix: Matrix4;
-  distanceAtCurve: number;
+  arcLength: number;
   segmentIndex: number;
 };
 
-export const length = (curve: CurveNode[]) => {
-  return last(curve)?.distanceAtCurve || 0;
+export const totalArcLength = (curve: CurveNode[]) => {
+  return last(curve)?.arcLength || 0;
 };
 
-export const matrixAtDistance = (curve: CurveNode[], at: number) => {
+export const matrixAtArcLength = (curve: CurveNode[], at: number) => {
   const nodes = findBoundingIndices(
     curve,
     at,
-    (node) => node.distanceAtCurve,
+    (node) => node.arcLength,
   );
   if (!nodes) return new Matrix4();
 
   const left = curve[nodes[0]];
   const right = curve[nodes[1]];
 
-  const length = right.distanceAtCurve - left.distanceAtCurve;
+  const length = right.arcLength - left.arcLength;
 
   if (length > Number.EPSILON) {
     const t = MathUtils.clamp(
-      (at - left.distanceAtCurve) / length,
+      (at - left.arcLength) / length,
       0.0,
       1.0,
     );
@@ -77,15 +77,15 @@ export const insertMatrix = (
   segmentIndex: number = 0,
 ): void => {
   const lastNode = last(curve);
-  let distanceAtCurve = 0;
+  let arcLength = 0;
 
   if (lastNode) {
-    distanceAtCurve =
-      lastNode.distanceAtCurve + distance(lastNode.matrix, matrix);
+    arcLength =
+      lastNode.arcLength + distance(lastNode.matrix, matrix);
   }
 
   curve.push({
-    distanceAtCurve,
+    arcLength,
     matrix: matrix.clone(),
     segmentIndex,
   });
@@ -125,10 +125,10 @@ export const applyRollFromCurve = (
   curve: CurveNode[],
   rollCurve: CurveNode[],
 ) => {
-  curve.forEach(({ matrix, distanceAtCurve }) => {
+  curve.forEach(({ matrix, arcLength }) => {
     return applyRotationZ(
       matrix,
-      -positionAtX(rollCurve, distanceAtCurve).y,
+      -positionAtX(rollCurve, arcLength).y,
     );
   });
 
@@ -164,7 +164,7 @@ export const fromPointsWithBasicNormals = (points: Vector3[]) => {
   const curve: CurveNode[] = [];
   if (points.length < 2) return curve;
 
-  let distanceAtCurve = 0;
+  let arcLength = 0;
 
   for (let i = 0; i < points.length - 1; i++) {
     const left = points[i];
@@ -174,7 +174,7 @@ export const fromPointsWithBasicNormals = (points: Vector3[]) => {
     if (prevNode)
       curve.push({
         matrix: prevNode.matrix.clone().setPosition(left),
-        distanceAtCurve,
+        arcLength,
         segmentIndex: 0,
       });
 
@@ -182,11 +182,11 @@ export const fromPointsWithBasicNormals = (points: Vector3[]) => {
       matrix: new Matrix4()
         .lookAt(right, left, new Vector3(0, 1, 0))
         .setPosition(left),
-      distanceAtCurve,
+      arcLength,
       segmentIndex: 0,
     });
 
-    distanceAtCurve += left.distanceTo(right);
+    arcLength += left.distanceTo(right);
   }
 
   const lastNode = last(curve)!;
@@ -194,7 +194,7 @@ export const fromPointsWithBasicNormals = (points: Vector3[]) => {
 
   curve.push({
     matrix: lastNode.matrix.clone().setPosition(lastPoint),
-    distanceAtCurve,
+    arcLength,
     segmentIndex: 0,
   });
 
@@ -205,7 +205,7 @@ export const toPoints = (curve: CurveNode[]) => {
   return curve.map((node) => fromMatrix4(node.matrix));
 };
 
-export const distanceAtCurveAtOffset = (u: number, segmentOffsets: number[]) => {
+export const arcLengthAtOffset = (u: number, segmentOffsets: number[]) => {
   const i = Math.floor(u);
   const t = u - i;
 
@@ -241,8 +241,8 @@ export const toSegmentOffsets = (
       : last(segment)!;
 
     const length =
-      curve[rightNodeIndex].distanceAtCurve -
-      curve[leftNodeIndex].distanceAtCurve;
+      curve[rightNodeIndex].arcLength -
+      curve[leftNodeIndex].arcLength;
 
     if (length < Number.EPSILON) return;
     lengths.push(length);

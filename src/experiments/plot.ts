@@ -2,8 +2,8 @@ import { Matrix4, Vector2, Vector3, Vector4 } from 'three';
 
 import {
   CurveNode,
-  length,
-  matrixAtDistance,
+  totalArcLength,
+  matrixAtArcLength,
 } from '../maths/curve';
 import { uniformSampleMap } from '../helper/uniform-sample';
 
@@ -21,9 +21,9 @@ export const plotDataFromCurve = (
 ) => {
   const points = uniformSampleMap(
     0,
-    length(curve),
+    totalArcLength(curve),
     resolution,
-    (at: number) => new Vector2(at, fn(matrixAtDistance(curve, at))),
+    (at: number) => new Vector2(at, fn(matrixAtArcLength(curve, at))),
   );
 
   return plotDataFromPoints(points);

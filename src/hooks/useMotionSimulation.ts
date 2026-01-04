@@ -2,7 +2,7 @@ import { useEffect, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { MathUtils } from 'three';
 
-import { CurveNode, length, matrixAtDistance } from '../maths/curve';
+import { CurveNode, totalArcLength, matrixAtArcLength } from '../maths/curve';
 import { evaluateMotion } from '../helper/physics';
 
 import { useSimulationStateControls } from './useSimulationStateControls';
@@ -18,7 +18,7 @@ export const useMotionSimulation = (
     setSimulationState(
       evaluateMotion(
         simulationState,
-        matrixAtDistance(curve, simulationState.distanceTraveled),
+        matrixAtArcLength(curve, simulationState.distanceTraveled),
         simulationState.friction,
         simulationState.airResistance,
         simulationState.gravity,
@@ -30,7 +30,7 @@ export const useMotionSimulation = (
   // reset simulation state if train overshoots track
   useEffect(() => {
     if (
-      simulationState.distanceTraveled > length(curve) ||
+      simulationState.distanceTraveled > totalArcLength(curve) ||
       simulationState.distanceTraveled < 0
     ) {
       setSimulationState({
@@ -39,16 +39,22 @@ export const useMotionSimulation = (
         acceleration: 0,
       });
     }
-  }, [simulationState.distanceTraveled, setSimulationState, curve]);
+  }, [
+    simulationState.distanceTraveled,
+    setSimulationState,
+    curve,
+    init?.velocity,
+    init?.distanceTraveled,
+  ]);
 
   return useMemo(
     () =>
-      matrixAtDistance(
+      matrixAtArcLength(
         curve,
         MathUtils.clamp(
           simulationState.distanceTraveled,
           0,
-          length(curve),
+          totalArcLength(curve),
         ),
       ),
     [curve, simulationState.distanceTraveled],

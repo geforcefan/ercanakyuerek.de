@@ -10,12 +10,12 @@ import Plot from 'react-plotly.js';
 import { MathUtils, Vector2, Vector3 } from 'three';
 
 import { bezierSplineCurve } from '../maths/bezier';
-import { clampedCubicSplineCurve } from '../maths/cubic-spline';
+import { clampedCubicSplineCurve } from '../maths/cubic';
 import {
   applyRollFromCurve,
   CurveNode,
-  length,
-  matrixAtDistance,
+  totalArcLength,
+  matrixAtArcLength,
 } from '../maths/curve';
 import { fromMatrix4 } from '../maths/vector3';
 import { evaluateMotion } from '../helper/physics';
@@ -79,12 +79,12 @@ const TrainWithPhysics = (props: { curve: CurveNode[] }) => {
 
   const evaluatedMatrix = useMemo(
     () =>
-      matrixAtDistance(
+      matrixAtArcLength(
         curve,
         MathUtils.clamp(
           simulationState.distanceTraveled,
           0,
-          length(curve),
+          totalArcLength(curve),
         ),
       ),
     [curve, simulationState.distanceTraveled],
@@ -105,7 +105,7 @@ const TrainWithPhysics = (props: { curve: CurveNode[] }) => {
 
   useEffect(() => {
     if (
-      simulationState.distanceTraveled > length(curve) ||
+      simulationState.distanceTraveled > totalArcLength(curve) ||
       simulationState.distanceTraveled < 0
     ) {
       setSimulationState({
@@ -172,9 +172,9 @@ export const CurvesAndMatricesScene = () => {
   const rollNodes = useMemo(
     () =>
       curve.map(
-        ({ matrix, distanceAtCurve }) =>
+        ({ matrix, arcLength }) =>
           new Vector2(
-            distanceAtCurve,
+            arcLength,
             MathUtils.radToDeg(zRotation(matrix)),
           ),
       ),

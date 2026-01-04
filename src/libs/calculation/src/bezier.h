@@ -6,7 +6,7 @@
 
 struct node {
     glm::vec3 position;
-    float distance;
+    float arcLength;
 };
 
 class bezier {
@@ -18,15 +18,15 @@ public:
         evaluate();
     }
 
-    glm::vec3 position_at_distance(float distance);
-    float length();
+    glm::vec3 position_at_arc_length(float distance);
+    float total_arc_length();
 
 private:
     glm::vec3 cp1, cp2, cp3, cp4;
     std::vector<node> nodes;
 
     static glm::vec3 bezier_fast(glm::vec3 p0, glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, float t);
-    float estimate_length();
+    float estimate_total_arc_length();
     void evaluate();
 };
 

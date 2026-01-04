@@ -23,7 +23,7 @@ include_directories(glm)
 ```
 
 ## Bezier implementation
-In summary, I have developed a solution for the problem discussed earlier, but I won't delve too deeply into the technical details. The primary function of my implementation, ``bezier_fast``, computes the position on a bezier curve based on a given ``t`` parameter. Additionally, ``estimate_length`` is used to calculate the curve's length very quickly with a ``low step size``. This estimation is necessary to determine how many nodes we should evaluate. With this method, we can create densely populated nodes depending on the curve's length. The evaluate function executes the procedure I just described. Naturally, we can always measure the distance between the evaluated position and the previous one to obtain the curve's total length, which we simply pass through the ``length`` function. Lastly, ``position_at_distance`` searches for the minimum node at a specified distance and linearly interpolates the position to the next node. We have successfully achieved the ability to evaluate uniformly spaced points on the curve.
+In summary, I have developed a solution for the problem discussed earlier, but I won't delve too deeply into the technical details. The primary function of my implementation, ``bezier_fast``, computes the position on a bezier curve based on a given ``t`` parameter. Additionally, ``estimate_total_arc_length`` is used to estimate the curve's total arc length very quickly with a **low step size**. This estimation is necessary to determine how many nodes we should evaluate. With this method, we can create densely populated nodes depending on the curve's total arc length. The evaluate function executes the procedure I just described. Naturally, we can always measure the distance between the evaluated position and the previous one to obtain the curve's total arc length, which we simply pass through the ``total_arc_length`` function. Lastly, ``position_at_arc_length`` searches for the minimum node at a specified distance and linearly interpolates the position to the next node. We have successfully achieved the ability to evaluate uniformly spaced points on the curve.
 
 ``src/bezier.cc:``
 
@@ -33,21 +33,21 @@ In summary, I have developed a solution for the problem discussed earlier, but I
 
 void bezier::evaluate() {
     nodes.clear();
-    int numberOfNodes = (int)(estimate_length() * 20.0f);
+    int numberOfNodes = (int)(estimate_total_arc_length() * 20.0f);
     if(!numberOfNodes) return;
 
-    float distance = 0.0f;
+    float arcLength = 0.0f;
     glm::vec3 lastPos = cp1;
 
     for(int i=0; i < numberOfNodes; i++) {
         float t = (float) i / (float) (numberOfNodes - 1);
 
         glm::vec3 position = bezier_fast(cp1, cp2, cp3, cp4, t);
-        distance += glm::distance(position, lastPos);
+        arcLength += glm::distance(position, lastPos);
 
         nodes.push_back({
             .position = position,
-            .distance = distance
+            .arcLength = arcLength
         });
 
         lastPos = position;
@@ -64,24 +64,24 @@ glm::vec3 bezier::bezier_fast(glm::vec3 p0, glm::vec3 p1, glm::vec3 p2, glm::vec
     return b0 * p0  + b1 * p1 + b2 * p2 + b3 * p3;
 }
 
-float bezier::estimate_length() {
+float bezier::estimate_total_arc_length() {
     glm::vec3 lastPos = cp1;
-    float length = 0.0f;
+    float totalArcLength = 0.0f;
 
     for(int i=0; i < 15; i+= 2) {
         float t = (float) (i) / 14.0f;
         glm::vec3 pos = bezier_fast(cp1, cp2, cp3, cp4, t);
-        length += glm::distance(pos, lastPos);
+        totalArcLength += glm::distance(pos, lastPos);
         lastPos = pos;
     };
 
-    return length;
+    return totalArcLength;
 }
 
-glm::vec3 bezier::position_at_distance(float distance) {
+glm::vec3 bezier::position_at_arc_length(float at) {
     if (nodes.size() < 2) return glm::vec3(0.0f);
 
-    auto nextNode = std::lower_bound(nodes.begin(), nodes.end(), distance, [](auto a, double value) -> bool { return a.distance < value; });
+    auto nextNode = std::lower_bound(nodes.begin(), nodes.end(), at, [](auto a, double value) -> bool { return a.arcLength < value; });
     auto currentNode = nextNode - 1;
 
     auto isFirst = nextNode == nodes.begin();
@@ -92,15 +92,15 @@ glm::vec3 bezier::position_at_distance(float distance) {
 
     double t = 0.0;
 
-    if (nextNode->distance - currentNode->distance > std::numeric_limits<double>::epsilon()) {
-        t = std::max(std::min((distance - currentNode->distance) / (nextNode->distance - currentNode->distance), 1.0f), 0.0f);
+    if (nextNode->arcLength - currentNode->arcLength > std::numeric_limits<double>::epsilon()) {
+        t = std::max(std::min((at - currentNode->arcLength) / (nextNode->arcLength - currentNode->arcLength), 1.0f), 0.0f);
     }
 
     return glm::mix(currentNode->position, nextNode->position, t);
 }
 
-float bezier::length() {
-    if(!nodes.empty()) return nodes[nodes.size() - 1].distance;
+float bezier::total_arc_length() {
+    if(!nodes.empty()) return nodes[nodes.size() - 1].arcLength;
 
     return 0;
 }
@@ -117,7 +117,7 @@ float bezier::length() {
 
 struct node {
     glm::vec3 position;
-    float distance;
+    float arcLength;
 };
 
 class bezier {
@@ -129,15 +129,15 @@ public:
         evaluate();
     }
 
-    glm::vec3 position_at_distance(float distance);
-    float length();
+    glm::vec3 position_at_arc_length(float distance);
+    float total_arc_length();
 
 private:
     glm::vec3 cp1, cp2, cp3, cp4;
     std::vector<node> nodes;
 
     static glm::vec3 bezier_fast(glm::vec3 p0, glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, float t);
-    float estimate_length();
+    float estimate_total_arc_length();
     void evaluate();
 };
 
@@ -145,7 +145,7 @@ private:
 ```
 
 ## Gluing the Pieces of our library
-We still cannot use the functions yet, so we need to create glue code to expose them to the outside world. Our goal is to use this bezier library in our browser, for example, to draw a uniformly spaced Bezier curve. We will expose three functions: ```bezierFromPoints```, ```bezierPositionAtDistance```, and ```bezierLength```. Some of these functions return complex types, such as a ```3D vector```, which we will handle on the JavaScript side. There are many techniques to pass complex data from and to our WebAssembly module, which we will discuss in detail later. For now, let's focus on creating some glue code in ``glue/glue.cc``.
+We still cannot use the functions yet, so we need to create glue code to expose them to the outside world. Our goal is to use this bezier library in our browser, for example, to draw a uniformly spaced Bezier curve. We will expose three functions: ```bezierFromPoints```, ```bezierPositionAtArcLength```, and ```bezierTotalArcLength```. Some of these functions return complex types, such as a ```3D vector```, which we will handle on the JavaScript side. There are many techniques to pass complex data from and to our WebAssembly module, which we will discuss in detail later. For now, let's focus on creating some glue code in ``glue/glue.cc``.
 
 ### Data types
 As mentioned several times before, passing complex data types in and out can be challenging, but it can be managed. Passing 32 and 64 bit integers and decimal numbers is natively supported, so there is no need to worry about those. However, passing types such as a ```3D vector``` is a different matter. We need to allocate memory on the JavaScript side, assign the ```3D vector``` data (3x ```floats```) to a free memory space, and pass the location (pointer) to the function calls. If we return complex data from the WebAssembly module, we will get a pointer and access the data in memory and "demangle" it (for example, using ```Float64Array``` with the pointer as offset and length of 3 to access x, y, z data). We will delve deeper into this later.
@@ -160,23 +160,23 @@ bezier *bezierFromPoints(glm::vec3 *cp1, glm::vec3 *cp2, glm::vec3 *cp3, glm::ve
 }
 ```
 
-### bezierLength function
+### bezierTotalArcLength function
 This function returns a ```float```, so no need to handle any extra complex data stuff on the JavaScript side:
 
 ```cpp
-__attribute__((export_name("bezierLength")))
-float bezierLength(bezier *s) {
-    return s->length();
+__attribute__((export_name("bezierTotalArcLength")))
+float bezierTotalArcLength(bezier *s) {
+    return s->total_arc_length();
 }
 ```
 
-### bezierPositionAtDistance function
+### bezierPositionAtArcLength function
 This function returns a pointer to a ``3d vector``, which allows us to access its data in memory on the ``JavaScript`` side. Therefore, we need to allocate a new space for the returned ``3d vector``:
 
 ```cpp
-__attribute__((export_name("bezierPositionAtDistance")))
-glm::vec3 *bezierPositionAtDistance(bezier *s, float distance) {
-    return new glm::vec3(s->position_at_distance(distance));
+__attribute__((export_name("bezierPositionAtArcLength")))
+glm::vec3 *bezierPositionAtArcLength(bezier *s, float at) {
+    return new glm::vec3(s->position_at_arc_length(at));
 }
 ```
 

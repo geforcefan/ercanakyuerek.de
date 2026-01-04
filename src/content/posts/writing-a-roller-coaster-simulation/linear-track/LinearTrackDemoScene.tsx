@@ -5,9 +5,9 @@ import { useControls } from 'leva';
 import { Vector3 } from 'three';
 
 import {
-  forwardDirectionAtDistance,
-  length,
-  positionAtDistance,
+  forwardDirectionAtArcLength,
+  totalArcLength,
+  positionAtArcLength,
 } from '../../../../maths/linear';
 import { evaluateMotionByForwardDirection } from '../../../../helper/physics';
 import { useColors } from '../../../../hooks/useColors';
@@ -42,7 +42,7 @@ const LinearTrackDemo = () => {
     setSimulationState(
       evaluateMotionByForwardDirection(
         simulationState,
-        forwardDirectionAtDistance(
+        forwardDirectionAtArcLength(
           points[0],
           points[1],
           simulationState.distanceTraveled,
@@ -57,7 +57,7 @@ const LinearTrackDemo = () => {
   useEffect(() => {
     if (
       simulationState.distanceTraveled >
-        length(points[0], points[1]) ||
+      totalArcLength(points[0], points[1]) ||
       simulationState.distanceTraveled < 0
     ) {
       setSimulationState({
@@ -68,7 +68,7 @@ const LinearTrackDemo = () => {
     }
   }, [simulationState.distanceTraveled, setSimulationState, points]);
 
-  const trainPosition = positionAtDistance(
+  const trainPosition = positionAtArcLength(
     points[0],
     points[1],
     simulationState.distanceTraveled,

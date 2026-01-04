@@ -19,7 +19,7 @@ export const deCasteljau = (points: Vector3[], t: number) => {
   return p[0];
 };
 
-export const estimateLength = (points: Vector3[]) => {
+export const estimateTotalArcLength = (points: Vector3[]) => {
   const positions = uniformSampleMap(0, 8, 1, (at, t) =>
     deCasteljau(points, t),
   );
@@ -27,8 +27,8 @@ export const estimateLength = (points: Vector3[]) => {
   return positions
     .slice(1)
     .reduce(
-      (totalLength, position, i) =>
-        totalLength + position.distanceTo(positions[i]),
+      (arcLength, position, i) =>
+        arcLength + position.distanceTo(positions[i]),
       0,
     );
 };
@@ -39,7 +39,7 @@ export const bezierSplineCurve = (
 ) =>
   fromUniformSampledPositions(
     0,
-    estimateLength(points),
+    estimateTotalArcLength(points),
     resolution,
     (at, t) => deCasteljau(points, t),
   );

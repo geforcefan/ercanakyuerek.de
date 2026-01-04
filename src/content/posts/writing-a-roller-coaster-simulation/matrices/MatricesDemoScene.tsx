@@ -3,7 +3,7 @@ import { Line } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { MathUtils, Vector3 } from 'three';
 
-import { length, matrixAtDistance } from '../../../../maths/linear';
+import { totalArcLength, matrixAtArcLength } from '../../../../maths/linear';
 import { evaluateMotion } from '../../../../helper/physics';
 import { useColors } from '../../../../hooks/useColors';
 import { useSimulationStateControls } from '../../../../hooks/useSimulationStateControls';
@@ -28,7 +28,7 @@ const MatricesDemo = () => {
     setSimulationState(
       evaluateMotion(
         simulationState,
-        matrixAtDistance(
+        matrixAtArcLength(
           points[0],
           points[1],
           simulationState.distanceTraveled,
@@ -45,7 +45,7 @@ const MatricesDemo = () => {
   useEffect(() => {
     if (
       simulationState.distanceTraveled >
-        length(points[0], points[1]) ||
+      totalArcLength(points[0], points[1]) ||
       simulationState.distanceTraveled < 0
     ) {
       setSimulationState({
@@ -56,13 +56,13 @@ const MatricesDemo = () => {
     }
   }, [simulationState.distanceTraveled, points, setSimulationState]);
 
-  const motionMatrix = matrixAtDistance(
+  const motionMatrix = matrixAtArcLength(
     points[0],
     points[1],
     MathUtils.clamp(
       simulationState.distanceTraveled,
       0,
-      length(points[0], points[1]),
+      totalArcLength(points[0], points[1]),
     ),
   );
 

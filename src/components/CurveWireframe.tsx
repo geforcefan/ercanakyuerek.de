@@ -3,8 +3,8 @@ import { BufferGeometry, Vector3, Vector4 } from 'three';
 
 import {
   CurveNode,
-  length,
-  matrixAtDistance,
+  totalArcLength,
+  matrixAtArcLength,
 } from '../maths/curve';
 import { useColors } from '../hooks/useColors';
 
@@ -36,34 +36,34 @@ export const CurveWireframe = (props: {
   } = props;
 
   const points = useMemo(() => {
-    const curveLength = length(curve);
+    const curveLength = totalArcLength(curve);
     const numNodes = Math.floor(curveLength / railSpacing);
 
     const points: Vector3[] = [];
-    let tieDist = 0;
+    let tieDistance = 0;
 
     for (let k = 0; k < numNodes - 1; k++) {
-      const currentDistance: number =
+      const currentArcLength: number =
         (k / (numNodes - 1)) * curveLength;
-      const currentMatrixAtDistance = matrixAtDistance(
+      const currentMatrixAtArcLength = matrixAtArcLength(
         curve,
-        currentDistance,
+        currentArcLength,
       );
 
-      const nextDistance: number =
+      const nextArcLength: number =
         ((k + 1) / (numNodes - 1)) * curveLength;
-      const nextMatrixAtDistance = matrixAtDistance(
+      const nextMatrixAtArcLength = matrixAtArcLength(
         curve,
-        nextDistance,
+        nextArcLength,
       );
 
       for (let k = 0; k < rails.length; k++) {
         const currentPos = rails[k]
           .clone()
-          .applyMatrix4(currentMatrixAtDistance);
+          .applyMatrix4(currentMatrixAtArcLength);
         const nextPos = rails[k]
           .clone()
-          .applyMatrix4(nextMatrixAtDistance);
+          .applyMatrix4(nextMatrixAtArcLength);
 
         points.push(
           new Vector3(currentPos.x, currentPos.y, currentPos.z),
@@ -71,7 +71,7 @@ export const CurveWireframe = (props: {
         points.push(new Vector3(nextPos.x, nextPos.y, nextPos.z));
       }
 
-      if (tieDist > tieSpacing) {
+      if (tieDistance > tieSpacing) {
         for (
           let k = 0;
           k < (loopTie ? tie.length : tie.length - 1);
@@ -79,11 +79,11 @@ export const CurveWireframe = (props: {
         ) {
           const currentPos = tie[k % tie.length]
             .clone()
-            .applyMatrix4(currentMatrixAtDistance);
+            .applyMatrix4(currentMatrixAtArcLength);
 
           const nextPos = tie[(k + 1) % tie.length]
             .clone()
-            .applyMatrix4(currentMatrixAtDistance);
+            .applyMatrix4(currentMatrixAtArcLength);
 
           points.push(
             new Vector3(currentPos.x, currentPos.y, currentPos.z),
@@ -91,10 +91,10 @@ export const CurveWireframe = (props: {
           points.push(new Vector3(nextPos.x, nextPos.y, nextPos.z));
         }
 
-        tieDist = 0;
+        tieDistance = 0;
       }
 
-      tieDist += nextDistance - currentDistance;
+      tieDistance += nextArcLength - currentArcLength;
     }
 
     return points;
