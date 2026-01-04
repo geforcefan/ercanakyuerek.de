@@ -6,7 +6,7 @@ export const ContentComponentsListPage = () => {
   return (
     <ul>
       {contentComponents.keys().map((path: string) => (
-        <li>
+        <li key={path}>
           <a href={path}>{path.replace('./', '/')}</a>
         </li>
       ))}

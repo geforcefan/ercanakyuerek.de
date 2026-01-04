@@ -1,15 +1,23 @@
 import { useControls } from 'leva';
 
-export const useSimulationStateControls = () => {
+export const useSimulationStateControls = (
+  init: {
+    velocity?: number;
+    distanceTraveled?: number;
+    friction?: number;
+    airResistance? : number,
+    gravity? : number
+  } = {},
+) => {
   return useControls(() => ({
-    velocity: 0,
-    distanceTraveled: 0,
+    velocity: init.velocity ?? 0,
+    distanceTraveled: init.distanceTraveled ?? 0,
     friction: {
-      value: 0.03,
+      value: init.friction ?? 0.03,
       pad: 5,
     },
     airResistance: {
-      value: 0.0001,
+      value:init.airResistance ??  0.0001,
       pad: 6,
     },
     acceleration: {
@@ -17,7 +25,7 @@ export const useSimulationStateControls = () => {
       pad: 5,
     },
     gravity: {
-      value: 9.81665,
+      value: init.gravity ?? 9.81665,
       pad: 5,
     },
   }));

@@ -20,9 +20,9 @@ module.exports = {
     rules: [
       {
         test: /\.wasm$/,
-        type: 'asset/resource'
+        type: 'asset/resource',
       },
-      { test: /\.nl2park$/, loader: 'arraybuffer-loader' },
+      { test: /\.nl2park$/, type: 'asset/resource' },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],

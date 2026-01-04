@@ -1,3 +1,4 @@
+import { first, uniq } from 'lodash';
 import last from 'lodash/last';
 import { MathUtils, Matrix4, Vector3 } from 'three';
 
@@ -15,6 +16,7 @@ import { fromMatrix4 } from './vector3';
 export type CurveNode = {
   matrix: Matrix4;
   distanceAtCurve: number;
+  segmentIndex: number;
 };
 
 export const length = (curve: CurveNode[]) => {
@@ -72,6 +74,7 @@ export const positionAtX = (curve: CurveNode[], at: number) => {
 export const insertMatrix = (
   curve: CurveNode[],
   matrix: Matrix4,
+  segmentIndex: number = 0,
 ): void => {
   const lastNode = last(curve);
   let distanceAtCurve = 0;
@@ -84,16 +87,24 @@ export const insertMatrix = (
   curve.push({
     distanceAtCurve,
     matrix: matrix.clone(),
+    segmentIndex,
   });
 };
 
 export const insertPosition = (
   curve: CurveNode[],
   position: Vector3,
+  segmentIndex: number = 0,
 ) => {
   const lastNode = last(curve);
 
   if (lastNode) {
+    if (
+      position.distanceTo(fromMatrix4(lastNode.matrix)) <
+      Number.EPSILON
+    )
+      return;
+
     if (curve.length === 1) {
       applyLookRelativeAt(lastNode.matrix, position);
     }
@@ -102,6 +113,7 @@ export const insertPosition = (
     insertMatrix(
       curve,
       lastNode.matrix.clone().setPosition(position),
+      segmentIndex,
     );
     return;
   }
@@ -113,14 +125,12 @@ export const applyRollFromCurve = (
   curve: CurveNode[],
   rollCurve: CurveNode[],
 ) => {
-  const curveLength = length(curve);
   curve.forEach(({ matrix, distanceAtCurve }) => {
-      return applyRotationZ(
-        matrix,
-        -positionAtX(rollCurve, distanceAtCurve / curveLength).y,
-      )
-    }
-  );
+    return applyRotationZ(
+      matrix,
+      -positionAtX(rollCurve, distanceAtCurve).y,
+    );
+  });
 
   return curve;
 };
@@ -165,6 +175,7 @@ export const fromPointsWithBasicNormals = (points: Vector3[]) => {
       curve.push({
         matrix: prevNode.matrix.clone().setPosition(left),
         distanceAtCurve,
+        segmentIndex: 0,
       });
 
     curve.push({
@@ -172,6 +183,7 @@ export const fromPointsWithBasicNormals = (points: Vector3[]) => {
         .lookAt(right, left, new Vector3(0, 1, 0))
         .setPosition(left),
       distanceAtCurve,
+      segmentIndex: 0,
     });
 
     distanceAtCurve += left.distanceTo(right);
@@ -183,6 +195,7 @@ export const fromPointsWithBasicNormals = (points: Vector3[]) => {
   curve.push({
     matrix: lastNode.matrix.clone().setPosition(lastPoint),
     distanceAtCurve,
+    segmentIndex: 0,
   });
 
   return curve;
@@ -190,4 +203,72 @@ export const fromPointsWithBasicNormals = (points: Vector3[]) => {
 
 export const toPoints = (curve: CurveNode[]) => {
   return curve.map((node) => fromMatrix4(node.matrix));
+};
+
+export const distanceAtCurveAtOffset = (u: number, segmentOffsets: number[]) => {
+  const i = Math.floor(u);
+  const t = u - i;
+
+  const left = segmentOffsets[i] ?? 0;
+  const right = segmentOffsets[i + 1] ?? left;
+
+  return MathUtils.lerp(left, right, t);
+};
+
+export const toSegmentOffsets = (
+  curve: CurveNode[],
+  numberOfVertices: number,
+) => {
+  if (curve.length < 1) return [];
+  const numberOfSegments =
+    last(curve)!.segmentIndex - first(curve)!.segmentIndex + 1;
+
+  const segments: number[][] = Array.from(
+    { length: numberOfSegments },
+    () => [],
+  );
+  const lengths: number[] = [];
+
+  curve.forEach((node, index) =>
+    segments[node.segmentIndex].push(index),
+  );
+
+  segments.forEach((segment, index) => {
+    const nextSegment = segments[index + 1];
+    const leftNodeIndex = first(segment)!;
+    const rightNodeIndex = nextSegment
+      ? first(segments[index + 1])!
+      : last(segment)!;
+
+    const length =
+      curve[rightNodeIndex].distanceAtCurve -
+      curve[leftNodeIndex].distanceAtCurve;
+
+    if (length < Number.EPSILON) return;
+    lengths.push(length);
+  });
+
+  const splitIndices = uniq([lengths.length - 1, 0]);
+  const numberOfNeededLengths = numberOfVertices - 1;
+  const numberOfMissingLengths =
+    numberOfNeededLengths - lengths.length;
+  const numberOfSplitsNeeded =
+    numberOfMissingLengths / splitIndices.length + 1;
+
+  uniq(splitIndices).forEach((index) =>
+    lengths.splice(
+      index,
+      1,
+      ...new Array(numberOfSplitsNeeded).fill(
+        lengths[index] / numberOfSplitsNeeded,
+      ),
+    ),
+  );
+
+  const offsets: number[] = new Array(lengths.length + 1).fill(0);
+  lengths.forEach((_, index) => {
+    offsets[index + 1] = offsets[index] + lengths[index];
+  });
+
+  return offsets;
 };

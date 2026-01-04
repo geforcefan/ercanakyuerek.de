@@ -6,6 +6,7 @@ import {
   length,
   matrixAtDistance,
 } from '../maths/curve';
+import { useColors } from '../hooks/useColors';
 
 export const CurveWireframe = (props: {
   curve: CurveNode[];
@@ -16,6 +17,8 @@ export const CurveWireframe = (props: {
   loopTie?: boolean;
   color?: number;
 }) => {
+  const colors = useColors();
+
   const wireFrameParts = [
     new Vector4(1, 0, 0, 1),
     new Vector4(0, -1, 0, 1),
@@ -23,13 +26,13 @@ export const CurveWireframe = (props: {
   ];
 
   const {
-    railSpacing = 0.5,
+    railSpacing = 0.25,
     tieSpacing = 1,
     loopTie = true,
     tie = wireFrameParts,
     rails = wireFrameParts,
     curve = [],
-    color = 0x0000ff,
+    color
   } = props;
 
   const points = useMemo(() => {
@@ -99,7 +102,7 @@ export const CurveWireframe = (props: {
 
   return (
     <lineSegments geometry={new BufferGeometry().setFromPoints(points)}>
-      <lineBasicMaterial attach="material" color={color} />
+      <lineBasicMaterial attach="material" color={colors.secondary || color} />
     </lineSegments>
   );
 };

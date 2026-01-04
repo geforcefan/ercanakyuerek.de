@@ -7,9 +7,12 @@ import { evaluateMotion } from '../helper/physics';
 
 import { useSimulationStateControls } from './useSimulationStateControls';
 
-export const useMotionSimulation = (curve: CurveNode[]) => {
+export const useMotionSimulation = (
+  curve: CurveNode[],
+  init: Parameters<typeof useSimulationStateControls>[0] = {},
+) => {
   const [simulationState, setSimulationState] =
-    useSimulationStateControls();
+    useSimulationStateControls(init);
 
   useFrame((_, deltaTime) => {
     setSimulationState(
@@ -31,8 +34,8 @@ export const useMotionSimulation = (curve: CurveNode[]) => {
       simulationState.distanceTraveled < 0
     ) {
       setSimulationState({
-        velocity: 0,
-        distanceTraveled: 0,
+        velocity: init?.velocity ?? 0,
+        distanceTraveled: init?.distanceTraveled ?? 0,
         acceleration: 0,
       });
     }

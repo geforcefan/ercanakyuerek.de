@@ -4,14 +4,14 @@
 {{ $class := .Get "class" }}
 {{ $path := .Get "path" }}
 {{ $description := .Get "description" }}
-{{ $rootID := printf "react-root-%s" (md5 (printf "%s" $path)) }}
+{{ $rootID := printf "react-root-%s" (md5 (printf "%d" now.UnixNano)) }}
 
 <div class="embedded {{ $class }}">
   <iframe id="{{ $rootID }}" width="{{ $width }}" height="{{ $height }}" style="border: 0" class="frame"></iframe>
 
   {{ if $description }}
   <div class="description" style="width: {{ $width }}">
-    {{ $description }}
+    {{ $description | markdownify }}
   </div>
   {{ end }}
 

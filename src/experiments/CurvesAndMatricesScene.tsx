@@ -138,15 +138,15 @@ export const CurvesAndMatricesScene = () => {
 
   const [cubicPoints, setCubicPoints] = useState([
     new Vector3(0, 0),
-    new Vector3(0.5, 50),
+    new Vector3(0.5, 0.2),
     new Vector3(1, 0),
   ]);
 
   const [points, setPoints] = useState([
-    new Vector3(-1500, 300, 0),
-    new Vector3(5, 0, 0),
-    new Vector3(25, 0, 0),
-    new Vector3(1500, 300, 0),
+    new Vector3(0, 0, 0),
+    new Vector3(12, 0, 0),
+    new Vector3(12, 15, 0),
+    new Vector3(0, 15, 0),
   ]);
 
   const cubicCurve = useMemo(
