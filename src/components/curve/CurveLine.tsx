@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Line } from '@react-three/drei';
 import { LineProps } from '@react-three/drei/core/Line';
 
-import { CurveNode, toPoints } from '../maths/curve';
+import { CurveNode, toPoints } from '../../maths/curve';
 
 export const CurveLine = ({
   curve,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThreeElements } from '@react-three/fiber';
 
-import { useColors } from '../hooks/useColors';
+import { useColors } from '../../hooks/useColors';
 
 type Size = 'sm' | 'md';
 

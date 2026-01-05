@@ -2,16 +2,15 @@ import React, { useMemo, useState } from 'react';
 import { Line } from '@react-three/drei';
 import { Vector3 } from 'three';
 
-import { useColors } from '../../../../hooks/useColors';
-import { useMotionSimulation } from '../../../../hooks/useMotionSimulation';
-
-import { CurveLine } from '../../../../components/CurveLine';
-import { DragControlPoints } from '../../../../components/DragControlPoints';
-import { PointWithMatrixArrows } from '../../../../components/PointWithMatrixArrows';
-import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 import { bezierSplineCurve } from '../../../../maths/bezier';
+import { useColors } from '../../../../hooks/useColors';
 
-const BezierCurveDemo = () => {
+import { CurveWireframe } from '../../../../components/curve/CurveWireframe';
+import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
+import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
+import { OrthographicScene } from '../../../../scenes/OrthographicScene';
+
+export const BezierCurveDemoScene = () => {
   const colors = useColors();
 
   const [points, setPoints] = useState([
@@ -21,37 +20,22 @@ const BezierCurveDemo = () => {
     new Vector3(0, -2.4, 0),
   ]);
 
-  const curve = useMemo(
-    () => bezierSplineCurve(points),
-    [points],
-  );
-
-  const motionMatrix = useMotionSimulation(curve);
+  const curve = useMemo(() => bezierSplineCurve(points), [points]);
 
   return (
-    <>
+    <OrthographicScene>
       <Line
         points={points}
         color={colors.highlight}
         segments={true}
       />
-
       <DragControlPoints
         axisLock="z"
         points={points}
         setPoints={setPoints}
       />
-
-      <PointWithMatrixArrows matrix={motionMatrix} />
-      <CurveLine curve={curve} color={colors.secondary} />
-    </>
-  );
-};
-
-export const BezierCurveDemoScene = () => {
-  return (
-    <OrthographicScene>
-      <BezierCurveDemo />
+      <CurveWireframe curve={curve} />
+      <TrainWithPhysics curve={curve} />
     </OrthographicScene>
   );
 };

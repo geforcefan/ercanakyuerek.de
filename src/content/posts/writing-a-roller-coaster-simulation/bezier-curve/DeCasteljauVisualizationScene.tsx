@@ -9,8 +9,8 @@ import { deCasteljau } from '../../../../maths/bezier';
 import { uniformSampleMap } from '../../../../helper/uniform-sample';
 import { useColors } from '../../../../hooks/useColors';
 
-import { ControlPoint } from '../../../../components/ControlPoint';
-import { DragControlPoints } from '../../../../components/DragControlPoints';
+import { ControlPoint } from '../../../../components/curve/ControlPoint';
+import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 
 export const DeCasteljauVisualization = () => {

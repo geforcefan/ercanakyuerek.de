@@ -80,6 +80,9 @@ export const insertMatrix = (
   let arcLength = 0;
 
   if (lastNode) {
+    const distanceToLastNode = distance(lastNode.matrix, matrix);
+    if (distanceToLastNode < Number.EPSILON) return;
+
     arcLength =
       lastNode.arcLength + distance(lastNode.matrix, matrix);
   }
@@ -205,7 +208,10 @@ export const toPoints = (curve: CurveNode[]) => {
   return curve.map((node) => fromMatrix4(node.matrix));
 };
 
-export const arcLengthAtOffset = (u: number, segmentOffsets: number[]) => {
+export const arcLengthAtOffset = (
+  u: number,
+  segmentOffsets: number[],
+) => {
   const i = Math.floor(u);
   const t = u - i;
 
@@ -249,11 +255,14 @@ export const toSegmentOffsets = (
   });
 
   const splitIndices = uniq([lengths.length - 1, 0]);
-  const numberOfNeededLengths = numberOfVertices - 1;
+  /*const numberOfNeededLengths = numberOfVertices - 1;
   const numberOfMissingLengths =
     numberOfNeededLengths - lengths.length;
   const numberOfSplitsNeeded =
-    numberOfMissingLengths / splitIndices.length + 1;
+    numberOfMissingLengths / splitIndices.length + 1;*/
+
+  const numberOfSplitsNeeded =
+    numberOfVertices <= 4 ? numberOfVertices - 1 : 2;
 
   uniq(splitIndices).forEach((index) =>
     lengths.splice(

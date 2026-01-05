@@ -15,8 +15,8 @@ import {
 import { useColors } from '../../../../hooks/useColors';
 import { useSimulationStateControls } from '../../../../hooks/useSimulationStateControls';
 
-import { ControlPoint } from '../../../../components/ControlPoint';
-import { DragControlPoints } from '../../../../components/DragControlPoints';
+import { ControlPoint } from '../../../../components/curve/ControlPoint';
+import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 
 const FrictionAndAirResistanceDemo = () => {

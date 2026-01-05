@@ -5,8 +5,8 @@ import {
   CurveNode,
   totalArcLength,
   matrixAtArcLength,
-} from '../maths/curve';
-import { useColors } from '../hooks/useColors';
+} from '../../maths/curve';
+import { useColors } from '../../hooks/useColors';
 
 export const CurveWireframe = (props: {
   curve: CurveNode[];
@@ -102,7 +102,7 @@ export const CurveWireframe = (props: {
 
   return (
     <lineSegments geometry={new BufferGeometry().setFromPoints(points)}>
-      <lineBasicMaterial attach="material" color={colors.secondary || color} />
+      <lineBasicMaterial attach="material" color={color || colors.secondary} />
     </lineSegments>
   );
 };

@@ -6,8 +6,8 @@ import { Vector3 } from 'three';
 
 import { useColors } from '../../../../hooks/useColors';
 
-import { BezierCurve } from '../../../../components/BezierCurve';
-import { DragControlPoints } from '../../../../components/DragControlPoints';
+import { BezierCurve } from '../../../../components/curve/BezierCurve';
+import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 
 const Example = () => {

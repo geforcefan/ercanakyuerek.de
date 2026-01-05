@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 
@@ -9,7 +9,7 @@ import { ContentComponent } from './components/ContentComponent';
 import { ContentComponentsListPage } from './pages/ContentComponentsListPage';
 
 import './themes/hello-friend-ng/assets/scss/main-webpack.scss';
-import { CurvesAndMatricesScene } from './experiments/CurvesAndMatricesScene';
+import { NoLimitsTrackScene } from './experiments/NoLimitsTrack';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/experiment',
-    Component: CurvesAndMatricesScene,
+    Component: NoLimitsTrackScene,
   },
   ...contentComponents.keys().map((path: string) => {
     return {
@@ -31,5 +31,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 ).render(
-    <RouterProvider router={router} />,
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>,
 );

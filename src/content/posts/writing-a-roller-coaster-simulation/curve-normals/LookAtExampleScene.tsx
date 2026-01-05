@@ -1,16 +1,12 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import {
-  CameraControls,
-  CameraControlsImpl,
   Line,
-  PerspectiveCamera,
 } from '@react-three/drei';
 import { useControls } from 'leva';
-import { MathUtils, Matrix4, Vector3, Vector4 } from 'three';
+import { Vector3, Vector4 } from 'three';
 
 import {
-  CurveNode,
-  fromPointsWithBasicNormals,
+  fromPointsWithBasicNormals, toSegmentOffsets,
 } from '../../../../maths/curve';
 import {
   fromPoints,
@@ -20,12 +16,11 @@ import { fromMatrix4 } from '../../../../maths/vector3';
 import { fromURL } from '../../../../helper/nl2park/nl2park';
 import { applyRollFromCustomTrack } from '../../../../helper/nolimits';
 import { useColors } from '../../../../hooks/useColors';
-import { useMotionSimulation } from '../../../../hooks/useMotionSimulation';
 
-import { CurveWireframe } from '../../../../components/CurveWireframe';
-import { DragControlPoints } from '../../../../components/DragControlPoints';
+import { CurveWireframe } from '../../../../components/curve/CurveWireframe';
+import { DefaultCameraControls } from '../../../../components/camera/DefaultCameraControls';
 import { Ground } from '../../../../components/Ground';
-import { PointWithMatrixArrows } from '../../../../components/PointWithMatrixArrows';
+import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
 import { PerspectiveScene } from '../../../../scenes/PerspectiveScene';
 
 // @ts-ignore
@@ -34,63 +29,15 @@ import LookAtExample from './LookAtExample.nl2park';
 const exampleCoaster = (await fromURL(LookAtExample)).coaster[0];
 const exampleTrack = exampleCoaster?.tracks[0];
 
-const MotionSimulation = ({
-  curve,
-  pov,
-}: {
-  curve: CurveNode[];
-  pov?: boolean;
-}) => {
-  const motionMatrix = useMotionSimulation(curve, { velocity: 22 });
-
-  const povMatrix = useMemo(
-    () =>
-      motionMatrix
-        .clone()
-        .multiply(
-          new Matrix4().makeRotationY(MathUtils.degToRad(180)),
-        )
-        .multiply(new Matrix4().makeTranslation(0, 1, 0)),
-    [motionMatrix],
-  );
-
-  return (
-    <>
-      {!pov && <PointWithMatrixArrows matrix={motionMatrix} />}
-      <PerspectiveCamera
-        matrix={povMatrix}
-        matrixAutoUpdate={false}
-        fov={100}
-        makeDefault={pov}
-      />
-      <CameraControls
-        makeDefault={!pov}
-        dollyToCursor={true}
-        draggingSmoothTime={0.03}
-        dollySpeed={0.4}
-        infinityDolly={true}
-        dollyDragInverted={true}
-        minDistance={0}
-        maxDistance={Infinity}
-        mouseButtons={{
-          left: CameraControlsImpl.ACTION.ROTATE,
-          right: CameraControlsImpl.ACTION.TRUCK,
-          wheel: CameraControlsImpl.ACTION.DOLLY,
-          middle: CameraControlsImpl.ACTION.NONE,
-        }}
-      />
-      <Ground />
-    </>
-  );
-};
-
 export const LookAtExampleScene = () => {
   const colors = useColors();
 
-  const [points, setPoints] = useState(
-    exampleTrack?.vertices.map((v) =>
-      new Vector4().fromArray(v.position),
-    ),
+  const points = useMemo(
+    () =>
+      exampleTrack?.vertices.map((v) =>
+        new Vector4().fromArray(v.position),
+      ),
+    [],
   );
 
   const { lookAt, pov } = useControls({
@@ -111,7 +58,12 @@ export const LookAtExampleScene = () => {
           )
         : nurbsCurve;
 
-    applyRollFromCustomTrack(curve, exampleTrack);
+    const segmentOffsets = toSegmentOffsets(
+      curve,
+      points.length,
+    );
+
+    applyRollFromCustomTrack(curve, segmentOffsets, exampleTrack);
 
     return curve;
   }, [points, lookAt]);
@@ -130,7 +82,13 @@ export const LookAtExampleScene = () => {
           </>
         )}
         <CurveWireframe curve={curve} />
-        <MotionSimulation curve={curve} pov={pov} />
+        <TrainWithPhysics
+          curve={curve}
+          activateCamera={pov}
+          init={{ velocity: 22 }}
+        />
+        <DefaultCameraControls makeDefault={!pov} />
+        <Ground />
       </PerspectiveScene>
     </>
   );

@@ -2,7 +2,7 @@ import React, { memo, useState } from 'react';
 import set from 'lodash/set';
 import { Vector3 } from 'three';
 
-import { useColors } from '../hooks/useColors';
+import { useColors } from '../../hooks/useColors';
 
 import { ControlPoint } from './ControlPoint';
 import { DragControlPosition } from './DragControlPosition';

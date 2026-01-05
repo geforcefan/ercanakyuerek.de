@@ -2,11 +2,11 @@ import React, { useMemo } from 'react';
 import { Line } from '@react-three/drei';
 import { Vector3 } from 'three';
 
-import { bezierSplineCurve } from '../maths/bezier';
-import { totalArcLength, matrixAtArcLength } from '../maths/curve';
-import { fromMatrix4 } from '../maths/vector3';
-import { uniformSampleMap } from '../helper/uniform-sample';
-import { useColors } from '../hooks/useColors';
+import { bezierSplineCurve } from '../../maths/bezier';
+import { totalArcLength, matrixAtArcLength } from '../../maths/curve';
+import { fromMatrix4 } from '../../maths/vector3';
+import { uniformSampleMap } from '../../helper/uniform-sample';
+import { useColors } from '../../hooks/useColors';
 
 import { ControlPoint } from './ControlPoint';
 

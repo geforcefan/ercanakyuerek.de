@@ -22,9 +22,9 @@ import { evaluateMotion } from '../helper/physics';
 import { useColors } from '../hooks/useColors';
 import { useMeasure } from '../hooks/useMeasure';
 
-import { ControlPoint } from '../components/ControlPoint';
-import { CurveWireframe } from '../components/CurveWireframe';
-import { DragControlPoints } from '../components/DragControlPoints';
+import { ControlPoint } from '../components/curve/ControlPoint';
+import { CurveWireframe } from '../components/curve/CurveWireframe';
+import { DragControlPoints } from '../components/curve/DragControlPoints';
 import { MatrixArrowHelper } from '../components/MatrixArrowHelper';
 import { OrthographicScene } from '../scenes/OrthographicScene';
 import { PerspectiveScene } from '../scenes/PerspectiveScene';
