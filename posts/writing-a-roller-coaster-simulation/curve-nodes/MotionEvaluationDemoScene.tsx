@@ -1,18 +1,14 @@
 import React, { useMemo, useState } from 'react';
-import { Line } from '@react-three/drei';
 import { Vector3 } from 'three';
 
 import { fromPointsWithBasicNormals } from '../../../../maths/curve';
-import { useColors } from '../../../../hooks/useColors';
-import { useMotionSimulation } from '../../../../hooks/useMotionSimulation';
 
-import { DragControlPoints } from '../../../../components/DragControlPoints';
-import { PointWithMatrixArrows } from '../../../../components/PointWithMatrixArrows';
+import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
+import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
+import { CurveLine } from '../../../../components/curve/CurveLine';
 
-const MotionEvaluationDemo = () => {
-  const colors = useColors();
-
+export const MotionEvaluationDemoScene = () => {
   const [points, setPoints] = useState([
     new Vector3(-11.5, 2.5, 0),
     new Vector3(-10, -0.75, 0),
@@ -26,25 +22,16 @@ const MotionEvaluationDemo = () => {
     () => fromPointsWithBasicNormals(points),
     [points],
   );
-  const motionMatrix = useMotionSimulation(curve);
 
   return (
-    <>
+    <OrthographicScene>
       <DragControlPoints
         axisLock="z"
         points={points}
         setPoints={setPoints}
       />
-      <Line points={points} color={colors.secondary} />
-      <PointWithMatrixArrows matrix={motionMatrix} />
-    </>
-  );
-};
-
-export const MotionEvaluationDemoScene = () => {
-  return (
-    <OrthographicScene>
-      <MotionEvaluationDemo />
+      <CurveLine curve={curve} />
+      <TrainWithPhysics curve={curve} />
     </OrthographicScene>
   );
 };

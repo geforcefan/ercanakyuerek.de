@@ -8,7 +8,7 @@ import { evaluateMotion } from '../../../../helper/physics';
 import { useColors } from '../../../../hooks/useColors';
 import { useSimulationStateControls } from '../../../../hooks/useSimulationStateControls';
 
-import { DragControlPoints } from '../../../../components/DragControlPoints';
+import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
 import { PointWithMatrixArrows } from '../../../../components/PointWithMatrixArrows';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 

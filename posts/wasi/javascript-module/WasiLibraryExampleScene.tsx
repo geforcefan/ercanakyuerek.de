@@ -5,7 +5,7 @@ import { Vector3 } from 'three';
 import { uniformSampleMap } from '../../../../helper/uniform-sample';
 import { useColors } from '../../../../hooks/useColors';
 
-import { DragControlPoints } from '../../../../components/DragControlPoints';
+import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 
 import {

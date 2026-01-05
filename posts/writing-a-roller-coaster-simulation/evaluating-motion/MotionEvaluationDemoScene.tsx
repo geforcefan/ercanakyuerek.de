@@ -8,7 +8,7 @@ import { evaluateMotionByAcceleration } from '../../../../helper/physics';
 import { useColors } from '../../../../hooks/useColors';
 
 import { Arrow } from '../../../../components/Arrow';
-import { ControlPoint } from '../../../../components/ControlPoint';
+import { ControlPoint } from '../../../../components/curve/ControlPoint';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 
 const MotionEvaluationDemo = () => {

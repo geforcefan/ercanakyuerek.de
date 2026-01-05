@@ -25,7 +25,7 @@
 
 
 <div class="embedded ">
-  <iframe id="react-root-fc30216115669f56fcdd844ffa3ccddf" width="100%" height="450px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-2f9e0f5b9b0519bc653e18bcb6b7a5e8" width="100%" height="450px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -34,7 +34,7 @@
   
 
   <script>
-    document.getElementById('react-root-fc30216115669f56fcdd844ffa3ccddf').srcdoc = `
+    document.getElementById('react-root-2f9e0f5b9b0519bc653e18bcb6b7a5e8').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -52,12 +52,12 @@
   </script>
 </div>
 ]]></content></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
-&lt;iframe id="react-root-29a9b465e3f583070a13b47231b5330d" width="225px" height="225px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
+&lt;iframe id="react-root-8b11bc47b484a34e81ea6008ecd9b783" width="225px" height="225px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
 &lt;div class="description" style="width: 225px"&gt;
 An interactive example of a Bézier curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-29a9b465e3f583070a13b47231b5330d').srcdoc = `
+document.getElementById('react-root-8b11bc47b484a34e81ea6008ecd9b783').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -84,7 +84,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-29a9b465e3f583070a13b47231b5330d" width="225px" height="225px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-8b11bc47b484a34e81ea6008ecd9b783" width="225px" height="225px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 225px">
@@ -93,7 +93,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
   
 
   <script>
-    document.getElementById('react-root-29a9b465e3f583070a13b47231b5330d').srcdoc = `
+    document.getElementById('react-root-8b11bc47b484a34e81ea6008ecd9b783').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -124,12 +124,12 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded ">
-  <iframe id="react-root-cacb5170b3861202146c600a3342b994" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-d60c2ea9d0a92efd12fe4211b2a2da4b" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-cacb5170b3861202146c600a3342b994').srcdoc = `
+    document.getElementById('react-root-d60c2ea9d0a92efd12fe4211b2a2da4b').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -166,7 +166,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-cfec6cc60c09804fa732099c4b1f1e14" width="355px" height="500px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-7c607db59d80a238a79759f98bb38152" width="355px" height="500px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 355px">
@@ -175,7 +175,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
   
 
   <script>
-    document.getElementById('react-root-cfec6cc60c09804fa732099c4b1f1e14').srcdoc = `
+    document.getElementById('react-root-7c607db59d80a238a79759f98bb38152').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -259,7 +259,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-91877e4ec0bd27c4d2430ed95a657a23" width="355px" height="425px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-58b0f1e925df40d7e0f380139e788645" width="355px" height="425px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 355px">
@@ -268,7 +268,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
   
 
   <script>
-    document.getElementById('react-root-91877e4ec0bd27c4d2430ed95a657a23').srcdoc = `
+    document.getElementById('react-root-58b0f1e925df40d7e0f380139e788645').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -419,16 +419,15 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
 import { Line } from &#39;@react-three/drei&#39;;
 import { Vector3 } from &#39;three&#39;;
 
-import { useColors } from &#39;../../../../hooks/useColors&#39;;
-import { useMotionSimulation } from &#39;../../../../hooks/useMotionSimulation&#39;;
-
-import { CurveLine } from &#39;../../../../components/CurveLine&#39;;
-import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
-import { PointWithMatrixArrows } from &#39;../../../../components/PointWithMatrixArrows&#39;;
-import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 import { bezierSplineCurve } from &#39;../../../../maths/bezier&#39;;
+import { useColors } from &#39;../../../../hooks/useColors&#39;;
 
-const BezierCurveDemo = () =&gt; {
+import { CurveWireframe } from &#39;../../../../components/curve/CurveWireframe&#39;;
+import { DragControlPoints } from &#39;../../../../components/curve/DragControlPoints&#39;;
+import { TrainWithPhysics } from &#39;../../../../components/TrainWithPhysics&#39;;
+import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
+
+export const BezierCurveDemoScene = () =&gt; {
   const colors = useColors();
 
   const [points, setPoints] = useState([
@@ -438,37 +437,22 @@ const BezierCurveDemo = () =&gt; {
     new Vector3(0, -2.4, 0),
   ]);
 
-  const curve = useMemo(
-    () =&gt; bezierSplineCurve(points),
-    [points],
-  );
-
-  const motionMatrix = useMotionSimulation(curve);
+  const curve = useMemo(() =&gt; bezierSplineCurve(points), [points]);
 
   return (
-    &lt;&gt;
+    &lt;OrthographicScene&gt;
       &lt;Line
         points={points}
         color={colors.highlight}
         segments={true}
       /&gt;
-
       &lt;DragControlPoints
         axisLock=&#34;z&#34;
         points={points}
         setPoints={setPoints}
       /&gt;
-
-      &lt;PointWithMatrixArrows matrix={motionMatrix} /&gt;
-      &lt;CurveLine curve={curve} color={colors.secondary} /&gt;
-    &lt;/&gt;
-  );
-};
-
-export const BezierCurveDemoScene = () =&gt; {
-  return (
-    &lt;OrthographicScene&gt;
-      &lt;BezierCurveDemo /&gt;
+      &lt;CurveWireframe curve={curve} /&gt;
+      &lt;TrainWithPhysics curve={curve} /&gt;
     &lt;/OrthographicScene&gt;
   );
 };
@@ -495,7 +479,7 @@ export const BezierCurveDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-2b3cd32eaa5d9ca8ed50f6549ace74b6" width="100%" height="200px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-5ba056c6f1a07106c6c47f17dd1300f2" width="100%" height="200px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -504,7 +488,7 @@ export const BezierCurveDemoScene = () =&gt; {
   
 
   <script>
-    document.getElementById('react-root-2b3cd32eaa5d9ca8ed50f6549ace74b6').srcdoc = `
+    document.getElementById('react-root-5ba056c6f1a07106c6c47f17dd1300f2').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -750,7 +734,7 @@ export const BezierCurveDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-434e64532cbdf66b33d06cfc570aea42" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-12e077a171363ea758b59de9738de88c" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -759,7 +743,7 @@ export const BezierCurveDemoScene = () =&gt; {
   
 
   <script>
-    document.getElementById('react-root-434e64532cbdf66b33d06cfc570aea42').srcdoc = `
+    document.getElementById('react-root-12e077a171363ea758b59de9738de88c').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -803,20 +787,16 @@ export const BezierCurveDemoScene = () =&gt; {
 </p>
 
 <pre><code class="language-tsx">import React, { useMemo, useState } from &#39;react&#39;;
-import { Line } from &#39;@react-three/drei&#39;;
 import { Vector3 } from &#39;three&#39;;
 
 import { fromPointsWithBasicNormals } from &#39;../../../../maths/curve&#39;;
-import { useColors } from &#39;../../../../hooks/useColors&#39;;
-import { useMotionSimulation } from &#39;../../../../hooks/useMotionSimulation&#39;;
 
-import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
-import { PointWithMatrixArrows } from &#39;../../../../components/PointWithMatrixArrows&#39;;
+import { DragControlPoints } from &#39;../../../../components/curve/DragControlPoints&#39;;
+import { TrainWithPhysics } from &#39;../../../../components/TrainWithPhysics&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
+import { CurveLine } from &#39;../../../../components/curve/CurveLine&#39;;
 
-const MotionEvaluationDemo = () =&gt; {
-  const colors = useColors();
-
+export const MotionEvaluationDemoScene = () =&gt; {
   const [points, setPoints] = useState([
     new Vector3(-11.5, 2.5, 0),
     new Vector3(-10, -0.75, 0),
@@ -830,25 +810,16 @@ const MotionEvaluationDemo = () =&gt; {
     () =&gt; fromPointsWithBasicNormals(points),
     [points],
   );
-  const motionMatrix = useMotionSimulation(curve);
 
   return (
-    &lt;&gt;
+    &lt;OrthographicScene&gt;
       &lt;DragControlPoints
         axisLock=&#34;z&#34;
         points={points}
         setPoints={setPoints}
       /&gt;
-      &lt;Line points={points} color={colors.secondary} /&gt;
-      &lt;PointWithMatrixArrows matrix={motionMatrix} /&gt;
-    &lt;/&gt;
-  );
-};
-
-export const MotionEvaluationDemoScene = () =&gt; {
-  return (
-    &lt;OrthographicScene&gt;
-      &lt;MotionEvaluationDemo /&gt;
+      &lt;CurveLine curve={curve} /&gt;
+      &lt;TrainWithPhysics curve={curve} /&gt;
     &lt;/OrthographicScene&gt;
   );
 };
@@ -928,12 +899,12 @@ export const MotionEvaluationDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-b69c3b54e69b51bca7e4183fd28430a8" width="100%" height="320px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-bff67b4f67cd5580e0047bfcff95b749" width="100%" height="320px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-b69c3b54e69b51bca7e4183fd28430a8').srcdoc = `
+    document.getElementById('react-root-bff67b4f67cd5580e0047bfcff95b749').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -985,7 +956,7 @@ import { evaluateMotion } from &#39;../../../../helper/physics&#39;;
 import { useColors } from &#39;../../../../hooks/useColors&#39;;
 import { useSimulationStateControls } from &#39;../../../../hooks/useSimulationStateControls&#39;;
 
-import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
+import { DragControlPoints } from &#39;../../../../components/curve/DragControlPoints&#39;;
 import { PointWithMatrixArrows } from &#39;../../../../components/PointWithMatrixArrows&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
@@ -1161,12 +1132,12 @@ That is the whole trick.</p>
 
 
 <div class="embedded ">
-  <iframe id="react-root-420c43a00b6068e573cd7ef73735ae28" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-91e2a5f2aad0ccb010ef1732beb58a4b" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-420c43a00b6068e573cd7ef73735ae28').srcdoc = `
+    document.getElementById('react-root-91e2a5f2aad0ccb010ef1732beb58a4b').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1234,8 +1205,8 @@ import {
 import { useColors } from &#39;../../../../hooks/useColors&#39;;
 import { useSimulationStateControls } from &#39;../../../../hooks/useSimulationStateControls&#39;;
 
-import { ControlPoint } from &#39;../../../../components/ControlPoint&#39;;
-import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
+import { ControlPoint } from &#39;../../../../components/curve/ControlPoint&#39;;
+import { DragControlPoints } from &#39;../../../../components/curve/DragControlPoints&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
 const FrictionAndAirResistanceDemo = () =&gt; {
@@ -1491,12 +1462,12 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 
 
 <div class="embedded ">
-  <iframe id="react-root-0d97e7bea1a3de7614b0252adb9a4410" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-d0b39d89c9057ce397a298afedce9a35" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-0d97e7bea1a3de7614b0252adb9a4410').srcdoc = `
+    document.getElementById('react-root-d0b39d89c9057ce397a298afedce9a35').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1556,8 +1527,8 @@ import {
 import { evaluateMotionByForwardDirection } from &#39;../../../../helper/physics&#39;;
 import { useColors } from &#39;../../../../hooks/useColors&#39;;
 
-import { ControlPoint } from &#39;../../../../components/ControlPoint&#39;;
-import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
+import { ControlPoint } from &#39;../../../../components/curve/ControlPoint&#39;;
+import { DragControlPoints } from &#39;../../../../components/curve/DragControlPoints&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
 const LinearTrackDemo = () =&gt; {
@@ -1739,12 +1710,12 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
 
 
 <div class="embedded ">
-  <iframe id="react-root-6be58dbdf2a3e9ee31d0eafebfe6c706" width="100%" height="320px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-f2612c97ed54d5c225695da5aea4c285" width="100%" height="320px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-6be58dbdf2a3e9ee31d0eafebfe6c706').srcdoc = `
+    document.getElementById('react-root-f2612c97ed54d5c225695da5aea4c285').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1799,7 +1770,7 @@ import { evaluateMotionByAcceleration } from &#39;../../../../helper/physics&#39
 import { useColors } from &#39;../../../../hooks/useColors&#39;;
 
 import { Arrow } from &#39;../../../../components/Arrow&#39;;
-import { ControlPoint } from &#39;../../../../components/ControlPoint&#39;;
+import { ControlPoint } from &#39;../../../../components/curve/ControlPoint&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
 const MotionEvaluationDemo = () =&gt; {
@@ -2018,12 +1989,12 @@ so it might help you as well.</p>
 
 
 <div class="embedded ">
-  <iframe id="react-root-b06877c7c89b64538930afe8618e96cd" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-459e35cf8c4dcec955eae28c1ee96293" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-b06877c7c89b64538930afe8618e96cd').srcdoc = `
+    document.getElementById('react-root-459e35cf8c4dcec955eae28c1ee96293').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2335,12 +2306,12 @@ finally bring us closer to a real, fully working roller coaster simulation.</p>
 
 
 <div class="embedded ">
-  <iframe id="react-root-bca6105f45754dbf8a3339886427bb74" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-c985bab2ca3143776612397ca0bbd497" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-bca6105f45754dbf8a3339886427bb74').srcdoc = `
+    document.getElementById('react-root-c985bab2ca3143776612397ca0bbd497').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2395,7 +2366,7 @@ import { Vector3 } from &#39;three&#39;;
 import { uniformSampleMap } from &#39;../../../../helper/uniform-sample&#39;;
 import { useColors } from &#39;../../../../hooks/useColors&#39;;
 
-import { DragControlPoints } from &#39;../../../../components/DragControlPoints&#39;;
+import { DragControlPoints } from &#39;../../../../components/curve/DragControlPoints&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
 
 import {
@@ -2439,12 +2410,12 @@ export const WasiLibraryExampleScene = () =&gt; {
 
 
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
-&lt;iframe id="react-root-d39ac36e92e5c0e8948e47982ec45dec" width="225px" height="225px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
+&lt;iframe id="react-root-9799fef72a35ba1bd44a98065f4c3fe4" width="225px" height="225px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
 &lt;div class="description" style="width: 225px"&gt;
 Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-d39ac36e92e5c0e8948e47982ec45dec').srcdoc = `
+document.getElementById('react-root-9799fef72a35ba1bd44a98065f4c3fe4').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -2470,7 +2441,7 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/implementing-library-funct
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-d39ac36e92e5c0e8948e47982ec45dec" width="225px" height="225px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-9799fef72a35ba1bd44a98065f4c3fe4" width="225px" height="225px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 225px">
@@ -2479,7 +2450,7 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/implementing-library-funct
   
 
   <script>
-    document.getElementById('react-root-d39ac36e92e5c0e8948e47982ec45dec').srcdoc = `
+    document.getElementById('react-root-9799fef72a35ba1bd44a98065f4c3fe4').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
