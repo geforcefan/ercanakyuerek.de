@@ -36,7 +36,7 @@ const MatricesDemo = () => {
         simulationState.friction,
         simulationState.airResistance,
         simulationState.gravity,
-        deltaTime,
+        deltaTime * simulationState.simulationSpeed,
       ),
     );
   });

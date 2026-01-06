@@ -1,6 +1,10 @@
-import { first, uniq } from 'lodash';
+import { first } from 'lodash';
 import last from 'lodash/last';
-import { MathUtils, Matrix4, Vector3 } from 'three';
+import {
+  MathUtils,
+  Matrix4,
+  Vector3,
+} from 'three';
 
 import { findBoundingIndices } from '../helper/binary-search';
 import { uniformSample } from '../helper/uniform-sample';
@@ -71,11 +75,24 @@ export const positionAtX = (curve: CurveNode[], at: number) => {
   return left;
 };
 
+export const arcLengthAtOffset = (
+  at: number,
+  segmentOffsets: number[],
+) => {
+  const i = Math.floor(at);
+  const t = at - i;
+
+  const left = segmentOffsets[i] ?? 0;
+  const right = segmentOffsets[i + 1] ?? left;
+
+  return MathUtils.lerp(left, right, t);
+};
+
 export const insertMatrix = (
   curve: CurveNode[],
   matrix: Matrix4,
   segmentIndex: number = 0,
-): void => {
+) => {
   const lastNode = last(curve);
   let arcLength = 0;
 
@@ -87,11 +104,15 @@ export const insertMatrix = (
       lastNode.arcLength + distance(lastNode.matrix, matrix);
   }
 
+  const nodeMatrix = matrix.clone();
+
   curve.push({
     arcLength,
-    matrix: matrix.clone(),
+    matrix: nodeMatrix,
     segmentIndex,
   });
+
+  return nodeMatrix;
 };
 
 export const insertPosition = (
@@ -113,15 +134,14 @@ export const insertPosition = (
     }
     applyLookRelativeAt(lastNode.matrix, position);
 
-    insertMatrix(
+    return insertMatrix(
       curve,
       lastNode.matrix.clone().setPosition(position),
       segmentIndex,
     );
-    return;
   }
 
-  insertMatrix(curve, new Matrix4().setPosition(position));
+  return insertMatrix(curve, new Matrix4().setPosition(position));
 };
 
 export const applyRollFromCurve = (
@@ -129,10 +149,7 @@ export const applyRollFromCurve = (
   rollCurve: CurveNode[],
 ) => {
   curve.forEach(({ matrix, arcLength }) => {
-    return applyRotationZ(
-      matrix,
-      -positionAtX(rollCurve, arcLength).y,
-    );
+    applyRotationZ(matrix, -positionAtX(rollCurve, arcLength).y);
   });
 
   return curve;
@@ -208,24 +225,9 @@ export const toPoints = (curve: CurveNode[]) => {
   return curve.map((node) => fromMatrix4(node.matrix));
 };
 
-export const arcLengthAtOffset = (
-  u: number,
-  segmentOffsets: number[],
-) => {
-  const i = Math.floor(u);
-  const t = u - i;
-
-  const left = segmentOffsets[i] ?? 0;
-  const right = segmentOffsets[i + 1] ?? left;
-
-  return MathUtils.lerp(left, right, t);
-};
-
-export const toSegmentOffsets = (
-  curve: CurveNode[],
-  numberOfVertices: number,
-) => {
+export const toSegmentLengths = (curve: CurveNode[]) => {
   if (curve.length < 1) return [];
+  const minSegmentIndex = first(curve)!.segmentIndex;
   const numberOfSegments =
     last(curve)!.segmentIndex - first(curve)!.segmentIndex + 1;
 
@@ -236,7 +238,7 @@ export const toSegmentOffsets = (
   const lengths: number[] = [];
 
   curve.forEach((node, index) =>
-    segments[node.segmentIndex].push(index),
+    segments[node.segmentIndex - minSegmentIndex].push(index),
   );
 
   segments.forEach((segment, index) => {
@@ -251,33 +253,69 @@ export const toSegmentOffsets = (
       curve[leftNodeIndex].arcLength;
 
     if (length < Number.EPSILON) return;
+
     lengths.push(length);
   });
 
-  const splitIndices = uniq([lengths.length - 1, 0]);
-  /*const numberOfNeededLengths = numberOfVertices - 1;
-  const numberOfMissingLengths =
-    numberOfNeededLengths - lengths.length;
-  const numberOfSplitsNeeded =
-    numberOfMissingLengths / splitIndices.length + 1;*/
+  return lengths;
+};
 
-  const numberOfSplitsNeeded =
-    numberOfVertices <= 4 ? numberOfVertices - 1 : 2;
+export const toSegmentOffsets = (segmentLengths: number[]) => {
+  const offsets: number[] = [0];
 
-  uniq(splitIndices).forEach((index) =>
-    lengths.splice(
-      index,
-      1,
-      ...new Array(numberOfSplitsNeeded).fill(
-        lengths[index] / numberOfSplitsNeeded,
-      ),
-    ),
-  );
-
-  const offsets: number[] = new Array(lengths.length + 1).fill(0);
-  lengths.forEach((_, index) => {
-    offsets[index + 1] = offsets[index] + lengths[index];
+  segmentLengths.forEach((_, index) => {
+    offsets.push(offsets[index] + segmentLengths[index]);
   });
 
   return offsets;
+};
+
+export const toLocalTransformed = (
+  curve: CurveNode[],
+  translation: Vector3,
+): CurveNode[] => {
+  const transformedCurve: CurveNode[] = [];
+
+  curve.forEach((node) => {
+    insertPosition(
+      transformedCurve,
+      fromMatrix4(
+        node.matrix
+          .clone()
+          .multiply(new Matrix4().makeTranslation(translation)),
+      ),
+      node.segmentIndex,
+    );
+  });
+
+  transformedCurve.map((node, index) => {
+    const pos = new Vector3().setFromMatrixPosition(node.matrix);
+    const oldFront = new Vector3(0, 0, 1)
+      .applyMatrix4(curve[index].matrix)
+      .sub(new Vector3().setFromMatrixPosition(curve[index].matrix))
+      .normalize();
+    const oldLeft = new Vector3(1, 0, 0)
+      .applyMatrix4(curve[index].matrix)
+      .sub(new Vector3().setFromMatrixPosition(curve[index].matrix))
+      .normalize();
+    const roll = oldLeft
+      .sub(oldFront.clone().multiplyScalar(oldLeft.dot(oldFront)))
+      .normalize();
+    const front = new Vector3(0, 0, 1)
+      .applyMatrix4(node.matrix)
+      .sub(pos)
+      .normalize();
+    const left = roll
+      .sub(front.clone().multiplyScalar(roll.dot(front)))
+      .normalize();
+    const up = new Vector3().crossVectors(front, left).normalize();
+
+    node.matrix = new Matrix4()
+      .makeBasis(left, up, front)
+      .setPosition(pos);
+
+    return node;
+  });
+
+  return transformedCurve;
 };

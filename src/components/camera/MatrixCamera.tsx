@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { PerspectiveCamera } from '@react-three/drei';
 import { PerspectiveCameraProps } from '@react-three/drei/core/PerspectiveCamera';
 import { MathUtils, Matrix4, Vector3 } from 'three';

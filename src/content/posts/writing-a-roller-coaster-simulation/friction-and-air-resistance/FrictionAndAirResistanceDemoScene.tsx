@@ -53,7 +53,7 @@ const FrictionAndAirResistanceDemo = () => {
         simulationState.friction,
         simulationState.airResistance,
         simulationState.gravity,
-        deltaTime,
+        deltaTime * simulationState.simulationSpeed,
       ),
     );
 
@@ -67,7 +67,7 @@ const FrictionAndAirResistanceDemo = () => {
           simulationStateWithoutFriction.distanceTraveled,
         ),
         simulationState.gravity,
-        deltaTime,
+        deltaTime * simulationState.simulationSpeed,
       ),
     );
   });
