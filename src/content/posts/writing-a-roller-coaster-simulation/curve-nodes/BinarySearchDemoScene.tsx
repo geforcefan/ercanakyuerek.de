@@ -8,13 +8,13 @@ import {
   matrixAtArcLength,
   totalArcLength,
 } from '../../../../maths/curve';
-import { fromMatrix4 } from '../../../../maths/vector3';
 import { findBoundingIndices } from '../../../../helper/binary-search';
 import { useColors } from '../../../../hooks/useColors';
 
 import { ControlPoint } from '../../../../components/curve/ControlPoint';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
+import { toPosition } from '../../../../maths/matrix4';
 
 const BinarySearchDemo = () => {
   const colors = useColors();
@@ -41,13 +41,13 @@ const BinarySearchDemo = () => {
     [curveLength],
   );
 
-  const position = fromMatrix4(matrixAtArcLength(curve, atArcLength));
+  const position = toPosition(matrixAtArcLength(curve, atArcLength));
 
   const nodes = findBoundingIndices(
     curve,
     atArcLength,
     (node) => node.arcLength,
-  )?.map((index) => fromMatrix4(curve[index].matrix));
+  )?.map((index) => toPosition(curve[index].matrix));
 
   return (
     <>

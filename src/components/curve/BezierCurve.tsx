@@ -4,11 +4,11 @@ import { Vector3 } from 'three';
 
 import { bezierSplineCurve } from '../../maths/bezier';
 import { totalArcLength, matrixAtArcLength } from '../../maths/curve';
-import { fromMatrix4 } from '../../maths/vector3';
 import { uniformSampleMap } from '../../helper/uniform-sample';
 import { useColors } from '../../hooks/useColors';
 
 import { ControlPoint } from './ControlPoint';
+import { toPosition } from '../../maths/matrix4';
 
 export const BezierCurve = (props: {
   points: Vector3[];
@@ -31,14 +31,14 @@ export const BezierCurve = (props: {
     const curve = bezierSplineCurve(points, resolution);
 
     const parametricNodes = curve.map((node) =>
-      fromMatrix4(node.matrix),
+      toPosition(node.matrix),
     );
 
     const uniformNodes = uniformSampleMap(
       0,
       totalArcLength(curve),
       resolution,
-      (at) => fromMatrix4(matrixAtArcLength(curve, at)),
+      (at) => toPosition(matrixAtArcLength(curve, at)),
     );
 
     return uniform ? uniformNodes : parametricNodes;

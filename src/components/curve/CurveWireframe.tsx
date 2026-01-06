@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { BufferGeometry, Vector3, Vector4 } from 'three';
+import { BufferGeometry, Vector3 } from 'three';
 
 import {
   CurveNode,
@@ -9,33 +9,29 @@ import {
 import { useColors } from '../../hooks/useColors';
 
 const wireFrameParts = [
-  new Vector4(1, 0, 0, 1),
-  new Vector4(0, -1, 0, 1),
-  new Vector4(-1, 0, 0, 1),
+  new Vector3(1, 0, 0),
+  new Vector3(0, -1, 0),
+  new Vector3(-1, 0, 0),
 ];
 export const CurveWireframe = ({
   railSpacing = 0.25,
   tieSpacing = 1,
   loopTie = true,
-  tieParts = wireFrameParts,
-  railParts = wireFrameParts,
+  tie = wireFrameParts,
+  rails = wireFrameParts,
   curve = [],
-  offset = new Vector4(0, 0, 0, 0),
   color,
 }: {
   curve: CurveNode[];
   railSpacing?: number;
   tieSpacing?: number;
-  tieParts?: Vector4[];
-  railParts?: Vector4[];
+  tie?: Vector3[];
+  rails?: Vector3[];
   loopTie?: boolean;
   color?: number;
-  offset?: Vector4;
+  offset?: Vector3;
 }) => {
   const colors = useColors();
-
-  const tie = useMemo(() => tieParts.map(p => p.clone().add(offset)), [offset, tieParts]);
-  const rails = useMemo(() => railParts.map(p => p.clone().add(offset)), [offset, railParts]);
 
   const points = useMemo(() => {
     const curveLength = totalArcLength(curve);

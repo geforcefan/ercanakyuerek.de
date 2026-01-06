@@ -127,20 +127,28 @@ export const fromPoints = (
   const numberOfPoints = points.length;
   const degree = Math.min(numberOfPoints - 1, maxDegree);
   const knots = knotVectorFactory(points, degree);
-  const [min, max] = domain(knots, degree);
 
-  uniformSample(
-    min,
-    max,
-    estimateLength(points, knots, degree, min, max) * resolution,
-    (at) => {
-      insertPosition(
-        out,
-        nurbs(points, knots, degree, at),
-        minSegmentIndex + Math.floor(at),
-      );
-    },
-  );
+  const [minKnotIndex, maxKnotIndex] = knotIndexRange(knots, degree);
 
-  return out;
+  for (
+    let knotIndex = minKnotIndex;
+    knotIndex < maxKnotIndex;
+    knotIndex++
+  ) {
+    const min = knots[knotIndex];
+    const max = knots[knotIndex + 1];
+
+    uniformSample(
+      min,
+      max,
+      estimateLength(points, knots, degree, min, max) * resolution,
+      (at) => {
+        insertPosition(
+          out,
+          nurbs(points, knots, degree, at),
+          minSegmentIndex + Math.floor(at),
+        );
+      },
+    );
+  }
 };

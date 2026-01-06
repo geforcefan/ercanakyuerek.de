@@ -1,21 +1,18 @@
 import { first } from 'lodash';
 import last from 'lodash/last';
-import {
-  MathUtils,
-  Matrix4,
-  Vector3,
-} from 'three';
+import { MathUtils, Matrix4, Vector3 } from 'three';
 
 import { findBoundingIndices } from '../helper/binary-search';
 import { uniformSample } from '../helper/uniform-sample';
 
 import {
   applyLookRelativeAt,
-  applyRotationZ,
+  applyRoll,
   distance,
   lerp,
+  rollDirection,
+  toFrontDirection, toPosition,
 } from './matrix4';
-import { fromMatrix4 } from './vector3';
 
 export type CurveNode = {
   matrix: Matrix4;
@@ -60,8 +57,8 @@ export const positionAtX = (curve: CurveNode[], at: number) => {
   );
   if (!nodes) return new Vector3();
 
-  const left = fromMatrix4(curve[nodes[0]].matrix);
-  const right = fromMatrix4(curve[nodes[1]].matrix);
+  const left = toPosition(curve[nodes[0]].matrix);
+  const right = toPosition(curve[nodes[1]].matrix);
 
   const length = right.x - left.x;
 
@@ -124,7 +121,7 @@ export const insertPosition = (
 
   if (lastNode) {
     if (
-      position.distanceTo(fromMatrix4(lastNode.matrix)) <
+      position.distanceTo(toPosition(lastNode.matrix)) <
       Number.EPSILON
     )
       return;
@@ -149,7 +146,7 @@ export const applyRollFromCurve = (
   rollCurve: CurveNode[],
 ) => {
   curve.forEach(({ matrix, arcLength }) => {
-    applyRotationZ(matrix, -positionAtX(rollCurve, arcLength).y);
+    applyRoll(matrix, -positionAtX(rollCurve, arcLength).y);
   });
 
   return curve;
@@ -222,7 +219,7 @@ export const fromPointsWithBasicNormals = (points: Vector3[]) => {
 };
 
 export const toPoints = (curve: CurveNode[]) => {
-  return curve.map((node) => fromMatrix4(node.matrix));
+  return curve.map((node) => toPosition(node.matrix));
 };
 
 export const toSegmentLengths = (curve: CurveNode[]) => {
@@ -279,7 +276,7 @@ export const toLocalTransformed = (
   curve.forEach((node) => {
     insertPosition(
       transformedCurve,
-      fromMatrix4(
+      toPosition(
         node.matrix
           .clone()
           .multiply(new Matrix4().makeTranslation(translation)),
@@ -288,33 +285,24 @@ export const toLocalTransformed = (
     );
   });
 
-  transformedCurve.map((node, index) => {
-    const pos = new Vector3().setFromMatrixPosition(node.matrix);
-    const oldFront = new Vector3(0, 0, 1)
-      .applyMatrix4(curve[index].matrix)
-      .sub(new Vector3().setFromMatrixPosition(curve[index].matrix))
+  transformedCurve.forEach((node, index) => {
+    const position = toPosition(node.matrix);
+    const originalRollDirection = rollDirection(curve[index].matrix);
+
+    const front = toFrontDirection(node.matrix);
+    const left = originalRollDirection
+      .sub(
+        front
+          .clone()
+          .multiplyScalar(originalRollDirection.dot(front)),
+      )
       .normalize();
-    const oldLeft = new Vector3(1, 0, 0)
-      .applyMatrix4(curve[index].matrix)
-      .sub(new Vector3().setFromMatrixPosition(curve[index].matrix))
-      .normalize();
-    const roll = oldLeft
-      .sub(oldFront.clone().multiplyScalar(oldLeft.dot(oldFront)))
-      .normalize();
-    const front = new Vector3(0, 0, 1)
-      .applyMatrix4(node.matrix)
-      .sub(pos)
-      .normalize();
-    const left = roll
-      .sub(front.clone().multiplyScalar(roll.dot(front)))
-      .normalize();
+
     const up = new Vector3().crossVectors(front, left).normalize();
 
     node.matrix = new Matrix4()
       .makeBasis(left, up, front)
-      .setPosition(pos);
-
-    return node;
+      .setPosition(position);
   });
 
   return transformedCurve;
