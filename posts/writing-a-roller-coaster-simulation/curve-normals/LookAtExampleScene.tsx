@@ -6,7 +6,6 @@ import {
   toSegmentOffsets,
   totalArcLength,
 } from '../../../../maths/curve';
-import { fromMatrix4 } from '../../../../maths/vector3';
 import { fromURL } from '../../../../helper/nl2park/nl2park';
 import {
   applyRollFromCustomTrack,
@@ -20,6 +19,7 @@ import { PerspectiveScene } from '../../../../scenes/PerspectiveScene';
 
 // @ts-ignore
 import LookAtExample from './LookAtExample.nl2park';
+import { toPosition } from '../../../../maths/matrix4';
 
 const exampleCoaster = (await fromURL(LookAtExample)).coaster[0];
 const exampleTrack = exampleCoaster?.tracks[0];
@@ -44,7 +44,7 @@ export const LookAtExampleScene = () => {
 
     if (lookAt === 'fixedUpDirection') {
       const fixedUpDirectionCurve = fromPointsWithBasicNormals(
-        trackCurve.map((node) => fromMatrix4(node.matrix)),
+        trackCurve.map((node) => toPosition(node.matrix)),
       );
       applyRollFromCustomTrack(
         fixedUpDirectionCurve,

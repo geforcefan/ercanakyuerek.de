@@ -6,6 +6,13 @@
  */
 
 /*!
+ * camera-controls
+ * https://github.com/yomotsu/camera-controls
+ * (c) 2017 @yomotsu
+ * Released under the MIT License.
+ */
+
+/*!
  * for-in <https://github.com/jonschlinkert/for-in>
  *
  * Copyright (c) 2014-2017, Jon Schlinkert.
