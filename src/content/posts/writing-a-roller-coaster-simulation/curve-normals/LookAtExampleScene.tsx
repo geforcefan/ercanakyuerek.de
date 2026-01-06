@@ -27,7 +27,7 @@ const exampleTrack = exampleCoaster?.tracks[0];
 export const LookAtExampleScene = () => {
   const { lookAt } = useControls({
     lookAt: {
-      options: ['fixedUpDirection', 'incrementalRotation'],
+      options: ['fixedUpDirection', 'incremental'],
       value: 'fixedUpDirection',
     },
   });
