@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { useControls } from 'leva';
-import { Vector4 } from 'three';
 
 import {
   fromPointsWithBasicNormals,
@@ -26,14 +25,6 @@ const exampleCoaster = (await fromURL(LookAtExample)).coaster[0];
 const exampleTrack = exampleCoaster?.tracks[0];
 
 export const LookAtExampleScene = () => {
-  const points = useMemo(
-    () =>
-      exampleTrack?.vertices.map((v) =>
-        new Vector4().fromArray(v.position),
-      ),
-    [],
-  );
-
   const { lookAt } = useControls({
     lookAt: {
       options: ['fixedUpDirection', 'incrementalRotation'],
@@ -62,7 +53,7 @@ export const LookAtExampleScene = () => {
       );
       return fixedUpDirectionCurve;
     } else return trackCurve;
-  }, [points, lookAt]);
+  }, [lookAt]);
 
   return (
     <>

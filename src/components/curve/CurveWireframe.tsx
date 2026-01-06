@@ -34,8 +34,8 @@ export const CurveWireframe = ({
 }) => {
   const colors = useColors();
 
-  const tie = useMemo(() => tieParts.map(p => p.clone().add(offset)), [offset]);
-  const rails = useMemo(() => railParts.map(p => p.clone().add(offset)), [offset]);
+  const tie = useMemo(() => tieParts.map(p => p.clone().add(offset)), [offset, tieParts]);
+  const rails = useMemo(() => railParts.map(p => p.clone().add(offset)), [offset, railParts]);
 
   const points = useMemo(() => {
     const curveLength = totalArcLength(curve);
