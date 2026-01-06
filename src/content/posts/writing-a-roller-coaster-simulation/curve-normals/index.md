@@ -1,6 +1,6 @@
 ---
 title: 'Curve normals'
-date: 2025-12-30T14:30:00+01:00
+date: 2026-01-04T14:30:00+01:00
 math: true
 tags: ['writing a roller coaster simulation']
 ---------------------------------------------
