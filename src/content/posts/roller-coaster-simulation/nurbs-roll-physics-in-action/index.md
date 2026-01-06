@@ -29,7 +29,7 @@ Below is an interactive demo of the current state of the simulator. You can play
 
 As always, the full code is available below.
 
-{{< embedded-content-component path="./posts/roller-coaster-simulation/nurbs-roll-physics-in-action/NurbsRollPhysicsInActionDemoScene.tsx" width="100%" height="500px">}}
+{{< embedded-content-component path="./posts/roller-coaster-simulation/nurbs-roll-physics-in-action/NurbsRollPhysicsInActionDemoScene.tsx" width="100%" height="560px">}}
 
 # Code
 

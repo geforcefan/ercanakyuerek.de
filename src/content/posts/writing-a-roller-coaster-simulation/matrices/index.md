@@ -93,6 +93,6 @@ There is no visible difference in the demo. The train behaves exactly as before.
 
 For completeness, the full demo is shown below.
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/matrices/MatricesDemoScene.tsx" width="100%" height="320px">}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/matrices/MatricesDemoScene.tsx" width="100%" height="380px">}}
 
 {{< show-content-script "posts/writing-a-roller-coaster-simulation/matrices/MatricesDemoScene.tsx" >}}

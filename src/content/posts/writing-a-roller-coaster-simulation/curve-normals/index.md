@@ -30,6 +30,6 @@ The exact math and geometry behind this is not trivial, and explaining it proper
 
 In this chapter, we will not go into mathematical details. Instead, we focus on the implementation and simply compare the two approaches in the following interactive demo by switching the lookAt method between a fixed up direction and an incremental rotation based on the previous node:
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-normals/LookAtExampleScene.tsx" width="100%" height="450px" description="**Fixed up direction**: Roll becomes unstable near 90° slopes. **Incremental rotation**: Stable roll and smooth orientation along the curve." >}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-normals/LookAtExampleScene.tsx" width="100%" height="500px" description="**Fixed up direction**: Roll becomes unstable near 90° slopes. **Incremental rotation**: Stable roll and smooth orientation along the curve." >}}
 
 

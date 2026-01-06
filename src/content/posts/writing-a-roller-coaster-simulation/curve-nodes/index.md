@@ -23,7 +23,7 @@ Imagine a linear track defined by four points. In that case, we also have four n
 
 This can be hard to visualize just by reading, so the example below shows four points and a slider. You can also move the control points to see what happens when the requested distance overshoots a segment.
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-nodes/BinarySearchDemoScene.tsx" width="100%" height="200px" description="As you move the slider, you request a distance along the track. You can immediately see between which two nodes that distance is sandwiched." >}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-nodes/BinarySearchDemoScene.tsx" width="100%" height="260px" description="As you move the slider, you request a distance along the track. You can immediately see between which two nodes that distance is sandwiched." >}}
 
 # Find nodes sandwiching the requested distance
 
@@ -337,7 +337,7 @@ In the next chapter, we will build curve nodes from **Bezier splines**. The nice
 
 ## Demo with linear track segments
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-nodes/MotionEvaluationDemoScene.tsx" width="100%" height="320px" description="Move the control points around to get a feeling for building a roller coaster track with physics motion." >}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-nodes/MotionEvaluationDemoScene.tsx" width="100%" height="380px" description="Move the control points around to get a feeling for building a roller coaster track with physics motion." >}}
 
 # Demo code
 

@@ -127,7 +127,7 @@ Just like in the last chapter, we again have an interactive demo. This time, we�
 > **Important note:** Earlier in this article I said we would evaluate everything every **16 ms**, right? Well… that was kind of a lie, at least for this demo.  
 > Since we’re using **THREE.js**, we _can_ make use of the `useFrame` hook, which gives us the **delta time of the previous frame**, and we benefit from using it. This is the proper way to handle updates, instead of forcing a fixed 16 ms step, which I briefly covered in the introduction of this chapter.
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/evaluating-motion/MotionEvaluationDemoScene.tsx" width="100%" height="320px">}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/evaluating-motion/MotionEvaluationDemoScene.tsx" width="100%" height="360px">}}
 
 ## What comes next?
 

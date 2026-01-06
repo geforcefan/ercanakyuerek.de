@@ -120,7 +120,7 @@ Just like in the previous chapter, here is a small interactive demo. This time i
 
 Feel free to move the control points to experiment with the track shape and see how both trains react differently.
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/friction-and-air-resistance/FrictionAndAirResistanceDemoScene.tsx" width="100%" height="300px">}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/friction-and-air-resistance/FrictionAndAirResistanceDemoScene.tsx" width="100%" height="360px">}}
 
 ## What comes next?
 

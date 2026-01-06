@@ -11,6 +11,7 @@
     "start": "hugo --themesDir src/themes server"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.2",
     "@tweenjs/tween.js": "^25.0.0",
@@ -23,6 +24,7 @@
     "react-recipes": "^1.6.0",
     "react-router": "^7.11.0",
     "react-scripts": "5.0.1",
+    "react-use": "^17.6.0",
     "three": "^0.181.2",
     "use-device-pixel-ratio": "^1.1.2"
   },
