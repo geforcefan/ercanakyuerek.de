@@ -19,7 +19,7 @@ const MotionEvaluationDemo = () => {
     setSimulationState,
   ] = useControls(() => ({
     slope: {
-      value: 0,
+      value: 45,
       step: 5,
       min: -180,
       max: 180,
