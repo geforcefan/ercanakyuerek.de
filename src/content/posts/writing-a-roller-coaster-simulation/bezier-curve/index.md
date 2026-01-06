@@ -17,7 +17,7 @@ The physics simulation does not care where the shape comes from. It does not kno
 
 This time, I will first show you a demo with a Bézier curve, just to spoil the ending a bit:
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/bezier-curve/BezierCurveDemoScene.tsx" width="100%" height="300px" >}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/bezier-curve/BezierCurveDemoScene.tsx" width="100%" height="320px" >}}
 
 # Multiple algorithms
 

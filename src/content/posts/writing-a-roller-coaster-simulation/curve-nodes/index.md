@@ -337,7 +337,7 @@ In the next chapter, we will build curve nodes from **Bezier splines**. The nice
 
 ## Demo with linear track segments
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-nodes/MotionEvaluationDemoScene.tsx" width="100%" height="300px" description="Move the control points around to get a feeling for building a roller coaster track with physics motion." >}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-nodes/MotionEvaluationDemoScene.tsx" width="100%" height="320px" description="Move the control points around to get a feeling for building a roller coaster track with physics motion." >}}
 
 # Demo code
 

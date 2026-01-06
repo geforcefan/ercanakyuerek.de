@@ -1,6 +1,8 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useControls } from 'leva';
+import { Vector3 } from 'three';
 
+import { toLocalTransformed } from '../maths/curve';
 import { fromURL } from '../helper/nl2park/nl2park';
 import {
   curveFromCSVUrl,
@@ -15,13 +17,18 @@ import { TrainWithPhysics } from '../components/TrainWithPhysics';
 import { PerspectiveScene } from '../scenes/PerspectiveScene';
 
 // @ts-ignore
-import ParkCSV from './Venom.csv';
+import ParkCSV from './Avenger.csv';
 // @ts-ignore
-import Park from './Venom.nl2park';
+import Park from './Valhall.nl2park';
 
 const exampleCoaster = (await fromURL(Park)).coaster[0];
 const exampleTrack = exampleCoaster?.tracks[0];
-const exampleCurveCSV = await curveFromCSVUrl(ParkCSV);
+
+const exampleTrackCurve = toLocalTransformed(
+  curveFromCustomTrack(exampleTrack),
+  new Vector3(0, -1.6, 0),
+);
+const exampleCSVCurve = await curveFromCSVUrl(ParkCSV);
 
 export const NoLimitsTrackScene = () => {
   const colors = useColors();
@@ -29,22 +36,24 @@ export const NoLimitsTrackScene = () => {
   const { pov } = useControls({
     pov: true,
   });
-  const curve = useMemo(() => curveFromCustomTrack(exampleTrack), []);
 
   return (
     <>
       <PerspectiveScene>
         <Ground />
         <DefaultCameraControls />
-        <TrainWithPhysics
-          curve={curve}
-          activateCamera={pov}
-          init={{ velocity: 3, distanceTraveled: 115 }}
+        <CurveWireframe
+          color={colors.secondary}
+          curve={exampleTrackCurve}
         />
-        <CurveWireframe color={colors.secondary} curve={curve} />
         <CurveWireframe
           color={colors.highlight}
-          curve={exampleCurveCSV}
+          curve={exampleCSVCurve}
+        />
+        <TrainWithPhysics
+          curve={exampleTrackCurve}
+          activateCamera={pov}
+          init={{ velocity: 8, distanceTraveled: 105 }}
         />
       </PerspectiveScene>
     </>

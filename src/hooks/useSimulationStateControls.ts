@@ -5,8 +5,9 @@ export const useSimulationStateControls = (
     velocity?: number;
     distanceTraveled?: number;
     friction?: number;
-    airResistance? : number,
-    gravity? : number
+    airResistance?: number;
+    gravity?: number;
+    simulationSpeed?: number;
   } = {},
 ) => {
   return useControls(() => ({
@@ -17,7 +18,7 @@ export const useSimulationStateControls = (
       pad: 5,
     },
     airResistance: {
-      value:init.airResistance ??  0.0001,
+      value: init.airResistance ?? 2e-05,
       pad: 6,
     },
     acceleration: {
@@ -27,6 +28,12 @@ export const useSimulationStateControls = (
     gravity: {
       value: init.gravity ?? 9.81665,
       pad: 5,
+    },
+    simulationSpeed: {
+      min: 0.25,
+      max: 4,
+      step: 0.25,
+      value: init.simulationSpeed ?? 1,
     },
   }));
 };

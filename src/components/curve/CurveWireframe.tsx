@@ -3,37 +3,39 @@ import { BufferGeometry, Vector3, Vector4 } from 'three';
 
 import {
   CurveNode,
-  totalArcLength,
   matrixAtArcLength,
+  totalArcLength,
 } from '../../maths/curve';
 import { useColors } from '../../hooks/useColors';
 
-export const CurveWireframe = (props: {
+const wireFrameParts = [
+  new Vector4(1, 0, 0, 1),
+  new Vector4(0, -1, 0, 1),
+  new Vector4(-1, 0, 0, 1),
+];
+export const CurveWireframe = ({
+  railSpacing = 0.25,
+  tieSpacing = 1,
+  loopTie = true,
+  tieParts = wireFrameParts,
+  railParts = wireFrameParts,
+  curve = [],
+  offset = new Vector4(0, 0, 0, 0),
+  color,
+}: {
   curve: CurveNode[];
   railSpacing?: number;
   tieSpacing?: number;
-  rails?: Vector4[];
-  tie?: Vector4[];
+  tieParts?: Vector4[];
+  railParts?: Vector4[];
   loopTie?: boolean;
   color?: number;
+  offset?: Vector4;
 }) => {
   const colors = useColors();
 
-  const wireFrameParts = [
-    new Vector4(1, 0, 0, 1),
-    new Vector4(0, -1, 0, 1),
-    new Vector4(-1, 0, 0, 1),
-  ];
-
-  const {
-    railSpacing = 0.25,
-    tieSpacing = 1,
-    loopTie = true,
-    tie = wireFrameParts,
-    rails = wireFrameParts,
-    curve = [],
-    color
-  } = props;
+  const tie = useMemo(() => tieParts.map(p => p.clone().add(offset)), [offset]);
+  const rails = useMemo(() => railParts.map(p => p.clone().add(offset)), [offset]);
 
   const points = useMemo(() => {
     const curveLength = totalArcLength(curve);
@@ -101,8 +103,13 @@ export const CurveWireframe = (props: {
   }, [curve, loopTie, railSpacing, rails, tie, tieSpacing]);
 
   return (
-    <lineSegments geometry={new BufferGeometry().setFromPoints(points)}>
-      <lineBasicMaterial attach="material" color={color || colors.secondary} />
+    <lineSegments
+      geometry={new BufferGeometry().setFromPoints(points)}
+    >
+      <lineBasicMaterial
+        attach="material"
+        color={color || colors.secondary}
+      />
     </lineSegments>
   );
 };

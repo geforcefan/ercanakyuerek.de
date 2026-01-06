@@ -51,6 +51,10 @@ export const knotIndexRange = (knots: number[], degree: number) => {
   return [degree, knots.length - degree - 1];
 };
 
+export const domain = (knots: number[], degree: number) => {
+  return [knots[degree], knots[knots.length - degree - 1]];
+};
+
 const deBoor = (
   points: Vector4[],
   knots: number[],
@@ -115,37 +119,28 @@ export const estimateLength = (
 export const fromPoints = (
   points: Vector4[],
   knotVectorFactory: (points: Vector4[], degree: number) => number[],
+  out: CurveNode[] = [],
   resolution: number = 20,
   maxDegree: number = 3,
+  minSegmentIndex: number = 0,
 ) => {
   const numberOfPoints = points.length;
   const degree = Math.min(numberOfPoints - 1, maxDegree);
   const knots = knotVectorFactory(points, degree);
-  const [minKnotIndex, maxKnotIndex] = knotIndexRange(knots, degree);
+  const [min, max] = domain(knots, degree);
 
-  const curve: CurveNode[] = [];
+  uniformSample(
+    min,
+    max,
+    estimateLength(points, knots, degree, min, max) * resolution,
+    (at) => {
+      insertPosition(
+        out,
+        nurbs(points, knots, degree, at),
+        minSegmentIndex + Math.floor(at),
+      );
+    },
+  );
 
-  for (
-    let knotIndex = minKnotIndex;
-    knotIndex < maxKnotIndex;
-    knotIndex++
-  ) {
-    const min = knots[knotIndex];
-    const max = knots[knotIndex + 1];
-
-    uniformSample(
-      min,
-      max,
-      estimateLength(points, knots, degree, min, max) * resolution,
-      (at) => {
-        insertPosition(
-          curve,
-          nurbs(points, knots, degree, at),
-          Math.floor(at),
-        );
-      },
-    );
-  }
-
-  return curve;
+  return out;
 };

@@ -31,7 +31,7 @@ $$friction \cdot gravity$$
 
 Air resistance works differently. It **increases** with **velocity**. The faster the train moves, the more the air pushes back against it.
 
-A typical air resistance value is around **0.0001 m/s²**.
+A typical air resistance value is around **0.00002 m/s²**.
 We follow the same idea and use this value as the base for our simplified model. The **resistance** grows with **velocity²**, so we multiply it with **velocity²** and the air resistance constant:
 
 $$airResistance \cdot velocity^2$$
