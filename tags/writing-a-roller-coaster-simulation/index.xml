@@ -3,7 +3,7 @@
 &lt;p&gt;We already did some basic normal calculations in previous chapters, and that mostly worked fine. However, there is a problem when we rely too much on a simple &lt;code&gt;lookAt&lt;/code&gt; from &lt;strong&gt;THREE.js&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The issue is &lt;strong&gt;roll&lt;/strong&gt;, also known as rotation around the Z axis.&lt;/p&gt;
 &lt;p&gt;When we use &lt;code&gt;lookAt&lt;/code&gt;, we have to provide an up vector. So far, we have always used &lt;code&gt;(0, 1, 0)&lt;/code&gt;. This works well for gentle slopes, but it starts to break down when the track approaches angles close to 90 degrees.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
- &lt;iframe id="react-root-8873436e814dd8ec92c6e283c073a7c8" width="225px" height="285px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
+ &lt;iframe id="react-root-5343ecea45c529754e9b5f759e3acce8" width="225px" height="285px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
 
  
  &lt;div class="description" style="width: 225px"&gt;
@@ -12,7 +12,7 @@
  
 
  &lt;script&gt;
- document.getElementById('react-root-8873436e814dd8ec92c6e283c073a7c8').srcdoc = `
+ document.getElementById('react-root-5343ecea45c529754e9b5f759e3acce8').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
