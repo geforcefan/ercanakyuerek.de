@@ -141,7 +141,7 @@ export const insertPosition = (
   return insertMatrix(curve, new Matrix4().setPosition(position));
 };
 
-export const applyRollFromCurve = (
+export const applyRollCurve = (
   curve: CurveNode[],
   rollCurve: CurveNode[],
 ) => {
@@ -222,7 +222,7 @@ export const toPoints = (curve: CurveNode[]) => {
   return curve.map((node) => toPosition(node.matrix));
 };
 
-export const toSegmentLengths = (curve: CurveNode[]) => {
+export const toSegmentOffsets = (curve: CurveNode[]) => {
   if (curve.length < 1) return [];
   const minSegmentIndex = first(curve)!.segmentIndex;
   const numberOfSegments =
@@ -254,14 +254,10 @@ export const toSegmentLengths = (curve: CurveNode[]) => {
     lengths.push(length);
   });
 
-  return lengths;
-};
-
-export const toSegmentOffsets = (segmentLengths: number[]) => {
   const offsets: number[] = [0];
 
-  segmentLengths.forEach((_, index) => {
-    offsets.push(offsets[index] + segmentLengths[index]);
+  lengths.forEach((_, index) => {
+    offsets.push(offsets[index] + lengths[index]);
   });
 
   return offsets;

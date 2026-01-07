@@ -13,10 +13,11 @@ import { Ground } from '../components/Ground';
 import { TrainWithPhysics } from '../components/TrainWithPhysics';
 import { PerspectiveScene } from '../scenes/PerspectiveScene';
 
+import { fromUrl } from '../coaster/nolimits-csv-track';
 // @ts-ignore
-//import ParkCSV from './Experiment.csv';
+import ParkCSV from './Hybris.csv';
 // @ts-ignore
-import Park from './Experiment.nl2park';
+import Park from './Hybris.nl2park';
 
 const exampleCoaster = (await fromURL(Park)).coaster[0];
 const exampleTrack = exampleCoaster?.tracks[0];
@@ -25,7 +26,7 @@ const exampleTrackCurve = toLocalTransformed(
   curveFromCustomTrack(exampleTrack),
   new Vector3(0, -1.1, 0),
 );
-//const exampleCSVCurve = await curveFromCSVUrl(ParkCSV);
+const exampleCSVCurve = await fromUrl(ParkCSV);
 
 export const NoLimitsTrackScene = () => {
   const colors = useColors();
@@ -43,12 +44,18 @@ export const NoLimitsTrackScene = () => {
           color={colors.secondary}
           curve={exampleTrackCurve}
         />
+        <CurveWireframe
+          color={colors.highlight}
+          curve={exampleCSVCurve}
+        />
         <TrainWithPhysics
           curve={exampleTrackCurve}
           activateCamera={pov}
           init={{
-            velocity: 20,
-            distanceTraveled: 0,
+            velocity: 7,
+            distanceTraveled: 186,
+            friction: 0.026,
+            airResistance: 2e-5,
           }}
         />
       </PerspectiveScene>
