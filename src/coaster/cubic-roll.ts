@@ -1,4 +1,4 @@
-import { MathUtils, Vector2, Vector4 } from 'three';
+import { MathUtils, Vector2 } from 'three';
 
 import { clampedCubicSplineCurve } from '../maths/cubic';
 import {
