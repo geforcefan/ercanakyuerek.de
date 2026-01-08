@@ -50,8 +50,8 @@ This means:</p><blockquote><p>velocity tells us how much <strong>distance</stron
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> { <span style=color:#a6e22e>velocity</span>, <span style=color:#a6e22e>distanceTraveled</span> };
 </span></span><span style=display:flex><span>};
-</span></span></code></pre></div><p>This is already a complete physics step without friction or air resistance.</p><h2 id=interactive-demo>Interactive demo</h2><p>Just like in the last chapter, we again have an interactive demo. This time, we’ve implemented a simple motion-evaluation method that applies basic physics. In this demo you can play around with the slope and already see a physical motion emerging.</p><blockquote><p><strong>Important note:</strong> Earlier in this article I said we would evaluate everything every <strong>16 ms</strong>, right? Well… that was kind of a lie, at least for this demo.<br>Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <code>useFrame</code> hook, which gives us the <strong>delta time of the previous frame</strong>, and we benefit from using it. This is the proper way to handle updates, instead of forcing a fixed 16 ms step, which I briefly covered in the introduction of this chapter.</p></blockquote><div class=embedded><iframe id=react-root-8a580c1280385fd0bcd352a6940307e0 width=100% height=360px style=border:0 class=frame></iframe>
-<script>document.getElementById("react-root-8a580c1280385fd0bcd352a6940307e0").srcdoc=`
+</span></span></code></pre></div><p>This is already a complete physics step without friction or air resistance.</p><h2 id=interactive-demo>Interactive demo</h2><p>Just like in the last chapter, we again have an interactive demo. This time, we’ve implemented a simple motion-evaluation method that applies basic physics. In this demo you can play around with the slope and already see a physical motion emerging.</p><blockquote><p><strong>Important note:</strong> Earlier in this article I said we would evaluate everything every <strong>16 ms</strong>, right? Well… that was kind of a lie, at least for this demo.<br>Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <code>useFrame</code> hook, which gives us the <strong>delta time of the previous frame</strong>, and we benefit from using it. This is the proper way to handle updates, instead of forcing a fixed 16 ms step, which I briefly covered in the introduction of this chapter.</p></blockquote><div class=embedded><iframe id=react-root-fd850a93d523718c5f241292f511156f width=100% height=360px style=border:0 class=frame></iframe>
+<script>document.getElementById("react-root-fd850a93d523718c5f241292f511156f").srcdoc=`
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -76,12 +76,13 @@ import { useFrame } from &#39;@react-three/fiber&#39;;
 import { useControls } from &#39;leva&#39;;
 import { MathUtils, Vector3 } from &#39;three&#39;;
 
-import { evaluateMotionByAcceleration } from &#39;../../../../helper/physics&#39;;
 import { useColors } from &#39;../../../../hooks/useColors&#39;;
 
 import { Arrow } from &#39;../../../../components/Arrow&#39;;
 import { ControlPoint } from &#39;../../../../components/curve/ControlPoint&#39;;
 import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
+
+import { evaluateMotion } from &#39;./physics&#39;;
 
 const MotionEvaluationDemo = () =&gt; {
   const colors = useColors();
@@ -129,7 +130,7 @@ const MotionEvaluationDemo = () =&gt; {
 
   useFrame((state, deltaTime) =&gt; {
     setSimulationState(
-      evaluateMotionByAcceleration(
+      evaluateMotion(
         simulationState,
         simulationState.acceleration,
         deltaTime,
