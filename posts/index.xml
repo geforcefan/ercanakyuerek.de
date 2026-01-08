@@ -21,12 +21,12 @@
 
 
 <div class="embedded ">
-  <iframe id="react-root-e428170eeae1c8c37bdfe8725463596c" width="100%" height="560px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-2e5409d25930e3591d8242e24da2f6bb" width="100%" height="560px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-e428170eeae1c8c37bdfe8725463596c').srcdoc = `
+    document.getElementById('react-root-2e5409d25930e3591d8242e24da2f6bb').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -153,7 +153,7 @@ export const NurbsRollPhysicsInActionDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-e5d0088149b19c0fd67eb2d81bbebac8" width="100%" height="500px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-3677741f1c5a9f2294466682a63a7f6c" width="100%" height="500px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -162,7 +162,7 @@ export const NurbsRollPhysicsInActionDemoScene = () =&gt; {
   
 
   <script>
-    document.getElementById('react-root-e5d0088149b19c0fd67eb2d81bbebac8').srcdoc = `
+    document.getElementById('react-root-3677741f1c5a9f2294466682a63a7f6c').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -180,12 +180,12 @@ export const NurbsRollPhysicsInActionDemoScene = () =&gt; {
   </script>
 </div>
 ]]></content></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
-&lt;iframe id="react-root-4a3a002a8ddaf26b305830a99c94aefa" width="225px" height="285px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
+&lt;iframe id="react-root-fb11dd38752e30a4e89f410ff3889b03" width="225px" height="285px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
 &lt;div class="description" style="width: 225px"&gt;
 An interactive example of a Bézier curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-4a3a002a8ddaf26b305830a99c94aefa').srcdoc = `
+document.getElementById('react-root-fb11dd38752e30a4e89f410ff3889b03').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -212,7 +212,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-4a3a002a8ddaf26b305830a99c94aefa" width="225px" height="285px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-fb11dd38752e30a4e89f410ff3889b03" width="225px" height="285px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 225px">
@@ -221,7 +221,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
   
 
   <script>
-    document.getElementById('react-root-4a3a002a8ddaf26b305830a99c94aefa').srcdoc = `
+    document.getElementById('react-root-fb11dd38752e30a4e89f410ff3889b03').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -252,12 +252,12 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded ">
-  <iframe id="react-root-f2a33645a79faca254536671572c7aff" width="100%" height="380px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-e151c48c1f31aca1b178737afbd7998b" width="100%" height="380px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-f2a33645a79faca254536671572c7aff').srcdoc = `
+    document.getElementById('react-root-e151c48c1f31aca1b178737afbd7998b').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -294,7 +294,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-9e892c149eb450e8724b7a5fa471fb43" width="355px" height="560px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-74105442ea8fa85b8a5906a8db306c22" width="355px" height="560px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 355px">
@@ -303,7 +303,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
   
 
   <script>
-    document.getElementById('react-root-9e892c149eb450e8724b7a5fa471fb43').srcdoc = `
+    document.getElementById('react-root-74105442ea8fa85b8a5906a8db306c22').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -387,7 +387,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-f99acb6342351447c7f9e1384438b292" width="355px" height="485px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-97745663a1174aae1b2f7a68a2811715" width="355px" height="485px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 355px">
@@ -396,7 +396,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
   
 
   <script>
-    document.getElementById('react-root-f99acb6342351447c7f9e1384438b292').srcdoc = `
+    document.getElementById('react-root-97745663a1174aae1b2f7a68a2811715').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -607,7 +607,7 @@ export const BezierCurveDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-494a59898194464d8e161455ee757812" width="100%" height="260px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-8bea6d13337c5758e3fff8fd1093dc7d" width="100%" height="260px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -616,7 +616,7 @@ export const BezierCurveDemoScene = () =&gt; {
   
 
   <script>
-    document.getElementById('react-root-494a59898194464d8e161455ee757812').srcdoc = `
+    document.getElementById('react-root-8bea6d13337c5758e3fff8fd1093dc7d').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -862,7 +862,7 @@ export const BezierCurveDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-aafaf3afb87296230a85d6990889d168" width="100%" height="380px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-d99caa3bbb28f9da1295e3da86220ad5" width="100%" height="380px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -871,7 +871,7 @@ export const BezierCurveDemoScene = () =&gt; {
   
 
   <script>
-    document.getElementById('react-root-aafaf3afb87296230a85d6990889d168').srcdoc = `
+    document.getElementById('react-root-d99caa3bbb28f9da1295e3da86220ad5').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1027,12 +1027,12 @@ export const MotionEvaluationDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-e90838d95539bc4dc33eca7a537634d1" width="100%" height="380px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-d672062e5d88f8c29bd4bc6a17ca39db" width="100%" height="380px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-e90838d95539bc4dc33eca7a537634d1').srcdoc = `
+    document.getElementById('react-root-d672062e5d88f8c29bd4bc6a17ca39db').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1263,12 +1263,12 @@ That is the whole trick.</p>
 
 
 <div class="embedded ">
-  <iframe id="react-root-0101edfa5b958b7fb5c6f260e04f62a8" width="100%" height="360px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-728f7911ce1f0b96be8ae83672340702" width="100%" height="360px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-0101edfa5b958b7fb5c6f260e04f62a8').srcdoc = `
+    document.getElementById('react-root-728f7911ce1f0b96be8ae83672340702').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1593,12 +1593,12 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 
 
 <div class="embedded ">
-  <iframe id="react-root-61dd455bf5ae8b9fa8182c14aa01d61f" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-ad55bedbdbd16532494a38058b509380" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-61dd455bf5ae8b9fa8182c14aa01d61f').srcdoc = `
+    document.getElementById('react-root-ad55bedbdbd16532494a38058b509380').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1841,12 +1841,12 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
 
 
 <div class="embedded ">
-  <iframe id="react-root-53878bb44b2ded45aa357c0a51bca109" width="100%" height="360px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-a5594024546f091f38605610fbc9e7bf" width="100%" height="360px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-53878bb44b2ded45aa357c0a51bca109').srcdoc = `
+    document.getElementById('react-root-a5594024546f091f38605610fbc9e7bf').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2120,12 +2120,12 @@ so it might help you as well.</p>
 
 
 <div class="embedded ">
-  <iframe id="react-root-cbb3bd7369b09765650d26ed4834adcc" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-a6e9bcef6062a5b04b3054ca1495f16f" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-cbb3bd7369b09765650d26ed4834adcc').srcdoc = `
+    document.getElementById('react-root-a6e9bcef6062a5b04b3054ca1495f16f').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2374,12 +2374,12 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 
 
 <div class="embedded ">
-  <iframe id="react-root-afab3d63e74bcd6c5b476116efe3a3ed" width="100%" height="360px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-1fdaf05b1c71717b6c9526dfacf389f6" width="100%" height="360px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-afab3d63e74bcd6c5b476116efe3a3ed').srcdoc = `
+    document.getElementById('react-root-1fdaf05b1c71717b6c9526dfacf389f6').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2488,12 +2488,12 @@ export const WasiLibraryExampleScene = () =&gt; {
 
 
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
-&lt;iframe id="react-root-11fe949657859d75e043ad3ebb04168f" width="225px" height="285px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
+&lt;iframe id="react-root-8869c45a9fc1b0327fb59095577a6e03" width="225px" height="285px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
 &lt;div class="description" style="width: 225px"&gt;
 Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-11fe949657859d75e043ad3ebb04168f').srcdoc = `
+document.getElementById('react-root-8869c45a9fc1b0327fb59095577a6e03').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -2519,7 +2519,7 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/implementing-library-funct
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-11fe949657859d75e043ad3ebb04168f" width="225px" height="285px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-8869c45a9fc1b0327fb59095577a6e03" width="225px" height="285px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 225px">
@@ -2528,7 +2528,7 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/implementing-library-funct
   
 
   <script>
-    document.getElementById('react-root-11fe949657859d75e043ad3ebb04168f').srcdoc = `
+    document.getElementById('react-root-8869c45a9fc1b0327fb59095577a6e03').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
