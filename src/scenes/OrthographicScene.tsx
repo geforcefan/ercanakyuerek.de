@@ -8,7 +8,8 @@ import { useColors } from '../hooks/useColors';
 import { SplineEditorCameraControls } from '../components/camera/SplineEditorCameraControls';
 
 export const OrthographicScene = ({
-  cameraControlsActive = true, ...props
+  cameraControlsActive = true,
+  ...props
 }: {
   children?: ReactNode;
   cameraControlsActive?: boolean;
