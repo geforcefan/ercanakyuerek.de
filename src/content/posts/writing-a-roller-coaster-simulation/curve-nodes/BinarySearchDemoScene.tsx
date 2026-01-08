@@ -44,10 +44,10 @@ const BinarySearchDemo = () => {
   const position = toPosition(matrixAtArcLength(curve, atArcLength));
 
   const nodes = findBoundingIndices(
-    curve,
+    curve.nodes,
     atArcLength,
     (node) => node.arcLength,
-  )?.map((index) => toPosition(curve[index].matrix));
+  )?.map((index) => toPosition(curve.nodes[index].matrix));
 
   return (
     <>

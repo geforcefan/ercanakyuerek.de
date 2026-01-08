@@ -4,12 +4,13 @@ import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
 import { MathUtils, Vector3 } from 'three';
 
-import { evaluateMotionByAcceleration } from '../../../../helper/physics';
 import { useColors } from '../../../../hooks/useColors';
 
 import { Arrow } from '../../../../components/Arrow';
 import { ControlPoint } from '../../../../components/curve/ControlPoint';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
+
+import { evaluateMotion } from './physics';
 
 const MotionEvaluationDemo = () => {
   const colors = useColors();
@@ -57,7 +58,7 @@ const MotionEvaluationDemo = () => {
 
   useFrame((state, deltaTime) => {
     setSimulationState(
-      evaluateMotionByAcceleration(
+      evaluateMotion(
         simulationState,
         simulationState.acceleration,
         deltaTime,

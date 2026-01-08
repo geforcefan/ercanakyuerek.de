@@ -1,4 +1,3 @@
-import { first } from 'lodash';
 import last from 'lodash/last';
 import { MathUtils, Matrix4, Vector3 } from 'three';
 
@@ -21,20 +20,25 @@ export type CurveNode = {
   segmentIndex: number;
 };
 
-export const totalArcLength = (curve: CurveNode[]) => {
-  return last(curve)?.arcLength || 0;
+export type Curve = {
+  nodes: CurveNode[];
+  segmentOffsets: number[];
 };
 
-export const matrixAtArcLength = (curve: CurveNode[], at: number) => {
+export const totalArcLength = (curve: Curve) => {
+  return last(curve.nodes)?.arcLength || 0;
+};
+
+export const matrixAtArcLength = (curve: Curve, at: number) => {
   const nodes = findBoundingIndices(
-    curve,
+    curve.nodes,
     at,
     (node) => node.arcLength,
   );
   if (!nodes) return new Matrix4();
 
-  const left = curve[nodes[0]];
-  const right = curve[nodes[1]];
+  const left = curve.nodes[nodes[0]];
+  const right = curve.nodes[nodes[1]];
 
   const length = right.arcLength - left.arcLength;
 
@@ -50,16 +54,16 @@ export const matrixAtArcLength = (curve: CurveNode[], at: number) => {
   return left.matrix.clone();
 };
 
-export const positionAtX = (curve: CurveNode[], at: number) => {
+export const positionAtX = (curve: Curve, at: number) => {
   const nodes = findBoundingIndices(
-    curve,
+    curve.nodes,
     at,
     (node) => node.matrix.elements[12],
   );
   if (!nodes) return new Vector3();
 
-  const left = toPosition(curve[nodes[0]].matrix);
-  const right = toPosition(curve[nodes[1]].matrix);
+  const left = toPosition(curve.nodes[nodes[0]].matrix);
+  const right = toPosition(curve.nodes[nodes[1]].matrix);
 
   const length = right.x - left.x;
 
@@ -87,11 +91,13 @@ export const arcLengthAtOffset = (
 };
 
 export const insertMatrix = (
-  curve: CurveNode[],
+  curve: Curve,
   matrix: Matrix4,
   segmentIndex: number = 0,
 ) => {
-  const lastNode = last(curve);
+  const lastNode = last(curve.nodes);
+  const lastSegmentIndex = lastNode?.segmentIndex ?? 0;
+
   let arcLength = 0;
 
   if (lastNode) {
@@ -104,7 +110,11 @@ export const insertMatrix = (
 
   const nodeMatrix = matrix.clone();
 
-  curve.push({
+  if (lastSegmentIndex !== segmentIndex)
+    curve.segmentOffsets[segmentIndex] = arcLength;
+  else curve.segmentOffsets[segmentIndex + 1] = arcLength;
+
+  curve.nodes.push({
     arcLength,
     matrix: nodeMatrix,
     segmentIndex,
@@ -114,11 +124,11 @@ export const insertMatrix = (
 };
 
 export const insertPosition = (
-  curve: CurveNode[],
+  curve: Curve,
   position: Vector3,
   segmentIndex: number = 0,
 ) => {
-  const lastNode = last(curve);
+  const lastNode = last(curve.nodes);
 
   if (lastNode) {
     if (
@@ -127,7 +137,7 @@ export const insertPosition = (
     )
       return;
 
-    if (curve.length === 1) {
+    if (curve.nodes.length === 1) {
       applyLookRelativeAt(lastNode.matrix, position);
     }
     applyLookRelativeAt(lastNode.matrix, position);
@@ -142,19 +152,26 @@ export const insertPosition = (
   return insertMatrix(curve, new Matrix4().setPosition(position));
 };
 
-export const applyRollCurve = (
-  curve: CurveNode[],
-  rollCurve: CurveNode[],
-) => {
-  curve.forEach(({ matrix, arcLength }) => {
+export const applyRollCurve = (curve: Curve, rollCurve: Curve) => {
+  curve.nodes.forEach(({ matrix, arcLength }) => {
     applyRoll(matrix, -positionAtX(rollCurve, arcLength).y);
   });
 
   return curve;
 };
 
+export const empty = (
+  nodes: CurveNode[] = [],
+  segmentOffsets: number[] = [0],
+): Curve => {
+  return {
+    nodes,
+    segmentOffsets,
+  };
+};
+
 export const fromPoints = (points: Vector3[]) => {
-  const curve: CurveNode[] = [];
+  const curve = empty();
 
   points.forEach((point) => {
     insertPosition(curve, point);
@@ -169,7 +186,7 @@ export const fromUniformSampledPositions = (
   resolution: number = 20,
   positionFn: (at: number, t: number) => Vector3,
 ) => {
-  const curve: CurveNode[] = [];
+  const curve = empty();
 
   uniformSample(from, to, resolution, (at, t) => {
     insertPosition(curve, positionFn(at, t));
@@ -178,99 +195,17 @@ export const fromUniformSampledPositions = (
   return curve;
 };
 
-export const fromPointsWithBasicNormals = (points: Vector3[]) => {
-  const curve: CurveNode[] = [];
-  if (points.length < 2) return curve;
-
-  let arcLength = 0;
-
-  for (let i = 0; i < points.length - 1; i++) {
-    const left = points[i];
-    const right = points[i + 1];
-    const prevNode = curve[curve.length - 1];
-
-    if (prevNode)
-      curve.push({
-        matrix: prevNode.matrix.clone().setPosition(left),
-        arcLength,
-        segmentIndex: 0,
-      });
-
-    curve.push({
-      matrix: new Matrix4()
-        .lookAt(right, left, new Vector3(0, 1, 0))
-        .setPosition(left),
-      arcLength,
-      segmentIndex: 0,
-    });
-
-    arcLength += left.distanceTo(right);
-  }
-
-  const lastNode = last(curve)!;
-  const lastPoint = last(points)!;
-
-  curve.push({
-    matrix: lastNode.matrix.clone().setPosition(lastPoint),
-    arcLength,
-    segmentIndex: 0,
-  });
-
-  return curve;
-};
-
-export const toPoints = (curve: CurveNode[]) => {
-  return curve.map((node) => toPosition(node.matrix));
-};
-
-export const toSegmentOffsets = (curve: CurveNode[]) => {
-  if (curve.length < 1) return [];
-  const minSegmentIndex = first(curve)!.segmentIndex;
-  const numberOfSegments =
-    last(curve)!.segmentIndex - first(curve)!.segmentIndex + 1;
-
-  const segments: number[][] = Array.from(
-    { length: numberOfSegments },
-    () => [],
-  );
-  const lengths: number[] = [];
-
-  curve.forEach((node, index) =>
-    segments[node.segmentIndex - minSegmentIndex].push(index),
-  );
-
-  segments.forEach((segment, index) => {
-    const nextSegment = segments[index + 1];
-    const leftNodeIndex = first(segment)!;
-    const rightNodeIndex = nextSegment
-      ? first(segments[index + 1])!
-      : last(segment)!;
-
-    const length =
-      curve[rightNodeIndex].arcLength -
-      curve[leftNodeIndex].arcLength;
-
-    if (length < Number.EPSILON) return;
-
-    lengths.push(length);
-  });
-
-  const offsets: number[] = [0];
-
-  lengths.forEach((_, index) => {
-    offsets.push(offsets[index] + lengths[index]);
-  });
-
-  return offsets;
+export const toPoints = (curve: Curve) => {
+  return curve.nodes.map((node) => toPosition(node.matrix));
 };
 
 export const toLocalTransformed = (
-  curve: CurveNode[],
+  curve: Curve,
   translation: Vector3,
-): CurveNode[] => {
-  const transformedCurve: CurveNode[] = [];
+): Curve => {
+  const transformedCurve = empty();
 
-  curve.forEach((node) => {
+  curve.nodes.forEach((node) => {
     insertPosition(
       transformedCurve,
       toPosition(
@@ -282,9 +217,11 @@ export const toLocalTransformed = (
     );
   });
 
-  transformedCurve.forEach((node, index) => {
+  transformedCurve.nodes.forEach((node, index) => {
     const position = toPosition(node.matrix);
-    const originalRollDirection = rollDirection(curve[index].matrix);
+    const originalRollDirection = rollDirection(
+      curve.nodes[index].matrix,
+    );
 
     const front = toFrontDirection(node.matrix);
     const left = originalRollDirection

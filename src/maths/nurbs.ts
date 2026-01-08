@@ -6,7 +6,7 @@ import {
   uniformSampleMap,
 } from '../helper/uniform-sample';
 
-import { CurveNode, insertPosition } from './curve';
+import { Curve, empty, insertPosition } from './curve';
 
 export const makeClampedKnots = (
   points: Vector4[],
@@ -158,7 +158,7 @@ export const estimateLength = (
 export const fromPoints = (
   points: Vector4[],
   knotVectorFactory: (points: Vector4[], degree: number) => number[],
-  out: CurveNode[] = [],
+  out: Curve = empty(),
   resolution: number = 20,
   maxDegree: number = 3,
   minSegmentIndex: number = 0,

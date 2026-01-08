@@ -3,6 +3,7 @@ import { Line } from '@react-three/drei';
 import { useControls } from 'leva';
 import { Vector3 } from 'three';
 
+import { toLocalTransformed } from '../maths/curve';
 import { fromURL, toArrayBuffer } from '../helper/nl2park/nl2park';
 import { curveFromCustomTrack } from '../helper/nolimits';
 import { useColors } from '../hooks/useColors';
@@ -16,9 +17,9 @@ import { PerspectiveScene } from '../scenes/PerspectiveScene';
 
 import { fromUrl } from '../coaster/nolimits-csv-track';
 // @ts-ignore
-import ParkCSV from './Experiment.csv';
+import ParkCSV from './Hybris.csv';
 // @ts-ignore
-import Park from './Experiment.nl2park';
+import Park from './Hybris.nl2park';
 
 const park = await fromURL(Park);
 const exampleCoaster = park.coaster[0];
@@ -27,7 +28,10 @@ const points = exampleTrack?.vertices.map((v) =>
   new Vector3().fromArray(v.position),
 );
 
-const exampleTrackCurve = curveFromCustomTrack(exampleTrack, false);
+const exampleTrackCurve = toLocalTransformed(
+  curveFromCustomTrack(exampleTrack, true),
+  new Vector3(0, -1.1, 0),
+);
 
 const exampleCSVCurve = await fromUrl(ParkCSV);
 
@@ -51,18 +55,18 @@ export const NoLimitsTrackScene = () => {
           color={colors.secondary}
           curve={exampleTrackCurve}
         />
-        <group position={new Vector3(0, -0.1, 0)}>
-          <CurveWireframe
-            color={colors.highlight}
-            curve={exampleCSVCurve}
-          />
-        </group>
+        <CurveWireframe
+          color={colors.highlight}
+          curve={exampleCSVCurve}
+        />
         <TrainWithPhysics
           curve={exampleTrackCurve}
           activateCamera={pov}
           init={{
-            velocity: 10,
-            distanceTraveled: 0,
+            velocity: 7,
+            distanceTraveled: 186,
+            friction: 0.026,
+            airResistance: 2e-5,
           }}
         />
       </PerspectiveScene>

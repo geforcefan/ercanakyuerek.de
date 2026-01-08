@@ -3,15 +3,15 @@ import { MathUtils, Vector2 } from 'three';
 import { clampedCubicSplineCurve } from '../maths/cubic';
 import {
   arcLengthAtOffset,
-  CurveNode,
+  Curve,
+  empty,
   matrixAtArcLength,
-  toSegmentOffsets,
 } from '../maths/curve';
 import { toLeftDirection, toUpDirection } from '../maths/matrix4';
 import { splitPointsByStrict } from '../helper/strict-point';
 
 export const fromRollPoints = (
-  curve: CurveNode[],
+  curve: Curve,
   rollPoints: Array<{
     position: number;
     roll: number;
@@ -20,19 +20,21 @@ export const fromRollPoints = (
   }>,
   resolution: number = 20,
 ) => {
-  const segmentOffsets = toSegmentOffsets(curve);
   const rollSections = splitPointsByStrict(rollPoints);
 
   let lastRoll = 0;
   let offset = 0;
 
-  const rollCurve: CurveNode[] = [];
+  const rollCurve = empty();
 
   for (const sectionRollPoints of rollSections) {
     const points: Vector2[] = [];
 
     for (const p of sectionRollPoints) {
-      const arcLength = arcLengthAtOffset(p.position, segmentOffsets);
+      const arcLength = arcLengthAtOffset(
+        p.position,
+        curve.segmentOffsets,
+      );
       const matrix = matrixAtArcLength(curve, arcLength);
 
       let roll = MathUtils.degToRad(p.roll);
@@ -58,8 +60,9 @@ export const fromRollPoints = (
       points.push(new Vector2(arcLength, roll));
     }
 
-    rollCurve.push(
-      ...clampedCubicSplineCurve(points, 0, 0, resolution),
+    // TODO(ercan.akyuerek): write curve merge utility? or something different, I dont know
+    rollCurve.nodes.push(
+      ...clampedCubicSplineCurve(points, 0, 0, resolution).nodes,
     );
   }
 

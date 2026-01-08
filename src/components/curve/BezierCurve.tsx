@@ -30,7 +30,7 @@ export const BezierCurve = (props: {
   const nodes = useMemo(() => {
     const curve = bezierSplineCurve(points, resolution);
 
-    const parametricNodes = curve.map((node) =>
+    const parametricNodes = curve.nodes.map((node) =>
       toPosition(node.matrix),
     );
 

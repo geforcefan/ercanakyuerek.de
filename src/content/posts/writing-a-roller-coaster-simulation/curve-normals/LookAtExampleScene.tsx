@@ -4,6 +4,7 @@ import { Matrix4, Vector3 } from 'three';
 
 import {
   applyRollCurve,
+  empty,
   toLocalTransformed,
 } from '../../../../maths/curve';
 import { toPosition } from '../../../../maths/matrix4';
@@ -37,21 +38,24 @@ export const LookAtExampleScene = () => {
     const trackCurve = curveFromCustomTrack(exampleTrack, false);
 
     if (lookAt === 'fixedUpDirection') {
-      return trackCurve.map((node, index, trackCurve) => {
-        const isLast = index === trackCurve.length - 1;
-        const left = toPosition(
-          isLast ? trackCurve[index - 1].matrix : node.matrix,
-        );
-        const right = toPosition(
-          isLast ? node.matrix : trackCurve[index + 1].matrix,
-        );
-        return {
-          ...node,
-          matrix: new Matrix4()
-            .lookAt(right, left, new Vector3(0, 1, 0))
-            .setPosition(left),
-        };
-      });
+      return empty(
+        trackCurve.nodes.map((node, index, nodes) => {
+          const isLast = index === nodes.length - 1;
+          const left = toPosition(
+            isLast ? nodes[index - 1].matrix : node.matrix,
+          );
+          const right = toPosition(
+            isLast ? node.matrix : nodes[index + 1].matrix,
+          );
+          return {
+            ...node,
+            matrix: new Matrix4()
+              .lookAt(right, left, new Vector3(0, 1, 0))
+              .setPosition(left),
+          };
+        }),
+        trackCurve.segmentOffsets,
+      );
     } else return trackCurve;
   }, [lookAt]);
 
