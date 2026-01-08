@@ -42,6 +42,7 @@
       transition: 0.2s linear all;
 
       &:hover {
+        color: $dark-background-header;
         background-color: $highlight-color;
       }
 
