@@ -37,13 +37,13 @@
     }
 
     button {
+      background: #3b3d42;
       padding: 5px;
       margin: 0;
       transition: 0.2s linear all;
 
       &:hover {
-        color: $dark-background-header;
-        background-color: $highlight-color;
+        background-color: darken(#3b3d42, 5%);
       }
 
       svg {
