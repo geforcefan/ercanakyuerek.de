@@ -3,8 +3,7 @@ import { Line } from '@react-three/drei';
 import { useControls } from 'leva';
 import { Vector3 } from 'three';
 
-import { toLocalTransformed } from '../maths/curve';
-import { fromURL } from '../helper/nl2park/nl2park';
+import { fromURL, toArrayBuffer } from '../helper/nl2park/nl2park';
 import { curveFromCustomTrack } from '../helper/nolimits';
 import { useColors } from '../hooks/useColors';
 
@@ -17,21 +16,22 @@ import { PerspectiveScene } from '../scenes/PerspectiveScene';
 
 import { fromUrl } from '../coaster/nolimits-csv-track';
 // @ts-ignore
-import ParkCSV from './Hybris.csv';
+import ParkCSV from './Experiment.csv';
 // @ts-ignore
-import Park from './Hybris.nl2park';
+import Park from './Experiment.nl2park';
 
-const exampleCoaster = (await fromURL(Park)).coaster[0];
+const park = await fromURL(Park);
+const exampleCoaster = park.coaster[0];
 const exampleTrack = exampleCoaster?.tracks[0];
 const points = exampleTrack?.vertices.map((v) =>
   new Vector3().fromArray(v.position),
 );
 
-const exampleTrackCurve = toLocalTransformed(
-  curveFromCustomTrack(exampleTrack),
-  new Vector3(0, -1.1, 0),
-);
+const exampleTrackCurve = curveFromCustomTrack(exampleTrack, false);
+
 const exampleCSVCurve = await fromUrl(ParkCSV);
+
+const parkBuffer = toArrayBuffer(park);
 
 export const NoLimitsTrackScene = () => {
   const colors = useColors();
@@ -46,24 +46,36 @@ export const NoLimitsTrackScene = () => {
         <Ground />
         <DragControlPoints points={points} setPoints={() => {}} />
         <Line points={points} color={colors.secondary} />
-        <DefaultCameraControls />
+        {!pov && <DefaultCameraControls />}
         <CurveWireframe
           color={colors.secondary}
           curve={exampleTrackCurve}
         />
-        <CurveWireframe
-          color={colors.highlight}
-          curve={exampleCSVCurve}
-        />
+        <group position={new Vector3(0, -0.1, 0)}>
+          <CurveWireframe
+            color={colors.highlight}
+            curve={exampleCSVCurve}
+          />
+        </group>
         <TrainWithPhysics
           curve={exampleTrackCurve}
           activateCamera={pov}
           init={{
-            velocity: 30,
-            distanceTraveled: 190,
+            velocity: 10,
+            distanceTraveled: 0,
           }}
         />
       </PerspectiveScene>
+      <a
+        href={URL.createObjectURL(
+          new Blob([parkBuffer], {
+            type: 'application/octet-stream',
+          }),
+        )}
+        download="vertex.nl2park"
+      >
+        Download Vertex
+      </a>
     </>
   );
 };

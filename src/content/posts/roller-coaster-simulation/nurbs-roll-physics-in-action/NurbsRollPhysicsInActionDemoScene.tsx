@@ -7,7 +7,6 @@ import { fromURL } from '../../../../helper/nl2park/nl2park';
 import { curveFromCustomTrack } from '../../../../helper/nolimits';
 import { useColors } from '../../../../hooks/useColors';
 
-import { DefaultCameraControls } from '../../../../components/camera/DefaultCameraControls';
 import { CurveWireframe } from '../../../../components/curve/CurveWireframe';
 import { Ground } from '../../../../components/Ground';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
@@ -33,9 +32,8 @@ export const NurbsRollPhysicsInActionDemoScene = () => {
 
   return (
     <>
-      <PerspectiveScene>
+      <PerspectiveScene cameraControlsActive={!pov}>
         <Ground position={new Vector3(0, -7, 0)} />
-        <DefaultCameraControls />
         <CurveWireframe
           color={colors.secondary}
           curve={exampleTrackCurve}

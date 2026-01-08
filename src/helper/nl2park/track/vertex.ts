@@ -1,4 +1,14 @@
-import { NoLimitsStream, readBoolean, readDoubleVector4, readNull } from '../nolimits-stream';
+import {
+  NoLimitsStream,
+  readBoolean,
+  readDoubleVector4,
+  readNull,
+  writeBoolean,
+  writeDoubleVector4,
+  writeNull,
+} from '../nolimits-stream';
+
+export type Vertex = ReturnType<typeof readVertex>;
 
 export const readVertex = (stream: NoLimitsStream) => {
   const vertex = {
@@ -8,4 +18,14 @@ export const readVertex = (stream: NoLimitsStream) => {
   };
   readNull(stream, 22);
   return vertex;
+};
+
+export const writeVertex = (
+  stream: NoLimitsStream,
+  vertex: Vertex,
+): void => {
+  writeDoubleVector4(stream, vertex.position);
+  writeBoolean(stream, vertex.locked);
+  writeBoolean(stream, vertex.strict);
+  writeNull(stream, 22);
 };

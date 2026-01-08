@@ -1,5 +1,3 @@
-import { readBrake } from './brake';
-import { readLift } from './lift';
 import {
   makeChunkReader,
   NoLimitsStream,
@@ -7,66 +5,123 @@ import {
   readNull,
   readString,
   readUnsignedInteger,
+  writeChunk,
+  writeNull,
+  writeString,
+  writeUnsignedInteger,
 } from '../nolimits-stream';
-import { readStation } from './station';
-import { readStorage } from './storage';
-import { readTransport } from './transport';
+import {
+  BrakeSection,
+  readBrakeSection,
+  writeBrakeSection,
+} from './brake-section';
+import {
+  LiftSection,
+  readLiftSection,
+  writeLiftSection,
+} from './lift-section';
+import {
+  readStationSection,
+  StationSection,
+  writeStationSection,
+} from './station-section';
+import {
+  readStorageSection,
+  StorageSection,
+  writeStorageSection,
+} from './storage-section';
+import {
+  readTransportSection,
+  TransportSection,
+  writeTransportSection,
+} from './transport-section';
+
+export type Section = {
+  name: string;
+} & (
+  | ({
+      sectionType: SectionType.Lift;
+    } & LiftSection)
+  | ({
+      sectionType: SectionType.Transport;
+    } & TransportSection)
+  | ({
+      sectionType: SectionType.Brake;
+    } & BrakeSection)
+  | ({
+      sectionType: SectionType.Station;
+    } & StationSection)
+  | ({
+      sectionType: SectionType.Storage;
+    } & StorageSection)
+  | {
+      sectionType: SectionType.Track;
+    }
+);
+
+export enum SectionType {
+  Track = 0,
+  Station = 1,
+  Lift = 2,
+  Transport = 3,
+  Brake = 4,
+  Storage = 5,
+}
 
 export const readSection = (stream: NoLimitsStream) => {
   readUnsignedInteger(stream); // section type
   const name = readString(stream);
-
   readNull(stream, 26);
 
   let section:
     | ({
-        sectionType: 'lift';
-      } & ReturnType<typeof readLift>)
+        sectionType: SectionType.Lift;
+      } & LiftSection)
     | ({
-        sectionType: 'transport';
-      } & ReturnType<typeof readTransport>)
+        sectionType: SectionType.Transport;
+      } & TransportSection)
     | ({
-        sectionType: 'brake';
-      } & ReturnType<typeof readBrake>)
+        sectionType: SectionType.Brake;
+      } & BrakeSection)
     | ({
-        sectionType: 'station';
-      } & ReturnType<typeof readStation>)
+        sectionType: SectionType.Station;
+      } & StationSection)
     | ({
-        sectionType: 'storage';
-      } & ReturnType<typeof readStorage>)
+        sectionType: SectionType.Storage;
+      } & StorageSection)
     | {
-        sectionType: 'none';
-      } = { sectionType: 'none' };
+        sectionType: SectionType.Track;
+      } = { sectionType: SectionType.Track };
 
   readChunks(
     [
-      makeChunkReader(readLift, 'LIFT', (lift) => {
+      makeChunkReader(readLiftSection, 'LIFT', (lift) => {
         section = {
-          sectionType: 'lift',
+          sectionType: SectionType.Lift,
           ...lift,
         };
       }),
-      makeChunkReader(readTransport, 'TRNS', (transport) => {
+      makeChunkReader(readTransportSection, 'TRNS', (transport) => {
         section = {
-          sectionType: 'transport',
+          sectionType: SectionType.Transport,
           ...transport,
         };
       }),
-      makeChunkReader(readBrake, 'BRKE', (brake) => {
+      makeChunkReader(readBrakeSection, 'BRKE', (brake) => {
         section = {
-          sectionType: 'brake',
+          sectionType: SectionType.Brake,
           ...brake,
         };
       }),
-      makeChunkReader(readStation, 'STTN', (station) => {
+      makeChunkReader(readStationSection, 'STTN', (station) => {
         section = {
-          sectionType: 'station',
+          sectionType: SectionType.Station,
           ...station,
         };
       }),
-      makeChunkReader(readStorage, 'STOR', (storage) => {
+      makeChunkReader(readStorageSection, 'STOR', (storage) => {
         section = {
-          sectionType: 'storage',
+          sectionType: SectionType.Storage,
           ...storage,
         };
       }),
@@ -78,4 +133,43 @@ export const readSection = (stream: NoLimitsStream) => {
     name,
     ...section,
   };
+};
+
+export const writeSection = (
+  stream: NoLimitsStream,
+  section: Section,
+): void => {
+  writeUnsignedInteger(stream, section.sectionType);
+  writeString(stream, section.name);
+  writeNull(stream, 26);
+
+  switch (section.sectionType) {
+    case SectionType.Lift:
+      writeChunk(stream, 'LIFT', (s) => writeLiftSection(s, section));
+      break;
+
+    case SectionType.Transport:
+      writeChunk(stream, 'TRNS', (s) =>
+        writeTransportSection(s, section),
+      );
+      break;
+
+    case SectionType.Brake:
+      writeChunk(stream, 'BRKE', (s) =>
+        writeBrakeSection(s, section),
+      );
+      break;
+
+    case SectionType.Station:
+      writeChunk(stream, 'STTN', (s) =>
+        writeStationSection(s, section),
+      );
+      break;
+
+    case SectionType.Storage:
+      writeChunk(stream, 'STOR', (s) =>
+        writeStorageSection(s, section),
+      );
+      break;
+  }
 };

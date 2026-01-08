@@ -1,4 +1,5 @@
 import { Matrix4, Vector3 } from 'three';
+
 import { toFrontDirection } from '../maths/matrix4';
 
 export type SimulationState = {

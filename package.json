@@ -8,7 +8,8 @@
   "scripts": {
     "build-scripts": "tsc --noEmit && webpack --config webpack.js",
     "dev-scripts": "react-scripts start",
-    "start": "hugo --themesDir src/themes server"
+    "start": "hugo --themesDir src/themes server",
+    "prepare": "husky"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -44,6 +45,8 @@
     "arraybuffer-loader": "^1.0.8",
     "babel-loader": "^9.1.2",
     "css-loader": "^7.1.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "prettier": "^2.8.4",
     "sass": "^1.97.1",
     "stream-browserify": "^3.0.0",
@@ -68,5 +71,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx,sass,css}": "prettier --write"
   }
 }

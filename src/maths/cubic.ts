@@ -64,7 +64,10 @@ export function clampedCubicSpline(
   return { x, y, b, c, d };
 }
 
-const evaluate = (s: ReturnType<typeof clampedCubicSpline>, t: number) => {
+const evaluate = (
+  s: ReturnType<typeof clampedCubicSpline>,
+  t: number,
+) => {
   const j = lowerBound(s.x, t, (v) => v);
   const i = Math.max(0, j - 1);
   const dx = t - s.x[i];
@@ -72,7 +75,7 @@ const evaluate = (s: ReturnType<typeof clampedCubicSpline>, t: number) => {
   return (
     s.y[i] + s.b[i] * dx + s.c[i] * dx * dx + s.d[i] * dx * dx * dx
   );
-}
+};
 
 export const clampedCubicSplineCurve = (
   points: Vector2[],

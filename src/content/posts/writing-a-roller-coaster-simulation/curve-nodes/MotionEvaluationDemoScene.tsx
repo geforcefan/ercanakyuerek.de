@@ -3,10 +3,10 @@ import { Vector3 } from 'three';
 
 import { fromPointsWithBasicNormals } from '../../../../maths/curve';
 
+import { CurveLine } from '../../../../components/curve/CurveLine';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
-import { CurveLine } from '../../../../components/curve/CurveLine';
 
 export const MotionEvaluationDemoScene = () => {
   const [points, setPoints] = useState([

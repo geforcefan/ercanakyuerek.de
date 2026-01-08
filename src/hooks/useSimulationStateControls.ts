@@ -18,7 +18,7 @@ export const useSimulationStateControls = (
       pad: 5,
     },
     airResistance: {
-      value: init.airResistance ?? 2e-05,
+      value: init.airResistance ?? 2e-5,
       pad: 6,
     },
     acceleration: {

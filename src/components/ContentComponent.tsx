@@ -1,9 +1,4 @@
-import React, {
-  lazy,
-  Suspense,
-  useMemo,
-  useRef,
-} from 'react';
+import React, { lazy, Suspense, useMemo, useRef } from 'react';
 import {
   ArrowsPointingInIcon,
   ArrowsPointingOutIcon,

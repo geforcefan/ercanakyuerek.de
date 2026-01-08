@@ -2,8 +2,8 @@ import { Matrix4, Vector2, Vector3, Vector4 } from 'three';
 
 import {
   CurveNode,
-  totalArcLength,
   matrixAtArcLength,
+  totalArcLength,
 } from '../maths/curve';
 import { uniformSampleMap } from '../helper/uniform-sample';
 

@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react';
-import { BufferGeometry, Vector3 } from 'three';
+import { Line } from '@react-three/drei';
+import { LineProps } from '@react-three/drei/core/Line';
+import { Vector3 } from 'three';
 
 import {
   CurveNode,
@@ -20,7 +22,7 @@ export const CurveWireframe = ({
   tie = wireFrameParts,
   rails = wireFrameParts,
   curve = [],
-  color,
+  ...props
 }: {
   curve: CurveNode[];
   railSpacing?: number;
@@ -28,9 +30,8 @@ export const CurveWireframe = ({
   tie?: Vector3[];
   rails?: Vector3[];
   loopTie?: boolean;
-  color?: number;
   offset?: Vector3;
-}) => {
+} & Omit<LineProps, 'points'>) => {
   const colors = useColors();
 
   const points = useMemo(() => {
@@ -99,13 +100,12 @@ export const CurveWireframe = ({
   }, [curve, loopTie, railSpacing, rails, tie, tieSpacing]);
 
   return (
-    <lineSegments
-      geometry={new BufferGeometry().setFromPoints(points)}
-    >
-      <lineBasicMaterial
-        attach="material"
-        color={color || colors.secondary}
-      />
-    </lineSegments>
+    <Line
+      points={points}
+      segments={true}
+      lineWidth={1}
+      color={colors.secondary}
+      {...props}
+    />
   );
 };

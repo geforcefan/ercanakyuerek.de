@@ -9,6 +9,7 @@ import { ContentComponent } from './components/ContentComponent';
 import { ContentComponentsListPage } from './pages/ContentComponentsListPage';
 
 import './themes/hello-friend-ng/assets/scss/main-webpack.scss';
+
 import { NoLimitsTrackScene } from './experiments/NoLimitsTrack';
 
 const router = createBrowserRouter([

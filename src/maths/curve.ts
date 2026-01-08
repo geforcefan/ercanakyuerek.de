@@ -11,7 +11,8 @@ import {
   distance,
   lerp,
   rollDirection,
-  toFrontDirection, toPosition,
+  toFrontDirection,
+  toPosition,
 } from './matrix4';
 
 export type CurveNode = {

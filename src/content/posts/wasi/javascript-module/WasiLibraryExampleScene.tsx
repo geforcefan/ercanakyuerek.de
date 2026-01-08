@@ -10,8 +10,8 @@ import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 
 import {
   bezierFromPoints,
-  bezierTotalArcLength,
   bezierPositionAtArcLength,
+  bezierTotalArcLength,
 } from '../../../../libs/calculation';
 
 export const WasiLibraryExampleScene = () => {
@@ -32,15 +32,25 @@ export const WasiLibraryExampleScene = () => {
       points[3].toArray(),
     );
 
-    return uniformSampleMap(0, bezierTotalArcLength(bezier), 5, (at) =>
-      new Vector3().fromArray(bezierPositionAtArcLength(bezier, at)),
+    return uniformSampleMap(
+      0,
+      bezierTotalArcLength(bezier),
+      5,
+      (at) =>
+        new Vector3().fromArray(
+          bezierPositionAtArcLength(bezier, at),
+        ),
     );
   }, [points]);
 
   return (
     <OrthographicScene>
       <DragControlPoints points={points} setPoints={setPoints} />
-      <Line color={colors.highlight} points={points} segments={true} />
+      <Line
+        color={colors.highlight}
+        points={points}
+        segments={true}
+      />
       <Line color={colors.secondary} points={nodes} />
     </OrthographicScene>
   );

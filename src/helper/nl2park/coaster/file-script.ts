@@ -1,9 +1,14 @@
 import {
   NoLimitsStream,
-  readUnsignedInteger,
-  readString,
   readNull,
+  readString,
+  readUnsignedInteger,
+  writeNull,
+  writeString,
+  writeUnsignedInteger,
 } from '../nolimits-stream';
+
+export type FileScript = ReturnType<typeof readFileScript>;
 
 export const readFileScript = (stream: NoLimitsStream) => {
   const paths: string[] = [];
@@ -19,4 +24,17 @@ export const readFileScript = (stream: NoLimitsStream) => {
   return {
     paths,
   };
+};
+
+export const writeFileScript = (
+  stream: NoLimitsStream,
+  fileScript: FileScript,
+): void => {
+  writeUnsignedInteger(stream, fileScript.paths.length);
+  for (const path of fileScript.paths) {
+    writeString(stream, path);
+    writeNull(stream, 8);
+  }
+
+  writeNull(stream, 8);
 };

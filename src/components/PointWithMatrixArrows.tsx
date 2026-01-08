@@ -6,7 +6,9 @@ import { useColors } from '../hooks/useColors';
 import { ControlPoint } from './curve/ControlPoint';
 import { MatrixArrowHelper } from './MatrixArrowHelper';
 
-export const PointWithMatrixArrows = (props: ThreeElements['group']) => {
+export const PointWithMatrixArrows = (
+  props: ThreeElements['group'],
+) => {
   const colors = useColors();
 
   return (

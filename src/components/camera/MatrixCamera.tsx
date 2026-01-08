@@ -20,7 +20,11 @@ export const MatrixCamera = ({
           new Matrix4().makeRotationY(MathUtils.degToRad(180)),
         )
         .multiply(
-          new Matrix4().makeTranslation(translate.x, translate.y, translate.z)
+          new Matrix4().makeTranslation(
+            translate.x,
+            translate.y,
+            translate.z,
+          ),
         ),
     [matrix, translate.x, translate.y, translate.z],
   );

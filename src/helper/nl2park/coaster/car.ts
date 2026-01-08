@@ -1,15 +1,21 @@
-import { readIndividualColor } from './individual-color';
 import {
   makeChunkReader,
   NoLimitsStream,
   readChunks,
   readUnsignedInteger,
+  writeChunk,
+  writeUnsignedInteger,
 } from '../nolimits-stream';
+import {
+  IndividualColor,
+  readIndividualColor,
+  writeIndividualColor,
+} from './individual-color';
+
+export type Car = ReturnType<typeof readCar>;
 
 export const readCar = (stream: NoLimitsStream) => {
-  let individualColor:
-    | ReturnType<typeof readIndividualColor>
-    | undefined;
+  let individualColor: IndividualColor | undefined;
 
   const internalCarIndex = readUnsignedInteger(stream);
 
@@ -28,4 +34,12 @@ export const readCar = (stream: NoLimitsStream) => {
     internalCarIndex,
     individualColor,
   };
+};
+
+export const writeCar = (stream: NoLimitsStream, car: Car): void => {
+  writeUnsignedInteger(stream, car.internalCarIndex);
+  writeChunk(stream, 'INDC', (s) => {
+    if (!car.individualColor) return;
+    writeIndividualColor(s, car.individualColor);
+  });
 };

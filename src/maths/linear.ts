@@ -24,7 +24,9 @@ export const matrixAtArcLength = (
   cp2: Vector3,
   at: number,
 ) => {
-  const position = cp1.clone().lerp(cp2, at / totalArcLength(cp1, cp2));
+  const position = cp1
+    .clone()
+    .lerp(cp2, at / totalArcLength(cp1, cp2));
 
   return new Matrix4()
     .lookAt(cp2, cp1, new Vector3(0, 1, 0))

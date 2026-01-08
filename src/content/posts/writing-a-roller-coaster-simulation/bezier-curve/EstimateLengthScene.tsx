@@ -3,12 +3,8 @@ import { Line } from '@react-three/drei';
 import { useControls } from 'leva';
 import { Vector3 } from 'three';
 
-import {
-  deCasteljau,
-} from '../../../../maths/bezier';
-import {
-  uniformSampleMap,
-} from '../../../../helper/uniform-sample';
+import { deCasteljau } from '../../../../maths/bezier';
+import { uniformSampleMap } from '../../../../helper/uniform-sample';
 import { useColors } from '../../../../hooks/useColors';
 
 import { BezierCurve } from '../../../../components/curve/BezierCurve';
@@ -36,13 +32,15 @@ export const EstimateLengthScene = () => {
 
   const positions = useMemo(
     () =>
-      uniformSampleMap(0, state.numberOfNodes, 1, (at, t) => deCasteljau(points, t)),
+      uniformSampleMap(0, state.numberOfNodes, 1, (at, t) =>
+        deCasteljau(points, t),
+      ),
     [state.numberOfNodes, points],
   );
 
   return (
     <OrthographicScene>
-      <Line points={positions}/>
+      <Line points={positions} />
       <Line
         points={points}
         color={colors.highlight}

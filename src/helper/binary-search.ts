@@ -3,7 +3,7 @@ import { MathUtils } from 'three';
 export const lowerBound = <T>(
   array: T[],
   value: number,
-  accessor: (item: T, index : number) => number,
+  accessor: (item: T, index: number) => number,
 ): number => {
   let first = 0;
   let len = array.length;
@@ -26,7 +26,7 @@ export const lowerBound = <T>(
 export const findBoundingIndices = <T>(
   array: T[],
   value: number,
-  accessor: (item: T, index : number) => number,
+  accessor: (item: T, index: number) => number,
 ) => {
   if (array.length < 2) return;
 

@@ -2,7 +2,11 @@ import { useEffect, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { MathUtils } from 'three';
 
-import { CurveNode, totalArcLength, matrixAtArcLength } from '../maths/curve';
+import {
+  CurveNode,
+  matrixAtArcLength,
+  totalArcLength,
+} from '../maths/curve';
 import { evaluateMotion } from '../helper/physics';
 
 import { useSimulationStateControls } from './useSimulationStateControls';

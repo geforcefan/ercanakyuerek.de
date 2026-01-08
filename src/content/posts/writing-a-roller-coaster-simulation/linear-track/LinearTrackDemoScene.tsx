@@ -6,8 +6,8 @@ import { Vector3 } from 'three';
 
 import {
   forwardDirectionAtArcLength,
-  totalArcLength,
   positionAtArcLength,
+  totalArcLength,
 } from '../../../../maths/linear';
 import { evaluateMotionByForwardDirection } from '../../../../helper/physics';
 import { useColors } from '../../../../hooks/useColors';
@@ -57,7 +57,7 @@ const LinearTrackDemo = () => {
   useEffect(() => {
     if (
       simulationState.distanceTraveled >
-      totalArcLength(points[0], points[1]) ||
+        totalArcLength(points[0], points[1]) ||
       simulationState.distanceTraveled < 0
     ) {
       setSimulationState({

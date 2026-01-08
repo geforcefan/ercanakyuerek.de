@@ -3,7 +3,10 @@ import { Line } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { MathUtils, Vector3 } from 'three';
 
-import { totalArcLength, matrixAtArcLength } from '../../../../maths/linear';
+import {
+  matrixAtArcLength,
+  totalArcLength,
+} from '../../../../maths/linear';
 import { evaluateMotion } from '../../../../helper/physics';
 import { useColors } from '../../../../hooks/useColors';
 import { useSimulationStateControls } from '../../../../hooks/useSimulationStateControls';
@@ -45,7 +48,7 @@ const MatricesDemo = () => {
   useEffect(() => {
     if (
       simulationState.distanceTraveled >
-      totalArcLength(points[0], points[1]) ||
+        totalArcLength(points[0], points[1]) ||
       simulationState.distanceTraveled < 0
     ) {
       setSimulationState({

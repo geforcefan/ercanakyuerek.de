@@ -3,12 +3,12 @@ import { Line } from '@react-three/drei';
 import { Vector3 } from 'three';
 
 import { bezierSplineCurve } from '../../maths/bezier';
-import { totalArcLength, matrixAtArcLength } from '../../maths/curve';
+import { matrixAtArcLength, totalArcLength } from '../../maths/curve';
+import { toPosition } from '../../maths/matrix4';
 import { uniformSampleMap } from '../../helper/uniform-sample';
 import { useColors } from '../../hooks/useColors';
 
 import { ControlPoint } from './ControlPoint';
-import { toPosition } from '../../maths/matrix4';
 
 export const BezierCurve = (props: {
   points: Vector3[];
@@ -22,7 +22,7 @@ export const BezierCurve = (props: {
     resolution = 20,
     uniform = false,
     showNodes = false,
-    color
+    color,
   } = props;
 
   const colors = useColors();

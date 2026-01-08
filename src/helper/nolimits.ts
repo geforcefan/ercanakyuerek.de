@@ -5,7 +5,7 @@ import { applyRollCurve, arcLengthAtOffset } from '../maths/curve';
 import { fromRollPoints } from '../coaster/cubic-roll';
 import { fromVertices } from '../coaster/nurbs-track';
 import { readCustomTrack } from './nl2park/track/custom-track';
-import { isRollPoint } from './nl2park/track/roll';
+import { isRollPoint } from './nl2park/track/roll-point';
 import { splitPointsByStrict } from './strict-point';
 
 export const curveFromCustomTrack = (
@@ -51,8 +51,23 @@ export const rollPointsFromCustomTrack = (
     );
   }
 
-  return track?.points
-    .filter(isRollPoint)
+  const rollPoints = [
+    {
+      position: 0,
+      roll: track.startRoll.roll,
+      vertical: track.startRoll.vertical,
+      strict: false,
+    },
+    {
+      position: track.vertices.length - 1,
+      roll: track.endRoll.roll,
+      vertical: track.endRoll.vertical,
+      strict: false,
+    },
+    ...track?.points.filter(isRollPoint),
+  ];
+
+  return rollPoints
     .sort((a, b) => a.position - b.position)
     .map((point) => ({
       ...point,

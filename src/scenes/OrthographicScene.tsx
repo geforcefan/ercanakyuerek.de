@@ -5,9 +5,15 @@ import { useDevicePixelRatio } from 'use-device-pixel-ratio';
 
 import { useColors } from '../hooks/useColors';
 
-export const OrthographicScene = (
-  props: { children?: ReactNode } & CanvasProps,
-) => {
+import { SplineEditorCameraControls } from '../components/camera/SplineEditorCameraControls';
+
+export const OrthographicScene = ({
+  cameraControlsActive = true,
+  ...props
+}: {
+  children?: ReactNode;
+  cameraControlsActive?: boolean;
+} & CanvasProps) => {
   const { children, ...restProps } = props;
   const colors = useColors();
   const dpr = useDevicePixelRatio();
@@ -19,6 +25,7 @@ export const OrthographicScene = (
       dpr={dpr}
       {...restProps}
     >
+      {cameraControlsActive && <SplineEditorCameraControls />}
       <color attach="background" args={[colors.primary]} />
       {children}
     </Canvas>

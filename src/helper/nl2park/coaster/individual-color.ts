@@ -5,7 +5,14 @@ import {
   readNull,
   readString,
   readUnsignedInteger,
+  writeBoolean,
+  writeColor,
+  writeNull,
+  writeString,
+  writeUnsignedInteger,
 } from '../nolimits-stream';
+
+export type IndividualColor = ReturnType<typeof readIndividualColor>;
 
 export const readIndividualColor = (stream: NoLimitsStream) => {
   const hasIndividualColor = readBoolean(stream);
@@ -36,4 +43,26 @@ export const readIndividualColor = (stream: NoLimitsStream) => {
     chassisColor,
     carTextures,
   };
+};
+
+export const writeIndividualColor = (
+  stream: NoLimitsStream,
+  color: IndividualColor,
+): void => {
+  writeBoolean(stream, color.hasIndividualColor);
+
+  writeColor(stream, color.carColor);
+  writeColor(stream, color.seatColor);
+  writeColor(stream, color.harnessColor);
+  writeColor(stream, color.bogieColor);
+  writeColor(stream, color.chassisColor);
+
+  writeNull(stream, 16);
+
+  writeUnsignedInteger(stream, color.carTextures.length);
+  for (const texture of color.carTextures) {
+    writeNull(stream, 4);
+    writeString(stream, texture);
+    writeNull(stream, 8);
+  }
 };
