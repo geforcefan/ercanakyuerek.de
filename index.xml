@@ -5,7 +5,7 @@
 &lt;p&gt;We already did some basic normal calculations in previous chapters, and that mostly worked fine. However, there is a problem when we rely too much on a simple &lt;code&gt;lookAt&lt;/code&gt; from &lt;strong&gt;THREE.js&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The issue is &lt;strong&gt;roll&lt;/strong&gt;, also known as rotation around the Z axis.&lt;/p&gt;
 &lt;p&gt;When we use &lt;code&gt;lookAt&lt;/code&gt;, we have to provide an up vector. So far, we have always used &lt;code&gt;(0, 1, 0)&lt;/code&gt;. This works well for gentle slopes, but it starts to break down when the track approaches angles close to 90 degrees.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
- &lt;iframe id="react-root-1e5aabc29cb80babe105a84745fe0e7b" width="225px" height="285px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
+ &lt;iframe id="react-root-dff868901ed9af410ba06b86180622c5" width="225px" height="285px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
 
  
  &lt;div class="description" style="width: 225px"&gt;
@@ -14,7 +14,7 @@
  
 
  &lt;script&gt;
- document.getElementById('react-root-1e5aabc29cb80babe105a84745fe0e7b').srcdoc = `
+ document.getElementById('react-root-dff868901ed9af410ba06b86180622c5').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -63,7 +63,7 @@ Nothing overly scientific, just the kind of system that behaves the way we intui
 In the end, the physics model will end up pretty close to what &lt;strong&gt;NoLimits Roller Coaster&lt;/strong&gt; does anyway, just without all the heavy engineering baggage.&lt;/p&gt;</description></item><item><title>JavaScript module</title><link>https://ercanakyuerek.de/posts/wasi/javascript-module/</link><pubDate>Mon, 27 Feb 2023 17:45:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/javascript-module/</guid><description>&lt;p&gt;This is the point where we start writing the &lt;strong&gt;JavaScript&lt;/strong&gt; side of the library that talks to our &lt;strong&gt;WebAssembly&lt;/strong&gt; module.&lt;/p&gt;
 &lt;p&gt;At this stage, the WebAssembly part already exists and exposes a couple of useful functions. What we need now is a small JavaScript wrapper that loads the module, wires things together, and gives us a nicer API to work with.&lt;/p&gt;
 &lt;p&gt;I have created a very basic template for this. You may notice that we define a number of imports for &lt;strong&gt;WASI&lt;/strong&gt;, but all of them are empty. This looks suspicious at first, so let us talk about that.&lt;/p&gt;</description></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
- &lt;iframe id="react-root-75167c111db7e4a31cb3ecee84d1c202" width="225px" height="285px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
+ &lt;iframe id="react-root-091ee8a374297589fe68b07233a88f24" width="225px" height="285px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
 
  
  &lt;div class="description" style="width: 225px"&gt;
@@ -72,7 +72,7 @@ In the end, the physics model will end up pretty close to what &lt;strong&gt;NoL
  
 
  &lt;script&gt;
- document.getElementById('react-root-75167c111db7e4a31cb3ecee84d1c202').srcdoc = `
+ document.getElementById('react-root-091ee8a374297589fe68b07233a88f24').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
