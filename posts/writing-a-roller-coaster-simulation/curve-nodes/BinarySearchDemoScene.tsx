@@ -8,13 +8,13 @@ import {
   matrixAtArcLength,
   totalArcLength,
 } from '../../../../maths/curve';
+import { toPosition } from '../../../../maths/matrix4';
 import { findBoundingIndices } from '../../../../helper/binary-search';
 import { useColors } from '../../../../hooks/useColors';
 
 import { ControlPoint } from '../../../../components/curve/ControlPoint';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
-import { toPosition } from '../../../../maths/matrix4';
 
 const BinarySearchDemo = () => {
   const colors = useColors();
