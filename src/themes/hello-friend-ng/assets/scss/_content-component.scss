@@ -43,7 +43,7 @@
       transition: 0.2s linear all;
 
       &:hover {
-        background-color: darken(#3b3d42, 5%);
+        background-color: lighten(#3b3d42, 5%);
       }
 
       svg {
