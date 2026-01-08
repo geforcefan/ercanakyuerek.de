@@ -39,6 +39,11 @@
     button {
       padding: 5px;
       margin: 0;
+      transition: 0.2s linear all;
+
+      &:hover {
+        background-color: $highlight-color;
+      }
 
       svg {
         width: 24px;
