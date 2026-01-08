@@ -4,7 +4,7 @@ import { LineProps } from '@react-three/drei/core/Line';
 import { Vector3 } from 'three';
 
 import {
-  CurveNode,
+  Curve,
   matrixAtArcLength,
   totalArcLength,
 } from '../../maths/curve';
@@ -21,10 +21,10 @@ export const CurveWireframe = ({
   loopTie = true,
   tie = wireFrameParts,
   rails = wireFrameParts,
-  curve = [],
+  curve,
   ...props
 }: {
-  curve: CurveNode[];
+  curve: Curve;
   railSpacing?: number;
   tieSpacing?: number;
   tie?: Vector3[];

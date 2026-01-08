@@ -1,7 +1,7 @@
 import { Matrix4, Vector2, Vector3, Vector4 } from 'three';
 
 import {
-  CurveNode,
+  Curve,
   matrixAtArcLength,
   totalArcLength,
 } from '../maths/curve';
@@ -15,7 +15,7 @@ export const plotDataFromPoints = (
 });
 
 export const plotDataFromCurve = (
-  curve: CurveNode[],
+  curve: Curve,
   resolution: number = 8,
   fn: (m: Matrix4) => number,
 ) => {

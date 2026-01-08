@@ -1,7 +1,7 @@
 import React from 'react';
 import { Vector3 } from 'three';
 
-import { CurveNode } from '../maths/curve';
+import { Curve } from '../maths/curve';
 import { useMotionSimulation } from '../hooks/useMotionSimulation';
 import { useSimulationStateControls } from '../hooks/useSimulationStateControls';
 
@@ -13,7 +13,7 @@ export const TrainWithPhysics = ({
   activateCamera = false,
   init = {},
 }: {
-  curve: CurveNode[];
+  curve: Curve;
   activateCamera?: boolean;
   init?: Parameters<typeof useSimulationStateControls>[0];
 }) => {

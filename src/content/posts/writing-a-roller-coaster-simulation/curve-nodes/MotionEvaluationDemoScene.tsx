@@ -1,12 +1,12 @@
 import React, { useMemo, useState } from 'react';
 import { Vector3 } from 'three';
 
-import { fromPointsWithBasicNormals } from '../../../../maths/curve';
-
 import { CurveLine } from '../../../../components/curve/CurveLine';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
+
+import { fromPoints } from './curve';
 
 export const MotionEvaluationDemoScene = () => {
   const [points, setPoints] = useState([
@@ -18,10 +18,7 @@ export const MotionEvaluationDemoScene = () => {
     new Vector3(-0.5, -2.5, 0),
   ]);
 
-  const curve = useMemo(
-    () => fromPointsWithBasicNormals(points),
-    [points],
-  );
+  const curve = useMemo(() => fromPoints(points), [points]);
 
   return (
     <OrthographicScene>

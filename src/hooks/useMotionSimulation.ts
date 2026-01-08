@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { MathUtils } from 'three';
 
 import {
-  CurveNode,
+  Curve,
   matrixAtArcLength,
   totalArcLength,
 } from '../maths/curve';
@@ -12,7 +12,7 @@ import { evaluateMotion } from '../helper/physics';
 import { useSimulationStateControls } from './useSimulationStateControls';
 
 export const useMotionSimulation = (
-  curve: CurveNode[],
+  curve: Curve,
   init: Parameters<typeof useSimulationStateControls>[0] = {},
 ) => {
   const [simulationState, setSimulationState] =

@@ -8,16 +8,17 @@ import {
   positionAtArcLength,
   totalArcLength,
 } from '../../../../maths/linear';
-import {
-  evaluateMotionByForwardDirection,
-  evaluateMotionByForwardDirectionWithFriction,
-} from '../../../../helper/physics';
 import { useColors } from '../../../../hooks/useColors';
 import { useSimulationStateControls } from '../../../../hooks/useSimulationStateControls';
 
 import { ControlPoint } from '../../../../components/curve/ControlPoint';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
+
+import {
+  evaluateMotion,
+  evaluateMotionWithFriction,
+} from '../linear-track/physics';
 
 const FrictionAndAirResistanceDemo = () => {
   const colors = useColors();
@@ -43,7 +44,7 @@ const FrictionAndAirResistanceDemo = () => {
   useFrame((state, deltaTime) => {
     // with friction and air resistance
     setSimulationState(
-      evaluateMotionByForwardDirectionWithFriction(
+      evaluateMotionWithFriction(
         simulationState,
         forwardDirectionAtArcLength(
           points[0],
@@ -59,7 +60,7 @@ const FrictionAndAirResistanceDemo = () => {
 
     // without energy loss
     setSimulationStateWithoutFriction(
-      evaluateMotionByForwardDirection(
+      evaluateMotion(
         simulationStateWithoutFriction,
         forwardDirectionAtArcLength(
           points[0],

@@ -2,7 +2,7 @@ import { Vector2, Vector3 } from 'three';
 
 import { lowerBound } from '../helper/binary-search';
 
-import { fromUniformSampledPositions } from './curve';
+import { empty, fromUniformSampledPositions } from './curve';
 
 export function clampedCubicSpline(
   points: Vector2[],
@@ -83,7 +83,7 @@ export const clampedCubicSplineCurve = (
   endSlope: number = 0,
   resolution: number = 8,
 ) => {
-  if (points.length < 2) return [];
+  if (points.length < 2) return empty();
 
   const spline = clampedCubicSpline(points, startSlope, endSlope);
 

@@ -9,12 +9,13 @@ import {
   positionAtArcLength,
   totalArcLength,
 } from '../../../../maths/linear';
-import { evaluateMotionByForwardDirection } from '../../../../helper/physics';
 import { useColors } from '../../../../hooks/useColors';
 
 import { ControlPoint } from '../../../../components/curve/ControlPoint';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
 import { OrthographicScene } from '../../../../scenes/OrthographicScene';
+
+import { evaluateMotion } from './physics';
 
 const LinearTrackDemo = () => {
   const colors = useColors();
@@ -40,7 +41,7 @@ const LinearTrackDemo = () => {
 
   useFrame((state, deltaTime) => {
     setSimulationState(
-      evaluateMotionByForwardDirection(
+      evaluateMotion(
         simulationState,
         forwardDirectionAtArcLength(
           points[0],
