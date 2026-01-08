@@ -39,7 +39,8 @@ export const rollPointsFromCustomTrack = (
   const sections = splitPointsByStrict(track.vertices);
 
   const parameterSpace: number[] = [0];
-  for (const vertices of sections) {
+  for (let i = 0; i < sections.length; i += 1) {
+    const vertices = sections[i];
     const lastParameterSpace =
       parameterSpace[parameterSpace.length - 1];
 
@@ -71,14 +72,29 @@ export const makeParameterSpaceMap = (
       space.push(space[space.length - 1] + u);
   };
 
-  if (closed) {
-    push(1, numberOfPoints);
-  } else {
-    const hasMiddle = numberOfPoints > degree + 1;
-    const splits = hasMiddle
-      ? Math.min(2, degree)
-      : numberOfPoints - 1;
+  const hasMiddle = numberOfPoints > degree + 1;
+  const splits = hasMiddle ? Math.min(2, degree) : numberOfPoints - 1;
+  //const middle = numberOfPoints - splits - 1;
 
+  if (closed) {
+    /*if ((isFirstSection || isLastSection) && numberOfPoints <= 3) {
+      push(1, 1) }
+    else if (isFirstSection && numberOfPoints <= 3) {
+      push(0.5, 4);
+    } else if (isFirstSection && numberOfPoints <= 4) {
+      push(1, 1);
+      push(1 / 2, 2);
+    } else if (isLastSection && numberOfPoints <= 4) {
+      push(1 / 2, 2);
+      push(1, 2);
+    } else if (isFirstSection) {
+      push(1, middle);
+      push(1 / splits, splits);
+    } else if (isLastSection) {
+      push(1 / splits, splits);
+      push(1, middle);
+    } else */ push(1, numberOfPoints);
+  } else {
     push(1 / splits, splits);
     if (hasMiddle) {
       push(1, numberOfPoints - 1 - 2 * splits);

@@ -17,9 +17,9 @@ import { PerspectiveScene } from '../scenes/PerspectiveScene';
 
 import { fromUrl } from '../coaster/nolimits-csv-track';
 // @ts-ignore
-import ParkCSV from './Experiment.csv';
+import ParkCSV from './Hybris.csv';
 // @ts-ignore
-import Park from './Experiment.nl2park';
+import Park from './Hybris.nl2park';
 
 const exampleCoaster = (await fromURL(Park)).coaster[0];
 const exampleTrack = exampleCoaster?.tracks[0];
@@ -29,7 +29,7 @@ const points = exampleTrack?.vertices.map((v) =>
 
 const exampleTrackCurve = toLocalTransformed(
   curveFromCustomTrack(exampleTrack),
-  new Vector3(0, 0, 0),
+  new Vector3(0, -1.1, 0),
 );
 const exampleCSVCurve = await fromUrl(ParkCSV);
 
@@ -59,7 +59,7 @@ export const NoLimitsTrackScene = () => {
           curve={exampleTrackCurve}
           activateCamera={pov}
           init={{
-            velocity: 5,
+            velocity: 30,
             distanceTraveled: 190,
           }}
         />

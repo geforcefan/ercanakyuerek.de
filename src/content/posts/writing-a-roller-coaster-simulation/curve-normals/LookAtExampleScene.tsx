@@ -2,7 +2,10 @@ import React, { useMemo } from 'react';
 import { useControls } from 'leva';
 import { Matrix4, Vector3 } from 'three';
 
-import { applyRollCurve } from '../../../../maths/curve';
+import {
+  applyRollCurve,
+  toLocalTransformed,
+} from '../../../../maths/curve';
 import { toPosition } from '../../../../maths/matrix4';
 import { fromURL } from '../../../../helper/nl2park/nl2park';
 import {
@@ -53,9 +56,15 @@ export const LookAtExampleScene = () => {
   }, [lookAt]);
 
   const curveWithRoll = useMemo(() => {
-    return applyRollCurve(
-      curve,
-      fromRollPoints(curve, rollPointsFromCustomTrack(exampleTrack)),
+    return toLocalTransformed(
+      applyRollCurve(
+        curve,
+        fromRollPoints(
+          curve,
+          rollPointsFromCustomTrack(exampleTrack),
+        ),
+      ),
+      new Vector3(0, -1.1, 0),
     );
   }, [curve]);
 
@@ -66,7 +75,7 @@ export const LookAtExampleScene = () => {
         <TrainWithPhysics
           curve={curveWithRoll}
           activateCamera={true}
-          init={{ velocity: 22 }}
+          init={{ velocity: 23 }}
         />
         <Ground />
       </PerspectiveScene>
