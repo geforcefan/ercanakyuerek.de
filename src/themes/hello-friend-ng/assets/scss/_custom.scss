@@ -18,9 +18,9 @@
 
   .frame {
     border: 0;
-    padding: 1em;
-    background: $embedded-frame-background;
     border-radius: 8px;
+    overflow: hidden;
+    background-color: $embedded-frame-background;
   }
 
   .description {

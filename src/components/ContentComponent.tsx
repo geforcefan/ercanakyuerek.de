@@ -34,33 +34,26 @@ export const ContentComponent = ({ path }: { path: string }) => {
 
   return (
     <div ref={ref} className="full-screen content-component">
-      <div className="content">
-        <Suspense fallback={<LoadingScreen />}>
-          <Leva
-            titleBar={{ filter: false, title: false }}
-            theme={{
-              sizes: { rootWidth: '300px' },
-              shadows: {
-                level1: 'none',
-              },
-              colors: {
-                accent2: numberToHexString(colors.highlight),
-                accent1: numberToHexString(colors.highlight),
-                elevation1: '#1b1c1d',
-                elevation2: '#232425',
-                elevation3: numberToHexString(colors.primary),
-              },
-            }}
-          />
-          <LazyComponent />
-        </Suspense>
-      </div>
-      <div
-        style={{ backgroundColor: numberToHexString(colors.primary) }}
-        className={`bottom-controls ${
-          isFullscreen ? 'is-full-screen' : ''
-        }`}
-      >
+      <Suspense fallback={<LoadingScreen />}>
+        <Leva
+          titleBar={{ filter: false, title: false }}
+          theme={{
+            sizes: { rootWidth: '300px' },
+            shadows: {
+              level1: 'none',
+            },
+            colors: {
+              accent2: numberToHexString(colors.highlight),
+              accent1: numberToHexString(colors.highlight),
+              elevation1: '#1b1c1d',
+              elevation2: '#232425',
+              elevation3: numberToHexString(colors.primary),
+            },
+          }}
+        />
+        <LazyComponent />
+      </Suspense>
+      <div className="bottom-controls">
         <button onClick={() => toggle()}>
           {!isFullscreen ? (
             <ArrowsPointingOutIcon />

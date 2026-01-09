@@ -33,10 +33,10 @@ export const DeCasteljauVisualization = () => {
   }));
 
   const [points, setPoints] = useState([
-    new Vector3(-4.5, -7, 0),
-    new Vector3(-4.5, 1.8, 0),
-    new Vector3(4.5, 1.8, 0),
-    new Vector3(4.5, -7, 0),
+    new Vector3(0, 0, 0),
+    new Vector3(0, 8.5, 0),
+    new Vector3(9, 8.5, 0),
+    new Vector3(9, 0, 0),
   ]);
 
   const iterations = useMemo(() => {
@@ -102,7 +102,7 @@ export const DeCasteljauVisualization = () => {
   });
 
   return (
-    <>
+    <group position={[-4.5, -6, 0]}>
       {iterations
         .slice(0, state.iteration + 1)
         .map((iteration, index) => {
@@ -136,7 +136,7 @@ export const DeCasteljauVisualization = () => {
         points={points}
         setPoints={setPoints}
       />
-    </>
+    </group>
   );
 };
 

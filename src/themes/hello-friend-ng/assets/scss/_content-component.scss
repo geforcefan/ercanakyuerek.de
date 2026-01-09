@@ -17,24 +17,14 @@
 }
 
 .content-component {
-  display: flex;
-  flex-direction: column;
-
-  .content {
-    flex: 1 1 auto;
-    min-height: 0; // wichtig für Canvas / Overflow
-    overflow: hidden;
-  }
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: $embedded-frame-background;
 
   .bottom-controls {
-    flex: 0 0 auto;
-    display: flex;
-    padding-top: 1em;
-    justify-content: end;
-
-    &.is-full-screen {
-      padding: 1em;
-    }
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
 
     button {
       background: #3b3d42;
@@ -43,13 +33,13 @@
       transition: 0.2s linear all;
 
       &:hover {
-        background-color: lighten(#3b3d42, 5%);
+        background-color: lighten(#3b3d42, 10%);
       }
 
       svg {
         width: 24px;
         height: 24px;
-        pointer-events: none; // verhindert doppeltes Hover
+        pointer-events: none;
       }
     }
   }
