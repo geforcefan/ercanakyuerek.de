@@ -19,65 +19,23 @@ For a linear track segment, this is straightforward. We compute the **position**
 
 > **Note:** At this stage, we only need a valid **forward direction**. There is no need to complicate things with **roll**, so we ignore it for now.
 
-```ts
-export const matrixAtArcLength = (
-  cp1: Vector3,
-  cp2: Vector3,
-  distance: number,
-) => {
-  const position = cp1.clone().lerp(cp2, distance / length(cp1, cp2));
-
-  return new Matrix4()
-    .lookAt(cp2, cp1, new Vector3(0, 1, 0))
-    .setPosition(position);
-};
-```
+{{< repository-code file="src/maths/linear.ts" type="function" name="matrixAtArcLength" >}}
 
 With this change, we also need to adjust `evaluateMotion`. Instead of receiving a **forward direction** vector, it now receives a **matrix**. We then extract the **forward direction** from that matrix.
 
-This is very straightforward. We take a vector pointing along the local Z axis and transform it by the matrix.
+This is very straightforward. Here is a small helper to extract the **forward direction** from a **matrix**:
+
+{{< repository-code file="src/maths/matrix4.ts" type="function" name="toFrontDirection" >}}
+
+Now we use this helper to extract the **forward direction**:
 
 ```ts
-const forwardDirection = new Vector4(0, 0, 1, 0)
-  .applyMatrix4(matrix)
-  .normalize();
+const forwardDirection = toFrontDirection(matrix);
 ```
-
-In other words, we define what **forward** means in local space and let the **matrix** tell us where that direction points in world space.
 
 With that in place, the full updated `evaluateMotion` function looks like this:
 
-```ts
-export const evaluateMotion = (
-  state: SimulationState,
-  matrix: Matrix4,
-  friction: number,
-  airResistance: number,
-  gravity: number,
-  deltaTime: number,
-): SimulationState => {
-  const forwardDirection = new Vector4(0, 0, 1, 0)
-    .applyMatrix4(matrix)
-    .normalize();
-
-  const velocityDirection = state.velocity < 0 ? -1 : 1;
-
-  let energyLoss = airResistance * state.velocity * state.velocity;
-  energyLoss += friction * gravity;
-  energyLoss *= velocityDirection;
-
-  let acceleration = forwardDirection.dot(
-    new Vector4(0, -gravity, 0, 0),
-  );
-  acceleration -= energyLoss;
-
-  const velocity = state.velocity + acceleration * deltaTime;
-  const distanceTraveled =
-    state.distanceTraveled + velocity * deltaTime;
-
-  return { velocity, distanceTraveled, acceleration };
-};
-```
+{{< repository-code file="src/helper/physics.ts" type="function" name="evaluateMotion" >}}
 
 ## What comes next?
 
@@ -95,4 +53,4 @@ For completeness, the full demo is shown below.
 
 {{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/matrices/MatricesDemoScene.tsx" width="100%" height="380px">}}
 
-{{< show-content-script "posts/writing-a-roller-coaster-simulation/matrices/MatricesDemoScene.tsx" >}}
+{{< repository-code-with-clone file="src/content/posts/writing-a-roller-coaster-simulation/matrices/MatricesDemoScene.tsx" >}}

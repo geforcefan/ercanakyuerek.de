@@ -49,7 +49,6 @@ The **Curve** type looks like this:
 
 To go along with this, we add a small helper that simply creates an empty curve:
 
-
 {{< repository-code file="src/maths/curve.ts" type="function" name="emptyCurve" >}}
 
 Next, we need a way to find the two nodes that sandwich any requested distance along the curve. There are many algorithms for this, but a simple binary search works very well here. It is fast, easy to implement, and more than good enough for what we need right now.
