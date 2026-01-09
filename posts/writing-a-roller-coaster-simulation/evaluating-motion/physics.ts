@@ -1,4 +1,7 @@
-import { SimulationState } from '../../../../helper/physics';
+export type SimulationState = {
+  velocity: number;
+  distanceTraveled: number;
+};
 
 export const evaluateMotion = (
   state: SimulationState,
@@ -9,5 +12,5 @@ export const evaluateMotion = (
   const distanceTraveled =
     state.distanceTraveled + velocity * deltaTime;
 
-  return { velocity, distanceTraveled, acceleration };
+  return { velocity, distanceTraveled };
 };
