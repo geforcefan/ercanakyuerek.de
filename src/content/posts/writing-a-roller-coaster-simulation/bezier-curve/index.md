@@ -155,7 +155,7 @@ Now we end up with this estimate function:
 
 {{< repository-code file="src/maths/bezier.ts" type="function" name="estimateTotalArcLength" >}}
 
-Here is the `uniformSampleMap` function. Use it when you need it.
+Here is the `uniformSampleMap` function.
 It is a small convenience helper that wraps `uniformSample` and makes mapping the result easier,
 instead of having to do it manually each time. It will show up here and there in later chapters.
 
