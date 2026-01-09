@@ -21,12 +21,12 @@
 
 
 <div class="embedded ">
-  <iframe id="react-root-cde1e27f2358e1008212de875390dc20" width="100%" height="560px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-876e9ee4d13de7e03d60de75067450d2" width="100%" height="560px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-cde1e27f2358e1008212de875390dc20').srcdoc = `
+    document.getElementById('react-root-876e9ee4d13de7e03d60de75067450d2').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -153,7 +153,7 @@ export const NurbsRollPhysicsInActionDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-348a2f91a0ea82155aa695fca60f9e11" width="100%" height="500px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-194b6ee3225599eb80dd52b85789a355" width="100%" height="500px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -162,7 +162,7 @@ export const NurbsRollPhysicsInActionDemoScene = () =&gt; {
   
 
   <script>
-    document.getElementById('react-root-348a2f91a0ea82155aa695fca60f9e11').srcdoc = `
+    document.getElementById('react-root-194b6ee3225599eb80dd52b85789a355').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -180,12 +180,12 @@ export const NurbsRollPhysicsInActionDemoScene = () =&gt; {
   </script>
 </div>
 ]]></content></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
-&lt;iframe id="react-root-5dca7db6668a8b18edbdd011c31e8f77" width="225px" height="285px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
+&lt;iframe id="react-root-cd9b05b7c07f48c39c4cdf5a1b8efb35" width="225px" height="285px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
 &lt;div class="description" style="width: 225px"&gt;
 An interactive example of a Bézier curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-5dca7db6668a8b18edbdd011c31e8f77').srcdoc = `
+document.getElementById('react-root-cd9b05b7c07f48c39c4cdf5a1b8efb35').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -212,7 +212,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-5dca7db6668a8b18edbdd011c31e8f77" width="225px" height="285px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-cd9b05b7c07f48c39c4cdf5a1b8efb35" width="225px" height="285px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 225px">
@@ -221,7 +221,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
   
 
   <script>
-    document.getElementById('react-root-5dca7db6668a8b18edbdd011c31e8f77').srcdoc = `
+    document.getElementById('react-root-cd9b05b7c07f48c39c4cdf5a1b8efb35').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -252,12 +252,12 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded ">
-  <iframe id="react-root-89e829de467fd6868c66262641b5c71a" width="100%" height="380px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-2cc69f1773743e955395e8479109c32b" width="100%" height="380px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-89e829de467fd6868c66262641b5c71a').srcdoc = `
+    document.getElementById('react-root-2cc69f1773743e955395e8479109c32b').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -294,7 +294,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-3e7b4c29dadf0425a8c85ea5fdcba1cf" width="355px" height="560px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-02092ac57219b386bbfc6bc590fe6341" width="355px" height="560px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 355px">
@@ -303,7 +303,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
   
 
   <script>
-    document.getElementById('react-root-3e7b4c29dadf0425a8c85ea5fdcba1cf').srcdoc = `
+    document.getElementById('react-root-02092ac57219b386bbfc6bc590fe6341').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -360,7 +360,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 </span></span></code></pre></div><blockquote>
 <p><strong>Note</strong>: In practice, it usually makes sense to stop at <strong>four</strong> control points, because everything beyond that tends to get unstable pretty quickly. But the function itself does not limit stupidity. That part is still up to us 🙂</p></blockquote>
 <p>So we end up with a general version that works for any number of control points. Add a small guard at the beginning and we are ready to use it:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">deCasteljau</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[], <span style="color:#a6e22e">t</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">deCasteljau</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[], <span style="color:#a6e22e">t</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">points</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`Expected control points, got </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">points</span>.<span style="color:#a6e22e">length</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
 </span></span><span style="display:flex;"><span>
@@ -374,7 +374,8 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">p</span>[<span style="color:#ae81ff">0</span>];
 </span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><h2 id="how-many-curve-nodes-do-we-need">How many curve nodes do we need?</h2>
+</span></span></code></pre></div>
+<h2 id="how-many-curve-nodes-do-we-need">How many curve nodes do we need?</h2>
 <p>Now that we can evaluate a Bézier curve for a parameter <code>t</code> in the range <code>[0, 1]</code>, the next question is:
 how many <strong>curve nodes</strong> do we actually want to generate along that curve?</p>
 <p>More nodes mean better precision. Fewer nodes mean better performance. We do not need perfect precision here, so we need to find a reasonable <strong>sweet spot</strong>.</p>
@@ -387,7 +388,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-4d1737bb55c83f15c0b49de9acb86b69" width="355px" height="485px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-69ca4e06070bb0ab4e2c2bf0687014c4" width="355px" height="485px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 355px">
@@ -396,7 +397,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
   
 
   <script>
-    document.getElementById('react-root-4d1737bb55c83f15c0b49de9acb86b69').srcdoc = `
+    document.getElementById('react-root-69ca4e06070bb0ab4e2c2bf0687014c4').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -422,7 +423,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
 <li>It will make sense to clamp the number of nodes in the <strong>editor</strong> in the future, where <strong>performance matters while dragging control points around</strong>. In the simulation, this is much less critical.</li>
 </ul>
 <p>To make this easier, we start with a small helper that lets us <strong>uniformly sample</strong> a range with a given resolution. It gives us both the actual value and a normalized<code>t</code> in <code>[0, 1]</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">uniformSample</span> <span style="color:#f92672">=</span> (
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">uniformSample</span> <span style="color:#f92672">=</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">from</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">number</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">to</span>: <span style="color:#66d9ef">number</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolution</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
@@ -437,7 +438,8 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fn</span>(<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>If this feels a bit abstract, here is a concrete example.</p>
+</span></span></code></pre></div>
+<p>If this feels a bit abstract, here is a concrete example.</p>
 <p>Assume we want to sample from <code>1</code> to <code>6</code> with a resolution of <code>1</code>. That means we will get <strong>5 evenly distributed values</strong>:</p>
 <ul>
 <li>actual values: <code>[1, 2.25, 3.5, 4.75, 6]</code></li>
@@ -446,9 +448,8 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
 <h2 id="estimating-the-bézier-curve-length">Estimating the Bézier curve length</h2>
 <p>Now that we have <code>uniformSample</code>, estimating the curve length is straightforward.</p>
 <p>We simply pick <strong>8 evenly distributed values</strong> in the range <code>[0, 8]</code> and evaluate the Bézier curve at those normalized values:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">positions</span>: <span style="color:#66d9ef">Vector3</span>[] <span style="color:#f92672">=</span> [];
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">uniformSample</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">1</span>, (<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>) <span style="color:#f92672">=&gt;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">positions</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">deCasteljau</span>(<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">t</span>)),
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">positions</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">uniformSampleMap</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">1</span>, (<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>) <span style="color:#f92672">=&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">deCasteljau</span>(<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">t</span>),
 </span></span><span style="display:flex;"><span>);
 </span></span></code></pre></div><p>At this point, <code>positions</code> contains 8 points along the Bézier curve.</p>
 <p>From here, it is extremely easy to iterate over these points and sum up the distances between positions to get an <strong>estimated total arc length</strong>.</p>
@@ -456,30 +457,28 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
 </span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">1</span>)
 </span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">reduce</span>(
 </span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">arcLength</span>, <span style="color:#a6e22e">position</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">arcLength</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">position</span>.<span style="color:#a6e22e">distanceTo</span>(<span style="color:#a6e22e">positions</span>[<span style="color:#a6e22e">i</span>]),
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">arcLength</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">position</span>.<span style="color:#a6e22e">distanceTo</span>(<span style="color:#a6e22e">positions</span>[<span style="color:#a6e22e">i</span>]),
 </span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0</span>,
 </span></span><span style="display:flex;"><span>  );
 </span></span></code></pre></div><p>Now we end up with this estimate function:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">estimateTotalArcLength</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[]) <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">positions</span>: <span style="color:#66d9ef">Vector3</span>[] <span style="color:#f92672">=</span> [];
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">uniformSample</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">1</span>, (<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>) <span style="color:#f92672">=&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">positions</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">deCasteljau</span>(<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">t</span>)),
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">estimateTotalArcLength</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[]) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">positions</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">uniformSampleMap</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">1</span>, (<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>) <span style="color:#f92672">=&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">deCasteljau</span>(<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">t</span>),
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">positions</span>
 </span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">1</span>)
 </span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">reduce</span>(
 </span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">arcLength</span>, <span style="color:#a6e22e">position</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">arcLength</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">position</span>.<span style="color:#a6e22e">distanceTo</span>(<span style="color:#a6e22e">positions</span>[<span style="color:#a6e22e">i</span>]),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">arcLength</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">position</span>.<span style="color:#a6e22e">distanceTo</span>(<span style="color:#a6e22e">positions</span>[<span style="color:#a6e22e">i</span>]),
 </span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">0</span>,
 </span></span><span style="display:flex;"><span>    );
 </span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>Do not be confused if you see <code>uniformSampleMap</code> used instead of <code>uniformSample</code> in the repository. It does exactly the same thing, it just exists for convenience so the call can be reduced to:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">positions</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">uniformSampleMap</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">1</span>, (<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>) <span style="color:#f92672">=&gt;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">deCasteljau</span>(<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">t</span>),
-</span></span><span style="display:flex;"><span>);
-</span></span></code></pre></div><p>Here is the <code>uniformSampleMap</code> function. Just use it, it is very convenient and will be used here and there:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">uniformSampleMap</span> <span style="color:#f92672">=</span> &lt;<span style="color:#f92672">T</span>&gt;(
+</span></span></code></pre></div>
+<p>Here is the <code>uniformSampleMap</code> function. Use it when you need it.
+It is a small convenience helper that wraps <code>uniformSample</code> and makes mapping the result easier,
+instead of having to do it manually each time. It will show up here and there in later chapters.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">uniformSampleMap</span> <span style="color:#f92672">=</span> &lt;<span style="color:#f92672">T</span>&gt;(
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">from</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">number</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">to</span>: <span style="color:#66d9ef">number</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolution</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
@@ -493,18 +492,23 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>;
 </span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><h1 id="constructing-a-bézier-curve">Constructing a Bézier curve</h1>
+</span></span></code></pre></div>
+<h1 id="constructing-a-bézier-curve">Constructing a Bézier curve</h1>
 <p>This part is almost stupidly simple, so I will just paste the code and explain it briefly.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bezierSplineCurve</span> <span style="color:#f92672">=</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[],
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolution</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
-</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fromPoints</span>(
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">uniformSampleMap</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">estimateTotalArcLength</span>(<span style="color:#a6e22e">points</span>), <span style="color:#a6e22e">resolution</span>, (<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>) <span style="color:#f92672">=&gt;</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">deCasteljau</span>(<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">t</span>),
-</span></span><span style="display:flex;"><span>    ),
-</span></span><span style="display:flex;"><span>  );
-</span></span></code></pre></div><p>What happens here is straightforward:</p>
+</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">positions</span>: <span style="color:#66d9ef">Vector3</span>[] <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">uniformSample</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">estimateLength</span>(<span style="color:#a6e22e">points</span>), <span style="color:#a6e22e">resolution</span>, (<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">positions</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">deCasteljau</span>(<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">t</span>));
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fromPoints</span>(<span style="color:#a6e22e">positions</span>);
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><blockquote>
+<p><strong>Note:</strong> In the repository, <code>bezierSplineCurve</code> has a slightly different implementation that calls utility functions for proper normal calculation. Do not worry about this for now. We will cover normals in the next chapters.</p></blockquote>
+<p>What happens here is straightforward:</p>
 <ul>
 <li>We sample from <code>0</code> to the <strong>estimated length</strong> of the Bézier curve.</li>
 <li>We use a default resolution of <code>20</code>.</li>
@@ -518,74 +522,55 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
 <blockquote>
 <p><strong>Note</strong>: In the demo, I already intentionally use the correct way of inserting positions (by using <code>fromUniformSampledPositions</code> instead of <code>fromPoints</code> from the last chapter) on the curve with proper normal calculation, so the demo does not jitter. Do not be confused by this. I am basically taking things a bit ahead of time here.</p></blockquote>
 <h1 id="demo-code">Demo code</h1>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <p>
-    If you want to run the demo locally, clone this
+    If you want to run the code locally, clone this
     <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
     run <code>npm install</code> and <code>npm run dev-scripts</code>,
     then open this
-    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/bezier-curve/BezierCurveDemoScene.tsx" target="_blank">link</a>
+    <a href="http://localhost:3000/src/content/posts/writing-a-roller-coaster-simulation/bezier-curve/BezierCurveDemoScene.tsx" target="_blank">link</a>
     in your browser.
-</p>
-
-<pre><code class="language-tsx">import React, { useMemo, useState } from &#39;react&#39;;
-import { Line } from &#39;@react-three/drei&#39;;
-import { Vector3 } from &#39;three&#39;;
-
-import { bezierSplineCurve } from &#39;../../../../maths/bezier&#39;;
-import { useColors } from &#39;../../../../hooks/useColors&#39;;
-
-import { CurveWireframe } from &#39;../../../../components/curve/CurveWireframe&#39;;
-import { DragControlPoints } from &#39;../../../../components/curve/DragControlPoints&#39;;
-import { TrainWithPhysics } from &#39;../../../../components/TrainWithPhysics&#39;;
-import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
-
-export const BezierCurveDemoScene = () =&gt; {
-  const colors = useColors();
-
-  const [points, setPoints] = useState([
-    new Vector3(-11.3, 3.9, 0),
-    new Vector3(-6.6, 2.7, 0),
-    new Vector3(-5.8, -3.8, 0),
-    new Vector3(0, -2.4, 0),
-  ]);
-
-  const curve = useMemo(() =&gt; bezierSplineCurve(points), [points]);
-
-  return (
-    &lt;OrthographicScene&gt;
-      &lt;Line
-        points={points}
-        color={colors.highlight}
-        segments={true}
-      /&gt;
-      &lt;DragControlPoints
-        axisLock=&#34;z&#34;
-        points={points}
-        setPoints={setPoints}
-      /&gt;
-      &lt;CurveWireframe curve={curve} /&gt;
-      &lt;TrainWithPhysics curve={curve} /&gt;
-    &lt;/OrthographicScene&gt;
-  );
-};
-</code></pre>
-
+</p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">useMemo</span>, <span style="color:#a6e22e">useState</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Line</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@react-three/drei&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Vector3</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;three&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">bezierSplineCurve</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../maths/bezier&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useColors</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../hooks/useColors&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">CurveWireframe</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/CurveWireframe&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">BezierCurveDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">colors</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useColors</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">setPoints</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>([
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">11.3</span>, <span style="color:#ae81ff">3.9</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">6.6</span>, <span style="color:#ae81ff">2.7</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">5.8</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3.8</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2.4</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>  ]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">curve</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useMemo</span>(() <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">bezierSplineCurve</span>(<span style="color:#a6e22e">points</span>), [<span style="color:#a6e22e">points</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">OrthographicScene</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Line</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">points</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">points</span>}
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">colors</span>.<span style="color:#a6e22e">highlight</span>}
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">segments</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">true</span>}
+</span></span><span style="display:flex;"><span>      /&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">DragControlPoints</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">axisLock</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;z&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">points</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">points</span>}
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setPoints</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">setPoints</span>}
+</span></span><span style="display:flex;"><span>      /&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">CurveWireframe</span> <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">curve</span>} /&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">TrainWithPhysics</span> <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">curve</span>} /&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">OrthographicScene</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
 
 ]]></content></item><item><title>Curve Nodes</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-nodes/</link><pubDate>Sun, 21 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-nodes/</guid><description>&lt;p&gt;In this chapter, we try to make our lives a bit easier by using a more flexible way to describe &lt;strong&gt;curves&lt;/strong&gt; in general.&lt;/p&gt;
 &lt;p&gt;This article is a bit longer than usual. The topic is hard to split into smaller pieces without losing context, so we keep everything in one place. I will try to keep things as simple as possible, but yes, there is a bit going on here.&lt;/p&gt;
@@ -607,7 +592,7 @@ export const BezierCurveDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-32de8419f2d1dfafa9bb626784ea2e64" width="100%" height="260px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-de7a11ad322125ff534f6a83859f0bbb" width="100%" height="260px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -616,7 +601,7 @@ export const BezierCurveDemoScene = () =&gt; {
   
 
   <script>
-    document.getElementById('react-root-32de8419f2d1dfafa9bb626784ea2e64').srcdoc = `
+    document.getElementById('react-root-de7a11ad322125ff534f6a83859f0bbb').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -638,19 +623,41 @@ export const BezierCurveDemoScene = () =&gt; {
 <p>You may notice that, in principle, we can build almost any curve geometry this way. <strong>NURBS</strong>, for example, are basically just straight lines following a curve with many, many nodes. Compared to the simple example above, they are much denser, but the idea is exactly the same. More nodes, same logic.</p>
 <p><strong>Curve nodes</strong> form a clean and agnostic <strong>interface</strong> between the physics simulation and the actual curve geometry. The simulation does not really care how the curve was created. It just asks for matrices and keeps going.</p>
 <p>With that in mind, we can start by defining what a <strong>curve node</strong> looks like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CurveNode</span> <span style="color:#f92672">=</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CurveNode</span> <span style="color:#f92672">=</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">matrix</span>: <span style="color:#66d9ef">Matrix4</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">arcLength</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">segmentIndex</span>: <span style="color:#66d9ef">number</span>;
 </span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>That is it. A <strong>matrix</strong> and its <strong>distance</strong> along the curve.</p>
+</span></span></code></pre></div>
+<p>That is it. A <strong>matrix</strong>, its <strong>distance</strong>, and the <strong>segment number</strong> along the curve. The segment number will not matter much for now, but it will become important later.</p>
+<p>Of course, nodes do not exist on their own. They have to belong to something, and that something is the <strong>curve</strong> itself. To make this explicit, we also introduce a <strong>Curve</strong> type that groups the nodes together.</p>
+<p>The <strong>Curve</strong> type looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Curve</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">nodes</span>: <span style="color:#66d9ef">CurveNode</span>[];
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">segmentOffsets</span>: <span style="color:#66d9ef">number</span>[];
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
+<blockquote>
+<p><strong>Note:</strong> The curve also stores <strong>segment offsets</strong>, which are accumulated <strong>arc lengths</strong> of the segments. They are not important right now. For the moment, we only deal with a single segment, so this will just be <code>[0, totalArcLength]</code>. We will come back to this later.</p></blockquote>
+<p>To go along with this, we add a small helper that simply creates an empty curve:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">emptyCurve</span> <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">nodes</span>: <span style="color:#66d9ef">CurveNode</span>[] <span style="color:#f92672">=</span> [],
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">segmentOffsets</span>: <span style="color:#66d9ef">number</span>[] <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>],
+</span></span><span style="display:flex;"><span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">Curve</span> <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">nodes</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">segmentOffsets</span>,
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
 <p>Next, we need a way to find the two nodes that sandwich any requested distance along the curve. There are many algorithms for this, but a simple binary search works very well here. It is fast, easy to implement, and more than good enough for what we need right now.</p>
 <p>The only real requirement is that the nodes are sorted by <code>arcLength</code>, which we will make sure of.</p>
 <p>If you want, you can read more about <a href="https://en.wikipedia.org/wiki/Binary_search">binary search</a>. To be honest, you do not need to understand every detail here.</p>
 <p>We use a lower-bound variant of binary search, which looks like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lowerBound</span> <span style="color:#f92672">=</span> &lt;<span style="color:#f92672">T</span>&gt;(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lowerBound</span> <span style="color:#f92672">=</span> &lt;<span style="color:#f92672">T</span>&gt;(
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">array</span>: <span style="color:#66d9ef">T</span>[],
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">number</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">accessor</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">item</span>: <span style="color:#66d9ef">T</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">accessor</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">item</span>: <span style="color:#66d9ef">T</span>, <span style="color:#a6e22e">index</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">number</span>,
 </span></span><span style="display:flex;"><span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">number</span> <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">first</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">len</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">array</span>.<span style="color:#a6e22e">length</span>;
@@ -659,7 +666,7 @@ export const BezierCurveDemoScene = () =&gt; {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">half</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">floor</span>(<span style="color:#a6e22e">len</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">middle</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">first</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">half</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">accessor</span>(<span style="color:#a6e22e">array</span>[<span style="color:#a6e22e">middle</span>]) <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">value</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">accessor</span>(<span style="color:#a6e22e">array</span>[<span style="color:#a6e22e">middle</span>], <span style="color:#a6e22e">middle</span>) <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">value</span>) {
 </span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">first</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">middle</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">len</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">len</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">half</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
@@ -669,11 +676,12 @@ export const BezierCurveDemoScene = () =&gt; {
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">first</span>;
 </span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>Now we use this binary search to find the node indices between which a requested distance along the curve lies. For that, we write a small helper:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">findBoundingIndices</span> <span style="color:#f92672">=</span> &lt;<span style="color:#f92672">T</span>&gt;(
+</span></span></code></pre></div>
+<p>Now we use this binary search to find the node indices between which a requested distance along the curve lies. For that, we write a small helper:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">findBoundingIndices</span> <span style="color:#f92672">=</span> &lt;<span style="color:#f92672">T</span>&gt;(
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">array</span>: <span style="color:#66d9ef">T</span>[],
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">number</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">accessor</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">item</span>: <span style="color:#66d9ef">T</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">accessor</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">item</span>: <span style="color:#66d9ef">T</span>, <span style="color:#a6e22e">index</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">number</span>,
 </span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">array</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span>;
 </span></span><span style="display:flex;"><span>
@@ -687,7 +695,8 @@ export const BezierCurveDemoScene = () =&gt; {
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> [<span style="color:#a6e22e">leftNodeIndex</span>, <span style="color:#a6e22e">rightNodeIndex</span>];
 </span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>This function needs a bit of explanation.</p>
+</span></span></code></pre></div>
+<p>This function needs a bit of explanation.</p>
 <p>First, a small sanity check. Searching for a distance <strong>between</strong> nodes only makes sense if we actually have at least two nodes. Anything else would be suspicious:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">array</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span>;
 </span></span></code></pre></div><p>After that, we do the binary search. The lower-bound search gives us the index of the first node whose distance is <strong>greater than or equal</strong> to the value we ask for.</p>
@@ -718,7 +727,7 @@ export const BezierCurveDemoScene = () =&gt; {
 <p>Now we move on to the more interesting part: <strong>interpolation between the left and right curve nodes</strong>.</p>
 <p>To find the <strong>left and right nodes</strong>, we use the <strong>binary search helper</strong> we just built:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">nodes</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">findBoundingIndices</span>(
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">curve</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">at</span>,
 </span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">node</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">arcLength</span>,
 </span></span><span style="display:flex;"><span>);
@@ -726,8 +735,8 @@ export const BezierCurveDemoScene = () =&gt; {
 </span></span></code></pre></div><blockquote>
 <p><strong>Note:</strong> Returning an empty matrix here is just a lazy safety check. Architecture wise this may or may not be great, but that is not the point right now. We will clean this up later. Or not. Depends on future us.</p></blockquote>
 <p>Once we have the indices, we fetch the actual nodes:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curve</span>[<span style="color:#a6e22e">nodes</span>[<span style="color:#ae81ff">0</span>]];
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curve</span>[<span style="color:#a6e22e">nodes</span>[<span style="color:#ae81ff">1</span>]];
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>[<span style="color:#a6e22e">nodes</span>[<span style="color:#ae81ff">0</span>]];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>[<span style="color:#a6e22e">nodes</span>[<span style="color:#ae81ff">1</span>]];
 </span></span></code></pre></div><p>Lets now prepare for interpolation between the found nodes. Assume we have the following node distances: <code>[0, 10, 30, 50, 60]</code></p>
 <p>If we request <code>20</code>, it is clearly sandwiched between <code>10</code> and <code>30</code>. No surprises there. For linear interpolation, we need to know <em>how far</em> <code>20</code> lies between those two values.</p>
 <p>We do this step by step. Nothing fancy:</p>
@@ -755,7 +764,7 @@ export const BezierCurveDemoScene = () =&gt; {
 <strong>Position</strong> is interpolated <strong>linearly</strong>. <strong>Rotation</strong> is interpolated using <strong>spherical linear interpolation</strong> on <strong>quaternions</strong>.</p>
 <p>If you already know what <strong>quaternions</strong> are, great. If not, also fine. This is not important at this point. I will write dedicated articles about <strong>vectors, matrices, euler and quaternions</strong> later.</p>
 <p>The helper looks like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lerp</span> <span style="color:#f92672">=</span> (
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lerp</span> <span style="color:#f92672">=</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">matrixA</span>: <span style="color:#66d9ef">Matrix4</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">matrixB</span>: <span style="color:#66d9ef">Matrix4</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">t</span>: <span style="color:#66d9ef">number</span>,
@@ -777,21 +786,22 @@ export const BezierCurveDemoScene = () =&gt; {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">scale</span>,
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>Now we can use this to interpolate between the <strong>left</strong> and <strong>right</strong> matrix:</p>
+</span></span></code></pre></div>
+<p>Now we can use this to interpolate between the <strong>left</strong> and <strong>right</strong> matrix:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">matrix</span>, <span style="color:#a6e22e">right</span>.<span style="color:#a6e22e">matrix</span>, <span style="color:#a6e22e">t</span>);
 </span></span></code></pre></div><p>If the distance between the nodes is <code>0</code>, things are easy. We just return a copy of the left node’s matrix:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">matrix</span>.<span style="color:#a6e22e">clone</span>();
 </span></span></code></pre></div><p>Putting everything together, the full function looks like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">matrixAtArcLength</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">curve</span>: <span style="color:#66d9ef">CurveNode</span>[], <span style="color:#a6e22e">at</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">matrixAtArcLength</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">curve</span>: <span style="color:#66d9ef">Curve</span>, <span style="color:#a6e22e">at</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">nodes</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">findBoundingIndices</span>(
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">curve</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">at</span>,
 </span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">node</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">arcLength</span>,
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">nodes</span>) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Matrix4</span>();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curve</span>[<span style="color:#a6e22e">nodes</span>[<span style="color:#ae81ff">0</span>]];
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curve</span>[<span style="color:#a6e22e">nodes</span>[<span style="color:#ae81ff">1</span>]];
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>[<span style="color:#a6e22e">nodes</span>[<span style="color:#ae81ff">0</span>]];
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>[<span style="color:#a6e22e">nodes</span>[<span style="color:#ae81ff">1</span>]];
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">length</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">right</span>.<span style="color:#a6e22e">arcLength</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">arcLength</span>;
 </span></span><span style="display:flex;"><span>
@@ -801,19 +811,19 @@ export const BezierCurveDemoScene = () =&gt; {
 </span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">0.0</span>,
 </span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">1.0</span>,
 </span></span><span style="display:flex;"><span>    );
-</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">matrix</span>, <span style="color:#a6e22e">right</span>.<span style="color:#a6e22e">matrix</span>, <span style="color:#a6e22e">t</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">matrix</span>.<span style="color:#a6e22e">clone</span>();
 </span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><h1 id="linear-track-with-more-segments">Linear track with more segments</h1>
+</span></span></code></pre></div>
+<h1 id="linear-track-with-more-segments">Linear track with more segments</h1>
 <p>To actually see this in motion, we need a small helper that constructs curve nodes from a list of points. This is only here to make the demo work and will be improved later.</p>
 <blockquote>
 <p><strong>Note</strong>: Points are duplicated to create hard transitions between segments. For linear track segments, smooth rotation transitions do not really make sense physically. Duplicating points is an easy way to fake the behavior we want.</p>
 <p><strong>Important</strong>: This is temporary junk. It exists only to make the demo work quickly and will be replaced by a proper implementation with correct normals and roll handling.</p></blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fromPoints</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[]) <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">curve</span>: <span style="color:#66d9ef">CurveNode</span>[] <span style="color:#f92672">=</span> [];
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fromPoints</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[]) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">curve</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">emptyCurve</span>();
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">points</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">curve</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">arcLength</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
@@ -821,35 +831,41 @@ export const BezierCurveDemoScene = () =&gt; {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">points</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">points</span>[<span style="color:#a6e22e">i</span>];
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">points</span>[<span style="color:#a6e22e">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">prevNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curve</span>[<span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">prevNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>[<span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">prevNode</span>)
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">push</span>({
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>.<span style="color:#a6e22e">push</span>({
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">matrix</span>: <span style="color:#66d9ef">prevNode.matrix.clone</span>().<span style="color:#a6e22e">setPosition</span>(<span style="color:#a6e22e">left</span>),
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">arcLength</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">segmentIndex</span>: <span style="color:#66d9ef">0</span>,
 </span></span><span style="display:flex;"><span>      });
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">push</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>.<span style="color:#a6e22e">push</span>({
 </span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">matrix</span>: <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Matrix4</span>()
 </span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">lookAt</span>(<span style="color:#a6e22e">right</span>, <span style="color:#a6e22e">left</span>, <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>))
 </span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">setPosition</span>(<span style="color:#a6e22e">left</span>),
 </span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">arcLength</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">segmentIndex</span>: <span style="color:#66d9ef">0</span>,
 </span></span><span style="display:flex;"><span>    });
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">arcLength</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">distanceTo</span>(<span style="color:#a6e22e">right</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lastNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">last</span>(<span style="color:#a6e22e">curve</span>)<span style="color:#f92672">!</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lastNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">last</span>(<span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>)<span style="color:#f92672">!</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lastPoint</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">last</span>(<span style="color:#a6e22e">points</span>)<span style="color:#f92672">!</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">push</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>.<span style="color:#a6e22e">push</span>({
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">matrix</span>: <span style="color:#66d9ef">lastNode.matrix.clone</span>().<span style="color:#a6e22e">setPosition</span>(<span style="color:#a6e22e">lastPoint</span>),
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">arcLength</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">segmentIndex</span>: <span style="color:#66d9ef">0</span>,
 </span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">segmentOffsets</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">arcLength</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">curve</span>;
 </span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>This helper just turns points into curve nodes and keeps track of the distance along the curve. It is very naive, but good enough to demonstrate the idea.</p>
+</span></span></code></pre></div>
+<p>This helper just turns points into curve nodes and keeps track of the distance along the curve. It is very naive, but good enough to demonstrate the idea.</p>
 <h2 id="what-comes-next">What comes next?</h2>
 <p>In the next chapter, we will build curve nodes from <strong>Bezier splines</strong>. The nice part is that we will not have to touch the simulation logic at all. Only the curve generation changes, which is exactly what we were aiming for from the beginning.</p>
 <h2 id="demo-with-linear-track-segments">Demo with linear track segments</h2>
@@ -862,7 +878,7 @@ export const BezierCurveDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-7e570979316bb661b743f84da9804d18" width="100%" height="380px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-be323faaec32f04fc4cb723f3ae8016d" width="100%" height="380px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -871,7 +887,7 @@ export const BezierCurveDemoScene = () =&gt; {
   
 
   <script>
-    document.getElementById('react-root-7e570979316bb661b743f84da9804d18').srcdoc = `
+    document.getElementById('react-root-be323faaec32f04fc4cb723f3ae8016d').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -889,67 +905,48 @@ export const BezierCurveDemoScene = () =&gt; {
   </script>
 </div>
 <h1 id="demo-code">Demo code</h1>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <p>
-    If you want to run the demo locally, clone this
+    If you want to run the code locally, clone this
     <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
     run <code>npm install</code> and <code>npm run dev-scripts</code>,
     then open this
-    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/curve-nodes/MotionEvaluationDemoScene.tsx" target="_blank">link</a>
+    <a href="http://localhost:3000/src/content/posts/writing-a-roller-coaster-simulation/curve-nodes/MotionEvaluationDemoScene.tsx" target="_blank">link</a>
     in your browser.
-</p>
-
-<pre><code class="language-tsx">import React, { useMemo, useState } from &#39;react&#39;;
-import { Vector3 } from &#39;three&#39;;
-
-import { CurveLine } from &#39;../../../../components/curve/CurveLine&#39;;
-import { DragControlPoints } from &#39;../../../../components/curve/DragControlPoints&#39;;
-import { TrainWithPhysics } from &#39;../../../../components/TrainWithPhysics&#39;;
-import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
-
-import { fromPoints } from &#39;./curve&#39;;
-
-export const MotionEvaluationDemoScene = () =&gt; {
-  const [points, setPoints] = useState([
-    new Vector3(-11.5, 2.5, 0),
-    new Vector3(-10, -0.75, 0),
-    new Vector3(-7.5, -2, 0),
-    new Vector3(-5, -1, 0),
-    new Vector3(-3, -1, 0),
-    new Vector3(-0.5, -2.5, 0),
-  ]);
-
-  const curve = useMemo(() =&gt; fromPoints(points), [points]);
-
-  return (
-    &lt;OrthographicScene&gt;
-      &lt;DragControlPoints
-        axisLock=&#34;z&#34;
-        points={points}
-        setPoints={setPoints}
-      /&gt;
-      &lt;CurveLine curve={curve} /&gt;
-      &lt;TrainWithPhysics curve={curve} /&gt;
-    &lt;/OrthographicScene&gt;
-  );
-};
-</code></pre>
-
+</p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">useMemo</span>, <span style="color:#a6e22e">useState</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Vector3</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;three&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">CurveLine</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/CurveLine&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">fromPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./curve&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MotionEvaluationDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">setPoints</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>([
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">11.5</span>, <span style="color:#ae81ff">2.5</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0.75</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">7.5</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">0.5</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2.5</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>  ]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">curve</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useMemo</span>(() <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">fromPoints</span>(<span style="color:#a6e22e">points</span>), [<span style="color:#a6e22e">points</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">OrthographicScene</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">DragControlPoints</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">axisLock</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;z&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">points</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">points</span>}
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setPoints</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">setPoints</span>}
+</span></span><span style="display:flex;"><span>      /&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">CurveLine</span> <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">curve</span>} /&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">TrainWithPhysics</span> <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">curve</span>} /&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">OrthographicScene</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
 
 ]]></content></item><item><title>Matrices</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/matrices/</link><pubDate>Sun, 21 Dec 2025 13:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/matrices/</guid><description>&lt;p&gt;Right now, when we want to know the &lt;strong&gt;position&lt;/strong&gt; and &lt;strong&gt;forward direction&lt;/strong&gt; along a curve, we ask two separate functions. This works, but having two separate functions for the same &lt;strong&gt;node&lt;/strong&gt; on the track is odd and adds more complexity than we actually need.&lt;/p&gt;
 &lt;p&gt;Earlier we mentioned that there is a better way to describe this kind of information. That better way is a &lt;strong&gt;4x4 matrix&lt;/strong&gt;.&lt;/p&gt;
@@ -961,25 +958,34 @@ export const MotionEvaluationDemoScene = () =&gt; {
 <p>For a linear track segment, this is straightforward. We compute the <strong>position</strong> exactly like before using linear interpolation. For orientation, we let <strong>THREE.js</strong> build a matrix that <code>lookAt</code>s from one control point to the other. This gives us a correct <strong>forward direction</strong> without any extra work.</p>
 <blockquote>
 <p><strong>Note:</strong> At this stage, we only need a valid <strong>forward direction</strong>. There is no need to complicate things with <strong>roll</strong>, so we ignore it for now.</p></blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">matrixAtArcLength</span> <span style="color:#f92672">=</span> (
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">matrixAtArcLength</span> <span style="color:#f92672">=</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">cp1</span>: <span style="color:#66d9ef">Vector3</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">cp2</span>: <span style="color:#66d9ef">Vector3</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">distance</span>: <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">at</span>: <span style="color:#66d9ef">number</span>,
 </span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">position</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cp1</span>.<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">cp2</span>, <span style="color:#a6e22e">distance</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">length</span>(<span style="color:#a6e22e">cp1</span>, <span style="color:#a6e22e">cp2</span>));
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">position</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cp1</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">clone</span>()
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">cp2</span>, <span style="color:#a6e22e">at</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">totalArcLength</span>(<span style="color:#a6e22e">cp1</span>, <span style="color:#a6e22e">cp2</span>));
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Matrix4</span>()
 </span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">lookAt</span>(<span style="color:#a6e22e">cp2</span>, <span style="color:#a6e22e">cp1</span>, <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>))
 </span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">setPosition</span>(<span style="color:#a6e22e">position</span>);
 </span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>With this change, we also need to adjust <code>evaluateMotion</code>. Instead of receiving a <strong>forward direction</strong> vector, it now receives a <strong>matrix</strong>. We then extract the <strong>forward direction</strong> from that matrix.</p>
-<p>This is very straightforward. We take a vector pointing along the local Z axis and transform it by the matrix.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">forwardDirection</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector4</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">applyMatrix4</span>(<span style="color:#a6e22e">matrix</span>)
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">normalize</span>();
-</span></span></code></pre></div><p>In other words, we define what <strong>forward</strong> means in local space and let the <strong>matrix</strong> tell us where that direction points in world space.</p>
-<p>With that in place, the full updated <code>evaluateMotion</code> function looks like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">evaluateMotion</span> <span style="color:#f92672">=</span> (
+</span></span></code></pre></div>
+<p>With this change, we also need to adjust <code>evaluateMotion</code>. Instead of receiving a <strong>forward direction</strong> vector, it now receives a <strong>matrix</strong>. We then extract the <strong>forward direction</strong> from that matrix.</p>
+<p>This is very straightforward. Here is a small helper to extract the <strong>forward direction</strong> from a <strong>matrix</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">toFrontDirection</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">m</span>: <span style="color:#66d9ef">Matrix4</span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">elements</span>[<span style="color:#ae81ff">8</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">elements</span>[<span style="color:#ae81ff">9</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">elements</span>[<span style="color:#ae81ff">10</span>],
+</span></span><span style="display:flex;"><span>  ).<span style="color:#a6e22e">normalize</span>();
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
+<p>Now we use this helper to extract the <strong>forward direction</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">forwardDirection</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">toFrontDirection</span>(<span style="color:#a6e22e">matrix</span>);
+</span></span></code></pre></div><p>With that in place, the full updated <code>evaluateMotion</code> function looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">evaluateMotion</span> <span style="color:#f92672">=</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">SimulationState</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">matrix</span>: <span style="color:#66d9ef">Matrix4</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">friction</span>: <span style="color:#66d9ef">number</span>,
@@ -987,10 +993,7 @@ export const MotionEvaluationDemoScene = () =&gt; {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">gravity</span>: <span style="color:#66d9ef">number</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">deltaTime</span>: <span style="color:#66d9ef">number</span>,
 </span></span><span style="display:flex;"><span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">SimulationState</span> <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">forwardDirection</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector4</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">applyMatrix4</span>(<span style="color:#a6e22e">matrix</span>)
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">normalize</span>();
-</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">forwardDirection</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">toFrontDirection</span>(<span style="color:#a6e22e">matrix</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">velocityDirection</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">1</span> : <span style="color:#66d9ef">1</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">energyLoss</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">airResistance</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span>;
@@ -998,7 +1001,7 @@ export const MotionEvaluationDemoScene = () =&gt; {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">energyLoss</span> <span style="color:#f92672">*=</span> <span style="color:#a6e22e">velocityDirection</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">forwardDirection</span>.<span style="color:#a6e22e">dot</span>(
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector4</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#a6e22e">gravity</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#a6e22e">gravity</span>, <span style="color:#ae81ff">0</span>),
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">-=</span> <span style="color:#a6e22e">energyLoss</span>;
 </span></span><span style="display:flex;"><span>
@@ -1008,7 +1011,8 @@ export const MotionEvaluationDemoScene = () =&gt; {
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">velocity</span>, <span style="color:#a6e22e">distanceTraveled</span>, <span style="color:#a6e22e">acceleration</span> };
 </span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><h2 id="what-comes-next">What comes next?</h2>
+</span></span></code></pre></div>
+<h2 id="what-comes-next">What comes next?</h2>
 <p>These changes are mostly structural. Visually, nothing changes yet. Under the hood, however, the simulation now works entirely with <strong>matrices</strong>, which will make later changes easier.</p>
 <p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-nodes/">In the next chapter</a>, we move away from linear segments and introduce a more general way to describe <strong>curves</strong>. That will require a new implementation of <code>matrixAtArcLength</code>, but the rest of the simulation can stay as it is.</p>
 <p>This is the kind of refactor we want. We change how the track is described without rewriting everything built on top of it.</p>
@@ -1024,12 +1028,12 @@ export const MotionEvaluationDemoScene = () =&gt; {
 
 
 <div class="embedded ">
-  <iframe id="react-root-fab62e71df733cbf84b42a276a40eb79" width="100%" height="380px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-3dc864e5a107c6797f6223c9f9fa3fef" width="100%" height="380px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-fab62e71df733cbf84b42a276a40eb79').srcdoc = `
+    document.getElementById('react-root-3dc864e5a107c6797f6223c9f9fa3fef').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1046,124 +1050,105 @@ export const MotionEvaluationDemoScene = () =&gt; {
   `;
   </script>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <p>
-    If you want to run the demo locally, clone this
+    If you want to run the code locally, clone this
     <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
     run <code>npm install</code> and <code>npm run dev-scripts</code>,
     then open this
-    <a href="http://localhost:3000/posts/writing-a-roller-coaster-simulation/matrices/MatricesDemoScene.tsx" target="_blank">link</a>
+    <a href="http://localhost:3000/src/content/posts/writing-a-roller-coaster-simulation/matrices/MatricesDemoScene.tsx" target="_blank">link</a>
     in your browser.
-</p>
-
-<pre><code class="language-tsx">import React, { useEffect, useState } from &#39;react&#39;;
-import { Line } from &#39;@react-three/drei&#39;;
-import { useFrame } from &#39;@react-three/fiber&#39;;
-import { MathUtils, Vector3 } from &#39;three&#39;;
-
-import {
-  matrixAtArcLength,
-  totalArcLength,
-} from &#39;../../../../maths/linear&#39;;
-import { evaluateMotion } from &#39;../../../../helper/physics&#39;;
-import { useColors } from &#39;../../../../hooks/useColors&#39;;
-import { useSimulationStateControls } from &#39;../../../../hooks/useSimulationStateControls&#39;;
-
-import { DragControlPoints } from &#39;../../../../components/curve/DragControlPoints&#39;;
-import { PointWithMatrixArrows } from &#39;../../../../components/PointWithMatrixArrows&#39;;
-import { OrthographicScene } from &#39;../../../../scenes/OrthographicScene&#39;;
-
-const MatricesDemo = () =&gt; {
-  const colors = useColors();
-
-  // control points
-  const [points, setPoints] = useState([
-    new Vector3(-11.5, 3.2, 0),
-    new Vector3(0, -2.8, 0),
-  ]);
-
-  const [simulationState, setSimulationState] =
-    useSimulationStateControls();
-
-  useFrame((state, deltaTime) =&gt; {
-    setSimulationState(
-      evaluateMotion(
-        simulationState,
-        matrixAtArcLength(
-          points[0],
-          points[1],
-          simulationState.distanceTraveled,
-        ),
-        simulationState.friction,
-        simulationState.airResistance,
-        simulationState.gravity,
-        deltaTime * simulationState.simulationSpeed,
-      ),
-    );
-  });
-
-  // reset simulation state if train overshoots track
-  useEffect(() =&gt; {
-    if (
-      simulationState.distanceTraveled &gt;
-        totalArcLength(points[0], points[1]) ||
-      simulationState.distanceTraveled &lt; 0
-    ) {
-      setSimulationState({
-        velocity: 0,
-        distanceTraveled: 0,
-        acceleration: 0,
-      });
-    }
-  }, [simulationState.distanceTraveled, points, setSimulationState]);
-
-  const motionMatrix = matrixAtArcLength(
-    points[0],
-    points[1],
-    MathUtils.clamp(
-      simulationState.distanceTraveled,
-      0,
-      totalArcLength(points[0], points[1]),
-    ),
-  );
-
-  return (
-    &lt;&gt;
-      &lt;DragControlPoints
-        axisLock=&#34;z&#34;
-        points={points}
-        setPoints={setPoints}
-      /&gt;
-      &lt;Line points={points} color={colors.secondary} /&gt;
-      &lt;PointWithMatrixArrows matrix={motionMatrix} /&gt;
-    &lt;/&gt;
-  );
-};
-
-export const MatricesDemoScene = () =&gt; {
-  return (
-    &lt;OrthographicScene&gt;
-      &lt;MatricesDemo /&gt;
-    &lt;/OrthographicScene&gt;
-  );
-};
-</code></pre>
-
+</p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">useEffect</span>, <span style="color:#a6e22e">useState</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Line</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@react-three/drei&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useFrame</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@react-three/fiber&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">MathUtils</span>, <span style="color:#a6e22e">Vector3</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;three&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">matrixAtArcLength</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">totalArcLength</span>,
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../maths/linear&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">evaluateMotion</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../helper/physics&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useColors</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../hooks/useColors&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useSimulationStateControls</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../hooks/useSimulationStateControls&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">PointWithMatrixArrows</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/PointWithMatrixArrows&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MatricesDemo</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">colors</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useColors</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// control points
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">setPoints</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>([
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">11.5</span>, <span style="color:#ae81ff">3.2</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2.8</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>  ]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">simulationState</span>, <span style="color:#a6e22e">setSimulationState</span>] <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">useSimulationStateControls</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">useFrame</span>((<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">deltaTime</span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setSimulationState</span>(
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">evaluateMotion</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">simulationState</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">matrixAtArcLength</span>(
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">0</span>],
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">1</span>],
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">simulationState</span>.<span style="color:#a6e22e">distanceTraveled</span>,
+</span></span><span style="display:flex;"><span>        ),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">simulationState</span>.<span style="color:#a6e22e">friction</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">simulationState</span>.<span style="color:#a6e22e">airResistance</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">simulationState</span>.<span style="color:#a6e22e">gravity</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">deltaTime</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">simulationState</span>.<span style="color:#a6e22e">simulationSpeed</span>,
+</span></span><span style="display:flex;"><span>      ),
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// reset simulation state if train overshoots track
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">useEffect</span>(() <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">simulationState</span>.<span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">totalArcLength</span>(<span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">0</span>], <span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">simulationState</span>.<span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    ) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">setSimulationState</span>({
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">velocity</span>: <span style="color:#66d9ef">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">distanceTraveled</span>: <span style="color:#66d9ef">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">acceleration</span>: <span style="color:#66d9ef">0</span>,
+</span></span><span style="display:flex;"><span>      });
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }, [<span style="color:#a6e22e">simulationState</span>.<span style="color:#a6e22e">distanceTraveled</span>, <span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">setSimulationState</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">motionMatrix</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">matrixAtArcLength</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">0</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">1</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">MathUtils</span>.<span style="color:#a6e22e">clamp</span>(
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">simulationState</span>.<span style="color:#a6e22e">distanceTraveled</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">totalArcLength</span>(<span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">0</span>], <span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">1</span>]),
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">DragControlPoints</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">axisLock</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;z&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">points</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">points</span>}
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setPoints</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">setPoints</span>}
+</span></span><span style="display:flex;"><span>      /&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Line</span> <span style="color:#a6e22e">points</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">points</span>} <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">colors</span>.<span style="color:#a6e22e">secondary</span>} /&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">PointWithMatrixArrows</span> <span style="color:#a6e22e">matrix</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">motionMatrix</span>} /&gt;
+</span></span><span style="display:flex;"><span>    &lt;/&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MatricesDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">OrthographicScene</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">MatricesDemo</span> /&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">OrthographicScene</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
 
 ]]></content></item><item><title>Friction and Air Resistance</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/friction-and-air-resistance/</link><pubDate>Sat, 06 Dec 2025 12:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/friction-and-air-resistance/</guid><description>&lt;p&gt;This chapter will be quite short and introduces two small but important parts of a more realistic roller coaster simulation:&lt;/p&gt;
 &lt;ul&gt;
@@ -1260,12 +1245,12 @@ That is the whole trick.</p>
 
 
 <div class="embedded ">
-  <iframe id="react-root-36c8ccc58d9a44616e2b04ffdc9f5645" width="100%" height="360px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-967eb4554e4590ccdd11f6b4356a5973" width="100%" height="360px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-36c8ccc58d9a44616e2b04ffdc9f5645').srcdoc = `
+    document.getElementById('react-root-967eb4554e4590ccdd11f6b4356a5973').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1591,12 +1576,12 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 
 
 <div class="embedded ">
-  <iframe id="react-root-150b4f6bd7c6c054ef70f60414637c01" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-ed87c4dbb650cef4b347148873251aef" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-150b4f6bd7c6c054ef70f60414637c01').srcdoc = `
+    document.getElementById('react-root-ed87c4dbb650cef4b347148873251aef').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1840,12 +1825,12 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
 
 
 <div class="embedded ">
-  <iframe id="react-root-fd850a93d523718c5f241292f511156f" width="100%" height="360px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-8e0cc1d16e23c87693d068c9e81204ea" width="100%" height="360px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-fd850a93d523718c5f241292f511156f').srcdoc = `
+    document.getElementById('react-root-8e0cc1d16e23c87693d068c9e81204ea').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2120,12 +2105,12 @@ so it might help you as well.</p>
 
 
 <div class="embedded ">
-  <iframe id="react-root-b64454070a1aa2d95a9f144767955324" width="100%" height="300px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-5ff9cb88d14239f0e308efb760c60ff7" width="100%" height="300px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-b64454070a1aa2d95a9f144767955324').srcdoc = `
+    document.getElementById('react-root-5ff9cb88d14239f0e308efb760c60ff7').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2267,9 +2252,10 @@ In the end, the physics model will end up pretty close to what <strong>NoLimits 
 </span></span></code></pre></div><p>Next, install a few useful dependencies. This is all we need for now. If I end up using another package later in the series and forgot to list it here, feel free to install it when you get to that part:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npm i leva three lodash @react-three/drei @react-three/fiber @types/three @types/lodash
 </span></span></code></pre></div><blockquote>
-<p><strong>Important note:</strong> In every article, I’ll show example code and link to the corresponding <strong>GitHub files</strong>. These files live inside my website’s blog repository, which contains a large <strong>shared script collection for all articles</strong>. This means the structure in the repo <strong>will differ</strong> from the snippets shown in the articles. For example, my <code>physics.ts</code> file contains multiple evaluation functions used across different posts, since we build things step by step from article to article. All iterations end up in the same file. So don’t worry if the repo looks more consolidated or structured differently than the examples shown here.</p></blockquote>
-<blockquote>
-<p><strong>Another important note</strong>: The example code in the articles <strong>will</strong> contain components that <strong>I don’t explicitly show or explain in the text</strong>. If you run into something unfamiliar, please check the GitHub repository and follow the imports to see how those components are implemented. <strong>Most of them are small helpers for things like drawing lines, rendering arrows, setting up scenes, and other utilities that would only distract from the main topic in the article itself</strong>.</p></blockquote>
+<p><strong>Important note:</strong> In every article, I show example code. These code files live in the <strong>same repository</strong> that powers this <strong>blog</strong>. The blog itself is a repository, and all chapters, demos, and examples live there together.</p>
+<p>The repository contains a <strong>shared</strong> collection of scripts used across multiple articles, such as <strong>camera setup, wireframe helpers, and scene utilities</strong>. Code that is specific to a chapter usually lives <strong>close to that chapter</strong>, while common pieces are shared.</p>
+<p>Because of this, you may occasionally see functionality being used before it is explicitly introduced in the text. <strong>If something looks unfamiliar, clone the repository, run the examples, and follow the imports to see how things are implemented</strong>.
+Some parts of the codebase intentionally exist a bit ahead of the articles to keep later iterations simpler.</p></blockquote>
 <h2 id="motion-dynamics">Motion Dynamics</h2>
 <p>At the end of the day, simulating a roller coaster comes down to one simple question:</p>
 <p><strong>How much distance should the coaster travel in each simulation step?</strong></p>
@@ -2374,12 +2360,12 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 
 
 <div class="embedded ">
-  <iframe id="react-root-c5995bd34d484d21fbde59c75916e8ee" width="100%" height="360px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-6c9237f5b7a9a49e6b60de8bd42cb869" width="100%" height="360px" style="border: 0" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-c5995bd34d484d21fbde59c75916e8ee').srcdoc = `
+    document.getElementById('react-root-6c9237f5b7a9a49e6b60de8bd42cb869').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2488,12 +2474,12 @@ export const WasiLibraryExampleScene = () =&gt; {
 
 
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
-&lt;iframe id="react-root-1240d419eaae2c4c70ca8fdbedb3bb77" width="225px" height="285px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
+&lt;iframe id="react-root-ac37c6fc1e0d8f0ea9fcae103a717b00" width="225px" height="285px" style="border: 0" class="frame"&gt;&lt;/iframe&gt;
 &lt;div class="description" style="width: 225px"&gt;
 Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-1240d419eaae2c4c70ca8fdbedb3bb77').srcdoc = `
+document.getElementById('react-root-ac37c6fc1e0d8f0ea9fcae103a717b00').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -2519,7 +2505,7 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/implementing-library-funct
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-1240d419eaae2c4c70ca8fdbedb3bb77" width="225px" height="285px" style="border: 0" class="frame"></iframe>
+  <iframe id="react-root-ac37c6fc1e0d8f0ea9fcae103a717b00" width="225px" height="285px" style="border: 0" class="frame"></iframe>
 
   
   <div class="description" style="width: 225px">
@@ -2528,7 +2514,7 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/implementing-library-funct
   
 
   <script>
-    document.getElementById('react-root-1240d419eaae2c4c70ca8fdbedb3bb77').srcdoc = `
+    document.getElementById('react-root-ac37c6fc1e0d8f0ea9fcae103a717b00').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>

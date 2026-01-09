@@ -1,10 +1,10 @@
 import last from 'lodash/last';
 import { Matrix4, Vector3 } from 'three';
 
-import { empty } from '../../../../maths/curve';
+import { emptyCurve } from '../../../../maths/curve';
 
 export const fromPoints = (points: Vector3[]) => {
-  const curve = empty();
+  const curve = emptyCurve();
   if (points.length < 2) return curve;
 
   let arcLength = 0;
