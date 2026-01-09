@@ -24,10 +24,10 @@ export const EstimateLengthScene = () => {
   }));
 
   const [points, setPoints] = useState([
-    new Vector3(-4.5, -6, 0),
-    new Vector3(-4.5, 2.8, 0),
-    new Vector3(4.5, 2.8, 0),
-    new Vector3(4.5, -6, 0),
+    new Vector3(0, 0, 0),
+    new Vector3(0, 8.5, 0),
+    new Vector3(9, 8.5, 0),
+    new Vector3(9, 0, 0),
   ]);
 
   const positions = useMemo(
@@ -40,18 +40,20 @@ export const EstimateLengthScene = () => {
 
   return (
     <OrthographicScene>
-      <Line points={positions} />
-      <Line
-        points={points}
-        color={colors.highlight}
-        segments={true}
-      />
-      <DragControlPoints
-        axisLock="z"
-        points={points}
-        setPoints={setPoints}
-      />
-      <BezierCurve points={points} color={colors.highlight} />
+      <group position={[-4.5, -4.8, 0]}>
+        <Line points={positions} />
+        <Line
+          points={points}
+          color={colors.highlight}
+          segments={true}
+        />
+        <DragControlPoints
+          axisLock="z"
+          points={points}
+          setPoints={setPoints}
+        />
+        <BezierCurve points={points} color={colors.highlight} />
+      </group>
     </OrthographicScene>
   );
 };

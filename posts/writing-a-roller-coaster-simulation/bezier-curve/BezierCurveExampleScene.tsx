@@ -12,25 +12,27 @@ export const BezierCurveExampleScene = () => {
   const colors = useColors();
 
   const [points, setPoints] = useState([
-    new Vector3(-3, -3, 0),
-    new Vector3(3, -3, 0),
-    new Vector3(-3, 3, 0),
-    new Vector3(3, 3, 0),
+    new Vector3(0, 0, 0),
+    new Vector3(6, 0, 0),
+    new Vector3(0, 6, 0),
+    new Vector3(6, 6, 0),
   ]);
 
   return (
     <OrthographicScene>
-      <Line
-        points={points}
-        color={colors.highlight}
-        segments={true}
-      />
-      <DragControlPoints
-        axisLock="z"
-        points={points}
-        setPoints={setPoints}
-      />
-      <BezierCurve points={points} />
+      <group position={[-3, -2, 0]}>
+        <Line
+          points={points}
+          color={colors.highlight}
+          segments={true}
+        />
+        <DragControlPoints
+          axisLock="z"
+          points={points}
+          setPoints={setPoints}
+        />
+        <BezierCurve points={points} />
+      </group>
     </OrthographicScene>
   );
 };

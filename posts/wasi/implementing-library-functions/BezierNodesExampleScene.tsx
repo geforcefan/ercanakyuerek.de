@@ -14,10 +14,10 @@ const Example = () => {
   const colors = useColors();
 
   const [points, setPoints] = useState([
-    new Vector3(-3, -3, 0),
-    new Vector3(3, -3, 0),
-    new Vector3(-3, 3, 0),
-    new Vector3(3, 3, 0),
+    new Vector3(0, 0, 0),
+    new Vector3(6, 0, 0),
+    new Vector3(0, 6, 0),
+    new Vector3(6, 6, 0),
   ]);
 
   const [motion, setMotion] = useState({
@@ -68,7 +68,7 @@ const Example = () => {
   });
 
   return (
-    <>
+    <group position={[-3, -2, 0]}>
       <Line
         points={points}
         color={colors.highlight}
@@ -85,7 +85,7 @@ const Example = () => {
         uniform={!!Math.round(motion.uniform)}
         showNodes={true}
       />
-    </>
+    </group>
   );
 };
 

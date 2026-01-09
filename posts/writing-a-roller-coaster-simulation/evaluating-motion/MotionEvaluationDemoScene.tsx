@@ -45,7 +45,7 @@ const MotionEvaluationDemo = () => {
     distanceTraveled: 0,
   }));
 
-  const [_, setState] = useControls(() => ({
+  const [, setState] = useControls(() => ({
     acceleration: {
       value: 0,
       pad: 5,
