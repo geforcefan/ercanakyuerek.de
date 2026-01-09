@@ -249,9 +249,9 @@
     "types": {}
   },
   "src/pages/ContentComponentsListPage.tsx": {
-    "source": "import React from 'react';\n\nimport { contentComponents } from '../helper/render-content-component';\n\nexport const ContentComponentsListPage = () => {\n  return (\n    <ul>\n      {contentComponents.keys().map((path: string) => {\n        const fullPath = `/src/content${path.replace('./', '/')}`\n        return <li key={fullPath}>\n          <a href={fullPath}>{fullPath}</a>\n        </li>;\n      })}\n    </ul>\n  );\n};\n",
+    "source": "import React from 'react';\n\nimport { contentComponents } from '../helper/render-content-component';\n\nexport const ContentComponentsListPage = () => {\n  return (\n    <ul>\n      {contentComponents.keys().map((path: string) => {\n        const fullPath = `/src/content${path.replace('./', '/')}`;\n        return (\n          <li key={fullPath}>\n            <a href={fullPath}>{fullPath}</a>\n          </li>\n        );\n      })}\n    </ul>\n  );\n};\n",
     "functions": {
-      "ContentComponentsListPage": "const ContentComponentsListPage = () => {\n  return (\n    <ul>\n      {contentComponents.keys().map((path: string) => {\n        const fullPath = `/src/content${path.replace('./', '/')}`\n        return <li key={fullPath}>\n          <a href={fullPath}>{fullPath}</a>\n        </li>;\n      })}\n    </ul>\n  );\n};"
+      "ContentComponentsListPage": "const ContentComponentsListPage = () => {\n  return (\n    <ul>\n      {contentComponents.keys().map((path: string) => {\n        const fullPath = `/src/content${path.replace('./', '/')}`;\n        return (\n          <li key={fullPath}>\n            <a href={fullPath}>{fullPath}</a>\n          </li>\n        );\n      })}\n    </ul>\n  );\n};"
     },
     "types": {}
   },
