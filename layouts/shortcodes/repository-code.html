@@ -1,0 +1,20 @@
+{{- $filePath := .Get "file" -}}
+{{- $name := .Get "name" -}}
+{{- $type := default "source" (.Get "type") -}}
+
+{{- $data := index .Site.Data "repository-code-index" -}}
+{{- $file := index $data $filePath -}}
+
+{{- $lang := path.Ext $filePath | strings.TrimPrefix "." -}}
+{{- $code := "" -}}
+
+{{- if eq $type "source" -}}
+{{- $code = $file.source -}}
+{{- else if eq $type "type" -}}
+{{- $code = index $file.types $name -}}
+{{- else -}}
+{{- $code = index $file.functions $name -}}
+{{- end -}}
+
+{{- $md := printf "```%s\n%s\n```" $lang $code -}}
+{{- $md | markdownify -}}

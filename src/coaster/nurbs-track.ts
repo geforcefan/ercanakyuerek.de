@@ -1,6 +1,6 @@
 import { Vector4 } from 'three';
 
-import { Curve, empty } from '../maths/curve';
+import { Curve, emptyCurve } from '../maths/curve';
 import {
   fromPoints,
   makeClampedKnots,
@@ -15,7 +15,7 @@ export const fromVertices = (
   closed: boolean = false,
   resolution: number = 20,
 ) => {
-  if (vertices.length < 2) return empty();
+  if (vertices.length < 2) return emptyCurve();
   const nurbsVertices = [...vertices];
 
   if (closed) {
@@ -33,7 +33,7 @@ export const fromVertices = (
     });
   }
 
-  const curve: Curve = empty();
+  const curve: Curve = emptyCurve();
   const nurbsSections = splitPointsByStrict(nurbsVertices);
   const hasStrictVertices = nurbsSections.length > 1;
 

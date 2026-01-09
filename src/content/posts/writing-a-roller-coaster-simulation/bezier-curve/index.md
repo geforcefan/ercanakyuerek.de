@@ -95,22 +95,7 @@ for (let k = points.length - 1; k > 0; k--) {
 
 So we end up with a general version that works for any number of control points. Add a small guard at the beginning and we are ready to use it:
 
-```typescript
-export const deCasteljau = (points: Vector3[], t: number) => {
-  if (points.length < 1)
-    throw new Error(`Expected control points, got ${points.length}`);
-
-  const p = points.map((v) => v.clone());
-
-  for (let k = points.length - 1; k > 0; k--) {
-    for (let i = 0; i < k; i++) {
-      p[i].lerp(p[i + 1], t);
-    }
-  }
-
-  return p[0];
-};
-```
+{{< repository-code file="src/maths/bezier.ts" type="function" name="deCasteljau" >}}
 
 ## How many curve nodes do we need?
 
@@ -131,23 +116,7 @@ In practice, this is what I usually do:
 
 To make this easier, we start with a small helper that lets us **uniformly sample** a range with a given resolution. It gives us both the actual value and a normalized`t` in `[0, 1]`.
 
-```typescript
-export const uniformSample = (
-  from: number,
-  to: number,
-  resolution: number = 20,
-  fn: (at: number, t: number) => void,
-) => {
-  const length = to - from;
-  const numberOfNodes = Math.max(Math.floor(length * resolution), 2);
-
-  for (let i = 0; i < numberOfNodes; i++) {
-    const t = i / (numberOfNodes - 1);
-    const at = from + t * length;
-    fn(at, t);
-  }
-};
-```
+{{< repository-code file="src/helper/uniform-sample.ts" type="function" name="uniformSample" >}}
 
 If this feels a bit abstract, here is a concrete example.
 
@@ -163,9 +132,8 @@ Now that we have `uniformSample`, estimating the curve length is straightforward
 We simply pick **8 evenly distributed values** in the range `[0, 8]` and evaluate the Bézier curve at those normalized values:
 
 ```typescript
-const positions: Vector3[] = [];
-uniformSample(0, 8, 1, (at, t) =>
-  positions.push(deCasteljau(points, t)),
+const positions = uniformSampleMap(0, 8, 1, (at, t) =>
+  deCasteljau(points, t),
 );
 ```
 
@@ -178,56 +146,20 @@ return positions
   .slice(1)
   .reduce(
     (arcLength, position, i) =>
-        arcLength + position.distanceTo(positions[i]),
+      arcLength + position.distanceTo(positions[i]),
     0,
   );
 ```
 
 Now we end up with this estimate function:
 
-```typescript
-export const estimateTotalArcLength = (points: Vector3[]) => {
-  const positions: Vector3[] = [];
-  uniformSample(0, 8, 1, (at, t) =>
-    positions.push(deCasteljau(points, t)),
-  );
+{{< repository-code file="src/maths/bezier.ts" type="function" name="estimateTotalArcLength" >}}
 
-  return positions
-    .slice(1)
-    .reduce(
-      (arcLength, position, i) =>
-          arcLength + position.distanceTo(positions[i]),
-      0,
-    );
-};
-```
+Here is the `uniformSampleMap` function. Use it when you need it.
+It is a small convenience helper that wraps `uniformSample` and makes mapping the result easier,
+instead of having to do it manually each time. It will show up here and there in later chapters.
 
-Do not be confused if you see `uniformSampleMap` used instead of `uniformSample` in the repository. It does exactly the same thing, it just exists for convenience so the call can be reduced to:
-
-```typescript
-const positions = uniformSampleMap(0, 8, 1, (at, t) =>
-  deCasteljau(points, t),
-);
-```
-
-Here is the `uniformSampleMap` function. Just use it, it is very convenient and will be used here and there:
-
-```typescript
-export const uniformSampleMap = <T>(
-  from: number,
-  to: number,
-  resolution: number = 20,
-  mapFn: (at: number, t: number) => T,
-) => {
-  const out: T[] = [];
-
-  uniformSample(from, to, resolution, (at, t) => {
-    out.push(mapFn(at, t));
-  });
-
-  return out;
-};
-```
+{{< repository-code file="src/helper/uniform-sample.ts" type="function" name="uniformSampleMap" >}}
 
 # Constructing a Bézier curve
 
@@ -237,13 +169,18 @@ This part is almost stupidly simple, so I will just paste the code and explain i
 export const bezierSplineCurve = (
   points: Vector3[],
   resolution: number = 20,
-) =>
-  fromPoints(
-    uniformSampleMap(0, estimateTotalArcLength(points), resolution, (at, t) =>
-      deCasteljau(points, t),
-    ),
-  );
+) => {
+  const positions: Vector3[] = [];
+  uniformSample(0, estimateLength(points), resolution, (at, t) => {
+    positions.push(deCasteljau(points, t));
+  });
+
+  return fromPoints(positions);
+};
 ```
+
+> **Note:** In the repository, `bezierSplineCurve` has a slightly different implementation that calls utility functions for proper normal calculation. Do not worry about this for now. We will cover normals in the next chapters.
+
 
 What happens here is straightforward:
 
@@ -264,4 +201,4 @@ Right now, our `fromPoints` is a temporary junk implementation with hard transit
 
 # Demo code
 
-{{< show-content-script "posts/writing-a-roller-coaster-simulation/bezier-curve/BezierCurveDemoScene.tsx" >}}
+{{< repository-code-with-clone file="src/content/posts/writing-a-roller-coaster-simulation/bezier-curve/BezierCurveDemoScene.tsx" >}}

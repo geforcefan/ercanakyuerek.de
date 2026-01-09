@@ -34,9 +34,13 @@ Next, install a few useful dependencies. This is all we need for now. If I end u
 npm i leva three lodash @react-three/drei @react-three/fiber @types/three @types/lodash
 ```
 
-> **Important note:** In every article, I’ll show example code and link to the corresponding **GitHub files**. These files live inside my website’s blog repository, which contains a large **shared script collection for all articles**. This means the structure in the repo **will differ** from the snippets shown in the articles. For example, my `physics.ts` file contains multiple evaluation functions used across different posts, since we build things step by step from article to article. All iterations end up in the same file. So don’t worry if the repo looks more consolidated or structured differently than the examples shown here.
+> **Important note:** In every article, I show example code. These code files live in the **same repository** that powers this **blog**. The blog itself is a repository, and all chapters, demos, and examples live there together.
+>
+> The repository contains a **shared** collection of scripts used across multiple articles, such as **camera setup, wireframe helpers, and scene utilities**. Code that is specific to a chapter usually lives **close to that chapter**, while common pieces are shared.
+>
+> Because of this, you may occasionally see functionality being used before it is explicitly introduced in the text. **If something looks unfamiliar, clone the repository, run the examples, and follow the imports to see how things are implemented**.
+> Some parts of the codebase intentionally exist a bit ahead of the articles to keep later iterations simpler.
 
-> **Another important note**: The example code in the articles **will** contain components that **I don’t explicitly show or explain in the text**. If you run into something unfamiliar, please check the GitHub repository and follow the imports to see how those components are implemented. **Most of them are small helpers for things like drawing lines, rendering arrows, setting up scenes, and other utilities that would only distract from the main topic in the article itself**.
 
 ## Motion Dynamics
 

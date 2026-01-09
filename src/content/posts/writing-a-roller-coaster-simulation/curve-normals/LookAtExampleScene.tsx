@@ -4,7 +4,7 @@ import { Matrix4, Vector3 } from 'three';
 
 import {
   applyRollCurve,
-  empty,
+  emptyCurve,
   toLocalTransformed,
 } from '../../../../maths/curve';
 import { toPosition } from '../../../../maths/matrix4';
@@ -38,7 +38,7 @@ export const LookAtExampleScene = () => {
     const trackCurve = curveFromCustomTrack(exampleTrack, false);
 
     if (lookAt === 'fixedUpDirection') {
-      return empty(
+      return emptyCurve(
         trackCurve.nodes.map((node, index, nodes) => {
           const isLast = index === nodes.length - 1;
           const left = toPosition(
