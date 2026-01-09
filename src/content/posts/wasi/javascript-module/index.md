@@ -55,12 +55,7 @@ We will talk about memory later, especially linear memory. For now, we can alrea
 
 We begin with a very simple one: `bezierTotalArcLength`. We grab the function from `instance.exports` and call it with a pointer to a Bezier curve. Since the function returns a single float, there is nothing special to do here.
 
-```typescript
-export const bezierTotalArcLength = (bezierPointer: number) => {
-  const { bezierTotalArcLength: func } = instance.exports as any;
-  return func(bezierPointer);
-};
-```
+{{< repository-code file="src/libs/calculation/index.ts" type="function" name="bezierTotalArcLength" >}}
 
 Next is a slightly more interesting function: `bezierPositionAtArcLength`.
 
@@ -68,17 +63,7 @@ This function also lives in the exports and takes a Bezier pointer plus a distan
 
 A 3D vector here is just three `float` values laid out next to each other in linear memory. Because these are `32-bit` floats, we use a `Float32Array` to read them back. The pointer returned from WebAssembly is simply an offset into the memory buffer.
 
-```typescript
-export const bezierPositionAtArcLength = (
-  bezierPointer: number,
-  at: number,
-) => {
-  const { bezierPositionAtArcLength: func, memory } =
-    instance.exports as any;
-  const positionPointer = func(bezierPointer, at);
-  return new Float32Array(memory.buffer, positionPointer, 3);
-};
-```
+{{< repository-code file="src/libs/calculation/index.ts" type="function" name="bezierPositionAtArcLength" >}}
 
 Now we reach a more involved function: `bezierFromPoints`.
 
@@ -90,28 +75,7 @@ This is not perfect. There are limitations and edge cases here. That is fine for
 
 On the JavaScript side, we allocate memory, write the coordinates into linear memory, and then pass the pointers to the WebAssembly function.
 
-```typescript
-export const bezierFromPoints = (
-  p0: number[],
-  p1: number[],
-  p2: number[],
-  p3: number[],
-) => {
-  const {
-    bezierFromPoints: func,
-    malloc,
-    memory,
-  } = instance.exports as any;
-
-  const pointers = [p0, p1, p2, p3].map((point) => {
-    const pointer = malloc(3 * 4); // (x, y, z) * 4 bytes
-    new Float32Array(memory.buffer, pointer, 3).set(point);
-    return pointer;
-  });
-
-  return func(pointers[0], pointers[1], pointers[2], pointers[3]);
-};
-```
+{{< repository-code file="src/libs/calculation/index.ts" type="function" name="bezierFromPoints" >}}
 
 # Demo
 
@@ -131,4 +95,4 @@ In the next articles, we will dig deeper into memory, data types, and better bin
 
 # Demo code
 
-{{< show-content-script "posts/wasi/javascript-module/WasiLibraryExampleScene.tsx" >}}
+{{< repository-code-with-clone file="src/content/posts/wasi/javascript-module/WasiLibraryExampleScene.tsx" >}}

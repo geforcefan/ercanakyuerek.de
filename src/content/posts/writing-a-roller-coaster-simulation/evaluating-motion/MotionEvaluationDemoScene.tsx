@@ -43,27 +43,25 @@ const MotionEvaluationDemo = () => {
     },
     velocity: 0,
     distanceTraveled: 0,
+  }));
+
+  const [_, setState] = useControls(() => ({
     acceleration: {
       value: 0,
       pad: 5,
+      disabled: true,
     },
   }));
 
-  useEffect(() => {
+  useFrame((_, deltaTime) => {
     const sinSlope = Math.sin(MathUtils.degToRad(slope));
     const acceleration = gravity * sinSlope;
 
-    setSimulationState({ acceleration, sinSlope });
-  }, [slope, gravity, setSimulationState]);
-
-  useFrame((state, deltaTime) => {
     setSimulationState(
-      evaluateMotion(
-        simulationState,
-        simulationState.acceleration,
-        deltaTime,
-      ),
+      evaluateMotion(simulationState, acceleration, deltaTime),
     );
+
+    setState({ acceleration });
   });
 
   // reset simulation state if train overshoots track

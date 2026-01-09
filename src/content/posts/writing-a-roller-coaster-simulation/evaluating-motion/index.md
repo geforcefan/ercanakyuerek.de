@@ -21,12 +21,9 @@ Now that we know how acceleration works and how gravity affects the coaster depe
 
 We start with a minimal simulation state.
 
-```typescript
-type SimulationState = {
-  velocity: number;
-  distanceTraveled: number;
-};
+{{< repository-code file="src/content/posts/writing-a-roller-coaster-simulation/evaluating-motion/physics.ts" type="type" name="SimulationState" >}}
 
+```typescript
 const simulationState: SimulationState = {
   velocity: 0,
   distanceTraveled: 0,
@@ -104,19 +101,7 @@ const distanceTraveled =
 
 So we end up with something like:
 
-```typescript
-const evaluateMotion = (
-  state: SimulationState,
-  acceleration: number,
-  deltaTime: number,
-): SimulationState => {
-  const velocity = state.velocity + acceleration * deltaTime;
-  const distanceTraveled =
-    state.distanceTraveled + velocity * deltaTime;
-
-  return { velocity, distanceTraveled };
-};
-```
+{{< repository-code file="src/content/posts/writing-a-roller-coaster-simulation/evaluating-motion/physics.ts" type="function" name="evaluateMotion" >}}
 
 This is already a complete physics step without friction or air resistance.
 
@@ -135,4 +120,4 @@ Just like in the last chapter, we again have an interactive demo. This time, weâ
 
 # Demo code
 
-{{< show-content-script "posts/writing-a-roller-coaster-simulation/evaluating-motion/MotionEvaluationDemoScene.tsx" >}}
+{{< repository-code-with-clone file="src/content/posts/writing-a-roller-coaster-simulation/evaluating-motion/MotionEvaluationDemoScene.tsx" >}}

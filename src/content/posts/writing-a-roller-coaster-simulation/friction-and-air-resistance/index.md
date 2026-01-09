@@ -79,35 +79,10 @@ const acceleration =
 
 ## Updated evaluateMotion function
 
-Putting everything together, the full motion evaluation now looks like this:
+Putting everything together, the full motion evaluation now looks like this.  
+For the sake of the demo, the function is named `evaluateMotionWithFrictionAndAirResistance` so we can compare behavior with and without air resistance. You can still name it `evaluateMotion`:
 
-```typescript
-const evaluateMotion = (
-  state: SimulationState,
-  forwardDirection: Vector3,
-  friction: number,
-  airResistance: number,
-  gravity: number,
-  deltaTime: number,
-): SimulationState => {
-  const velocityDirection = state.velocity < 0 ? -1 : 1;
-
-  let energyLoss = airResistance * state.velocity * state.velocity;
-  energyLoss += friction * gravity;
-  energyLoss *= velocityDirection;
-
-  let acceleration = forwardDirection.dot(
-    new Vector3(0, -gravity, 0),
-  );
-  acceleration -= energyLoss;
-
-  const velocity = state.velocity + acceleration * deltaTime;
-  const distanceTraveled =
-    state.distanceTraveled + velocity * deltaTime;
-
-  return { velocity, distanceTraveled, acceleration };
-};
-```
+{{< repository-code file="src/content/posts/writing-a-roller-coaster-simulation/linear-track/physics.ts" type="function" name="evaluateMotionWithFriction" >}}
 
 We still compute the gravity acceleration first. After that we subtract the energy losses from friction and air resistance. Even though this is a very simple model, the difference becomes immediately visible. The train will no longer accelerate forever or keep moving at impossible speeds.
 
@@ -134,4 +109,4 @@ While writing this, I realize it is probably best to introduce the concept first
 
 # Demo code
 
-{{< show-content-script "posts/writing-a-roller-coaster-simulation/friction-and-air-resistance/FrictionAndAirResistanceDemoScene.tsx" >}}
+{{< repository-code-with-clone file="src/content/posts/writing-a-roller-coaster-simulation/friction-and-air-resistance/FrictionAndAirResistanceDemoScene.tsx" >}}

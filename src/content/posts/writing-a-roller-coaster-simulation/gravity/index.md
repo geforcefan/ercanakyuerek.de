@@ -130,4 +130,4 @@ so it might help you as well.
 
 # Demo code
 
-{{< show-content-script "posts/writing-a-roller-coaster-simulation/gravity/GravityDemoScene.tsx" >}}
+{{< repository-code-with-clone file="src/content/posts/writing-a-roller-coaster-simulation/gravity/GravityDemoScene.tsx" >}}

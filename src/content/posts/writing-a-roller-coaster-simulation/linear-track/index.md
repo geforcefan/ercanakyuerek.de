@@ -56,31 +56,13 @@ In code:
 const acceleration = forwardDirection.dot(new Vector3(0, -gravity, 0));
 ```
 
-And our updated evaluateMotion function becomes:
+Since we now calculate **acceleration** dynamically, we extend `SimulationState` with a readonly `acceleration` property:
 
-```typescript
-type SimulationState = {
-  velocity: number;
-  distanceTraveled: number;
-  acceleration: number;
-};
+{{< repository-code file="src/helper/physics.ts" type="type" name="SimulationState" >}}
 
-const evaluateMotion = (
-  state: SimulationState,
-  forwardDirection: Vector3,
-  gravity: number,
-  deltaTime: number,
-): SimulationState => {
-  const acceleration = forwardDirection.dot(
-    new Vector3(0, -gravity, 0),
-  );
-  const velocity = state.velocity + acceleration * deltaTime;
-  const distanceTraveled =
-    state.distanceTraveled + velocity * deltaTime;
+And our updated `evaluateMotion` function becomes:
 
-  return { velocity, distanceTraveled, acceleration };
-};
-```
+{{< repository-code file="src/content/posts/writing-a-roller-coaster-simulation/linear-track/physics.ts" type="function" name="evaluateMotion" >}}
 
 ## Answering important questions
 
@@ -158,15 +140,8 @@ const positionAtArcLength = (
 
 Or using **THREE.js** to save yourself some sanity and avoid reinventing the wheel over and over again. I explained this part without THREE.js as well, but you may just forget it, the articles get way too big if I try to explain every concept of vectors and math in detail. For now we simply know: THREE.js is our friend:
 
-```typescript
-const positionAtArcLength = (
-  cp1: Vector3,
-  cp2: Vector3,
-  at: number,
-) => {
-  return cp1.clone().lerp(cp2, at / cp1.distanceTo(cp2));
-};
-```
+{{< repository-code file="src/maths/linear.ts" type="function" name="totalArcLength" >}}
+{{< repository-code file="src/maths/linear.ts" type="function" name="positionAtArcLength" >}}
 
 ## How to Calculate Forward Direction Along the Curve
 
@@ -178,15 +153,7 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 
 Translated into code:
 
-```typescript
-const forwardDirectionAtArcLength = (
-  cp1: Vector3,
-  cp2: Vector3,
-  at: number, // unused for now
-) => {
-  return cp2.clone().sub(cp1).normalize();
-};
-```
+{{< repository-code file="src/maths/linear.ts" type="function" name="forwardDirectionAtArcLength" >}}
 
 ## Small note
 
@@ -208,4 +175,4 @@ I’ve polished things a bit and moved the physics and linear interpolation logi
 
 # Demo code
 
-{{< show-content-script "posts/writing-a-roller-coaster-simulation/linear-track/LinearTrackDemoScene.tsx" >}}
+{{< repository-code-with-clone file="src/content/posts/writing-a-roller-coaster-simulation/linear-track/LinearTrackDemoScene.tsx" >}}

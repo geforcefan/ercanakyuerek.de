@@ -33,4 +33,4 @@ As always, the full code is available below.
 
 # Code
 
-{{< show-content-script "posts/roller-coaster-simulation/nurbs-roll-physics-in-action/NurbsRollPhysicsInActionDemoScene.tsx" >}}
+{{< repository-code-with-clone file="src/content/posts/roller-coaster-simulation/nurbs-roll-physics-in-action/NurbsRollPhysicsInActionDemoScene.tsx" >}}
