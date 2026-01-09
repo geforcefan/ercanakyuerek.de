@@ -35,14 +35,21 @@ You may notice that, in principle, we can build almost any curve geometry this w
 
 With that in mind, we can start by defining what a **curve node** looks like:
 
-```typescript
-type CurveNode = {
-  matrix: Matrix4;
-  arcLength: number;
-};
-```
+{{< repository-code file="src/maths/curve.ts" type="type" name="CurveNode" >}}
 
-That is it. A **matrix** and its **distance** along the curve.
+That is it. A **matrix**, its **distance**, and the **segment number** along the curve. The segment number will not matter much for now, but it will become important later.
+
+Of course, nodes do not exist on their own. They have to belong to something, and that something is the **curve** itself. To make this explicit, we also introduce a **Curve** type that groups the nodes together.
+
+The **Curve** type looks like this:
+
+{{< repository-code file="src/maths/curve.ts" type="type" name="Curve" >}}
+
+> **Note:** The curve also stores **segment offsets**, which are accumulated **arc lengths** of the segments. They are not important right now. For the moment, we only deal with a single segment, so this will just be `[0, totalArcLength]`. We will come back to this later.
+
+To go along with this, we add a small helper that simply creates an empty curve:
+
+{{< repository-code file="src/maths/curve.ts" type="function" name="emptyCurve" >}}
 
 Next, we need a way to find the two nodes that sandwich any requested distance along the curve. There are many algorithms for this, but a simple binary search works very well here. It is fast, easy to implement, and more than good enough for what we need right now.
 
@@ -52,52 +59,11 @@ If you want, you can read more about [binary search](https://en.wikipedia.org/wi
 
 We use a lower-bound variant of binary search, which looks like this:
 
-```typescript
-export const lowerBound = <T>(
-  array: T[],
-  value: number,
-  accessor: (item: T) => number,
-): number => {
-  let first = 0;
-  let len = array.length;
-
-  while (len > 0) {
-    const half = Math.floor(len / 2);
-    const middle = first + half;
-
-    if (accessor(array[middle]) < value) {
-      first = middle + 1;
-      len = len - half - 1;
-    } else {
-      len = half;
-    }
-  }
-
-  return first;
-};
-```
+{{< repository-code file="src/helper/binary-search.ts" type="function" name="lowerBound" >}}
 
 Now we use this binary search to find the node indices between which a requested distance along the curve lies. For that, we write a small helper:
 
-```typescript
-export const findBoundingIndices = <T>(
-  array: T[],
-  value: number,
-  accessor: (item: T) => number,
-) => {
-  if (array.length < 2) return;
-
-  const lowerNodeIndex = lowerBound(array, value, accessor);
-  const rightNodeIndex = MathUtils.clamp(
-    lowerNodeIndex,
-    1,
-    array.length - 1,
-  );
-  const leftNodeIndex = rightNodeIndex - 1;
-
-  return [leftNodeIndex, rightNodeIndex];
-};
-```
+{{< repository-code file="src/helper/binary-search.ts" type="function" name="findBoundingIndices" >}}
 
 This function needs a bit of explanation.
 
@@ -159,7 +125,7 @@ To find the **left and right nodes**, we use the **binary search helper** we jus
 
 ```typescript
 const nodes = findBoundingIndices(
-  curve,
+  curve.nodes,
   at,
   (node) => node.arcLength,
 );
@@ -171,8 +137,8 @@ if (!nodes) return new Matrix4();
 Once we have the indices, we fetch the actual nodes:
 
 ```typescript
-const left = curve[nodes[0]];
-const right = curve[nodes[1]];
+const left = curve.nodes[nodes[0]];
+const right = curve.nodes[nodes[1]];
 ```
 
 Lets now prepare for interpolation between the found nodes. Assume we have the following node distances: `[0, 10, 30, 50, 60]`
@@ -214,30 +180,7 @@ If you already know what **quaternions** are, great. If not, also fine. This is 
 
 The helper looks like this:
 
-```typescript
-export const lerp = (
-  matrixA: Matrix4,
-  matrixB: Matrix4,
-  t: number,
-) => {
-  const fromQuaternion = new Quaternion();
-  const toQuaternion = new Quaternion();
-
-  const fromPosition = new Vector3();
-  const toPosition = new Vector3();
-
-  const scale = new Vector3();
-
-  matrixA.decompose(fromPosition, fromQuaternion, scale);
-  matrixB.decompose(toPosition, toQuaternion, scale);
-
-  return new Matrix4().compose(
-    fromPosition.clone().lerp(toPosition, t),
-    fromQuaternion.slerp(toQuaternion, t),
-    scale,
-  );
-};
-```
+{{< repository-code file="src/maths/matrix4.ts" type="function" name="lerp" >}}
 
 Now we can use this to interpolate between the **left** and **right** matrix:
 
@@ -253,33 +196,7 @@ return left.matrix.clone();
 
 Putting everything together, the full function looks like this:
 
-```typescript
-export const matrixAtArcLength = (curve: CurveNode[], at: number) => {
-  const nodes = findBoundingIndices(
-    curve,
-    at,
-    (node) => node.arcLength,
-  );
-  if (!nodes) return new Matrix4();
-
-  const left = curve[nodes[0]];
-  const right = curve[nodes[1]];
-
-  const length = right.arcLength - left.arcLength;
-
-  if (length > Number.EPSILON) {
-    const t = MathUtils.clamp(
-      (at - left.arcLength) / length,
-      0.0,
-      1.0,
-    );
-
-    return lerp(left.matrix, right.matrix, t);
-  }
-
-  return left.matrix.clone();
-};
-```
+{{< repository-code file="src/maths/curve.ts" type="function" name="matrixAtArcLength" >}}
 
 # Linear track with more segments
 
@@ -289,45 +206,7 @@ To actually see this in motion, we need a small helper that constructs curve nod
 >
 > **Important**: This is temporary junk. It exists only to make the demo work quickly and will be replaced by a proper implementation with correct normals and roll handling.
 
-```typescript
-const fromPoints = (points: Vector3[]) => {
-  const curve: CurveNode[] = [];
-  if (points.length < 2) return curve;
-
-  let arcLength = 0;
-
-  for (let i = 0; i < points.length - 1; i++) {
-    const left = points[i];
-    const right = points[i + 1];
-    const prevNode = curve[curve.length - 1];
-
-    if (prevNode)
-      curve.push({
-        matrix: prevNode.matrix.clone().setPosition(left),
-        arcLength,
-      });
-
-    curve.push({
-      matrix: new Matrix4()
-        .lookAt(right, left, new Vector3(0, 1, 0))
-        .setPosition(left),
-      arcLength,
-    });
-
-    arcLength += left.distanceTo(right);
-  }
-
-  const lastNode = last(curve)!;
-  const lastPoint = last(points)!;
-
-  curve.push({
-    matrix: lastNode.matrix.clone().setPosition(lastPoint),
-    arcLength,
-  });
-
-  return curve;
-};
-```
+{{< repository-code file="src/content/posts/writing-a-roller-coaster-simulation/curve-nodes/curve.ts" type="function" name="fromPoints" >}}
 
 This helper just turns points into curve nodes and keeps track of the distance along the curve. It is very naive, but good enough to demonstrate the idea.
 
@@ -341,4 +220,4 @@ In the next chapter, we will build curve nodes from **Bezier splines**. The nice
 
 # Demo code
 
-{{< show-content-script "posts/writing-a-roller-coaster-simulation/curve-nodes/MotionEvaluationDemoScene.tsx" >}}
+{{< repository-code-with-clone file="src/content/posts/writing-a-roller-coaster-simulation/curve-nodes/MotionEvaluationDemoScene.tsx" >}}

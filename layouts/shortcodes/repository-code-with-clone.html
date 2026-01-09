@@ -1,0 +1,27 @@
+{{- $file := .Get "file" -}}
+{{- $name := .Get "name" -}}
+{{- $type := .Get "type" -}}
+
+{{- $sc := "{{< repository-code" -}}
+{{- $sc = printf "%s file=\"%s\"" $sc $file -}}
+
+{{- if $name -}}
+{{- $sc = printf "%s name=\"%s\"" $sc $name -}}
+{{- end -}}
+
+{{- if $type -}}
+{{- $sc = printf "%s type=\"%s\"" $sc $type -}}
+{{- end -}}
+
+{{- $sc = printf "%s >}}" $sc -}}
+
+<p>
+    If you want to run the code locally, clone this
+    <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
+    run <code>npm install</code> and <code>npm run dev-scripts</code>,
+    then open this
+    <a href="http://localhost:3000/{{ $file }}" target="_blank">link</a>
+    in your browser.
+</p>
+
+{{- .Page.RenderString $sc -}}

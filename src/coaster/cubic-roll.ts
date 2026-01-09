@@ -4,7 +4,7 @@ import { clampedCubicSplineCurve } from '../maths/cubic';
 import {
   arcLengthAtOffset,
   Curve,
-  empty,
+  emptyCurve,
   matrixAtArcLength,
 } from '../maths/curve';
 import { toLeftDirection, toUpDirection } from '../maths/matrix4';
@@ -25,7 +25,7 @@ export const fromRollPoints = (
   let lastRoll = 0;
   let offset = 0;
 
-  const rollCurve = empty();
+  const rollCurve = emptyCurve();
 
   for (const sectionRollPoints of rollSections) {
     const points: Vector2[] = [];

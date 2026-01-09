@@ -23,7 +23,7 @@ const router = createBrowserRouter([
   },
   ...contentComponents.keys().map((path: string) => {
     return {
-      path: path.replace('./', ''),
+      path: '/src/content/' + path.replace('./', ''),
       Component: () => <ContentComponent path={path} />,
     };
   }),

@@ -160,7 +160,7 @@ export const applyRollCurve = (curve: Curve, rollCurve: Curve) => {
   return curve;
 };
 
-export const empty = (
+export const emptyCurve = (
   nodes: CurveNode[] = [],
   segmentOffsets: number[] = [0],
 ): Curve => {
@@ -171,7 +171,7 @@ export const empty = (
 };
 
 export const fromPoints = (points: Vector3[]) => {
-  const curve = empty();
+  const curve = emptyCurve();
 
   points.forEach((point) => {
     insertPosition(curve, point);
@@ -186,7 +186,7 @@ export const fromUniformSampledPositions = (
   resolution: number = 20,
   positionFn: (at: number, t: number) => Vector3,
 ) => {
-  const curve = empty();
+  const curve = emptyCurve();
 
   uniformSample(from, to, resolution, (at, t) => {
     insertPosition(curve, positionFn(at, t));
@@ -203,7 +203,7 @@ export const toLocalTransformed = (
   curve: Curve,
   translation: Vector3,
 ): Curve => {
-  const transformedCurve = empty();
+  const transformedCurve = emptyCurve();
 
   curve.nodes.forEach((node) => {
     insertPosition(
