@@ -50,7 +50,7 @@ against it.
 
 The exact math and geometry behind this is not trivial, and explaining
 it properly would easily double the length of this chapter. For now,
-it is enough to think of it like this: _we incr ementally add rotation
+it is enough to think of it like this: _we incrementally add rotation
 while respecting the orientation of the previous node_.
 
 In this chapter, we will not go into mathematical details. Instead, we
