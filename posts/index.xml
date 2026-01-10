@@ -21,12 +21,12 @@
 
 
 <div class="embedded ">
-  <iframe id="react-root-22d4921385c5f9e6e951392690b041ac" width="100%" height="560px" class="frame"></iframe>
+  <iframe id="react-root-4851caaf16f5c9fdc3c8ac42d66c93db" width="100%" height="560px" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-22d4921385c5f9e6e951392690b041ac').srcdoc = `
+    document.getElementById('react-root-4851caaf16f5c9fdc3c8ac42d66c93db').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -62,8 +62,8 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">CurveWireframe</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/CurveWireframe&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Ground</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/Ground&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">PerspectiveScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/PerspectiveScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// @ts-ignore
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Park</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./Hybris.nl2park&#39;</span>;
@@ -134,7 +134,7 @@
 
 
 <div class="embedded ">
-  <iframe id="react-root-da7820e729a1ea6b867ed7963b0525bd" width="100%" height="500px" class="frame"></iframe>
+  <iframe id="react-root-a136eeef5c5ab148a966ef51b80f9215" width="100%" height="500px" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -143,7 +143,7 @@
   
 
   <script>
-    document.getElementById('react-root-da7820e729a1ea6b867ed7963b0525bd').srcdoc = `
+    document.getElementById('react-root-a136eeef5c5ab148a966ef51b80f9215').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -161,11 +161,11 @@
   </script>
 </div>
 ]]></content></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
-&lt;iframe id="react-root-a87966a3262748ad732f3eb63ee7bff6" width="225px" height="285px" class="frame"&gt;&lt;/iframe&gt;
+&lt;iframe id="react-root-60612d2d837a9a028e077977269054f1" width="225px" height="285px" class="frame"&gt;&lt;/iframe&gt;
 &lt;div class="description" style="width: 225px"&gt;
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-a87966a3262748ad732f3eb63ee7bff6').srcdoc = `
+document.getElementById('react-root-60612d2d837a9a028e077977269054f1').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -192,7 +192,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-a87966a3262748ad732f3eb63ee7bff6" width="225px" height="285px" class="frame"></iframe>
+  <iframe id="react-root-60612d2d837a9a028e077977269054f1" width="225px" height="285px" class="frame"></iframe>
 
   
   <div class="description" style="width: 225px">
@@ -201,7 +201,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
   
 
   <script>
-    document.getElementById('react-root-a87966a3262748ad732f3eb63ee7bff6').srcdoc = `
+    document.getElementById('react-root-60612d2d837a9a028e077977269054f1').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -232,12 +232,12 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded ">
-  <iframe id="react-root-3f491e42323000ee4adc0c2c6f74d4f3" width="100%" height="380px" class="frame"></iframe>
+  <iframe id="react-root-32cde2891015dc5e2ee711f06b938dfe" width="100%" height="380px" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-3f491e42323000ee4adc0c2c6f74d4f3').srcdoc = `
+    document.getElementById('react-root-32cde2891015dc5e2ee711f06b938dfe').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -274,7 +274,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-ba1163adf172fdc7910500b26c8df632" width="355px" height="560px" class="frame"></iframe>
+  <iframe id="react-root-55da149576aaacd4f4f28e0cefbf2438" width="355px" height="560px" class="frame"></iframe>
 
   
   <div class="description" style="width: 355px">
@@ -283,7 +283,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
   
 
   <script>
-    document.getElementById('react-root-ba1163adf172fdc7910500b26c8df632').srcdoc = `
+    document.getElementById('react-root-55da149576aaacd4f4f28e0cefbf2438').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -368,7 +368,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-380bad80e4843e3d5681bb1b2765e9b5" width="355px" height="485px" class="frame"></iframe>
+  <iframe id="react-root-1ce937c291cff714a20b052fc910f2c4" width="355px" height="485px" class="frame"></iframe>
 
   
   <div class="description" style="width: 355px">
@@ -377,7 +377,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
   
 
   <script>
-    document.getElementById('react-root-380bad80e4843e3d5681bb1b2765e9b5').srcdoc = `
+    document.getElementById('react-root-1ce937c291cff714a20b052fc910f2c4').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -518,8 +518,8 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">CurveWireframe</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/CurveWireframe&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">BezierCurveDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">colors</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useColors</span>();
@@ -554,11 +554,11 @@ instead of having to do it manually each time. It will show up here and there in
 
 ]]></content></item><item><title>Curve Nodes</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-nodes/</link><pubDate>Sun, 21 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-nodes/</guid><description>&lt;p&gt;In this chapter, we try to make our lives a bit easier by using a more flexible way to describe &lt;strong&gt;curves&lt;/strong&gt; in general.&lt;/p&gt;
 &lt;p&gt;This article is a bit longer than usual. The topic is hard to split into smaller pieces without losing context, so we keep everything in one place. I will try to keep things as simple as possible, but yes, there is a bit going on here.&lt;/p&gt;
-&lt;p&gt;Up to this point, everything was built around a very basic &lt;strong&gt;linear track&lt;/strong&gt; with two control points. Functions like &lt;code&gt;matrixAtArcLength&lt;/code&gt; only had to deal with a single segment. That worked fine for learning and experimenting, but it starts to feel limiting very quickly. A real roller coaster does not consist of exactly one straight line.&lt;/p&gt;</description><content type="html"><![CDATA[<p>In this chapter, we try to make our lives a bit easier by using a more flexible way to describe <strong>curves</strong> in general.</p>
+&lt;p&gt;Up to this point, everything was built around a very basic &lt;strong&gt;linear track&lt;/strong&gt; with two control points. Functions like &lt;code&gt;transformationAtArcLength&lt;/code&gt; only had to deal with a single segment. That worked fine for learning and experimenting, but it starts to feel limiting very quickly. A real roller coaster does not consist of exactly one straight line.&lt;/p&gt;</description><content type="html"><![CDATA[<p>In this chapter, we try to make our lives a bit easier by using a more flexible way to describe <strong>curves</strong> in general.</p>
 <p>This article is a bit longer than usual. The topic is hard to split into smaller pieces without losing context, so we keep everything in one place. I will try to keep things as simple as possible, but yes, there is a bit going on here.</p>
-<p>Up to this point, everything was built around a very basic <strong>linear track</strong> with two control points. Functions like <code>matrixAtArcLength</code> only had to deal with a single segment. That worked fine for learning and experimenting, but it starts to feel limiting very quickly. A real roller coaster does not consist of exactly one straight line.</p>
+<p>Up to this point, everything was built around a very basic <strong>linear track</strong> with two control points. Functions like <code>transformationAtArcLength</code> only had to deal with a single segment. That worked fine for learning and experimenting, but it starts to feel limiting very quickly. A real roller coaster does not consist of exactly one straight line.</p>
 <p>For now, we do not jump straight to <strong>NURBS</strong> or anything fancy. That will come later. We just want more segments. To do that, we need a way to describe curves that is not tied to a specific curve type, whether that is linear tracks, splines, geometric sections.</p>
-<p>The solution is a very basic concept called <strong>curve nodes</strong>. A curve node stores where it is in <strong>space</strong>, its <strong>orientation</strong> as a <strong>4x4 matrix</strong>, and the <strong>arc length</strong> at which it appears along the curve. Nothing more than that.</p>
+<p>The solution is a very basic concept called <strong>curve nodes</strong>. A curve node stores where it is in <strong>space</strong>, its <strong>orientation</strong> as a <strong>4x4 transformation matrix</strong>, and the <strong>arc length</strong> at which it appears along the curve. Nothing more than that.</p>
 <h1 id="curve-node">Curve Node</h1>
 <p>Before we write any code, we need to understand the idea first.</p>
 <p>Imagine a linear track defined by four points. In that case, we also have four nodes. Nothing surprising so far. If we want to know the <strong>position</strong> at a certain distance along the track, we search for the two nodes between which that distance lies. One node on the left, one on the right. Everything in between is just interpolation.</p>
@@ -572,7 +572,7 @@ instead of having to do it manually each time. It will show up here and there in
 
 
 <div class="embedded ">
-  <iframe id="react-root-07573bc5edeba5e51de2d59bd512146f" width="100%" height="260px" class="frame"></iframe>
+  <iframe id="react-root-82de07d636fd3eabc6fbee9ba0e34c15" width="100%" height="260px" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -581,7 +581,7 @@ instead of having to do it manually each time. It will show up here and there in
   
 
   <script>
-    document.getElementById('react-root-07573bc5edeba5e51de2d59bd512146f').srcdoc = `
+    document.getElementById('react-root-82de07d636fd3eabc6fbee9ba0e34c15').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -604,12 +604,12 @@ instead of having to do it manually each time. It will show up here and there in
 <p><strong>Curve nodes</strong> form a clean and agnostic <strong>interface</strong> between the physics simulation and the actual curve geometry. The simulation does not really care how the curve was created. It just asks for matrices and keeps going.</p>
 <p>With that in mind, we can start by defining what a <strong>curve node</strong> looks like:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CurveNode</span> <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">matrix</span>: <span style="color:#66d9ef">Matrix4</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">transformation</span>: <span style="color:#66d9ef">Matrix4</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">arcLength</span>: <span style="color:#66d9ef">number</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">segmentIndex</span>: <span style="color:#66d9ef">number</span>;
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
-<p>That is it. A <strong>matrix</strong>, its <strong>distance</strong>, and the <strong>segment number</strong> along the curve. The segment number will not matter much for now, but it will become important later.</p>
+<p>That is it. A <strong>transformation matrix</strong>, its <strong>distance</strong>, and the <strong>segment number</strong> along the curve. The segment number will not matter much for now, but it will become important later.</p>
 <p>Of course, nodes do not exist on their own. They have to belong to something, and that something is the <strong>curve</strong> itself. To make this explicit, we also introduce a <strong>Curve</strong> type that groups the nodes together.</p>
 <p>The <strong>Curve</strong> type looks like this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Curve</span> <span style="color:#f92672">=</span> {
@@ -740,7 +740,7 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
 </span></span></code></pre></div><p>We need a small utility function that interpolates between two matrices.</p>
 <p>Unfortunately, there is no built-in helper for this in <strong>THREE.js</strong>. <strong>THREE.js</strong> does have helpers to interpolate <strong>vectors</strong> and <strong>quaternions</strong> though, which is exactly what we need here.</p>
-<p>A matrix contains position and rotation. We extract those parts, interpolate them separately, and then build a new matrix again.
+<p>A transformation matrix contains position and rotation. We extract those parts, interpolate them separately, and then build a new transformation matrix again.
 <strong>Position</strong> is interpolated <strong>linearly</strong>. <strong>Rotation</strong> is interpolated using <strong>spherical linear interpolation</strong> on <strong>quaternions</strong>.</p>
 <p>If you already know what <strong>quaternions</strong> are, great. If not, also fine. This is not important at this point. I will write dedicated articles about <strong>vectors, matrices, euler and quaternions</strong> later.</p>
 <p>The helper looks like this:</p>
@@ -772,7 +772,7 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span></code></pre></div><p>If the distance between the nodes is <code>0</code>, things are easy. We just return a copy of the left node’s matrix:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">matrix</span>.<span style="color:#a6e22e">clone</span>();
 </span></span></code></pre></div><p>Putting everything together, the full function looks like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">matrixAtArcLength</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">curve</span>: <span style="color:#66d9ef">Curve</span>, <span style="color:#a6e22e">at</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">transformationAtArcLength</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">curve</span>: <span style="color:#66d9ef">Curve</span>, <span style="color:#a6e22e">at</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">nodes</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">findBoundingIndices</span>(
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">at</span>,
@@ -791,10 +791,10 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">0.0</span>,
 </span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">1.0</span>,
 </span></span><span style="display:flex;"><span>    );
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">matrix</span>, <span style="color:#a6e22e">right</span>.<span style="color:#a6e22e">matrix</span>, <span style="color:#a6e22e">t</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">transformation</span>, <span style="color:#a6e22e">right</span>.<span style="color:#a6e22e">transformation</span>, <span style="color:#a6e22e">t</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">matrix</span>.<span style="color:#a6e22e">clone</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">left</span>.<span style="color:#a6e22e">transformation</span>.<span style="color:#a6e22e">clone</span>();
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
 <h1 id="linear-track-with-more-segments">Linear track with more segments</h1>
@@ -815,13 +815,13 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">prevNode</span>)
 </span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>.<span style="color:#a6e22e">push</span>({
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">matrix</span>: <span style="color:#66d9ef">prevNode.matrix.clone</span>().<span style="color:#a6e22e">setPosition</span>(<span style="color:#a6e22e">left</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">transformation</span>: <span style="color:#66d9ef">prevNode.transformation.clone</span>().<span style="color:#a6e22e">setPosition</span>(<span style="color:#a6e22e">left</span>),
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">arcLength</span>,
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">segmentIndex</span>: <span style="color:#66d9ef">0</span>,
 </span></span><span style="display:flex;"><span>      });
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>.<span style="color:#a6e22e">push</span>({
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">matrix</span>: <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Matrix4</span>()
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">transformation</span>: <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Matrix4</span>()
 </span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">lookAt</span>(<span style="color:#a6e22e">right</span>, <span style="color:#a6e22e">left</span>, <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>))
 </span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">setPosition</span>(<span style="color:#a6e22e">left</span>),
 </span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">arcLength</span>,
@@ -835,7 +835,7 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lastPoint</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">last</span>(<span style="color:#a6e22e">points</span>)<span style="color:#f92672">!</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>.<span style="color:#a6e22e">push</span>({
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">matrix</span>: <span style="color:#66d9ef">lastNode.matrix.clone</span>().<span style="color:#a6e22e">setPosition</span>(<span style="color:#a6e22e">lastPoint</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transformation</span>: <span style="color:#66d9ef">lastNode.transformation.clone</span>().<span style="color:#a6e22e">setPosition</span>(<span style="color:#a6e22e">lastPoint</span>),
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">arcLength</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">segmentIndex</span>: <span style="color:#66d9ef">0</span>,
 </span></span><span style="display:flex;"><span>  });
@@ -858,7 +858,7 @@ instead of having to do it manually each time. It will show up here and there in
 
 
 <div class="embedded ">
-  <iframe id="react-root-517467ca967a670c3cc8b03b54131920" width="100%" height="380px" class="frame"></iframe>
+  <iframe id="react-root-6552959e63987ceb4397eae911762564" width="100%" height="380px" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -867,7 +867,7 @@ instead of having to do it manually each time. It will show up here and there in
   
 
   <script>
-    document.getElementById('react-root-517467ca967a670c3cc8b03b54131920').srcdoc = `
+    document.getElementById('react-root-6552959e63987ceb4397eae911762564').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -897,8 +897,8 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">CurveLine</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/CurveLine&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">fromPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./curve&#39;</span>;
 </span></span><span style="display:flex;"><span>
@@ -928,17 +928,17 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
 
-]]></content></item><item><title>Matrices</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/matrices/</link><pubDate>Sun, 21 Dec 2025 13:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/matrices/</guid><description>&lt;p&gt;Right now, when we want to know the &lt;strong&gt;position&lt;/strong&gt; and &lt;strong&gt;forward direction&lt;/strong&gt; along a curve, we ask two separate functions. This works, but having two separate functions for the same &lt;strong&gt;node&lt;/strong&gt; on the track is odd and adds more complexity than we actually need.&lt;/p&gt;
-&lt;p&gt;Earlier we mentioned that there is a better way to describe this kind of information. That better way is a &lt;strong&gt;4x4 matrix&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;A matrix can hold &lt;strong&gt;position&lt;/strong&gt; and &lt;strong&gt;directions&lt;/strong&gt; at the same time. This is exactly what we need to describe a &lt;strong&gt;node&lt;/strong&gt; along the track. Once we switch to &lt;strong&gt;matrices&lt;/strong&gt;, the two existing functions &lt;code&gt;forwardDirectionAtArcLength&lt;/code&gt; and &lt;code&gt;positionAtArcLength&lt;/code&gt; naturally collapse into one. Instead of asking the track for separate pieces of data, we ask for a &lt;strong&gt;matrix&lt;/strong&gt; at a distance along the curve and extract whatever information we need from it.&lt;/p&gt;</description><content type="html"><![CDATA[<p>Right now, when we want to know the <strong>position</strong> and <strong>forward direction</strong> along a curve, we ask two separate functions. This works, but having two separate functions for the same <strong>node</strong> on the track is odd and adds more complexity than we actually need.</p>
-<p>Earlier we mentioned that there is a better way to describe this kind of information. That better way is a <strong>4x4 matrix</strong>.</p>
-<p>A matrix can hold <strong>position</strong> and <strong>directions</strong> at the same time. This is exactly what we need to describe a <strong>node</strong> along the track. Once we switch to <strong>matrices</strong>, the two existing functions <code>forwardDirectionAtArcLength</code> and <code>positionAtArcLength</code> naturally collapse into one. Instead of asking the track for separate pieces of data, we ask for a <strong>matrix</strong> at a distance along the curve and extract whatever information we need from it.</p>
-<p>For that reason, we make a small but important change. From now on, we work with <strong>matrices</strong> and remove those two functions entirely.</p>
-<p>If it helps, it is worth rereading the chapter on <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/linear-track/">linear roller coaster tracks</a>, where <code>forwardDirectionAtArcLength</code> and <code>positionAtArcLength</code> were introduced. Both are now replaced by a single function called <code>matrixAtArcLength</code>.</p>
+]]></content></item><item><title>Transformation Matrix</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/transformation-matrix/</link><pubDate>Sun, 21 Dec 2025 13:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/transformation-matrix/</guid><description>&lt;p&gt;Right now, when we want to know the &lt;strong&gt;position&lt;/strong&gt; and &lt;strong&gt;forward direction&lt;/strong&gt; along a curve, we ask two separate functions. This works, but having two separate functions for the same &lt;strong&gt;node&lt;/strong&gt; on the track is odd and adds more complexity than we actually need.&lt;/p&gt;
+&lt;p&gt;Earlier we mentioned that there is a better way to describe this kind of information. That better way is a &lt;strong&gt;4x4 transformation matrix&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;A transformation matrix can hold &lt;strong&gt;position&lt;/strong&gt; and &lt;strong&gt;directions&lt;/strong&gt; at the same time. This is exactly what we need to describe a &lt;strong&gt;node&lt;/strong&gt; along the track. Once we switch to &lt;strong&gt;transformation matrices&lt;/strong&gt;, the two existing functions &lt;code&gt;forwardDirectionAtArcLength&lt;/code&gt; and &lt;code&gt;positionAtArcLength&lt;/code&gt; naturally collapse into one. Instead of asking the track for separate pieces of data, we ask for a &lt;strong&gt;transformation matrix&lt;/strong&gt; at a distance along the curve and extract whatever information we need from it.&lt;/p&gt;</description><content type="html"><![CDATA[<p>Right now, when we want to know the <strong>position</strong> and <strong>forward direction</strong> along a curve, we ask two separate functions. This works, but having two separate functions for the same <strong>node</strong> on the track is odd and adds more complexity than we actually need.</p>
+<p>Earlier we mentioned that there is a better way to describe this kind of information. That better way is a <strong>4x4 transformation matrix</strong>.</p>
+<p>A transformation matrix can hold <strong>position</strong> and <strong>directions</strong> at the same time. This is exactly what we need to describe a <strong>node</strong> along the track. Once we switch to <strong>transformation matrices</strong>, the two existing functions <code>forwardDirectionAtArcLength</code> and <code>positionAtArcLength</code> naturally collapse into one. Instead of asking the track for separate pieces of data, we ask for a <strong>transformation matrix</strong> at a distance along the curve and extract whatever information we need from it.</p>
+<p>For that reason, we make a small but important change. From now on, we work with <strong>tranformation matrices</strong> and remove those two functions entirely.</p>
+<p>If it helps, it is worth rereading the chapter on <a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/linear-track/">linear roller coaster tracks</a>, where <code>forwardDirectionAtArcLength</code> and <code>positionAtArcLength</code> were introduced. Both are now replaced by a single function called <code>transformationAtArcLength</code>.</p>
 <p>For a linear track segment, this is straightforward. We compute the <strong>position</strong> exactly like before using linear interpolation. For orientation, we let <strong>THREE.js</strong> build a matrix that <code>lookAt</code>s from one control point to the other. This gives us a correct <strong>forward direction</strong> without any extra work.</p>
 <blockquote>
 <p><strong>Note:</strong> At this stage, we only need a valid <strong>forward direction</strong>. There is no need to complicate things with <strong>roll</strong>, so we ignore it for now.</p></blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">matrixAtArcLength</span> <span style="color:#f92672">=</span> (
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">transformationAtArcLength</span> <span style="color:#f92672">=</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">cp1</span>: <span style="color:#66d9ef">Vector3</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">cp2</span>: <span style="color:#66d9ef">Vector3</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">at</span>: <span style="color:#66d9ef">number</span>,
@@ -952,8 +952,8 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">setPosition</span>(<span style="color:#a6e22e">position</span>);
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
-<p>With this change, we also need to adjust <code>evaluateMotion</code>. Instead of receiving a <strong>forward direction</strong> vector, it now receives a <strong>matrix</strong>. We then extract the <strong>forward direction</strong> from that matrix.</p>
-<p>This is very straightforward. Here is a small helper to extract the <strong>forward direction</strong> from a <strong>matrix</strong>:</p>
+<p>With this change, we also need to adjust <code>evaluateMotion</code>. Instead of receiving a <strong>forward direction</strong> vector, it now receives a <strong>transformation matrix</strong>. We then extract the <strong>forward direction</strong> from that transformation.</p>
+<p>This is very straightforward. Here is a small helper to extract the <strong>forward direction</strong> from a <strong>transformation matrix</strong>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">toFrontDirection</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">m</span>: <span style="color:#66d9ef">Matrix4</span>) <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">elements</span>[<span style="color:#ae81ff">8</span>],
@@ -963,17 +963,17 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
 <p>Now we use this helper to extract the <strong>forward direction</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">forwardDirection</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">toFrontDirection</span>(<span style="color:#a6e22e">matrix</span>);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">forwardDirection</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">toFrontDirection</span>(<span style="color:#a6e22e">transformation</span>);
 </span></span></code></pre></div><p>With that in place, the full updated <code>evaluateMotion</code> function looks like this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">evaluateMotion</span> <span style="color:#f92672">=</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">SimulationState</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">matrix</span>: <span style="color:#66d9ef">Matrix4</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">transformation</span>: <span style="color:#66d9ef">Matrix4</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">friction</span>: <span style="color:#66d9ef">number</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">airResistance</span>: <span style="color:#66d9ef">number</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">gravity</span>: <span style="color:#66d9ef">number</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">deltaTime</span>: <span style="color:#66d9ef">number</span>,
 </span></span><span style="display:flex;"><span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">SimulationState</span> <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">forwardDirection</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">toFrontDirection</span>(<span style="color:#a6e22e">matrix</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">forwardDirection</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">toFrontDirection</span>(<span style="color:#a6e22e">transformation</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">velocityDirection</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">1</span> : <span style="color:#66d9ef">1</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">energyLoss</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">airResistance</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span>;
@@ -993,11 +993,11 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
 <h2 id="what-comes-next">What comes next?</h2>
-<p>These changes are mostly structural. Visually, nothing changes yet. Under the hood, however, the simulation now works entirely with <strong>matrices</strong>, which will make later changes easier.</p>
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-nodes/">In the next chapter</a>, we move away from linear segments and introduce a more general way to describe <strong>curves</strong>. That will require a new implementation of <code>matrixAtArcLength</code>, but the rest of the simulation can stay as it is.</p>
+<p>These changes are mostly structural. Visually, nothing changes yet. Under the hood, however, the simulation now works entirely with <strong>transformation matrices</strong>, which will make later changes easier.</p>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-nodes/">In the next chapter</a>, we move away from linear segments and introduce a more general way to describe <strong>curves</strong>. That will require a new implementation of <code>transformationAtArcLength</code>, but the rest of the simulation can stay as it is.</p>
 <p>This is the kind of refactor we want. We change how the track is described without rewriting everything built on top of it.</p>
 <h2 id="interactive-demo-and-code">Interactive demo and code</h2>
-<p>There is no visible difference in the demo. The train behaves exactly as before. The only change is that the simulation now uses <code>matrixAtArcLength</code> internally.</p>
+<p>There is no visible difference in the demo. The train behaves exactly as before. The only change is that the simulation now uses <code>transformationAtArcLength</code> internally.</p>
 <p>For completeness, the full demo is shown below.</p>
 
 
@@ -1008,12 +1008,12 @@ instead of having to do it manually each time. It will show up here and there in
 
 
 <div class="embedded ">
-  <iframe id="react-root-e893bf3b335211fb3dd388268ac821af" width="100%" height="380px" class="frame"></iframe>
+  <iframe id="react-root-4e772f396d327ded911e1504209ea7e1" width="100%" height="380px" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-e893bf3b335211fb3dd388268ac821af').srcdoc = `
+    document.getElementById('react-root-4e772f396d327ded911e1504209ea7e1').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1023,7 +1023,7 @@ instead of having to do it manually each time. It will show up here and there in
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/matrices\/MatricesDemoScene.tsx');
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/transformation-matrix\/TransformationMatrixDemoScene.tsx');
         <\/script>
       </body>
     </html>
@@ -1035,7 +1035,7 @@ instead of having to do it manually each time. It will show up here and there in
     <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
     run <code>npm install</code> and <code>npm run dev-scripts</code>,
     then open this
-    <a href="http://localhost:3000/src/content/posts/writing-a-roller-coaster-simulation/matrices/MatricesDemoScene.tsx" target="_blank">link</a>
+    <a href="http://localhost:3000/src/content/posts/writing-a-roller-coaster-simulation/transformation-matrix/TransformationMatrixDemoScene.tsx" target="_blank">link</a>
     in your browser.
 </p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">useEffect</span>, <span style="color:#a6e22e">useState</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Line</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@react-three/drei&#39;</span>;
@@ -1043,7 +1043,7 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">MathUtils</span>, <span style="color:#a6e22e">Vector3</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;three&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">matrixAtArcLength</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">transformationAtArcLength</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">totalArcLength</span>,
 </span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../maths/linear&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">evaluateMotion</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../helper/physics&#39;</span>;
@@ -1054,7 +1054,7 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">PointWithMatrixArrows</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/PointWithMatrixArrows&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/OrthographicScene&#39;</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MatricesDemo</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">TransformationMatrixDemo</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">colors</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useColors</span>();
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// control points
@@ -1070,7 +1070,7 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setSimulationState</span>(
 </span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">evaluateMotion</span>(
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">simulationState</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">matrixAtArcLength</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">transformationAtArcLength</span>(
 </span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">0</span>],
 </span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">1</span>],
 </span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">simulationState</span>.<span style="color:#a6e22e">distanceTraveled</span>,
@@ -1098,7 +1098,7 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>  }, [<span style="color:#a6e22e">simulationState</span>.<span style="color:#a6e22e">distanceTraveled</span>, <span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">setSimulationState</span>]);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">motionMatrix</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">matrixAtArcLength</span>(
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">motionMatrix</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">transformationAtArcLength</span>(
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">0</span>],
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">1</span>],
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">MathUtils</span>.<span style="color:#a6e22e">clamp</span>(
@@ -1121,10 +1121,10 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>};
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MatricesDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">TransformationMatrixDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
 </span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">OrthographicScene</span>&gt;
-</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">MatricesDemo</span> /&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">TransformationMatrixDemo</span> /&gt;
 </span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">OrthographicScene</span>&gt;
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>};
@@ -1227,12 +1227,12 @@ For the sake of the demo, the function is named <code>evaluateMotionWithFriction
 
 
 <div class="embedded ">
-  <iframe id="react-root-720013a0d7d9b5bc2b49bb6df5e2d3bc" width="100%" height="360px" class="frame"></iframe>
+  <iframe id="react-root-52276795399d727e3902205cd3fc0de6" width="100%" height="360px" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-720013a0d7d9b5bc2b49bb6df5e2d3bc').srcdoc = `
+    document.getElementById('react-root-52276795399d727e3902205cd3fc0de6').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1250,10 +1250,10 @@ For the sake of the demo, the function is named <code>evaluateMotionWithFriction
   </script>
 </div>
 <h2 id="what-comes-next">What comes next?</h2>
-<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/matrices/">In the next chapter</a> we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/transformation-matrix/">In the next chapter</a> we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
 No matter what the underlying geometry is in the end, <strong>splines, imported tracks, FVD-based shapes or anything else, the evaluation should always work the same</strong>.
 The key step is replacing the two functions <code>positionAtArcLength</code> and <code>forwardDirectionAtArcLength</code>
-with a single <code>matrixAtArcLength</code> function. Working with <strong>matrices</strong> is more convenient, because we can extract everything we need from them.
+with a single <code>transformationAtArcLength</code> function. Working with <strong>matrices</strong> is more convenient, because we can extract everything we need from them.
 I will also introduce a <strong>curve node</strong> that stores a full matrix for a given distance along the track.
 Any geometry system can “fill” these <strong>curve nodes</strong>, whether that system is based on splines, imported CSV data, FVD geometries or something entirely different.
 While writing this, I realize it is probably best to introduce the concept first with a simple linear track. Stay tuned.</p>
@@ -1533,7 +1533,7 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
 <h2 id="small-note">Small note</h2>
-<p>Later the forward vector will be replaced by a <strong>4×4 matrix</strong>, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called <code>matrixAtArcLength</code>. I know, yet again a change, but that’s future you’s problem. Ignore it for now.</p>
+<p>Later the forward vector will be replaced by a <strong>4×4 matrix</strong>, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called <code>transformationAtArcLength</code>. I know, yet again a change, but that’s future you’s problem. Ignore it for now.</p>
 <p>Going forward, we will use <strong>9.81665 m/s²</strong> as the gravitational acceleration, since this is also the value used by <strong>NoLimits Roller Coaster</strong> and <strong>openFVD++</strong>.</p>
 <h2 id="adding-everything-up">Adding Everything Up</h2>
 <p>Time for a small demo. I built a basic setup: a visible line segment with draggable control points so you can adjust the slope in real time. On the side, a small panel displays the live simulation state.</p>
@@ -1546,12 +1546,12 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 
 
 <div class="embedded ">
-  <iframe id="react-root-6bb59700461f9d8a583dbcee8e7b0562" width="100%" height="300px" class="frame"></iframe>
+  <iframe id="react-root-a4ff6a8382eb96d969cb19c2d22c5789" width="100%" height="300px" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-6bb59700461f9d8a583dbcee8e7b0562').srcdoc = `
+    document.getElementById('react-root-a4ff6a8382eb96d969cb19c2d22c5789').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1777,12 +1777,12 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
 
 
 <div class="embedded ">
-  <iframe id="react-root-9f8cd351c1919ccb2b22337656730a39" width="100%" height="360px" class="frame"></iframe>
+  <iframe id="react-root-2b5c54c7682fe752a8cd4187f9ea6ad3" width="100%" height="360px" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-9f8cd351c1919ccb2b22337656730a39').srcdoc = `
+    document.getElementById('react-root-2b5c54c7682fe752a8cd4187f9ea6ad3').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2036,12 +2036,12 @@ so it might help you as well.</p>
 
 
 <div class="embedded ">
-  <iframe id="react-root-8198f05670fdb3c4ca3ad251c12a601f" width="100%" height="300px" class="frame"></iframe>
+  <iframe id="react-root-360ddeb7f3d43148d9f70fbc0ea4f69a" width="100%" height="300px" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-8198f05670fdb3c4ca3ad251c12a601f').srcdoc = `
+    document.getElementById('react-root-360ddeb7f3d43148d9f70fbc0ea4f69a').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2275,12 +2275,12 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 
 
 <div class="embedded ">
-  <iframe id="react-root-317e8ee234b646d8a95dbe02f1cb4665" width="100%" height="360px" class="frame"></iframe>
+  <iframe id="react-root-6ae7f05ede8d8c396ae8fed6941e3f1b" width="100%" height="360px" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-317e8ee234b646d8a95dbe02f1cb4665').srcdoc = `
+    document.getElementById('react-root-6ae7f05ede8d8c396ae8fed6941e3f1b').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2370,11 +2370,11 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 </span></span></code></pre></div>
 
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
-&lt;iframe id="react-root-7abdc564a6c7d1381d7fb76a41a85883" width="225px" height="285px" class="frame"&gt;&lt;/iframe&gt;
+&lt;iframe id="react-root-d164681e140ea920e7f4198a0c3e079f" width="225px" height="285px" class="frame"&gt;&lt;/iframe&gt;
 &lt;div class="description" style="width: 225px"&gt;
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-7abdc564a6c7d1381d7fb76a41a85883').srcdoc = `
+document.getElementById('react-root-d164681e140ea920e7f4198a0c3e079f').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -2400,7 +2400,7 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/implementing-library-funct
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-7abdc564a6c7d1381d7fb76a41a85883" width="225px" height="285px" class="frame"></iframe>
+  <iframe id="react-root-d164681e140ea920e7f4198a0c3e079f" width="225px" height="285px" class="frame"></iframe>
 
   
   <div class="description" style="width: 225px">
@@ -2409,7 +2409,7 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/implementing-library-funct
   
 
   <script>
-    document.getElementById('react-root-7abdc564a6c7d1381d7fb76a41a85883').srcdoc = `
+    document.getElementById('react-root-d164681e140ea920e7f4198a0c3e079f').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>

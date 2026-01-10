@@ -16,13 +16,15 @@ export const fromPoints = (points: Vector3[]) => {
 
     if (prevNode)
       curve.nodes.push({
-        matrix: prevNode.matrix.clone().setPosition(left),
+        transformation: prevNode.transformation
+          .clone()
+          .setPosition(left),
         arcLength,
         segmentIndex: 0,
       });
 
     curve.nodes.push({
-      matrix: new Matrix4()
+      transformation: new Matrix4()
         .lookAt(right, left, new Vector3(0, 1, 0))
         .setPosition(left),
       arcLength,
@@ -36,7 +38,9 @@ export const fromPoints = (points: Vector3[]) => {
   const lastPoint = last(points)!;
 
   curve.nodes.push({
-    matrix: lastNode.matrix.clone().setPosition(lastPoint),
+    transformation: lastNode.transformation
+      .clone()
+      .setPosition(lastPoint),
     arcLength,
     segmentIndex: 0,
   });

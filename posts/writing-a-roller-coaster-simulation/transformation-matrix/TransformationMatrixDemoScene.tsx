@@ -4,8 +4,8 @@ import { useFrame } from '@react-three/fiber';
 import { MathUtils, Vector3 } from 'three';
 
 import {
-  matrixAtArcLength,
   totalArcLength,
+  transformationAtArcLength,
 } from '../../../../maths/linear';
 import { evaluateMotion } from '../../../../helper/physics';
 import { useColors } from '../../../../hooks/useColors';
@@ -15,7 +15,7 @@ import { DragControlPoints } from '../../../../components/curve/DragControlPoint
 import { PointWithMatrixArrows } from '../../../../components/PointWithMatrixArrows';
 import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
 
-const MatricesDemo = () => {
+const TransformationMatrixDemo = () => {
   const colors = useColors();
 
   // control points
@@ -31,7 +31,7 @@ const MatricesDemo = () => {
     setSimulationState(
       evaluateMotion(
         simulationState,
-        matrixAtArcLength(
+        transformationAtArcLength(
           points[0],
           points[1],
           simulationState.distanceTraveled,
@@ -59,7 +59,7 @@ const MatricesDemo = () => {
     }
   }, [simulationState.distanceTraveled, points, setSimulationState]);
 
-  const motionMatrix = matrixAtArcLength(
+  const motionMatrix = transformationAtArcLength(
     points[0],
     points[1],
     MathUtils.clamp(
@@ -82,10 +82,10 @@ const MatricesDemo = () => {
   );
 };
 
-export const MatricesDemoScene = () => {
+export const TransformationMatrixDemoScene = () => {
   return (
     <OrthographicScene>
-      <MatricesDemo />
+      <TransformationMatrixDemo />
     </OrthographicScene>
   );
 };
