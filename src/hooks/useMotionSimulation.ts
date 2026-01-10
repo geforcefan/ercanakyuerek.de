@@ -4,8 +4,8 @@ import { MathUtils } from 'three';
 
 import {
   Curve,
-  matrixAtArcLength,
   totalArcLength,
+  transformationAtArcLength,
 } from '../maths/curve';
 import { evaluateMotion } from '../helper/physics';
 
@@ -22,7 +22,10 @@ export const useMotionSimulation = (
     setSimulationState(
       evaluateMotion(
         simulationState,
-        matrixAtArcLength(curve, simulationState.distanceTraveled),
+        transformationAtArcLength(
+          curve,
+          simulationState.distanceTraveled,
+        ),
         simulationState.friction,
         simulationState.airResistance,
         simulationState.gravity,
@@ -53,7 +56,7 @@ export const useMotionSimulation = (
 
   return useMemo(
     () =>
-      matrixAtArcLength(
+      transformationAtArcLength(
         curve,
         MathUtils.clamp(
           simulationState.distanceTraveled,

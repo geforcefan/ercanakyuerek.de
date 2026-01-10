@@ -5,8 +5,8 @@ import { Vector3 } from 'three';
 
 import {
   Curve,
-  matrixAtArcLength,
   totalArcLength,
+  transformationAtArcLength,
 } from '../../maths/curve';
 import { useColors } from '../../hooks/useColors';
 
@@ -44,14 +44,14 @@ export const CurveWireframe = ({
     for (let k = 0; k < numNodes - 1; k++) {
       const currentArcLength: number =
         (k / (numNodes - 1)) * curveLength;
-      const currentMatrixAtArcLength = matrixAtArcLength(
+      const currentMatrixAtArcLength = transformationAtArcLength(
         curve,
         currentArcLength,
       );
 
       const nextArcLength: number =
         ((k + 1) / (numNodes - 1)) * curveLength;
-      const nextMatrixAtArcLength = matrixAtArcLength(
+      const nextMatrixAtArcLength = transformationAtArcLength(
         curve,
         nextArcLength,
       );

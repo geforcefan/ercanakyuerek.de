@@ -1,7 +1,11 @@
 import { parse } from 'csv-parse/browser/esm';
 import { Matrix4, Vector3 } from 'three';
 
-import { Curve, emptyCurve, insertMatrix } from '../maths/curve';
+import {
+  Curve,
+  emptyCurve,
+  insertTransformationMatrix,
+} from '../maths/curve';
 
 export const fromUrl = async (url: string): Promise<Curve> => {
   const response = await fetch(url);
@@ -33,7 +37,7 @@ export const fromUrl = async (url: string): Promise<Curve> => {
         if (err) reject(err);
         const curve = emptyCurve();
         for (const row of records) {
-          insertMatrix(
+          insertTransformationMatrix(
             curve,
             new Matrix4()
               .makeBasis(

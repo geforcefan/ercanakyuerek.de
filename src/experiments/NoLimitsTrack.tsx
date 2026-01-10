@@ -3,7 +3,7 @@ import { useControls } from 'leva';
 import { Vector3 } from 'three';
 
 import { toLocalTransformed } from '../maths/curve';
-import { fromURL, toArrayBuffer } from '../helper/nl2park/nl2park';
+import { fromURL } from '../helper/nl2park/nl2park';
 import { curveFromCustomTrack } from '../helper/nolimits';
 import { useColors } from '../hooks/useColors';
 
@@ -24,8 +24,6 @@ const exampleTrackCurve = toLocalTransformed(
   curveFromCustomTrack(exampleTrack, true),
   new Vector3(0, -1.1, 0),
 );
-
-const parkBuffer = toArrayBuffer(park);
 
 export const NoLimitsTrackScene = () => {
   const colors = useColors();
@@ -55,16 +53,6 @@ export const NoLimitsTrackScene = () => {
           }}
         />
       </PerspectiveScene>
-      <a
-        href={URL.createObjectURL(
-          new Blob([parkBuffer], {
-            type: 'application/octet-stream',
-          }),
-        )}
-        download="vertex.nl2park"
-      >
-        Download Vertex
-      </a>
     </>
   );
 };

@@ -42,14 +42,18 @@ export const LookAtExampleScene = () => {
         trackCurve.nodes.map((node, index, nodes) => {
           const isLast = index === nodes.length - 1;
           const left = toPosition(
-            isLast ? nodes[index - 1].matrix : node.matrix,
+            isLast
+              ? nodes[index - 1].transformation
+              : node.transformation,
           );
           const right = toPosition(
-            isLast ? node.matrix : nodes[index + 1].matrix,
+            isLast
+              ? node.transformation
+              : nodes[index + 1].transformation,
           );
           return {
             ...node,
-            matrix: new Matrix4()
+            transformation: new Matrix4()
               .lookAt(right, left, new Vector3(0, 1, 0))
               .setPosition(left),
           };

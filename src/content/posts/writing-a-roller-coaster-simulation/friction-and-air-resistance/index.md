@@ -99,10 +99,10 @@ Feel free to move the control points to experiment with the track shape and see 
 
 ## What comes next?
 
-[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/matrices.md" >}}) we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
+[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/transformation-matrix.md" >}}) we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
 No matter what the underlying geometry is in the end, **splines, imported tracks, FVD-based shapes or anything else, the evaluation should always work the same**.
 The key step is replacing the two functions `positionAtArcLength` and `forwardDirectionAtArcLength`
-with a single `matrixAtArcLength` function. Working with **matrices** is more convenient, because we can extract everything we need from them.
+with a single `transformationAtArcLength` function. Working with **matrices** is more convenient, because we can extract everything we need from them.
 I will also introduce a **curve node** that stores a full matrix for a given distance along the track.
 Any geometry system can “fill” these **curve nodes**, whether that system is based on splines, imported CSV data, FVD geometries or something entirely different.
 While writing this, I realize it is probably best to introduce the concept first with a simple linear track. Stay tuned.

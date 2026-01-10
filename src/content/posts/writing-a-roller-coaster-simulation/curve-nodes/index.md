@@ -9,11 +9,11 @@ In this chapter, we try to make our lives a bit easier by using a more flexible 
 
 This article is a bit longer than usual. The topic is hard to split into smaller pieces without losing context, so we keep everything in one place. I will try to keep things as simple as possible, but yes, there is a bit going on here.
 
-Up to this point, everything was built around a very basic **linear track** with two control points. Functions like `matrixAtArcLength` only had to deal with a single segment. That worked fine for learning and experimenting, but it starts to feel limiting very quickly. A real roller coaster does not consist of exactly one straight line.
+Up to this point, everything was built around a very basic **linear track** with two control points. Functions like `transformationAtArcLength` only had to deal with a single segment. That worked fine for learning and experimenting, but it starts to feel limiting very quickly. A real roller coaster does not consist of exactly one straight line.
 
 For now, we do not jump straight to **NURBS** or anything fancy. That will come later. We just want more segments. To do that, we need a way to describe curves that is not tied to a specific curve type, whether that is linear tracks, splines, geometric sections.
 
-The solution is a very basic concept called **curve nodes**. A curve node stores where it is in **space**, its **orientation** as a **4x4 matrix**, and the **arc length** at which it appears along the curve. Nothing more than that.
+The solution is a very basic concept called **curve nodes**. A curve node stores where it is in **space**, its **orientation** as a **4x4 transformation matrix**, and the **arc length** at which it appears along the curve. Nothing more than that.
 
 # Curve Node
 
@@ -37,7 +37,7 @@ With that in mind, we can start by defining what a **curve node** looks like:
 
 {{< repository-code file="src/maths/curve.ts" type="type" name="CurveNode" >}}
 
-That is it. A **matrix**, its **distance**, and the **segment number** along the curve. The segment number will not matter much for now, but it will become important later.
+That is it. A **transformation matrix**, its **distance**, and the **segment number** along the curve. The segment number will not matter much for now, but it will become important later.
 
 Of course, nodes do not exist on their own. They have to belong to something, and that something is the **curve** itself. To make this explicit, we also introduce a **Curve** type that groups the nodes together.
 
@@ -173,7 +173,7 @@ We need a small utility function that interpolates between two matrices.
 
 Unfortunately, there is no built-in helper for this in **THREE.js**. **THREE.js** does have helpers to interpolate **vectors** and **quaternions** though, which is exactly what we need here.
 
-A matrix contains position and rotation. We extract those parts, interpolate them separately, and then build a new matrix again.
+A transformation matrix contains position and rotation. We extract those parts, interpolate them separately, and then build a new transformation matrix again.
 **Position** is interpolated **linearly**. **Rotation** is interpolated using **spherical linear interpolation** on **quaternions**.
 
 If you already know what **quaternions** are, great. If not, also fine. This is not important at this point. I will write dedicated articles about **vectors, matrices, euler and quaternions** later.
@@ -196,7 +196,7 @@ return left.matrix.clone();
 
 Putting everything together, the full function looks like this:
 
-{{< repository-code file="src/maths/curve.ts" type="variable" name="matrixAtArcLength" >}}
+{{< repository-code file="src/maths/curve.ts" type="variable" name="transformationAtArcLength" >}}
 
 # Linear track with more segments
 

@@ -5,8 +5,8 @@ import { Vector3 } from 'three';
 
 import {
   fromPoints,
-  matrixAtArcLength,
   totalArcLength,
+  transformationAtArcLength,
 } from '../../../../maths/curve';
 import { toPosition } from '../../../../maths/matrix4';
 import { findBoundingIndices } from '../../../../helper/binary-search';
@@ -41,13 +41,15 @@ const BinarySearchDemo = () => {
     [curveLength],
   );
 
-  const position = toPosition(matrixAtArcLength(curve, atArcLength));
+  const position = toPosition(
+    transformationAtArcLength(curve, atArcLength),
+  );
 
   const nodes = findBoundingIndices(
     curve.nodes,
     atArcLength,
     (node) => node.arcLength,
-  )?.map((index) => toPosition(curve.nodes[index].matrix));
+  )?.map((index) => toPosition(curve.nodes[index].transformation));
 
   return (
     <>

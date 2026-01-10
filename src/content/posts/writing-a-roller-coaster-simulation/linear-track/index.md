@@ -157,7 +157,7 @@ Translated into code:
 
 ## Small note
 
-Later the forward vector will be replaced by a **4×4 matrix**, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called `matrixAtArcLength`. I know, yet again a change, but that’s future you’s problem. Ignore it for now.
+Later the forward vector will be replaced by a **4×4 matrix**, which includes position, forward, right and up vectors all at once. That matrix will become our single source of truth, which makes it possible to reduce everything to just one method called `transformationAtArcLength`. I know, yet again a change, but that’s future you’s problem. Ignore it for now.
 
 Going forward, we will use **9.81665 m/s²** as the gravitational acceleration, since this is also the value used by **NoLimits Roller Coaster** and **openFVD++**.
 

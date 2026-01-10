@@ -10,13 +10,13 @@ export type SimulationState = {
 
 export const evaluateMotion = (
   state: SimulationState,
-  matrix: Matrix4,
+  transformation: Matrix4,
   friction: number,
   airResistance: number,
   gravity: number,
   deltaTime: number,
 ): SimulationState => {
-  const forwardDirection = toFrontDirection(matrix);
+  const forwardDirection = toFrontDirection(transformation);
   const velocityDirection = state.velocity < 0 ? -1 : 1;
 
   let energyLoss = airResistance * state.velocity * state.velocity;

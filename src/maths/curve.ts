@@ -15,7 +15,7 @@ import {
 } from './matrix4';
 
 export type CurveNode = {
-  matrix: Matrix4;
+  transformation: Matrix4;
   arcLength: number;
   segmentIndex: number;
 };
@@ -26,10 +26,13 @@ export type Curve = {
 };
 
 export const totalArcLength = (curve: Curve) => {
-  return last(curve.nodes)?.arcLength || 0;
+  return last(curve.nodes)?.arcLength ?? 0;
 };
 
-export const matrixAtArcLength = (curve: Curve, at: number) => {
+export const transformationAtArcLength = (
+  curve: Curve,
+  at: number,
+) => {
   const nodes = findBoundingIndices(
     curve.nodes,
     at,
@@ -48,22 +51,22 @@ export const matrixAtArcLength = (curve: Curve, at: number) => {
       0.0,
       1.0,
     );
-    return lerp(left.matrix, right.matrix, t);
+    return lerp(left.transformation, right.transformation, t);
   }
 
-  return left.matrix.clone();
+  return left.transformation.clone();
 };
 
 export const positionAtX = (curve: Curve, at: number) => {
   const nodes = findBoundingIndices(
     curve.nodes,
     at,
-    (node) => node.matrix.elements[12],
+    (node) => toPosition(node.transformation).x,
   );
   if (!nodes) return new Vector3();
 
-  const left = toPosition(curve.nodes[nodes[0]].matrix);
-  const right = toPosition(curve.nodes[nodes[1]].matrix);
+  const left = toPosition(curve.nodes[nodes[0]].transformation);
+  const right = toPosition(curve.nodes[nodes[1]].transformation);
 
   const length = right.x - left.x;
 
@@ -90,9 +93,9 @@ export const arcLengthAtOffset = (
   return MathUtils.lerp(left, right, t);
 };
 
-export const insertMatrix = (
+export const insertTransformationMatrix = (
   curve: Curve,
-  matrix: Matrix4,
+  transformation: Matrix4,
   segmentIndex: number = 0,
 ) => {
   const lastNode = last(curve.nodes);
@@ -101,14 +104,16 @@ export const insertMatrix = (
   let arcLength = 0;
 
   if (lastNode) {
-    const distanceToLastNode = distance(lastNode.matrix, matrix);
+    const distanceToLastNode = distance(
+      lastNode.transformation,
+      transformation,
+    );
     if (distanceToLastNode < Number.EPSILON) return;
 
-    arcLength =
-      lastNode.arcLength + distance(lastNode.matrix, matrix);
+    arcLength = lastNode.arcLength + distanceToLastNode;
   }
 
-  const nodeMatrix = matrix.clone();
+  const nodeTransformation = transformation.clone();
 
   if (lastSegmentIndex !== segmentIndex)
     curve.segmentOffsets[segmentIndex] = arcLength;
@@ -116,11 +121,9 @@ export const insertMatrix = (
 
   curve.nodes.push({
     arcLength,
-    matrix: nodeMatrix,
+    transformation: nodeTransformation,
     segmentIndex,
   });
-
-  return nodeMatrix;
 };
 
 export const insertPosition = (
@@ -132,29 +135,32 @@ export const insertPosition = (
 
   if (lastNode) {
     if (
-      position.distanceTo(toPosition(lastNode.matrix)) <
+      position.distanceTo(toPosition(lastNode.transformation)) <
       Number.EPSILON
     )
       return;
 
     if (curve.nodes.length === 1) {
-      applyLookRelativeAt(lastNode.matrix, position);
+      applyLookRelativeAt(lastNode.transformation, position);
     }
-    applyLookRelativeAt(lastNode.matrix, position);
+    applyLookRelativeAt(lastNode.transformation, position);
 
-    return insertMatrix(
+    return insertTransformationMatrix(
       curve,
-      lastNode.matrix.clone().setPosition(position),
+      lastNode.transformation.clone().setPosition(position),
       segmentIndex,
     );
   }
 
-  return insertMatrix(curve, new Matrix4().setPosition(position));
+  return insertTransformationMatrix(
+    curve,
+    new Matrix4().setPosition(position),
+  );
 };
 
 export const applyRollCurve = (curve: Curve, rollCurve: Curve) => {
-  curve.nodes.forEach(({ matrix, arcLength }) => {
-    applyRoll(matrix, -positionAtX(rollCurve, arcLength).y);
+  curve.nodes.forEach(({ transformation, arcLength }) => {
+    applyRoll(transformation, -positionAtX(rollCurve, arcLength).y);
   });
 
   return curve;
@@ -196,7 +202,7 @@ export const fromUniformSampledPositions = (
 };
 
 export const toPoints = (curve: Curve) => {
-  return curve.nodes.map((node) => toPosition(node.matrix));
+  return curve.nodes.map((node) => toPosition(node.transformation));
 };
 
 export const toLocalTransformed = (
@@ -209,7 +215,7 @@ export const toLocalTransformed = (
     insertPosition(
       transformedCurve,
       toPosition(
-        node.matrix
+        node.transformation
           .clone()
           .multiply(new Matrix4().makeTranslation(translation)),
       ),
@@ -218,12 +224,12 @@ export const toLocalTransformed = (
   });
 
   transformedCurve.nodes.forEach((node, index) => {
-    const position = toPosition(node.matrix);
+    const position = toPosition(node.transformation);
     const originalRollDirection = rollDirection(
-      curve.nodes[index].matrix,
+      curve.nodes[index].transformation,
     );
 
-    const front = toFrontDirection(node.matrix);
+    const front = toFrontDirection(node.transformation);
     const left = originalRollDirection
       .sub(
         front
@@ -234,7 +240,7 @@ export const toLocalTransformed = (
 
     const up = new Vector3().crossVectors(front, left).normalize();
 
-    node.matrix = new Matrix4()
+    node.transformation = new Matrix4()
       .makeBasis(left, up, front)
       .setPosition(position);
   });

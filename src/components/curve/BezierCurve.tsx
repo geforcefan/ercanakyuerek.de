@@ -3,7 +3,10 @@ import { Line } from '@react-three/drei';
 import { Vector3 } from 'three';
 
 import { bezierSplineCurve } from '../../maths/bezier';
-import { matrixAtArcLength, totalArcLength } from '../../maths/curve';
+import {
+  totalArcLength,
+  transformationAtArcLength,
+} from '../../maths/curve';
 import { toPosition } from '../../maths/matrix4';
 import { uniformSampleMap } from '../../helper/uniform-sample';
 import { useColors } from '../../hooks/useColors';
@@ -31,14 +34,14 @@ export const BezierCurve = (props: {
     const curve = bezierSplineCurve(points, resolution);
 
     const parametricNodes = curve.nodes.map((node) =>
-      toPosition(node.matrix),
+      toPosition(node.transformation),
     );
 
     const uniformNodes = uniformSampleMap(
       0,
       totalArcLength(curve),
       resolution,
-      (at) => toPosition(matrixAtArcLength(curve, at)),
+      (at) => toPosition(transformationAtArcLength(curve, at)),
     );
 
     return uniform ? uniformNodes : parametricNodes;

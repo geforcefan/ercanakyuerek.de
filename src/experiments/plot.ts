@@ -2,8 +2,8 @@ import { Matrix4, Vector2, Vector3, Vector4 } from 'three';
 
 import {
   Curve,
-  matrixAtArcLength,
   totalArcLength,
+  transformationAtArcLength,
 } from '../maths/curve';
 import { uniformSampleMap } from '../helper/uniform-sample';
 
@@ -23,7 +23,8 @@ export const plotDataFromCurve = (
     0,
     totalArcLength(curve),
     resolution,
-    (at: number) => new Vector2(at, fn(matrixAtArcLength(curve, at))),
+    (at: number) =>
+      new Vector2(at, fn(transformationAtArcLength(curve, at))),
   );
 
   return plotDataFromPoints(points);

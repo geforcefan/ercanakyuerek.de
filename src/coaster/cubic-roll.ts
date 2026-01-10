@@ -5,7 +5,7 @@ import {
   arcLengthAtOffset,
   Curve,
   emptyCurve,
-  matrixAtArcLength,
+  transformationAtArcLength,
 } from '../maths/curve';
 import { toLeftDirection, toUpDirection } from '../maths/matrix4';
 import { splitPointsByStrict } from '../helper/strict-point';
@@ -35,7 +35,7 @@ export const fromRollPoints = (
         p.position,
         curve.segmentOffsets,
       );
-      const matrix = matrixAtArcLength(curve, arcLength);
+      const matrix = transformationAtArcLength(curve, arcLength);
 
       let roll = MathUtils.degToRad(p.roll);
 

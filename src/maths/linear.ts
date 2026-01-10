@@ -19,7 +19,7 @@ export const forwardDirectionAtArcLength = (
   return cp2.clone().sub(cp1).normalize();
 };
 
-export const matrixAtArcLength = (
+export const transformationAtArcLength = (
   cp1: Vector3,
   cp2: Vector3,
   at: number,
