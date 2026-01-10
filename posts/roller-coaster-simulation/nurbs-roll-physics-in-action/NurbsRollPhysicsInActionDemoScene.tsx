@@ -9,8 +9,8 @@ import { useColors } from '../../../../hooks/useColors';
 
 import { CurveWireframe } from '../../../../components/curve/CurveWireframe';
 import { Ground } from '../../../../components/Ground';
+import { PerspectiveScene } from '../../../../components/scenes/PerspectiveScene';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
-import { PerspectiveScene } from '../../../../scenes/PerspectiveScene';
 
 // @ts-ignore
 import Park from './Hybris.nl2park';

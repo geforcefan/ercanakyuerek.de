@@ -16,8 +16,8 @@ import {
 
 import { CurveWireframe } from '../../../../components/curve/CurveWireframe';
 import { Ground } from '../../../../components/Ground';
+import { PerspectiveScene } from '../../../../components/scenes/PerspectiveScene';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
-import { PerspectiveScene } from '../../../../scenes/PerspectiveScene';
 
 import { fromRollPoints } from '../../../../coaster/cubic-roll';
 // @ts-ignore

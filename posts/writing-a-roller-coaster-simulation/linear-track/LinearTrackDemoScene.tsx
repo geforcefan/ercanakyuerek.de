@@ -13,7 +13,7 @@ import { useColors } from '../../../../hooks/useColors';
 
 import { ControlPoint } from '../../../../components/curve/ControlPoint';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
-import { OrthographicScene } from '../../../../scenes/OrthographicScene';
+import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
 
 import { evaluateMotion } from './physics';
 

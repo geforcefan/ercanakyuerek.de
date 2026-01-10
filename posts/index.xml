@@ -21,12 +21,12 @@
 
 
 <div class="embedded ">
-  <iframe id="react-root-d77077b992699813b2fa281a7e38754d" width="100%" height="560px" class="frame"></iframe>
+  <iframe id="react-root-22d4921385c5f9e6e951392690b041ac" width="100%" height="560px" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-d77077b992699813b2fa281a7e38754d').srcdoc = `
+    document.getElementById('react-root-22d4921385c5f9e6e951392690b041ac').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -63,7 +63,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">CurveWireframe</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/CurveWireframe&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Ground</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/Ground&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">PerspectiveScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../scenes/PerspectiveScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">PerspectiveScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/PerspectiveScene&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// @ts-ignore
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Park</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./Hybris.nl2park&#39;</span>;
@@ -134,7 +134,7 @@
 
 
 <div class="embedded ">
-  <iframe id="react-root-709ca113161135b32c2ba12d566f8ce8" width="100%" height="500px" class="frame"></iframe>
+  <iframe id="react-root-da7820e729a1ea6b867ed7963b0525bd" width="100%" height="500px" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -143,7 +143,7 @@
   
 
   <script>
-    document.getElementById('react-root-709ca113161135b32c2ba12d566f8ce8').srcdoc = `
+    document.getElementById('react-root-da7820e729a1ea6b867ed7963b0525bd').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -161,11 +161,11 @@
   </script>
 </div>
 ]]></content></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
-&lt;iframe id="react-root-dbb788beef1ec45b17a94173c0955c99" width="225px" height="285px" class="frame"&gt;&lt;/iframe&gt;
+&lt;iframe id="react-root-a87966a3262748ad732f3eb63ee7bff6" width="225px" height="285px" class="frame"&gt;&lt;/iframe&gt;
 &lt;div class="description" style="width: 225px"&gt;
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-dbb788beef1ec45b17a94173c0955c99').srcdoc = `
+document.getElementById('react-root-a87966a3262748ad732f3eb63ee7bff6').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -192,7 +192,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-dbb788beef1ec45b17a94173c0955c99" width="225px" height="285px" class="frame"></iframe>
+  <iframe id="react-root-a87966a3262748ad732f3eb63ee7bff6" width="225px" height="285px" class="frame"></iframe>
 
   
   <div class="description" style="width: 225px">
@@ -201,7 +201,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
   
 
   <script>
-    document.getElementById('react-root-dbb788beef1ec45b17a94173c0955c99').srcdoc = `
+    document.getElementById('react-root-a87966a3262748ad732f3eb63ee7bff6').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -232,12 +232,12 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded ">
-  <iframe id="react-root-ddd0a655322aa42bcbe2337c0ffe00d8" width="100%" height="380px" class="frame"></iframe>
+  <iframe id="react-root-3f491e42323000ee4adc0c2c6f74d4f3" width="100%" height="380px" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-ddd0a655322aa42bcbe2337c0ffe00d8').srcdoc = `
+    document.getElementById('react-root-3f491e42323000ee4adc0c2c6f74d4f3').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -274,7 +274,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-605a7200b6451c53635b6370535be359" width="355px" height="560px" class="frame"></iframe>
+  <iframe id="react-root-ba1163adf172fdc7910500b26c8df632" width="355px" height="560px" class="frame"></iframe>
 
   
   <div class="description" style="width: 355px">
@@ -283,7 +283,7 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
   
 
   <script>
-    document.getElementById('react-root-605a7200b6451c53635b6370535be359').srcdoc = `
+    document.getElementById('react-root-ba1163adf172fdc7910500b26c8df632').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -368,7 +368,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-f91feaff916edc3dbd630e980109eca3" width="355px" height="485px" class="frame"></iframe>
+  <iframe id="react-root-380bad80e4843e3d5681bb1b2765e9b5" width="355px" height="485px" class="frame"></iframe>
 
   
   <div class="description" style="width: 355px">
@@ -377,7 +377,7 @@ how many <strong>curve nodes</strong> do we actually want to generate along that
   
 
   <script>
-    document.getElementById('react-root-f91feaff916edc3dbd630e980109eca3').srcdoc = `
+    document.getElementById('react-root-380bad80e4843e3d5681bb1b2765e9b5').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -475,7 +475,7 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span></code></pre></div>
 <h1 id="constructing-a-bézier-curve">Constructing a Bézier curve</h1>
 <p>This part is almost stupidly simple, so I will just paste the code and explain it briefly.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bezierSplineCurve</span> <span style="color:#f92672">=</span> (
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bezierSplineCurve</span> <span style="color:#f92672">=</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[],
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolution</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
 </span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
@@ -519,7 +519,7 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">CurveWireframe</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/CurveWireframe&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/OrthographicScene&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">BezierCurveDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">colors</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useColors</span>();
@@ -572,7 +572,7 @@ instead of having to do it manually each time. It will show up here and there in
 
 
 <div class="embedded ">
-  <iframe id="react-root-0b22c6cdebc6c58321444c1760f7ee2a" width="100%" height="260px" class="frame"></iframe>
+  <iframe id="react-root-07573bc5edeba5e51de2d59bd512146f" width="100%" height="260px" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -581,7 +581,7 @@ instead of having to do it manually each time. It will show up here and there in
   
 
   <script>
-    document.getElementById('react-root-0b22c6cdebc6c58321444c1760f7ee2a').srcdoc = `
+    document.getElementById('react-root-07573bc5edeba5e51de2d59bd512146f').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -858,7 +858,7 @@ instead of having to do it manually each time. It will show up here and there in
 
 
 <div class="embedded ">
-  <iframe id="react-root-8db226ebac202871c7e4ccf6c319a8b1" width="100%" height="380px" class="frame"></iframe>
+  <iframe id="react-root-517467ca967a670c3cc8b03b54131920" width="100%" height="380px" class="frame"></iframe>
 
   
   <div class="description" style="width: 100%">
@@ -867,7 +867,7 @@ instead of having to do it manually each time. It will show up here and there in
   
 
   <script>
-    document.getElementById('react-root-8db226ebac202871c7e4ccf6c319a8b1').srcdoc = `
+    document.getElementById('react-root-517467ca967a670c3cc8b03b54131920').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -898,7 +898,7 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">CurveLine</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/CurveLine&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/OrthographicScene&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">fromPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./curve&#39;</span>;
 </span></span><span style="display:flex;"><span>
@@ -1008,12 +1008,12 @@ instead of having to do it manually each time. It will show up here and there in
 
 
 <div class="embedded ">
-  <iframe id="react-root-e21b99e989418147dc48d4ab5278134c" width="100%" height="380px" class="frame"></iframe>
+  <iframe id="react-root-e893bf3b335211fb3dd388268ac821af" width="100%" height="380px" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-e21b99e989418147dc48d4ab5278134c').srcdoc = `
+    document.getElementById('react-root-e893bf3b335211fb3dd388268ac821af').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1052,7 +1052,7 @@ instead of having to do it manually each time. It will show up here and there in
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">PointWithMatrixArrows</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/PointWithMatrixArrows&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/OrthographicScene&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MatricesDemo</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">colors</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useColors</span>();
@@ -1227,12 +1227,12 @@ For the sake of the demo, the function is named <code>evaluateMotionWithFriction
 
 
 <div class="embedded ">
-  <iframe id="react-root-ea1da7ed54096daa4e70f0fc0ac97556" width="100%" height="360px" class="frame"></iframe>
+  <iframe id="react-root-720013a0d7d9b5bc2b49bb6df5e2d3bc" width="100%" height="360px" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-ea1da7ed54096daa4e70f0fc0ac97556').srcdoc = `
+    document.getElementById('react-root-720013a0d7d9b5bc2b49bb6df5e2d3bc').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1280,7 +1280,7 @@ While writing this, I realize it is probably best to introduce the concept first
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">ControlPoint</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/ControlPoint&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/OrthographicScene&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">evaluateMotion</span>,
@@ -1546,12 +1546,12 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 
 
 <div class="embedded ">
-  <iframe id="react-root-6625b0f3000c341065e7a9c1279225ce" width="100%" height="300px" class="frame"></iframe>
+  <iframe id="react-root-6bb59700461f9d8a583dbcee8e7b0562" width="100%" height="300px" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-6625b0f3000c341065e7a9c1279225ce').srcdoc = `
+    document.getElementById('react-root-6bb59700461f9d8a583dbcee8e7b0562').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1594,7 +1594,7 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">ControlPoint</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/ControlPoint&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/OrthographicScene&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">evaluateMotion</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./physics&#39;</span>;
 </span></span><span style="display:flex;"><span>
@@ -1777,12 +1777,12 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
 
 
 <div class="embedded ">
-  <iframe id="react-root-2d49cb3f094c69340c8ba89605068e7c" width="100%" height="360px" class="frame"></iframe>
+  <iframe id="react-root-9f8cd351c1919ccb2b22337656730a39" width="100%" height="360px" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-2d49cb3f094c69340c8ba89605068e7c').srcdoc = `
+    document.getElementById('react-root-9f8cd351c1919ccb2b22337656730a39').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1819,7 +1819,7 @@ Since we’re using <strong>THREE.js</strong>, we <em>can</em> make use of the <
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Arrow</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/Arrow&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">ControlPoint</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/ControlPoint&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/OrthographicScene&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">evaluateMotion</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./physics&#39;</span>;
 </span></span><span style="display:flex;"><span>
@@ -2036,12 +2036,12 @@ so it might help you as well.</p>
 
 
 <div class="embedded ">
-  <iframe id="react-root-0b3c5f4d7255d3941f73f35f941abb70" width="100%" height="300px" class="frame"></iframe>
+  <iframe id="react-root-8198f05670fdb3c4ca3ad251c12a601f" width="100%" height="300px" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-0b3c5f4d7255d3941f73f35f941abb70').srcdoc = `
+    document.getElementById('react-root-8198f05670fdb3c4ca3ad251c12a601f').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2076,7 +2076,7 @@ so it might help you as well.</p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useColors</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../hooks/useColors&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Arrow</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/Arrow&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/OrthographicScene&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">GravityDemo</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">colors</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useColors</span>();
@@ -2199,10 +2199,9 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 <p>We start with a bit of boilerplate code in <code>index.ts</code> to load and instantiate the WebAssembly module:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#75715e">// @ts-ignore
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">glue</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./glue.wasm&#39;</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">module</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">WebAssembly</span>.<span style="color:#a6e22e">compileStreaming</span>(<span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">glue</span>));
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">instance</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">WebAssembly</span>.<span style="color:#a6e22e">instantiate</span>(<span style="color:#a6e22e">module</span>, {
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">module</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">WebAssembly</span>.<span style="color:#a6e22e">compileStreaming</span>(<span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">glue</span>));
+</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">instance</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">WebAssembly</span>.<span style="color:#a6e22e">instantiate</span>(<span style="color:#a6e22e">module</span>, {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">wasi_snapshot_preview1</span><span style="color:#f92672">:</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">environ_get</span><span style="color:#f92672">:</span> () <span style="color:#f92672">=&gt;</span> {},
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">environ_sizes_get</span><span style="color:#f92672">:</span> () <span style="color:#f92672">=&gt;</span> {},
@@ -2218,7 +2217,8 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">path_open</span><span style="color:#f92672">:</span> () <span style="color:#f92672">=&gt;</span> {},
 </span></span><span style="display:flex;"><span>  },
 </span></span><span style="display:flex;"><span>});
-</span></span></code></pre></div><p>We will talk about memory later, especially linear memory. For now, we can already start wrapping exported WebAssembly functions.</p>
+</span></span></code></pre></div>
+<p>We will talk about memory later, especially linear memory. For now, we can already start wrapping exported WebAssembly functions.</p>
 <p>We begin with a very simple one: <code>bezierTotalArcLength</code>. We grab the function from <code>instance.exports</code> and call it with a pointer to a Bezier curve. Since the function returns a single float, there is nothing special to do here.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bezierTotalArcLength</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">bezierPointer</span>: <span style="color:#66d9ef">number</span>) <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">bezierTotalArcLength</span>: <span style="color:#66d9ef">func</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">instance</span>.<span style="color:#a6e22e">exports</span> <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">any</span>;
@@ -2275,12 +2275,12 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 
 
 <div class="embedded ">
-  <iframe id="react-root-7fbc068c81eefd9e63adf7fb2cacd111" width="100%" height="360px" class="frame"></iframe>
+  <iframe id="react-root-317e8ee234b646d8a95dbe02f1cb4665" width="100%" height="360px" class="frame"></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-7fbc068c81eefd9e63adf7fb2cacd111').srcdoc = `
+    document.getElementById('react-root-317e8ee234b646d8a95dbe02f1cb4665').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2318,7 +2318,7 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useColors</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../hooks/useColors&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/OrthographicScene&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">bezierFromPoints</span>,
@@ -2370,11 +2370,11 @@ Acceleration changes the velocity, <strong>velocity determines the distance to t
 </span></span></code></pre></div>
 
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
-&lt;iframe id="react-root-8648aaf66ac93df5612b3a866cf2fa3a" width="225px" height="285px" class="frame"&gt;&lt;/iframe&gt;
+&lt;iframe id="react-root-7abdc564a6c7d1381d7fb76a41a85883" width="225px" height="285px" class="frame"&gt;&lt;/iframe&gt;
 &lt;div class="description" style="width: 225px"&gt;
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-8648aaf66ac93df5612b3a866cf2fa3a').srcdoc = `
+document.getElementById('react-root-7abdc564a6c7d1381d7fb76a41a85883').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -2400,7 +2400,7 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/implementing-library-funct
 
 
 <div class="embedded float-right">
-  <iframe id="react-root-8648aaf66ac93df5612b3a866cf2fa3a" width="225px" height="285px" class="frame"></iframe>
+  <iframe id="react-root-7abdc564a6c7d1381d7fb76a41a85883" width="225px" height="285px" class="frame"></iframe>
 
   
   <div class="description" style="width: 225px">
@@ -2409,7 +2409,7 @@ renderContentComponentByPath('root', '.\/posts\/wasi\/implementing-library-funct
   
 
   <script>
-    document.getElementById('react-root-8648aaf66ac93df5612b3a866cf2fa3a').srcdoc = `
+    document.getElementById('react-root-7abdc564a6c7d1381d7fb76a41a85883').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>

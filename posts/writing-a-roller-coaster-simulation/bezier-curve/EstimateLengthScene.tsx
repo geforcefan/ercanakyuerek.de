@@ -9,7 +9,7 @@ import { useColors } from '../../../../hooks/useColors';
 
 import { BezierCurve } from '../../../../components/curve/BezierCurve';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
-import { OrthographicScene } from '../../../../scenes/OrthographicScene';
+import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
 
 export const EstimateLengthScene = () => {
   const colors = useColors();
