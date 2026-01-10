@@ -62,7 +62,7 @@ for (const sourceFile of project.getSourceFiles()) {
     types[i.getName()] = getTextWithoutExport(i);
   });
 
-  if (Object.keys(functions).length || Object.keys(types).length) {
+  if (Object.keys(functions).length || Object.keys(types).length || Object.keys(variables).length) {
     result[path.relative(process.cwd(), filePath)] = {
       source: sourceFile.getFullText(),
       functions,
