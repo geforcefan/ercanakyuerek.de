@@ -4,11 +4,11 @@ import { lowerBound } from '../helper/binary-search';
 
 import { emptyCurve, fromUniformSampledPositions } from './curve';
 
-export function clampedCubicSpline(
+export const clampedCubicSpline = (
   points: Vector2[],
   startSlope: number = 0,
   endSlope: number = 0,
-) {
+) => {
   const n = points.length - 1;
 
   const x = points.map((p) => p.x);
@@ -62,7 +62,7 @@ export function clampedCubicSpline(
   }
 
   return { x, y, b, c, d };
-}
+};
 
 const evaluate = (
   s: ReturnType<typeof clampedCubicSpline>,

@@ -49,27 +49,9 @@ for (const sourceFile of project.getSourceFiles()) {
     functions[name] = getTextWithoutExport(fn);
   });
 
-  sourceFile.getVariableDeclarations().forEach((v) => {
-    const name = v.getName();
-    const initializer = v.getInitializer();
-
-    if (
-      initializer &&
-      (Node.isArrowFunction(initializer) ||
-        Node.isFunctionExpression(initializer))
-    ) {
-      const stmt = v.getVariableStatement();
-      if (stmt) {
-        functions[name] = getTextWithoutExport(stmt);
-      }
-    }
-  });
-
   sourceFile.getVariableDeclarations().forEach((t) => {
-    if (t.getVariableStatement())
-      variables[t.getName()] = getTextWithoutExport(
-        t.getVariableStatement(),
-      );
+    const stmt = t.getVariableStatement();
+    if (stmt) variables[t.getName()] = getTextWithoutExport(stmt);
   });
 
   sourceFile.getTypeAliases().forEach((t) => {
