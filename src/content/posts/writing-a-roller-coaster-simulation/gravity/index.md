@@ -7,11 +7,14 @@ tags: ['writing a roller coaster simulation']
 
 ## How do we determine the acceleration of the coaster?
 
-To simplify things, we ignore air resistance, rolling friction and any other additional forces. We also assume Earth’s gravity is **9.81 m/s²**. This allows us to focus entirely on the fundamental idea:
+To simplify things, we ignore air resistance, rolling friction and any
+other additional forces. We also assume Earth’s gravity is **9.81
+m/s²**. This allows us to focus entirely on the fundamental idea:
 
 > **Gravity is the primary source of acceleration.**
 
-On Earth, gravity provides a constant acceleration of roughly **9.81 m/s²**.
+On Earth, gravity provides a constant acceleration of roughly **9.81
+m/s²**.
 
 What does this number actually mean?
 
@@ -30,7 +33,8 @@ In short: **acceleration continuously increases an object's speed.**
 ## Acceleration on slopes
 
 Gravity is always pointing straight down.  
-But on a slope, only a part of that force helps the coaster move along the track.
+But on a slope, only a part of that force helps the coaster move along
+the track.
 
 To compute that portion, we use the **downhill-slope acceleration**:
 
@@ -44,10 +48,13 @@ Where:
 
 ### But why?
 
-For simplification, we only look at **downward slopes** at this point.  
-Of course, in a real simulation we also have **negative angles** when the coaster travels uphill, but we will get to that later.
+For simplification, we only look at **downward slopes** at this
+point.  
+Of course, in a real simulation we also have **negative angles** when
+the coaster travels uphill, but we will get to that later.
 
-For these downhill angles, the relevant sine values lie between **0 and 1**:
+For these downhill angles, the relevant sine values lie between **0
+and 1**:
 
 - **sin = 0** → no gravity along the track
 - **sin = 1** → full gravity along the track
@@ -65,7 +72,8 @@ Full gravity acts along the track, essentially free fall.
 
 #### **45° slope**
 
-You probably expected to get **half of gravity** here, right? Nope, it's not linear at all :D It’s a sine function.
+You probably expected to get **half of gravity** here, right? Nope,
+it's not linear at all. It’s a sine function.
 
 - sin(45°) ≈ 0.707 (≈ 70% of **gravity**)
 - acceleration ≈ **6.93 m/s²**
@@ -95,11 +103,13 @@ And the crucial insight is:
 
 > **This relationship is not linear, it's governed by sine.**
 
-This is why 45° does _not_ give half of Earth's gravity, but roughly **70%**.
+This is why 45° does _not_ give half of Earth's gravity, but roughly
+**70%**.
 
 ## Interactive Example
 
-When it comes to calculating the acceleration component along the slope, the formula ultimately reduces to:
+When it comes to calculating the acceleration component along the
+slope, the formula ultimately reduces to:
 
 ```typescript
 const acceleration = gravity * Math.sin(slope);
@@ -107,26 +117,34 @@ const acceleration = gravity * Math.sin(slope);
 
 > Keep in mind that `Math.sin` accepts **radians**, not **degrees**.
 >
-> A **radian** is simply another way of measuring angles, where angles are expressed as multiples of **π**.
+> A **radian** is simply another way of measuring angles, where angles
+> are expressed as multiples of **π**.
 >
 > The range from **−π to π** corresponds to **−180° to 180°**.
 >
-> In code, we almost always work with **radians**, because most math functions expect them. Degrees are typically used only for user input, since they are more intuitive.
+> In code, we almost always work with **radians**, because most math
+> functions expect them. Degrees are typically used only for user
+> input, since they are more intuitive.
 >
 > When converting between the two, use:
 >
-> $$\text{radians} = \text{degrees} \cdot \frac{\pi}{180}$$
+> $$\text{radians} = \text{degrees} \cdot \frac{\pi}{180}$$ 
+> 
 > $$\text{degrees} = \text{radians} \cdot \frac{180}{\pi}$$
 
-You can play around with **different slopes** and see how they affect the percentage of **gravity applied** to the coaster.
-Having a visual representation of written concepts really helps me reach that **I got it** moment,
-so it might help you as well.
+You can play around with **different slopes** and see how they affect
+the percentage of **gravity applied** to the coaster. Having a visual
+representation of written concepts really helps me reach that **I got
+it** moment, so it might help you as well.
 
 {{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/gravity/GravityDemoScene.tsx" width="100%" height="300px">}}
 
 ## What comes next?
 
-[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/evaluating-motion.md" >}}), we’ll add motion evaluation and move a simple object along a linear plane.
+[In the next
+chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/evaluating-motion.md" >}}),
+we’ll add motion evaluation and move a simple object along a linear
+plane.
 
 # Demo code
 

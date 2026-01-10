@@ -5,50 +5,72 @@ math: true
 tags: ['writing a roller coaster simulation']
 ---
 
-This chapter will be quite short and introduces two small but important parts of a more realistic roller coaster simulation:
+This chapter will be quite short and introduces two small but
+important parts of a more realistic roller coaster simulation:
 
 - friction
 - air resistance
 
-Until now, our coaster moved in a world without any energy loss. That works for understanding the basics but real coasters slow down over time. Wheels create friction, air pushes against the train, and both effects reduce the acceleration the train can achieve.
+Until now, our coaster moved in a world without any energy loss. That
+works for understanding the basics but real coasters slow down over
+time. Wheels create friction, air pushes against the train, and both
+effects reduce the acceleration the train can achieve.
 
-We will not create a complex physics model. Instead we introduce two simple parameters, very similar to what you may know from **NoLimits Roller Coaster**.  
-Our physics simulation should behave almost identically, apart from a few edge cases.
+We will not create a complex physics model. Instead we introduce two
+simple parameters, very similar to what you may know from **NoLimits
+Roller Coaster**.  
+Our physics simulation should behave almost identically, apart from a
+few edge cases.
 
-Since both **friction** and **air resistance** represent energy loss, we simply subtract them from the acceleration we calculated from gravity. This is almost correct, but there is one detail to handle when the train moves backward.
-More on that in the section **When riding backward, what happens?**.
+Since both **friction** and **air resistance** represent energy loss,
+we simply subtract them from the acceleration we calculated from
+gravity. This is almost correct, but there is one detail to handle
+when the train moves backward. More on that in the section **When
+riding backward, what happens?**.
 
 ## Friction
 
-Friction is the permanent resistance between the train and the track. We apply it directly to the acceleration. The idea is very simple:
-multiply the friction constant with gravity and subtract it from the current acceleration.
+Friction is the permanent resistance between the train and the track.
+We apply it directly to the acceleration. The idea is very simple:
+multiply the friction constant with gravity and subtract it from the
+current acceleration.
 
-A typical friction value in is about **0.03 m/m** (height loss per meter).
+A typical friction value in is about **0.03 m/m** (height loss per
+meter).
 
 $$friction \cdot gravity$$
 
 ## Air Resistance
 
-Air resistance works differently. It **increases** with **velocity**. The faster the train moves, the more the air pushes back against it.
+Air resistance works differently. It **increases** with **velocity**.
+The faster the train moves, the more the air pushes back against it.
 
-A typical air resistance value is around **0.00002 m/s²**.
-We follow the same idea and use this value as the base for our simplified model. The **resistance** grows with **velocity²**, so we multiply it with **velocity²** and the air resistance constant:
+A typical air resistance value is around **0.00002 m/s²**. We follow
+the same idea and use this value as the base for our simplified model.
+The **resistance** grows with **velocity²**, so we multiply it with
+**velocity²** and the air resistance constant:
 
 $$airResistance \cdot velocity^2$$
 
-This removes more energy when the train moves fast and almost none when it moves slowly.
+This removes more energy when the train moves fast and almost none
+when it moves slowly.
 
 # When riding backward, what happens?
 
-There is one small detail we have to handle.
-If the train moves **backward**, the velocity becomes negative. This also means our energy loss must flip direction. Otherwise we would accidentally add energy instead of removing it.
+There is one small detail we have to handle. If the train moves
+**backward**, the velocity becomes negative. This also means our
+energy loss must flip direction. Otherwise we would accidentally add
+energy instead of removing it.
 
 To put it simply:
 
-- when riding **forward**, friction and air resistance **subtract** energy
-- when riding **backward**, they must still subtract energy, but from the **opposite** direction
+- when riding **forward**, friction and air resistance **subtract**
+  energy
+- when riding **backward**, they must still subtract energy, but from
+  the **opposite** direction
 
-So we need a small multiplier that tells us whether the train is moving forward or backward:
+So we need a small multiplier that tells us whether the train is
+moving forward or backward:
 
 - If the velocity is **negative**, the factor becomes **-1**
 - If the velocity is **positive**, the factor is **1**
@@ -67,8 +89,8 @@ energyLoss += friction * gravity;
 energyLoss *= velocityDirection;
 ```
 
-This flips the resistance forces to the correct direction depending on the current motion.
-That is the whole trick.
+This flips the resistance forces to the correct direction depending on
+the current motion. That is the whole trick.
 
 Now subtract energy loss from acceleration:
 
@@ -79,33 +101,54 @@ const acceleration =
 
 ## Updated evaluateMotion function
 
-Putting everything together, the full motion evaluation now looks like this.  
-For the sake of the demo, the function is named `evaluateMotionWithFrictionAndAirResistance` so we can compare behavior with and without air resistance. You can still name it `evaluateMotion`:
+Putting everything together, the full motion evaluation now looks like
+this.  
+For the sake of the demo, the function is named
+`evaluateMotionWithFrictionAndAirResistance` so we can compare
+behavior with and without air resistance. You can still name it
+`evaluateMotion`:
 
 {{< repository-code file="src/content/posts/writing-a-roller-coaster-simulation/linear-track/physics.ts" type="variable" name="evaluateMotionWithFriction" >}}
 
-We still compute the gravity acceleration first. After that we subtract the energy losses from friction and air resistance. Even though this is a very simple model, the difference becomes immediately visible. The train will no longer accelerate forever or keep moving at impossible speeds.
+We still compute the gravity acceleration first. After that we
+subtract the energy losses from friction and air resistance. Even
+though this is a very simple model, the difference becomes immediately
+visible. The train will no longer accelerate forever or keep moving at
+impossible speeds.
 
 ## Demo with friction and air resistance
 
-Just like in the previous chapter, here is a small interactive demo. This time it includes both friction and air resistance so you can see how the coaster behaves when energy loss is part of the simulation.
+Just like in the previous chapter, here is a small interactive demo.
+This time it includes both friction and air resistance so you can see
+how the coaster behaves when energy loss is part of the simulation.
 
-- The **orange** dot represents a train with friction and air resistance applied.
+- The **orange** dot represents a train with friction and air
+  resistance applied.
 - The **white** dot shows the same motion without any energy loss.
 
-Feel free to move the control points to experiment with the track shape and see how both trains react differently.
+Feel free to move the control points to experiment with the track
+shape and see how both trains react differently.
 
 {{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/friction-and-air-resistance/FrictionAndAirResistanceDemoScene.tsx" width="100%" height="360px">}}
 
 ## What comes next?
 
-[In the next chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/transformation-matrix.md" >}}) we will make a few changes to the track itself, preparing everything for an agnostic evaluation of physics.
-No matter what the underlying geometry is in the end, **splines, imported tracks, FVD-based shapes or anything else, the evaluation should always work the same**.
-The key step is replacing the two functions `positionAtArcLength` and `forwardDirectionAtArcLength`
-with a single `transformationAtArcLength` function. Working with **matrices** is more convenient, because we can extract everything we need from them.
-I will also introduce a **curve node** that stores a full matrix for a given distance along the track.
-Any geometry system can “fill” these **curve nodes**, whether that system is based on splines, imported CSV data, FVD geometries or something entirely different.
-While writing this, I realize it is probably best to introduce the concept first with a simple linear track. Stay tuned.
+[In the next
+chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/transformation-matrix.md" >}})
+we will make a few changes to the track itself, preparing everything
+for an agnostic evaluation of physics. No matter what the underlying
+geometry is in the end, **splines, imported tracks, FVD-based shapes
+or anything else, the evaluation should always work the same**. The
+key step is replacing the two functions `positionAtArcLength` and
+`forwardDirectionAtArcLength` with a single
+`transformationAtArcLength` function. Working with **matrices** is
+more convenient, because we can extract everything we need from them.
+I will also introduce a **curve node** that stores a full matrix for a
+given distance along the track. Any geometry system can “fill” these
+**curve nodes**, whether that system is based on splines, imported CSV
+data, FVD geometries or something entirely different. While writing
+this, I realize it is probably best to introduce the concept first
+with a simple linear track. Stay tuned.
 
 # Demo code
 

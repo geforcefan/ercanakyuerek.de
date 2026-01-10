@@ -3,6 +3,7 @@
   "singleQuote": true,
   "trailingComma": "all",
   "printWidth": 70,
+  "proseWrap": "always",
   "tabWidth": 2,
   "plugins": ["@ianvs/prettier-plugin-sort-imports"],
   "importOrder": [
