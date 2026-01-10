@@ -62,7 +62,7 @@ Since we now calculate **acceleration** dynamically, we extend `SimulationState`
 
 And our updated `evaluateMotion` function becomes:
 
-{{< repository-code file="src/content/posts/writing-a-roller-coaster-simulation/linear-track/physics.ts" type="function" name="evaluateMotion" >}}
+{{< repository-code file="src/content/posts/writing-a-roller-coaster-simulation/linear-track/physics.ts" type="variable" name="evaluateMotion" >}}
 
 ## Answering important questions
 
@@ -140,8 +140,8 @@ const positionAtArcLength = (
 
 Or using **THREE.js** to save yourself some sanity and avoid reinventing the wheel over and over again. I explained this part without THREE.js as well, but you may just forget it, the articles get way too big if I try to explain every concept of vectors and math in detail. For now we simply know: THREE.js is our friend:
 
-{{< repository-code file="src/maths/linear.ts" type="function" name="totalArcLength" >}}
-{{< repository-code file="src/maths/linear.ts" type="function" name="positionAtArcLength" >}}
+{{< repository-code file="src/maths/linear.ts" type="variable" name="totalArcLength" >}}
+{{< repository-code file="src/maths/linear.ts" type="variable" name="positionAtArcLength" >}}
 
 ## How to Calculate Forward Direction Along the Curve
 
@@ -153,7 +153,7 @@ $$ \vec{forwardDir} = \frac{\vec{cp2} - \vec{cp1}}{\lVert \vec{cp2} - \vec{cp1} 
 
 Translated into code:
 
-{{< repository-code file="src/maths/linear.ts" type="function" name="forwardDirectionAtArcLength" >}}
+{{< repository-code file="src/maths/linear.ts" type="variable" name="forwardDirectionAtArcLength" >}}
 
 ## Small note
 

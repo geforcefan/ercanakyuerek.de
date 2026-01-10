@@ -13,7 +13,7 @@ import { useSimulationStateControls } from '../../../../hooks/useSimulationState
 
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
 import { PointWithMatrixArrows } from '../../../../components/PointWithMatrixArrows';
-import { OrthographicScene } from '../../../../scenes/OrthographicScene';
+import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
 
 const MatricesDemo = () => {
   const colors = useColors();

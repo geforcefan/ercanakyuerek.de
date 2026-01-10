@@ -7,8 +7,8 @@ import { useColors } from '../../../../hooks/useColors';
 
 import { CurveWireframe } from '../../../../components/curve/CurveWireframe';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
+import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
-import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 
 export const BezierCurveDemoScene = () => {
   const colors = useColors();

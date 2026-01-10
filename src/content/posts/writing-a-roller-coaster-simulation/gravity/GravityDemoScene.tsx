@@ -6,7 +6,7 @@ import { MathUtils, Vector3 } from 'three';
 import { useColors } from '../../../../hooks/useColors';
 
 import { Arrow } from '../../../../components/Arrow';
-import { OrthographicScene } from '../../../../scenes/OrthographicScene';
+import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
 
 const GravityDemo = () => {
   const colors = useColors();

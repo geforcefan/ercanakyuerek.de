@@ -82,7 +82,7 @@ const acceleration =
 Putting everything together, the full motion evaluation now looks like this.  
 For the sake of the demo, the function is named `evaluateMotionWithFrictionAndAirResistance` so we can compare behavior with and without air resistance. You can still name it `evaluateMotion`:
 
-{{< repository-code file="src/content/posts/writing-a-roller-coaster-simulation/linear-track/physics.ts" type="function" name="evaluateMotionWithFriction" >}}
+{{< repository-code file="src/content/posts/writing-a-roller-coaster-simulation/linear-track/physics.ts" type="variable" name="evaluateMotionWithFriction" >}}
 
 We still compute the gravity acceleration first. After that we subtract the energy losses from friction and air resistance. Even though this is a very simple model, the difference becomes immediately visible. The train will no longer accelerate forever or keep moving at impossible speeds.
 

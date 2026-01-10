@@ -30,6 +30,7 @@ type FileResult = {
   source: string;
   functions: Record<string, string>;
   types: Record<string, string>;
+  variables: Record<string, string>;
 };
 
 const result: Record<string, FileResult> = {};
@@ -39,6 +40,7 @@ for (const sourceFile of project.getSourceFiles()) {
 
   const functions: Record<string, string> = {};
   const types: Record<string, string> = {};
+  const variables: Record<string, string> = {};
 
   sourceFile.getFunctions().forEach((fn) => {
     const name = fn.getName();
@@ -63,6 +65,13 @@ for (const sourceFile of project.getSourceFiles()) {
     }
   });
 
+  sourceFile.getVariableDeclarations().forEach((t) => {
+    if (t.getVariableStatement())
+      variables[t.getName()] = getTextWithoutExport(
+        t.getVariableStatement(),
+      );
+  });
+
   sourceFile.getTypeAliases().forEach((t) => {
     types[t.getName()] = getTextWithoutExport(t);
   });
@@ -76,6 +85,7 @@ for (const sourceFile of project.getSourceFiles()) {
       source: sourceFile.getFullText(),
       functions,
       types,
+      variables,
     };
   }
 }

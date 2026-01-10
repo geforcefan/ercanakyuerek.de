@@ -3,8 +3,8 @@ import { Vector3 } from 'three';
 
 import { CurveLine } from '../../../../components/curve/CurveLine';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
+import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
-import { OrthographicScene } from '../../../../scenes/OrthographicScene';
 
 import { fromPoints } from './curve';
 

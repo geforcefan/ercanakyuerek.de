@@ -95,7 +95,7 @@ for (let k = points.length - 1; k > 0; k--) {
 
 So we end up with a general version that works for any number of control points. Add a small guard at the beginning and we are ready to use it:
 
-{{< repository-code file="src/maths/bezier.ts" type="function" name="deCasteljau" >}}
+{{< repository-code file="src/maths/bezier.ts" type="variable" name="deCasteljau" >}}
 
 ## How many curve nodes do we need?
 
@@ -116,7 +116,7 @@ In practice, this is what I usually do:
 
 To make this easier, we start with a small helper that lets us **uniformly sample** a range with a given resolution. It gives us both the actual value and a normalized`t` in `[0, 1]`.
 
-{{< repository-code file="src/helper/uniform-sample.ts" type="function" name="uniformSample" >}}
+{{< repository-code file="src/helper/uniform-sample.ts" type="variable" name="uniformSample" >}}
 
 If this feels a bit abstract, here is a concrete example.
 
@@ -153,20 +153,20 @@ return positions
 
 Now we end up with this estimate function:
 
-{{< repository-code file="src/maths/bezier.ts" type="function" name="estimateTotalArcLength" >}}
+{{< repository-code file="src/maths/bezier.ts" type="variable" name="estimateTotalArcLength" >}}
 
 Here is the `uniformSampleMap` function.
 It is a small convenience helper that wraps `uniformSample` and makes mapping the result easier,
 instead of having to do it manually each time. It will show up here and there in later chapters.
 
-{{< repository-code file="src/helper/uniform-sample.ts" type="function" name="uniformSampleMap" >}}
+{{< repository-code file="src/helper/uniform-sample.ts" type="variable" name="uniformSampleMap" >}}
 
 # Constructing a Bézier curve
 
 This part is almost stupidly simple, so I will just paste the code and explain it briefly.
 
 ```typescript
-export const bezierSplineCurve = (
+const bezierSplineCurve = (
   points: Vector3[],
   resolution: number = 20,
 ) => {

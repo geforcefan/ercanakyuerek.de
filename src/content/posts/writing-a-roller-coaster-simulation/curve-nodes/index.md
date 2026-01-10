@@ -49,7 +49,7 @@ The **Curve** type looks like this:
 
 To go along with this, we add a small helper that simply creates an empty curve:
 
-{{< repository-code file="src/maths/curve.ts" type="function" name="emptyCurve" >}}
+{{< repository-code file="src/maths/curve.ts" type="variable" name="emptyCurve" >}}
 
 Next, we need a way to find the two nodes that sandwich any requested distance along the curve. There are many algorithms for this, but a simple binary search works very well here. It is fast, easy to implement, and more than good enough for what we need right now.
 
@@ -59,11 +59,11 @@ If you want, you can read more about [binary search](https://en.wikipedia.org/wi
 
 We use a lower-bound variant of binary search, which looks like this:
 
-{{< repository-code file="src/helper/binary-search.ts" type="function" name="lowerBound" >}}
+{{< repository-code file="src/helper/binary-search.ts" type="variable" name="lowerBound" >}}
 
 Now we use this binary search to find the node indices between which a requested distance along the curve lies. For that, we write a small helper:
 
-{{< repository-code file="src/helper/binary-search.ts" type="function" name="findBoundingIndices" >}}
+{{< repository-code file="src/helper/binary-search.ts" type="variable" name="findBoundingIndices" >}}
 
 This function needs a bit of explanation.
 
@@ -180,7 +180,7 @@ If you already know what **quaternions** are, great. If not, also fine. This is 
 
 The helper looks like this:
 
-{{< repository-code file="src/maths/matrix4.ts" type="function" name="lerp" >}}
+{{< repository-code file="src/maths/matrix4.ts" type="variable" name="lerp" >}}
 
 Now we can use this to interpolate between the **left** and **right** matrix:
 
@@ -196,7 +196,7 @@ return left.matrix.clone();
 
 Putting everything together, the full function looks like this:
 
-{{< repository-code file="src/maths/curve.ts" type="function" name="matrixAtArcLength" >}}
+{{< repository-code file="src/maths/curve.ts" type="variable" name="matrixAtArcLength" >}}
 
 # Linear track with more segments
 
@@ -206,7 +206,7 @@ To actually see this in motion, we need a small helper that constructs curve nod
 >
 > **Important**: This is temporary junk. It exists only to make the demo work quickly and will be replaced by a proper implementation with correct normals and roll handling.
 
-{{< repository-code file="src/content/posts/writing-a-roller-coaster-simulation/curve-nodes/curve.ts" type="function" name="fromPoints" >}}
+{{< repository-code file="src/content/posts/writing-a-roller-coaster-simulation/curve-nodes/curve.ts" type="variable" name="fromPoints" >}}
 
 This helper just turns points into curve nodes and keeps track of the distance along the curve. It is very naive, but good enough to demonstrate the idea.
 

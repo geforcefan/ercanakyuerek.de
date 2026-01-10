@@ -8,7 +8,7 @@ import { useColors } from '../../../../hooks/useColors';
 
 import { Arrow } from '../../../../components/Arrow';
 import { ControlPoint } from '../../../../components/curve/ControlPoint';
-import { OrthographicScene } from '../../../../scenes/OrthographicScene';
+import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
 
 import { evaluateMotion } from './physics';
 

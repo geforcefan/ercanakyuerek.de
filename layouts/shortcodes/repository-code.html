@@ -13,7 +13,7 @@
 {{- else if eq $type "type" -}}
 {{- $code = index $file.types $name -}}
 {{- else -}}
-{{- $code = index $file.functions $name -}}
+{{- $code = index $file.variables $name -}}
 {{- end -}}
 
 {{- $md := printf "```%s\n%s\n```" $lang $code -}}

@@ -6,7 +6,7 @@ import { uniformSampleMap } from '../../../../helper/uniform-sample';
 import { useColors } from '../../../../hooks/useColors';
 
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
-import { OrthographicScene } from '../../../../scenes/OrthographicScene';
+import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
 
 import {
   bezierFromPoints,

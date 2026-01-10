@@ -3,9 +3,9 @@ import { Canvas } from '@react-three/fiber';
 import { CanvasProps } from '@react-three/fiber/dist/declarations/src/web/Canvas';
 import { useDevicePixelRatio } from 'use-device-pixel-ratio';
 
-import { useColors } from '../hooks/useColors';
+import { useColors } from '../../hooks/useColors';
 
-import { SplineEditorCameraControls } from '../components/camera/SplineEditorCameraControls';
+import { SplineEditorCameraControls } from '../camera/SplineEditorCameraControls';
 
 export const OrthographicScene = ({
   cameraControlsActive = true,

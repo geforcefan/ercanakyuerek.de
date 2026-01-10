@@ -30,32 +30,18 @@ We start with a bit of boilerplate code in `index.ts` to load and instantiate th
 ```typescript
 // @ts-ignore
 import glue from './glue.wasm';
-
-const module = await WebAssembly.compileStreaming(fetch(glue));
-
-const instance = await WebAssembly.instantiate(module, {
-  wasi_snapshot_preview1: {
-    environ_get: () => {},
-    environ_sizes_get: () => {},
-    fd_close: () => {},
-    fd_fdstat_get: () => {},
-    fd_read: () => {},
-    fd_write: () => {},
-    proc_exit: () => {},
-    fd_seek: () => {},
-    fd_fdstat_set_flags: () => {},
-    fd_prestat_get: () => {},
-    fd_prestat_dir_name: () => {},
-    path_open: () => {},
-  },
-});
 ```
+
+{{< repository-code file="src/libs/calculation/index.ts" type="variable" name="module" >}}
+
+{{< repository-code file="src/libs/calculation/index.ts" type="variable" name="instance" >}}
+
 
 We will talk about memory later, especially linear memory. For now, we can already start wrapping exported WebAssembly functions.
 
 We begin with a very simple one: `bezierTotalArcLength`. We grab the function from `instance.exports` and call it with a pointer to a Bezier curve. Since the function returns a single float, there is nothing special to do here.
 
-{{< repository-code file="src/libs/calculation/index.ts" type="function" name="bezierTotalArcLength" >}}
+{{< repository-code file="src/libs/calculation/index.ts" type="variable" name="bezierTotalArcLength" >}}
 
 Next is a slightly more interesting function: `bezierPositionAtArcLength`.
 
@@ -63,7 +49,7 @@ This function also lives in the exports and takes a Bezier pointer plus a distan
 
 A 3D vector here is just three `float` values laid out next to each other in linear memory. Because these are `32-bit` floats, we use a `Float32Array` to read them back. The pointer returned from WebAssembly is simply an offset into the memory buffer.
 
-{{< repository-code file="src/libs/calculation/index.ts" type="function" name="bezierPositionAtArcLength" >}}
+{{< repository-code file="src/libs/calculation/index.ts" type="variable" name="bezierPositionAtArcLength" >}}
 
 Now we reach a more involved function: `bezierFromPoints`.
 
@@ -75,7 +61,7 @@ This is not perfect. There are limitations and edge cases here. That is fine for
 
 On the JavaScript side, we allocate memory, write the coordinates into linear memory, and then pass the pointers to the WebAssembly function.
 
-{{< repository-code file="src/libs/calculation/index.ts" type="function" name="bezierFromPoints" >}}
+{{< repository-code file="src/libs/calculation/index.ts" type="variable" name="bezierFromPoints" >}}
 
 # Demo
 

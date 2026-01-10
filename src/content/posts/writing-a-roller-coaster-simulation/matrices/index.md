@@ -19,13 +19,13 @@ For a linear track segment, this is straightforward. We compute the **position**
 
 > **Note:** At this stage, we only need a valid **forward direction**. There is no need to complicate things with **roll**, so we ignore it for now.
 
-{{< repository-code file="src/maths/linear.ts" type="function" name="matrixAtArcLength" >}}
+{{< repository-code file="src/maths/linear.ts" type="variable" name="matrixAtArcLength" >}}
 
 With this change, we also need to adjust `evaluateMotion`. Instead of receiving a **forward direction** vector, it now receives a **matrix**. We then extract the **forward direction** from that matrix.
 
 This is very straightforward. Here is a small helper to extract the **forward direction** from a **matrix**:
 
-{{< repository-code file="src/maths/matrix4.ts" type="function" name="toFrontDirection" >}}
+{{< repository-code file="src/maths/matrix4.ts" type="variable" name="toFrontDirection" >}}
 
 Now we use this helper to extract the **forward direction**:
 
@@ -35,7 +35,7 @@ const forwardDirection = toFrontDirection(matrix);
 
 With that in place, the full updated `evaluateMotion` function looks like this:
 
-{{< repository-code file="src/helper/physics.ts" type="function" name="evaluateMotion" >}}
+{{< repository-code file="src/helper/physics.ts" type="variable" name="evaluateMotion" >}}
 
 ## What comes next?
 

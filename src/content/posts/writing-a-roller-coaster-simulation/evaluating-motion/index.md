@@ -101,7 +101,7 @@ const distanceTraveled =
 
 So we end up with something like:
 
-{{< repository-code file="src/content/posts/writing-a-roller-coaster-simulation/evaluating-motion/physics.ts" type="function" name="evaluateMotion" >}}
+{{< repository-code file="src/content/posts/writing-a-roller-coaster-simulation/evaluating-motion/physics.ts" type="variable" name="evaluateMotion" >}}
 
 This is already a complete physics step without friction or air resistance.
 
