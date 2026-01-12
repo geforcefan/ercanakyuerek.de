@@ -9,7 +9,7 @@ has always been &lt;code&gt;Vector3(0, 1, 0)&lt;/code&gt;. This is fine for gent
 but it starts to fall apart when the track approaches angles close to
 &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-207fcc6369712c1eb09c0bb6dbff027a"
+ id="react-root-568618c3f09fc550935a32ad551bb6b7"
  width="225px"
  height="285px"
  class="frame"
@@ -22,7 +22,7 @@ but it starts to fall apart when the track approaches angles close to
  
 
  &lt;script&gt;
- document.getElementById('react-root-207fcc6369712c1eb09c0bb6dbff027a').srcdoc = `
+ document.getElementById('react-root-568618c3f09fc550935a32ad551bb6b7').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
