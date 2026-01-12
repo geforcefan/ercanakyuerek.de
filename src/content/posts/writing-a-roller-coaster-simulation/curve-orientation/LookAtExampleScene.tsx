@@ -27,17 +27,17 @@ const exampleCoaster = (await fromURL(LookAtExample)).coaster[0];
 const exampleTrack = exampleCoaster?.tracks[0];
 
 export const LookAtExampleScene = () => {
-  const { lookAt } = useControls({
-    lookAt: {
-      options: ['fixedUpDirection', 'incremental'],
-      value: 'fixedUpDirection',
+  const { method } = useControls({
+    method: {
+      options: ['fixedUpLookAt', 'incremental'],
+      value: 'fixedUpLookAt',
     },
   });
 
   const curve = useMemo(() => {
     const trackCurve = curveFromCustomTrack(exampleTrack, false);
 
-    if (lookAt === 'fixedUpDirection') {
+    if (method === 'fixedUpLookAt') {
       return emptyCurve(
         trackCurve.nodes.map((node, index, nodes) => {
           const isLast = index === nodes.length - 1;
@@ -61,7 +61,7 @@ export const LookAtExampleScene = () => {
         trackCurve.segmentOffsets,
       );
     } else return trackCurve;
-  }, [lookAt]);
+  }, [method]);
 
   const curveWithRoll = useMemo(() => {
     return toLocalTransformed(

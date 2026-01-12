@@ -2,13 +2,12 @@ import last from 'lodash/last';
 import { MathUtils, Matrix4, Vector3 } from 'three';
 
 import { findBoundingIndices } from '../helper/binary-search';
-import { uniformSample } from '../helper/uniform-sample';
 
 import {
-  applyLookRelativeAt,
   applyRoll,
   distance,
   lerp,
+  parallelTransportTransformation,
   rollDirection,
   toFrontDirection,
   toPosition,
@@ -113,15 +112,13 @@ export const insertTransformationMatrix = (
     arcLength = lastNode.arcLength + distanceToLastNode;
   }
 
-  const nodeTransformation = transformation.clone();
-
   if (lastSegmentIndex !== segmentIndex)
     curve.segmentOffsets[segmentIndex] = arcLength;
   else curve.segmentOffsets[segmentIndex + 1] = arcLength;
 
   curve.nodes.push({
     arcLength,
-    transformation: nodeTransformation,
+    transformation,
     segmentIndex,
   });
 };
@@ -132,29 +129,34 @@ export const insertPosition = (
   segmentIndex: number = 0,
 ) => {
   const lastNode = last(curve.nodes);
-
-  if (lastNode) {
-    if (
-      position.distanceTo(toPosition(lastNode.transformation)) <
-      Number.EPSILON
-    )
-      return;
-
-    if (curve.nodes.length === 1) {
-      applyLookRelativeAt(lastNode.transformation, position);
-    }
-    applyLookRelativeAt(lastNode.transformation, position);
-
+  if (!lastNode)
     return insertTransformationMatrix(
       curve,
-      lastNode.transformation.clone().setPosition(position),
-      segmentIndex,
+      new Matrix4().setPosition(position),
+    );
+
+  if (
+    position.distanceTo(toPosition(lastNode.transformation)) <
+    Number.EPSILON
+  )
+    return;
+
+  if (curve.nodes.length === 1) {
+    lastNode.transformation = parallelTransportTransformation(
+      lastNode.transformation,
+      position,
     );
   }
 
+  lastNode.transformation = parallelTransportTransformation(
+    lastNode.transformation,
+    position,
+  );
+
   return insertTransformationMatrix(
     curve,
-    new Matrix4().setPosition(position),
+    lastNode.transformation.clone().setPosition(position),
+    segmentIndex,
   );
 };
 
@@ -181,21 +183,6 @@ export const fromPoints = (points: Vector3[]) => {
 
   points.forEach((point) => {
     insertPosition(curve, point);
-  });
-
-  return curve;
-};
-
-export const fromUniformSampledPositions = (
-  from: number = 0,
-  to: number = 0,
-  resolution: number = 20,
-  positionFn: (at: number, t: number) => Vector3,
-) => {
-  const curve = emptyCurve();
-
-  uniformSample(from, to, resolution, (at, t) => {
-    insertPosition(curve, positionFn(at, t));
   });
 
   return curve;

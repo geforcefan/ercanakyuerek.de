@@ -51,42 +51,44 @@ export const toFrontDirection = (m: Matrix4) => {
   ).normalize();
 };
 
+export const toRotationMatrix = (transformation: Matrix4) => {
+  return transformation.clone().setPosition(0, 0, 0);
+};
+
 export const toPosition = (m: Matrix4) => {
   return new Vector3(m.elements[12], m.elements[13], m.elements[14]);
 };
 
-export const applyLookRelativeAt = (
-  matrix: Matrix4,
-  lookAt: Vector3,
+export const parallelTransportTransformation = (
+  transformation: Matrix4,
+  nextPosition: Vector3,
 ) => {
-  const position = toPosition(matrix);
-  const normal = position.clone().sub(lookAt).normalize();
+  const position = toPosition(transformation);
+  const direction = position.clone().sub(nextPosition).normalize();
 
-  matrix.setPosition(0, 0, 0);
+  const rotationMatrix = toRotationMatrix(transformation);
+  const localRotation = new Matrix4().copy(rotationMatrix).invert();
 
-  const inverseMatrix = new Matrix4().copy(matrix).invert();
-  const transformedNormal = normal
+  const relativeDirection = direction
     .clone()
-    .applyMatrix4(inverseMatrix);
+    .applyMatrix4(localRotation);
 
-  const normalLength = new Vector2(
-    transformedNormal.x,
-    transformedNormal.z,
+  const relativeDirectionLength = new Vector2(
+    relativeDirection.x,
+    relativeDirection.z,
   ).length();
 
   const rotationY = new Matrix4().makeRotationY(
-    Math.atan2(-transformedNormal.x, -transformedNormal.z),
+    Math.atan2(-relativeDirection.x, -relativeDirection.z),
   );
   const rotationX = new Matrix4().makeRotationX(
-    Math.atan2(transformedNormal.y, normalLength),
+    Math.atan2(relativeDirection.y, relativeDirectionLength),
   );
 
-  matrix.multiply(rotationY);
-  matrix.multiply(rotationX);
+  rotationMatrix.multiply(rotationY);
+  rotationMatrix.multiply(rotationX);
 
-  matrix.setPosition(position);
-
-  return matrix;
+  return rotationMatrix.setPosition(position);
 };
 
 export const rollDirection = (m: Matrix4) => {

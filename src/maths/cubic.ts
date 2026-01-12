@@ -1,8 +1,9 @@
 import { Vector2, Vector3 } from 'three';
 
 import { lowerBound } from '../helper/binary-search';
+import { uniformSample } from '../helper/uniform-sample';
 
-import { emptyCurve, fromUniformSampledPositions } from './curve';
+import { emptyCurve, insertPosition } from './curve';
 
 export const clampedCubicSpline = (
   points: Vector2[],
@@ -86,11 +87,15 @@ export const clampedCubicSplineCurve = (
   if (points.length < 2) return emptyCurve();
 
   const spline = clampedCubicSpline(points, startSlope, endSlope);
+  const curve = emptyCurve();
 
-  return fromUniformSampledPositions(
+  uniformSample(
     points[0].x,
     points[points.length - 1].x,
     resolution,
-    (at) => new Vector3(at, evaluate(spline, at), 0),
+    (at) =>
+      insertPosition(curve, new Vector3(at, evaluate(spline, at), 0)),
   );
+
+  return curve;
 };

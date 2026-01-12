@@ -252,8 +252,8 @@ const bezierSplineCurve = (
 
 > **Note:** In the repository, `bezierSplineCurve` has a slightly
 > different implementation that calls utility functions for proper
-> normal calculation. Do not worry about this for now. We will cover
-> normals in the next chapters.
+> curve orientation calculation. Do not worry about this for now. We
+> will cover it in the next chapters.
 
 What happens here is straightforward:
 
@@ -269,10 +269,10 @@ and turn the result into curve nodes.
 
 ## What’s next?
 
-In the next article, we will eventually and finally fix our normal
-problems and create a good `fromPoints` function that calculates
-normals in a way that nothing breaks on loopings or slopes close to
-90°.
+[In the next article]({{< ref "/posts/writing-a-roller-coaster-simulation/curve-orientation.md" >}}), we will eventually and finally fix our curve node
+orientation problems and create a good `fromPoints` function that
+calculates the orientation in a way that nothing breaks on looping or
+slopes close to 90°.
 
 Right now, our `fromPoints` is a temporary junk implementation with
 hard transitions on the edges. That was fine while we only had linear
@@ -282,9 +282,9 @@ easier to see.
 > **Note**: In the demo, I already intentionally use the correct way
 > of inserting positions (by using `fromUniformSampledPositions`
 > instead of `fromPoints` from the last chapter) on the curve with
-> proper normal calculation, so the demo does not jitter. Do not be
-> confused by this. I am basically taking things a bit ahead of time
-> here.
+> proper curve node orientation calculation, so the demo does not
+> jitter. Do not be confused by this. I am basically taking things a
+> bit ahead of time here.
 
 # Demo code
 

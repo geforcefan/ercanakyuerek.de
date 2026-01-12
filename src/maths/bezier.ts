@@ -1,8 +1,11 @@
 import { Vector3 } from 'three';
 
-import { uniformSampleMap } from '../helper/uniform-sample';
+import {
+  uniformSample,
+  uniformSampleMap,
+} from '../helper/uniform-sample';
 
-import { fromUniformSampledPositions } from './curve';
+import { emptyCurve, insertPosition } from './curve';
 
 export const deCasteljau = (points: Vector3[], t: number) => {
   if (points.length < 1)
@@ -36,10 +39,17 @@ export const estimateTotalArcLength = (points: Vector3[]) => {
 export const bezierSplineCurve = (
   points: Vector3[],
   resolution: number = 20,
-) =>
-  fromUniformSampledPositions(
+) => {
+  const curve = emptyCurve();
+
+  uniformSample(
     0,
     estimateTotalArcLength(points),
     resolution,
-    (at, t) => deCasteljau(points, t),
+    (at, t) => {
+      insertPosition(curve, deCasteljau(points, t));
+    },
   );
+
+  return curve;
+};

@@ -1,17 +1,20 @@
-{{ $src := .Get "src" }}
-{{ $height := .Get "height" | default "300px" }}
-{{ $width := .Get "width" | default "100%" }}
-{{ $class := .Get "class" }}
-{{ $path := .Get "path" }}
-{{ $description := .Get "description" }}
-{{ $rootID := printf "react-root-%s" (md5 (printf "%d" now.UnixNano)) }}
+{{ $src := .Get "src" }} {{ $height := .Get "height" | default "300px"
+}} {{ $width := .Get "width" | default "100%" }} {{ $class := .Get
+"class" }} {{ $path := .Get "path" }} {{ $description := .Get
+"description" }} {{ $rootID := printf "react-root-%s" (md5 (printf
+"%d" now.UnixNano)) }}
 
 <div class="embedded {{ $class }}">
-  <iframe id="{{ $rootID }}" width="{{ $width }}" height="{{ $height }}" class="frame"></iframe>
+  <iframe
+    id="{{ $rootID }}"
+    width="{{ $width }}"
+    height="{{ $height }}"
+    class="frame"
+  ></iframe>
 
   {{ if $description }}
   <div class="description" style="width: {{ $width }}">
-<!--    {{ $description | markdownify }}-->
+    {{ $description | markdownify }}
   </div>
   {{ end }}
 
