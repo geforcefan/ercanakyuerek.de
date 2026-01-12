@@ -10,25 +10,31 @@ code.&lt;/p&gt;
 &lt;p&gt;A large part of the work recently was, understanding how &lt;strong&gt;NoLimits
 Roller Coaster 2&lt;/strong&gt; handles track interpolation and roll. I spent quite
 a few hours digging into this, because, well, I more or less
-reimplemented its curve generation logic.&lt;/p&gt;</description></item><item><title>Curve normals</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-normals/</link><pubDate>Sun, 04 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-normals/</guid><description>&lt;h1 id="the-lookat-problem"&gt;The lookAt problem&lt;/h1&gt;
-&lt;p&gt;We already did some basic normal calculations in previous chapters,
-and that mostly worked fine. However, there is a problem when we rely
-too much on a simple &lt;code&gt;lookAt&lt;/code&gt; from &lt;strong&gt;THREE.js&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;The issue is &lt;strong&gt;roll&lt;/strong&gt;, also known as rotation around the Z axis.&lt;/p&gt;
-&lt;p&gt;When we use &lt;code&gt;lookAt&lt;/code&gt;, we have to provide an up vector. So far, we have
-always used &lt;code&gt;(0, 1, 0)&lt;/code&gt;. This works well for gentle slopes, but it
-starts to break down when the track approaches angles close to 90
-degrees.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
- &lt;iframe id="react-root-19c5968cfdde1138cab5eba6b393368a" width="225px" height="285px" class="frame"&gt;&lt;/iframe&gt;
+reimplemented its curve generation logic.&lt;/p&gt;</description></item><item><title>Curve orientation</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/</link><pubDate>Sun, 04 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/</guid><description>&lt;p&gt;In earlier chapters, we already computed basic orientations along the
+track, and for a while that worked reasonably well. The trouble starts
+when we rely too much on a simple &lt;code&gt;lookAt&lt;/code&gt; from &lt;strong&gt;THREE.js&lt;/strong&gt; together
+with a fixed up direction.&lt;/p&gt;
+&lt;p&gt;The missing piece here is &lt;strong&gt;roll&lt;/strong&gt;, also known as rotation around the
+&lt;strong&gt;forward direction&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Whenever we use &lt;code&gt;lookAt&lt;/code&gt;, we must provide an up vector. So far, this
+has always been &lt;code&gt;Vector3(0, 1, 0)&lt;/code&gt;. This is fine for gentle slopes,
+but it starts to fall apart when the track approaches angles close to
+&lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
+ &lt;iframe
+ id="react-root-207fcc6369712c1eb09c0bb6dbff027a"
+ width="225px"
+ height="285px"
+ class="frame"
+ &gt;&lt;/iframe&gt;
 
  
  &lt;div class="description" style="width: 225px"&gt;
-
+ An interactive example of a Bézier curve, drag the controls around to see changes in shape
  &lt;/div&gt;
  
 
  &lt;script&gt;
- document.getElementById('react-root-19c5968cfdde1138cab5eba6b393368a').srcdoc = `
+ document.getElementById('react-root-207fcc6369712c1eb09c0bb6dbff027a').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -45,6 +51,7 @@ degrees.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>h
  `;
  &lt;/script&gt;
 &lt;/div&gt;
+
 &lt;p&gt;So, now it is finally time to build an actual &lt;strong&gt;Bézier curve&lt;/strong&gt; instead
 of only linear segments.&lt;/p&gt;
 &lt;p&gt;I do not think Bézier curves are particularly well suited for
@@ -138,16 +145,21 @@ nicer API to work with.&lt;/p&gt;
 &lt;p&gt;I have created a very basic template for this. You may notice that we
 define a number of imports for &lt;strong&gt;WASI&lt;/strong&gt;, but all of them are empty.
 This looks suspicious at first, so let us talk about that.&lt;/p&gt;</description></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
- &lt;iframe id="react-root-09742ee86f14289c14f871a3b2319507" width="225px" height="285px" class="frame"&gt;&lt;/iframe&gt;
+ &lt;iframe
+ id="react-root-513891dd6d5e2873280531564ec2d259"
+ width="225px"
+ height="285px"
+ class="frame"
+ &gt;&lt;/iframe&gt;
 
  
  &lt;div class="description" style="width: 225px"&gt;
-
+ Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
  &lt;/div&gt;
  
 
  &lt;script&gt;
- document.getElementById('react-root-09742ee86f14289c14f871a3b2319507').srcdoc = `
+ document.getElementById('react-root-513891dd6d5e2873280531564ec2d259').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -164,6 +176,7 @@ This looks suspicious at first, so let us talk about that.&lt;/p&gt;</descriptio
  `;
  &lt;/script&gt;
 &lt;/div&gt;
+
 &lt;p&gt;In this article, we&amp;rsquo;ll be exploring a more interesting example where
 we&amp;rsquo;ll construct a Bézier curve, evaluate nodes on it, and write a
 function that gives any position on the curve by a length parameter.

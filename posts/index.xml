@@ -45,21 +45,20 @@ arc length mapping yet.</p>
 You can play around with it and see how the track interpolation, roll,
 and physics behave together.</p>
 <p>As always, the full code is available below.</p>
-
-
-
-
-
-
-
+      
 
 <div class="embedded ">
-  <iframe id="react-root-fb59ca090da772505d68fb2c699738b7" width="100%" height="560px" class="frame"></iframe>
+  <iframe
+    id="react-root-c0d44bc67e0db528548a26865f01fd03"
+    width="100%"
+    height="560px"
+    class="frame"
+  ></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-fb59ca090da772505d68fb2c699738b7').srcdoc = `
+    document.getElementById('react-root-c0d44bc67e0db528548a26865f01fd03').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -76,6 +75,7 @@ and physics behave together.</p>
   `;
   </script>
 </div>
+
 <h1 id="code">Code</h1>
 <p>
     If you want to run the code locally, clone this
@@ -140,74 +140,76 @@ and physics behave together.</p>
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
 
-]]></content></item><item><title>Curve normals</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-normals/</link><pubDate>Sun, 04 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-normals/</guid><description>&lt;h1 id="the-lookat-problem"&gt;The lookAt problem&lt;/h1&gt;
-&lt;p&gt;We already did some basic normal calculations in previous chapters,
-and that mostly worked fine. However, there is a problem when we rely
-too much on a simple &lt;code&gt;lookAt&lt;/code&gt; from &lt;strong&gt;THREE.js&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;The issue is &lt;strong&gt;roll&lt;/strong&gt;, also known as rotation around the Z axis.&lt;/p&gt;
-&lt;p&gt;When we use &lt;code&gt;lookAt&lt;/code&gt;, we have to provide an up vector. So far, we have
-always used &lt;code&gt;(0, 1, 0)&lt;/code&gt;. This works well for gentle slopes, but it
-starts to break down when the track approaches angles close to 90
-degrees.&lt;/p&gt;</description><content type="html"><![CDATA[<h1 id="the-lookat-problem">The lookAt problem</h1>
-<p>We already did some basic normal calculations in previous chapters,
-and that mostly worked fine. However, there is a problem when we rely
-too much on a simple <code>lookAt</code> from <strong>THREE.js</strong>.</p>
-<p>The issue is <strong>roll</strong>, also known as rotation around the Z axis.</p>
-<p>When we use <code>lookAt</code>, we have to provide an up vector. So far, we have
-always used <code>(0, 1, 0)</code>. This works well for gentle slopes, but it
-starts to break down when the track approaches angles close to 90
-degrees.</p>
+]]></content></item><item><title>Curve orientation</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/</link><pubDate>Sun, 04 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/</guid><description>&lt;p&gt;In earlier chapters, we already computed basic orientations along the
+track, and for a while that worked reasonably well. The trouble starts
+when we rely too much on a simple &lt;code&gt;lookAt&lt;/code&gt; from &lt;strong&gt;THREE.js&lt;/strong&gt; together
+with a fixed up direction.&lt;/p&gt;
+&lt;p&gt;The missing piece here is &lt;strong&gt;roll&lt;/strong&gt;, also known as rotation around the
+&lt;strong&gt;forward direction&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Whenever we use &lt;code&gt;lookAt&lt;/code&gt;, we must provide an up vector. So far, this
+has always been &lt;code&gt;Vector3(0, 1, 0)&lt;/code&gt;. This is fine for gentle slopes,
+but it starts to fall apart when the track approaches angles close to
+&lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description><content type="html"><![CDATA[<p>In earlier chapters, we already computed basic orientations along the
+track, and for a while that worked reasonably well. The trouble starts
+when we rely too much on a simple <code>lookAt</code> from <strong>THREE.js</strong> together
+with a fixed up direction.</p>
+<p>The missing piece here is <strong>roll</strong>, also known as rotation around the
+<strong>forward direction</strong>.</p>
+<p>Whenever we use <code>lookAt</code>, we must provide an up vector. So far, this
+has always been <code>Vector3(0, 1, 0)</code>. This is fine for gentle slopes,
+but it starts to fall apart when the track approaches angles close to
+<strong>90 degrees</strong>.</p>
 <p>At that point, the curve direction points almost straight up. The up
 vector also points up. Now both vectors look into the sky, and the
-matrix becomes unstable.</p>
+resulting <strong>matrix</strong> becomes unstable.</p>
 <p>When the track points straight up, roll is no longer uniquely defined.
 Rotating around that direction does not change where the track is
-pointing, so <code>lookAt</code> has no stable orientation to choose.</p>
-<p>Mathematically, this happens because <code>lookAt</code> builds an orientation
-using cross products. When the forward direction becomes parallel, or
-nearly parallel, to the up vector, the cross product between them
-approaches zero. That means the remaining axes of the matrix cannot be
-constructed reliably anymore.</p>
-<p>The result is sudden flips, jitter, or strange twisting along the
-track, especially around slopes close to 90 degrees.</p>
-<h1 id="solution">Solution</h1>
+pointing, so <code>lookAt</code> has no stable orientation to choose from.</p>
+<p>Mathematically, this happens because <code>lookAt</code> constructs an
+orientation using cross products. When the <strong>forward direction</strong>
+becomes parallel, or nearly parallel, to the up vector, the cross
+product between them approaches zero. Once that happens, the remaining
+axes of the <strong>matrix</strong> cannot be built reliably anymore.</p>
+<p>The visible result is sudden flips, jitter, or strange twisting along
+the track, especially around slopes <strong>close to 90 degrees</strong>.</p>
+<h1 id="incremental-orientation">Incremental orientation</h1>
 <p>To fix this, we need a slightly different approach. Instead of
 computing each orientation in isolation, we build it
-<strong>incrementally</strong>. We start from the matrix of the previous node and
-apply a small rotation that follows the curve direction. In other
-words, we still use a <code>lookAt</code>-like idea, but we guide it using the
-orientation from the previous node.</p>
-<p>This way, the up direction is not reset every time. It slowly rotates
-along with the curve, respecting the existing roll instead of fighting
-against it.</p>
-<p>The exact math and geometry behind this is not trivial, and explaining
-it properly would easily double the length of this chapter. For now,
-it is enough to think of it like this: <em>we incrementally add rotation
-while respecting the orientation of the previous node</em>.</p>
-<p>In this chapter, we will not go into mathematical details. Instead, we
-focus on the implementation and simply compare the two approaches in
-the following interactive demo by switching the lookAt method between
-a fixed up direction and an incremental rotation based on the previous
-node:</p>
-
-
-
-
-
-
-
+<strong>incrementally</strong>. We start from the transformation <strong>matrix</strong> of the
+previous node and apply a small rotation that follows the curve
+direction.</p>
+<p>In other words, we still align the orientation with the curve, but we
+do it <strong>relative to the previous node’s orientation</strong>, instead of
+rebuilding everything from scratch.</p>
+<p>This way, the up direction is not reset at every step. It slowly
+rotates along the curve, preserving the existing roll instead of
+fighting against it.</p>
+<p>This technique is commonly called <strong>parallel transport</strong>, because the
+orientation is transported along the curve with as little rotation as
+possible.</p>
+<p>Think of it like this: we add rotation step by step while respecting
+the previous orientation.</p>
+<p>The following interactive demo lets us switch between a <strong>fixed-up
+lookAt orientation</strong> and an <strong>incremental orientation based on the
+previous node</strong>. This helps visualize the problem.</p>
+      
 
 <div class="embedded ">
-  <iframe id="react-root-8fcdf40f7d89e061f13ce02b85452794" width="100%" height="500px" class="frame"></iframe>
+  <iframe
+    id="react-root-4e45a3752ffcbf64f8dc89ff0d8eee03"
+    width="100%"
+    height="500px"
+    class="frame"
+  ></iframe>
 
   
   <div class="description" style="width: 100%">
-
+    <strong>fixed-up lookAt orientation</strong>: Roll becomes unstable near 90° slopes. <strong>Incremental rotation</strong>: Stable roll and smooth orientation along the curve.
   </div>
   
 
   <script>
-    document.getElementById('react-root-8fcdf40f7d89e061f13ce02b85452794').srcdoc = `
+    document.getElementById('react-root-4e45a3752ffcbf64f8dc89ff0d8eee03').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -217,19 +219,336 @@ node:</p>
         <div id="root" class="full-screen"></div>
         \x3Cscript type="module">
           import { renderContentComponentByPath } from '/scripts/render-content-component.js';
-          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/curve-normals\/LookAtExampleScene.tsx');
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/curve-orientation\/LookAtExampleScene.tsx');
         <\/script>
       </body>
     </html>
   `;
   </script>
 </div>
+
+<h2 id="parallel-transport">Parallel transport</h2>
+<p>Now we can look at how to actually solve the fixed-up <code>lookAt</code>
+problem.</p>
+<p>We already know the key idea: instead of rebuilding the orientation at
+every node, we rotate <strong>incrementally</strong>, relative to the previous
+node.</p>
+<p>For each curve node step, we compute a transported frame and return a
+new transformation <strong>matrix</strong>.</p>
+<p>The steps are:</p>
+<ul>
+<li>Compute the direction towards the next curve node from the current
+position.</li>
+<li>Extract the current rotation from the transformation matrix.</li>
+<li>Transform the direction using the current local rotation so it is
+expressed relative to the orientation of the current node.</li>
+<li>Derive yaw and pitch from that relative direction.</li>
+<li>Apply yaw and pitch derived from the relative direction to the
+transformation matrix. The relative direction itself represents the
+increment.</li>
+</ul>
+<p>The result is a function that parallel-transports a transformation
+matrix and returns a new, transported transformation matrix:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">parallelTransportTransformation</span> <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">transformation</span>: <span style="color:#66d9ef">Matrix4</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">nextPosition</span>: <span style="color:#66d9ef">Vector3</span>,
+</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">position</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">toPosition</span>(<span style="color:#a6e22e">transformation</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">direction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">position</span>.<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">sub</span>(<span style="color:#a6e22e">nextPosition</span>).<span style="color:#a6e22e">normalize</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rotationMatrix</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">toRotationMatrix</span>(<span style="color:#a6e22e">transformation</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">localRotation</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Matrix4</span>().<span style="color:#a6e22e">copy</span>(<span style="color:#a6e22e">rotationMatrix</span>).<span style="color:#a6e22e">invert</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">relativeDirection</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">direction</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">clone</span>()
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">applyMatrix4</span>(<span style="color:#a6e22e">localRotation</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">relativeDirectionLength</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector2</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">relativeDirection</span>.<span style="color:#a6e22e">x</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">relativeDirection</span>.<span style="color:#a6e22e">z</span>,
+</span></span><span style="display:flex;"><span>  ).<span style="color:#a6e22e">length</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rotationY</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Matrix4</span>().<span style="color:#a6e22e">makeRotationY</span>(
+</span></span><span style="display:flex;"><span>    Math.<span style="color:#a6e22e">atan2</span>(<span style="color:#f92672">-</span><span style="color:#a6e22e">relativeDirection</span>.<span style="color:#a6e22e">x</span>, <span style="color:#f92672">-</span><span style="color:#a6e22e">relativeDirection</span>.<span style="color:#a6e22e">z</span>),
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rotationX</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Matrix4</span>().<span style="color:#a6e22e">makeRotationX</span>(
+</span></span><span style="display:flex;"><span>    Math.<span style="color:#a6e22e">atan2</span>(<span style="color:#a6e22e">relativeDirection</span>.<span style="color:#a6e22e">y</span>, <span style="color:#a6e22e">relativeDirectionLength</span>),
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">rotationMatrix</span>.<span style="color:#a6e22e">multiply</span>(<span style="color:#a6e22e">rotationY</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">rotationMatrix</span>.<span style="color:#a6e22e">multiply</span>(<span style="color:#a6e22e">rotationX</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">rotationMatrix</span>.<span style="color:#a6e22e">setPosition</span>(<span style="color:#a6e22e">position</span>);
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
+<p>We also need a small helper that extracts a rotation matrix from a
+transformation matrix. This assumes there is <strong>no scale</strong> involved.
+Since we never use scale for curve transformations, this
+simplification is acceptable and keeps things simple.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">toRotationMatrix</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">transformation</span> : <span style="color:#66d9ef">Matrix4</span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">transformation</span>.<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">setPosition</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+<h2 id="constructing-a-curve-properly">Constructing a curve properly</h2>
+<p>Now that we can parallel-transport a transformation matrix, we need to
+actually use it.</p>
+<p>In earlier chapters, we built curves using a temporary helper that
+simply connected points without caring about orientation. Now is the
+point where we finally remove it.</p>
+<p>We introduce two new methods:</p>
+<ul>
+<li><code>insertTransformationMatrix</code>, which inserts a transformation matrix
+into the curve and calculates arc length and updates segment
+offsets.</li>
+<li><code>insertPosition</code>, which inserts a position and computes the correct
+orientation using parallel transport.</li>
+</ul>
+<p>We start with <code>insertTransformationMatrix</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">insertTransformationMatrix</span> <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">curve</span>: <span style="color:#66d9ef">Curve</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">transformation</span>: <span style="color:#66d9ef">Matrix4</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">segmentIndex</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lastNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">last</span>(<span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lastSegmentIndex</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">lastNode</span><span style="color:#f92672">?</span>.<span style="color:#a6e22e">segmentIndex</span> <span style="color:#f92672">??</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">arcLength</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">lastNode</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">distanceToLastNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">distance</span>(
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">lastNode</span>.<span style="color:#a6e22e">transformation</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">transformation</span>,
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">distanceToLastNode</span> <span style="color:#f92672">&lt;</span> Number.<span style="color:#a6e22e">EPSILON</span>) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">arcLength</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">lastNode</span>.<span style="color:#a6e22e">arcLength</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">distanceToLastNode</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">lastSegmentIndex</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">segmentIndex</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">segmentOffsets</span>[<span style="color:#a6e22e">segmentIndex</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">arcLength</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">segmentOffsets</span>[<span style="color:#a6e22e">segmentIndex</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">arcLength</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>.<span style="color:#a6e22e">push</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">arcLength</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transformation</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">segmentIndex</span>,
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
+<p>What happens here is fairly straightforward:</p>
+<ul>
+<li>We look up the last node’s position and compute the distance to the
+new matrix.</li>
+<li>We add that distance to the node’s arc length.</li>
+<li>If the distance is zero, we skip inserting the node.</li>
+<li>We compute the segment index and update the segment offset list
+accordingly.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> Segment offsets are a fast lookup structure for segment
+lengths. For example, offsets like <code>[0, 20, 30]</code> tell us that
+segment 1 spans arc lengths from 20 to 30. This will become useful
+later.</p></blockquote>
+<p>Next, we implement <code>insertPosition</code>, which handles the parallel
+transport logic. The approach is as follows:</p>
+<ul>
+<li>The first point is added with an empty transformation matrix that
+only contains a position.</li>
+<li>Once we have at least one node, we treat the last node as the
+<strong>left</strong> side and the new position as the <strong>right</strong> side.</li>
+<li>If the distance between them is zero, we skip the insertion.</li>
+<li>We parallel-transport the <strong>left transformation matrix</strong> toward the
+<strong>right</strong> position.</li>
+<li>The very first node needs to be transported twice to initialise its
+orientation.</li>
+<li>The last node always keeps the same orientation as its predecessor,
+since there is no next point to define a direction.</li>
+</ul>
+<p>This is easier to understand once you look at the implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">insertPosition</span> <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">curve</span>: <span style="color:#66d9ef">Curve</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">position</span>: <span style="color:#66d9ef">Vector3</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">segmentIndex</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lastNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">last</span>(<span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">lastNode</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">insertTransformationMatrix</span>(
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">curve</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Matrix4</span>().<span style="color:#a6e22e">setPosition</span>(<span style="color:#a6e22e">position</span>),
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">position</span>.<span style="color:#a6e22e">distanceTo</span>(<span style="color:#a6e22e">toPosition</span>(<span style="color:#a6e22e">lastNode</span>.<span style="color:#a6e22e">transformation</span>)) <span style="color:#f92672">&lt;</span>
+</span></span><span style="display:flex;"><span>    Number.<span style="color:#a6e22e">EPSILON</span>
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">lastNode</span>.<span style="color:#a6e22e">transformation</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">parallelTransportTransformation</span>(
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">lastNode</span>.<span style="color:#a6e22e">transformation</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">position</span>,
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">lastNode</span>.<span style="color:#a6e22e">transformation</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">parallelTransportTransformation</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">lastNode</span>.<span style="color:#a6e22e">transformation</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">position</span>,
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">insertTransformationMatrix</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">curve</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">lastNode</span>.<span style="color:#a6e22e">transformation</span>.<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">setPosition</span>(<span style="color:#a6e22e">position</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">segmentIndex</span>,
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
+<p>With that in place, we can now update <code>bezierSplineCurve</code>. In earlier
+chapters, this function relied on a temporary <code>fromPoints</code> helper with
+no proper orientation. We can now replace that with repeated calls to
+<code>insertPosition</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bezierSplineCurve</span> <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[],
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolution</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">curve</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">emptyCurve</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">uniformSample</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">estimateTotalArcLength</span>(<span style="color:#a6e22e">points</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">resolution</span>,
+</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">at</span>, <span style="color:#a6e22e">t</span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">insertPosition</span>(<span style="color:#a6e22e">curve</span>, <span style="color:#a6e22e">deCasteljau</span>(<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">t</span>));
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">curve</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
+<h1 id="what-comes-next">What comes next?</h1>
+<p>At this point, we finally have a stable orientation along the curve,
+without jitter near steep slopes. It would be tempting to go straight
+into a proper <strong>roll interpolation</strong>, but before doing that, we want
+to take a step back.</p>
+<p>The next step will be the introduction of <strong>NURBS curves</strong>, which
+allow much more freedom than <strong>Bézier curves</strong> and make
+experimentation far more interesting.</p>
+<p>The theory behind this, like continuity, knot vectors, and curve
+order, can get confusing quickly. For now, we keep the implementation
+practical and leave most of the theory for a separate spline-focused
+series.</p>
+<p>If you want an introduction in the meantime, the video
+<a href="https://www.youtube.com/watch?v=jvPPXbo87ds">The Continuity of Splines</a>
+by <a href="https://www.youtube.com/@acegikmo">Ferya Holmèr</a> is gold. It is
+perfect and covers almost everything you need to understand splines in
+general.</p>
+<h1 id="interactive-demo">Interactive demo</h1>
+<p>This chapter ends with a small interactive example. You can move the
+control points of a Bézier curve and observe how the orientation
+behaves. There should be no sudden flips or jitter near <strong>90 degree</strong>
+slopes.</p>
+      
+
+<div class="embedded ">
+  <iframe
+    id="react-root-e33288da8582b073a6bb2e394efbb70d"
+    width="100%"
+    height="380px"
+    class="frame"
+  ></iframe>
+
+  
+
+  <script>
+    document.getElementById('react-root-e33288da8582b073a6bb2e394efbb70d').srcdoc = `
+    <!DOCTYPE html>
+    <html lang="en" data-theme="dark">
+      <head>
+          <base href="${location.origin}/">
+      </head>
+        <body class="content-component">
+        <div id="root" class="full-screen"></div>
+        \x3Cscript type="module">
+          import { renderContentComponentByPath } from '/scripts/render-content-component.js';
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/curve-orientation\/CurveOrientationDemoScene.tsx');
+        <\/script>
+      </body>
+    </html>
+  `;
+  </script>
+</div>
+
+<h1 id="demo-code">Demo code</h1>
+<p>
+    If you want to run the code locally, clone this
+    <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
+    run <code>npm install</code> and <code>npm run dev-scripts</code>,
+    then open this
+    <a href="http://localhost:3000/src/content/posts/writing-a-roller-coaster-simulation/curve-orientation/CurveOrientationDemoScene.tsx" target="_blank">link</a>
+    in your browser.
+</p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">useMemo</span>, <span style="color:#a6e22e">useState</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Line</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@react-three/drei&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useControls</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;leva&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Vector3</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;three&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">bezierSplineCurve</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../maths/bezier&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useColors</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../hooks/useColors&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">CurveWireframe</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/CurveWireframe&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Ground</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/Ground&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">PerspectiveScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/PerspectiveScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">CurveOrientationDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">pov</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useControls</span>({ <span style="color:#a6e22e">pov</span>: <span style="color:#66d9ef">false</span> });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">colors</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useColors</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">setPoints</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>([
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">12</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>  ]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">curve</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useMemo</span>(() <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">bezierSplineCurve</span>(<span style="color:#a6e22e">points</span>), [<span style="color:#a6e22e">points</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">PerspectiveScene</span> <span style="color:#a6e22e">cameraControlsActive</span><span style="color:#f92672">=</span>{<span style="color:#f92672">!</span><span style="color:#a6e22e">pov</span>}&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">group</span> <span style="color:#a6e22e">position</span><span style="color:#f92672">=</span>{[<span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>]}&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Line</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">points</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">points</span>}
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">colors</span>.<span style="color:#a6e22e">highlight</span>}
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">segments</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">true</span>}
+</span></span><span style="display:flex;"><span>        /&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">DragControlPoints</span> <span style="color:#a6e22e">points</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">points</span>} <span style="color:#a6e22e">setPoints</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">setPoints</span>} /&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">CurveWireframe</span> <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">curve</span>} /&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">TrainWithPhysics</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">curve</span>}
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">init</span><span style="color:#f92672">=</span>{{ <span style="color:#a6e22e">velocity</span>: <span style="color:#66d9ef">17</span> }}
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">activateCamera</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">pov</span>}
+</span></span><span style="display:flex;"><span>        /&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">group</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">group</span> <span style="color:#a6e22e">position</span><span style="color:#f92672">=</span>{[<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>]}&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Ground</span> /&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">group</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">PerspectiveScene</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
+
 ]]></content></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
-&lt;iframe id="react-root-19c5968cfdde1138cab5eba6b393368a" width="225px" height="285px" class="frame"&gt;&lt;/iframe&gt;
+&lt;iframe
+id="react-root-207fcc6369712c1eb09c0bb6dbff027a"
+width="225px"
+height="285px"
+class="frame"
+&gt;&lt;/iframe&gt;
 &lt;div class="description" style="width: 225px"&gt;
+An interactive example of a Bézier curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-19c5968cfdde1138cab5eba6b393368a').srcdoc = `
+document.getElementById('react-root-207fcc6369712c1eb09c0bb6dbff027a').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -252,25 +571,24 @@ of only linear segments.&lt;/p&gt;
 hand-building real roller coaster tracks. But they are simple to
 implement, easy to visualize, and most importantly, they finally give
 us &lt;em&gt;real curvature&lt;/em&gt; instead of straight lines everywhere. And
-honestly, we have been staring at straight lines long enough.&lt;/p&gt;</description><content type="html"><![CDATA[
-
-
-
-
-
-
+honestly, we have been staring at straight lines long enough.&lt;/p&gt;</description><content type="html"><![CDATA[      
 
 <div class="embedded float-right">
-  <iframe id="react-root-19c5968cfdde1138cab5eba6b393368a" width="225px" height="285px" class="frame"></iframe>
+  <iframe
+    id="react-root-207fcc6369712c1eb09c0bb6dbff027a"
+    width="225px"
+    height="285px"
+    class="frame"
+  ></iframe>
 
   
   <div class="description" style="width: 225px">
-
+    An interactive example of a Bézier curve, drag the controls around to see changes in shape
   </div>
   
 
   <script>
-    document.getElementById('react-root-19c5968cfdde1138cab5eba6b393368a').srcdoc = `
+    document.getElementById('react-root-207fcc6369712c1eb09c0bb6dbff027a').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -287,6 +605,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
   `;
   </script>
 </div>
+
 <p>So, now it is finally time to build an actual <strong>Bézier curve</strong> instead
 of only linear segments.</p>
 <p>I do not think Bézier curves are particularly well suited for
@@ -305,21 +624,20 @@ It just consumes curve nodes and keeps going. That was the whole point
 of the abstraction.</p>
 <p>This time, I will first show you a demo with a Bézier curve, just to
 spoil the ending a bit:</p>
-
-
-
-
-
-
-
+      
 
 <div class="embedded ">
-  <iframe id="react-root-c840da2e88cd9dff04bc084492a37d0d" width="100%" height="380px" class="frame"></iframe>
+  <iframe
+    id="react-root-a609379ac01840065432d0dd86b15acc"
+    width="100%"
+    height="380px"
+    class="frame"
+  ></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-c840da2e88cd9dff04bc084492a37d0d').srcdoc = `
+    document.getElementById('react-root-a609379ac01840065432d0dd86b15acc').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -336,6 +654,7 @@ spoil the ending a bit:</p>
   `;
   </script>
 </div>
+
 <h1 id="multiple-algorithms">Multiple algorithms</h1>
 <p>A Bézier curve can be evaluated in different ways. In practice, there
 are multiple algorithms to compute points on the curve.</p>
@@ -368,25 +687,24 @@ thank you.</p></blockquote>
 <p>Assume we have <strong>4 control points</strong> and we want to know the
 <strong>position</strong> for a parameter <code>t</code> in the range <code>[0, 1]</code>. What we
 actually do is nothing more than repeated <strong>linear interpolation</strong>.</p>
-
-
-
-
-
-
-
+      
 
 <div class="embedded float-right">
-  <iframe id="react-root-5b50d5eb7bd16a489d9ba22206327fe9" width="355px" height="560px" class="frame"></iframe>
+  <iframe
+    id="react-root-2c8264cb9458c25b5527319064947a08"
+    width="355px"
+    height="560px"
+    class="frame"
+  ></iframe>
 
   
   <div class="description" style="width: 355px">
-
+    Each animation loop shows one iteration of linear interpolations in the de Casteljau algorithm. After all three iterations described in the article, the Bézier curve is drawn.
   </div>
   
 
   <script>
-    document.getElementById('react-root-5b50d5eb7bd16a489d9ba22206327fe9').srcdoc = `
+    document.getElementById('react-root-2c8264cb9458c25b5527319064947a08').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -403,6 +721,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
   `;
   </script>
 </div>
+
 <p>First, we interpolate between the control points:</p>
 <ul>
 <li><code>a</code> = interpolate between <code>p0</code> and <code>p1</code></li>
@@ -482,25 +801,24 @@ actually want to generate along that curve?</p>
 <p>More nodes mean better precision. Fewer nodes mean better performance.
 We do not need perfect precision here, so we need to find a reasonable
 <strong>sweet spot</strong>.</p>
-
-
-
-
-
-
-
+      
 
 <div class="embedded float-right">
-  <iframe id="react-root-92c941a982ee8201c6dc97dc1dfc63ad" width="355px" height="485px" class="frame"></iframe>
+  <iframe
+    id="react-root-8d6782a79229a3192e9b60adc46e11ae"
+    width="355px"
+    height="485px"
+    class="frame"
+  ></iframe>
 
   
   <div class="description" style="width: 355px">
-
+    Interactive visualization of curve length estimation using uniformly sampled points. Try different sample counts and Bézier shapes to see when the estimate becomes good enough. This is how I settled on 8 points as a reasonable sweet spot.
   </div>
   
 
   <script>
-    document.getElementById('react-root-92c941a982ee8201c6dc97dc1dfc63ad').srcdoc = `
+    document.getElementById('react-root-8d6782a79229a3192e9b60adc46e11ae').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -517,6 +835,7 @@ We do not need perfect precision here, so we need to find a reasonable
   `;
   </script>
 </div>
+
 <p>In practice, this is what I usually do:</p>
 <ul>
 <li>First, estimate the arc length of the Bézier curve by uniformly
@@ -629,8 +948,8 @@ explain it briefly.</p>
 </span></span></code></pre></div><blockquote>
 <p><strong>Note:</strong> In the repository, <code>bezierSplineCurve</code> has a slightly
 different implementation that calls utility functions for proper
-normal calculation. Do not worry about this for now. We will cover
-normals in the next chapters.</p></blockquote>
+curve orientation calculation. Do not worry about this for now. We
+will cover it in the next chapters.</p></blockquote>
 <p>What happens here is straightforward:</p>
 <ul>
 <li>We sample from <code>0</code> to the <strong>estimated length</strong> of the Bézier curve.</li>
@@ -643,10 +962,10 @@ algorithm with <code>t</code> in the range <code>[0, 1]</code>.</li>
 <p>There is nothing more going on here. We sample the curve, evaluate it,
 and turn the result into curve nodes.</p>
 <h2 id="whats-next">What’s next?</h2>
-<p>In the next article, we will eventually and finally fix our normal
-problems and create a good <code>fromPoints</code> function that calculates
-normals in a way that nothing breaks on loopings or slopes close to
-90°.</p>
+<p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/">In the next article</a>, we will eventually and finally fix our curve node
+orientation problems and create a good <code>fromPoints</code> function that
+calculates the orientation in a way that nothing breaks on looping or
+slopes close to 90°.</p>
 <p>Right now, our <code>fromPoints</code> is a temporary junk implementation with
 hard transitions on the edges. That was fine while we only had linear
 segments, but now we actually have curvature, so the problems are much
@@ -655,9 +974,9 @@ easier to see.</p>
 <p><strong>Note</strong>: In the demo, I already intentionally use the correct way
 of inserting positions (by using <code>fromUniformSampledPositions</code>
 instead of <code>fromPoints</code> from the last chapter) on the curve with
-proper normal calculation, so the demo does not jitter. Do not be
-confused by this. I am basically taking things a bit ahead of time
-here.</p></blockquote>
+proper curve node orientation calculation, so the demo does not
+jitter. Do not be confused by this. I am basically taking things a
+bit ahead of time here.</p></blockquote>
 <h1 id="demo-code">Demo code</h1>
 <p>
     If you want to run the code locally, clone this
@@ -750,25 +1069,24 @@ on the right. Everything in between is just interpolation.</p>
 <p>This can be hard to visualize just by reading, so the example below
 shows four points and a slider. You can also move the control points
 to see what happens when the requested distance overshoots a segment.</p>
-
-
-
-
-
-
-
+      
 
 <div class="embedded ">
-  <iframe id="react-root-8a3100e3159f7f328da25a95d3832f0a" width="100%" height="260px" class="frame"></iframe>
+  <iframe
+    id="react-root-1f01b80c9f2439f18f4a4d7223b0196c"
+    width="100%"
+    height="260px"
+    class="frame"
+  ></iframe>
 
   
   <div class="description" style="width: 100%">
-
+    As you move the slider, you request a distance along the track. You can immediately see between which two nodes that distance is sandwiched.
   </div>
   
 
   <script>
-    document.getElementById('react-root-8a3100e3159f7f328da25a95d3832f0a').srcdoc = `
+    document.getElementById('react-root-1f01b80c9f2439f18f4a4d7223b0196c').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -785,6 +1103,7 @@ to see what happens when the requested distance overshoots a segment.</p>
   `;
   </script>
 </div>
+
 <h1 id="find-nodes-sandwiching-the-requested-distance">Find nodes sandwiching the requested distance</h1>
 <p>In the example above, we look for the two nodes that sandwich the
 requested distance and then linearly interpolate the <strong>position</strong>
@@ -1116,25 +1435,24 @@ splines</strong>. The nice part is that we will not have to touch the
 simulation logic at all. Only the curve generation changes, which is
 exactly what we were aiming for from the beginning.</p>
 <h2 id="demo-with-linear-track-segments">Demo with linear track segments</h2>
-
-
-
-
-
-
-
+      
 
 <div class="embedded ">
-  <iframe id="react-root-3f4b54140d604b97cac06253830bbb15" width="100%" height="380px" class="frame"></iframe>
+  <iframe
+    id="react-root-26c1936fbd29e9808b4324ce3f8dda00"
+    width="100%"
+    height="380px"
+    class="frame"
+  ></iframe>
 
   
   <div class="description" style="width: 100%">
-
+    Move the control points around to get a feeling for building a roller coaster track with physics motion.
   </div>
   
 
   <script>
-    document.getElementById('react-root-3f4b54140d604b97cac06253830bbb15').srcdoc = `
+    document.getElementById('react-root-26c1936fbd29e9808b4324ce3f8dda00').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1151,6 +1469,7 @@ exactly what we were aiming for from the beginning.</p>
   `;
   </script>
 </div>
+
 <h1 id="demo-code">Demo code</h1>
 <p>
     If you want to run the code locally, clone this
@@ -1316,21 +1635,20 @@ described without rewriting everything built on top of it.</p>
 as before. The only change is that the simulation now uses
 <code>transformationAtArcLength</code> internally.</p>
 <p>For completeness, the full demo is shown below.</p>
-
-
-
-
-
-
-
+      
 
 <div class="embedded ">
-  <iframe id="react-root-450964818a10d88cb1b278c1662ff36b" width="100%" height="380px" class="frame"></iframe>
+  <iframe
+    id="react-root-735db7e28fb4f520e6b9dc9977131eae"
+    width="100%"
+    height="380px"
+    class="frame"
+  ></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-450964818a10d88cb1b278c1662ff36b').srcdoc = `
+    document.getElementById('react-root-735db7e28fb4f520e6b9dc9977131eae').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1347,6 +1665,7 @@ as before. The only change is that the simulation now uses
   `;
   </script>
 </div>
+
 <p>
     If you want to run the code locally, clone this
     <a href="https://github.com/geforcefan/ercanakyuerek.de" target="_blank">repository</a>,
@@ -1576,21 +1895,20 @@ resistance applied.</li>
 </ul>
 <p>Feel free to move the control points to experiment with the track
 shape and see how both trains react differently.</p>
-
-
-
-
-
-
-
+      
 
 <div class="embedded ">
-  <iframe id="react-root-32eff4d53455818ff910a88d2233a12f" width="100%" height="360px" class="frame"></iframe>
+  <iframe
+    id="react-root-b5f9fb9461ba4f7ffa7f5e2e2b5578ea"
+    width="100%"
+    height="360px"
+    class="frame"
+  ></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-32eff4d53455818ff910a88d2233a12f').srcdoc = `
+    document.getElementById('react-root-b5f9fb9461ba4f7ffa7f5e2e2b5578ea').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1607,6 +1925,7 @@ shape and see how both trains react differently.</p>
   `;
   </script>
 </div>
+
 <h2 id="what-comes-next">What comes next?</h2>
 <p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/transformation-matrix/">In the next
 chapter</a>
@@ -1955,21 +2274,20 @@ Coaster</strong> and <strong>openFVD++</strong>.</p>
 <p>Time for a small demo. I built a basic setup: a visible line segment
 with draggable control points so you can adjust the slope in real
 time. On the side, a small panel displays the live simulation state.</p>
-
-
-
-
-
-
-
+      
 
 <div class="embedded ">
-  <iframe id="react-root-6152e1fd1d0f1ffb0a5e8e0e3d2bf181" width="100%" height="300px" class="frame"></iframe>
+  <iframe
+    id="react-root-71c496e7c15e364e58eaa736230ef7f2"
+    width="100%"
+    height="300px"
+    class="frame"
+  ></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-6152e1fd1d0f1ffb0a5e8e0e3d2bf181').srcdoc = `
+    document.getElementById('react-root-71c496e7c15e364e58eaa736230ef7f2').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1986,6 +2304,7 @@ time. On the side, a small panel displays the live simulation state.</p>
   `;
   </script>
 </div>
+
 <p>I’ve polished things a bit and moved the physics and linear
 interpolation logic into their own files instead of keeping everything
 as spaghetti code. The complete source code is available in my GitHub
@@ -2225,21 +2544,20 @@ hook, which gives us the <strong>delta time of the previous frame</strong>, and
 we benefit from using it. This is the proper way to handle updates,
 instead of forcing a fixed 16 ms step, which I briefly covered in
 the introduction of this chapter.</p></blockquote>
-
-
-
-
-
-
-
+      
 
 <div class="embedded ">
-  <iframe id="react-root-b28b2dc164793211f59a9fff1b18b3fa" width="100%" height="360px" class="frame"></iframe>
+  <iframe
+    id="react-root-95f83dc15a0b58fd332109b4fc87c07b"
+    width="100%"
+    height="360px"
+    class="frame"
+  ></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-b28b2dc164793211f59a9fff1b18b3fa').srcdoc = `
+    document.getElementById('react-root-95f83dc15a0b58fd332109b4fc87c07b').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2256,6 +2574,7 @@ the introduction of this chapter.</p></blockquote>
   `;
   </script>
 </div>
+
 <h2 id="what-comes-next">What comes next?</h2>
 <p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/linear-track/">In the next
 chapter</a>
@@ -2503,21 +2822,20 @@ $$\text{radians} = \text{degrees} \cdot \frac{\pi}{180}$$$$\text{degrees} = \tex
 the percentage of <strong>gravity applied</strong> to the coaster. Having a visual
 representation of written concepts really helps me reach that <strong>I got
 it</strong> moment, so it might help you as well.</p>
-
-
-
-
-
-
-
+      
 
 <div class="embedded ">
-  <iframe id="react-root-4a3f03dc57458f5e1ddd27e393d8a1ec" width="100%" height="300px" class="frame"></iframe>
+  <iframe
+    id="react-root-62313c6253441339d37ac6e6355da777"
+    width="100%"
+    height="300px"
+    class="frame"
+  ></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-4a3f03dc57458f5e1ddd27e393d8a1ec').srcdoc = `
+    document.getElementById('react-root-62313c6253441339d37ac6e6355da777').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2534,6 +2852,7 @@ it</strong> moment, so it might help you as well.</p>
   `;
   </script>
 </div>
+
 <h2 id="what-comes-next">What comes next?</h2>
 <p><a href="https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/evaluating-motion/">In the next
 chapter</a>,
@@ -2850,21 +3169,20 @@ linear memory, and then pass the pointers to the WebAssembly function.</p>
 <p>To make this less abstract, there is an interactive demo where you can
 drag control points around and see the Bezier calculations happen
 inside the WebAssembly module.</p>
-
-
-
-
-
-
-
+      
 
 <div class="embedded ">
-  <iframe id="react-root-26cf793f4bf884a541c1bf514101cf14" width="100%" height="360px" class="frame"></iframe>
+  <iframe
+    id="react-root-0b8cbc3f79b9e02f64a44d42bd77dd3e"
+    width="100%"
+    height="360px"
+    class="frame"
+  ></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-26cf793f4bf884a541c1bf514101cf14').srcdoc = `
+    document.getElementById('react-root-0b8cbc3f79b9e02f64a44d42bd77dd3e').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2881,6 +3199,7 @@ inside the WebAssembly module.</p>
   `;
   </script>
 </div>
+
 <h2 id="conclusion">Conclusion</h2>
 <p>That is it for now.</p>
 <p>We have not covered everything yet. Passing strings, logging, more
@@ -2962,11 +3281,17 @@ better bindings.</p>
 </span></span></code></pre></div>
 
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
-&lt;iframe id="react-root-09742ee86f14289c14f871a3b2319507" width="225px" height="285px" class="frame"&gt;&lt;/iframe&gt;
+&lt;iframe
+id="react-root-513891dd6d5e2873280531564ec2d259"
+width="225px"
+height="285px"
+class="frame"
+&gt;&lt;/iframe&gt;
 &lt;div class="description" style="width: 225px"&gt;
+Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-09742ee86f14289c14f871a3b2319507').srcdoc = `
+document.getElementById('react-root-513891dd6d5e2873280531564ec2d259').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -2992,25 +3317,24 @@ the curve. However, this &lt;code&gt;t&lt;/code&gt; value doesn&amp;rsquo;t prod
 which is problematic when we want to evaluate a point on the curve
 based on its distance. To solve this, we can evaluate some nodes along
 the curve with known distances and then linearly interpolate new nodes
-between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</description><content type="html"><![CDATA[
-
-
-
-
-
-
+between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</description><content type="html"><![CDATA[      
 
 <div class="embedded float-right">
-  <iframe id="react-root-09742ee86f14289c14f871a3b2319507" width="225px" height="285px" class="frame"></iframe>
+  <iframe
+    id="react-root-513891dd6d5e2873280531564ec2d259"
+    width="225px"
+    height="285px"
+    class="frame"
+  ></iframe>
 
   
   <div class="description" style="width: 225px">
-
+    Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
   </div>
   
 
   <script>
-    document.getElementById('react-root-09742ee86f14289c14f871a3b2319507').srcdoc = `
+    document.getElementById('react-root-513891dd6d5e2873280531564ec2d259').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3027,6 +3351,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
   `;
   </script>
 </div>
+
 <p>In this article, we&rsquo;ll be exploring a more interesting example where
 we&rsquo;ll construct a Bézier curve, evaluate nodes on it, and write a
 function that gives any position on the curve by a length parameter.
