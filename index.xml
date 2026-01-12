@@ -13,15 +13,15 @@ a few hours digging into this, because, well, I more or less
 reimplemented its curve generation logic.&lt;/p&gt;</description></item><item><title>Curve orientation</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/</link><pubDate>Sun, 04 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/</guid><description>&lt;p&gt;In earlier chapters, we already computed basic orientations along the
 track, and for a while that worked reasonably well. The trouble starts
 when we rely too much on a simple &lt;code&gt;lookAt&lt;/code&gt; from &lt;strong&gt;THREE.js&lt;/strong&gt; together
-with a fixed up direction.&lt;/p&gt;
+with a &lt;strong&gt;fixed up direction&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The missing piece here is &lt;strong&gt;roll&lt;/strong&gt;, also known as rotation around the
 &lt;strong&gt;forward direction&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Whenever we use &lt;code&gt;lookAt&lt;/code&gt;, we must provide an up vector. So far, this
-has always been &lt;code&gt;Vector3(0, 1, 0)&lt;/code&gt;. This is fine for gentle slopes,
-but it starts to fall apart when the track approaches angles close to
-&lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
+&lt;p&gt;Whenever we use &lt;code&gt;lookAt&lt;/code&gt;, we must provide an &lt;strong&gt;up vector&lt;/strong&gt;. So far,
+this has always been &lt;code&gt;Vector3(0, 1, 0)&lt;/code&gt;. This is fine for &lt;strong&gt;gentle
+slopes&lt;/strong&gt;, but it starts to fall apart when the track approaches angles
+close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-568618c3f09fc550935a32ad551bb6b7"
+ id="react-root-c1abcce2b94aad23cc58cdfff7fa7367"
  width="225px"
  height="285px"
  class="frame"
@@ -34,7 +34,7 @@ but it starts to fall apart when the track approaches angles close to
  
 
  &lt;script&gt;
- document.getElementById('react-root-568618c3f09fc550935a32ad551bb6b7').srcdoc = `
+ document.getElementById('react-root-c1abcce2b94aad23cc58cdfff7fa7367').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -146,7 +146,7 @@ nicer API to work with.&lt;/p&gt;
 define a number of imports for &lt;strong&gt;WASI&lt;/strong&gt;, but all of them are empty.
 This looks suspicious at first, so let us talk about that.&lt;/p&gt;</description></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-144c4fa1160d590352fbc112d097d1e3"
+ id="react-root-ef95a8944654288581d40c71d107b3da"
  width="225px"
  height="285px"
  class="frame"
@@ -159,7 +159,7 @@ This looks suspicious at first, so let us talk about that.&lt;/p&gt;</descriptio
  
 
  &lt;script&gt;
- document.getElementById('react-root-144c4fa1160d590352fbc112d097d1e3').srcdoc = `
+ document.getElementById('react-root-ef95a8944654288581d40c71d107b3da').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;

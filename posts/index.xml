@@ -49,7 +49,7 @@ and physics behave together.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-01df456b22d817bca546d3042bc4a576"
+    id="react-root-29e084a7e00197bd536fcc739c484290"
     width="100%"
     height="560px"
     class="frame"
@@ -58,7 +58,7 @@ and physics behave together.</p>
   
 
   <script>
-    document.getElementById('react-root-01df456b22d817bca546d3042bc4a576').srcdoc = `
+    document.getElementById('react-root-29e084a7e00197bd536fcc739c484290').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -143,52 +143,54 @@ and physics behave together.</p>
 ]]></content></item><item><title>Curve orientation</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/</link><pubDate>Sun, 04 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/</guid><description>&lt;p&gt;In earlier chapters, we already computed basic orientations along the
 track, and for a while that worked reasonably well. The trouble starts
 when we rely too much on a simple &lt;code&gt;lookAt&lt;/code&gt; from &lt;strong&gt;THREE.js&lt;/strong&gt; together
-with a fixed up direction.&lt;/p&gt;
+with a &lt;strong&gt;fixed up direction&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The missing piece here is &lt;strong&gt;roll&lt;/strong&gt;, also known as rotation around the
 &lt;strong&gt;forward direction&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Whenever we use &lt;code&gt;lookAt&lt;/code&gt;, we must provide an up vector. So far, this
-has always been &lt;code&gt;Vector3(0, 1, 0)&lt;/code&gt;. This is fine for gentle slopes,
-but it starts to fall apart when the track approaches angles close to
-&lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description><content type="html"><![CDATA[<p>In earlier chapters, we already computed basic orientations along the
+&lt;p&gt;Whenever we use &lt;code&gt;lookAt&lt;/code&gt;, we must provide an &lt;strong&gt;up vector&lt;/strong&gt;. So far,
+this has always been &lt;code&gt;Vector3(0, 1, 0)&lt;/code&gt;. This is fine for &lt;strong&gt;gentle
+slopes&lt;/strong&gt;, but it starts to fall apart when the track approaches angles
+close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description><content type="html"><![CDATA[<p>In earlier chapters, we already computed basic orientations along the
 track, and for a while that worked reasonably well. The trouble starts
 when we rely too much on a simple <code>lookAt</code> from <strong>THREE.js</strong> together
-with a fixed up direction.</p>
+with a <strong>fixed up direction</strong>.</p>
 <p>The missing piece here is <strong>roll</strong>, also known as rotation around the
 <strong>forward direction</strong>.</p>
-<p>Whenever we use <code>lookAt</code>, we must provide an up vector. So far, this
-has always been <code>Vector3(0, 1, 0)</code>. This is fine for gentle slopes,
-but it starts to fall apart when the track approaches angles close to
-<strong>90 degrees</strong>.</p>
-<p>At that point, the curve direction points almost straight up. The up
-vector also points up. Now both vectors look into the sky, and the
-resulting <strong>matrix</strong> becomes unstable.</p>
-<p>When the track points straight up, roll is no longer uniquely defined.
-Rotating around that direction does not change where the track is
-pointing, so <code>lookAt</code> has no stable orientation to choose from.</p>
+<p>Whenever we use <code>lookAt</code>, we must provide an <strong>up vector</strong>. So far,
+this has always been <code>Vector3(0, 1, 0)</code>. This is fine for <strong>gentle
+slopes</strong>, but it starts to fall apart when the track approaches angles
+close to <strong>90 degrees</strong>.</p>
+<p>At that point, the <strong>curve direction</strong> points almost straight up. The
+<strong>up vector</strong> also points up. Now both vectors look into the sky, and
+the resulting <strong>matrix</strong> becomes unstable.</p>
+<p>When the track points straight up, <strong>roll</strong> is no longer uniquely
+defined. Rotating around that direction does not change where the
+track is pointing, so <code>lookAt</code> has no stable orientation to choose
+from.</p>
 <p>Mathematically, this happens because <code>lookAt</code> constructs an
-orientation using cross products. When the <strong>forward direction</strong>
-becomes parallel, or nearly parallel, to the up vector, the cross
-product between them approaches zero. Once that happens, the remaining
-axes of the <strong>matrix</strong> cannot be built reliably anymore.</p>
-<p>The visible result is sudden flips, jitter, or strange twisting along
-the track, especially around slopes <strong>close to 90 degrees</strong>.</p>
+orientation using <strong>cross-products</strong>. When the <strong>forward direction</strong>
+becomes parallel, or nearly parallel, to the <strong>up vector</strong>, the
+cross-product between them approaches zero. Once that happens, the
+remaining axes of the <strong>matrix</strong> cannot be built reliably anymore.</p>
+<p>The visible result is <strong>sudden flips</strong>, <strong>jitter</strong>, or <strong>strange
+twisting</strong> along the track, especially around slopes <strong>close to 90
+degrees</strong>.</p>
 <h1 id="incremental-orientation">Incremental orientation</h1>
 <p>To fix this, we need a slightly different approach. Instead of
 computing each orientation in isolation, we build it
 <strong>incrementally</strong>. We start from the transformation <strong>matrix</strong> of the
-previous node and apply a small rotation that follows the curve
-direction.</p>
+<strong>previous node</strong> and apply a small rotation that follows the <strong>curve
+direction</strong>.</p>
 <p>In other words, we still align the orientation with the curve, but we
 do it <strong>relative to the previous node’s orientation</strong>, instead of
 rebuilding everything from scratch.</p>
-<p>This way, the up direction is not reset at every step. It slowly
-rotates along the curve, preserving the existing roll instead of
+<p>This way, the <strong>up direction</strong> is not reset at every step. It slowly
+rotates along the curve, preserving the existing <strong>roll</strong> instead of
 fighting against it.</p>
 <p>This technique is commonly called <strong>parallel transport</strong>, because the
-orientation is transported along the curve with as little rotation as
-possible.</p>
+orientation is transported along the curve with <strong>as little rotation
+as possible</strong>.</p>
 <p>Think of it like this: we add rotation step by step while respecting
-the previous orientation.</p>
+the <strong>previous orientation</strong>.</p>
 <p>The following interactive demo lets us switch between a <strong>fixed-up
 lookAt orientation</strong> and an <strong>incremental orientation based on the
 previous node</strong>. This helps visualize the problem.</p>
@@ -196,7 +198,7 @@ previous node</strong>. This helps visualize the problem.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-6bc385d1b4e9c118d05cf6296b3a2966"
+    id="react-root-9583cda62174259082024237bafef68d"
     width="100%"
     height="500px"
     class="frame"
@@ -209,7 +211,7 @@ previous node</strong>. This helps visualize the problem.</p>
   
 
   <script>
-    document.getElementById('react-root-6bc385d1b4e9c118d05cf6296b3a2966').srcdoc = `
+    document.getElementById('react-root-9583cda62174259082024237bafef68d').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -228,27 +230,26 @@ previous node</strong>. This helps visualize the problem.</p>
 </div>
 
 <h2 id="parallel-transport">Parallel transport</h2>
-<p>Now we can look at how to actually solve the fixed-up <code>lookAt</code>
-problem.</p>
+<p>Now we can look at how to actually solve the <strong>fixed-up <code>lookAt</code>
+problem</strong>.</p>
 <p>We already know the key idea: instead of rebuilding the orientation at
-every node, we rotate <strong>incrementally</strong>, relative to the previous
-node.</p>
-<p>For each curve node step, we compute a transported frame and return a
-new transformation <strong>matrix</strong>.</p>
+every node, we rotate <strong>incrementally</strong>, relative to the <strong>previous
+node</strong>.</p>
+<p>For each <strong>curve node step</strong>, we compute a <strong>transported frame</strong> and
+return a new transformation <strong>matrix</strong>.</p>
 <p>The steps are:</p>
 <ul>
-<li>Compute the direction towards the next curve node from the current
-position.</li>
-<li>Extract the current rotation from the transformation matrix.</li>
-<li>Transform the direction using the current local rotation so it is
-expressed relative to the orientation of the current node.</li>
-<li>Derive yaw and pitch from that relative direction.</li>
-<li>Apply yaw and pitch derived from the relative direction to the
-transformation matrix. The relative direction itself represents the
-increment.</li>
+<li>Compute the <strong>direction</strong> towards the <strong>next curve node</strong> from the
+<strong>current position</strong>.</li>
+<li>Extract the <strong>current rotation</strong> from the transformation <strong>matrix</strong>.</li>
+<li>Transform the direction using the <strong>current local rotation</strong> so it
+is expressed relative to the <strong>orientation of the current node</strong>.</li>
+<li>Apply <strong>yaw and pitch</strong> derived from the <strong>relative direction</strong> to
+the transformation <strong>matrix</strong>. The <strong>relative direction itself</strong>
+represents the <strong>increment</strong>.</li>
 </ul>
-<p>The result is a function that parallel-transports a transformation
-matrix and returns a new, transported transformation matrix:</p>
+<p>The result is a function that <strong>parallel-transports</strong> a transformation
+<strong>matrix</strong> and returns a new, transported transformation <strong>matrix</strong>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">parallelTransportTransformation</span> <span style="color:#f92672">=</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">transformation</span>: <span style="color:#66d9ef">Matrix4</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">nextPosition</span>: <span style="color:#66d9ef">Vector3</span>,
@@ -281,27 +282,27 @@ matrix and returns a new, transported transformation matrix:</p>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">rotationMatrix</span>.<span style="color:#a6e22e">setPosition</span>(<span style="color:#a6e22e">position</span>);
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
-<p>We also need a small helper that extracts a rotation matrix from a
-transformation matrix. This assumes there is <strong>no scale</strong> involved.
-Since we never use scale for curve transformations, this
-simplification is acceptable and keeps things simple.</p>
+<p>We also need a small helper that extracts a <strong>rotation matrix</strong> from a
+transformation <strong>matrix</strong>. This assumes there is <strong>no scale</strong>
+involved. Since we never use scale for <strong>curve transformation
+matrices</strong>, this simplification is acceptable and keeps things simple.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">toRotationMatrix</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">transformation</span>: <span style="color:#66d9ef">Matrix4</span>) <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">transformation</span>.<span style="color:#a6e22e">clone</span>().<span style="color:#a6e22e">setPosition</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
 <h2 id="constructing-a-curve-properly">Constructing a curve properly</h2>
-<p>Now that we can parallel-transport a transformation matrix, we need to
-actually use it.</p>
-<p>In earlier chapters, we built curves using a temporary helper that
-simply connected points without caring about orientation. Now is the
-point where we finally remove it.</p>
+<p>Now that we can <strong>parallel-transport</strong> a transformation <strong>matrix</strong>, we
+need to actually use it.</p>
+<p>In earlier chapters, we built curves using a <strong>temporary helper</strong> that
+simply connected points without caring about <strong>orientation</strong>. Now is
+the point where we finally remove it.</p>
 <p>We introduce two new methods:</p>
 <ul>
-<li><code>insertTransformationMatrix</code>, which inserts a transformation matrix
-into the curve and calculates arc length and updates segment
-offsets.</li>
-<li><code>insertPosition</code>, which inserts a position and computes the correct
-orientation using parallel transport.</li>
+<li><code>insertTransformationMatrix</code>, which inserts a transformation
+<strong>matrix</strong> into the curve and <strong>calculates arc length</strong> and updates
+<strong>segment offsets</strong>.</li>
+<li><code>insertPosition</code>, which inserts a <strong>position</strong> and computes the
+correct <strong>orientation</strong> using <strong>parallel transport</strong>.</li>
 </ul>
 <p>We start with <code>insertTransformationMatrix</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">insertTransformationMatrix</span> <span style="color:#f92672">=</span> (
@@ -337,32 +338,32 @@ orientation using parallel transport.</li>
 </span></span></code></pre></div>
 <p>What happens here is fairly straightforward:</p>
 <ul>
-<li>We look up the last node’s position and compute the distance to the
-new matrix.</li>
-<li>We add that distance to the node’s arc length.</li>
-<li>If the distance is zero, we skip inserting the node.</li>
-<li>We compute the segment index and update the segment offset list
-accordingly.</li>
+<li>We look up the <strong>last node’s position</strong> and compute the <strong>distance</strong>
+to the new <strong>matrix</strong>.</li>
+<li>We add that distance to the node’s <strong>arc length</strong>.</li>
+<li>If the distance is <strong>zero</strong>, we skip inserting the node.</li>
+<li>We compute the <strong>segment index</strong> and update the <strong>segment offset
+list</strong> accordingly.</li>
 </ul>
 <blockquote>
-<p><strong>Note:</strong> Segment offsets are a fast lookup structure for segment
-lengths. For example, offsets like <code>[0, 20, 30]</code> tell us that
-segment 1 spans arc lengths from 20 to 30. This will become useful
-later.</p></blockquote>
-<p>Next, we implement <code>insertPosition</code>, which handles the parallel
-transport logic. The approach is as follows:</p>
+<p><strong>Note:</strong> <strong>Segment offsets</strong> are a fast lookup structure for
+segment lengths. For example, offsets like <code>[0, 20, 30]</code> tell us
+that <strong>segment 1</strong> spans arc lengths from <strong>20 to 30</strong>. This will
+become useful later.</p></blockquote>
+<p>Next, we implement <code>insertPosition</code>, which handles the <strong>parallel
+transport logic</strong>. The approach is as follows:</p>
 <ul>
-<li>The first point is added with an empty transformation matrix that
-only contains a position.</li>
-<li>Once we have at least one node, we treat the last node as the
-<strong>left</strong> side and the new position as the <strong>right</strong> side.</li>
-<li>If the distance between them is zero, we skip the insertion.</li>
+<li>The <strong>first point</strong> is added with an <strong>empty transformation matrix</strong>
+that only contains a <strong>position</strong>.</li>
+<li>Once we have at least one node, we treat the <strong>last node</strong> as the
+<strong>left side</strong> and the new position as the <strong>right side</strong>.</li>
+<li>If the <strong>distance</strong> between them is <strong>zero</strong>, we skip the insertion.</li>
 <li>We parallel-transport the <strong>left transformation matrix</strong> toward the
-<strong>right</strong> position.</li>
-<li>The very first node needs to be transported twice to initialise its
-orientation.</li>
-<li>The last node always keeps the same orientation as its predecessor,
-since there is no next point to define a direction.</li>
+<strong>right position</strong>.</li>
+<li>The <strong>very first node</strong> needs to be transported <strong>twice</strong> to
+initialize its <strong>orientation</strong>.</li>
+<li>The <strong>last node</strong> always keeps the same <strong>orientation</strong> as its
+predecessor, since there is <strong>no next point</strong> to define a direction.</li>
 </ul>
 <p>This is easier to understand once you look at the implementation:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">insertPosition</span> <span style="color:#f92672">=</span> (
@@ -404,8 +405,8 @@ since there is no next point to define a direction.</li>
 </span></span></code></pre></div>
 <p>With that in place, we can now update <code>bezierSplineCurve</code>. In earlier
 chapters, this function relied on a temporary <code>fromPoints</code> helper with
-no proper orientation. We can now replace that with repeated calls to
-<code>insertPosition</code>.</p>
+<strong>no proper orientation</strong>. We can now replace that with repeated calls
+to <code>insertPosition</code>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bezierSplineCurve</span> <span style="color:#f92672">=</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector3</span>[],
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolution</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
@@ -425,32 +426,32 @@ no proper orientation. We can now replace that with repeated calls to
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
 <h1 id="what-comes-next">What comes next?</h1>
-<p>At this point, we finally have a stable orientation along the curve,
-without jitter near steep slopes. It would be tempting to go straight
-into a proper <strong>roll interpolation</strong>, but before doing that, we want
-to take a step back.</p>
+<p>At this point, we finally have a <strong>stable orientation</strong> along the
+curve, without <strong>jitter</strong> near <strong>steep slopes</strong>. It would be tempting
+to go straight into a proper <strong>roll interpolation</strong>, but before doing
+that, we want to take a step back.</p>
 <p>The next step will be the introduction of <strong>NURBS curves</strong>, which
 allow much more freedom than <strong>Bézier curves</strong> and make
 experimentation far more interesting.</p>
-<p>The theory behind this, like continuity, knot vectors, and curve
-order, can get confusing quickly. For now, we keep the implementation
-practical and leave most of the theory for a separate spline-focused
-series.</p>
+<p>The theory behind this, like <strong>continuity</strong>, <strong>knot vectors</strong>, and
+<strong>curve order</strong>, can get confusing quickly. For now, we keep the
+implementation <strong>practical</strong> and leave most of the theory for a
+separate <strong>spline-focused series</strong>.</p>
 <p>If you want an introduction in the meantime, the video
 <a href="https://www.youtube.com/watch?v=jvPPXbo87ds">The Continuity of Splines</a>
-by <a href="https://www.youtube.com/@acegikmo">Ferya Holmèr</a> is gold. It is
-perfect and covers almost everything you need to understand splines in
-general.</p>
+by <a href="https://www.youtube.com/@acegikmo">Ferya Holmèr</a> is <strong>gold</strong>. It
+is <strong>perfect</strong> and covers almost everything you need to understand
+<strong>splines in general</strong>.</p>
 <h1 id="interactive-demo">Interactive demo</h1>
 <p>This chapter ends with a small interactive example. You can move the
-control points of a Bézier curve and observe how the orientation
-behaves. There should be no sudden flips or jitter near <strong>90 degree</strong>
-slopes.</p>
+control points of a <strong>Bézier curve</strong> and observe how the
+<strong>orientation</strong> behaves. There should be <strong>no sudden flips or jitter</strong>
+near <strong>90 degree slopes</strong>.</p>
       
 
 <div class="embedded ">
   <iframe
-    id="react-root-dd29bf25807f7f86dff772e73e5ddd67"
+    id="react-root-2eabf0acfb7e043ddacd69917f78e2ad"
     width="100%"
     height="380px"
     class="frame"
@@ -459,7 +460,7 @@ slopes.</p>
   
 
   <script>
-    document.getElementById('react-root-dd29bf25807f7f86dff772e73e5ddd67').srcdoc = `
+    document.getElementById('react-root-2eabf0acfb7e043ddacd69917f78e2ad').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -539,7 +540,7 @@ slopes.</p>
 
 ]]></content></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-568618c3f09fc550935a32ad551bb6b7"
+id="react-root-c1abcce2b94aad23cc58cdfff7fa7367"
 width="225px"
 height="285px"
 class="frame"
@@ -548,7 +549,7 @@ class="frame"
 An interactive example of a Bézier curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-568618c3f09fc550935a32ad551bb6b7').srcdoc = `
+document.getElementById('react-root-c1abcce2b94aad23cc58cdfff7fa7367').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -575,7 +576,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-568618c3f09fc550935a32ad551bb6b7"
+    id="react-root-c1abcce2b94aad23cc58cdfff7fa7367"
     width="225px"
     height="285px"
     class="frame"
@@ -588,7 +589,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
   
 
   <script>
-    document.getElementById('react-root-568618c3f09fc550935a32ad551bb6b7').srcdoc = `
+    document.getElementById('react-root-c1abcce2b94aad23cc58cdfff7fa7367').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -628,7 +629,7 @@ spoil the ending a bit:</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-76f04d4f17313099d1a5acf5b4390e0d"
+    id="react-root-6102d50024496d83c609aff626b2bf33"
     width="100%"
     height="380px"
     class="frame"
@@ -637,7 +638,7 @@ spoil the ending a bit:</p>
   
 
   <script>
-    document.getElementById('react-root-76f04d4f17313099d1a5acf5b4390e0d').srcdoc = `
+    document.getElementById('react-root-6102d50024496d83c609aff626b2bf33').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -691,7 +692,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-afb7e578ab57bf97e3d0cb71bc1bdef9"
+    id="react-root-a5287dca5ff9444f64afd4fb4feee4e5"
     width="355px"
     height="560px"
     class="frame"
@@ -704,7 +705,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
   
 
   <script>
-    document.getElementById('react-root-afb7e578ab57bf97e3d0cb71bc1bdef9').srcdoc = `
+    document.getElementById('react-root-a5287dca5ff9444f64afd4fb4feee4e5').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -805,7 +806,7 @@ We do not need perfect precision here, so we need to find a reasonable
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-da6e554c44524a96d484214e1c1bf4ca"
+    id="react-root-9b1f3956c57eba7169affbae279a97f3"
     width="355px"
     height="485px"
     class="frame"
@@ -818,7 +819,7 @@ We do not need perfect precision here, so we need to find a reasonable
   
 
   <script>
-    document.getElementById('react-root-da6e554c44524a96d484214e1c1bf4ca').srcdoc = `
+    document.getElementById('react-root-9b1f3956c57eba7169affbae279a97f3').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1073,7 +1074,7 @@ to see what happens when the requested distance overshoots a segment.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-f4597240e4d4da4c55abaf7434bd07b8"
+    id="react-root-f55c16e83c693db2aa5087c51c9f7961"
     width="100%"
     height="260px"
     class="frame"
@@ -1086,7 +1087,7 @@ to see what happens when the requested distance overshoots a segment.</p>
   
 
   <script>
-    document.getElementById('react-root-f4597240e4d4da4c55abaf7434bd07b8').srcdoc = `
+    document.getElementById('react-root-f55c16e83c693db2aa5087c51c9f7961').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1439,7 +1440,7 @@ exactly what we were aiming for from the beginning.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-294fb370911d08abd3aacdf63f60e940"
+    id="react-root-c4c4dec2a8015be55953f1834714baf9"
     width="100%"
     height="380px"
     class="frame"
@@ -1452,7 +1453,7 @@ exactly what we were aiming for from the beginning.</p>
   
 
   <script>
-    document.getElementById('react-root-294fb370911d08abd3aacdf63f60e940').srcdoc = `
+    document.getElementById('react-root-c4c4dec2a8015be55953f1834714baf9').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1639,7 +1640,7 @@ as before. The only change is that the simulation now uses
 
 <div class="embedded ">
   <iframe
-    id="react-root-ce007a12d14b9e071caa25c8b9b1dfa4"
+    id="react-root-7ecd2d36c43806715a1e78cde7a79802"
     width="100%"
     height="380px"
     class="frame"
@@ -1648,7 +1649,7 @@ as before. The only change is that the simulation now uses
   
 
   <script>
-    document.getElementById('react-root-ce007a12d14b9e071caa25c8b9b1dfa4').srcdoc = `
+    document.getElementById('react-root-7ecd2d36c43806715a1e78cde7a79802').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1899,7 +1900,7 @@ shape and see how both trains react differently.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-065dcd14fcf1a2320d0f6b9ebee81a41"
+    id="react-root-a313405cd99682f4b7f72b38550dc9fa"
     width="100%"
     height="360px"
     class="frame"
@@ -1908,7 +1909,7 @@ shape and see how both trains react differently.</p>
   
 
   <script>
-    document.getElementById('react-root-065dcd14fcf1a2320d0f6b9ebee81a41').srcdoc = `
+    document.getElementById('react-root-a313405cd99682f4b7f72b38550dc9fa').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2278,7 +2279,7 @@ time. On the side, a small panel displays the live simulation state.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-d6142df681e5f3f9b01606610bd393c4"
+    id="react-root-ceb7dadd759dcbe78f7ca9eb3349a9d8"
     width="100%"
     height="300px"
     class="frame"
@@ -2287,7 +2288,7 @@ time. On the side, a small panel displays the live simulation state.</p>
   
 
   <script>
-    document.getElementById('react-root-d6142df681e5f3f9b01606610bd393c4').srcdoc = `
+    document.getElementById('react-root-ceb7dadd759dcbe78f7ca9eb3349a9d8').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2548,7 +2549,7 @@ the introduction of this chapter.</p></blockquote>
 
 <div class="embedded ">
   <iframe
-    id="react-root-baecf09a7811398484d89d4d26c5623e"
+    id="react-root-9754842097b3ff3e395212c533c68d10"
     width="100%"
     height="360px"
     class="frame"
@@ -2557,7 +2558,7 @@ the introduction of this chapter.</p></blockquote>
   
 
   <script>
-    document.getElementById('react-root-baecf09a7811398484d89d4d26c5623e').srcdoc = `
+    document.getElementById('react-root-9754842097b3ff3e395212c533c68d10').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2826,7 +2827,7 @@ it</strong> moment, so it might help you as well.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-ba6bb1825d1d67b30dafee7a991cae67"
+    id="react-root-3bb65bc0940179a77fa7f1c6b8bf026d"
     width="100%"
     height="300px"
     class="frame"
@@ -2835,7 +2836,7 @@ it</strong> moment, so it might help you as well.</p>
   
 
   <script>
-    document.getElementById('react-root-ba6bb1825d1d67b30dafee7a991cae67').srcdoc = `
+    document.getElementById('react-root-3bb65bc0940179a77fa7f1c6b8bf026d').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3173,7 +3174,7 @@ inside the WebAssembly module.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-27e62bd7e46f4f9016b1fdd117fae904"
+    id="react-root-edff6d298bbede08f40b311e14ca3e29"
     width="100%"
     height="360px"
     class="frame"
@@ -3182,7 +3183,7 @@ inside the WebAssembly module.</p>
   
 
   <script>
-    document.getElementById('react-root-27e62bd7e46f4f9016b1fdd117fae904').srcdoc = `
+    document.getElementById('react-root-edff6d298bbede08f40b311e14ca3e29').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3282,7 +3283,7 @@ better bindings.</p>
 
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-144c4fa1160d590352fbc112d097d1e3"
+id="react-root-ef95a8944654288581d40c71d107b3da"
 width="225px"
 height="285px"
 class="frame"
@@ -3291,7 +3292,7 @@ class="frame"
 Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-144c4fa1160d590352fbc112d097d1e3').srcdoc = `
+document.getElementById('react-root-ef95a8944654288581d40c71d107b3da').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -3321,7 +3322,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-144c4fa1160d590352fbc112d097d1e3"
+    id="react-root-ef95a8944654288581d40c71d107b3da"
     width="225px"
     height="285px"
     class="frame"
@@ -3334,7 +3335,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
   
 
   <script>
-    document.getElementById('react-root-144c4fa1160d590352fbc112d097d1e3').srcdoc = `
+    document.getElementById('react-root-ef95a8944654288581d40c71d107b3da').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
