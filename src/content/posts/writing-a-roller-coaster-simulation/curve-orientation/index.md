@@ -8,7 +8,7 @@ tags: ['writing a roller coaster simulation']
 In earlier chapters, we already computed basic orientations along the
 track, and for a while that worked reasonably well. The trouble starts
 when we rely too much on a simple `lookAt` from **THREE.js** together
-with a **fixed up direction**.
+with a **fixed-up direction**.
 
 The missing piece here is **roll**, also known as rotation around the
 **forward direction**.
