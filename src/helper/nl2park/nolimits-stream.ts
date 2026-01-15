@@ -1,3 +1,5 @@
+import { Vector2, Vector3, Vector4 } from 'three';
+
 export type NoLimitsStream = {
   content: Uint8Array;
   position: number;
@@ -126,54 +128,49 @@ export const readUnsigned8 = (stream: NoLimitsStream) => {
 export const readBoolean = (stream: NoLimitsStream) =>
   !!readUnsigned8(stream);
 
-export const readIntegerVector2 = (
-  stream: NoLimitsStream,
-): [number, number] => [readInteger(stream), readInteger(stream)];
+export const readIntegerVector2 = (stream: NoLimitsStream) =>
+  new Vector2().fromArray([readInteger(stream), readInteger(stream)]);
 
-export const readUnsigned8Vector2 = (
-  stream: NoLimitsStream,
-): [number, number] => [readUnsigned8(stream), readUnsigned8(stream)];
+export const readUnsigned8Vector2 = (stream: NoLimitsStream) =>
+  new Vector2().fromArray([
+    readUnsigned8(stream),
+    readUnsigned8(stream),
+  ]);
 
-export const readUnsigned8Vector3 = (
-  stream: NoLimitsStream,
-): [number, number, number] => [
-  readUnsigned8(stream),
-  readUnsigned8(stream),
-  readUnsigned8(stream),
-];
+export const readUnsigned8Vector3 = (stream: NoLimitsStream) =>
+  new Vector3().fromArray([
+    readUnsigned8(stream),
+    readUnsigned8(stream),
+    readUnsigned8(stream),
+  ]);
 
-export const readFloatVector2 = (
-  stream: NoLimitsStream,
-): [number, number] => [readFloat(stream), readFloat(stream)];
+export const readFloatVector2 = (stream: NoLimitsStream) =>
+  new Vector2().fromArray([readFloat(stream), readFloat(stream)]);
 
-export const readFloatVector3 = (
-  stream: NoLimitsStream,
-): [number, number, number] => [
-  readFloat(stream),
-  readFloat(stream),
-  readFloat(stream),
-];
+export const readFloatVector3 = (stream: NoLimitsStream) =>
+  new Vector3().fromArray([
+    readFloat(stream),
+    readFloat(stream),
+    readFloat(stream),
+  ]);
 
-export const readDoubleVector2 = (
-  stream: NoLimitsStream,
-): [number, number] => [readDouble(stream), readDouble(stream)];
+export const readDoubleVector2 = (stream: NoLimitsStream) =>
+  new Vector2().fromArray([readDouble(stream), readDouble(stream)]);
 
-export const readDoubleVector3 = (
-  stream: NoLimitsStream,
-): [number, number, number] => [
-  readDouble(stream),
-  readDouble(stream),
-  readDouble(stream),
-];
+export const readDoubleVector3 = (stream: NoLimitsStream) =>
+  new Vector3().fromArray([
+    readDouble(stream),
+    readDouble(stream),
+    readDouble(stream),
+  ]);
 
-export const readDoubleVector4 = (
-  stream: NoLimitsStream,
-): [number, number, number, number] => [
-  readDouble(stream),
-  readDouble(stream),
-  readDouble(stream),
-  readDouble(stream),
-];
+export const readDoubleVector4 = (stream: NoLimitsStream) =>
+  new Vector4().fromArray([
+    readDouble(stream),
+    readDouble(stream),
+    readDouble(stream),
+    readDouble(stream),
+  ]);
 
 export const readColor = (stream: NoLimitsStream) =>
   readUnsigned8Vector3(stream);
@@ -257,54 +254,54 @@ export const write = (
 
 export const writeDoubleVector4 = (
   stream: NoLimitsStream,
-  value: [number, number, number, number],
+  value: Vector4,
 ) => {
-  writeDouble(stream, value[0]);
-  writeDouble(stream, value[1]);
-  writeDouble(stream, value[2]);
-  writeDouble(stream, value[3]);
+  writeDouble(stream, value.x);
+  writeDouble(stream, value.y);
+  writeDouble(stream, value.z);
+  writeDouble(stream, value.w);
 };
 
 export const writeIntegerVector2 = (
   stream: NoLimitsStream,
-  value: [number, number],
+  value: Vector2,
 ) => {
-  writeInteger(stream, value[0]);
-  writeInteger(stream, value[1]);
+  writeInteger(stream, value.x);
+  writeInteger(stream, value.y);
 };
 
 export const writeFloatVector2 = (
   stream: NoLimitsStream,
-  value: [number, number],
+  value: Vector2,
 ) => {
-  writeFloat(stream, value[0]);
-  writeFloat(stream, value[1]);
+  writeFloat(stream, value.x);
+  writeFloat(stream, value.y);
 };
 
 export const writeFloatVector3 = (
   stream: NoLimitsStream,
-  value: [number, number, number],
+  value: Vector3,
 ) => {
-  writeFloat(stream, value[0]);
-  writeFloat(stream, value[1]);
-  writeFloat(stream, value[2]);
+  writeFloat(stream, value.x);
+  writeFloat(stream, value.y);
+  writeFloat(stream, value.z);
 };
 
 export const writeDoubleVector3 = (
   stream: NoLimitsStream,
-  value: [number, number, number],
+  value: Vector3,
 ) => {
-  writeDouble(stream, value[0]);
-  writeDouble(stream, value[1]);
-  writeDouble(stream, value[2]);
+  writeDouble(stream, value.x);
+  writeDouble(stream, value.y);
+  writeDouble(stream, value.z);
 };
 
 export const writeDoubleVector2 = (
   stream: NoLimitsStream,
-  value: [number, number],
+  value: Vector2,
 ) => {
-  writeDouble(stream, value[0]);
-  writeDouble(stream, value[1]);
+  writeDouble(stream, value.x);
+  writeDouble(stream, value.y);
 };
 
 export const writeNull = (
@@ -337,16 +334,16 @@ export const writeString = (
 
 export const writeUnsigned8Vector3 = (
   stream: NoLimitsStream,
-  value: [number, number, number],
+  value: Vector3,
 ) => {
-  writeUnsigned8(stream, value[0]);
-  writeUnsigned8(stream, value[1]);
-  writeUnsigned8(stream, value[2]);
+  writeUnsigned8(stream, value.x);
+  writeUnsigned8(stream, value.y);
+  writeUnsigned8(stream, value.z);
 };
 
 export const writeColor = (
   stream: NoLimitsStream,
-  color: [number, number, number],
+  color: Vector3,
 ) => {
   writeUnsigned8Vector3(stream, color);
 };

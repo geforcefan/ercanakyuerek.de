@@ -41,6 +41,7 @@ import {
   TriggerPoint,
   writeTriggerPoint,
 } from './trigger-point';
+import { Vertex } from './vertex';
 
 export type TrackPoint =
   | RollPoint
@@ -70,11 +71,7 @@ export const readCustomTrack = (stream: NoLimitsStream) => {
 
   let segment: Segment | undefined;
   let section: Section | undefined;
-  const vertices: Array<{
-    position: [number, number, number, number];
-    locked: boolean;
-    strict: boolean;
-  }> = [];
+  const vertices: Array<Vertex> = [];
 
   for (let i = 0; i < numberOfControlPoints; i++) {
     vertices.push({

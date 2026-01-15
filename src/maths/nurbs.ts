@@ -103,8 +103,11 @@ const deBoor = (
   t: number,
 ): Vector4 => {
   if (k === 0) {
-    const p = points[i];
-    return new Vector4(p.x * p.w, p.y * p.w, p.z * p.w, p.w);
+    return new Vector4(
+      points[i].x,
+      points[i].y,
+      points[i].z,
+    ).multiplyScalar(points[i].w);
   }
 
   const alpha =
@@ -113,10 +116,10 @@ const deBoor = (
   const p0 = deBoor(points, knots, degree, k - 1, i - 1, t);
   const p1 = deBoor(points, knots, degree, k - 1, i, t);
 
-  return p0.multiplyScalar(1 - alpha).add(p1.multiplyScalar(alpha));
+  return p0.lerp(p1, alpha);
 };
 
-export const nurbs = (
+export const evaluate = (
   points: Vector4[],
   knots: number[],
   degree: number,
@@ -128,8 +131,43 @@ export const nurbs = (
     knots.length - degree - 2,
   );
 
-  const pos = deBoor(points, knots, degree, degree, knotIndex, t);
-  return new Vector3(pos.x / pos.w, pos.y / pos.w, pos.z / pos.w);
+  const p = deBoor(points, knots, degree, degree, knotIndex, t);
+  return new Vector3(p.x, p.y, p.z).divideScalar(p.w);
+};
+
+export const makeKnots = (
+  numberOfPoints: number,
+  degree: number,
+  method: 'uniform' | 'clamped',
+): number[] => {
+  const n = numberOfPoints - 1;
+  const knotCount = n + degree + 2;
+
+  const knots = new Array<number>(knotCount);
+
+  if (method === 'uniform') {
+    for (let i = 0; i < knotCount; i++) {
+      knots[i] = i;
+    }
+  } else {
+    for (let i = 0; i <= degree; i++) {
+      knots[i] = 0;
+    }
+
+    for (let i = 1; i <= n - degree; i++) {
+      knots[degree + i] = i;
+    }
+
+    for (let i = knotCount - degree - 1; i < knotCount; i++) {
+      knots[i] = n - degree + 1;
+    }
+  }
+
+  return knots;
+};
+
+export const intervals = (knots: number[], degree: number) => {
+  return knots.slice(degree, knots.length - degree);
 };
 
 export const estimateLength = (
@@ -143,7 +181,7 @@ export const estimateLength = (
     min,
     max,
     Math.ceil(max - min),
-    (at, t) => nurbs(points, knots, degree, t),
+    (at, t) => evaluate(points, knots, degree, t),
   );
 
   return positions
@@ -167,15 +205,10 @@ export const fromPoints = (
   const degree = Math.min(numberOfPoints - 1, maxDegree);
   const knots = knotVectorFactory(points, degree);
 
-  const [minKnotIndex, maxKnotIndex] = knotIndexRange(knots, degree);
-
-  for (
-    let knotIndex = minKnotIndex;
-    knotIndex < maxKnotIndex;
-    knotIndex++
-  ) {
-    const min = knots[knotIndex];
-    const max = knots[knotIndex + 1];
+  intervals(knots, degree).forEach((_, index, intervals) => {
+    const min = intervals[index];
+    const max = intervals[index + 1];
+    if (!max) return;
 
     uniformSample(
       min,
@@ -184,10 +217,12 @@ export const fromPoints = (
       (at) => {
         insertPosition(
           out,
-          nurbs(points, knots, degree, at),
+          evaluate(points, knots, degree, at),
           minSegmentIndex + Math.floor(at),
         );
       },
     );
-  }
+  });
+
+  return out;
 };

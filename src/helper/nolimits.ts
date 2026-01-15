@@ -1,5 +1,3 @@
-import { Vector4 } from 'three';
-
 import { applyRollCurve, arcLengthAtOffset } from '../maths/curve';
 
 import { fromRollPoints } from '../coaster/cubic-roll';
@@ -16,7 +14,7 @@ export const curveFromCustomTrack = (
   const curve = fromVertices(
     track.vertices.map((vertex) => ({
       ...vertex,
-      position: new Vector4().fromArray(vertex.position),
+      position: vertex.position.clone(),
     })),
     track.closed,
     resolution,
