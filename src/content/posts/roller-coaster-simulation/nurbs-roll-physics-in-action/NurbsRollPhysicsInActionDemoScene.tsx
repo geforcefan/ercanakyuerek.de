@@ -12,7 +12,6 @@ import { Ground } from '../../../../components/Ground';
 import { PerspectiveScene } from '../../../../components/scenes/PerspectiveScene';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
 
-// @ts-ignore
 import Park from './Hybris.nl2park';
 
 const exampleCoaster = (await fromURL(Park)).coaster[0];

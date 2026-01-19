@@ -31,7 +31,7 @@ export const makeClampedKnots = (
   return knots;
 };
 
-export const makeClosedKnots = (
+export const makeUniformKnots = (
   points: Vector4[],
   degree: number,
 ): number[] => {
@@ -45,53 +45,6 @@ export const makeClosedKnots = (
   }
 
   return knots;
-};
-
-export const makeLeftClampedRightOpenKnots = (
-  points: Vector4[],
-  degree: number,
-): number[] => {
-  const n = points.length - 1;
-  const knotCount = n + degree + 2;
-
-  const knots = new Array<number>(knotCount);
-
-  for (let i = 0; i <= degree; i++) {
-    knots[i] = 0;
-  }
-
-  for (let i = degree + 1; i < knotCount; i++) {
-    knots[i] = i - degree;
-  }
-
-  return knots;
-};
-
-export const makeLeftOpenRightClampedKnots = (
-  points: Vector4[],
-  degree: number,
-): number[] => {
-  const n = points.length - 1;
-  const knotCount = n + degree + 2;
-  const knots = new Array<number>(knotCount);
-
-  for (let i = 0; i < knotCount - degree - 1; i++) {
-    knots[i] = i - degree;
-  }
-
-  for (let i = knotCount - degree - 1; i < knotCount; i++) {
-    knots[i] = n - degree + 1;
-  }
-
-  return knots;
-};
-
-export const knotIndexRange = (knots: number[], degree: number) => {
-  return [degree, knots.length - degree - 1];
-};
-
-export const domain = (knots: number[], degree: number) => {
-  return [knots[degree], knots[knots.length - degree - 1]];
 };
 
 const deBoor = (
@@ -133,37 +86,6 @@ export const evaluate = (
 
   const p = deBoor(points, knots, degree, degree, knotIndex, t);
   return new Vector3(p.x, p.y, p.z).divideScalar(p.w);
-};
-
-export const makeKnots = (
-  numberOfPoints: number,
-  degree: number,
-  method: 'uniform' | 'clamped',
-): number[] => {
-  const n = numberOfPoints - 1;
-  const knotCount = n + degree + 2;
-
-  const knots = new Array<number>(knotCount);
-
-  if (method === 'uniform') {
-    for (let i = 0; i < knotCount; i++) {
-      knots[i] = i;
-    }
-  } else {
-    for (let i = 0; i <= degree; i++) {
-      knots[i] = 0;
-    }
-
-    for (let i = 1; i <= n - degree; i++) {
-      knots[degree + i] = i;
-    }
-
-    for (let i = knotCount - degree - 1; i < knotCount; i++) {
-      knots[i] = n - degree + 1;
-    }
-  }
-
-  return knots;
 };
 
 export const intervals = (knots: number[], degree: number) => {

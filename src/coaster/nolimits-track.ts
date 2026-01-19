@@ -1,13 +1,7 @@
 import { Vector4 } from 'three';
 
 import { Curve, emptyCurve } from '../maths/curve';
-import {
-  fromPoints,
-  makeClampedKnots,
-  makeClosedKnots,
-  makeLeftClampedRightOpenKnots,
-  makeLeftOpenRightClampedKnots,
-} from '../maths/nurbs';
+import { fromPoints, makeClampedKnots } from '../maths/nurbs';
 import { splitPointsByStrict } from '../helper/strict-point';
 
 export const fromVertices = (
@@ -23,39 +17,18 @@ export const fromVertices = (
       position: vertices[0].position,
       strict: false,
     });
-    nurbsVertices.push({
-      position: vertices[1].position,
-      strict: false,
-    });
-    nurbsVertices.unshift({
-      position: vertices[vertices.length - 1].position,
-      strict: false,
-    });
   }
 
   const curve: Curve = emptyCurve();
   const nurbsSections = splitPointsByStrict(nurbsVertices);
-  const hasStrictVertices = nurbsSections.length > 1;
 
   for (let i = 0; i < nurbsSections.length; i += 1) {
     const vertices = nurbsSections[i];
     const lastCurveNode = curve.nodes[curve.nodes.length - 1];
-    const isFirstSection = !i;
-    const isLastSection = i === nurbsSections.length - 1;
-
-    let knots = makeClampedKnots;
-
-    if (closed) {
-      if (hasStrictVertices && isFirstSection)
-        knots = makeLeftOpenRightClampedKnots;
-      else if (hasStrictVertices && isLastSection)
-        knots = makeLeftClampedRightOpenKnots;
-      else if (!hasStrictVertices) knots = makeClosedKnots;
-    }
 
     fromPoints(
       vertices.map((v) => v.position),
-      knots,
+      makeClampedKnots,
       curve,
       resolution,
       3,

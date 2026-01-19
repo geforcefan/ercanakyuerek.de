@@ -1,7 +1,7 @@
 import { applyRollCurve, arcLengthAtOffset } from '../maths/curve';
 
 import { fromRollPoints } from '../coaster/cubic-roll';
-import { fromVertices } from '../coaster/nurbs-track';
+import { fromVertices } from '../coaster/nolimits-track';
 import { readCustomTrack } from './nl2park/track/custom-track';
 import { isRollPoint } from './nl2park/track/roll-point';
 import { splitPointsByStrict } from './strict-point';

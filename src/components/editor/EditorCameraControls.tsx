@@ -5,9 +5,7 @@ import {
 } from '@react-three/drei';
 import { CameraControlsProps } from '@react-three/drei/core/CameraControls';
 
-export const SplineEditorCameraControls = (
-  props: CameraControlsProps,
-) => {
+export const EditorCameraControls = (props: CameraControlsProps) => {
   return (
     <CameraControls
       mouseButtons={{
