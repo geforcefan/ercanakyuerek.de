@@ -13,7 +13,8 @@ import { useSimulationStateControls } from '../../../../hooks/useSimulationState
 
 import { ControlPoint } from '../../../../components/curve/ControlPoint';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
-import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
+import { Ground } from '../../../../components/Ground';
+import { EditorScene } from '../../../../components/scenes/EditorScene';
 
 import {
   evaluateMotion,
@@ -23,7 +24,6 @@ import {
 const FrictionAndAirResistanceDemo = () => {
   const colors = useColors();
 
-  // control points
   const [points, setPoints] = useState([
     new Vector3(-11.5, 3.2, 0),
     new Vector3(0, -2.8, 0),
@@ -127,11 +127,11 @@ const FrictionAndAirResistanceDemo = () => {
         setPoints={setPoints}
       />
       <Line points={points} color={colors.secondary} />
-
       <ControlPoint
         position={trainPosition}
         color={colors.highlight}
       />
+      <Ground position={[0, -3, 0]} />
       <ControlPoint position={trainPositionWithoutFriction} />
     </>
   );
@@ -139,8 +139,8 @@ const FrictionAndAirResistanceDemo = () => {
 
 export const FrictionAndAirResistanceDemoScene = () => {
   return (
-    <OrthographicScene>
+    <EditorScene>
       <FrictionAndAirResistanceDemo />
-    </OrthographicScene>
+    </EditorScene>
   );
 };

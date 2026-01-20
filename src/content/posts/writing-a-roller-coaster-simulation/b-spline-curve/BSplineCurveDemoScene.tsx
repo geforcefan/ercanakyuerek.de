@@ -8,15 +8,14 @@ import { useColors } from '../../../../hooks/useColors';
 
 import { CurveWireframe } from '../../../../components/curve/CurveWireframe';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
-import { OrthographicEditorScene } from '../../../../components/editor/OrthographicEditorScene';
 import { Ground } from '../../../../components/Ground';
-import { PerspectiveScene } from '../../../../components/scenes/PerspectiveScene';
+import { EditorScene } from '../../../../components/scenes/EditorScene';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
 
 import { fromVertices as bSplineFromVertices } from '../../../../coaster/b-spline-track';
 import { fromVertices } from '../../../../coaster/nolimits-track';
 
-export const BSplineCurveDemo = ({ pov }: { pov?: boolean }) => {
+export const BSplineCurveDemoScene = ({ pov }: { pov?: boolean }) => {
   const colors = useColors();
 
   const [points, setPoints] = useState([
@@ -31,6 +30,7 @@ export const BSplineCurveDemo = ({ pov }: { pov?: boolean }) => {
   const { closed, nurbs } = useControls({
     closed: false,
     nurbs: false,
+    pov: false,
   });
 
   const curve = useMemo(() => {
@@ -58,38 +58,12 @@ export const BSplineCurveDemo = ({ pov }: { pov?: boolean }) => {
   );
 
   return (
-    <>
+    <EditorScene>
       <Line points={points} color={colors.highlight} />
       <DragControlPoints points={points} setPoints={setPoints} />
       <Ground />
       <CurveWireframe curve={heartlineCurve} />
       <TrainWithPhysics curve={heartlineCurve} activateCamera={pov} />
-    </>
-  );
-};
-
-export const BSplineCurveDemoScene = () => {
-  const { pov, view } = useControls({
-    pov: false,
-
-    view: {
-      value: 'front',
-      options: ['top', 'bottom', 'front', 'back', 'left', 'right'],
-    },
-  });
-
-  const renderedScene = useMemo(() => {
-    return <BSplineCurveDemo pov={pov} />;
-  }, [pov]);
-
-  return (
-    <>
-      {pov && <PerspectiveScene>{renderedScene}</PerspectiveScene>}
-      {!pov && (
-        <OrthographicEditorScene view={view as any}>
-          {renderedScene}
-        </OrthographicEditorScene>
-      )}
-    </>
+    </EditorScene>
   );
 };

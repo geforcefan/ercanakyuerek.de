@@ -4,21 +4,21 @@ import { useDevicePixelRatio } from 'use-device-pixel-ratio';
 
 import { useColors } from '../../hooks/useColors';
 
-import { DefaultCameraControls } from '../camera/DefaultCameraControls';
+import { PerspectiveCameraControls } from '../camera/PerspectiveCameraControls';
 
 export const PerspectiveScene = ({
   children,
-  cameraControlsActive = true,
+  withCameraControls = true,
 }: {
   children?: ReactNode;
-  cameraControlsActive?: boolean;
+  withCameraControls?: boolean;
 }) => {
   const colors = useColors();
   const dpr = useDevicePixelRatio();
 
   return (
     <Canvas dpr={dpr}>
-      {cameraControlsActive && <DefaultCameraControls />}
+      {withCameraControls && <PerspectiveCameraControls />}
       <color attach="background" args={[colors.primary]} />
       {children}
     </Canvas>

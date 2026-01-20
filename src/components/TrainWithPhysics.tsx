@@ -5,7 +5,7 @@ import { Curve } from '../maths/curve';
 import { useMotionSimulation } from '../hooks/useMotionSimulation';
 import { useSimulationStateControls } from '../hooks/useSimulationStateControls';
 
-import { MatrixCamera } from './camera/MatrixCamera';
+import { TransformationMatrixCamera } from './camera/TransformationMatrixCamera';
 import { PointWithMatrixArrows } from './PointWithMatrixArrows';
 
 export const TrainWithPhysics = ({
@@ -24,7 +24,7 @@ export const TrainWithPhysics = ({
       {!activateCamera && (
         <PointWithMatrixArrows matrix={motionMatrix} />
       )}
-      <MatrixCamera
+      <TransformationMatrixCamera
         matrix={motionMatrix}
         translate={new Vector3(0, 1, 0)}
         makeDefault={activateCamera}

@@ -13,7 +13,8 @@ import { useColors } from '../../../../hooks/useColors';
 
 import { ControlPoint } from '../../../../components/curve/ControlPoint';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
-import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
+import { Ground } from '../../../../components/Ground';
+import { EditorScene } from '../../../../components/scenes/EditorScene';
 
 import { evaluateMotion } from './physics';
 
@@ -83,6 +84,7 @@ const LinearTrackDemo = () => {
         setPoints={setPoints}
       />
       <Line points={points} color={colors.secondary} />
+      <Ground position={[0, -3, 0]} />
       <ControlPoint
         position={trainPosition}
         color={colors.highlight}
@@ -93,8 +95,8 @@ const LinearTrackDemo = () => {
 
 export const LinearTrackDemoScene = () => {
   return (
-    <OrthographicScene>
+    <EditorScene>
       <LinearTrackDemo />
-    </OrthographicScene>
+    </EditorScene>
   );
 };

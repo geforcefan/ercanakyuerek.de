@@ -31,7 +31,7 @@ export const NurbsRollPhysicsInActionDemoScene = () => {
 
   return (
     <>
-      <PerspectiveScene cameraControlsActive={!pov}>
+      <PerspectiveScene withCameraControls={!pov}>
         <Ground position={new Vector3(0, -7, 0)} />
         <CurveWireframe
           color={colors.secondary}

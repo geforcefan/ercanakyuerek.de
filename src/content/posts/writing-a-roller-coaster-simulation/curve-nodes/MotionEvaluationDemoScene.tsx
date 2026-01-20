@@ -3,7 +3,8 @@ import { Vector3 } from 'three';
 
 import { CurveLine } from '../../../../components/curve/CurveLine';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
-import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
+import { Ground } from '../../../../components/Ground';
+import { EditorScene } from '../../../../components/scenes/EditorScene';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
 
 import { fromPoints } from './curve';
@@ -21,7 +22,7 @@ export const MotionEvaluationDemoScene = () => {
   const curve = useMemo(() => fromPoints(points), [points]);
 
   return (
-    <OrthographicScene>
+    <EditorScene>
       <DragControlPoints
         axisLock="z"
         points={points}
@@ -29,6 +30,7 @@ export const MotionEvaluationDemoScene = () => {
       />
       <CurveLine curve={curve} />
       <TrainWithPhysics curve={curve} />
-    </OrthographicScene>
+      <Ground position={[0, -3, 0]} />
+    </EditorScene>
   );
 };

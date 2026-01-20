@@ -9,7 +9,7 @@ import { useColors } from '../../../../hooks/useColors';
 import { CurveWireframe } from '../../../../components/curve/CurveWireframe';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
 import { Ground } from '../../../../components/Ground';
-import { PerspectiveScene } from '../../../../components/scenes/PerspectiveScene';
+import { EditorScene } from '../../../../components/scenes/EditorScene';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
 
 export const CurveOrientationDemoScene = () => {
@@ -27,8 +27,8 @@ export const CurveOrientationDemoScene = () => {
   const curve = useMemo(() => bezierSplineCurve(points), [points]);
 
   return (
-    <PerspectiveScene cameraControlsActive={!pov}>
-      <group position={[-15, -5, -10]}>
+    <EditorScene>
+      <group position={[-11, -5, -10]}>
         <Line
           points={points}
           color={colors.highlight}
@@ -45,6 +45,6 @@ export const CurveOrientationDemoScene = () => {
       <group position={[0, -10, 0]}>
         <Ground />
       </group>
-    </PerspectiveScene>
+    </EditorScene>
   );
 };

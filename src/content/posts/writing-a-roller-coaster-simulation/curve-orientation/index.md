@@ -191,7 +191,7 @@ control points of a **Bézier curve** and observe how the
 **orientation** behaves. There should be **no sudden flips or jitter**
 near **90 degree slopes**.
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-orientation/CurveOrientationDemoScene.tsx" width="100%" height="380px" >}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-orientation/CurveOrientationDemoScene.tsx" width="100%" height="650px" >}}
 
 # Demo code
 

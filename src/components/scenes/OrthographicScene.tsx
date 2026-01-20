@@ -6,14 +6,12 @@ import { useDevicePixelRatio } from 'use-device-pixel-ratio';
 
 import { useColors } from '../../hooks/useColors';
 
-import { EditorCameraControls } from '../editor/EditorCameraControls';
-
 export const OrthographicScene = ({
-  cameraControlsActive = true,
+  withCameraControls = true,
   ...props
 }: {
   children?: ReactNode;
-  cameraControlsActive?: boolean;
+  withCameraControls?: boolean;
 } & CanvasProps) => {
   const { children, ...restProps } = props;
   const colors = useColors();
@@ -27,7 +25,6 @@ export const OrthographicScene = ({
         position={[0, 0, 500]}
         up={[0, 0, 0]}
       />
-      {cameraControlsActive && <EditorCameraControls />}
       <color attach="background" args={[colors.primary]} />
       {children}
     </Canvas>

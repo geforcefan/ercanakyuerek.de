@@ -6,7 +6,7 @@ import { Vector3 } from 'three';
 import { fromURL } from '../helper/nl2park/nl2park';
 import { useColors } from '../hooks/useColors';
 
-import { DefaultCameraControls } from '../components/camera/DefaultCameraControls';
+import { PerspectiveCameraControls } from '../components/camera/PerspectiveCameraControls';
 import { CurveWireframe } from '../components/curve/CurveWireframe';
 import { DragControlPoints } from '../components/curve/DragControlPoints';
 import { Ground } from '../components/Ground';
@@ -45,7 +45,7 @@ export const ExperimentScene = () => {
         <Ground />
         <DragControlPoints points={points} setPoints={() => {}} />
         <Line points={points} color={colors.secondary} />
-        {!pov && <DefaultCameraControls />}
+        {!pov && <PerspectiveCameraControls />}
         <CurveWireframe color={colors.secondary} curve={curve} />
       </PerspectiveScene>
     </>
