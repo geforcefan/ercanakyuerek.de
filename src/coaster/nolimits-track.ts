@@ -32,7 +32,7 @@ export const fromVertices = (
       curve,
       resolution,
       3,
-      lastCurveNode?.segmentIndex ?? 0,
+      (lastCurveNode?.segmentIndex ?? -1) + 1,
     );
   }
 

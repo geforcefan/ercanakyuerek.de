@@ -140,7 +140,7 @@ export const fromPoints = (
         insertPosition(
           out,
           evaluate(points, knots, degree, at),
-          minSegmentIndex + Math.floor(at),
+          minSegmentIndex + min,
         );
       },
     );
