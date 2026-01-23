@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 04 Jan 2026 21:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>NURBS, Roll, Physics in Action</title><link>https://ercanakyuerek.de/posts/roller-coaster-simulation/nurbs-roll-physics-in-action/</link><pubDate>Sun, 04 Jan 2026 21:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/roller-coaster-simulation/nurbs-roll-physics-in-action/</guid><description>&lt;p&gt;Parallel to writing this series about building a &lt;a href="https://ercanakyuerek.de/tags/writing-a-roller-coaster-simulation/"&gt;roller coaster
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 18 Jan 2026 14:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>NURBS, Roll, Physics in Action</title><link>https://ercanakyuerek.de/posts/roller-coaster-simulation/nurbs-roll-physics-in-action/</link><pubDate>Sun, 04 Jan 2026 21:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/roller-coaster-simulation/nurbs-roll-physics-in-action/</guid><description>&lt;p&gt;Parallel to writing this series about building a &lt;a href="https://ercanakyuerek.de/tags/writing-a-roller-coaster-simulation/"&gt;roller coaster
 simulator in the
 browser&lt;/a&gt;, I
 am also implementing and testing everything I write about in a real
@@ -41,7 +41,7 @@ this is straightforward. For closed curves, I have not figured out the
 arc length mapping yet.</p>
 <p>I will figure it out eventually. Probably.</p>
 <h1 id="interactive-demo">Interactive demo</h1>
-<p>Below is an interactive demo of the current state of the simulator.
+<p>Below is an interactive demo of the simulator.
 You can play around with it and see how the track interpolation, roll,
 and physics behave together.</p>
 <p>As always, the full code is available below.</p>
@@ -49,16 +49,16 @@ and physics behave together.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-18deba433ce77f28ebf45c54900189e3"
+    id="react-root-3792f5db8e047e7bcd6719db842929c9"
     width="100%"
-    height="560px"
+    height="650px"
     class="frame"
   ></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-18deba433ce77f28ebf45c54900189e3').srcdoc = `
+    document.getElementById('react-root-3792f5db8e047e7bcd6719db842929c9').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -85,7 +85,6 @@ and physics behave together.</p>
     <a href="http://localhost:3000/src/content/posts/roller-coaster-simulation/nurbs-roll-physics-in-action/NurbsRollPhysicsInActionDemoScene.tsx" target="_blank">link</a>
     in your browser.
 </p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useControls</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;leva&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Vector3</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;three&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">toLocalTransformed</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../maths/curve&#39;</span>;
@@ -98,8 +97,7 @@ and physics behave together.</p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">PerspectiveScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/PerspectiveScene&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// @ts-ignore
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Park</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./Hybris.nl2park&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Park</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./Hybris.nl2park&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">exampleCoaster</span> <span style="color:#f92672">=</span> (<span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fromURL</span>(<span style="color:#a6e22e">Park</span>)).<span style="color:#a6e22e">coaster</span>[<span style="color:#ae81ff">0</span>];
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">exampleTrack</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">exampleCoaster</span><span style="color:#f92672">?</span>.<span style="color:#a6e22e">tracks</span>[<span style="color:#ae81ff">0</span>];
@@ -112,13 +110,9 @@ and physics behave together.</p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">NurbsRollPhysicsInActionDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">colors</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useColors</span>();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">pov</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useControls</span>({
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pov</span>: <span style="color:#66d9ef">true</span>,
-</span></span><span style="display:flex;"><span>  });
-</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
 </span></span><span style="display:flex;"><span>    &lt;&gt;
-</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">PerspectiveScene</span> <span style="color:#a6e22e">cameraControlsActive</span><span style="color:#f92672">=</span>{<span style="color:#f92672">!</span><span style="color:#a6e22e">pov</span>}&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">PerspectiveScene</span>&gt;
 </span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Ground</span> <span style="color:#a6e22e">position</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">0</span>)} /&gt;
 </span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">CurveWireframe</span>
 </span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">colors</span>.<span style="color:#a6e22e">secondary</span>}
@@ -126,13 +120,13 @@ and physics behave together.</p>
 </span></span><span style="display:flex;"><span>        /&gt;
 </span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">TrainWithPhysics</span>
 </span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">exampleTrackCurve</span>}
-</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">activateCamera</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">pov</span>}
 </span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">init</span><span style="color:#f92672">=</span>{{
 </span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">velocity</span>: <span style="color:#66d9ef">7</span>,
 </span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">distanceTraveled</span>: <span style="color:#66d9ef">186</span>,
 </span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">friction</span>: <span style="color:#66d9ef">0.026</span>,
 </span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">airResistance</span>: <span style="color:#66d9ef">2e</span><span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>,
 </span></span><span style="display:flex;"><span>          }}
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">activateCamera</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">true</span>}
 </span></span><span style="display:flex;"><span>        /&gt;
 </span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">PerspectiveScene</span>&gt;
 </span></span><span style="display:flex;"><span>    &lt;/&gt;
@@ -198,9 +192,9 @@ previous node</strong>. This helps visualize the problem.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-f4ca702343c7942fd3caad817854c199"
+    id="react-root-6f350671b92a2dde26a636cb33237c90"
     width="100%"
-    height="500px"
+    height="700px"
     class="frame"
   ></iframe>
 
@@ -211,7 +205,7 @@ previous node</strong>. This helps visualize the problem.</p>
   
 
   <script>
-    document.getElementById('react-root-f4ca702343c7942fd3caad817854c199').srcdoc = `
+    document.getElementById('react-root-6f350671b92a2dde26a636cb33237c90').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -311,7 +305,6 @@ correct <strong>orientation</strong> using <strong>parallel transport</strong>.<
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">segmentIndex</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
 </span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lastNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">last</span>(<span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>);
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lastSegmentIndex</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">lastNode</span><span style="color:#f92672">?</span>.<span style="color:#a6e22e">segmentIndex</span> <span style="color:#f92672">??</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">arcLength</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>
@@ -325,9 +318,7 @@ correct <strong>orientation</strong> using <strong>parallel transport</strong>.<
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">arcLength</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">lastNode</span>.<span style="color:#a6e22e">arcLength</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">distanceToLastNode</span>;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">lastSegmentIndex</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">segmentIndex</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">segmentOffsets</span>[<span style="color:#a6e22e">segmentIndex</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">arcLength</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">segmentOffsets</span>[<span style="color:#a6e22e">segmentIndex</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">arcLength</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">segmentOffsets</span>[<span style="color:#a6e22e">segmentIndex</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">arcLength</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">curve</span>.<span style="color:#a6e22e">nodes</span>.<span style="color:#a6e22e">push</span>({
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">arcLength</span>,
@@ -451,16 +442,16 @@ near <strong>90 degree slopes</strong>.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-6065ae384d230c3184dc72b311853e9b"
+    id="react-root-500618f8b6dcb49e5647ef36e7b55648"
     width="100%"
-    height="380px"
+    height="650px"
     class="frame"
   ></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-6065ae384d230c3184dc72b311853e9b').srcdoc = `
+    document.getElementById('react-root-500618f8b6dcb49e5647ef36e7b55648').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -488,7 +479,6 @@ near <strong>90 degree slopes</strong>.</p>
     in your browser.
 </p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">useMemo</span>, <span style="color:#a6e22e">useState</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Line</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@react-three/drei&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useControls</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;leva&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Vector3</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;three&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">bezierSplineCurve</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../maths/bezier&#39;</span>;
@@ -497,12 +487,10 @@ near <strong>90 degree slopes</strong>.</p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">CurveWireframe</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/CurveWireframe&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Ground</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/Ground&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">PerspectiveScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/PerspectiveScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">EditorScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/EditorScene&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">CurveOrientationDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">pov</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useControls</span>({ <span style="color:#a6e22e">pov</span>: <span style="color:#66d9ef">false</span> });
-</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">colors</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useColors</span>();
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">setPoints</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>([
@@ -515,8 +503,8 @@ near <strong>90 degree slopes</strong>.</p>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">curve</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useMemo</span>(() <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">bezierSplineCurve</span>(<span style="color:#a6e22e">points</span>), [<span style="color:#a6e22e">points</span>]);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">PerspectiveScene</span> <span style="color:#a6e22e">cameraControlsActive</span><span style="color:#f92672">=</span>{<span style="color:#f92672">!</span><span style="color:#a6e22e">pov</span>}&gt;
-</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">group</span> <span style="color:#a6e22e">position</span><span style="color:#f92672">=</span>{[<span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>]}&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">EditorScene</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">group</span> <span style="color:#a6e22e">position</span><span style="color:#f92672">=</span>{[<span style="color:#f92672">-</span><span style="color:#ae81ff">11</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>]}&gt;
 </span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Line</span>
 </span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">points</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">points</span>}
 </span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">colors</span>.<span style="color:#a6e22e">highlight</span>}
@@ -524,23 +512,19 @@ near <strong>90 degree slopes</strong>.</p>
 </span></span><span style="display:flex;"><span>        /&gt;
 </span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">DragControlPoints</span> <span style="color:#a6e22e">points</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">points</span>} <span style="color:#a6e22e">setPoints</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">setPoints</span>} /&gt;
 </span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">CurveWireframe</span> <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">curve</span>} /&gt;
-</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">TrainWithPhysics</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">curve</span>}
-</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">init</span><span style="color:#f92672">=</span>{{ <span style="color:#a6e22e">velocity</span>: <span style="color:#66d9ef">17</span> }}
-</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">activateCamera</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">pov</span>}
-</span></span><span style="display:flex;"><span>        /&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">TrainWithPhysics</span> <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">curve</span>} <span style="color:#a6e22e">init</span><span style="color:#f92672">=</span>{{ <span style="color:#a6e22e">velocity</span>: <span style="color:#66d9ef">17</span> }} /&gt;
 </span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">group</span>&gt;
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">group</span> <span style="color:#a6e22e">position</span><span style="color:#f92672">=</span>{[<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>]}&gt;
 </span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Ground</span> /&gt;
 </span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">group</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">PerspectiveScene</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">EditorScene</span>&gt;
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
 
 ]]></content></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-361a9f7750cfa33fef10008970528b9c"
+id="react-root-4fa345387cce75fafa33e66ca2ac1dd6"
 width="225px"
 height="285px"
 class="frame"
@@ -549,7 +533,7 @@ class="frame"
 An interactive example of a Bézier curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-361a9f7750cfa33fef10008970528b9c').srcdoc = `
+document.getElementById('react-root-4fa345387cce75fafa33e66ca2ac1dd6').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -576,7 +560,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-361a9f7750cfa33fef10008970528b9c"
+    id="react-root-4fa345387cce75fafa33e66ca2ac1dd6"
     width="225px"
     height="285px"
     class="frame"
@@ -589,7 +573,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
   
 
   <script>
-    document.getElementById('react-root-361a9f7750cfa33fef10008970528b9c').srcdoc = `
+    document.getElementById('react-root-4fa345387cce75fafa33e66ca2ac1dd6').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -629,7 +613,7 @@ spoil the ending a bit:</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-bff52b92152ef6d2df1b4e633b5e02de"
+    id="react-root-1405decc566e988fbd5482f2f596f3c4"
     width="100%"
     height="380px"
     class="frame"
@@ -638,7 +622,7 @@ spoil the ending a bit:</p>
   
 
   <script>
-    document.getElementById('react-root-bff52b92152ef6d2df1b4e633b5e02de').srcdoc = `
+    document.getElementById('react-root-1405decc566e988fbd5482f2f596f3c4').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -692,7 +676,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-8b21197e263631278f1d0bf4c8c4298a"
+    id="react-root-954baf568fe3030543ff93667cd41531"
     width="355px"
     height="560px"
     class="frame"
@@ -705,7 +689,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
   
 
   <script>
-    document.getElementById('react-root-8b21197e263631278f1d0bf4c8c4298a').srcdoc = `
+    document.getElementById('react-root-954baf568fe3030543ff93667cd41531').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -806,7 +790,7 @@ We do not need perfect precision here, so we need to find a reasonable
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-9638feb260d6d275d1903eead1e9e2ce"
+    id="react-root-f9f090470341b4e65d7f2358238d102b"
     width="355px"
     height="485px"
     class="frame"
@@ -819,7 +803,7 @@ We do not need perfect precision here, so we need to find a reasonable
   
 
   <script>
-    document.getElementById('react-root-9638feb260d6d275d1903eead1e9e2ce').srcdoc = `
+    document.getElementById('react-root-f9f090470341b4e65d7f2358238d102b').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -995,7 +979,8 @@ bit ahead of time here.</p></blockquote>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">CurveWireframe</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/CurveWireframe&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Ground</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/Ground&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">EditorScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/EditorScene&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">BezierCurveDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
@@ -1011,7 +996,7 @@ bit ahead of time here.</p></blockquote>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">curve</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useMemo</span>(() <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">bezierSplineCurve</span>(<span style="color:#a6e22e">points</span>), [<span style="color:#a6e22e">points</span>]);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">OrthographicScene</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">EditorScene</span>&gt;
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Line</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">points</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">points</span>}
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">colors</span>.<span style="color:#a6e22e">highlight</span>}
@@ -1024,7 +1009,8 @@ bit ahead of time here.</p></blockquote>
 </span></span><span style="display:flex;"><span>      /&gt;
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">CurveWireframe</span> <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">curve</span>} /&gt;
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">TrainWithPhysics</span> <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">curve</span>} /&gt;
-</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">OrthographicScene</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Ground</span> <span style="color:#a6e22e">position</span><span style="color:#f92672">=</span>{[<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">0</span>]} /&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">EditorScene</span>&gt;
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
@@ -1074,7 +1060,7 @@ to see what happens when the requested distance overshoots a segment.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-cf80d52907b840574a257bf04edc9c01"
+    id="react-root-4d370a5b5e9bf15fea7089ed615b5be1"
     width="100%"
     height="260px"
     class="frame"
@@ -1087,7 +1073,7 @@ to see what happens when the requested distance overshoots a segment.</p>
   
 
   <script>
-    document.getElementById('react-root-cf80d52907b840574a257bf04edc9c01').srcdoc = `
+    document.getElementById('react-root-4d370a5b5e9bf15fea7089ed615b5be1').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1440,7 +1426,7 @@ exactly what we were aiming for from the beginning.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-8795abf43766f1b6e4e15fc09a2134dc"
+    id="react-root-0a852d6b5ecf78309665a009e86750e7"
     width="100%"
     height="380px"
     class="frame"
@@ -1453,7 +1439,7 @@ exactly what we were aiming for from the beginning.</p>
   
 
   <script>
-    document.getElementById('react-root-8795abf43766f1b6e4e15fc09a2134dc').srcdoc = `
+    document.getElementById('react-root-0a852d6b5ecf78309665a009e86750e7').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1480,16 +1466,24 @@ exactly what we were aiming for from the beginning.</p>
     <a href="http://localhost:3000/src/content/posts/writing-a-roller-coaster-simulation/curve-nodes/MotionEvaluationDemoScene.tsx" target="_blank">link</a>
     in your browser.
 </p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">useMemo</span>, <span style="color:#a6e22e">useState</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Line</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@react-three/drei&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Vector3</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;three&#39;</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">CurveLine</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/CurveLine&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useColors</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../hooks/useColors&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">CurveWireframe</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/CurveWireframe&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Ground</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/Ground&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">EditorScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/EditorScene&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">fromPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./curve&#39;</span>;
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">wireFrameParts</span> <span style="color:#f92672">=</span> [<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>), <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)];
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MotionEvaluationDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">colors</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useColors</span>();
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">setPoints</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>([
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">11.5</span>, <span style="color:#ae81ff">2.5</span>, <span style="color:#ae81ff">0</span>),
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0.75</span>, <span style="color:#ae81ff">0</span>),
@@ -1502,15 +1496,21 @@ exactly what we were aiming for from the beginning.</p>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">curve</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useMemo</span>(() <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">fromPoints</span>(<span style="color:#a6e22e">points</span>), [<span style="color:#a6e22e">points</span>]);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">OrthographicScene</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">EditorScene</span>&gt;
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">DragControlPoints</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">axisLock</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;z&#34;</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">points</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">points</span>}
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setPoints</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">setPoints</span>}
 </span></span><span style="display:flex;"><span>      /&gt;
-</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">CurveLine</span> <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">curve</span>} /&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">CurveWireframe</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">rails</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">wireFrameParts</span>}
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">tie</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">wireFrameParts</span>}
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">curve</span>}
+</span></span><span style="display:flex;"><span>      /&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Line</span> <span style="color:#a6e22e">points</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">points</span>} <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">colors</span>.<span style="color:#a6e22e">highlight</span>} /&gt;
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">TrainWithPhysics</span> <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">curve</span>} /&gt;
-</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">OrthographicScene</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Ground</span> <span style="color:#a6e22e">position</span><span style="color:#f92672">=</span>{[<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>]} /&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">EditorScene</span>&gt;
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
@@ -1640,16 +1640,16 @@ as before. The only change is that the simulation now uses
 
 <div class="embedded ">
   <iframe
-    id="react-root-867cb2c66510454b4bb34f9e3fedd804"
+    id="react-root-3bd2513f3431e3905b7d914dfe9ef17b"
     width="100%"
-    height="380px"
+    height="480px"
     class="frame"
   ></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-867cb2c66510454b4bb34f9e3fedd804').srcdoc = `
+    document.getElementById('react-root-3bd2513f3431e3905b7d914dfe9ef17b').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1688,8 +1688,9 @@ as before. The only change is that the simulation now uses
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useSimulationStateControls</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../hooks/useSimulationStateControls&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Ground</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/Ground&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">PointWithMatrixArrows</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/PointWithMatrixArrows&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">EditorScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/EditorScene&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">TransformationMatrixDemo</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">colors</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useColors</span>();
@@ -1753,6 +1754,7 @@ as before. The only change is that the simulation now uses
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setPoints</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">setPoints</span>}
 </span></span><span style="display:flex;"><span>      /&gt;
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Line</span> <span style="color:#a6e22e">points</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">points</span>} <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">colors</span>.<span style="color:#a6e22e">secondary</span>} /&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Ground</span> <span style="color:#a6e22e">position</span><span style="color:#f92672">=</span>{[<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">0</span>]} /&gt;
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">PointWithMatrixArrows</span> <span style="color:#a6e22e">matrix</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">motionMatrix</span>} /&gt;
 </span></span><span style="display:flex;"><span>    &lt;/&gt;
 </span></span><span style="display:flex;"><span>  );
@@ -1760,9 +1762,9 @@ as before. The only change is that the simulation now uses
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">TransformationMatrixDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">OrthographicScene</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">EditorScene</span>&gt;
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">TransformationMatrixDemo</span> /&gt;
-</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">OrthographicScene</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">EditorScene</span>&gt;
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
@@ -1900,16 +1902,16 @@ shape and see how both trains react differently.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-480e8d418220ce3106967e103b4011fe"
+    id="react-root-ce459a875dae0488e700b479cb844b8e"
     width="100%"
-    height="360px"
+    height="460px"
     class="frame"
   ></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-480e8d418220ce3106967e103b4011fe').srcdoc = `
+    document.getElementById('react-root-ce459a875dae0488e700b479cb844b8e').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1967,7 +1969,8 @@ with a simple linear track. Stay tuned.</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">ControlPoint</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/ControlPoint&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Ground</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/Ground&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">EditorScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/EditorScene&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">evaluateMotion</span>,
@@ -1977,8 +1980,7 @@ with a simple linear track. Stay tuned.</p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">FrictionAndAirResistanceDemo</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">colors</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useColors</span>();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// control points
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">setPoints</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>([
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">setPoints</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>([
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">11.5</span>, <span style="color:#ae81ff">3.2</span>, <span style="color:#ae81ff">0</span>),
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2.8</span>, <span style="color:#ae81ff">0</span>),
 </span></span><span style="display:flex;"><span>  ]);
@@ -2081,11 +2083,11 @@ with a simple linear track. Stay tuned.</p>
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setPoints</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">setPoints</span>}
 </span></span><span style="display:flex;"><span>      /&gt;
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Line</span> <span style="color:#a6e22e">points</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">points</span>} <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">colors</span>.<span style="color:#a6e22e">secondary</span>} /&gt;
-</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">ControlPoint</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">position</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">trainPosition</span>}
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">colors</span>.<span style="color:#a6e22e">highlight</span>}
 </span></span><span style="display:flex;"><span>      /&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Ground</span> <span style="color:#a6e22e">position</span><span style="color:#f92672">=</span>{[<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>]} /&gt;
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">ControlPoint</span> <span style="color:#a6e22e">position</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">trainPositionWithoutFriction</span>} /&gt;
 </span></span><span style="display:flex;"><span>    &lt;/&gt;
 </span></span><span style="display:flex;"><span>  );
@@ -2093,9 +2095,9 @@ with a simple linear track. Stay tuned.</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">FrictionAndAirResistanceDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">OrthographicScene</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">EditorScene</span>&gt;
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">FrictionAndAirResistanceDemo</span> /&gt;
-</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">OrthographicScene</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">EditorScene</span>&gt;
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
@@ -2279,16 +2281,16 @@ time. On the side, a small panel displays the live simulation state.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-d78911a73de71f9a77f70bb17d049649"
+    id="react-root-4081ac54fb0417e0e560dfc9723f51d4"
     width="100%"
-    height="300px"
+    height="360px"
     class="frame"
   ></iframe>
 
   
 
   <script>
-    document.getElementById('react-root-d78911a73de71f9a77f70bb17d049649').srcdoc = `
+    document.getElementById('react-root-4081ac54fb0417e0e560dfc9723f51d4').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2339,7 +2341,8 @@ with and without energy loss.</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">ControlPoint</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/ControlPoint&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DragControlPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/curve/DragControlPoints&#39;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">OrthographicScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/OrthographicScene&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Ground</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/Ground&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">EditorScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/EditorScene&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">evaluateMotion</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./physics&#39;</span>;
 </span></span><span style="display:flex;"><span>
@@ -2352,18 +2355,21 @@ with and without energy loss.</p>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2.8</span>, <span style="color:#ae81ff">0</span>),
 </span></span><span style="display:flex;"><span>  ]);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">simulationState</span>, <span style="color:#a6e22e">setSimulationState</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useControls</span>(() <span style="color:#f92672">=&gt;</span> ({
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">velocity</span>: <span style="color:#66d9ef">0</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">distanceTraveled</span>: <span style="color:#66d9ef">0</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">acceleration</span><span style="color:#f92672">:</span> {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">0</span>,
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">pad</span>: <span style="color:#66d9ef">5</span>,
-</span></span><span style="display:flex;"><span>    },
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">gravity</span><span style="color:#f92672">:</span> {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">9.81665</span>,
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">pad</span>: <span style="color:#66d9ef">5</span>,
-</span></span><span style="display:flex;"><span>    },
-</span></span><span style="display:flex;"><span>  }));
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">simulationState</span>, <span style="color:#a6e22e">setSimulationState</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useControls</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;Simulation&#39;</span>,
+</span></span><span style="display:flex;"><span>    () <span style="color:#f92672">=&gt;</span> ({
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">velocity</span>: <span style="color:#66d9ef">0</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">distanceTraveled</span>: <span style="color:#66d9ef">0</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">acceleration</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">pad</span>: <span style="color:#66d9ef">5</span>,
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">gravity</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">9.81665</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">pad</span>: <span style="color:#66d9ef">5</span>,
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>    }),
+</span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">useFrame</span>((<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">deltaTime</span>) <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setSimulationState</span>(
@@ -2409,6 +2415,7 @@ with and without energy loss.</p>
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setPoints</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">setPoints</span>}
 </span></span><span style="display:flex;"><span>      /&gt;
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Line</span> <span style="color:#a6e22e">points</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">points</span>} <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">colors</span>.<span style="color:#a6e22e">secondary</span>} /&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Ground</span> <span style="color:#a6e22e">position</span><span style="color:#f92672">=</span>{[<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>]} /&gt;
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">ControlPoint</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">position</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">trainPosition</span>}
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">colors</span>.<span style="color:#a6e22e">highlight</span>}
@@ -2419,9 +2426,9 @@ with and without energy loss.</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">LinearTrackDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">OrthographicScene</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">EditorScene</span>&gt;
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">LinearTrackDemo</span> /&gt;
-</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">OrthographicScene</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">EditorScene</span>&gt;
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
@@ -2549,7 +2556,7 @@ the introduction of this chapter.</p></blockquote>
 
 <div class="embedded ">
   <iframe
-    id="react-root-5baf7adbb76625f733b2170d5d521aa6"
+    id="react-root-f69e828f349ea2752975524374300450"
     width="100%"
     height="360px"
     class="frame"
@@ -2558,7 +2565,7 @@ the introduction of this chapter.</p></blockquote>
   
 
   <script>
-    document.getElementById('react-root-5baf7adbb76625f733b2170d5d521aa6').srcdoc = `
+    document.getElementById('react-root-f69e828f349ea2752975524374300450').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2827,7 +2834,7 @@ it</strong> moment, so it might help you as well.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-a22014ab0e0c50205b4d12ed33d91bfc"
+    id="react-root-e33a3095f032a14520a338164a7869a5"
     width="100%"
     height="300px"
     class="frame"
@@ -2836,7 +2843,7 @@ it</strong> moment, so it might help you as well.</p>
   
 
   <script>
-    document.getElementById('react-root-a22014ab0e0c50205b4d12ed33d91bfc').srcdoc = `
+    document.getElementById('react-root-e33a3095f032a14520a338164a7869a5').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3174,7 +3181,7 @@ inside the WebAssembly module.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-b2fcee47405d7cf2bd403214d7a102fe"
+    id="react-root-6b1294eede5105118a9ab9baec113d35"
     width="100%"
     height="360px"
     class="frame"
@@ -3183,7 +3190,7 @@ inside the WebAssembly module.</p>
   
 
   <script>
-    document.getElementById('react-root-b2fcee47405d7cf2bd403214d7a102fe').srcdoc = `
+    document.getElementById('react-root-6b1294eede5105118a9ab9baec113d35').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3283,7 +3290,7 @@ better bindings.</p>
 
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-08d6223202e2268be1f7c2e558133a4f"
+id="react-root-b4eadd5fbf4a3ea0c278271941a4f6b0"
 width="225px"
 height="285px"
 class="frame"
@@ -3292,7 +3299,7 @@ class="frame"
 Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-08d6223202e2268be1f7c2e558133a4f').srcdoc = `
+document.getElementById('react-root-b4eadd5fbf4a3ea0c278271941a4f6b0').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -3322,7 +3329,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-08d6223202e2268be1f7c2e558133a4f"
+    id="react-root-b4eadd5fbf4a3ea0c278271941a4f6b0"
     width="225px"
     height="285px"
     class="frame"
@@ -3335,7 +3342,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
   
 
   <script>
-    document.getElementById('react-root-08d6223202e2268be1f7c2e558133a4f').srcdoc = `
+    document.getElementById('react-root-b4eadd5fbf4a3ea0c278271941a4f6b0').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>

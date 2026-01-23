@@ -1,5 +1,4 @@
 import React from 'react';
-import { useControls } from 'leva';
 import { Vector3 } from 'three';
 
 import { toLocalTransformed } from '../../../../maths/curve';
@@ -12,7 +11,6 @@ import { Ground } from '../../../../components/Ground';
 import { PerspectiveScene } from '../../../../components/scenes/PerspectiveScene';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
 
-// @ts-ignore
 import Park from './Hybris.nl2park';
 
 const exampleCoaster = (await fromURL(Park)).coaster[0];
@@ -26,13 +24,9 @@ const exampleTrackCurve = toLocalTransformed(
 export const NurbsRollPhysicsInActionDemoScene = () => {
   const colors = useColors();
 
-  const { pov } = useControls({
-    pov: true,
-  });
-
   return (
     <>
-      <PerspectiveScene cameraControlsActive={!pov}>
+      <PerspectiveScene>
         <Ground position={new Vector3(0, -7, 0)} />
         <CurveWireframe
           color={colors.secondary}
@@ -40,13 +34,13 @@ export const NurbsRollPhysicsInActionDemoScene = () => {
         />
         <TrainWithPhysics
           curve={exampleTrackCurve}
-          activateCamera={pov}
           init={{
             velocity: 7,
             distanceTraveled: 186,
             friction: 0.026,
             airResistance: 2e-5,
           }}
+          activateCamera={true}
         />
       </PerspectiveScene>
     </>

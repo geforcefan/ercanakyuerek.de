@@ -7,7 +7,8 @@ import { useColors } from '../../../../hooks/useColors';
 
 import { CurveWireframe } from '../../../../components/curve/CurveWireframe';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
-import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
+import { Ground } from '../../../../components/Ground';
+import { EditorScene } from '../../../../components/scenes/EditorScene';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
 
 export const BezierCurveDemoScene = () => {
@@ -23,7 +24,7 @@ export const BezierCurveDemoScene = () => {
   const curve = useMemo(() => bezierSplineCurve(points), [points]);
 
   return (
-    <OrthographicScene>
+    <EditorScene>
       <Line
         points={points}
         color={colors.highlight}
@@ -36,6 +37,7 @@ export const BezierCurveDemoScene = () => {
       />
       <CurveWireframe curve={curve} />
       <TrainWithPhysics curve={curve} />
-    </OrthographicScene>
+      <Ground position={[0, -5, 0]} />
+    </EditorScene>
   );
 };
