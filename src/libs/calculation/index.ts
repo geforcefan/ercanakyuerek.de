@@ -1,4 +1,3 @@
-// @ts-ignore
 import glue from './glue.wasm';
 
 const module = await WebAssembly.compileStreaming(fetch(glue));

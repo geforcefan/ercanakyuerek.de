@@ -10,6 +10,7 @@ import { ContentComponentsListPage } from './pages/ContentComponentsListPage';
 
 import './themes/hello-friend-ng/assets/scss/main-webpack.scss';
 
+import { ExperimentScene } from './experiments/Experiment';
 import { NoLimitsTrackScene } from './experiments/NoLimitsTrack';
 
 export const router = createBrowserRouter([
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
   {
     path: '/experiment',
     Component: NoLimitsTrackScene,
+  },
+  {
+    path: '/experiment2',
+    Component: ExperimentScene,
   },
   ...contentComponents.keys().map((path: string) => {
     return {

@@ -13,7 +13,8 @@ import { useColors } from '../../../../hooks/useColors';
 
 import { ControlPoint } from '../../../../components/curve/ControlPoint';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
-import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
+import { Ground } from '../../../../components/Ground';
+import { EditorScene } from '../../../../components/scenes/EditorScene';
 
 import { evaluateMotion } from './physics';
 
@@ -26,18 +27,21 @@ const LinearTrackDemo = () => {
     new Vector3(0, -2.8, 0),
   ]);
 
-  const [simulationState, setSimulationState] = useControls(() => ({
-    velocity: 0,
-    distanceTraveled: 0,
-    acceleration: {
-      value: 0,
-      pad: 5,
-    },
-    gravity: {
-      value: 9.81665,
-      pad: 5,
-    },
-  }));
+  const [simulationState, setSimulationState] = useControls(
+    'Simulation',
+    () => ({
+      velocity: 0,
+      distanceTraveled: 0,
+      acceleration: {
+        value: 0,
+        pad: 5,
+      },
+      gravity: {
+        value: 9.81665,
+        pad: 5,
+      },
+    }),
+  );
 
   useFrame((state, deltaTime) => {
     setSimulationState(
@@ -83,6 +87,7 @@ const LinearTrackDemo = () => {
         setPoints={setPoints}
       />
       <Line points={points} color={colors.secondary} />
+      <Ground position={[0, -3, 0]} />
       <ControlPoint
         position={trainPosition}
         color={colors.highlight}
@@ -93,8 +98,8 @@ const LinearTrackDemo = () => {
 
 export const LinearTrackDemoScene = () => {
   return (
-    <OrthographicScene>
+    <EditorScene>
       <LinearTrackDemo />
-    </OrthographicScene>
+    </EditorScene>
   );
 };

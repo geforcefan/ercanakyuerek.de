@@ -20,7 +20,6 @@ import { PerspectiveScene } from '../../../../components/scenes/PerspectiveScene
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
 
 import { fromRollPoints } from '../../../../coaster/cubic-roll';
-// @ts-ignore
 import LookAtExample from './LookAtExample.nl2park';
 
 const exampleCoaster = (await fromURL(LookAtExample)).coaster[0];
@@ -81,8 +80,8 @@ export const LookAtExampleScene = () => {
       <PerspectiveScene>
         <CurveWireframe curve={curveWithRoll} />
         <TrainWithPhysics
-          curve={curveWithRoll}
           activateCamera={true}
+          curve={curveWithRoll}
           init={{ velocity: 23 }}
         />
         <Ground />

@@ -1,5 +1,5 @@
 @import 'main-webpack.scss';
 
-.content-component {
-  background: none !important;
+.content-component, body {
+  background-color: $embedded-frame-background !important;
 }

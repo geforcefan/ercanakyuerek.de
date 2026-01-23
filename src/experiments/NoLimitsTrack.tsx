@@ -7,16 +7,14 @@ import { fromURL } from '../helper/nl2park/nl2park';
 import { curveFromCustomTrack } from '../helper/nolimits';
 import { useColors } from '../hooks/useColors';
 
-import { DefaultCameraControls } from '../components/camera/DefaultCameraControls';
+import { PerspectiveCameraControls } from '../components/camera/PerspectiveCameraControls';
 import { CurveWireframe } from '../components/curve/CurveWireframe';
 import { Ground } from '../components/Ground';
 import { PerspectiveScene } from '../components/scenes/PerspectiveScene';
 import { TrainWithPhysics } from '../components/TrainWithPhysics';
 
 import { fromUrl } from '../coaster/nolimits-csv-track';
-// @ts-ignore
 import ParkCSV from './Hybris.csv';
-// @ts-ignore
 import Park from './Hybris.nl2park';
 
 const park = await fromURL(Park);
@@ -43,7 +41,7 @@ export const NoLimitsTrackScene = () => {
         <Ground />
         {/*<DragControlPoints points={points} setPoints={() => {}} />
         <Line points={points} color={colors.secondary} />*/}
-        {!pov && <DefaultCameraControls />}
+        {!pov && <PerspectiveCameraControls />}
         <CurveWireframe
           color={colors.highlight}
           curve={exampleCSVCurve}
@@ -54,7 +52,6 @@ export const NoLimitsTrackScene = () => {
         />
         <TrainWithPhysics
           curve={exampleTrackCurve}
-          activateCamera={pov}
           init={{
             velocity: 7,
             distanceTraveled: 186,

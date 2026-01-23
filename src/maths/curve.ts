@@ -98,7 +98,6 @@ export const insertTransformationMatrix = (
   segmentIndex: number = 0,
 ) => {
   const lastNode = last(curve.nodes);
-  const lastSegmentIndex = lastNode?.segmentIndex ?? 0;
 
   let arcLength = 0;
 
@@ -112,9 +111,7 @@ export const insertTransformationMatrix = (
     arcLength = lastNode.arcLength + distanceToLastNode;
   }
 
-  if (lastSegmentIndex !== segmentIndex)
-    curve.segmentOffsets[segmentIndex] = arcLength;
-  else curve.segmentOffsets[segmentIndex + 1] = arcLength;
+  curve.segmentOffsets[segmentIndex + 1] = arcLength;
 
   curve.nodes.push({
     arcLength,

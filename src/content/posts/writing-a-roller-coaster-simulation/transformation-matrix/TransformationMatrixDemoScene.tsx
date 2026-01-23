@@ -12,8 +12,9 @@ import { useColors } from '../../../../hooks/useColors';
 import { useSimulationStateControls } from '../../../../hooks/useSimulationStateControls';
 
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
+import { Ground } from '../../../../components/Ground';
 import { PointWithMatrixArrows } from '../../../../components/PointWithMatrixArrows';
-import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
+import { EditorScene } from '../../../../components/scenes/EditorScene';
 
 const TransformationMatrixDemo = () => {
   const colors = useColors();
@@ -77,6 +78,7 @@ const TransformationMatrixDemo = () => {
         setPoints={setPoints}
       />
       <Line points={points} color={colors.secondary} />
+      <Ground position={[0, -5, 0]} />
       <PointWithMatrixArrows matrix={motionMatrix} />
     </>
   );
@@ -84,8 +86,8 @@ const TransformationMatrixDemo = () => {
 
 export const TransformationMatrixDemoScene = () => {
   return (
-    <OrthographicScene>
+    <EditorScene>
       <TransformationMatrixDemo />
-    </OrthographicScene>
+    </EditorScene>
   );
 };

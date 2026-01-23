@@ -4,7 +4,7 @@ export const splitPointsByStrict = <T extends { strict: boolean }>(
   const result: T[][] = [];
   const indices = points.reduce<Array<number>>(
     (indices, v, i) => {
-      if (v.strict || i === points.length - 1) indices.push(i);
+      if ((v.strict && i) || i === points.length - 1) indices.push(i);
       return indices;
     },
     [0],

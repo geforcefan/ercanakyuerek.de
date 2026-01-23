@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Line } from '@react-three/drei';
-import { Vector3 } from 'three';
+import { Vector3, Vector4 } from 'three';
 
-import { bezierSplineCurve } from '../../../../maths/bezier';
 import { useColors } from '../../../../hooks/useColors';
 
 import { CurveWireframe } from '../../../../components/curve/CurveWireframe';
@@ -11,33 +10,38 @@ import { Ground } from '../../../../components/Ground';
 import { EditorScene } from '../../../../components/scenes/EditorScene';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
 
-export const BezierCurveDemoScene = () => {
+import { fromVertices } from '../../../../coaster/b-spline-track';
+
+export const BSplineCurveDemoScene = () => {
   const colors = useColors();
 
   const [points, setPoints] = useState([
-    new Vector3(-11.3, 3.9, 0),
-    new Vector3(-6.6, 2.7, 0),
-    new Vector3(-5.8, -3.8, 0),
-    new Vector3(0, -2.4, 0),
+    new Vector3(0, 3, 0),
+    new Vector3(10, 0, 0),
+    new Vector3(12, 0, 0),
+    new Vector3(15, 0, 0),
+    new Vector3(17, 0, 0),
+    new Vector3(18, 0, 0),
   ]);
 
-  const curve = useMemo(() => bezierSplineCurve(points), [points]);
+  const curve = useMemo(
+    () =>
+      fromVertices(
+        points.map((p) => ({
+          position: new Vector4(p.x, p.y, p.z),
+          strict: false,
+        })),
+      ),
+    [points],
+  );
 
   return (
     <EditorScene>
-      <Line
-        points={points}
-        color={colors.highlight}
-        segments={true}
-      />
-      <DragControlPoints
-        axisLock="z"
-        points={points}
-        setPoints={setPoints}
-      />
+      <Line points={points} color={colors.highlight} />
+      <DragControlPoints points={points} setPoints={setPoints} />
+      <Ground />
       <CurveWireframe curve={curve} />
       <TrainWithPhysics curve={curve} />
-      <Ground position={[0, -5, 0]} />
     </EditorScene>
   );
 };

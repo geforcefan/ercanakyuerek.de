@@ -3,7 +3,7 @@ import { PerspectiveCamera } from '@react-three/drei';
 import { PerspectiveCameraProps } from '@react-three/drei/core/PerspectiveCamera';
 import { MathUtils, Matrix4, Vector3 } from 'three';
 
-export const MatrixCamera = ({
+export const TransformationMatrixCamera = ({
   matrix = new Matrix4(),
   translate = new Vector3(),
   fov = 100,
@@ -31,9 +31,9 @@ export const MatrixCamera = ({
 
   return (
     <PerspectiveCamera
-      matrixAutoUpdate={false}
-      matrix={perspectiveMatrix}
       fov={fov}
+      matrix={perspectiveMatrix}
+      matrixAutoUpdate={false}
       {...props}
     />
   );
