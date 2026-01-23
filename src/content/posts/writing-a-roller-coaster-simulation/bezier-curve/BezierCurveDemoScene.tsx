@@ -37,7 +37,7 @@ export const BezierCurveDemoScene = () => {
       />
       <CurveWireframe curve={curve} />
       <TrainWithPhysics curve={curve} />
-      <Ground />
+      <Ground position={[0, -5, 0]} />
     </EditorScene>
   );
 };

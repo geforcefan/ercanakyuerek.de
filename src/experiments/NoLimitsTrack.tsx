@@ -52,7 +52,6 @@ export const NoLimitsTrackScene = () => {
         />
         <TrainWithPhysics
           curve={exampleTrackCurve}
-          activateCamera={pov}
           init={{
             velocity: 7,
             distanceTraveled: 186,

@@ -46,13 +46,13 @@ I will figure it out eventually. Probably.
 
 # Interactive demo
 
-Below is an interactive demo of the current state of the simulator.
+Below is an interactive demo of the simulator.
 You can play around with it and see how the track interpolation, roll,
 and physics behave together.
 
 As always, the full code is available below.
 
-{{< embedded-content-component path="./posts/roller-coaster-simulation/nurbs-roll-physics-in-action/NurbsRollPhysicsInActionDemoScene.tsx" width="100%" height="560px">}}
+{{< embedded-content-component path="./posts/roller-coaster-simulation/nurbs-roll-physics-in-action/NurbsRollPhysicsInActionDemoScene.tsx" width="100%" height="650px">}}
 
 # Code
 

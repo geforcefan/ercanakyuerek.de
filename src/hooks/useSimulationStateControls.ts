@@ -10,7 +10,7 @@ export const useSimulationStateControls = (
     simulationSpeed?: number;
   } = {},
 ) => {
-  return useControls(() => ({
+  return useControls('Simulation', () => ({
     velocity: init.velocity ?? 0,
     distanceTraveled: init.distanceTraveled ?? 0,
     friction: {

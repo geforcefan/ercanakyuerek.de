@@ -27,18 +27,21 @@ const LinearTrackDemo = () => {
     new Vector3(0, -2.8, 0),
   ]);
 
-  const [simulationState, setSimulationState] = useControls(() => ({
-    velocity: 0,
-    distanceTraveled: 0,
-    acceleration: {
-      value: 0,
-      pad: 5,
-    },
-    gravity: {
-      value: 9.81665,
-      pad: 5,
-    },
-  }));
+  const [simulationState, setSimulationState] = useControls(
+    'Simulation',
+    () => ({
+      velocity: 0,
+      distanceTraveled: 0,
+      acceleration: {
+        value: 0,
+        pad: 5,
+      },
+      gravity: {
+        value: 9.81665,
+        pad: 5,
+      },
+    }),
+  );
 
   useFrame((state, deltaTime) => {
     setSimulationState(

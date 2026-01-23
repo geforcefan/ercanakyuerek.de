@@ -1,12 +1,15 @@
 import React, { ReactNode } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { CanvasProps } from '@react-three/fiber/dist/declarations/src/web/Canvas';
-import { useControls } from 'leva';
 import { Vector3 } from 'three';
 import { useDevicePixelRatio } from 'use-device-pixel-ratio';
 
 import { useColors } from '../../hooks/useColors';
 
+import {
+  CameraView,
+  CameraViewManager,
+} from '../camera/CameraViewManager';
 import { OrthographicEditor } from '../editor/OrthographicEditor';
 import { PerspectiveEditor } from '../editor/PerspectiveEditor';
 
@@ -21,29 +24,22 @@ export const EditorScene = ({
   const colors = useColors();
   const dpr = useDevicePixelRatio();
 
-  const { view } = useControls({
-    view: {
-      value: 'front',
-      options: [
-        'top',
-        'bottom',
-        'front',
-        'back',
-        'left',
-        'right',
-        'perspective',
-      ],
-    },
-  });
-
   return (
-    <Canvas dpr={dpr} {...props}>
-      {view === 'perspective' && <PerspectiveEditor />}
-      {view !== 'perspective' && (
-        <OrthographicEditor view={view as any} />
-      )}
-      <color attach="background" args={[colors.primary]} />
-      {children}
-    </Canvas>
+    <CameraViewManager>
+      <Canvas dpr={dpr} {...props}>
+        {['front', 'back', 'top', 'bottom', 'left', 'right'].map(
+          (view) => (
+            <CameraView name={view} makeDefault={view === 'front'}>
+              <OrthographicEditor view={view as any} />
+            </CameraView>
+          ),
+        )}
+        <CameraView name="perspective">
+          <PerspectiveEditor />
+        </CameraView>
+        {children}
+        <color attach="background" args={[colors.primary]} />
+      </Canvas>
+    </CameraViewManager>
   );
 };

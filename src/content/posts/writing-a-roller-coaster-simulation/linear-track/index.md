@@ -208,7 +208,7 @@ Time for a small demo. I built a basic setup: a visible line segment
 with draggable control points so you can adjust the slope in real
 time. On the side, a small panel displays the live simulation state.
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/linear-track/LinearTrackDemoScene.tsx" width="100%" height="300px">}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/linear-track/LinearTrackDemoScene.tsx" width="100%" height="360px">}}
 
 I’ve polished things a bit and moved the physics and linear
 interpolation logic into their own files instead of keeping everything

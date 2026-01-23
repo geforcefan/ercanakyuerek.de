@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { PerspectiveCamera } from '@react-three/drei';
 import { PerspectiveCameraProps } from '@react-three/drei/core/PerspectiveCamera';
-import { Matrix4, Vector3 } from 'three';
+import { MathUtils, Matrix4, Vector3 } from 'three';
 
 export const TransformationMatrixCamera = ({
   matrix = new Matrix4(),
@@ -12,11 +12,29 @@ export const TransformationMatrixCamera = ({
   PerspectiveCameraProps,
   'matrixAutoUpdate' | 'matrix'
 >) => {
+  const perspectiveMatrix = useMemo(
+    () =>
+      matrix
+        .clone()
+        .multiply(
+          new Matrix4().makeRotationY(MathUtils.degToRad(180)),
+        )
+        .multiply(
+          new Matrix4().makeTranslation(
+            translate.x,
+            translate.y,
+            translate.z,
+          ),
+        ),
+    [matrix, translate.x, translate.y, translate.z],
+  );
+
   return (
-    <group matrix={matrix} matrixAutoUpdate={false}>
-      <group position={translate} rotation={[0, Math.PI, 0]}>
-        <PerspectiveCamera fov={fov} {...props} />
-      </group>
-    </group>
+    <PerspectiveCamera
+      fov={fov}
+      matrix={perspectiveMatrix}
+      matrixAutoUpdate={false}
+      {...props}
+    />
   );
 };

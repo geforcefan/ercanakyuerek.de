@@ -2,6 +2,7 @@
 title: 'Uniform Rational B-Spline curve'
 date: 2026-01-18T14:30:00+01:00
 math: true
+draft: true
 tags: ['writing a roller coaster simulation']
 ---
 

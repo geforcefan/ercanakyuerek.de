@@ -3,7 +3,7 @@ import React from 'react';
 export const LoadingScreen = () => {
   return (
     <div
-      className="full-screen"
+      className="loading-screen full-screen"
       style={{
         display: 'flex',
         justifyContent: 'center',

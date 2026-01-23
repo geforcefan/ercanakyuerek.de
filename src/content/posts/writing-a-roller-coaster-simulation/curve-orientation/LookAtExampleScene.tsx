@@ -80,8 +80,8 @@ export const LookAtExampleScene = () => {
       <PerspectiveScene>
         <CurveWireframe curve={curveWithRoll} />
         <TrainWithPhysics
-          curve={curveWithRoll}
           activateCamera={true}
+          curve={curveWithRoll}
           init={{ velocity: 23 }}
         />
         <Ground />

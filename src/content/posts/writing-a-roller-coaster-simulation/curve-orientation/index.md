@@ -64,7 +64,7 @@ The following interactive demo lets us switch between a **fixed-up
 lookAt orientation** and an **incremental orientation based on the
 previous node**. This helps visualize the problem.
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-orientation/LookAtExampleScene.tsx" width="100%" height="500px" description="**fixed-up lookAt orientation**: Roll becomes unstable near 90° slopes. **Incremental rotation**: Stable roll and smooth orientation along the curve." >}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-orientation/LookAtExampleScene.tsx" width="100%" height="700px" description="**fixed-up lookAt orientation**: Roll becomes unstable near 90° slopes. **Incremental rotation**: Stable roll and smooth orientation along the curve." >}}
 
 ## Parallel transport
 

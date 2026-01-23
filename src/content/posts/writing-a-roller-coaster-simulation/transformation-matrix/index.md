@@ -90,6 +90,6 @@ as before. The only change is that the simulation now uses
 
 For completeness, the full demo is shown below.
 
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/transformation-matrix/TransformationMatrixDemoScene.tsx" width="100%" height="380px">}}
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/transformation-matrix/TransformationMatrixDemoScene.tsx" width="100%" height="480px">}}
 
 {{< repository-code-with-clone file="src/content/posts/writing-a-roller-coaster-simulation/transformation-matrix/TransformationMatrixDemoScene.tsx" >}}

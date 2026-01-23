@@ -1,12 +1,10 @@
-import React, { useMemo } from 'react';
-import {
-  CameraControls,
-  CameraControlsImpl,
-  OrthographicCamera,
-} from '@react-three/drei';
+import React, { useMemo, useState } from 'react';
+import { OrthographicCamera } from '@react-three/drei';
 import { find } from 'lodash';
 import { Euler, Vector3 } from 'three';
+import * as THREE from 'three';
 
+import { OrthographicCameraControls } from '../camera/OrthographicCameraControls';
 import { EditorGrid } from './EditorGrid';
 
 const views = [
@@ -85,6 +83,9 @@ export const OrthographicEditor = ({
   view?: 'front' | 'back' | 'left' | 'right' | 'top' | 'bottom';
   showGrid?: boolean;
 }) => {
+  const [camera, setCamera] =
+    useState<THREE.OrthographicCamera | null>();
+
   const activeView = useMemo(
     () => find(views, { name: view }),
     [view],
@@ -94,23 +95,13 @@ export const OrthographicEditor = ({
   return (
     <>
       <OrthographicCamera
+        ref={setCamera}
         key={view}
         makeDefault={true}
         zoom={30}
         {...activeView.camera}
       />
-      <CameraControls
-        mouseButtons={{
-          left: CameraControlsImpl.ACTION.NONE,
-          right: CameraControlsImpl.ACTION.TRUCK,
-          wheel: CameraControlsImpl.ACTION.ZOOM,
-          middle: CameraControlsImpl.ACTION.NONE,
-        }}
-        makeDefault={true}
-        dollySpeed={0.4}
-        dollyToCursor={true}
-        draggingSmoothTime={0.03}
-      />
+      {camera && <OrthographicCameraControls camera={camera} />}
       {showGrid && <EditorGrid {...activeView.grid} />}
     </>
   );
