@@ -32,7 +32,7 @@ export const TrainWithPhysics = ({
       <CameraView name="train" makeDefault={activateCamera}>
         <TransformationMatrixCamera
           matrix={motionMatrix}
-          translate={new Vector3(0, 1, 0)}
+          translate={new Vector3(0, 0.75, 0)}
           makeDefault={true}
         />
       </CameraView>

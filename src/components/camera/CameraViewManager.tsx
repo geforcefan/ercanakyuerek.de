@@ -46,7 +46,7 @@ export const CameraViewManager: React.FC<{ children: ReactNode }> = ({
   );
 
   useEffect(() => {
-    const id = setTimeout(() => setShowLoading(false), 250);
+    const id = setTimeout(() => setShowLoading(false), 500);
     return () => clearTimeout(id);
   }, []);
 

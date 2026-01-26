@@ -11,14 +11,14 @@ import {
 import { useColors } from '../../hooks/useColors';
 
 const wireFrameParts = [
-  new Vector3(1, 0, 0),
-  new Vector3(0, -1, 0),
-  new Vector3(-1, 0, 0),
+  new Vector3(0.45, 0, 0),
+  new Vector3(0, -0.4, 0),
+  new Vector3(-0.45, 0, 0),
 ];
 
 export const CurveWireframe = ({
   railSpacing = 0.25,
-  tieSpacing = 1,
+  tieSpacing = 0.75,
   loopTie = true,
   tie = wireFrameParts,
   rails = wireFrameParts,

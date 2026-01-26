@@ -21,6 +21,8 @@ export const PerspectiveScene = ({
   return (
     <CameraViewManager>
       <Canvas dpr={dpr}>
+        <ambientLight intensity={0.4} />
+        <directionalLight position={[5, 5, 5]} intensity={0.8} />
         <CameraView name="perspective" makeDefault={true}>
           <PerspectiveEditor />
         </CameraView>

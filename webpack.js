@@ -23,6 +23,7 @@ module.exports = {
         type: 'asset/resource',
       },
       { test: /\.nl2park$/, type: 'asset/resource' },
+      { test: /\.3ds$/, type: 'asset/resource' },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],

@@ -12,3 +12,8 @@ declare module '*.wasm' {
   const url: string;
   export default url;
 }
+
+declare module '*.3ds' {
+  const url: string;
+  export default url;
+}

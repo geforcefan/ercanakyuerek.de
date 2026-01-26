@@ -1604,6 +1604,11 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@jscad/modeling@^2.12.6":
+  version "2.12.6"
+  resolved "https://registry.npmjs.org/@jscad/modeling/-/modeling-2.12.6.tgz"
+  integrity sha512-RyT7hrxuq9UHuBmsC8o+KzimQCY6En2IFiSYPDbSlNFKLFdOc3Kyq9NXpt5+RNQhrhLz6uo15XDtnE43EFF3YQ==
+
 "@leichtgewicht/ip-codec@^2.0.1":
   version "2.0.5"
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.5.tgz"

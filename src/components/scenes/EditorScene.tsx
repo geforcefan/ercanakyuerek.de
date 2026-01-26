@@ -27,6 +27,9 @@ export const EditorScene = ({
   return (
     <CameraViewManager>
       <Canvas dpr={dpr} {...props}>
+        <ambientLight intensity={0.4} />
+        <directionalLight position={[5, 5, 5]} intensity={0.8} />
+
         {['front', 'back', 'top', 'bottom', 'left', 'right'].map(
           (view) => (
             <CameraView name={view} makeDefault={view === 'front'}>
