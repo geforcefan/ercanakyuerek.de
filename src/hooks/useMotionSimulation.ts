@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useControls } from 'leva';
-import { MathUtils } from 'three';
+import { MathUtils, Matrix4 } from 'three';
 
 import {
   Curve,
@@ -15,52 +15,34 @@ export const useMotionSimulation = (
   curve: Curve,
   init: Parameters<typeof useSimulationStateControls>[0] = {},
 ) => {
-  const [
-    { friction, airResistance, gravity, simulationSpeed },
-    setSimulationConstants,
-  ] = useControls('Simulation', () => ({
-    friction: {
-      value: init.friction ?? 0.03,
-      pad: 5,
-    },
-    airResistance: {
-      value: init.airResistance ?? 2e-5,
-      pad: 6,
-    },
-    gravity: {
-      value: init.gravity ?? 9.81665,
-      pad: 5,
-    },
-    simulationSpeed: {
-      min: 0.25,
-      max: 4,
-      step: 0.25,
-      value: init.simulationSpeed ?? 1,
-    },
-    distanceTraveled: {
-      value: 0,
-      disabled: true,
-    },
-    velocity: {
-      value: 0,
-      disabled: true,
-    },
-    acceleration: {
-      value: 0,
-      pad: 5,
-      disabled: true,
-    },
-  }));
+  const [matrix, setMatrix] = useState(new Matrix4());
+  const [{ friction, airResistance, gravity, simulationSpeed }] =
+    useControls('Simulation', () => ({
+      friction: {
+        value: init.friction ?? 0.03,
+        pad: 5,
+      },
+      airResistance: {
+        value: init.airResistance ?? 2e-5,
+        pad: 6,
+      },
+      gravity: {
+        value: init.gravity ?? 9.81665,
+        pad: 5,
+      },
+      simulationSpeed: {
+        min: 0.25,
+        max: 4,
+        step: 0.25,
+        value: init.simulationSpeed ?? 1,
+      },
+    }));
 
-  const [simulationState, setSimulationState] = useState({
+  const simulationState = useRef({
     distanceTraveled: init?.distanceTraveled ?? 0,
     velocity: init?.velocity ?? 0,
     acceleration: 0,
   });
-
-  useEffect(() => {
-    setSimulationConstants({ ...simulationState });
-  }, [setSimulationConstants, simulationState]);
 
   useEffect(() => {
     let timeoutId: number;
@@ -72,61 +54,62 @@ export const useMotionSimulation = (
       lastTime = now;
 
       if (deltaTime > 0.032 || !deltaTime) {
-        timeoutId = window.setTimeout(tick, 8);
+        timeoutId = window.setTimeout(tick);
         return;
       }
 
-      setSimulationState((prev) =>
-        evaluateMotion(
-          prev,
-          transformationAtArcLength(curve, prev.distanceTraveled),
+      if (
+        simulationState.current.distanceTraveled >
+          totalArcLength(curve) ||
+        simulationState.current.distanceTraveled < 0
+      ) {
+        simulationState.current = {
+          velocity: init?.velocity ?? 0,
+          distanceTraveled: init?.distanceTraveled ?? 0,
+          acceleration: 0,
+        };
+      } else {
+        simulationState.current = evaluateMotion(
+          simulationState.current,
+          transformationAtArcLength(
+            curve,
+            simulationState.current.distanceTraveled,
+          ),
           friction,
           airResistance,
           gravity,
           deltaTime * simulationSpeed,
+        );
+      }
+
+      setMatrix(
+        transformationAtArcLength(
+          curve,
+          MathUtils.clamp(
+            simulationState.current.distanceTraveled,
+            0,
+            totalArcLength(curve),
+          ),
         ),
       );
 
-      timeoutId = window.setTimeout(tick, 8);
+      timeoutId = window.setTimeout(tick);
     };
 
-    timeoutId = window.setTimeout(tick, 8);
+    tick();
 
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [curve, simulationSpeed, gravity, airResistance, friction]);
-
-  // reset simulation state if train overshoots track
-  useEffect(() => {
-    if (
-      simulationState.distanceTraveled > totalArcLength(curve) ||
-      simulationState.distanceTraveled < 0
-    ) {
-      setSimulationState({
-        velocity: init?.velocity ?? 0,
-        distanceTraveled: init?.distanceTraveled ?? 0,
-        acceleration: 0,
-      });
-    }
   }, [
-    simulationState.distanceTraveled,
-    setSimulationState,
     curve,
-    init?.velocity,
+    simulationSpeed,
+    gravity,
+    airResistance,
+    friction,
     init?.distanceTraveled,
+    init?.velocity,
   ]);
 
-  return useMemo(
-    () =>
-      transformationAtArcLength(
-        curve,
-        MathUtils.clamp(
-          simulationState.distanceTraveled,
-          0,
-          totalArcLength(curve),
-        ),
-      ),
-    [curve, simulationState.distanceTraveled],
-  );
+  return matrix;
 };
