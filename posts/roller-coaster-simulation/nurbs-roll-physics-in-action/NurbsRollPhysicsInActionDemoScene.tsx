@@ -4,9 +4,8 @@ import { Vector3 } from 'three';
 import { toLocalTransformed } from '../../../../maths/curve';
 import { fromURL } from '../../../../helper/nl2park/nl2park';
 import { curveFromCustomTrack } from '../../../../helper/nolimits';
-import { useColors } from '../../../../hooks/useColors';
 
-import { CurveWireframe } from '../../../../components/curve/CurveWireframe';
+import { CurveTrackMesh } from '../../../../components/curve/CurveTrackMesh';
 import { Ground } from '../../../../components/Ground';
 import { PerspectiveScene } from '../../../../components/scenes/PerspectiveScene';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
@@ -22,16 +21,11 @@ const exampleTrackCurve = toLocalTransformed(
 );
 
 export const NurbsRollPhysicsInActionDemoScene = () => {
-  const colors = useColors();
-
   return (
     <>
       <PerspectiveScene>
         <Ground position={new Vector3(0, -7, 0)} />
-        <CurveWireframe
-          color={colors.secondary}
-          curve={exampleTrackCurve}
-        />
+        <CurveTrackMesh curve={exampleTrackCurve} />
         <TrainWithPhysics
           curve={exampleTrackCurve}
           init={{
