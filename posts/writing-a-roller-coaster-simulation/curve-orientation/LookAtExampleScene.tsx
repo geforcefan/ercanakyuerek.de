@@ -14,7 +14,7 @@ import {
   rollPointsFromCustomTrack,
 } from '../../../../helper/nolimits';
 
-import { CurveWireframe } from '../../../../components/curve/CurveWireframe';
+import { CurveTrackMesh } from '../../../../components/curve/CurveTrackMesh';
 import { Ground } from '../../../../components/Ground';
 import { PerspectiveScene } from '../../../../components/scenes/PerspectiveScene';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
@@ -78,7 +78,7 @@ export const LookAtExampleScene = () => {
   return (
     <>
       <PerspectiveScene>
-        <CurveWireframe curve={curveWithRoll} />
+        <CurveTrackMesh curve={curveWithRoll} />
         <TrainWithPhysics
           activateCamera={true}
           curve={curveWithRoll}

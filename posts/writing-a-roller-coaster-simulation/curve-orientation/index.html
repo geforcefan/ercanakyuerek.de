@@ -41,7 +41,7 @@ orientation is transported along the curve with <strong>as little rotation
 as possible</strong>.</p><p>Think of it like this: we add rotation step by step while respecting
 the <strong>previous orientation</strong>.</p><p>The following interactive demo lets us switch between a <strong>fixed-up
 lookAt orientation</strong> and an <strong>incremental orientation based on the
-previous node</strong>. This helps visualize the problem.</p><div class=embedded><iframe id=react-root-d7bcb0f429ac581eb9cf30fc41921990 width=100% height=700px class=frame></iframe><div class=description style=width:100%><strong>fixed-up lookAt orientation</strong>: Roll becomes unstable near 90° slopes. <strong>Incremental rotation</strong>: Stable roll and smooth orientation along the curve.</div><script>document.getElementById("react-root-d7bcb0f429ac581eb9cf30fc41921990").srcdoc=`
+previous node</strong>. This helps visualize the problem.</p><div class=embedded><iframe id=react-root-c922ff81d79e6a33fd2c5878d51186dc width=100% height=700px class=frame></iframe><div class=description style=width:100%><strong>fixed-up lookAt orientation</strong>: Roll becomes unstable near 90° slopes. <strong>Incremental rotation</strong>: Stable roll and smooth orientation along the curve.</div><script>document.getElementById("react-root-c922ff81d79e6a33fd2c5878d51186dc").srcdoc=`
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -216,8 +216,8 @@ is <strong>perfect</strong> and covers almost everything you need to understand
 <strong>splines in general</strong>.</p><h1 id=interactive-demo>Interactive demo</h1><p>This chapter ends with a small interactive example. You can move the
 control points of a <strong>Bézier curve</strong> and observe how the
 <strong>orientation</strong> behaves. There should be <strong>no sudden flips or jitter</strong>
-near <strong>90 degree slopes</strong>.</p><div class=embedded><iframe id=react-root-c11b43882089a6fb65106e6014a057ed width=100% height=650px class=frame></iframe>
-<script>document.getElementById("react-root-c11b43882089a6fb65106e6014a057ed").srcdoc=`
+near <strong>90 degree slopes</strong>.</p><div class=embedded><iframe id=react-root-e3b24ab7f3503028db16d528c158c825 width=100% height=650px class=frame></iframe>
+<script>document.getElementById("react-root-e3b24ab7f3503028db16d528c158c825").srcdoc=`
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
