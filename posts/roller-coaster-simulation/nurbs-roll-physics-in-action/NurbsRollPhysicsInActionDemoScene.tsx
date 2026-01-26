@@ -1,4 +1,5 @@
 import React from 'react';
+import { Stats } from '@react-three/drei';
 import { Vector3 } from 'three';
 
 import { toLocalTransformed } from '../../../../maths/curve';
@@ -24,6 +25,7 @@ export const NurbsRollPhysicsInActionDemoScene = () => {
   return (
     <>
       <PerspectiveScene>
+        <Stats />
         <Ground position={new Vector3(0, -7, 0)} />
         <CurveTrackMesh curve={exampleTrackCurve} />
         <TrainWithPhysics
