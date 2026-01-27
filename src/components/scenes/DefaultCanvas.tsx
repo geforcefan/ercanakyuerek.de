@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import { Stats } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { EffectComposer } from '@react-three/postprocessing';
 import { ACESFilmicToneMapping, Vector3 } from 'three';
@@ -23,7 +22,6 @@ export const DefaultCanvas = ({
       dpr={dpr}
       shadows={true}
     >
-      <Stats />
       <ambientLight castShadow={true} intensity={1.3} />
       <directionalLight
         castShadow
