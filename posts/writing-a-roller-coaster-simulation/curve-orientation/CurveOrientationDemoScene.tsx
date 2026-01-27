@@ -5,7 +5,7 @@ import { Vector3 } from 'three';
 import { bezierSplineCurve } from '../../../../maths/bezier';
 import { useColors } from '../../../../hooks/useColors';
 
-import { CurveWireframe } from '../../../../components/curve/CurveWireframe';
+import { CurveTrackMesh } from '../../../../components/curve/CurveTrackMesh';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
 import { Ground } from '../../../../components/Ground';
 import { EditorScene } from '../../../../components/scenes/EditorScene';
@@ -32,7 +32,7 @@ export const CurveOrientationDemoScene = () => {
           segments={true}
         />
         <DragControlPoints points={points} setPoints={setPoints} />
-        <CurveWireframe curve={curve} />
+        <CurveTrackMesh curve={curve} />
         <TrainWithPhysics curve={curve} init={{ velocity: 17 }} />
       </group>
       <group position={[0, -10, 0]}>
