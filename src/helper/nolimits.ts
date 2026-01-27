@@ -95,11 +95,6 @@ export const makeParameterSpaceMap = (
       space.push(space[space.length - 1] + u);
   };
 
-  if (numberOfPoints === 2) {
-    push(1, 1);
-    return space;
-  }
-
   const hasMiddle = numberOfPoints > degree + 1;
   const splits = hasMiddle ? Math.min(2, degree) : numberOfPoints - 1;
   //const middle = numberOfPoints - splits - 1;
