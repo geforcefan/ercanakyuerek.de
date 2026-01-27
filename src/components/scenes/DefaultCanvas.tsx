@@ -6,7 +6,7 @@ import { useDevicePixelRatio } from 'use-device-pixel-ratio';
 
 import { useColors } from '../../hooks/useColors';
 
-const sunPosition = new Vector3(50, 50, -50);
+const sunPosition = new Vector3(100, 100, -100);
 
 export const DefaultCanvas = ({
   children,
@@ -26,7 +26,7 @@ export const DefaultCanvas = ({
       <directionalLight
         castShadow
         position={sunPosition}
-        intensity={1}
+        intensity={2}
         shadow-mapSize-width={2048 * 4}
         shadow-mapSize-height={2048 * 4}
         shadow-camera-near={1}
