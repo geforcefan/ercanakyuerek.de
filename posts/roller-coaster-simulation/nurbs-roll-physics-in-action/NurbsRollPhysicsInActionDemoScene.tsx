@@ -26,7 +26,7 @@ export const NurbsRollPhysicsInActionDemoScene = () => {
     <>
       <PerspectiveScene>
         <Stats />
-        <Ground position={[0, -7, 0]} />
+        <Ground position={[0, 0, 0]} />
         <CurveTrackMesh curve={exampleTrackCurve} />
         <TrainWithPhysics
           curve={exampleTrackCurve}

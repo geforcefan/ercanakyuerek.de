@@ -9,7 +9,7 @@
 
 <div class="embedded ">
   <iframe
-    id="react-root-c4b96961e2e86dac24343cc467e1db1a"
+    id="react-root-e7f3db90ee73790050cfce7df869559a"
     width="100%"
     height="580px"
     class="frame"
@@ -18,7 +18,7 @@
   
 
   <script>
-    document.getElementById('react-root-c4b96961e2e86dac24343cc467e1db1a').srcdoc = `
+    document.getElementById('react-root-e7f3db90ee73790050cfce7df869559a').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -71,7 +71,7 @@ representation of the track.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-58bf3d3f44b63b8ceb8ad759ebaf8fe5"
+    id="react-root-523ef72a875b2d5d34203503b026ed56"
     width="100%"
     height="650px"
     class="frame"
@@ -80,7 +80,7 @@ representation of the track.</p>
   
 
   <script>
-    document.getElementById('react-root-58bf3d3f44b63b8ceb8ad759ebaf8fe5').srcdoc = `
+    document.getElementById('react-root-523ef72a875b2d5d34203503b026ed56').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -119,14 +119,14 @@ representation of the track.</p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">PerspectiveScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/PerspectiveScene&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Park</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./Rock-it Man.nl2park&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Park</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./Example.nl2park&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">exampleCoaster</span> <span style="color:#f92672">=</span> (<span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fromURL</span>(<span style="color:#a6e22e">Park</span>)).<span style="color:#a6e22e">coaster</span>[<span style="color:#ae81ff">0</span>];
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">exampleTrack</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">exampleCoaster</span><span style="color:#f92672">?</span>.<span style="color:#a6e22e">tracks</span>[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">exampleTrack</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">exampleCoaster</span><span style="color:#f92672">?</span>.<span style="color:#a6e22e">tracks</span>[<span style="color:#ae81ff">2</span>];
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">exampleTrackCurve</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">toLocalTransformed</span>(
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">curveFromCustomTrack</span>(<span style="color:#a6e22e">exampleTrack</span>),
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1.1</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1.2</span>, <span style="color:#ae81ff">0</span>),
 </span></span><span style="display:flex;"><span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">NurbsRollPhysicsInActionDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
@@ -138,13 +138,46 @@ representation of the track.</p>
 </span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">CurveTrackMesh</span> <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">exampleTrackCurve</span>} /&gt;
 </span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">TrainWithPhysics</span>
 </span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">exampleTrackCurve</span>}
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">sections</span><span style="color:#f92672">=</span>{[
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">acceleration</span>: <span style="color:#66d9ef">0.5</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">9.81665</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">fromArcLength</span>: <span style="color:#66d9ef">0</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">toArcLength</span>: <span style="color:#66d9ef">15.38</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">maxVelocity</span>: <span style="color:#66d9ef">8</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">3.6</span>,
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">acceleration</span>: <span style="color:#66d9ef">0.5</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">9.81665</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">fromArcLength</span>: <span style="color:#66d9ef">15.38</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">toArcLength</span>: <span style="color:#66d9ef">18.92</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">maxVelocity</span>: <span style="color:#66d9ef">9.654</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">3.6</span>,
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">acceleration</span>: <span style="color:#66d9ef">0.5</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">9.81665</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">fromArcLength</span>: <span style="color:#66d9ef">44.43</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">toArcLength</span>: <span style="color:#66d9ef">60.16</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">maxVelocity</span>: <span style="color:#66d9ef">12.872</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">3.6</span>,
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">acceleration</span>: <span style="color:#66d9ef">0.8</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">9.81665</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">fromArcLength</span>: <span style="color:#66d9ef">60.16</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">toArcLength</span>: <span style="color:#66d9ef">113.83</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">maxVelocity</span>: <span style="color:#66d9ef">85.277</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">3.6</span>,
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">acceleration</span><span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">9.81665</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">fromArcLength</span>: <span style="color:#66d9ef">715.1</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">toArcLength</span>: <span style="color:#66d9ef">735.54</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">minVelocity</span>: <span style="color:#66d9ef">12.872</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">3.6</span>,
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>          ]}
 </span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">init</span><span style="color:#f92672">=</span>{{
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">velocity</span>: <span style="color:#66d9ef">26.6</span>,
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">distanceTraveled</span>: <span style="color:#66d9ef">41</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">velocity</span>: <span style="color:#66d9ef">0</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">distanceTraveled</span>: <span style="color:#66d9ef">13</span>,
 </span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">friction</span>: <span style="color:#66d9ef">0.026</span>,
 </span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">airResistance</span>: <span style="color:#66d9ef">2e</span><span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>,
 </span></span><span style="display:flex;"><span>          }}
 </span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">activateCamera</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">true</span>}
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">resetWhenReachedLimit</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">false</span>}
 </span></span><span style="display:flex;"><span>        /&gt;
 </span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">PerspectiveScene</span>&gt;
 </span></span><span style="display:flex;"><span>    &lt;/&gt;
@@ -210,7 +243,7 @@ previous node</strong>. This helps visualize the problem.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-bcd2c276a794ecc84c308c17ebed88f8"
+    id="react-root-93de01e745818151aabb13834707e3b4"
     width="100%"
     height="700px"
     class="frame"
@@ -223,7 +256,7 @@ previous node</strong>. This helps visualize the problem.</p>
   
 
   <script>
-    document.getElementById('react-root-bcd2c276a794ecc84c308c17ebed88f8').srcdoc = `
+    document.getElementById('react-root-93de01e745818151aabb13834707e3b4').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -460,7 +493,7 @@ near <strong>90 degree slopes</strong>.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-2ea67b12d87c6c0159c883371d5fdfec"
+    id="react-root-42da9877d5cdc4f84dd8a456ca4f5194"
     width="100%"
     height="650px"
     class="frame"
@@ -469,7 +502,7 @@ near <strong>90 degree slopes</strong>.</p>
   
 
   <script>
-    document.getElementById('react-root-2ea67b12d87c6c0159c883371d5fdfec').srcdoc = `
+    document.getElementById('react-root-42da9877d5cdc4f84dd8a456ca4f5194').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -542,7 +575,7 @@ near <strong>90 degree slopes</strong>.</p>
 
 ]]></content></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-964f01bc1cffd2bf301272efd621a349"
+id="react-root-1f1ce64a81658a7ba5710e3c01ecf860"
 width="225px"
 height="285px"
 class="frame"
@@ -551,7 +584,7 @@ class="frame"
 An interactive example of a Bézier curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-964f01bc1cffd2bf301272efd621a349').srcdoc = `
+document.getElementById('react-root-1f1ce64a81658a7ba5710e3c01ecf860').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -578,7 +611,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-964f01bc1cffd2bf301272efd621a349"
+    id="react-root-1f1ce64a81658a7ba5710e3c01ecf860"
     width="225px"
     height="285px"
     class="frame"
@@ -591,7 +624,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
   
 
   <script>
-    document.getElementById('react-root-964f01bc1cffd2bf301272efd621a349').srcdoc = `
+    document.getElementById('react-root-1f1ce64a81658a7ba5710e3c01ecf860').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -631,7 +664,7 @@ spoil the ending a bit:</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-c39263223b621d47ba9703a2c85be196"
+    id="react-root-758360138bf416ff3787820f292de2d0"
     width="100%"
     height="480px"
     class="frame"
@@ -640,7 +673,7 @@ spoil the ending a bit:</p>
   
 
   <script>
-    document.getElementById('react-root-c39263223b621d47ba9703a2c85be196').srcdoc = `
+    document.getElementById('react-root-758360138bf416ff3787820f292de2d0').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -694,7 +727,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-e88188ad8c66bba15c0bbf0df8892ac2"
+    id="react-root-b8cfec26f49d50a364a688e686f01443"
     width="355px"
     height="560px"
     class="frame"
@@ -707,7 +740,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
   
 
   <script>
-    document.getElementById('react-root-e88188ad8c66bba15c0bbf0df8892ac2').srcdoc = `
+    document.getElementById('react-root-b8cfec26f49d50a364a688e686f01443').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -808,7 +841,7 @@ We do not need perfect precision here, so we need to find a reasonable
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-199ead08c0ffb42dffaa5b04a5097aff"
+    id="react-root-450b0242f53b19c7585b3c2279a5923b"
     width="355px"
     height="485px"
     class="frame"
@@ -821,7 +854,7 @@ We do not need perfect precision here, so we need to find a reasonable
   
 
   <script>
-    document.getElementById('react-root-199ead08c0ffb42dffaa5b04a5097aff').srcdoc = `
+    document.getElementById('react-root-450b0242f53b19c7585b3c2279a5923b').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1078,7 +1111,7 @@ to see what happens when the requested distance overshoots a segment.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-3540e2472e2ebf913111f435b501e3f3"
+    id="react-root-69aaa4922e43b48f44228d9dae8bfe09"
     width="100%"
     height="260px"
     class="frame"
@@ -1091,7 +1124,7 @@ to see what happens when the requested distance overshoots a segment.</p>
   
 
   <script>
-    document.getElementById('react-root-3540e2472e2ebf913111f435b501e3f3').srcdoc = `
+    document.getElementById('react-root-69aaa4922e43b48f44228d9dae8bfe09').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1444,7 +1477,7 @@ exactly what we were aiming for from the beginning.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-e5458e18a5e5f3243cb5532896a467cd"
+    id="react-root-8758d23f8b3cecdf4f77da760512add8"
     width="100%"
     height="380px"
     class="frame"
@@ -1457,7 +1490,7 @@ exactly what we were aiming for from the beginning.</p>
   
 
   <script>
-    document.getElementById('react-root-e5458e18a5e5f3243cb5532896a467cd').srcdoc = `
+    document.getElementById('react-root-8758d23f8b3cecdf4f77da760512add8').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1613,6 +1646,7 @@ like this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">evaluateMotion</span> <span style="color:#f92672">=</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">SimulationState</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">transformation</span>: <span style="color:#66d9ef">Matrix4</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">additionalAcceleration</span>: <span style="color:#66d9ef">number</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">friction</span>: <span style="color:#66d9ef">number</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">airResistance</span>: <span style="color:#66d9ef">number</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">gravity</span>: <span style="color:#66d9ef">number</span>,
@@ -1629,6 +1663,7 @@ like this:</p>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#a6e22e">gravity</span>, <span style="color:#ae81ff">0</span>),
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">-=</span> <span style="color:#a6e22e">energyLoss</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">additionalAcceleration</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">=</span>
@@ -1658,7 +1693,7 @@ as before. The only change is that the simulation now uses
 
 <div class="embedded ">
   <iframe
-    id="react-root-0a5d874c6680bdf4bfeabc5d21807fca"
+    id="react-root-2060dce35e30160396e2eb7464222b98"
     width="100%"
     height="480px"
     class="frame"
@@ -1667,7 +1702,7 @@ as before. The only change is that the simulation now uses
   
 
   <script>
-    document.getElementById('react-root-0a5d874c6680bdf4bfeabc5d21807fca').srcdoc = `
+    document.getElementById('react-root-2060dce35e30160396e2eb7464222b98').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1731,6 +1766,7 @@ as before. The only change is that the simulation now uses
 </span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">points</span>[<span style="color:#ae81ff">1</span>],
 </span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">simulationState</span>.<span style="color:#a6e22e">distanceTraveled</span>,
 </span></span><span style="display:flex;"><span>        ),
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span>,
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">simulationState</span>.<span style="color:#a6e22e">friction</span>,
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">simulationState</span>.<span style="color:#a6e22e">airResistance</span>,
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">simulationState</span>.<span style="color:#a6e22e">gravity</span>,
@@ -1920,7 +1956,7 @@ shape and see how both trains react differently.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-8556be8fe4853644ac851ccfee046af1"
+    id="react-root-a6144fdd4e0d7b14572bff6cc09b0427"
     width="100%"
     height="460px"
     class="frame"
@@ -1929,7 +1965,7 @@ shape and see how both trains react differently.</p>
   
 
   <script>
-    document.getElementById('react-root-8556be8fe4853644ac851ccfee046af1').srcdoc = `
+    document.getElementById('react-root-a6144fdd4e0d7b14572bff6cc09b0427').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2299,7 +2335,7 @@ time. On the side, a small panel displays the live simulation state.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-f4682088871b29eb4dc73ebf20fd9702"
+    id="react-root-e40f7c9f846124747cb4339c310a804d"
     width="100%"
     height="360px"
     class="frame"
@@ -2308,7 +2344,7 @@ time. On the side, a small panel displays the live simulation state.</p>
   
 
   <script>
-    document.getElementById('react-root-f4682088871b29eb4dc73ebf20fd9702').srcdoc = `
+    document.getElementById('react-root-e40f7c9f846124747cb4339c310a804d').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2574,7 +2610,7 @@ the introduction of this chapter.</p></blockquote>
 
 <div class="embedded ">
   <iframe
-    id="react-root-7bcc16aa813d696f167d94185c0247af"
+    id="react-root-2258e6e329b9e597c11aea6173475d0c"
     width="100%"
     height="360px"
     class="frame"
@@ -2583,7 +2619,7 @@ the introduction of this chapter.</p></blockquote>
   
 
   <script>
-    document.getElementById('react-root-7bcc16aa813d696f167d94185c0247af').srcdoc = `
+    document.getElementById('react-root-2258e6e329b9e597c11aea6173475d0c').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2852,7 +2888,7 @@ it</strong> moment, so it might help you as well.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-655fe7996188b6d1a4dfba739a7c65e1"
+    id="react-root-05bf029536765c93252c0878508ca789"
     width="100%"
     height="300px"
     class="frame"
@@ -2861,7 +2897,7 @@ it</strong> moment, so it might help you as well.</p>
   
 
   <script>
-    document.getElementById('react-root-655fe7996188b6d1a4dfba739a7c65e1').srcdoc = `
+    document.getElementById('react-root-05bf029536765c93252c0878508ca789').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3199,7 +3235,7 @@ inside the WebAssembly module.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-2cdb3c6474f0f45a7c2a53c69f086a87"
+    id="react-root-bd1f9482a92ce7940f36d3c0bbab5e9d"
     width="100%"
     height="360px"
     class="frame"
@@ -3208,7 +3244,7 @@ inside the WebAssembly module.</p>
   
 
   <script>
-    document.getElementById('react-root-2cdb3c6474f0f45a7c2a53c69f086a87').srcdoc = `
+    document.getElementById('react-root-bd1f9482a92ce7940f36d3c0bbab5e9d').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3308,7 +3344,7 @@ better bindings.</p>
 
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-e0bc4695bbd421531aad933fa5d808f7"
+id="react-root-994ef715b541b5548f356319a499b717"
 width="225px"
 height="285px"
 class="frame"
@@ -3317,7 +3353,7 @@ class="frame"
 Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-e0bc4695bbd421531aad933fa5d808f7').srcdoc = `
+document.getElementById('react-root-994ef715b541b5548f356319a499b717').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -3347,7 +3383,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-e0bc4695bbd421531aad933fa5d808f7"
+    id="react-root-994ef715b541b5548f356319a499b717"
     width="225px"
     height="285px"
     class="frame"
@@ -3360,7 +3396,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
   
 
   <script>
-    document.getElementById('react-root-e0bc4695bbd421531aad933fa5d808f7').srcdoc = `
+    document.getElementById('react-root-994ef715b541b5548f356319a499b717').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
