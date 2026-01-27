@@ -1,5 +1,4 @@
 import React from 'react';
-import { Stats } from '@react-three/drei';
 import { Vector3 } from 'three';
 
 import { toLocalTransformed } from '../../../../maths/curve';
@@ -7,7 +6,8 @@ import { fromURL } from '../../../../helper/nl2park/nl2park';
 import { curveFromCustomTrack } from '../../../../helper/nolimits';
 
 import { CurveTrackMesh } from '../../../../components/curve/CurveTrackMesh';
-import { AtmosphericPerspectiveScene } from '../../../../components/scenes/AtmosphericPerspectiveScene';
+import { Ground } from '../../../../components/Ground';
+import { PerspectiveScene } from '../../../../components/scenes/PerspectiveScene';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
 
 import Park from './Hybris.nl2park';
@@ -23,16 +23,8 @@ const exampleTrackCurve = toLocalTransformed(
 export const NurbsRollPhysicsInActionDemoScene = () => {
   return (
     <>
-      <AtmosphericPerspectiveScene>
-        <Stats />
-
-        <group receiveShadow={true} position={[0, -7, 0]}>
-          <mesh receiveShadow={true} rotation-x={-Math.PI / 2}>
-            <planeGeometry args={[1000, 1000]} />
-            <meshStandardMaterial color={'dark-green'} />
-          </mesh>
-        </group>
-
+      <PerspectiveScene>
+        <Ground position={[0, -7, 0]} />
         <CurveTrackMesh curve={exampleTrackCurve} />
         <TrainWithPhysics
           curve={exampleTrackCurve}
@@ -44,7 +36,7 @@ export const NurbsRollPhysicsInActionDemoScene = () => {
           }}
           activateCamera={true}
         />
-      </AtmosphericPerspectiveScene>
+      </PerspectiveScene>
     </>
   );
 };
