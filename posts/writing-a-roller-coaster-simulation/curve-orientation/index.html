@@ -41,7 +41,7 @@ orientation is transported along the curve with <strong>as little rotation
 as possible</strong>.</p><p>Think of it like this: we add rotation step by step while respecting
 the <strong>previous orientation</strong>.</p><p>The following interactive demo lets us switch between a <strong>fixed-up
 lookAt orientation</strong> and an <strong>incremental orientation based on the
-previous node</strong>. This helps visualize the problem.</p><div class=embedded><iframe id=react-root-2f3010df2e494fe54c9254071def18bd width=100% height=700px class=frame></iframe><div class=description style=width:100%><strong>fixed-up lookAt orientation</strong>: Roll becomes unstable near 90° slopes. <strong>Incremental rotation</strong>: Stable roll and smooth orientation along the curve.</div><script>document.getElementById("react-root-2f3010df2e494fe54c9254071def18bd").srcdoc=`
+previous node</strong>. This helps visualize the problem.</p><div class=embedded><iframe id=react-root-e153d03d467c6983297e5d99251d61f2 width=100% height=700px class=frame></iframe><div class=description style=width:100%><strong>fixed-up lookAt orientation</strong>: Roll becomes unstable near 90° slopes. <strong>Incremental rotation</strong>: Stable roll and smooth orientation along the curve.</div><script>document.getElementById("react-root-e153d03d467c6983297e5d99251d61f2").srcdoc=`
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -216,8 +216,8 @@ is <strong>perfect</strong> and covers almost everything you need to understand
 <strong>splines in general</strong>.</p><h1 id=interactive-demo>Interactive demo</h1><p>This chapter ends with a small interactive example. You can move the
 control points of a <strong>Bézier curve</strong> and observe how the
 <strong>orientation</strong> behaves. There should be <strong>no sudden flips or jitter</strong>
-near <strong>90 degree slopes</strong>.</p><div class=embedded><iframe id=react-root-4204d609d011fc92c944921dd237e14e width=100% height=650px class=frame></iframe>
-<script>document.getElementById("react-root-4204d609d011fc92c944921dd237e14e").srcdoc=`
+near <strong>90 degree slopes</strong>.</p><div class=embedded><iframe id=react-root-8ac3c712d803ede5df8771aad5701305 width=100% height=650px class=frame></iframe>
+<script>document.getElementById("react-root-8ac3c712d803ede5df8771aad5701305").srcdoc=`
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -243,7 +243,7 @@ in your browser.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;bac
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>bezierSplineCurve</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../../../maths/bezier&#39;</span>;
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>useColors</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../../../hooks/useColors&#39;</span>;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>CurveWireframe</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../../../components/curve/CurveWireframe&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>CurveTrackMesh</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../../../components/curve/CurveTrackMesh&#39;</span>;
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>DragControlPoints</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../../../components/curve/DragControlPoints&#39;</span>;
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Ground</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../../../components/Ground&#39;</span>;
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>EditorScene</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../../../components/scenes/EditorScene&#39;</span>;
@@ -270,7 +270,7 @@ in your browser.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;bac
 </span></span><span style=display:flex><span>          <span style=color:#a6e22e>segments</span><span style=color:#f92672>=</span>{<span style=color:#66d9ef>true</span>}
 </span></span><span style=display:flex><span>        /&gt;
 </span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>DragControlPoints</span> <span style=color:#a6e22e>points</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>points</span>} <span style=color:#a6e22e>setPoints</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>setPoints</span>} /&gt;
-</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>CurveWireframe</span> <span style=color:#a6e22e>curve</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>curve</span>} /&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>CurveTrackMesh</span> <span style=color:#a6e22e>curve</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>curve</span>} /&gt;
 </span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>TrainWithPhysics</span> <span style=color:#a6e22e>curve</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>curve</span>} <span style=color:#a6e22e>init</span><span style=color:#f92672>=</span>{{ <span style=color:#a6e22e>velocity</span>: <span style=color:#66d9ef>17</span> }} /&gt;
 </span></span><span style=display:flex><span>      &lt;/<span style=color:#f92672>group</span>&gt;
 </span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>group</span> <span style=color:#a6e22e>position</span><span style=color:#f92672>=</span>{[<span style=color:#ae81ff>0</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>0</span>]}&gt;
