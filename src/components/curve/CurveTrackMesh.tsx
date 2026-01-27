@@ -32,8 +32,8 @@ export const CurveTrackMesh: FunctionComponent<{ curve: Curve }> = ({
     () =>
       sweep(
         [
-          makeCircleShape(0.07, 8, new Vector2(-0.45, 0)),
-          makeCircleShape(0.07, 8, new Vector2(0.45, 0)),
+          makeCircleShape(0.07, 12, new Vector2(-0.45, 0)),
+          makeCircleShape(0.07, 12, new Vector2(0.45, 0)),
           makeCircleShape(0.2, 8, new Vector2(0, -0.4)),
         ],
         curve,
@@ -68,14 +68,21 @@ export const CurveTrackMesh: FunctionComponent<{ curve: Curve }> = ({
 
       instanced.instanceMatrix.needsUpdate = true;
 
-      return <primitive key={gi} object={instanced} />;
+      return (
+        <primitive
+          receiveShadow={true}
+          castShadow={true}
+          key={gi}
+          object={instanced}
+        />
+      );
     });
   }, [curve, tieMaterial]);
 
   return (
     <>
       {ties}
-      <mesh geometry={rails}>
+      <mesh receiveShadow={true} castShadow={true} geometry={rails}>
         <meshStandardMaterial color={colors.highlight} />
       </mesh>
     </>
