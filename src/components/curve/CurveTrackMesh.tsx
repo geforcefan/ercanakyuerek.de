@@ -43,7 +43,7 @@ export const CurveTrackMesh: FunctionComponent<{ curve: Curve }> = ({
   );
 
   const tieMaterial = useMemo(
-    () => new MeshStandardMaterial({ color: colors.highlight }),
+    () => new MeshStandardMaterial({ color: colors.secondary }),
     [colors.highlight],
   );
 
@@ -83,7 +83,7 @@ export const CurveTrackMesh: FunctionComponent<{ curve: Curve }> = ({
     <>
       {ties}
       <mesh receiveShadow={true} castShadow={true} geometry={rails}>
-        <meshStandardMaterial color={colors.highlight} />
+        <meshStandardMaterial color={colors.secondary} />
       </mesh>
     </>
   );
