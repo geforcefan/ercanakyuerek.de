@@ -10,7 +10,10 @@ export const Ground = (props: ThreeElements['group']) => {
     <group position={[0, -1, 0]} {...props}>
       <mesh receiveShadow={true} rotation-x={-Math.PI / 2}>
         <planeGeometry args={[1000, 1000]} />
-        <meshBasicMaterial color={colors.silent} />
+        <meshStandardMaterial
+          dithering={true}
+          color={colors.silent}
+        />
       </mesh>
     </group>
   );

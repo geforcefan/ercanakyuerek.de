@@ -17,6 +17,7 @@
     "@jscad/modeling": "^2.12.6",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.2",
+    "@react-three/postprocessing": "^3.0.4",
     "@tweenjs/tween.js": "^25.0.0",
     "csv-parse": "^6.1.0",
     "leva": "^0.10.1",
