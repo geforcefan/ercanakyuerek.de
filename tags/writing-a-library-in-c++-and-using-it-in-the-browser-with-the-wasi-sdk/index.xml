@@ -8,7 +8,7 @@ nicer API to work with.&lt;/p&gt;
 define a number of imports for &lt;strong&gt;WASI&lt;/strong&gt;, but all of them are empty.
 This looks suspicious at first, so let us talk about that.&lt;/p&gt;</description></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-abd41433ec58d02901617e24dcd70bda"
+ id="react-root-60aac5999f899024b96fcfc70c95cfcc"
  width="225px"
  height="285px"
  class="frame"
@@ -21,7 +21,7 @@ This looks suspicious at first, so let us talk about that.&lt;/p&gt;</descriptio
  
 
  &lt;script&gt;
- document.getElementById('react-root-abd41433ec58d02901617e24dcd70bda').srcdoc = `
+ document.getElementById('react-root-60aac5999f899024b96fcfc70c95cfcc').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
