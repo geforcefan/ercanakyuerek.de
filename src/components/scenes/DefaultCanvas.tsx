@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { Stats } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { EffectComposer } from '@react-three/postprocessing';
-import { Vector3 } from 'three';
+import { ACESFilmicToneMapping, Vector3 } from 'three';
 import { useDevicePixelRatio } from 'use-device-pixel-ratio';
 
 import { useColors } from '../../hooks/useColors';
@@ -18,9 +18,13 @@ export const DefaultCanvas = ({
   const dpr = useDevicePixelRatio();
 
   return (
-    <Canvas dpr={dpr} shadows={true}>
+    <Canvas
+      gl={{ toneMapping: ACESFilmicToneMapping }}
+      dpr={dpr}
+      shadows={true}
+    >
       <Stats />
-      <ambientLight castShadow={true} intensity={1.5} />
+      <ambientLight castShadow={true} intensity={1.3} />
       <directionalLight
         castShadow
         position={sunPosition}
