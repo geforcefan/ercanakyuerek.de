@@ -9,7 +9,7 @@
 
 <div class="embedded ">
   <iframe
-    id="react-root-eaf3cafb4c7ad5ae057c340a4b4b9943"
+    id="react-root-3f63ba2f3876a0fe87eac5cf8d4f5feb"
     width="100%"
     height="580px"
     class="frame"
@@ -18,7 +18,7 @@
   
 
   <script>
-    document.getElementById('react-root-eaf3cafb4c7ad5ae057c340a4b4b9943').srcdoc = `
+    document.getElementById('react-root-3f63ba2f3876a0fe87eac5cf8d4f5feb').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -87,7 +87,7 @@ and physics behave together.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-7d866904849cc0d17e14aafed971cd91"
+    id="react-root-ce5bf8d0ff1f25918a2b9472abc6d847"
     width="100%"
     height="650px"
     class="frame"
@@ -96,7 +96,7 @@ and physics behave together.</p>
   
 
   <script>
-    document.getElementById('react-root-7d866904849cc0d17e14aafed971cd91').srcdoc = `
+    document.getElementById('react-root-ce5bf8d0ff1f25918a2b9472abc6d847').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -224,7 +224,7 @@ previous node</strong>. This helps visualize the problem.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-e6f73e017f575b5d67371bf35ba270a2"
+    id="react-root-271bb2a5d5ef2f0b30e1f4f4c6b65f4f"
     width="100%"
     height="700px"
     class="frame"
@@ -237,7 +237,7 @@ previous node</strong>. This helps visualize the problem.</p>
   
 
   <script>
-    document.getElementById('react-root-e6f73e017f575b5d67371bf35ba270a2').srcdoc = `
+    document.getElementById('react-root-271bb2a5d5ef2f0b30e1f4f4c6b65f4f').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -474,7 +474,7 @@ near <strong>90 degree slopes</strong>.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-7908f63958ac73e6e052b5b217574f51"
+    id="react-root-2abdb07e86ba881eb18593b55e94d79c"
     width="100%"
     height="650px"
     class="frame"
@@ -483,7 +483,7 @@ near <strong>90 degree slopes</strong>.</p>
   
 
   <script>
-    document.getElementById('react-root-7908f63958ac73e6e052b5b217574f51').srcdoc = `
+    document.getElementById('react-root-2abdb07e86ba881eb18593b55e94d79c').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -556,7 +556,7 @@ near <strong>90 degree slopes</strong>.</p>
 
 ]]></content></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-dc94df451a6f7bd9ae9d2d33fa489901"
+id="react-root-ae6c0bdfa987f873da123f98d2840090"
 width="225px"
 height="285px"
 class="frame"
@@ -565,7 +565,7 @@ class="frame"
 An interactive example of a Bézier curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-dc94df451a6f7bd9ae9d2d33fa489901').srcdoc = `
+document.getElementById('react-root-ae6c0bdfa987f873da123f98d2840090').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -592,7 +592,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-dc94df451a6f7bd9ae9d2d33fa489901"
+    id="react-root-ae6c0bdfa987f873da123f98d2840090"
     width="225px"
     height="285px"
     class="frame"
@@ -605,7 +605,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
   
 
   <script>
-    document.getElementById('react-root-dc94df451a6f7bd9ae9d2d33fa489901').srcdoc = `
+    document.getElementById('react-root-ae6c0bdfa987f873da123f98d2840090').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -645,7 +645,7 @@ spoil the ending a bit:</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-70de2912a118553192047b6cbb4982c0"
+    id="react-root-c94ff3c3e7a3fa945fde33843d576eed"
     width="100%"
     height="480px"
     class="frame"
@@ -654,7 +654,7 @@ spoil the ending a bit:</p>
   
 
   <script>
-    document.getElementById('react-root-70de2912a118553192047b6cbb4982c0').srcdoc = `
+    document.getElementById('react-root-c94ff3c3e7a3fa945fde33843d576eed').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -708,7 +708,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-89f59126a6a7f28f92acd5fa96cba437"
+    id="react-root-8378cc12b5501fbc308476faf2fa51b0"
     width="355px"
     height="560px"
     class="frame"
@@ -721,7 +721,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
   
 
   <script>
-    document.getElementById('react-root-89f59126a6a7f28f92acd5fa96cba437').srcdoc = `
+    document.getElementById('react-root-8378cc12b5501fbc308476faf2fa51b0').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -822,7 +822,7 @@ We do not need perfect precision here, so we need to find a reasonable
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-40d70ccea62365479735e4c39e3db290"
+    id="react-root-8c9b4e7e564aab7fb858dba3a6d835df"
     width="355px"
     height="485px"
     class="frame"
@@ -835,7 +835,7 @@ We do not need perfect precision here, so we need to find a reasonable
   
 
   <script>
-    document.getElementById('react-root-40d70ccea62365479735e4c39e3db290').srcdoc = `
+    document.getElementById('react-root-8c9b4e7e564aab7fb858dba3a6d835df').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1092,7 +1092,7 @@ to see what happens when the requested distance overshoots a segment.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-e9f816dfab98e8a303c2a37c02f1301c"
+    id="react-root-88c024262eaa7b695f36096890f960ee"
     width="100%"
     height="260px"
     class="frame"
@@ -1105,7 +1105,7 @@ to see what happens when the requested distance overshoots a segment.</p>
   
 
   <script>
-    document.getElementById('react-root-e9f816dfab98e8a303c2a37c02f1301c').srcdoc = `
+    document.getElementById('react-root-88c024262eaa7b695f36096890f960ee').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1458,7 +1458,7 @@ exactly what we were aiming for from the beginning.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-be291753d881ebac354b83a68232d9ac"
+    id="react-root-d673ae8531680cc761110af8c2b76245"
     width="100%"
     height="380px"
     class="frame"
@@ -1471,7 +1471,7 @@ exactly what we were aiming for from the beginning.</p>
   
 
   <script>
-    document.getElementById('react-root-be291753d881ebac354b83a68232d9ac').srcdoc = `
+    document.getElementById('react-root-d673ae8531680cc761110af8c2b76245').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1672,7 +1672,7 @@ as before. The only change is that the simulation now uses
 
 <div class="embedded ">
   <iframe
-    id="react-root-ce43884776aa95d33e737758c8eedd46"
+    id="react-root-cad1cf1716da172b2ee6eb9bacd5a31d"
     width="100%"
     height="480px"
     class="frame"
@@ -1681,7 +1681,7 @@ as before. The only change is that the simulation now uses
   
 
   <script>
-    document.getElementById('react-root-ce43884776aa95d33e737758c8eedd46').srcdoc = `
+    document.getElementById('react-root-cad1cf1716da172b2ee6eb9bacd5a31d').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1934,7 +1934,7 @@ shape and see how both trains react differently.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-8cc5541cdb32844d7ced70687b591c94"
+    id="react-root-30aae0bc24d51805d6bd4dfb73775e2f"
     width="100%"
     height="460px"
     class="frame"
@@ -1943,7 +1943,7 @@ shape and see how both trains react differently.</p>
   
 
   <script>
-    document.getElementById('react-root-8cc5541cdb32844d7ced70687b591c94').srcdoc = `
+    document.getElementById('react-root-30aae0bc24d51805d6bd4dfb73775e2f').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2313,7 +2313,7 @@ time. On the side, a small panel displays the live simulation state.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-75d0dddb8449e9cabf5dab6d16531e5d"
+    id="react-root-4241d1d9f01947cbaa9f5b7cf14baf79"
     width="100%"
     height="360px"
     class="frame"
@@ -2322,7 +2322,7 @@ time. On the side, a small panel displays the live simulation state.</p>
   
 
   <script>
-    document.getElementById('react-root-75d0dddb8449e9cabf5dab6d16531e5d').srcdoc = `
+    document.getElementById('react-root-4241d1d9f01947cbaa9f5b7cf14baf79').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2588,7 +2588,7 @@ the introduction of this chapter.</p></blockquote>
 
 <div class="embedded ">
   <iframe
-    id="react-root-1e3634799847293b13998e30cc548239"
+    id="react-root-3897569a93ee1951613e08f2bbfe2487"
     width="100%"
     height="360px"
     class="frame"
@@ -2597,7 +2597,7 @@ the introduction of this chapter.</p></blockquote>
   
 
   <script>
-    document.getElementById('react-root-1e3634799847293b13998e30cc548239').srcdoc = `
+    document.getElementById('react-root-3897569a93ee1951613e08f2bbfe2487').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2866,7 +2866,7 @@ it</strong> moment, so it might help you as well.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-3b1d3757cc02d0ade71ca01625430d10"
+    id="react-root-fa86084d370619db9afaf99fa088dba7"
     width="100%"
     height="300px"
     class="frame"
@@ -2875,7 +2875,7 @@ it</strong> moment, so it might help you as well.</p>
   
 
   <script>
-    document.getElementById('react-root-3b1d3757cc02d0ade71ca01625430d10').srcdoc = `
+    document.getElementById('react-root-fa86084d370619db9afaf99fa088dba7').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3213,7 +3213,7 @@ inside the WebAssembly module.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-60d3c8a590300ba3aaa0ac85bbddf689"
+    id="react-root-8a856168aba3649d914259e4e05c99e2"
     width="100%"
     height="360px"
     class="frame"
@@ -3222,7 +3222,7 @@ inside the WebAssembly module.</p>
   
 
   <script>
-    document.getElementById('react-root-60d3c8a590300ba3aaa0ac85bbddf689').srcdoc = `
+    document.getElementById('react-root-8a856168aba3649d914259e4e05c99e2').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3322,7 +3322,7 @@ better bindings.</p>
 
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-872da7be9aa0c6e6a263c3ca0d75256c"
+id="react-root-6e652a0f8cfd4c9f8b646dcaa7d0bf89"
 width="225px"
 height="285px"
 class="frame"
@@ -3331,7 +3331,7 @@ class="frame"
 Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-872da7be9aa0c6e6a263c3ca0d75256c').srcdoc = `
+document.getElementById('react-root-6e652a0f8cfd4c9f8b646dcaa7d0bf89').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -3361,7 +3361,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-872da7be9aa0c6e6a263c3ca0d75256c"
+    id="react-root-6e652a0f8cfd4c9f8b646dcaa7d0bf89"
     width="225px"
     height="285px"
     class="frame"
@@ -3374,7 +3374,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
   
 
   <script>
-    document.getElementById('react-root-872da7be9aa0c6e6a263c3ca0d75256c').srcdoc = `
+    document.getElementById('react-root-6e652a0f8cfd4c9f8b646dcaa7d0bf89').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
