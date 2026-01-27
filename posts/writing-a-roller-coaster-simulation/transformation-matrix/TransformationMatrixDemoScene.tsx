@@ -37,6 +37,7 @@ const TransformationMatrixDemo = () => {
           points[1],
           simulationState.distanceTraveled,
         ),
+        0,
         simulationState.friction,
         simulationState.airResistance,
         simulationState.gravity,
