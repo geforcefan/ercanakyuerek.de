@@ -11,7 +11,7 @@ this has always been &lt;code&gt;Vector3(0, 1, 0)&lt;/code&gt;. This is fine for
 slopes&lt;/strong&gt;, but it starts to fall apart when the track approaches angles
 close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-a93df2ccb4f2dfb5f54fa17a649fe223"
+ id="react-root-20966aed6a195b0f31eb6f8c5870250b"
  width="225px"
  height="285px"
  class="frame"
@@ -24,7 +24,7 @@ close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item>
  
 
  &lt;script&gt;
- document.getElementById('react-root-a93df2ccb4f2dfb5f54fa17a649fe223').srcdoc = `
+ document.getElementById('react-root-20966aed6a195b0f31eb6f8c5870250b').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
