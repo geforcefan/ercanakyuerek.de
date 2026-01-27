@@ -14,7 +14,7 @@ export const PointWithMatrixArrows = (
   return (
     <group matrixAutoUpdate={false} {...props}>
       <MatrixArrowHelper />
-      <ControlPoint color={colors.highlight} />
+      <ControlPoint castShadow={true} color={colors.highlight} />
     </group>
   );
 };

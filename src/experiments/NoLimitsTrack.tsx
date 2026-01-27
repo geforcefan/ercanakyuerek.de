@@ -14,8 +14,8 @@ import { PerspectiveScene } from '../components/scenes/PerspectiveScene';
 import { TrainWithPhysics } from '../components/TrainWithPhysics';
 
 import { fromUrl } from '../coaster/nolimits-csv-track';
-import ParkCSV from './Hybris.csv';
-import Park from './Hybris.nl2park';
+import ParkCSV from './Experiment.csv';
+import Park from './Experiment.nl2park';
 
 const park = await fromURL(Park);
 const exampleCoaster = park.coaster[0];

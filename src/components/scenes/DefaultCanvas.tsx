@@ -6,7 +6,7 @@ import { useDevicePixelRatio } from 'use-device-pixel-ratio';
 
 import { useColors } from '../../hooks/useColors';
 
-const sunPosition = new Vector3(50, 50, 0);
+const sunPosition = new Vector3(-50, 50, -50);
 
 export const DefaultCanvas = ({
   children,
@@ -30,11 +30,11 @@ export const DefaultCanvas = ({
         shadow-mapSize-width={2048 * 4}
         shadow-mapSize-height={2048 * 4}
         shadow-camera-near={1}
-        shadow-camera-far={400}
-        shadow-camera-left={-400}
-        shadow-camera-right={400}
-        shadow-camera-top={400}
-        shadow-camera-bottom={-400}
+        shadow-camera-far={200}
+        shadow-camera-left={-200}
+        shadow-camera-right={200}
+        shadow-camera-top={200}
+        shadow-camera-bottom={-200}
       />
 
       <color attach="background" args={[colors.primary]} />
