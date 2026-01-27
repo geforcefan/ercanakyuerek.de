@@ -9,7 +9,7 @@
 
 <div class="embedded ">
   <iframe
-    id="react-root-25f3f662e6d1120b4124502567854cdc"
+    id="react-root-d7d4631f61463fbb78e19c4305f7b14f"
     width="100%"
     height="580px"
     class="frame"
@@ -18,7 +18,7 @@
   
 
   <script>
-    document.getElementById('react-root-25f3f662e6d1120b4124502567854cdc').srcdoc = `
+    document.getElementById('react-root-d7d4631f61463fbb78e19c4305f7b14f').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -38,56 +38,40 @@
 
 ]]></content></item><item><title>NURBS, Roll, Physics in Action</title><link>https://ercanakyuerek.de/posts/roller-coaster-simulation/nurbs-roll-physics-in-action/</link><pubDate>Sun, 04 Jan 2026 21:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/roller-coaster-simulation/nurbs-roll-physics-in-action/</guid><description>&lt;p&gt;Parallel to writing this series about building a &lt;a href="https://ercanakyuerek.de/tags/writing-a-roller-coaster-simulation/"&gt;roller coaster
 simulator in the
-browser&lt;/a&gt;, I
-am also implementing and testing everything I write about in a real
-project.&lt;/p&gt;
-&lt;p&gt;At this point, the simulator already supports &lt;strong&gt;NURBS tracks&lt;/strong&gt;, &lt;strong&gt;roll
-interpolation&lt;/strong&gt;, and the full &lt;strong&gt;physics simulation&lt;/strong&gt;. Most of the
-ideas in the articles are no longer just sketches. They are running
-code.&lt;/p&gt;
-&lt;p&gt;A large part of the work recently was, understanding how &lt;strong&gt;NoLimits
-Roller Coaster 2&lt;/strong&gt; handles track interpolation and roll. I spent quite
-a few hours digging into this, because, well, I more or less
-reimplemented its curve generation logic.&lt;/p&gt;</description><content type="html"><![CDATA[<p>Parallel to writing this series about building a <a href="https://ercanakyuerek.de/tags/writing-a-roller-coaster-simulation/">roller coaster
+browser&lt;/a&gt;, the
+system itself has continued to evolve.&lt;/p&gt;
+&lt;p&gt;At this point, the simulator already supports &lt;strong&gt;NURBS tracks&lt;/strong&gt;,
+&lt;strong&gt;roll interpolation&lt;/strong&gt;, and a complete &lt;strong&gt;physics simulation&lt;/strong&gt; running
+together. What started as isolated experiments in earlier chapters is
+now a connected system. The ideas described in the articles are no
+longer sketches. They are running code.&lt;/p&gt;
+&lt;p&gt;This post is not a deep technical explanation. It is a snapshot of the
+current state of the simulator.&lt;/p&gt;</description><content type="html"><![CDATA[<p>Parallel to writing this series about building a <a href="https://ercanakyuerek.de/tags/writing-a-roller-coaster-simulation/">roller coaster
 simulator in the
-browser</a>, I
-am also implementing and testing everything I write about in a real
-project.</p>
-<p>At this point, the simulator already supports <strong>NURBS tracks</strong>, <strong>roll
-interpolation</strong>, and the full <strong>physics simulation</strong>. Most of the
-ideas in the articles are no longer just sketches. They are running
-code.</p>
-<p>A large part of the work recently was, understanding how <strong>NoLimits
-Roller Coaster 2</strong> handles track interpolation and roll. I spent quite
-a few hours digging into this, because, well, I more or less
-reimplemented its curve generation logic.</p>
-<h2 id="why-do-that">Why do that?</h2>
-<p>First, it is a genuinely challenging problem. Second, it is a great
-way to understand how a real coaster simulator works without having to
-build a full editor and toolchain around it. You can test ideas
-quickly, break things, and learn where your assumptions were wrong.</p>
-<p>I plan to write a separate article that focuses only on how <strong>NoLimits
-Roller Coaster 2 style interpolation and track generation</strong> works.
-There is a lot going on there, and it deserves its own chapter. Stay
-tuned for that.</p>
-<p>One thing I have <em>not</em> fully figured out yet is how to properly close
-<strong>NURBS curves</strong>.</p>
-<p>And no, this is not about not knowing how to compute knot vectors for
-closed NURBS. The tricky bit is how the <strong>curve parameter space maps
-to actual arc length</strong> once the curve is closed. For clamped curves,
-this is straightforward. For closed curves, I have not figured out the
-arc length mapping yet.</p>
-<p>I will figure it out eventually. Probably.</p>
+browser</a>, the
+system itself has continued to evolve.</p>
+<p>At this point, the simulator already supports <strong>NURBS tracks</strong>,
+<strong>roll interpolation</strong>, and a complete <strong>physics simulation</strong> running
+together. What started as isolated experiments in earlier chapters is
+now a connected system. The ideas described in the articles are no
+longer sketches. They are running code.</p>
+<p>This post is not a deep technical explanation. It is a snapshot of the
+current state of the simulator.</p>
+<p>The track is generated from <strong>NURBS curves</strong>, orientation along the
+curve is handled with <strong>roll interpolation</strong>, and a basic <strong>3D track
+model</strong> is built directly from the curve data. Everything is evaluated
+and rendered in real time, without any heavy optimization or offline
+processing.</p>
+<p>The goal here is simply to show how these pieces behave when combined:
+curve interpolation, orientation, and physics acting on the same
+representation of the track.</p>
 <h1 id="interactive-demo">Interactive demo</h1>
-<p>Below is an interactive demo of the simulator.
-You can play around with it and see how the track interpolation, roll,
-and physics behave together.</p>
 <p>As always, the full code is available below.</p>
       
 
 <div class="embedded ">
   <iframe
-    id="react-root-cfb4010c6cb51c621c6429d8bf1ba303"
+    id="react-root-69bb78af89b50b96421f5ecb1e57368c"
     width="100%"
     height="650px"
     class="frame"
@@ -96,7 +80,7 @@ and physics behave together.</p>
   
 
   <script>
-    document.getElementById('react-root-cfb4010c6cb51c621c6429d8bf1ba303').srcdoc = `
+    document.getElementById('react-root-69bb78af89b50b96421f5ecb1e57368c').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -123,6 +107,7 @@ and physics behave together.</p>
     <a href="http://localhost:3000/src/content/posts/roller-coaster-simulation/nurbs-roll-physics-in-action/NurbsRollPhysicsInActionDemoScene.tsx" target="_blank">link</a>
     in your browser.
 </p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Stats</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@react-three/drei&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Vector3</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;three&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">toLocalTransformed</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../maths/curve&#39;</span>;
@@ -148,6 +133,7 @@ and physics behave together.</p>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
 </span></span><span style="display:flex;"><span>    &lt;&gt;
 </span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">PerspectiveScene</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Stats</span> /&gt;
 </span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Ground</span> <span style="color:#a6e22e">position</span><span style="color:#f92672">=</span>{[<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">0</span>]} /&gt;
 </span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">CurveTrackMesh</span> <span style="color:#a6e22e">curve</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">exampleTrackCurve</span>} /&gt;
 </span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">TrainWithPhysics</span>
@@ -224,7 +210,7 @@ previous node</strong>. This helps visualize the problem.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-4d01a5c668f7672998dabc6489f2e562"
+    id="react-root-cd00a82a992ba90658757f754bd5a390"
     width="100%"
     height="700px"
     class="frame"
@@ -237,7 +223,7 @@ previous node</strong>. This helps visualize the problem.</p>
   
 
   <script>
-    document.getElementById('react-root-4d01a5c668f7672998dabc6489f2e562').srcdoc = `
+    document.getElementById('react-root-cd00a82a992ba90658757f754bd5a390').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -474,7 +460,7 @@ near <strong>90 degree slopes</strong>.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-88b8024eb8c39743f1fc3fda0ef1e796"
+    id="react-root-3533cd8502e26712b9ed571ec276734e"
     width="100%"
     height="650px"
     class="frame"
@@ -483,7 +469,7 @@ near <strong>90 degree slopes</strong>.</p>
   
 
   <script>
-    document.getElementById('react-root-88b8024eb8c39743f1fc3fda0ef1e796').srcdoc = `
+    document.getElementById('react-root-3533cd8502e26712b9ed571ec276734e').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -556,7 +542,7 @@ near <strong>90 degree slopes</strong>.</p>
 
 ]]></content></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-af59410e70c8707623e282c9a187f8fb"
+id="react-root-c6d36a6d1bf706f621b734415d78a2ca"
 width="225px"
 height="285px"
 class="frame"
@@ -565,7 +551,7 @@ class="frame"
 An interactive example of a Bézier curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-af59410e70c8707623e282c9a187f8fb').srcdoc = `
+document.getElementById('react-root-c6d36a6d1bf706f621b734415d78a2ca').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -592,7 +578,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-af59410e70c8707623e282c9a187f8fb"
+    id="react-root-c6d36a6d1bf706f621b734415d78a2ca"
     width="225px"
     height="285px"
     class="frame"
@@ -605,7 +591,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
   
 
   <script>
-    document.getElementById('react-root-af59410e70c8707623e282c9a187f8fb').srcdoc = `
+    document.getElementById('react-root-c6d36a6d1bf706f621b734415d78a2ca').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -645,7 +631,7 @@ spoil the ending a bit:</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-a04717463b40ed4c8c2963e2a99e2206"
+    id="react-root-9d4948fd6815ef00722cacc601b4df40"
     width="100%"
     height="480px"
     class="frame"
@@ -654,7 +640,7 @@ spoil the ending a bit:</p>
   
 
   <script>
-    document.getElementById('react-root-a04717463b40ed4c8c2963e2a99e2206').srcdoc = `
+    document.getElementById('react-root-9d4948fd6815ef00722cacc601b4df40').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -708,7 +694,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-e33bbe00ca6aed3b03adab477b42a155"
+    id="react-root-8bfa85160d893427768cb59657601102"
     width="355px"
     height="560px"
     class="frame"
@@ -721,7 +707,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
   
 
   <script>
-    document.getElementById('react-root-e33bbe00ca6aed3b03adab477b42a155').srcdoc = `
+    document.getElementById('react-root-8bfa85160d893427768cb59657601102').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -822,7 +808,7 @@ We do not need perfect precision here, so we need to find a reasonable
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-068f8064598d35639b7f2c362cc1f1f0"
+    id="react-root-09dfe7b04dfe4c54c161d333b32cd83c"
     width="355px"
     height="485px"
     class="frame"
@@ -835,7 +821,7 @@ We do not need perfect precision here, so we need to find a reasonable
   
 
   <script>
-    document.getElementById('react-root-068f8064598d35639b7f2c362cc1f1f0').srcdoc = `
+    document.getElementById('react-root-09dfe7b04dfe4c54c161d333b32cd83c').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1092,7 +1078,7 @@ to see what happens when the requested distance overshoots a segment.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-508f516e4a70da23fc3e4628e8122da6"
+    id="react-root-221e68421c6ea8a61795cb6d4632b02c"
     width="100%"
     height="260px"
     class="frame"
@@ -1105,7 +1091,7 @@ to see what happens when the requested distance overshoots a segment.</p>
   
 
   <script>
-    document.getElementById('react-root-508f516e4a70da23fc3e4628e8122da6').srcdoc = `
+    document.getElementById('react-root-221e68421c6ea8a61795cb6d4632b02c').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1458,7 +1444,7 @@ exactly what we were aiming for from the beginning.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-dfea45ecce133e4c44b71c502b22174f"
+    id="react-root-284dffbebcacee3747ab204b3cba5ba2"
     width="100%"
     height="380px"
     class="frame"
@@ -1471,7 +1457,7 @@ exactly what we were aiming for from the beginning.</p>
   
 
   <script>
-    document.getElementById('react-root-dfea45ecce133e4c44b71c502b22174f').srcdoc = `
+    document.getElementById('react-root-284dffbebcacee3747ab204b3cba5ba2').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1672,7 +1658,7 @@ as before. The only change is that the simulation now uses
 
 <div class="embedded ">
   <iframe
-    id="react-root-396271a546c1553af81a309a5b634ccf"
+    id="react-root-82f1f1134512e05a9ba0b1927cf6cc79"
     width="100%"
     height="480px"
     class="frame"
@@ -1681,7 +1667,7 @@ as before. The only change is that the simulation now uses
   
 
   <script>
-    document.getElementById('react-root-396271a546c1553af81a309a5b634ccf').srcdoc = `
+    document.getElementById('react-root-82f1f1134512e05a9ba0b1927cf6cc79').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1934,7 +1920,7 @@ shape and see how both trains react differently.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-8787ce4feb49869df7d83fa02cea45e4"
+    id="react-root-be7663bf25d64cd1c18eef96600439fd"
     width="100%"
     height="460px"
     class="frame"
@@ -1943,7 +1929,7 @@ shape and see how both trains react differently.</p>
   
 
   <script>
-    document.getElementById('react-root-8787ce4feb49869df7d83fa02cea45e4').srcdoc = `
+    document.getElementById('react-root-be7663bf25d64cd1c18eef96600439fd').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2313,7 +2299,7 @@ time. On the side, a small panel displays the live simulation state.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-d869614441190c72cb0aa3d9973cbfae"
+    id="react-root-f58ab88743667c343e7c7a3ed1951c80"
     width="100%"
     height="360px"
     class="frame"
@@ -2322,7 +2308,7 @@ time. On the side, a small panel displays the live simulation state.</p>
   
 
   <script>
-    document.getElementById('react-root-d869614441190c72cb0aa3d9973cbfae').srcdoc = `
+    document.getElementById('react-root-f58ab88743667c343e7c7a3ed1951c80').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2588,7 +2574,7 @@ the introduction of this chapter.</p></blockquote>
 
 <div class="embedded ">
   <iframe
-    id="react-root-907ef944179916822badaf5bcb90225f"
+    id="react-root-8b6e2921deac68a79e1a482ec1fb5a96"
     width="100%"
     height="360px"
     class="frame"
@@ -2597,7 +2583,7 @@ the introduction of this chapter.</p></blockquote>
   
 
   <script>
-    document.getElementById('react-root-907ef944179916822badaf5bcb90225f').srcdoc = `
+    document.getElementById('react-root-8b6e2921deac68a79e1a482ec1fb5a96').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2866,7 +2852,7 @@ it</strong> moment, so it might help you as well.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-02e2554b1351daabd26c290bb3f7cdde"
+    id="react-root-83b611b9528858652a9e8f0081d59243"
     width="100%"
     height="300px"
     class="frame"
@@ -2875,7 +2861,7 @@ it</strong> moment, so it might help you as well.</p>
   
 
   <script>
-    document.getElementById('react-root-02e2554b1351daabd26c290bb3f7cdde').srcdoc = `
+    document.getElementById('react-root-83b611b9528858652a9e8f0081d59243').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3213,7 +3199,7 @@ inside the WebAssembly module.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-38c297fda9fccfba5eb7f5c939c5a957"
+    id="react-root-fc2c59e15f19c3e370079c3f8f97c44a"
     width="100%"
     height="360px"
     class="frame"
@@ -3222,7 +3208,7 @@ inside the WebAssembly module.</p>
   
 
   <script>
-    document.getElementById('react-root-38c297fda9fccfba5eb7f5c939c5a957').srcdoc = `
+    document.getElementById('react-root-fc2c59e15f19c3e370079c3f8f97c44a').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3322,7 +3308,7 @@ better bindings.</p>
 
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-3182f40445d784c83569506127ea70b2"
+id="react-root-62bdb9093e09aeab03b701c4984b4b8f"
 width="225px"
 height="285px"
 class="frame"
@@ -3331,7 +3317,7 @@ class="frame"
 Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-3182f40445d784c83569506127ea70b2').srcdoc = `
+document.getElementById('react-root-62bdb9093e09aeab03b701c4984b4b8f').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -3361,7 +3347,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-3182f40445d784c83569506127ea70b2"
+    id="react-root-62bdb9093e09aeab03b701c4984b4b8f"
     width="225px"
     height="285px"
     class="frame"
@@ -3374,7 +3360,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
   
 
   <script>
-    document.getElementById('react-root-3182f40445d784c83569506127ea70b2').srcdoc = `
+    document.getElementById('react-root-62bdb9093e09aeab03b701c4984b4b8f').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>

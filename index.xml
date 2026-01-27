@@ -2,17 +2,15 @@
 &lt;p&gt;That said, it felt useful to already show the result.&lt;/p&gt;
 &lt;p&gt;The interactive demo below is backed by a &lt;strong&gt;Uniform Rational B-Spline curve&lt;/strong&gt; and already renders a full &lt;strong&gt;3D track mesh&lt;/strong&gt; in real time. There is no heavy optimization involved at this stage. The geometry is generated directly from the curve and updated live as the control points change.&lt;/p&gt;</description></item><item><title>NURBS, Roll, Physics in Action</title><link>https://ercanakyuerek.de/posts/roller-coaster-simulation/nurbs-roll-physics-in-action/</link><pubDate>Sun, 04 Jan 2026 21:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/roller-coaster-simulation/nurbs-roll-physics-in-action/</guid><description>&lt;p&gt;Parallel to writing this series about building a &lt;a href="https://ercanakyuerek.de/tags/writing-a-roller-coaster-simulation/"&gt;roller coaster
 simulator in the
-browser&lt;/a&gt;, I
-am also implementing and testing everything I write about in a real
-project.&lt;/p&gt;
-&lt;p&gt;At this point, the simulator already supports &lt;strong&gt;NURBS tracks&lt;/strong&gt;, &lt;strong&gt;roll
-interpolation&lt;/strong&gt;, and the full &lt;strong&gt;physics simulation&lt;/strong&gt;. Most of the
-ideas in the articles are no longer just sketches. They are running
-code.&lt;/p&gt;
-&lt;p&gt;A large part of the work recently was, understanding how &lt;strong&gt;NoLimits
-Roller Coaster 2&lt;/strong&gt; handles track interpolation and roll. I spent quite
-a few hours digging into this, because, well, I more or less
-reimplemented its curve generation logic.&lt;/p&gt;</description></item><item><title>Curve orientation</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/</link><pubDate>Sun, 04 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/</guid><description>&lt;p&gt;In earlier chapters, we already computed basic orientations along the
+browser&lt;/a&gt;, the
+system itself has continued to evolve.&lt;/p&gt;
+&lt;p&gt;At this point, the simulator already supports &lt;strong&gt;NURBS tracks&lt;/strong&gt;,
+&lt;strong&gt;roll interpolation&lt;/strong&gt;, and a complete &lt;strong&gt;physics simulation&lt;/strong&gt; running
+together. What started as isolated experiments in earlier chapters is
+now a connected system. The ideas described in the articles are no
+longer sketches. They are running code.&lt;/p&gt;
+&lt;p&gt;This post is not a deep technical explanation. It is a snapshot of the
+current state of the simulator.&lt;/p&gt;</description></item><item><title>Curve orientation</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/</link><pubDate>Sun, 04 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/</guid><description>&lt;p&gt;In earlier chapters, we already computed basic orientations along the
 track, and for a while that worked reasonably well. The trouble starts
 when we rely too much on a simple &lt;code&gt;lookAt&lt;/code&gt; from &lt;strong&gt;THREE.js&lt;/strong&gt; together
 with a &lt;strong&gt;fixed-up direction&lt;/strong&gt;.&lt;/p&gt;
@@ -23,7 +21,7 @@ this has always been &lt;code&gt;Vector3(0, 1, 0)&lt;/code&gt;. This is fine for
 slopes&lt;/strong&gt;, but it starts to fall apart when the track approaches angles
 close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-af59410e70c8707623e282c9a187f8fb"
+ id="react-root-c6d36a6d1bf706f621b734415d78a2ca"
  width="225px"
  height="285px"
  class="frame"
@@ -36,7 +34,7 @@ close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item>
  
 
  &lt;script&gt;
- document.getElementById('react-root-af59410e70c8707623e282c9a187f8fb').srcdoc = `
+ document.getElementById('react-root-c6d36a6d1bf706f621b734415d78a2ca').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -148,7 +146,7 @@ nicer API to work with.&lt;/p&gt;
 define a number of imports for &lt;strong&gt;WASI&lt;/strong&gt;, but all of them are empty.
 This looks suspicious at first, so let us talk about that.&lt;/p&gt;</description></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-3182f40445d784c83569506127ea70b2"
+ id="react-root-62bdb9093e09aeab03b701c4984b4b8f"
  width="225px"
  height="285px"
  class="frame"
@@ -161,7 +159,7 @@ This looks suspicious at first, so let us talk about that.&lt;/p&gt;</descriptio
  
 
  &lt;script&gt;
- document.getElementById('react-root-3182f40445d784c83569506127ea70b2').srcdoc = `
+ document.getElementById('react-root-62bdb9093e09aeab03b701c4984b4b8f').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
