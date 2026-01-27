@@ -22,7 +22,7 @@ export const DefaultCanvas = ({
       dpr={dpr}
       shadows={true}
     >
-      <ambientLight castShadow={true} intensity={1.3} />
+      <ambientLight intensity={1.3} />
       <directionalLight
         castShadow
         position={sunPosition}

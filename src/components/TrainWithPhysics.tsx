@@ -3,7 +3,6 @@ import { Vector3 } from 'three';
 
 import { Curve } from '../maths/curve';
 import { useMotionSimulation } from '../hooks/useMotionSimulation';
-import { useSimulationStateControls } from '../hooks/useSimulationStateControls';
 
 import {
   CameraView,
@@ -16,12 +15,17 @@ export const TrainWithPhysics = ({
   curve,
   init = {},
   activateCamera = false,
+  resetWhenReachedLimit = true,
+  sections = [],
 }: {
   curve: Curve;
   activateCamera?: boolean;
-  init?: Parameters<typeof useSimulationStateControls>[0];
-}) => {
-  const motionMatrix = useMotionSimulation(curve, init);
+} & Parameters<typeof useMotionSimulation>[1]) => {
+  const motionMatrix = useMotionSimulation(curve, {
+    init,
+    resetWhenReachedLimit,
+    sections,
+  });
   const cameraViewManager = useCameraViewManager();
 
   return (

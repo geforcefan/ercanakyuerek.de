@@ -11,6 +11,7 @@ export type SimulationState = {
 export const evaluateMotion = (
   state: SimulationState,
   transformation: Matrix4,
+  additionalAcceleration: number,
   friction: number,
   airResistance: number,
   gravity: number,
@@ -27,6 +28,7 @@ export const evaluateMotion = (
     new Vector3(0, -gravity, 0),
   );
   acceleration -= energyLoss;
+  acceleration += additionalAcceleration;
 
   const velocity = state.velocity + acceleration * deltaTime;
   const distanceTraveled =

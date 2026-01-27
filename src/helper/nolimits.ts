@@ -29,7 +29,7 @@ export const curveFromCustomTrack = (
   return curve;
 };
 
-export const rollPointsFromCustomTrack = (
+export const parameterSpaceFromCustomTrack = (
   track: ReturnType<typeof readCustomTrack>,
 ) => {
   if (track.vertices.length < 2) return [];
@@ -48,6 +48,16 @@ export const rollPointsFromCustomTrack = (
         .map((u) => lastParameterSpace + u),
     );
   }
+
+  return parameterSpace;
+};
+
+export const rollPointsFromCustomTrack = (
+  track: ReturnType<typeof readCustomTrack>,
+) => {
+  if (track.vertices.length < 2) return [];
+
+  const parameterSpace = parameterSpaceFromCustomTrack(track);
 
   const rollPoints = [
     {
@@ -84,6 +94,11 @@ export const makeParameterSpaceMap = (
     for (let i = 0; i < repeat; i++)
       space.push(space[space.length - 1] + u);
   };
+
+  if (numberOfPoints === 2) {
+    push(1, 1);
+    return space;
+  }
 
   const hasMiddle = numberOfPoints > degree + 1;
   const splits = hasMiddle ? Math.min(2, degree) : numberOfPoints - 1;
