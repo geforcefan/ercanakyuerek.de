@@ -41,7 +41,7 @@ orientation is transported along the curve with <strong>as little rotation
 as possible</strong>.</p><p>Think of it like this: we add rotation step by step while respecting
 the <strong>previous orientation</strong>.</p><p>The following interactive demo lets us switch between a <strong>fixed-up
 lookAt orientation</strong> and an <strong>incremental orientation based on the
-previous node</strong>. This helps visualize the problem.</p><div class=embedded><iframe id=react-root-b32ecb6a8e5a8f5c258a57433b7a141f width=100% height=700px class=frame></iframe><div class=description style=width:100%><strong>fixed-up lookAt orientation</strong>: Roll becomes unstable near 90° slopes. <strong>Incremental rotation</strong>: Stable roll and smooth orientation along the curve.</div><script>document.getElementById("react-root-b32ecb6a8e5a8f5c258a57433b7a141f").srcdoc=`
+previous node</strong>. This helps visualize the problem.</p><div class=embedded><iframe id=react-root-f38af957cc21c9fd410a4ecb2ad49252 width=100% height=700px class=frame></iframe><div class=description style=width:100%><strong>fixed-up lookAt orientation</strong>: Roll becomes unstable near 90° slopes. <strong>Incremental rotation</strong>: Stable roll and smooth orientation along the curve.</div><script>document.getElementById("react-root-f38af957cc21c9fd410a4ecb2ad49252").srcdoc=`
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -201,23 +201,11 @@ to <code>insertPosition</code>.</p><div class=highlight><pre tabindex=0 style=co
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>curve</span>;
 </span></span><span style=display:flex><span>};
-</span></span></code></pre></div><h1 id=what-comes-next>What comes next?</h1><p>At this point, we finally have a <strong>stable orientation</strong> along the
-curve, without <strong>jitter</strong> near <strong>steep slopes</strong>. It would be tempting
-to go straight into a proper <strong>roll interpolation</strong>, but before doing
-that, we want to take a step back.</p><p>The next step will be the introduction of <strong>NURBS curves</strong>, which
-allow much more freedom than <strong>Bézier curves</strong> and make
-experimentation far more interesting.</p><p>The theory behind this, like <strong>continuity</strong>, <strong>knot vectors</strong>, and
-<strong>curve order</strong>, can get confusing quickly. For now, we keep the
-implementation <strong>practical</strong> and leave most of the theory for a
-separate <strong>spline-focused series</strong>.</p><p>If you want an introduction in the meantime, the video
-<a href="https://www.youtube.com/watch?v=jvPPXbo87ds">The Continuity of Splines</a>
-by <a href=https://www.youtube.com/@acegikmo>Ferya Holmèr</a> is <strong>gold</strong>. It
-is <strong>perfect</strong> and covers almost everything you need to understand
-<strong>splines in general</strong>.</p><h1 id=interactive-demo>Interactive demo</h1><p>This chapter ends with a small interactive example. You can move the
+</span></span></code></pre></div><h1 id=interactive-demo>Interactive demo</h1><p>This chapter ends with a small interactive example. You can move the
 control points of a <strong>Bézier curve</strong> and observe how the
 <strong>orientation</strong> behaves. There should be <strong>no sudden flips or jitter</strong>
-near <strong>90 degree slopes</strong>.</p><div class=embedded><iframe id=react-root-b0b31c7c15b6cb018665ee319b6516f5 width=100% height=650px class=frame></iframe>
-<script>document.getElementById("react-root-b0b31c7c15b6cb018665ee319b6516f5").srcdoc=`
+near <strong>90 degree slopes</strong>.</p><div class=embedded><iframe id=react-root-cf1f02a64551f39c1ff6a0b1f71625c2 width=100% height=650px class=frame></iframe>
+<script>document.getElementById("react-root-cf1f02a64551f39c1ff6a0b1f71625c2").srcdoc=`
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -231,7 +219,19 @@ near <strong>90 degree slopes</strong>.</p><div class=embedded><iframe id=react-
         <\/script>
       </body>
     </html>
-  `</script></div><h1 id=demo-code>Demo code</h1><p>If you want to run the code locally, clone this
+  `</script></div><h1 id=what-comes-next>What comes next?</h1><p>At this point, we finally have a <strong>stable orientation</strong> along the
+curve, without <strong>jitter</strong> near <strong>steep slopes</strong>. It would be tempting
+to go straight into a proper <strong>roll interpolation</strong>, but before doing
+that, we want to take a step back.</p><p>The next step will be the introduction of <strong>NURBS curves</strong>, which
+allow much more freedom than <strong>Bézier curves</strong> and make
+experimentation far more interesting.</p><p>The theory behind this, like <strong>continuity</strong>, <strong>knot vectors</strong>, and
+<strong>curve order</strong>, can get confusing quickly. For now, we keep the
+implementation <strong>practical</strong> and leave most of the theory for a
+separate <strong>spline-focused series</strong>.</p><p>If you want an introduction in the meantime, the video
+<a href="https://www.youtube.com/watch?v=jvPPXbo87ds">The Continuity of Splines</a>
+by <a href=https://www.youtube.com/@acegikmo>Ferya Holmèr</a> is <strong>gold</strong>. It
+is <strong>perfect</strong> and covers almost everything you need to understand
+<strong>splines in general</strong>.</p><h1 id=demo-code>Demo code</h1><p>If you want to run the code locally, clone this
 <a href=https://github.com/geforcefan/ercanakyuerek.de target=_blank>repository</a>,
 run <code>npm install</code> and <code>npm run dev-scripts</code>,
 then open this

@@ -31,7 +31,7 @@ have four nodes. Nothing surprising so far. If we want to know the
 two nodes between which that distance lies. One node on the left, one
 on the right. Everything in between is just interpolation.</p><p>This can be hard to visualize just by reading, so the example below
 shows four points and a slider. You can also move the control points
-to see what happens when the requested distance overshoots a segment.</p><div class=embedded><iframe id=react-root-d6d7597a66a359e409ae2ffbea6f68bc width=100% height=260px class=frame></iframe><div class=description style=width:100%>As you move the slider, you request a distance along the track. You can immediately see between which two nodes that distance is sandwiched.</div><script>document.getElementById("react-root-d6d7597a66a359e409ae2ffbea6f68bc").srcdoc=`
+to see what happens when the requested distance overshoots a segment.</p><div class=embedded><iframe id=react-root-8d942b5f97a52160f31e472f6a337519 width=100% height=260px class=frame></iframe><div class=description style=width:100%>As you move the slider, you request a distance along the track. You can immediately see between which two nodes that distance is sandwiched.</div><script>document.getElementById("react-root-8d942b5f97a52160f31e472f6a337519").srcdoc=`
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -297,10 +297,7 @@ with correct normals and roll handling.</p></blockquote><div class=highlight><pr
 </span></span><span style=display:flex><span>};
 </span></span></code></pre></div><p>This helper just turns points into curve nodes and keeps track of the
 distance along the curve. It is very naive, but good enough to
-demonstrate the idea.</p><h2 id=what-comes-next>What comes next?</h2><p>In the next chapter, we will build curve nodes from <strong>Bezier
-splines</strong>. The nice part is that we will not have to touch the
-simulation logic at all. Only the curve generation changes, which is
-exactly what we were aiming for from the beginning.</p><h2 id=demo-with-linear-track-segments>Demo with linear track segments</h2><div class=embedded><iframe id=react-root-93acaa5692bfbac1c2ced5899ad5e743 width=100% height=380px class=frame></iframe><div class=description style=width:100%>Move the control points around to get a feeling for building a roller coaster track with physics motion.</div><script>document.getElementById("react-root-93acaa5692bfbac1c2ced5899ad5e743").srcdoc=`
+demonstrate the idea.</p><h2 id=demo-with-linear-track-segments>Demo with linear track segments</h2><div class=embedded><iframe id=react-root-04319f6a5bff3c062703dec7017618d5 width=100% height=380px class=frame></iframe><div class=description style=width:100%>Move the control points around to get a feeling for building a roller coaster track with physics motion.</div><script>document.getElementById("react-root-04319f6a5bff3c062703dec7017618d5").srcdoc=`
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -314,7 +311,10 @@ exactly what we were aiming for from the beginning.</p><h2 id=demo-with-linear-t
         <\/script>
       </body>
     </html>
-  `</script></div><h1 id=demo-code>Demo code</h1><p>If you want to run the code locally, clone this
+  `</script></div><h2 id=what-comes-next>What comes next?</h2><p>In the next chapter, we will build curve nodes from <strong>Bezier
+splines</strong>. The nice part is that we will not have to touch the
+simulation logic at all. Only the curve generation changes, which is
+exactly what we were aiming for from the beginning.</p><h1 id=demo-code>Demo code</h1><p>If you want to run the code locally, clone this
 <a href=https://github.com/geforcefan/ercanakyuerek.de target=_blank>repository</a>,
 run <code>npm install</code> and <code>npm run dev-scripts</code>,
 then open this
