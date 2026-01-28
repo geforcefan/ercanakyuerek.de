@@ -4,36 +4,26 @@ date: 2026-01-04T21:00:00+01:00
 math: false
 tags: ['roller coaster simulation']
 ---
+While writing this series about building a [roller coaster simulation
+in the
+browser]({{< ref "/tags/writing-a-roller-coaster-simulation/" >}}),
+the simulation itself has continued to evolve.
 
-Parallel to writing this series about building a [roller coaster
-simulator in the
-browser]({{< ref "/tags/writing-a-roller-coaster-simulation/" >}}), the
-system itself has continued to evolve.
+What started as small, separate experiments in earlier chapters has,
+over time, come together into a runnable simulation with **NURBS
+tracks**, **cubic roll interpolation**, a **physics simulation** and
+**basic 3D track model generation** running in real time. The scene
+includes basic **lighting** and **shadows**, so the track is rendered
+as real geometry in a simple **3D environment**.
 
-At this point, the simulator already supports **NURBS tracks**,
-**roll interpolation**, and a complete **physics simulation** running
-together. What started as isolated experiments in earlier chapters is
-now a connected system. The ideas described in the articles are no
-longer sketches. They are running code.
-
-This post is not a deep technical explanation. It is a snapshot of the
-current state of the simulator.
-
-The track is generated from **NURBS curves**, orientation along the
-curve is handled with **roll interpolation**, and a basic **3D track
-model** is built directly from the curve data. Everything is evaluated
-and rendered in real time, without any heavy optimization or offline
-processing.
-
-The goal here is simply to show how these pieces behave when combined:
-curve interpolation, orientation, and physics acting on the same
-representation of the track.
+Below is a live demo using a track kindly provided by **Keltan Kemp**,
+showing the current state of the simulation running in real time.
 
 # Interactive demo
 
 As always, the full code is available below.
 
-{{< embedded-content-component path="./posts/roller-coaster-simulation/nurbs-roll-physics-in-action/NurbsRollPhysicsInActionDemoScene.tsx" width="100%" height="650px">}}
+{{< embedded-content-component path="./posts/roller-coaster-simulation/nurbs-roll-physics-in-action/NurbsRollPhysicsInActionDemoScene.tsx" width="100%" height="650px" description="Special thanks to **Keltan Kemp**, who kindly provided the track model used in this demo">}}
 
 # Code
 
