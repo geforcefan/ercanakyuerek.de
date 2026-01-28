@@ -23,7 +23,7 @@ showing the current state of the simulation running in real time.
 
 As always, the full code is available below.
 
-{{< embedded-content-component path="./posts/roller-coaster-simulation/nurbs-roll-physics-in-action/NurbsRollPhysicsInActionDemoScene.tsx" width="100%" height="650px" description="Special thanks to **Keltan Kemp**, who kindly provided the track model used in this demo">}}
+{{< embedded-content-component path="./posts/roller-coaster-simulation/nurbs-roll-physics-in-action/NurbsRollPhysicsInActionDemoScene.tsx" width="100%" height="650px" description="Special thanks to **Keltan Kemp**, who kindly provided the track used in this demo">}}
 
 # Code
 
