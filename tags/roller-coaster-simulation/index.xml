@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Roller Coaster Simulation on Ercan Akyürek</title><link>https://ercanakyuerek.de/tags/roller-coaster-simulation/</link><description>Recent content in Roller Coaster Simulation on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Sun, 04 Jan 2026 21:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/tags/roller-coaster-simulation/index.xml" rel="self" type="application/rss+xml"/><item><title>NURBS, Roll, Physics in Action</title><link>https://ercanakyuerek.de/posts/roller-coaster-simulation/nurbs-roll-physics-in-action/</link><pubDate>Sun, 04 Jan 2026 21:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/roller-coaster-simulation/nurbs-roll-physics-in-action/</guid><description>&lt;p&gt;Parallel to writing this series about building a &lt;a href="https://ercanakyuerek.de/tags/writing-a-roller-coaster-simulation/"&gt;roller coaster
-simulator in the
-browser&lt;/a&gt;, the
-system itself has continued to evolve.&lt;/p&gt;
-&lt;p&gt;At this point, the simulator already supports &lt;strong&gt;NURBS tracks&lt;/strong&gt;,
-&lt;strong&gt;roll interpolation&lt;/strong&gt;, and a complete &lt;strong&gt;physics simulation&lt;/strong&gt; running
-together. What started as isolated experiments in earlier chapters is
-now a connected system. The ideas described in the articles are no
-longer sketches. They are running code.&lt;/p&gt;
-&lt;p&gt;This post is not a deep technical explanation. It is a snapshot of the
-current state of the simulator.&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Roller Coaster Simulation on Ercan Akyürek</title><link>https://ercanakyuerek.de/tags/roller-coaster-simulation/</link><description>Recent content in Roller Coaster Simulation on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Sun, 04 Jan 2026 21:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/tags/roller-coaster-simulation/index.xml" rel="self" type="application/rss+xml"/><item><title>NURBS, Roll, Physics in Action</title><link>https://ercanakyuerek.de/posts/roller-coaster-simulation/nurbs-roll-physics-in-action/</link><pubDate>Sun, 04 Jan 2026 21:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/roller-coaster-simulation/nurbs-roll-physics-in-action/</guid><description>&lt;p&gt;While writing this series about building a &lt;a href="https://ercanakyuerek.de/tags/writing-a-roller-coaster-simulation/"&gt;roller coaster simulation
+in the
+browser&lt;/a&gt;,
+the simulation itself has continued to evolve.&lt;/p&gt;
+&lt;p&gt;What started as small, separate experiments in earlier chapters has,
+over time, come together into a runnable simulation with &lt;strong&gt;NURBS
+tracks&lt;/strong&gt;, &lt;strong&gt;cubic roll interpolation&lt;/strong&gt;, a &lt;strong&gt;physics simulation&lt;/strong&gt; and
+&lt;strong&gt;basic 3D track model generation&lt;/strong&gt; running in real time. The scene
+includes basic &lt;strong&gt;lighting&lt;/strong&gt; and &lt;strong&gt;shadows&lt;/strong&gt;, so the track is rendered
+as real geometry in a simple &lt;strong&gt;3D environment&lt;/strong&gt;.&lt;/p&gt;</description></item></channel></rss>
