@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Line } from '@react-three/drei';
+import { useControls } from 'leva';
 import { Vector3, Vector4 } from 'three';
 
 import { useColors } from '../../../../hooks/useColors';
@@ -10,10 +11,12 @@ import { Ground } from '../../../../components/Ground';
 import { EditorScene } from '../../../../components/scenes/EditorScene';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
 
-import { fromVertices } from '../../../../coaster/b-spline-track';
+import { fromPoints } from '../../../../coaster/b-spline-track';
 
 export const BSplineCurveDemoScene = () => {
   const colors = useColors();
+
+  const [{ closed }] = useControls(() => ({ closed: false }));
 
   const [points, setPoints] = useState([
     new Vector3(-10, 8, 0),
@@ -25,13 +28,11 @@ export const BSplineCurveDemoScene = () => {
 
   const curve = useMemo(
     () =>
-      fromVertices(
-        points.map((p) => ({
-          position: new Vector4(p.x, p.y, p.z),
-          strict: false,
-        })),
+      fromPoints(
+        points.map((p) => new Vector4(p.x, p.y, p.z)),
+        closed,
       ),
-    [points],
+    [points, closed],
   );
 
   return (
@@ -40,7 +41,10 @@ export const BSplineCurveDemoScene = () => {
       <DragControlPoints points={points} setPoints={setPoints} />
       <Ground position={[0, -10, 0]} />
       <CurveTrackMesh curve={curve} />
-      <TrainWithPhysics curve={curve} />
+      <TrainWithPhysics
+        curve={curve}
+        resetWhenReachedLimit={!closed}
+      />
     </EditorScene>
   );
 };

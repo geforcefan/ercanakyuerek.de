@@ -12,7 +12,7 @@ import { DragControlPoints } from '../components/curve/DragControlPoints';
 import { Ground } from '../components/Ground';
 import { PerspectiveScene } from '../components/scenes/PerspectiveScene';
 
-import { fromVertices } from '../coaster/b-spline-track';
+import { fromPoints } from '../coaster/b-spline-track';
 import Park from './Experiment.nl2park';
 
 const park = await fromURL(Park);
@@ -36,7 +36,10 @@ export const ExperimentScene = () => {
   );
 
   const curve = useMemo(() => {
-    return fromVertices(exampleTrack?.vertices, closed);
+    return fromPoints(
+      exampleTrack?.vertices.map((v) => v.position),
+      closed,
+    );
   }, [closed]);
 
   return (

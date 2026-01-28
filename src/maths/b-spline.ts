@@ -7,13 +7,13 @@ import {
 
 import { emptyCurve, insertPosition } from './curve';
 
-function cubicBSpline(
+const cubicUniformRationalBSpline = (
   p0: Vector4,
   p1: Vector4,
   p2: Vector4,
   p3: Vector4,
   t: number,
-): Vector3 {
+) => {
   const t2 = t * t;
   const t3 = t2 * t;
 
@@ -31,7 +31,7 @@ function cubicBSpline(
     .addScaledVector(p3, b3 * p3.w);
 
   return new Vector3(num.x, num.y, num.z).divideScalar(denominator);
-}
+};
 
 export const estimateTotalArcLength = (
   p0: Vector4,
@@ -40,7 +40,7 @@ export const estimateTotalArcLength = (
   p3: Vector4,
 ) => {
   const positions = uniformSampleMap(0, 8, 1, (at, t) =>
-    cubicBSpline(p0, p1, p2, p3, t),
+    cubicUniformRationalBSpline(p0, p1, p2, p3, t),
   );
 
   return positions
@@ -57,6 +57,7 @@ export const fromPoints = (
   resolution: number = 20,
 ) => {
   const curve = emptyCurve();
+  if (points.length < 4) return curve;
 
   for (let i = 0; i < points.length - 3; i++) {
     const p0 = points[i];
@@ -69,7 +70,10 @@ export const fromPoints = (
       estimateTotalArcLength(p0, p1, p2, p3),
       resolution,
       (at, t) => {
-        insertPosition(curve, cubicBSpline(p0, p1, p2, p3, t));
+        insertPosition(
+          curve,
+          cubicUniformRationalBSpline(p0, p1, p2, p3, t),
+        );
       },
     );
   }

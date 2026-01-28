@@ -162,6 +162,15 @@ to `insertPosition`.
 
 {{< repository-code file="src/maths/bezier.ts" type="variable" name="bezierSplineCurve" >}}
 
+# Interactive demo
+
+This chapter ends with a small interactive example. You can move the
+control points of a **Bézier curve** and observe how the
+**orientation** behaves. There should be **no sudden flips or jitter**
+near **90 degree slopes**.
+
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-orientation/CurveOrientationDemoScene.tsx" width="100%" height="650px" >}}
+
 # What comes next?
 
 At this point, we finally have a **stable orientation** along the
@@ -183,15 +192,6 @@ If you want an introduction in the meantime, the video
 by [Ferya Holmèr](https://www.youtube.com/@acegikmo) is **gold**. It
 is **perfect** and covers almost everything you need to understand
 **splines in general**.
-
-# Interactive demo
-
-This chapter ends with a small interactive example. You can move the
-control points of a **Bézier curve** and observe how the
-**orientation** behaves. There should be **no sudden flips or jitter**
-near **90 degree slopes**.
-
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-orientation/CurveOrientationDemoScene.tsx" width="100%" height="650px" >}}
 
 # Demo code
 

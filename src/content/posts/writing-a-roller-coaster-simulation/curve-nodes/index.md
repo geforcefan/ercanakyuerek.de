@@ -301,16 +301,16 @@ This helper just turns points into curve nodes and keeps track of the
 distance along the curve. It is very naive, but good enough to
 demonstrate the idea.
 
+## Demo with linear track segments
+
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-nodes/MotionEvaluationDemoScene.tsx" width="100%" height="380px" description="Move the control points around to get a feeling for building a roller coaster track with physics motion." >}}
+
 ## What comes next?
 
 In the next chapter, we will build curve nodes from **Bezier
 splines**. The nice part is that we will not have to touch the
 simulation logic at all. Only the curve generation changes, which is
 exactly what we were aiming for from the beginning.
-
-## Demo with linear track segments
-
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/curve-nodes/MotionEvaluationDemoScene.tsx" width="100%" height="380px" description="Move the control points around to get a feeling for building a roller coaster track with physics motion." >}}
 
 # Demo code
 

@@ -66,6 +66,14 @@ like this:
 
 {{< repository-code file="src/helper/physics.ts" type="variable" name="evaluateMotion" >}}
 
+## Interactive demo and code
+
+There is no visible difference in the demo. The train behaves exactly
+as before. The only change is that the simulation now uses
+`transformationAtArcLength` internally.
+
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/transformation-matrix/TransformationMatrixDemoScene.tsx" width="100%" height="480px">}}
+
 ## What comes next?
 
 These changes are mostly structural. Visually, nothing changes yet.
@@ -82,14 +90,6 @@ as it is.
 This is the kind of refactor we want. We change how the track is
 described without rewriting everything built on top of it.
 
-## Interactive demo and code
-
-There is no visible difference in the demo. The train behaves exactly
-as before. The only change is that the simulation now uses
-`transformationAtArcLength` internally.
-
-For completeness, the full demo is shown below.
-
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/transformation-matrix/TransformationMatrixDemoScene.tsx" width="100%" height="480px">}}
+# Demo code
 
 {{< repository-code-with-clone file="src/content/posts/writing-a-roller-coaster-simulation/transformation-matrix/TransformationMatrixDemoScene.tsx" >}}

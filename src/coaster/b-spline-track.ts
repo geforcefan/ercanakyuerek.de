@@ -1,29 +1,25 @@
 import { Vector4 } from 'three';
 
-import { fromPoints } from '../maths/b-spline';
+import { fromPoints as bSplineFromPoints } from '../maths/b-spline';
 
-export const fromVertices = (
-  vertices: Array<{ position: Vector4; strict: boolean }>,
+export const fromPoints = (
+  points: Vector4[],
   closed: boolean = false,
   resolution: number = 20,
 ) => {
-  const points: Vector4[] = [];
+  const bSplinePoints: Vector4[] = [...points];
 
-  for (let i = 0; i < vertices.length; i++) {
-    const vertex = vertices[i];
-    const clamp = !closed && (i === vertices.length - 1 || !i);
+  if (!closed) {
+    const firstPoint = bSplinePoints[0];
+    const lastPoint = bSplinePoints[bSplinePoints.length - 1];
 
-    points.push(vertex.position);
-
-    if (clamp || vertex.strict)
-      points.push(vertex.position, vertex.position);
+    bSplinePoints.unshift(firstPoint, firstPoint);
+    bSplinePoints.push(lastPoint, lastPoint);
+  } else if (closed && bSplinePoints.length >= 4) {
+    bSplinePoints.unshift(bSplinePoints[bSplinePoints.length - 1]);
+    bSplinePoints.push(bSplinePoints[1]);
+    bSplinePoints.push(bSplinePoints[2]);
   }
 
-  if (closed && points.length >= 4) {
-    points.unshift(points[points.length - 1]);
-    points.push(points[1]);
-    points.push(points[2]);
-  }
-
-  return fromPoints(points, resolution);
+  return bSplineFromPoints(bSplinePoints, resolution);
 };
