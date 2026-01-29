@@ -180,7 +180,7 @@ are moved.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-06d84f4a1c42e41bf70622c3881ccf44"
+    id="react-root-58217cf5a4b6c3dc6bd4a76b40ca2180"
     width="100%"
     height="580px"
     class="frame"
@@ -189,7 +189,7 @@ are moved.</p>
   
 
   <script>
-    document.getElementById('react-root-06d84f4a1c42e41bf70622c3881ccf44').srcdoc = `
+    document.getElementById('react-root-58217cf5a4b6c3dc6bd4a76b40ca2180').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -299,7 +299,7 @@ showing the current state of the simulation running in real time.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-c51dfbdbbd880f3939656679cc0854e4"
+    id="react-root-e4598268fadd327fd0fb9a04ad8047f3"
     width="100%"
     height="650px"
     class="frame"
@@ -312,7 +312,7 @@ showing the current state of the simulation running in real time.</p>
   
 
   <script>
-    document.getElementById('react-root-c51dfbdbbd880f3939656679cc0854e4').srcdoc = `
+    document.getElementById('react-root-e4598268fadd327fd0fb9a04ad8047f3').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -475,7 +475,7 @@ previous node</strong>. This helps visualize the problem.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-5995c92800c33acc6496aeac49abe7cd"
+    id="react-root-23876b2fc4e456f95ab49603a3068a89"
     width="100%"
     height="700px"
     class="frame"
@@ -488,7 +488,7 @@ previous node</strong>. This helps visualize the problem.</p>
   
 
   <script>
-    document.getElementById('react-root-5995c92800c33acc6496aeac49abe7cd').srcdoc = `
+    document.getElementById('react-root-23876b2fc4e456f95ab49603a3068a89').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -708,7 +708,7 @@ near <strong>90 degree slopes</strong>.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-957824cb40241a054b9ae24d19badf1c"
+    id="react-root-b2951141839b44fd3bb981fce64b4939"
     width="100%"
     height="650px"
     class="frame"
@@ -717,7 +717,7 @@ near <strong>90 degree slopes</strong>.</p>
   
 
   <script>
-    document.getElementById('react-root-957824cb40241a054b9ae24d19badf1c').srcdoc = `
+    document.getElementById('react-root-b2951141839b44fd3bb981fce64b4939').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -807,7 +807,7 @@ is <strong>perfect</strong> and covers almost everything you need to understand
 
 ]]></content></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-8d73668f5baf100032a259ed6c694f76"
+id="react-root-6ef7fdd590665602c31cd65f89738e30"
 width="225px"
 height="285px"
 class="frame"
@@ -816,7 +816,7 @@ class="frame"
 An interactive example of a Bézier curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-8d73668f5baf100032a259ed6c694f76').srcdoc = `
+document.getElementById('react-root-6ef7fdd590665602c31cd65f89738e30').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -843,7 +843,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-8d73668f5baf100032a259ed6c694f76"
+    id="react-root-6ef7fdd590665602c31cd65f89738e30"
     width="225px"
     height="285px"
     class="frame"
@@ -856,7 +856,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
   
 
   <script>
-    document.getElementById('react-root-8d73668f5baf100032a259ed6c694f76').srcdoc = `
+    document.getElementById('react-root-6ef7fdd590665602c31cd65f89738e30').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -896,7 +896,7 @@ spoil the ending a bit:</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-9774e54dfdcbba612e1765d88678c117"
+    id="react-root-2a5d47689ade931c18e824e35f43abc0"
     width="100%"
     height="480px"
     class="frame"
@@ -905,7 +905,7 @@ spoil the ending a bit:</p>
   
 
   <script>
-    document.getElementById('react-root-9774e54dfdcbba612e1765d88678c117').srcdoc = `
+    document.getElementById('react-root-2a5d47689ade931c18e824e35f43abc0').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -959,7 +959,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-888dba562157db42c19d30316395d58e"
+    id="react-root-91af56f537f4cab0e0f9bde2f842a948"
     width="355px"
     height="560px"
     class="frame"
@@ -972,7 +972,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
   
 
   <script>
-    document.getElementById('react-root-888dba562157db42c19d30316395d58e').srcdoc = `
+    document.getElementById('react-root-91af56f537f4cab0e0f9bde2f842a948').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1073,7 +1073,7 @@ We do not need perfect precision here, so we need to find a reasonable
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-8f7875de16baa4e2f6d4ccb96ce33ca4"
+    id="react-root-70e36f15c43c173a9ef3b8b0f705ad0d"
     width="355px"
     height="485px"
     class="frame"
@@ -1086,7 +1086,7 @@ We do not need perfect precision here, so we need to find a reasonable
   
 
   <script>
-    document.getElementById('react-root-8f7875de16baa4e2f6d4ccb96ce33ca4').srcdoc = `
+    document.getElementById('react-root-70e36f15c43c173a9ef3b8b0f705ad0d').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1343,7 +1343,7 @@ to see what happens when the requested distance overshoots a segment.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-03738be405dbdb37334e24baebcef689"
+    id="react-root-2f3dac988f21b7e8193e4c84b5b99f2e"
     width="100%"
     height="260px"
     class="frame"
@@ -1356,7 +1356,7 @@ to see what happens when the requested distance overshoots a segment.</p>
   
 
   <script>
-    document.getElementById('react-root-03738be405dbdb37334e24baebcef689').srcdoc = `
+    document.getElementById('react-root-2f3dac988f21b7e8193e4c84b5b99f2e').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1704,7 +1704,7 @@ demonstrate the idea.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-4a172bdabb2597377aaf0e4dfb7e14c5"
+    id="react-root-e9554ae18808a7ff44d5560f2c60cb02"
     width="100%"
     height="380px"
     class="frame"
@@ -1717,7 +1717,7 @@ demonstrate the idea.</p>
   
 
   <script>
-    document.getElementById('react-root-4a172bdabb2597377aaf0e4dfb7e14c5').srcdoc = `
+    document.getElementById('react-root-e9554ae18808a7ff44d5560f2c60cb02').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1840,6 +1840,71 @@ orientation, we let <strong>THREE.js</strong> build a matrix that <code>lookAt</
 one control point to the other. This gives us a correct <strong>forward
 direction</strong> without any extra work.</p>
 <blockquote>
+<p><strong>Note:</strong> At this stage, we only need a valid <strong>forward direction</strong>.
+There is no need to complicate things with <strong>roll</strong>, so we ignore it
+for now.</p></blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">transformationAtArcLength</span> <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">cp1</span>: <span style="color:#66d9ef">Vector3</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">cp2</span>: <span style="color:#66d9ef">Vector3</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">at</span>: <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">position</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cp1</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">clone</span>()
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">lerp</span>(<span style="color:#a6e22e">cp2</span>, <span style="color:#a6e22e">at</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">totalArcLength</span>(<span style="color:#a6e22e">cp1</span>, <span style="color:#a6e22e">cp2</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Matrix4</span>()
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">lookAt</span>(<span style="color:#a6e22e">cp2</span>, <span style="color:#a6e22e">cp1</span>, <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">setPosition</span>(<span style="color:#a6e22e">position</span>);
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
+<p>With this change, we also need to adjust <code>evaluateMotion</code>. Instead of
+receiving a <strong>forward direction</strong> vector, it now receives a
+<strong>transformation matrix</strong>. We then extract the <strong>forward direction</strong>
+from that transformation.</p>
+<p>This is very straightforward. Here is a small helper to extract the
+<strong>forward direction</strong> from a <strong>transformation matrix</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">toForwardDirection</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">m</span>: <span style="color:#66d9ef">Matrix4</span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">elements</span>[<span style="color:#ae81ff">8</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">elements</span>[<span style="color:#ae81ff">9</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">elements</span>[<span style="color:#ae81ff">10</span>],
+</span></span><span style="display:flex;"><span>  ).<span style="color:#a6e22e">normalize</span>();
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
+<p>Now we use this helper to extract the <strong>forward direction</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">forwardDirection</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">toForwardDirection</span>(<span style="color:#a6e22e">transformation</span>);
+</span></span></code></pre></div><p>With that in place, the full updated <code>evaluateMotion</code> function looks
+like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">evaluateMotion</span> <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">SimulationState</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">transformation</span>: <span style="color:#66d9ef">Matrix4</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">activeAcceleration</span>: <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">friction</span>: <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">airResistance</span>: <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">gravity</span>: <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">deltaTime</span>: <span style="color:#66d9ef">number</span>,
+</span></span><span style="display:flex;"><span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">SimulationState</span> <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">forwardDirection</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">toForwardDirection</span>(<span style="color:#a6e22e">transformation</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">velocityDirection</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">1</span> : <span style="color:#66d9ef">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">energyLoss</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">airResistance</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">energyLoss</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">friction</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">gravity</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">energyLoss</span> <span style="color:#f92672">*=</span> <span style="color:#a6e22e">velocityDirection</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">forwardDirection</span>.<span style="color:#a6e22e">dot</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#a6e22e">gravity</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">activeAcceleration</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">-=</span> <span style="color:#a6e22e">energyLoss</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">velocity</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">acceleration</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">distanceTraveled</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">velocity</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">deltaTime</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">velocity</span>, <span style="color:#a6e22e">distanceTraveled</span>, <span style="color:#a6e22e">acceleration</span> };
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
+<blockquote>
 <p><strong>Note:</strong> Do not worry about the <code>activeAcceleration</code> parameter,
 which seems to come from nowhere. This is just us preparing for
 later chapters, when we introduce actual roller coaster sections
@@ -1854,7 +1919,7 @@ track.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-2b15bbbb1d1cda55a01e5c6304cdb38c"
+    id="react-root-ce74f5cd86745e391387b95eda3a2a35"
     width="100%"
     height="480px"
     class="frame"
@@ -1863,7 +1928,7 @@ track.</p>
   
 
   <script>
-    document.getElementById('react-root-2b15bbbb1d1cda55a01e5c6304cdb38c').srcdoc = `
+    document.getElementById('react-root-ce74f5cd86745e391387b95eda3a2a35').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2130,7 +2195,7 @@ shape and see how both trains react differently.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-ed64862735b0095dc04858da6dcd7d0e"
+    id="react-root-a685977a3d332f360b9b32739271321e"
     width="100%"
     height="460px"
     class="frame"
@@ -2139,7 +2204,7 @@ shape and see how both trains react differently.</p>
   
 
   <script>
-    document.getElementById('react-root-ed64862735b0095dc04858da6dcd7d0e').srcdoc = `
+    document.getElementById('react-root-a685977a3d332f360b9b32739271321e').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2509,7 +2574,7 @@ time. On the side, a small panel displays the live simulation state.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-1abfd5e68952b625d0a172095e1ae2fa"
+    id="react-root-02c194d2d4710e059162df08dc67aece"
     width="100%"
     height="360px"
     class="frame"
@@ -2518,7 +2583,7 @@ time. On the side, a small panel displays the live simulation state.</p>
   
 
   <script>
-    document.getElementById('react-root-1abfd5e68952b625d0a172095e1ae2fa').srcdoc = `
+    document.getElementById('react-root-02c194d2d4710e059162df08dc67aece').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2784,7 +2849,7 @@ the introduction of this chapter.</p></blockquote>
 
 <div class="embedded ">
   <iframe
-    id="react-root-17adfe8595c229281a2689fc48c0e7e2"
+    id="react-root-e77f26b92cf0c86cdfe5541b77686264"
     width="100%"
     height="360px"
     class="frame"
@@ -2793,7 +2858,7 @@ the introduction of this chapter.</p></blockquote>
   
 
   <script>
-    document.getElementById('react-root-17adfe8595c229281a2689fc48c0e7e2').srcdoc = `
+    document.getElementById('react-root-e77f26b92cf0c86cdfe5541b77686264').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3062,7 +3127,7 @@ it</strong> moment, so it might help you as well.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-1c78bc92229cc61c42369dcbd32fae1b"
+    id="react-root-6e0d49cd3284c4d68246e51fd1a7dafc"
     width="100%"
     height="300px"
     class="frame"
@@ -3071,7 +3136,7 @@ it</strong> moment, so it might help you as well.</p>
   
 
   <script>
-    document.getElementById('react-root-1c78bc92229cc61c42369dcbd32fae1b').srcdoc = `
+    document.getElementById('react-root-6e0d49cd3284c4d68246e51fd1a7dafc').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3409,7 +3474,7 @@ inside the WebAssembly module.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-8ceab4be1eb90188ca2a40585a5d7c4a"
+    id="react-root-78c0bd941c9f8a1a15c25e02b2b3ad0c"
     width="100%"
     height="360px"
     class="frame"
@@ -3418,7 +3483,7 @@ inside the WebAssembly module.</p>
   
 
   <script>
-    document.getElementById('react-root-8ceab4be1eb90188ca2a40585a5d7c4a').srcdoc = `
+    document.getElementById('react-root-78c0bd941c9f8a1a15c25e02b2b3ad0c').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3518,7 +3583,7 @@ better bindings.</p>
 
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-dc80c2d099449354a3322183e3c99419"
+id="react-root-8702eb5071f3ef79527b70b82f537e0f"
 width="225px"
 height="285px"
 class="frame"
@@ -3527,7 +3592,7 @@ class="frame"
 Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-dc80c2d099449354a3322183e3c99419').srcdoc = `
+document.getElementById('react-root-8702eb5071f3ef79527b70b82f537e0f').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -3557,7 +3622,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-dc80c2d099449354a3322183e3c99419"
+    id="react-root-8702eb5071f3ef79527b70b82f537e0f"
     width="225px"
     height="285px"
     class="frame"
@@ -3570,7 +3635,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
   
 
   <script>
-    document.getElementById('react-root-dc80c2d099449354a3322183e3c99419').srcdoc = `
+    document.getElementById('react-root-8702eb5071f3ef79527b70b82f537e0f').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
