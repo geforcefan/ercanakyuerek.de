@@ -41,7 +41,7 @@ direction** without any extra work.
 > **Note:** Do not worry about the `activeAcceleration` parameter,
 > which seems to come from nowhere. This is just us preparing for
 > later chapters, when we introduce actual roller coaster sections
-> that actively add or remove acceleration, for example launch or
+> that actively add or remove acceleration, for example, launch or
 > brake sections. It is not used yet and is always zero for now.
 
 # Interactive demo
