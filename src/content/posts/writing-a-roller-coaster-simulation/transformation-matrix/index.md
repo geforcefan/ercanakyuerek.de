@@ -4,6 +4,14 @@ date: 2025-12-21T13:30:00+01:00
 math: true
 tags: ['writing a roller coaster simulation']
 ---
+
+---
+
+title: 'Transformation Matrix' date: 2025-12-21T13:30:00+01:00 math:
+true tags: ['writing a roller coaster simulation']
+
+---
+
 Right now, when we want to know the **position** and **forward
 direction** along a curve, we ask two separate functions. This works,
 but having two separate functions for the same **node** on the track
@@ -37,6 +45,33 @@ For a linear track segment, this is straightforward. We compute the
 orientation, we let **THREE.js** build a matrix that `lookAt`s from
 one control point to the other. This gives us a correct **forward
 direction** without any extra work.
+
+> **Note:** At this stage, we only need a valid **forward direction**.
+> There is no need to complicate things with **roll**, so we ignore it
+> for now.
+
+{{< repository-code file="src/maths/linear.ts" type="variable" name="transformationAtArcLength" >}}
+
+With this change, we also need to adjust `evaluateMotion`. Instead of
+receiving a **forward direction** vector, it now receives a
+**transformation matrix**. We then extract the **forward direction**
+from that transformation.
+
+This is very straightforward. Here is a small helper to extract the
+**forward direction** from a **transformation matrix**:
+
+{{< repository-code file="src/maths/matrix4.ts" type="variable" name="toForwardDirection" >}}
+
+Now we use this helper to extract the **forward direction**:
+
+```ts
+const forwardDirection = toForwardDirection(transformation);
+```
+
+With that in place, the full updated `evaluateMotion` function looks
+like this:
+
+{{< repository-code file="src/helper/physics.ts" type="variable" name="evaluateMotion" >}}
 
 > **Note:** Do not worry about the `activeAcceleration` parameter,
 > which seems to come from nowhere. This is just us preparing for
