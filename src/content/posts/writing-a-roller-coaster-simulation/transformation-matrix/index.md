@@ -4,14 +4,6 @@ date: 2025-12-21T13:30:00+01:00
 math: true
 tags: ['writing a roller coaster simulation']
 ---
-
----
-
-title: 'Transformation Matrix' date: 2025-12-21T13:30:00+01:00 math:
-true tags: ['writing a roller coaster simulation']
-
----
-
 Right now, when we want to know the **position** and **forward
 direction** along a curve, we ask two separate functions. This works,
 but having two separate functions for the same **node** on the track
