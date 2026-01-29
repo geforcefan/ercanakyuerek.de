@@ -82,10 +82,6 @@ track.
 
 # What comes next?
 
-These changes are mostly structural. Visually, nothing changes yet.
-Under the hood, however, the simulation now works entirely with
-**transformation matrices**, which will make later changes easier.
-
 [In the next
 chapter]({{< ref "/posts/writing-a-roller-coaster-simulation/curve-nodes.md" >}}),
 we move away from linear segments and introduce a more general way to
