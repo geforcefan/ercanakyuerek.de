@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
 import { find } from 'lodash';
 import { MathUtils, Matrix4 } from 'three';
@@ -16,6 +17,7 @@ export const useMotionSimulation = (
   curve: Curve,
   options: {
     init?: Parameters<typeof useSimulationStateControls>[0];
+    maxDeltaTime?: number;
     resetWhenReachedLimit?: boolean;
     sections?: Array<{
       acceleration: number;
@@ -29,6 +31,7 @@ export const useMotionSimulation = (
   const {
     init = {},
     resetWhenReachedLimit = true,
+    maxDeltaTime = 0.08,
     sections = [],
   } = options;
   const [matrix, setMatrix] = useState(new Matrix4());
@@ -60,19 +63,14 @@ export const useMotionSimulation = (
     acceleration: 0,
   });
 
-  useEffect(() => {
-    let timeoutId: number;
-    let lastTime = performance.now();
+  useFrame((_, deltaTime) => {
+    if (!deltaTime || deltaTime > 1) return;
 
-    const tick = () => {
-      const now = performance.now();
-      const deltaTime = (now - lastTime) / 1000;
-      lastTime = now;
+    let deltaLeft = deltaTime;
 
-      if (deltaTime > 0.032 || !deltaTime) {
-        timeoutId = window.setTimeout(tick);
-        return;
-      }
+    while (deltaLeft > 0) {
+      const accumulatorDeltaTime = Math.min(maxDeltaTime, deltaLeft);
+      deltaLeft -= maxDeltaTime;
 
       if (
         resetWhenReachedLimit &&
@@ -94,19 +92,20 @@ export const useMotionSimulation = (
             simulationState.current.distanceTraveled <= s.toArcLength,
         );
 
-        let acceleration = 0;
+        let activeAcceleration = 0;
+
         if (
           section &&
           section.maxVelocity !== undefined &&
           simulationState.current.velocity < section.maxVelocity
         )
-          acceleration = section.acceleration;
+          activeAcceleration = section.acceleration;
         if (
           section &&
           section.minVelocity !== undefined &&
           simulationState.current.velocity > section.minVelocity
         )
-          acceleration = section.acceleration;
+          activeAcceleration = section.acceleration;
 
         simulationState.current = evaluateMotion(
           simulationState.current,
@@ -114,11 +113,11 @@ export const useMotionSimulation = (
             curve,
             simulationState.current.distanceTraveled,
           ),
-          acceleration,
+          activeAcceleration,
           friction,
           airResistance,
           gravity,
-          deltaTime * simulationSpeed,
+          accumulatorDeltaTime * simulationSpeed,
         );
 
         const arcLength = totalArcLength(curve);
@@ -140,26 +139,8 @@ export const useMotionSimulation = (
           ),
         ),
       );
-
-      timeoutId = window.setTimeout(tick);
-    };
-
-    tick();
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [
-    curve,
-    simulationSpeed,
-    gravity,
-    airResistance,
-    friction,
-    resetWhenReachedLimit,
-    sections,
-    init?.distanceTraveled,
-    init?.velocity,
-  ]);
+    }
+  });
 
   return matrix;
 };

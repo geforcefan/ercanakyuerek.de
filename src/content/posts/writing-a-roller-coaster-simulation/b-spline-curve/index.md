@@ -4,7 +4,8 @@ date: 2026-01-18T14:30:00+01:00
 math: true
 tags: ['writing a roller coaster simulation']
 ---------------------------------------------
-## Why another curve type?
+
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/b-spline-curve/BSplineClampedExampleScene.tsx" class="float-right" width="225px" height="285px" description="An interactive example of a clamped uniform rational B-spline curve, drag the controls around to see changes in shape" >}}
 
 So far, we mostly used **Bézier curves**. They are easy to understand,
 easy to code, and good enough to get something moving on screen. The
@@ -58,6 +59,8 @@ This behavior is intentional. Clamping a B-spline relaxes some
 continuity guarantees, and continuity is one of the main reasons to
 use B-splines in the first place. The default behavior is not a
 mistake.
+
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/b-spline-curve/BSplineBoundaryExampleScene.tsx" width="100%" height="385px" >}}
 
 ## Cubic uniform rational B-spline evaluation
 
