@@ -9,7 +9,7 @@ import {
   lerp,
   parallelTransportTransformation,
   rollDirection,
-  toFrontDirection,
+  toForwardDirection,
   toPosition,
 } from './matrix4';
 
@@ -213,19 +213,19 @@ export const toLocalTransformed = (
       curve.nodes[index].transformation,
     );
 
-    const front = toFrontDirection(node.transformation);
+    const forward = toForwardDirection(node.transformation);
     const left = originalRollDirection
       .sub(
-        front
+        forward
           .clone()
-          .multiplyScalar(originalRollDirection.dot(front)),
+          .multiplyScalar(originalRollDirection.dot(forward)),
       )
       .normalize();
 
-    const up = new Vector3().crossVectors(front, left).normalize();
+    const up = new Vector3().crossVectors(forward, left).normalize();
 
     node.transformation = new Matrix4()
-      .makeBasis(left, up, front)
+      .makeBasis(left, up, forward)
       .setPosition(position);
   });
 

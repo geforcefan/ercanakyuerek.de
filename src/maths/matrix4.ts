@@ -43,7 +43,7 @@ export const toLeftDirection = (m: Matrix4) => {
   ).normalize();
 };
 
-export const toFrontDirection = (m: Matrix4) => {
+export const toForwardDirection = (m: Matrix4) => {
   return new Vector3(
     m.elements[8],
     m.elements[9],
@@ -92,11 +92,11 @@ export const parallelTransportTransformation = (
 };
 
 export const rollDirection = (m: Matrix4) => {
-  const front = toFrontDirection(m);
+  const forward = toForwardDirection(m);
   const left = toLeftDirection(m);
 
   return left
-    .sub(front.clone().multiplyScalar(left.dot(front)))
+    .sub(forward.clone().multiplyScalar(left.dot(forward)))
     .normalize();
 };
 

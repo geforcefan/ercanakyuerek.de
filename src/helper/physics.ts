@@ -1,6 +1,6 @@
 import { Matrix4, Vector3 } from 'three';
 
-import { toFrontDirection } from '../maths/matrix4';
+import { toForwardDirection } from '../maths/matrix4';
 
 export type SimulationState = {
   velocity: number;
@@ -17,7 +17,7 @@ export const evaluateMotion = (
   gravity: number,
   deltaTime: number,
 ): SimulationState => {
-  const forwardDirection = toFrontDirection(transformation);
+  const forwardDirection = toForwardDirection(transformation);
   const velocityDirection = state.velocity < 0 ? -1 : 1;
 
   let energyLoss = airResistance * state.velocity * state.velocity;

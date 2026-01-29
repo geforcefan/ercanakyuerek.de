@@ -4,7 +4,6 @@ date: 2025-12-21T13:30:00+01:00
 math: true
 tags: ['writing a roller coaster simulation']
 ---
-
 Right now, when we want to know the **position** and **forward
 direction** along a curve, we ask two separate functions. This works,
 but having two separate functions for the same **node** on the track
@@ -23,7 +22,7 @@ matrix** at a distance along the curve and extract whatever
 information we need from it.
 
 For that reason, we make a small but important change. From now on, we
-work with **tranformation matrices** and remove those two functions
+work with **transformation matrices** and remove those two functions
 entirely.
 
 If it helps, it is worth rereading the chapter on [linear roller
@@ -39,42 +38,22 @@ orientation, we let **THREE.js** build a matrix that `lookAt`s from
 one control point to the other. This gives us a correct **forward
 direction** without any extra work.
 
-> **Note:** At this stage, we only need a valid **forward direction**.
-> There is no need to complicate things with **roll**, so we ignore it
-> for now.
+> **Note:** Do not worry about the `activeAcceleration` parameter,
+> which seems to come from nowhere. This is just us preparing for
+> later chapters, when we introduce actual roller coaster sections
+> that actively add or remove acceleration, for example launch or
+> brake sections. It is not used yet and is always zero for now.
 
-{{< repository-code file="src/maths/linear.ts" type="variable" name="transformationAtArcLength" >}}
+# Interactive demo
 
-With this change, we also need to adjust `evaluateMotion`. Instead of
-receiving a **forward direction** vector, it now receives a
-**transformation matrix**. We then extract the **forward direction**
-from that transformation.
+The demo shows the same train motion as before. What changes is how
+**position** and **forward direction** are obtained internally: both
+now come from a single **transformation matrix** evaluated along the
+track.
 
-This is very straightforward. Here is a small helper to extract the
-**forward direction** from a **transformation matrix**:
+{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/transformation-matrix/TransformationMatrixDemoScene.tsx" width="100%" height="480px" >}}
 
-{{< repository-code file="src/maths/matrix4.ts" type="variable" name="toFrontDirection" >}}
-
-Now we use this helper to extract the **forward direction**:
-
-```ts
-const forwardDirection = toFrontDirection(transformation);
-```
-
-With that in place, the full updated `evaluateMotion` function looks
-like this:
-
-{{< repository-code file="src/helper/physics.ts" type="variable" name="evaluateMotion" >}}
-
-## Interactive demo and code
-
-There is no visible difference in the demo. The train behaves exactly
-as before. The only change is that the simulation now uses
-`transformationAtArcLength` internally.
-
-{{< embedded-content-component path="./posts/writing-a-roller-coaster-simulation/transformation-matrix/TransformationMatrixDemoScene.tsx" width="100%" height="480px">}}
-
-## What comes next?
+# What comes next?
 
 These changes are mostly structural. Visually, nothing changes yet.
 Under the hood, however, the simulation now works entirely with
