@@ -1,12 +1,13 @@
 /* Must be loaded before everything else */
 @import "normalize";
+@import "variables";
 @import "prism";
 /* Main stuff */
-@import "variables";
 @import "mixins";
 
 @import "fonts";
 @include inter-fonts("../fonts");
+@include jetbrains-mono-fonts("../fonts");
 
 @import "buttons";
 /* Modules */
