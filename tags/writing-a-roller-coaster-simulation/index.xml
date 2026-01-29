@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Writing a Roller Coaster Simulation on Ercan Akyürek</title><link>https://ercanakyuerek.de/tags/writing-a-roller-coaster-simulation/</link><description>Recent content in Writing a Roller Coaster Simulation on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Sun, 18 Jan 2026 14:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/tags/writing-a-roller-coaster-simulation/index.xml" rel="self" type="application/rss+xml"/><item><title>Uniform Rational B-Spline curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</link><pubDate>Sun, 18 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</guid><description>&lt;hr&gt;
-&lt;h2 id="why-another-curve-type"&gt;Why another curve type?&lt;/h2&gt;
+ 
+
+&lt;div class="embedded float-right"&gt;
+ &lt;iframe
+ id="react-root-d504c707792902c61d8135848fd7137f"
+ width="225px"
+ height="285px"
+ class="frame"
+ &gt;&lt;/iframe&gt;
+
+ 
+ &lt;div class="description" style="width: 225px"&gt;
+ An interactive example of a clamped uniform rational B-spline curve, drag the controls around to see changes in shape
+ &lt;/div&gt;
+ 
+
+ &lt;script&gt;
+ document.getElementById('react-root-d504c707792902c61d8135848fd7137f').srcdoc = `
+ &lt;!DOCTYPE html&gt;
+ &lt;html lang="en" data-theme="dark"&gt;
+ &lt;head&gt;
+ &lt;base href="${location.origin}/"&gt;
+ &lt;/head&gt;
+ &lt;body class="content-component"&gt;
+ &lt;div id="root" class="full-screen"&gt;&lt;/div&gt;
+ \x3Cscript type="module"&gt;
+ import { renderContentComponentByPath } from '/scripts/render-content-component.js';
+ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/b-spline-curve\/BSplineClampedExampleScene.tsx');
+ &lt;\/script&gt;
+ &lt;/body&gt;
+ &lt;/html&gt;
+ `;
+ &lt;/script&gt;
+&lt;/div&gt;
+
 &lt;p&gt;So far, we mostly used &lt;strong&gt;Bézier curves&lt;/strong&gt;. They are easy to understand,
 easy to code, and good enough to get something moving on screen. The
 problem is &lt;strong&gt;continuity&lt;/strong&gt;. When we connect multiple Bézier segments,
-it is hard to keep everything smooth.&lt;/p&gt;
-&lt;p&gt;For a roller coaster track, we want position, direction, and curvature
-to change smoothly along the whole track. In practice, this usually
-means &lt;strong&gt;C2 continuity&lt;/strong&gt;: the position, first derivative, and second
-derivative are continuous.&lt;/p&gt;</description></item><item><title>Curve orientation</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/</link><pubDate>Sun, 04 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/</guid><description>&lt;p&gt;In earlier chapters, we already computed basic orientations along the
+it is hard to keep everything smooth.&lt;/p&gt;</description></item><item><title>Curve orientation</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/</link><pubDate>Sun, 04 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/curve-orientation/</guid><description>&lt;p&gt;In earlier chapters, we already computed basic orientations along the
 track, and for a while that worked reasonably well. The trouble starts
 when we rely too much on a simple &lt;code&gt;lookAt&lt;/code&gt; from &lt;strong&gt;THREE.js&lt;/strong&gt; together
 with a &lt;strong&gt;fixed-up direction&lt;/strong&gt;.&lt;/p&gt;
@@ -18,7 +48,7 @@ this has always been &lt;code&gt;Vector3(0, 1, 0)&lt;/code&gt;. This is fine for
 slopes&lt;/strong&gt;, but it starts to fall apart when the track approaches angles
 close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-21d60163f00f442624729386c7db5682"
+ id="react-root-7c22839ffa8224704e52b7e7c3f005d1"
  width="225px"
  height="285px"
  class="frame"
@@ -31,7 +61,7 @@ close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item>
  
 
  &lt;script&gt;
- document.getElementById('react-root-21d60163f00f442624729386c7db5682').srcdoc = `
+ document.getElementById('react-root-7c22839ffa8224704e52b7e7c3f005d1').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;

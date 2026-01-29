@@ -1,14 +1,71 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 18 Jan 2026 14:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Uniform Rational B-Spline curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</link><pubDate>Sun, 18 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</guid><description>&lt;hr&gt;
-&lt;h2 id="why-another-curve-type"&gt;Why another curve type?&lt;/h2&gt;
+&lt;div class="embedded float-right"&gt;
+&lt;iframe
+id="react-root-d504c707792902c61d8135848fd7137f"
+width="225px"
+height="285px"
+class="frame"
+&gt;&lt;/iframe&gt;
+&lt;div class="description" style="width: 225px"&gt;
+An interactive example of a clamped uniform rational B-spline curve, drag the controls around to see changes in shape
+&lt;/div&gt;
+&lt;script&gt;
+document.getElementById('react-root-d504c707792902c61d8135848fd7137f').srcdoc = `
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en" data-theme="dark"&gt;
+&lt;head&gt;
+&lt;base href="${location.origin}/"&gt;
+&lt;/head&gt;
+&lt;body class="content-component"&gt;
+&lt;div id="root" class="full-screen"&gt;&lt;/div&gt;
+\x3Cscript type="module"&gt;
+import { renderContentComponentByPath } from '/scripts/render-content-component.js';
+renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/b-spline-curve\/BSplineClampedExampleScene.tsx');
+&lt;\/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+`;
+&lt;/script&gt;
+&lt;/div&gt;
 &lt;p&gt;So far, we mostly used &lt;strong&gt;Bézier curves&lt;/strong&gt;. They are easy to understand,
 easy to code, and good enough to get something moving on screen. The
 problem is &lt;strong&gt;continuity&lt;/strong&gt;. When we connect multiple Bézier segments,
-it is hard to keep everything smooth.&lt;/p&gt;
-&lt;p&gt;For a roller coaster track, we want position, direction, and curvature
-to change smoothly along the whole track. In practice, this usually
-means &lt;strong&gt;C2 continuity&lt;/strong&gt;: the position, first derivative, and second
-derivative are continuous.&lt;/p&gt;</description><content type="html"><![CDATA[<hr>
-<h2 id="why-another-curve-type">Why another curve type?</h2>
+it is hard to keep everything smooth.&lt;/p&gt;</description><content type="html"><![CDATA[<hr>
+      
+
+<div class="embedded float-right">
+  <iframe
+    id="react-root-d504c707792902c61d8135848fd7137f"
+    width="225px"
+    height="285px"
+    class="frame"
+  ></iframe>
+
+  
+  <div class="description" style="width: 225px">
+    An interactive example of a clamped uniform rational B-spline curve, drag the controls around to see changes in shape
+  </div>
+  
+
+  <script>
+    document.getElementById('react-root-d504c707792902c61d8135848fd7137f').srcdoc = `
+    <!DOCTYPE html>
+    <html lang="en" data-theme="dark">
+      <head>
+          <base href="${location.origin}/">
+      </head>
+        <body class="content-component">
+        <div id="root" class="full-screen"></div>
+        \x3Cscript type="module">
+          import { renderContentComponentByPath } from '/scripts/render-content-component.js';
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/b-spline-curve\/BSplineClampedExampleScene.tsx');
+        <\/script>
+      </body>
+    </html>
+  `;
+  </script>
+</div>
+
 <p>So far, we mostly used <strong>Bézier curves</strong>. They are easy to understand,
 easy to code, and good enough to get something moving on screen. The
 problem is <strong>continuity</strong>. When we connect multiple Bézier segments,
@@ -50,6 +107,37 @@ approaches them while keeping continuity across segments.</p>
 continuity guarantees, and continuity is one of the main reasons to
 use B-splines in the first place. The default behavior is not a
 mistake.</p>
+      
+
+<div class="embedded ">
+  <iframe
+    id="react-root-79c3df2b95bbfbad0809fe505a18af77"
+    width="100%"
+    height="385px"
+    class="frame"
+  ></iframe>
+
+  
+
+  <script>
+    document.getElementById('react-root-79c3df2b95bbfbad0809fe505a18af77').srcdoc = `
+    <!DOCTYPE html>
+    <html lang="en" data-theme="dark">
+      <head>
+          <base href="${location.origin}/">
+      </head>
+        <body class="content-component">
+        <div id="root" class="full-screen"></div>
+        \x3Cscript type="module">
+          import { renderContentComponentByPath } from '/scripts/render-content-component.js';
+          renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulation\/b-spline-curve\/BSplineBoundaryExampleScene.tsx');
+        <\/script>
+      </body>
+    </html>
+  `;
+  </script>
+</div>
+
 <h2 id="cubic-uniform-rational-b-spline-evaluation">Cubic uniform rational B-spline evaluation</h2>
 <p>Each curve segment is evaluated from <strong>four control points</strong>. This is
 similar to a cubic Bézier curve, but the basis functions are
@@ -180,7 +268,7 @@ are moved.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-ebc99cd5fa1b80e96c6dae62d5b34d5f"
+    id="react-root-b3a3a04acf3c7f80aac1f93abe8d7f46"
     width="100%"
     height="580px"
     class="frame"
@@ -189,7 +277,7 @@ are moved.</p>
   
 
   <script>
-    document.getElementById('react-root-ebc99cd5fa1b80e96c6dae62d5b34d5f').srcdoc = `
+    document.getElementById('react-root-b3a3a04acf3c7f80aac1f93abe8d7f46').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -299,7 +387,7 @@ showing the current state of the simulation running in real time.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-aaf4887a7e7f040575355a4843daa4bb"
+    id="react-root-b316ace6ff300babdc18e6bd4413eb50"
     width="100%"
     height="650px"
     class="frame"
@@ -312,7 +400,7 @@ showing the current state of the simulation running in real time.</p>
   
 
   <script>
-    document.getElementById('react-root-aaf4887a7e7f040575355a4843daa4bb').srcdoc = `
+    document.getElementById('react-root-b316ace6ff300babdc18e6bd4413eb50').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -475,7 +563,7 @@ previous node</strong>. This helps visualize the problem.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-b1e7d50b3c0f98addfe4d67cff97f09f"
+    id="react-root-17ae78904296096df4722b66dd687a6e"
     width="100%"
     height="700px"
     class="frame"
@@ -488,7 +576,7 @@ previous node</strong>. This helps visualize the problem.</p>
   
 
   <script>
-    document.getElementById('react-root-b1e7d50b3c0f98addfe4d67cff97f09f').srcdoc = `
+    document.getElementById('react-root-17ae78904296096df4722b66dd687a6e').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -708,7 +796,7 @@ near <strong>90 degree slopes</strong>.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-519f8baeba58940c8521dbfbef6a8a24"
+    id="react-root-4ed358c5b91eaa4a6672897032dc0160"
     width="100%"
     height="650px"
     class="frame"
@@ -717,7 +805,7 @@ near <strong>90 degree slopes</strong>.</p>
   
 
   <script>
-    document.getElementById('react-root-519f8baeba58940c8521dbfbef6a8a24').srcdoc = `
+    document.getElementById('react-root-4ed358c5b91eaa4a6672897032dc0160').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -807,7 +895,7 @@ is <strong>perfect</strong> and covers almost everything you need to understand
 
 ]]></content></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-21d60163f00f442624729386c7db5682"
+id="react-root-7c22839ffa8224704e52b7e7c3f005d1"
 width="225px"
 height="285px"
 class="frame"
@@ -816,7 +904,7 @@ class="frame"
 An interactive example of a Bézier curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-21d60163f00f442624729386c7db5682').srcdoc = `
+document.getElementById('react-root-7c22839ffa8224704e52b7e7c3f005d1').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -843,7 +931,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-21d60163f00f442624729386c7db5682"
+    id="react-root-7c22839ffa8224704e52b7e7c3f005d1"
     width="225px"
     height="285px"
     class="frame"
@@ -856,7 +944,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
   
 
   <script>
-    document.getElementById('react-root-21d60163f00f442624729386c7db5682').srcdoc = `
+    document.getElementById('react-root-7c22839ffa8224704e52b7e7c3f005d1').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -896,7 +984,7 @@ spoil the ending a bit:</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-a35238f0f844d611c14a069aee55c6ea"
+    id="react-root-fdf26209bff6292fea272b6c48d8cc45"
     width="100%"
     height="480px"
     class="frame"
@@ -905,7 +993,7 @@ spoil the ending a bit:</p>
   
 
   <script>
-    document.getElementById('react-root-a35238f0f844d611c14a069aee55c6ea').srcdoc = `
+    document.getElementById('react-root-fdf26209bff6292fea272b6c48d8cc45').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -959,7 +1047,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-2b4109936422d99d04817eb519db3c6b"
+    id="react-root-e7c889914fb88a50f03e050d284fa36a"
     width="355px"
     height="560px"
     class="frame"
@@ -972,7 +1060,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
   
 
   <script>
-    document.getElementById('react-root-2b4109936422d99d04817eb519db3c6b').srcdoc = `
+    document.getElementById('react-root-e7c889914fb88a50f03e050d284fa36a').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1073,7 +1161,7 @@ We do not need perfect precision here, so we need to find a reasonable
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-e49ede3a5970986e837b8d3e22b54d5c"
+    id="react-root-60f62cf798332ca56e6515f73d20ddb6"
     width="355px"
     height="485px"
     class="frame"
@@ -1086,7 +1174,7 @@ We do not need perfect precision here, so we need to find a reasonable
   
 
   <script>
-    document.getElementById('react-root-e49ede3a5970986e837b8d3e22b54d5c').srcdoc = `
+    document.getElementById('react-root-60f62cf798332ca56e6515f73d20ddb6').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1343,7 +1431,7 @@ to see what happens when the requested distance overshoots a segment.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-d4aebd246f6523133be2440ec6a0c40c"
+    id="react-root-2d13c5ae44cdf780edfc5beb4c02a3d4"
     width="100%"
     height="260px"
     class="frame"
@@ -1356,7 +1444,7 @@ to see what happens when the requested distance overshoots a segment.</p>
   
 
   <script>
-    document.getElementById('react-root-d4aebd246f6523133be2440ec6a0c40c').srcdoc = `
+    document.getElementById('react-root-2d13c5ae44cdf780edfc5beb4c02a3d4').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1704,7 +1792,7 @@ demonstrate the idea.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-9d718df07461854f4e282c634367a628"
+    id="react-root-564f31eb2c4784566ef56b30f144e8d3"
     width="100%"
     height="380px"
     class="frame"
@@ -1717,7 +1805,7 @@ demonstrate the idea.</p>
   
 
   <script>
-    document.getElementById('react-root-9d718df07461854f4e282c634367a628').srcdoc = `
+    document.getElementById('react-root-564f31eb2c4784566ef56b30f144e8d3').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1919,7 +2007,7 @@ track.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-b016367eef4cca1f6b2ac91736091259"
+    id="react-root-4d4b523906d4f4008d042574c0b6a6e1"
     width="100%"
     height="480px"
     class="frame"
@@ -1928,7 +2016,7 @@ track.</p>
   
 
   <script>
-    document.getElementById('react-root-b016367eef4cca1f6b2ac91736091259').srcdoc = `
+    document.getElementById('react-root-4d4b523906d4f4008d042574c0b6a6e1').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2192,7 +2280,7 @@ shape and see how both trains react differently.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-f7f455d6d795decf5e11cd983231e4ca"
+    id="react-root-62be513082bdd50917270dc12a0c6936"
     width="100%"
     height="460px"
     class="frame"
@@ -2201,7 +2289,7 @@ shape and see how both trains react differently.</p>
   
 
   <script>
-    document.getElementById('react-root-f7f455d6d795decf5e11cd983231e4ca').srcdoc = `
+    document.getElementById('react-root-62be513082bdd50917270dc12a0c6936').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2571,7 +2659,7 @@ time. On the side, a small panel displays the live simulation state.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-4bb8d91a71988b767154e60fa1b3b9d9"
+    id="react-root-4f048d2844c9321da1dc3bcd1fca7af4"
     width="100%"
     height="360px"
     class="frame"
@@ -2580,7 +2668,7 @@ time. On the side, a small panel displays the live simulation state.</p>
   
 
   <script>
-    document.getElementById('react-root-4bb8d91a71988b767154e60fa1b3b9d9').srcdoc = `
+    document.getElementById('react-root-4f048d2844c9321da1dc3bcd1fca7af4').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2846,7 +2934,7 @@ the introduction of this chapter.</p></blockquote>
 
 <div class="embedded ">
   <iframe
-    id="react-root-c6e4e9ea60787046b277821669880bb9"
+    id="react-root-1ecad3a24720447463f3047093671e1b"
     width="100%"
     height="360px"
     class="frame"
@@ -2855,7 +2943,7 @@ the introduction of this chapter.</p></blockquote>
   
 
   <script>
-    document.getElementById('react-root-c6e4e9ea60787046b277821669880bb9').srcdoc = `
+    document.getElementById('react-root-1ecad3a24720447463f3047093671e1b').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3124,7 +3212,7 @@ it</strong> moment, so it might help you as well.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-222698988d4695bdf3b0e25d68654b8e"
+    id="react-root-d595931a05cca85fbf8b82822ae9d648"
     width="100%"
     height="300px"
     class="frame"
@@ -3133,7 +3221,7 @@ it</strong> moment, so it might help you as well.</p>
   
 
   <script>
-    document.getElementById('react-root-222698988d4695bdf3b0e25d68654b8e').srcdoc = `
+    document.getElementById('react-root-d595931a05cca85fbf8b82822ae9d648').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3471,7 +3559,7 @@ inside the WebAssembly module.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-0e9e2f7281a166b6be62cc4d235906c4"
+    id="react-root-c0c91425f6a2d323c8d9b5df99c0e4c6"
     width="100%"
     height="360px"
     class="frame"
@@ -3480,7 +3568,7 @@ inside the WebAssembly module.</p>
   
 
   <script>
-    document.getElementById('react-root-0e9e2f7281a166b6be62cc4d235906c4').srcdoc = `
+    document.getElementById('react-root-c0c91425f6a2d323c8d9b5df99c0e4c6').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3580,7 +3668,7 @@ better bindings.</p>
 
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-95730cc4f4ed080bc21130aaf5543160"
+id="react-root-83b2404ee71e4ff423794ab3ae19d68a"
 width="225px"
 height="285px"
 class="frame"
@@ -3589,7 +3677,7 @@ class="frame"
 Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-95730cc4f4ed080bc21130aaf5543160').srcdoc = `
+document.getElementById('react-root-83b2404ee71e4ff423794ab3ae19d68a').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -3619,7 +3707,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-95730cc4f4ed080bc21130aaf5543160"
+    id="react-root-83b2404ee71e4ff423794ab3ae19d68a"
     width="225px"
     height="285px"
     class="frame"
@@ -3632,7 +3720,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
   
 
   <script>
-    document.getElementById('react-root-95730cc4f4ed080bc21130aaf5543160').srcdoc = `
+    document.getElementById('react-root-83b2404ee71e4ff423794ab3ae19d68a').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
