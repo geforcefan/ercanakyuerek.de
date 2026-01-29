@@ -106,7 +106,7 @@ pre[class*='language-'] {
 .token.property,
 .token.constant,
 .token.variable {
-  color: #9876aa;
+  color: $token-constant-color;
 }
 
 .token.string,
