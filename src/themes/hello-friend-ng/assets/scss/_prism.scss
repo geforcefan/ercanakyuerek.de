@@ -9,7 +9,8 @@
  */
 
 code[class*='language-'],
-pre[class*='language-'] {
+pre[class*='language-'],
+span[class*='language-'] {
   color: rgb(188, 190, 195);
   font-family: 'JetBrains Mono', Consolas, Monaco, 'Andale Mono',
     monospace;
@@ -91,7 +92,6 @@ pre[class*='language-'] {
 }
 
 .token.tag,
-.token.tag .punctuation,
 .token.doctype,
 .token.builtin {
   color: $token-color;
