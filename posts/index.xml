@@ -1,7 +1,6 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 18 Jan 2026 14:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Uniform Rational B-Spline curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</link><pubDate>Sun, 18 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</guid><description>&lt;hr&gt;
-&lt;div class="embedded float-right"&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 18 Jan 2026 14:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Uniform Rational B-Spline curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</link><pubDate>Sun, 18 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-922721f11d1823653bd82ca6b7d9c46d"
+id="react-root-5869a150469770b3652bc5d887b7951b"
 width="225px"
 height="285px"
 class="frame"
@@ -10,7 +9,7 @@ class="frame"
 An interactive example of a clamped uniform rational B-spline curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-922721f11d1823653bd82ca6b7d9c46d').srcdoc = `
+document.getElementById('react-root-5869a150469770b3652bc5d887b7951b').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -30,12 +29,11 @@ renderContentComponentByPath('root', '.\/posts\/writing-a-roller-coaster-simulat
 &lt;p&gt;So far, we mostly used &lt;strong&gt;Bézier curves&lt;/strong&gt;. They are easy to understand,
 easy to code, and good enough to get something moving on screen. The
 problem is &lt;strong&gt;continuity&lt;/strong&gt;. When we connect multiple Bézier segments,
-it is hard to keep everything smooth.&lt;/p&gt;</description><content type="html"><![CDATA[<hr>
-      
+it is hard to keep everything smooth.&lt;/p&gt;</description><content type="html"><![CDATA[      
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-922721f11d1823653bd82ca6b7d9c46d"
+    id="react-root-5869a150469770b3652bc5d887b7951b"
     width="225px"
     height="285px"
     class="frame"
@@ -48,7 +46,7 @@ it is hard to keep everything smooth.&lt;/p&gt;</description><content type="html
   
 
   <script>
-    document.getElementById('react-root-922721f11d1823653bd82ca6b7d9c46d').srcdoc = `
+    document.getElementById('react-root-5869a150469770b3652bc5d887b7951b').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -80,10 +78,12 @@ control points across segments. That is simply very difficult to do.</p>
 curve segments that blend smoothly into each other, and it is <strong>C2
 continuous</strong> across segment boundaries by design. Smoothness is built
 in, instead of being enforced by hand.</p>
-<p>In this chapter, we keep things deliberately simple. We do <strong>not</strong>
-start with full <strong>NURBS</strong>, because that would require dealing with
-knot vectors right away. Instead, we focus on a minimal and practical
-variant: <strong>uniform rational B-splines</strong>.</p>
+<p>In this chapter, we keep things simple. We do <strong>not</strong> start with full
+<strong>NURBS</strong>, because that would mean dealing with knot vectors right
+away. Instead, we focus on a small and practical variant: <strong>uniform
+rational B-splines</strong>.</p>
+<p>We will probably never go fully into NURBS in this series. Maybe we
+will. Maybe we will not. We will see.</p>
 <h2 id="rational-means-weighted">Rational means weighted</h2>
 <p>The <strong>rational</strong> part means that each control point has a <strong>weight</strong>.
 Instead of using <code>Vector3</code>, we use <code>Vector4</code>, where the <code>w</code> component
@@ -95,23 +95,18 @@ lower weight lets the curve stay farther away.</p>
 them when we need more control.</p>
 <blockquote>
 <p><strong>More control</strong>, without digging too deep into math, means that
-some shapes <strong>cannot</strong> be represented with a B-spline alone. A perfect
-<strong>circle</strong> is the classic example. There is a well-known trick where
-certain control points use a weight of \(1 / \sqrt{2}\) to produce an
-exact circle.</p></blockquote>
-<h2 id="a-first-look-an-unclamped-b-spline">A first look: an unclamped B-spline</h2>
-<p>By default, a B-spline is <strong>not clamped</strong>. The curve does not pass
-through the first or last control point. Instead, it smoothly
-approaches them while keeping continuity across segments.</p>
-<p>This behavior is intentional. Clamping a B-spline relaxes some
-continuity guarantees, and continuity is one of the main reasons to
-use B-splines in the first place. The default behavior is not a
-mistake.</p>
+some shapes <strong>cannot</strong> be represented with a B-spline alone. A
+perfect <strong>circle</strong> is the classic example. There is a well-known
+trick where certain control points use a weight of (1 / \sqrt{2}) to
+produce an exact circle.</p></blockquote>
+<h2 id="a-first-look-open-clamped-and-closed-b-splines">A first look: open, clamped, and closed B-splines</h2>
+<p>Before looking at code, we need to understand how a B-spline behaves
+at its boundaries.</p>
       
 
 <div class="embedded ">
   <iframe
-    id="react-root-2f3e95121d31ca6e59d0720fd9c655c1"
+    id="react-root-ced5e1a6716e0a17a58c0be90d7893ad"
     width="100%"
     height="385px"
     class="frame"
@@ -120,7 +115,7 @@ mistake.</p>
   
 
   <script>
-    document.getElementById('react-root-2f3e95121d31ca6e59d0720fd9c655c1').srcdoc = `
+    document.getElementById('react-root-ced5e1a6716e0a17a58c0be90d7893ad').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -138,6 +133,35 @@ mistake.</p>
   </script>
 </div>
 
+<h3 id="open-b-spline">Open B-spline</h3>
+<p>By default, a B-spline is <strong>open</strong>. The curve does <strong>not</strong> pass
+through the first or last control point. Instead, it smoothly
+approaches them while keeping <strong>C2 continuity</strong> across all segments.</p>
+<p>This is the natural behavior of a B-spline. Not touching the boundary
+control points is what allows the curve to remain smooth everywhere.
+This is not a mistake or a limitation. It is the reason B-splines are
+useful in the first place.</p>
+<h3 id="clamped-b-spline">Clamped B-spline</h3>
+<p>Sometimes we want the curve to start and end exactly at specific
+points. For example, an open roller coaster track should begin and end
+at known locations.</p>
+<p>A B-spline can be <strong>clamped</strong> using a simple trick: we repeat the
+first and last control points so they appear three times in total.
+Repeating a control point increases its influence at the boundary.
+As a result, the curve is forced to pass through the first and last
+points.</p>
+<p>This relaxes continuity only at the very ends of the curve. All
+interior segments remain smooth and <strong>C2 continuous</strong>.</p>
+<h3 id="closed-b-spline">Closed B-spline</h3>
+<p>A <strong>closed</strong> B-spline has no start or end. The curve wraps around and
+connects back to itself smoothly.</p>
+<p>Closing a B-spline uses another small trick. Control points from the
+end of the list are reused at the beginning, and control points from
+the beginning are reused at the end. This overlap ensures that the
+segments near the join see the same local neighborhood of control
+points.</p>
+<p>The result is a seamless loop with no visible seam and full continuity
+at the connection.</p>
 <h2 id="cubic-uniform-rational-b-spline-evaluation">Cubic uniform rational B-spline evaluation</h2>
 <p>Each curve segment is evaluated from <strong>four control points</strong>. This is
 similar to a cubic Bézier curve, but the basis functions are
@@ -194,20 +218,55 @@ combined weight.</p>
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
 <h2 id="building-a-curve-from-control-points">Building a curve from control points</h2>
-<p>The full curve is built by sliding a window of four control points
-along the control polygon. Each window produces one curve segment.</p>
+<p>Before building the curve segments, we first apply the boundary
+behavior described above.</p>
+<p>For a <strong>clamped</strong> curve, the first and last control points are
+duplicated so that the curve starts and ends exactly at those points:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">boundary</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;clamped&#39;</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">firstPoint</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">controlPoints</span>[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lastPoint</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">controlPoints</span>[<span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">unshift</span>(<span style="color:#a6e22e">firstPoint</span>, <span style="color:#a6e22e">firstPoint</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">lastPoint</span>, <span style="color:#a6e22e">lastPoint</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>For a <strong>closed</strong> curve, control points are overlapped so that the
+curve wraps around smoothly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">boundary</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;closed&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">4</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">unshift</span>(<span style="color:#a6e22e">controlPoints</span>[<span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">controlPoints</span>[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">controlPoints</span>[<span style="color:#ae81ff">2</span>]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Once the control point list has been prepared, the full curve is built
+by sliding a window of four control points along the control polygon.
+Each window produces one curve segment.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fromPoints</span> <span style="color:#f92672">=</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector4</span>[],
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">boundary</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;clamped&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;open&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;closed&#39;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;clamped&#39;</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolution</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
 </span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">controlPoints</span> <span style="color:#f92672">=</span> [...<span style="color:#a6e22e">points</span>];
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">curve</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">emptyCurve</span>();
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">points</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">curve</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">curve</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">points</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">p0</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">points</span>[<span style="color:#a6e22e">i</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">p1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">points</span>[<span style="color:#a6e22e">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">p2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">points</span>[<span style="color:#a6e22e">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">p3</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">points</span>[<span style="color:#a6e22e">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>];
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">boundary</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;clamped&#39;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">firstPoint</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">controlPoints</span>[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lastPoint</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">controlPoints</span>[<span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">unshift</span>(<span style="color:#a6e22e">firstPoint</span>, <span style="color:#a6e22e">firstPoint</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">lastPoint</span>, <span style="color:#a6e22e">lastPoint</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">boundary</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;closed&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">4</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">unshift</span>(<span style="color:#a6e22e">controlPoints</span>[<span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">controlPoints</span>[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">controlPoints</span>[<span style="color:#ae81ff">2</span>]);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">controlPoints</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">p0</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">controlPoints</span>[<span style="color:#a6e22e">i</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">p1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">controlPoints</span>[<span style="color:#a6e22e">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">p2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">controlPoints</span>[<span style="color:#a6e22e">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">p3</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">controlPoints</span>[<span style="color:#a6e22e">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>];
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">uniformSample</span>(
 </span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">0</span>,
@@ -225,50 +284,15 @@ along the control polygon. Each window produces one curve segment.</p>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">curve</span>;
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
-<h2 id="clamping-and-closed-tracks">Clamping and closed tracks</h2>
-<p>Here we need to be precise. What we construct is a <strong>track</strong>, not just
-a raw curve. Internally, the track uses a B-spline, but it adds extra
-logic on top. We refer to this as a <strong>B-spline track</strong>.</p>
-<p>By default, the track is not clamped. To create an <strong>open track</strong>, we
-explicitly clamp it by duplicating the first and last control points.
-This forces the track to start and end exactly at those points,
-without changing the curve evaluation.</p>
-<p>A <strong>closed track</strong> works differently. We extend the control point list
-so that the curve wraps around and the first and last segments connect
-smoothly.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fromPoints</span> <span style="color:#f92672">=</span> (
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">points</span>: <span style="color:#66d9ef">Vector4</span>[],
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">closed</span>: <span style="color:#66d9ef">boolean</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolution</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
-</span></span><span style="display:flex;"><span>) <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bSplinePoints</span>: <span style="color:#66d9ef">Vector4</span>[] <span style="color:#f92672">=</span> [...<span style="color:#a6e22e">points</span>];
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">closed</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">firstPoint</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">bSplinePoints</span>[<span style="color:#ae81ff">0</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lastPoint</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">bSplinePoints</span>[<span style="color:#a6e22e">bSplinePoints</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">bSplinePoints</span>.<span style="color:#a6e22e">unshift</span>(<span style="color:#a6e22e">firstPoint</span>, <span style="color:#a6e22e">firstPoint</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">bSplinePoints</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">lastPoint</span>, <span style="color:#a6e22e">lastPoint</span>);
-</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">closed</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">bSplinePoints</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">4</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">bSplinePoints</span>.<span style="color:#a6e22e">unshift</span>(<span style="color:#a6e22e">bSplinePoints</span>[<span style="color:#a6e22e">bSplinePoints</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">bSplinePoints</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">bSplinePoints</span>[<span style="color:#ae81ff">1</span>]);
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">bSplinePoints</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">bSplinePoints</span>[<span style="color:#ae81ff">2</span>]);
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">bSplineFromPoints</span>(<span style="color:#a6e22e">bSplinePoints</span>, <span style="color:#a6e22e">resolution</span>);
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div>
-<p>An <strong>open</strong> track is a clamped track. A <strong>closed</strong> track relies on
-control point overlap to stay smooth at the join.</p>
 <h2 id="interactive-demo">Interactive demo</h2>
 <p>Below is an interactive demo showing how <strong>uniform rational
-B-splines</strong>, <strong>weights</strong>, and <strong>clamping</strong> behave when control points
-are moved.</p>
+B-splines</strong>, <strong>weights</strong>, and <strong>boundary behavior</strong> behave when
+control points are moved.</p>
       
 
 <div class="embedded ">
   <iframe
-    id="react-root-05073636aa3f42040edd04a2b7c0fbb2"
+    id="react-root-6dd369c5283b5ec8795eade6bf7d2bca"
     width="100%"
     height="580px"
     class="frame"
@@ -277,7 +301,7 @@ are moved.</p>
   
 
   <script>
-    document.getElementById('react-root-05073636aa3f42040edd04a2b7c0fbb2').srcdoc = `
+    document.getElementById('react-root-6dd369c5283b5ec8795eade6bf7d2bca').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -321,8 +345,7 @@ multiple roll interpolation methods can come later.</p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Ground</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/Ground&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">EditorScene</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/scenes/EditorScene&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TrainWithPhysics</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../components/TrainWithPhysics&#39;</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">fromPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../coaster/b-spline-track&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">fromPoints</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;../../../../maths/b-spline&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">BSplineCurveDemoScene</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">colors</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useColors</span>();
@@ -341,7 +364,7 @@ multiple roll interpolation methods can come later.</p>
 </span></span><span style="display:flex;"><span>    () <span style="color:#f92672">=&gt;</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">fromPoints</span>(
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">points</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">p</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector4</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">y</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">z</span>)),
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">closed</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">closed</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;closed&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;clamped&#34;</span>,
 </span></span><span style="display:flex;"><span>      ),
 </span></span><span style="display:flex;"><span>    [<span style="color:#a6e22e">points</span>, <span style="color:#a6e22e">closed</span>],
 </span></span><span style="display:flex;"><span>  );
@@ -387,7 +410,7 @@ showing the current state of the simulation running in real time.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-51080ac5c5bddcda1b62c2ee27504fc0"
+    id="react-root-1b90fa6a252d696fe4dc41ac381c8e6c"
     width="100%"
     height="650px"
     class="frame"
@@ -400,7 +423,7 @@ showing the current state of the simulation running in real time.</p>
   
 
   <script>
-    document.getElementById('react-root-51080ac5c5bddcda1b62c2ee27504fc0').srcdoc = `
+    document.getElementById('react-root-1b90fa6a252d696fe4dc41ac381c8e6c').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -563,7 +586,7 @@ previous node</strong>. This helps visualize the problem.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-1d53d287c1b733fc629dc7aabb45aae3"
+    id="react-root-71de5eefc25f6ad02337922251ee5d22"
     width="100%"
     height="700px"
     class="frame"
@@ -576,7 +599,7 @@ previous node</strong>. This helps visualize the problem.</p>
   
 
   <script>
-    document.getElementById('react-root-1d53d287c1b733fc629dc7aabb45aae3').srcdoc = `
+    document.getElementById('react-root-71de5eefc25f6ad02337922251ee5d22').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -796,7 +819,7 @@ near <strong>90 degree slopes</strong>.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-6e3fa1e5609b9f88e9df97874cc2bdc5"
+    id="react-root-6b73eb473a7f3527853e227bcffb4e0e"
     width="100%"
     height="650px"
     class="frame"
@@ -805,7 +828,7 @@ near <strong>90 degree slopes</strong>.</p>
   
 
   <script>
-    document.getElementById('react-root-6e3fa1e5609b9f88e9df97874cc2bdc5').srcdoc = `
+    document.getElementById('react-root-6b73eb473a7f3527853e227bcffb4e0e').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -895,7 +918,7 @@ is <strong>perfect</strong> and covers almost everything you need to understand
 
 ]]></content></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-9e5dc6d93891f8c48c20ac592ec5624c"
+id="react-root-37d87d30206270dc532a226b20476d3b"
 width="225px"
 height="285px"
 class="frame"
@@ -904,7 +927,7 @@ class="frame"
 An interactive example of a Bézier curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-9e5dc6d93891f8c48c20ac592ec5624c').srcdoc = `
+document.getElementById('react-root-37d87d30206270dc532a226b20476d3b').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -931,7 +954,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-9e5dc6d93891f8c48c20ac592ec5624c"
+    id="react-root-37d87d30206270dc532a226b20476d3b"
     width="225px"
     height="285px"
     class="frame"
@@ -944,7 +967,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
   
 
   <script>
-    document.getElementById('react-root-9e5dc6d93891f8c48c20ac592ec5624c').srcdoc = `
+    document.getElementById('react-root-37d87d30206270dc532a226b20476d3b').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -984,7 +1007,7 @@ spoil the ending a bit:</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-4892d138a9f35bb34ab68f589a7c4342"
+    id="react-root-5ef70d761c09600422fbb44b50f26204"
     width="100%"
     height="480px"
     class="frame"
@@ -993,7 +1016,7 @@ spoil the ending a bit:</p>
   
 
   <script>
-    document.getElementById('react-root-4892d138a9f35bb34ab68f589a7c4342').srcdoc = `
+    document.getElementById('react-root-5ef70d761c09600422fbb44b50f26204').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1047,7 +1070,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-61feda525221a863514a3d6768e5e6d8"
+    id="react-root-3815da551f0861f1581acf7e9128ece8"
     width="355px"
     height="560px"
     class="frame"
@@ -1060,7 +1083,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
   
 
   <script>
-    document.getElementById('react-root-61feda525221a863514a3d6768e5e6d8').srcdoc = `
+    document.getElementById('react-root-3815da551f0861f1581acf7e9128ece8').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1161,7 +1184,7 @@ We do not need perfect precision here, so we need to find a reasonable
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-3a761bd6da579601f49c4ab5f772870e"
+    id="react-root-50d5af47f01abebc1398c6b98ab5ad83"
     width="355px"
     height="485px"
     class="frame"
@@ -1174,7 +1197,7 @@ We do not need perfect precision here, so we need to find a reasonable
   
 
   <script>
-    document.getElementById('react-root-3a761bd6da579601f49c4ab5f772870e').srcdoc = `
+    document.getElementById('react-root-50d5af47f01abebc1398c6b98ab5ad83').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1431,7 +1454,7 @@ to see what happens when the requested distance overshoots a segment.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-4b6a5233d03dd8fb9209e63be54b5e7a"
+    id="react-root-b39f34895eb0ce07c57d22394066d942"
     width="100%"
     height="260px"
     class="frame"
@@ -1444,7 +1467,7 @@ to see what happens when the requested distance overshoots a segment.</p>
   
 
   <script>
-    document.getElementById('react-root-4b6a5233d03dd8fb9209e63be54b5e7a').srcdoc = `
+    document.getElementById('react-root-b39f34895eb0ce07c57d22394066d942').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1792,7 +1815,7 @@ demonstrate the idea.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-260520dabb032eff1c3d74d76a856d62"
+    id="react-root-4ef74b562256e752a37694ecb956c906"
     width="100%"
     height="380px"
     class="frame"
@@ -1805,7 +1828,7 @@ demonstrate the idea.</p>
   
 
   <script>
-    document.getElementById('react-root-260520dabb032eff1c3d74d76a856d62').srcdoc = `
+    document.getElementById('react-root-4ef74b562256e752a37694ecb956c906').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2007,7 +2030,7 @@ track.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-c4e9f5cb0de53a284313895dcc82860b"
+    id="react-root-5d775334692151669a2e4b591113c7e1"
     width="100%"
     height="480px"
     class="frame"
@@ -2016,7 +2039,7 @@ track.</p>
   
 
   <script>
-    document.getElementById('react-root-c4e9f5cb0de53a284313895dcc82860b').srcdoc = `
+    document.getElementById('react-root-5d775334692151669a2e4b591113c7e1').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2280,7 +2303,7 @@ shape and see how both trains react differently.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-b33721cc439e2c5f3d8d832daf47ae0b"
+    id="react-root-64a983d9d312fc51b09eec4f4ca0a45f"
     width="100%"
     height="460px"
     class="frame"
@@ -2289,7 +2312,7 @@ shape and see how both trains react differently.</p>
   
 
   <script>
-    document.getElementById('react-root-b33721cc439e2c5f3d8d832daf47ae0b').srcdoc = `
+    document.getElementById('react-root-64a983d9d312fc51b09eec4f4ca0a45f').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2659,7 +2682,7 @@ time. On the side, a small panel displays the live simulation state.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-64a074a4cc73bded8aa15b4bff4ddafe"
+    id="react-root-69a50b65a4ebb175b64383c28c465df6"
     width="100%"
     height="360px"
     class="frame"
@@ -2668,7 +2691,7 @@ time. On the side, a small panel displays the live simulation state.</p>
   
 
   <script>
-    document.getElementById('react-root-64a074a4cc73bded8aa15b4bff4ddafe').srcdoc = `
+    document.getElementById('react-root-69a50b65a4ebb175b64383c28c465df6').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2934,7 +2957,7 @@ the introduction of this chapter.</p></blockquote>
 
 <div class="embedded ">
   <iframe
-    id="react-root-96a4f4fc92449bc32c0563afd285fdac"
+    id="react-root-67a0e2922b158a539b945318e4228690"
     width="100%"
     height="360px"
     class="frame"
@@ -2943,7 +2966,7 @@ the introduction of this chapter.</p></blockquote>
   
 
   <script>
-    document.getElementById('react-root-96a4f4fc92449bc32c0563afd285fdac').srcdoc = `
+    document.getElementById('react-root-67a0e2922b158a539b945318e4228690').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3212,7 +3235,7 @@ it</strong> moment, so it might help you as well.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-9886695b55b2b05acbc5afe0c550e12f"
+    id="react-root-a1af5c853636f88fee8469bbb3883cb1"
     width="100%"
     height="300px"
     class="frame"
@@ -3221,7 +3244,7 @@ it</strong> moment, so it might help you as well.</p>
   
 
   <script>
-    document.getElementById('react-root-9886695b55b2b05acbc5afe0c550e12f').srcdoc = `
+    document.getElementById('react-root-a1af5c853636f88fee8469bbb3883cb1').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3559,7 +3582,7 @@ inside the WebAssembly module.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-d8f4a50ef1d0d6bb3d66eb10e4a8717c"
+    id="react-root-7c30a710012cac71670857ea13be63c8"
     width="100%"
     height="360px"
     class="frame"
@@ -3568,7 +3591,7 @@ inside the WebAssembly module.</p>
   
 
   <script>
-    document.getElementById('react-root-d8f4a50ef1d0d6bb3d66eb10e4a8717c').srcdoc = `
+    document.getElementById('react-root-7c30a710012cac71670857ea13be63c8').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3668,7 +3691,7 @@ better bindings.</p>
 
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-c2a730552f222dfb28e9c317ec39fad9"
+id="react-root-e315ed3d686d08bb8841daf9924192cb"
 width="225px"
 height="285px"
 class="frame"
@@ -3677,7 +3700,7 @@ class="frame"
 Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-c2a730552f222dfb28e9c317ec39fad9').srcdoc = `
+document.getElementById('react-root-e315ed3d686d08bb8841daf9924192cb').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -3707,7 +3730,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-c2a730552f222dfb28e9c317ec39fad9"
+    id="react-root-e315ed3d686d08bb8841daf9924192cb"
     width="225px"
     height="285px"
     class="frame"
@@ -3720,7 +3743,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
   
 
   <script>
-    document.getElementById('react-root-c2a730552f222dfb28e9c317ec39fad9').srcdoc = `
+    document.getElementById('react-root-e315ed3d686d08bb8841daf9924192cb').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
