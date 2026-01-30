@@ -165,11 +165,9 @@ control points are moved.
 ## What comes next?
 
 Next, we look at **curve roll**. How roll should be interpolated is
-still open. We could reuse B-splines for roll, or use a simpler cubic
-spline, similar to what is used in **NoLimits Coaster 2**.
-
-We will start by choosing one approach and implementing it. Supporting
-multiple roll interpolation methods can come later.
+still open. We could reuse B-splines, use a simpler cubic spline like
+**NoLimits Coaster 2**, or do something else entirely. How far we go is
+also unclear. We will see.
 
 ## Demo code
 
