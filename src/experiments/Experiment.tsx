@@ -3,6 +3,7 @@ import { Line } from '@react-three/drei';
 import { useControls } from 'leva';
 import { Vector3 } from 'three';
 
+import { fromPoints } from '../maths/b-spline';
 import { fromURL } from '../helper/nl2park/nl2park';
 import { useColors } from '../hooks/useColors';
 
@@ -12,7 +13,6 @@ import { DragControlPoints } from '../components/curve/DragControlPoints';
 import { Ground } from '../components/Ground';
 import { PerspectiveScene } from '../components/scenes/PerspectiveScene';
 
-import { fromPoints } from '../coaster/b-spline-track';
 import Park from './Experiment.nl2park';
 
 const park = await fromURL(Park);
@@ -38,7 +38,7 @@ export const ExperimentScene = () => {
   const curve = useMemo(() => {
     return fromPoints(
       exampleTrack?.vertices.map((v) => v.position),
-      closed,
+      closed ? 'closed' : 'clamped',
     );
   }, [closed]);
 

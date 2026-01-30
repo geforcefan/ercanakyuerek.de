@@ -3,6 +3,7 @@ import { Line } from '@react-three/drei';
 import { useControls } from 'leva';
 import { Vector3, Vector4 } from 'three';
 
+import { fromPoints } from '../../../../maths/b-spline';
 import { useColors } from '../../../../hooks/useColors';
 
 import { CurveTrackMesh } from '../../../../components/curve/CurveTrackMesh';
@@ -10,8 +11,6 @@ import { DragControlPoints } from '../../../../components/curve/DragControlPoint
 import { Ground } from '../../../../components/Ground';
 import { EditorScene } from '../../../../components/scenes/EditorScene';
 import { TrainWithPhysics } from '../../../../components/TrainWithPhysics';
-
-import { fromPoints } from '../../../../coaster/b-spline-track';
 
 export const BSplineCurveDemoScene = () => {
   const colors = useColors();
@@ -30,7 +29,7 @@ export const BSplineCurveDemoScene = () => {
     () =>
       fromPoints(
         points.map((p) => new Vector4(p.x, p.y, p.z)),
-        closed,
+        closed ? 'closed' : 'clamped',
       ),
     [points, closed],
   );

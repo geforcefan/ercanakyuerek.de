@@ -2,13 +2,12 @@ import React, { useMemo, useState } from 'react';
 import { Line } from '@react-three/drei';
 import { Vector3, Vector4 } from 'three';
 
+import { fromPoints } from '../../../../maths/b-spline';
 import { useColors } from '../../../../hooks/useColors';
 
 import { CurveLine } from '../../../../components/curve/CurveLine';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
 import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
-
-import { fromPoints as bSplineTrackFromPoints } from '../../../../coaster/b-spline-track';
 
 export const BSplineClampedExampleScene = () => {
   const colors = useColors();
@@ -24,8 +23,9 @@ export const BSplineClampedExampleScene = () => {
 
   const curve = useMemo(
     () =>
-      bSplineTrackFromPoints(
+      fromPoints(
         points.map((p) => new Vector4(p.x, p.y, p.z)),
+        'clamped',
       ),
     [points],
   );

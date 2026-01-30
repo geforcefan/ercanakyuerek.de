@@ -3,14 +3,12 @@ import { Line } from '@react-three/drei';
 import { useControls } from 'leva';
 import { Vector3, Vector4 } from 'three';
 
-import { fromPoints as bSplineFromPoints } from '../../../../maths/b-spline';
+import { fromPoints } from '../../../../maths/b-spline';
 import { useColors } from '../../../../hooks/useColors';
 
 import { CurveLine } from '../../../../components/curve/CurveLine';
 import { DragControlPoints } from '../../../../components/curve/DragControlPoints';
 import { OrthographicScene } from '../../../../components/scenes/OrthographicScene';
-
-import { fromPoints as bSplineTrackFromPoints } from '../../../../coaster/b-spline-track';
 
 export const BSplineBoundaryExampleScene = () => {
   const colors = useColors();
@@ -31,12 +29,14 @@ export const BSplineBoundaryExampleScene = () => {
     new Vector3(8, 0, 0),
   ]);
 
-  const curve = useMemo(() => {
-    const vertices = points.map((p) => new Vector4(p.x, p.y, p.z));
-    if (boundary === 'open') return bSplineFromPoints(vertices);
-    else
-      return bSplineTrackFromPoints(vertices, boundary === 'closed');
-  }, [points, boundary]);
+  const curve = useMemo(
+    () =>
+      fromPoints(
+        points.map((p) => new Vector4(p.x, p.y, p.z)),
+        boundary as 'open' | 'closed' | 'clamped',
+      ),
+    [points, boundary],
+  );
 
   return (
     <OrthographicScene>

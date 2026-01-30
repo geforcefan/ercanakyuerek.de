@@ -54,16 +54,32 @@ export const estimateTotalArcLength = (
 
 export const fromPoints = (
   points: Vector4[],
+  boundary: 'clamped' | 'open' | 'closed' = 'clamped',
   resolution: number = 20,
 ) => {
+  const controlPoints = [...points];
   const curve = emptyCurve();
-  if (points.length < 4) return curve;
+  if (controlPoints.length < 4) return curve;
 
-  for (let i = 0; i < points.length - 3; i++) {
-    const p0 = points[i];
-    const p1 = points[i + 1];
-    const p2 = points[i + 2];
-    const p3 = points[i + 3];
+  if (boundary === 'clamped') {
+    const firstPoint = controlPoints[0];
+    const lastPoint = controlPoints[controlPoints.length - 1];
+
+    controlPoints.unshift(firstPoint, firstPoint);
+    controlPoints.push(lastPoint, lastPoint);
+  }
+
+  if (boundary === 'closed' && controlPoints.length >= 4) {
+    controlPoints.unshift(controlPoints[controlPoints.length - 1]);
+    controlPoints.push(controlPoints[1]);
+    controlPoints.push(controlPoints[2]);
+  }
+
+  for (let i = 0; i < controlPoints.length - 3; i++) {
+    const p0 = controlPoints[i];
+    const p1 = controlPoints[i + 1];
+    const p2 = controlPoints[i + 2];
+    const p3 = controlPoints[i + 3];
 
     uniformSample(
       0,
