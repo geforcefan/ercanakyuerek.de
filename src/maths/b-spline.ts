@@ -57,9 +57,9 @@ export const fromPoints = (
   boundary: 'clamped' | 'open' | 'closed' = 'clamped',
   resolution: number = 20,
 ) => {
-  const controlPoints = [...points];
   const curve = emptyCurve();
-  if (controlPoints.length < 4) return curve;
+  if (points.length < 4) return curve;
+  const controlPoints = [...points];
 
   if (boundary === 'clamped') {
     const firstPoint = controlPoints[0];
