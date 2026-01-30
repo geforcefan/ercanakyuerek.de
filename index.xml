@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ercan Akyürek</title><link>https://ercanakyuerek.de/</link><description>Recent content on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Sun, 18 Jan 2026 14:30:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/index.xml" rel="self" type="application/rss+xml"/><item><title>Uniform Rational B-Spline curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</link><pubDate>Sun, 18 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-5869a150469770b3652bc5d887b7951b"
+ id="react-root-7f302b686b9eb7bfe98102bbdeab2f17"
  width="225px"
  height="285px"
  class="frame"
@@ -13,7 +13,7 @@
  
 
  &lt;script&gt;
- document.getElementById('react-root-5869a150469770b3652bc5d887b7951b').srcdoc = `
+ document.getElementById('react-root-7f302b686b9eb7bfe98102bbdeab2f17').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -54,7 +54,7 @@ this has always been &lt;code&gt;Vector3(0, 1, 0)&lt;/code&gt;. This is fine for
 slopes&lt;/strong&gt;, but it starts to fall apart when the track approaches angles
 close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-37d87d30206270dc532a226b20476d3b"
+ id="react-root-94adb64540d51bf9ff85d90dfd61c01b"
  width="225px"
  height="285px"
  class="frame"
@@ -67,7 +67,7 @@ close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item>
  
 
  &lt;script&gt;
- document.getElementById('react-root-37d87d30206270dc532a226b20476d3b').srcdoc = `
+ document.getElementById('react-root-94adb64540d51bf9ff85d90dfd61c01b').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -179,7 +179,7 @@ nicer API to work with.&lt;/p&gt;
 define a number of imports for &lt;strong&gt;WASI&lt;/strong&gt;, but all of them are empty.
 This looks suspicious at first, so let us talk about that.&lt;/p&gt;</description></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-e315ed3d686d08bb8841daf9924192cb"
+ id="react-root-bafd1be728bdd9731dad551cbcfb8582"
  width="225px"
  height="285px"
  class="frame"
@@ -192,7 +192,7 @@ This looks suspicious at first, so let us talk about that.&lt;/p&gt;</descriptio
  
 
  &lt;script&gt;
- document.getElementById('react-root-e315ed3d686d08bb8841daf9924192cb').srcdoc = `
+ document.getElementById('react-root-bafd1be728bdd9731dad551cbcfb8582').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
