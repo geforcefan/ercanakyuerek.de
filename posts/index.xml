@@ -1,6 +1,42 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 09 Jul 2026 04:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Uniform Rational B-Spline curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</link><pubDate>Sun, 18 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</guid><description>&lt;div class="embedded float-right"&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ercan Akyürek</title><link>https://ercanakyuerek.de/posts/</link><description>Recent content in Posts on Ercan Akyürek</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 08 Jul 2026 22:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>c++react</title><link>https://ercanakyuerek.de/posts/cppreact/</link><pubDate>Wed, 08 Jul 2026 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/cppreact/</guid><description>&lt;p&gt;The last few days I built a small library, and I want to write down why.&lt;/p&gt;
+&lt;p&gt;I am working on a game in Unreal Engine 5, in C++. At some point you need a user interface, and if
+you have ever built one in C++ around OpenGL, you know the options are thin. I come from the web, I am
+used to React and CSS, and I missed them more than I expected. I tried a few things and none of them
+felt right.&lt;/p&gt;</description><content type="html"><![CDATA[<p>The last few days I built a small library, and I want to write down why.</p>
+<p>I am working on a game in Unreal Engine 5, in C++. At some point you need a user interface, and if
+you have ever built one in C++ around OpenGL, you know the options are thin. I come from the web, I am
+used to React and CSS, and I missed them more than I expected. I tried a few things and none of them
+felt right.</p>
+<p>Then I found <a href="https://github.com/mikke89/RmlUi">RmlUi</a>. It is an HTML and CSS like renderer for C++
+that draws through OpenGL and a few other backends. I was hooked pretty fast. It gave me the document
+and the styling I know from the browser, right inside my C++ code.</p>
+<p>So I wrote my own Slate backend and got RmlUi running inside Unreal Engine. And because it is plain
+portable C++, I could compile the same UI to the web with wasm and draw it with three.js. The same
+interface now runs in the engine and in the browser, from one codebase.</p>
+<p>But one thing was still missing. RmlUi gives you the tree and the styling, not the way I like to build
+UIs. No components, no hooks, no state that just updates the parts that changed. I missed my React.</p>
+<p>So I built it. c++react is the React model in C++: function components, hooks, and a virtual DOM that
+only touches what changed. It does not render on its own. You point it at a renderer and it drives
+that, so the same components run on RmlUi in the engine and on the web.</p>
+<p>Here is a counter, just so you get the feel:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> Component Counter <span style="color:#f92672">=</span> [](<span style="color:#66d9ef">const</span> Props<span style="color:#f92672">&amp;</span> props) <span style="color:#f92672">-&gt;</span> VNode {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">auto</span> label <span style="color:#f92672">=</span> props.get<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#34;label&#34;</span>).value_or(<span style="color:#e6db74">&#34;count&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">auto</span> [count, set_count] <span style="color:#f92672">=</span> use_state<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">auto</span> increment <span style="color:#f92672">=</span> [<span style="color:#f92672">=</span>](<span style="color:#66d9ef">const</span> Event<span style="color:#f92672">&amp;</span>) { set_count(count <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>); };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">div</span>({{<span style="color:#e6db74">&#34;class&#34;</span>, <span style="color:#e6db74">&#34;counter&#34;</span>}},
+</span></span><span style="display:flex;"><span>    span({}, label <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;: &#34;</span> <span style="color:#f92672">+</span> std<span style="color:#f92672">::</span>to_string(count)),
+</span></span><span style="display:flex;"><span>    button({{<span style="color:#e6db74">&#34;on_click&#34;</span>, increment}}, <span style="color:#e6db74">&#34;increment&#34;</span>));
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>If you have written React, you already know what this does. A click runs the handler, <code>set_count</code>
+re-renders, and the diff touches only the text node that changed.</p>
+<p><img src="/posts/cppreact/demo.gif" alt="the todo demo, c&#43;&#43;react driving RmlUi through OpenGL"></p>
+<p>It is early and it is open source. If you want to poke at it or break it, it is here:
+<a href="https://github.com/geforcefan/cppreact">github.com/geforcefan/cppreact</a>.</p>
+]]></content></item><item><title>Uniform Rational B-Spline curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</link><pubDate>Sun, 18 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-c49977faeba71504d4639ffb35c46342"
+id="react-root-4d2a5d93af052439c8f3c6adfe9f6f18"
 width="225px"
 height="285px"
 class="frame"
@@ -9,7 +45,7 @@ class="frame"
 An interactive example of a clamped uniform rational B-spline curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-c49977faeba71504d4639ffb35c46342').srcdoc = `
+document.getElementById('react-root-4d2a5d93af052439c8f3c6adfe9f6f18').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -33,7 +69,7 @@ it is hard to keep everything smooth.&lt;/p&gt;</description><content type="html
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-c49977faeba71504d4639ffb35c46342"
+    id="react-root-4d2a5d93af052439c8f3c6adfe9f6f18"
     width="225px"
     height="285px"
     class="frame"
@@ -46,7 +82,7 @@ it is hard to keep everything smooth.&lt;/p&gt;</description><content type="html
   
 
   <script>
-    document.getElementById('react-root-c49977faeba71504d4639ffb35c46342').srcdoc = `
+    document.getElementById('react-root-4d2a5d93af052439c8f3c6adfe9f6f18').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -106,7 +142,7 @@ at its boundaries.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-321d785667c90449c3f7fb585e0eb1ed"
+    id="react-root-5cd2e44bb7324a2f7971ff2d6027a448"
     width="100%"
     height="385px"
     class="frame"
@@ -115,7 +151,7 @@ at its boundaries.</p>
   
 
   <script>
-    document.getElementById('react-root-321d785667c90449c3f7fb585e0eb1ed').srcdoc = `
+    document.getElementById('react-root-5cd2e44bb7324a2f7971ff2d6027a448').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -292,7 +328,7 @@ control points are moved.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-01640cf82cd3e6f1f368a8189bf3c6b1"
+    id="react-root-698e9e012524bac9ffdacacd58820abc"
     width="100%"
     height="580px"
     class="frame"
@@ -301,7 +337,7 @@ control points are moved.</p>
   
 
   <script>
-    document.getElementById('react-root-01640cf82cd3e6f1f368a8189bf3c6b1').srcdoc = `
+    document.getElementById('react-root-698e9e012524bac9ffdacacd58820abc').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -409,7 +445,7 @@ showing the current state of the simulation running in real time.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-383def7bc93e5d041f071dea37a40e63"
+    id="react-root-c71186c2e03ca2e9033167c9d5e33c46"
     width="100%"
     height="650px"
     class="frame"
@@ -422,7 +458,7 @@ showing the current state of the simulation running in real time.</p>
   
 
   <script>
-    document.getElementById('react-root-383def7bc93e5d041f071dea37a40e63').srcdoc = `
+    document.getElementById('react-root-c71186c2e03ca2e9033167c9d5e33c46').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -585,7 +621,7 @@ previous node</strong>. This helps visualize the problem.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-218e2f3ba5e8e9103e699bae4f0edefb"
+    id="react-root-d08ae0c5ae12c8b87d322c9bea48a8ee"
     width="100%"
     height="700px"
     class="frame"
@@ -598,7 +634,7 @@ previous node</strong>. This helps visualize the problem.</p>
   
 
   <script>
-    document.getElementById('react-root-218e2f3ba5e8e9103e699bae4f0edefb').srcdoc = `
+    document.getElementById('react-root-d08ae0c5ae12c8b87d322c9bea48a8ee').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -818,7 +854,7 @@ near <strong>90 degree slopes</strong>.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-94f351cb23196a3e32f215a214887f4b"
+    id="react-root-c70023706ce9cfe1c0e2fcdae2e6b0c7"
     width="100%"
     height="650px"
     class="frame"
@@ -827,7 +863,7 @@ near <strong>90 degree slopes</strong>.</p>
   
 
   <script>
-    document.getElementById('react-root-94f351cb23196a3e32f215a214887f4b').srcdoc = `
+    document.getElementById('react-root-c70023706ce9cfe1c0e2fcdae2e6b0c7').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -917,7 +953,7 @@ is <strong>perfect</strong> and covers almost everything you need to understand
 
 ]]></content></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-850f1f02be7bb6d5ba17fbf55e37f208"
+id="react-root-132660b245ba5ed4c2df6e5f4284008f"
 width="225px"
 height="285px"
 class="frame"
@@ -926,7 +962,7 @@ class="frame"
 An interactive example of a Bézier curve, drag the controls around to see changes in shape
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-850f1f02be7bb6d5ba17fbf55e37f208').srcdoc = `
+document.getElementById('react-root-132660b245ba5ed4c2df6e5f4284008f').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -953,7 +989,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-850f1f02be7bb6d5ba17fbf55e37f208"
+    id="react-root-132660b245ba5ed4c2df6e5f4284008f"
     width="225px"
     height="285px"
     class="frame"
@@ -966,7 +1002,7 @@ honestly, we have been staring at straight lines long enough.&lt;/p&gt;</descrip
   
 
   <script>
-    document.getElementById('react-root-850f1f02be7bb6d5ba17fbf55e37f208').srcdoc = `
+    document.getElementById('react-root-132660b245ba5ed4c2df6e5f4284008f').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1006,7 +1042,7 @@ spoil the ending a bit:</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-0b935911487f96c02aa3386259671762"
+    id="react-root-9d0395ef380cfbbf644cf179ff5c2392"
     width="100%"
     height="480px"
     class="frame"
@@ -1015,7 +1051,7 @@ spoil the ending a bit:</p>
   
 
   <script>
-    document.getElementById('react-root-0b935911487f96c02aa3386259671762').srcdoc = `
+    document.getElementById('react-root-9d0395ef380cfbbf644cf179ff5c2392').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1069,7 +1105,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-c10417aebefb9d38f53b1149bf426824"
+    id="react-root-0f96c8c412e9111ababf62f78acb08d1"
     width="355px"
     height="560px"
     class="frame"
@@ -1082,7 +1118,7 @@ actually do is nothing more than repeated <strong>linear interpolation</strong>.
   
 
   <script>
-    document.getElementById('react-root-c10417aebefb9d38f53b1149bf426824').srcdoc = `
+    document.getElementById('react-root-0f96c8c412e9111ababf62f78acb08d1').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1183,7 +1219,7 @@ We do not need perfect precision here, so we need to find a reasonable
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-e2f1110a254a801f7baa50fa0fcf852e"
+    id="react-root-abcf22889ef3d775ff8d32719c9cf643"
     width="355px"
     height="485px"
     class="frame"
@@ -1196,7 +1232,7 @@ We do not need perfect precision here, so we need to find a reasonable
   
 
   <script>
-    document.getElementById('react-root-e2f1110a254a801f7baa50fa0fcf852e').srcdoc = `
+    document.getElementById('react-root-abcf22889ef3d775ff8d32719c9cf643').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1453,7 +1489,7 @@ to see what happens when the requested distance overshoots a segment.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-5d5a51f16264240fe53c5752f05b445e"
+    id="react-root-654329d66cc886787e211060e5b1b8ac"
     width="100%"
     height="260px"
     class="frame"
@@ -1466,7 +1502,7 @@ to see what happens when the requested distance overshoots a segment.</p>
   
 
   <script>
-    document.getElementById('react-root-5d5a51f16264240fe53c5752f05b445e').srcdoc = `
+    document.getElementById('react-root-654329d66cc886787e211060e5b1b8ac').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -1814,7 +1850,7 @@ demonstrate the idea.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-60e3464cc3bfb551e1e7fb84cf18baf9"
+    id="react-root-e4c60d76fff07196c43c7af3835a13f7"
     width="100%"
     height="380px"
     class="frame"
@@ -1827,7 +1863,7 @@ demonstrate the idea.</p>
   
 
   <script>
-    document.getElementById('react-root-60e3464cc3bfb551e1e7fb84cf18baf9').srcdoc = `
+    document.getElementById('react-root-e4c60d76fff07196c43c7af3835a13f7').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2029,7 +2065,7 @@ track.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-b54f696e041bb2303c409115010cbf1e"
+    id="react-root-0bfc89cf0f4dd6117dfd26e0313aa320"
     width="100%"
     height="480px"
     class="frame"
@@ -2038,7 +2074,7 @@ track.</p>
   
 
   <script>
-    document.getElementById('react-root-b54f696e041bb2303c409115010cbf1e').srcdoc = `
+    document.getElementById('react-root-0bfc89cf0f4dd6117dfd26e0313aa320').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2302,7 +2338,7 @@ shape and see how both trains react differently.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-25b0e9a969d8c707f363eb4965106dd0"
+    id="react-root-4ed85e2e79b5486fee7e0ad511686787"
     width="100%"
     height="460px"
     class="frame"
@@ -2311,7 +2347,7 @@ shape and see how both trains react differently.</p>
   
 
   <script>
-    document.getElementById('react-root-25b0e9a969d8c707f363eb4965106dd0').srcdoc = `
+    document.getElementById('react-root-4ed85e2e79b5486fee7e0ad511686787').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2681,7 +2717,7 @@ time. On the side, a small panel displays the live simulation state.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-22cfc38a891de576df59175aa2e16278"
+    id="react-root-d66162f3c41203230d3104686c60b66d"
     width="100%"
     height="360px"
     class="frame"
@@ -2690,7 +2726,7 @@ time. On the side, a small panel displays the live simulation state.</p>
   
 
   <script>
-    document.getElementById('react-root-22cfc38a891de576df59175aa2e16278').srcdoc = `
+    document.getElementById('react-root-d66162f3c41203230d3104686c60b66d').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -2956,7 +2992,7 @@ the introduction of this chapter.</p></blockquote>
 
 <div class="embedded ">
   <iframe
-    id="react-root-9e0e380b5dcb55fd79c520370add39f1"
+    id="react-root-20c3ce684e6e3cabd96aee28534a8a62"
     width="100%"
     height="360px"
     class="frame"
@@ -2965,7 +3001,7 @@ the introduction of this chapter.</p></blockquote>
   
 
   <script>
-    document.getElementById('react-root-9e0e380b5dcb55fd79c520370add39f1').srcdoc = `
+    document.getElementById('react-root-20c3ce684e6e3cabd96aee28534a8a62').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3234,7 +3270,7 @@ it</strong> moment, so it might help you as well.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-49f294388925c00dc30942d8867a4094"
+    id="react-root-9a03487491702522d51b33cd34f927d6"
     width="100%"
     height="300px"
     class="frame"
@@ -3243,7 +3279,7 @@ it</strong> moment, so it might help you as well.</p>
   
 
   <script>
-    document.getElementById('react-root-49f294388925c00dc30942d8867a4094').srcdoc = `
+    document.getElementById('react-root-9a03487491702522d51b33cd34f927d6').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3581,7 +3617,7 @@ inside the WebAssembly module.</p>
 
 <div class="embedded ">
   <iframe
-    id="react-root-44e443efd5f4c9977e09e50e3bf4bb9c"
+    id="react-root-c82f4bc5e44869d231a8b03cfa225e43"
     width="100%"
     height="360px"
     class="frame"
@@ -3590,7 +3626,7 @@ inside the WebAssembly module.</p>
   
 
   <script>
-    document.getElementById('react-root-44e443efd5f4c9977e09e50e3bf4bb9c').srcdoc = `
+    document.getElementById('react-root-c82f4bc5e44869d231a8b03cfa225e43').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
@@ -3690,7 +3726,7 @@ better bindings.</p>
 
 ]]></content></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
 &lt;iframe
-id="react-root-22b5d3b959a354379d0774987bcde17d"
+id="react-root-e48c1dee8881d349a4dbadae55359acd"
 width="225px"
 height="285px"
 class="frame"
@@ -3699,7 +3735,7 @@ class="frame"
 Transition from parameter-based non-uniform to uniform node spacing. The control points are draggable.
 &lt;/div&gt;
 &lt;script&gt;
-document.getElementById('react-root-22b5d3b959a354379d0774987bcde17d').srcdoc = `
+document.getElementById('react-root-e48c1dee8881d349a4dbadae55359acd').srcdoc = `
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en" data-theme="dark"&gt;
 &lt;head&gt;
@@ -3729,7 +3765,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
 
 <div class="embedded float-right">
   <iframe
-    id="react-root-22b5d3b959a354379d0774987bcde17d"
+    id="react-root-e48c1dee8881d349a4dbadae55359acd"
     width="225px"
     height="285px"
     class="frame"
@@ -3742,7 +3778,7 @@ between them to find the point we&amp;rsquo;re looking for.&lt;/p&gt;</descripti
   
 
   <script>
-    document.getElementById('react-root-22b5d3b959a354379d0774987bcde17d').srcdoc = `
+    document.getElementById('react-root-e48c1dee8881d349a4dbadae55359acd').srcdoc = `
     <!DOCTYPE html>
     <html lang="en" data-theme="dark">
       <head>
