@@ -1,13 +1,16 @@
 ---
-title: 'c++react'
+title: 'A React framework in C++'
 date: 2026-07-08T22:00:00+01:00
 tags: ['c++react']
 ---
 
-The last few days I built a small library, and I want to write down why.
+{{< figure src="demo.gif" class="right-floated" width="300" alt="the todo demo, c++react driving RmlUi through OpenGL" >}}
 
-I am working on a game in Unreal Engine 5, in C++. At some point you need a user interface, and if
-you have ever built one in C++ around OpenGL, you know the options are thin. I come from the web, I am
+I was crazy enough to build React in C++, and honestly I am pretty happy with how it turned out. Here
+is how I got there.
+
+I am working on a game in Unreal Engine 5, in C++. At some point you need a user interface, and if you
+have ever built one in C++ around OpenGL, you know the options are thin. I come from the web, I am
 used to React and CSS, and I missed them more than I expected. I tried a few things and none of them
 felt right.
 
@@ -43,8 +46,6 @@ const Component Counter = [](const Props& props) -> VNode {
 
 If you have written React, you already know what this does. A click runs the handler, `set_count`
 re-renders, and the diff touches only the text node that changed.
-
-![the todo demo, c++react driving RmlUi through OpenGL](demo.gif)
 
 It is early and it is open source. If you want to poke at it or break it, it is here:
 [github.com/geforcefan/cppreact](https://github.com/geforcefan/cppreact).
