@@ -1,10 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ercan Akyürek</title><link>https://ercanakyuerek.de/</link><description>Recent content on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Wed, 08 Jul 2026 22:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/index.xml" rel="self" type="application/rss+xml"/><item><title>c++react</title><link>https://ercanakyuerek.de/posts/cppreact/</link><pubDate>Wed, 08 Jul 2026 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/cppreact/</guid><description>&lt;p&gt;The last few days I built a small library, and I want to write down why.&lt;/p&gt;
-&lt;p&gt;I am working on a game in Unreal Engine 5, in C++. At some point you need a user interface, and if
-you have ever built one in C++ around OpenGL, you know the options are thin. I come from the web, I am
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ercan Akyürek</title><link>https://ercanakyuerek.de/</link><description>Recent content on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Wed, 08 Jul 2026 22:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/index.xml" rel="self" type="application/rss+xml"/><item><title>A React framework in C++</title><link>https://ercanakyuerek.de/posts/cppreact/</link><pubDate>Wed, 08 Jul 2026 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/cppreact/</guid><description>&lt;figure class="right-floated"&gt;&lt;img src="https://ercanakyuerek.de/posts/cppreact/demo.gif"
+ alt="the todo demo, c&amp;#43;&amp;#43;react driving RmlUi through OpenGL" width="300"&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I was crazy enough to build React in C++, and honestly I am pretty happy with how it turned out. Here
+is how I got there.&lt;/p&gt;
+&lt;p&gt;I am working on a game in Unreal Engine 5, in C++. At some point you need a user interface, and if you
+have ever built one in C++ around OpenGL, you know the options are thin. I come from the web, I am
 used to React and CSS, and I missed them more than I expected. I tried a few things and none of them
 felt right.&lt;/p&gt;</description></item><item><title>Uniform Rational B-Spline curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</link><pubDate>Sun, 18 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-4d2a5d93af052439c8f3c6adfe9f6f18"
+ id="react-root-6d65919fb8038ee2b2a5b11af596abcd"
  width="225px"
  height="285px"
  class="frame"
@@ -17,7 +22,7 @@ felt right.&lt;/p&gt;</description></item><item><title>Uniform Rational B-Spline
  
 
  &lt;script&gt;
- document.getElementById('react-root-4d2a5d93af052439c8f3c6adfe9f6f18').srcdoc = `
+ document.getElementById('react-root-6d65919fb8038ee2b2a5b11af596abcd').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -58,7 +63,7 @@ this has always been &lt;code&gt;Vector3(0, 1, 0)&lt;/code&gt;. This is fine for
 slopes&lt;/strong&gt;, but it starts to fall apart when the track approaches angles
 close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-132660b245ba5ed4c2df6e5f4284008f"
+ id="react-root-72a86fc85be0d0bdf8e764d2084a0d3a"
  width="225px"
  height="285px"
  class="frame"
@@ -71,7 +76,7 @@ close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item>
  
 
  &lt;script&gt;
- document.getElementById('react-root-132660b245ba5ed4c2df6e5f4284008f').srcdoc = `
+ document.getElementById('react-root-72a86fc85be0d0bdf8e764d2084a0d3a').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -183,7 +188,7 @@ nicer API to work with.&lt;/p&gt;
 define a number of imports for &lt;strong&gt;WASI&lt;/strong&gt;, but all of them are empty.
 This looks suspicious at first, so let us talk about that.&lt;/p&gt;</description></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-e48c1dee8881d349a4dbadae55359acd"
+ id="react-root-26dbd654696cbb16d6dd2b5410bf5b71"
  width="225px"
  height="285px"
  class="frame"
@@ -196,7 +201,7 @@ This looks suspicious at first, so let us talk about that.&lt;/p&gt;</descriptio
  
 
  &lt;script&gt;
- document.getElementById('react-root-e48c1dee8881d349a4dbadae55359acd').srcdoc = `
+ document.getElementById('react-root-26dbd654696cbb16d6dd2b5410bf5b71').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;

@@ -1,5 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>C++react on Ercan Akyürek</title><link>https://ercanakyuerek.de/tags/c++react/</link><description>Recent content in C++react on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Wed, 08 Jul 2026 22:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/tags/c++react/index.xml" rel="self" type="application/rss+xml"/><item><title>c++react</title><link>https://ercanakyuerek.de/posts/cppreact/</link><pubDate>Wed, 08 Jul 2026 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/cppreact/</guid><description>&lt;p&gt;The last few days I built a small library, and I want to write down why.&lt;/p&gt;
-&lt;p&gt;I am working on a game in Unreal Engine 5, in C++. At some point you need a user interface, and if
-you have ever built one in C++ around OpenGL, you know the options are thin. I come from the web, I am
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>C++react on Ercan Akyürek</title><link>https://ercanakyuerek.de/tags/c++react/</link><description>Recent content in C++react on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Wed, 08 Jul 2026 22:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/tags/c++react/index.xml" rel="self" type="application/rss+xml"/><item><title>A React framework in C++</title><link>https://ercanakyuerek.de/posts/cppreact/</link><pubDate>Wed, 08 Jul 2026 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/cppreact/</guid><description>&lt;figure class="right-floated"&gt;&lt;img src="https://ercanakyuerek.de/posts/cppreact/demo.gif"
+ alt="the todo demo, c&amp;#43;&amp;#43;react driving RmlUi through OpenGL" width="300"&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I was crazy enough to build React in C++, and honestly I am pretty happy with how it turned out. Here
+is how I got there.&lt;/p&gt;
+&lt;p&gt;I am working on a game in Unreal Engine 5, in C++. At some point you need a user interface, and if you
+have ever built one in C++ around OpenGL, you know the options are thin. I come from the web, I am
 used to React and CSS, and I missed them more than I expected. I tried a few things and none of them
 felt right.&lt;/p&gt;</description></item></channel></rss>
