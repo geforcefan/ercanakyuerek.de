@@ -47,5 +47,5 @@ const Component Counter = [](const Props& props) -> VNode {
 If you have written React, you already know what this does. A click runs the handler, `set_count`
 re-renders, and the diff touches only the text node that changed.
 
-It is early and it is open source. If you want to poke at it or break it, it is here:
+It is early and it is open source. If you want to try it or break it, it is here:
 [github.com/geforcefan/cppreact](https://github.com/geforcefan/cppreact).
