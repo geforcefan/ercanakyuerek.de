@@ -1,6 +1,6 @@
 ---
 title: 'c++react'
-date: 2026-07-09T04:00:00+01:00
+date: 2026-07-08T22:00:00+01:00
 tags: ['c++react']
 ---
 
@@ -25,6 +25,24 @@ UIs. No components, no hooks, no state that just updates the parts that changed.
 So I built it. c++react is the React model in C++: function components, hooks, and a virtual DOM that
 only touches what changed. It does not render on its own. You point it at a renderer and it drives
 that, so the same components run on RmlUi in the engine and on the web.
+
+Here is a counter, just so you get the feel:
+
+```cpp
+const Component Counter = [](const Props& props) -> VNode {
+  auto label = props.get<std::string>("label").value_or("count");
+  auto [count, set_count] = use_state<int>(0);
+
+  auto increment = [=](const Event&) { set_count(count + 1); };
+
+  return div({{"class", "counter"}},
+    span({}, label + ": " + std::to_string(count)),
+    button({{"on_click", increment}}, "increment"));
+};
+```
+
+If you have written React, you already know what this does. A click runs the handler, `set_count`
+re-renders, and the diff touches only the text node that changed.
 
 ![the todo demo, c++react driving RmlUi through OpenGL](demo.gif)
 
