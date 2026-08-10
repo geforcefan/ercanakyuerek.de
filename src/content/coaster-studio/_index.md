@@ -2,6 +2,8 @@
 title: Coaster Studio
 ---
 
+{{< figure src="/images/coaster-studio-hero.jpg" alt="Coaster Studio, a train in an inversion at low sun" >}}
+
 Welcome to Coaster Studio, and to its workshop. I always wanted to write my own coaster simulator,
 not a tool around somebody else's but my own, and this is me finally doing it. On this page I show
 what I build, what breaks, and what I throw away again.
