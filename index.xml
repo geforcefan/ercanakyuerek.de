@@ -1,4 +1,27 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ercan Akyürek</title><link>https://ercanakyuerek.de/</link><description>Recent content on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Wed, 08 Jul 2026 22:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/index.xml" rel="self" type="application/rss+xml"/><item><title>A React framework in C++</title><link>https://ercanakyuerek.de/posts/cppreact/</link><pubDate>Wed, 08 Jul 2026 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/cppreact/</guid><description>&lt;figure class="right-floated"&gt;&lt;img src="https://ercanakyuerek.de/posts/cppreact/demo.gif"
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ercan Akyürek</title><link>https://ercanakyuerek.de/</link><description>Recent content on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 10 Aug 2026 11:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/index.xml" rel="self" type="application/rss+xml"/><item><title>Exporting a whole park as animated glTF</title><link>https://ercanakyuerek.de/coaster-studio/glb-export/</link><pubDate>Mon, 10 Aug 2026 11:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/coaster-studio/glb-export/</guid><description>&lt;p&gt;Coaster Studio can write a whole park into a binary glTF file: track, supports, train, cameras, the
+sun, and the ride itself as animation. That works because the exporter is not really an exporter, it
+is just another host.&lt;/p&gt;
+&lt;p&gt;The scene is the React style component tree from
+&lt;a href="https://ercanakyuerek.de/coaster-studio/one-core-two-engines/"&gt;one core, two and a half engines&lt;/a&gt;, written in
+C++ on &lt;a href="https://github.com/geforcefan/cppreact"&gt;cppreact&lt;/a&gt;. Components build the park out of engine
+elements, a mesh, a camera, a light, and what such an element means is up to the host.&lt;/p&gt;</description></item><item><title>One core, two and a half engines</title><link>https://ercanakyuerek.de/coaster-studio/one-core-two-engines/</link><pubDate>Mon, 10 Aug 2026 08:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/coaster-studio/one-core-two-engines/</guid><description>&lt;p&gt;Coaster Studio runs on Unreal Engine 5 and on Google Filament, in the browser and on the desktop.
+Same application, same user interface. Two engines, and the glTF exporter as the half one, because
+it hosts the same scene without rendering a single pixel.&lt;/p&gt;
+&lt;p&gt;Everything that matters lives in one portable C++ core: math, curves, force vector design, physics,
+the data model, saving and loading, the scene and the whole user interface. A host only brings an
+engine, a window and the input.&lt;/p&gt;</description></item><item><title>The user interface, written once</title><link>https://ercanakyuerek.de/coaster-studio/user-interface/</link><pubDate>Mon, 10 Aug 2026 07:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/coaster-studio/user-interface/</guid><description>&lt;p&gt;The user interface of Coaster Studio is not written per host. It is C++ in the core, like everything
+else, and every host shows the same one. Not a rebuilt copy, the same components and the same
+stylesheets.&lt;/p&gt;
+&lt;p&gt;Here is the same toolbar, once in Unreal Engine 5 and once in the Filament build:&lt;/p&gt;
+&lt;figure&gt;&lt;img src="https://ercanakyuerek.de/coaster-studio/user-interface/ue5.png"
+ alt="the Coaster Studio toolbar in Unreal Engine 5"&gt;&lt;figcaption&gt;
+ &lt;p&gt;Unreal Engine 5&lt;/p&gt;
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;figure&gt;&lt;img src="https://ercanakyuerek.de/coaster-studio/user-interface/filament.png"
+ alt="the Coaster Studio toolbar in the Filament build"&gt;&lt;figcaption&gt;
+ &lt;p&gt;Google Filament&lt;/p&gt;</description></item><item><title>A React framework in C++</title><link>https://ercanakyuerek.de/posts/cppreact/</link><pubDate>Wed, 08 Jul 2026 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/cppreact/</guid><description>&lt;figure class="right-floated"&gt;&lt;img src="https://ercanakyuerek.de/posts/cppreact/demo.gif"
  alt="the todo demo, c&amp;#43;&amp;#43;react driving RmlUi through OpenGL" width="300"&gt;
 &lt;/figure&gt;
 
@@ -9,7 +32,7 @@ have ever built one in C++ around OpenGL, you know the options are thin. I come 
 used to React and CSS, and I missed them more than I expected. I tried a few things and none of them
 felt right.&lt;/p&gt;</description></item><item><title>Uniform Rational B-Spline curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</link><pubDate>Sun, 18 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-d8e9160572709d203973f6cbff3ddbbd"
+ id="react-root-29acc8974f3d77ac46947c21dd9917d2"
  width="225px"
  height="285px"
  class="frame"
@@ -22,7 +45,7 @@ felt right.&lt;/p&gt;</description></item><item><title>Uniform Rational B-Spline
  
 
  &lt;script&gt;
- document.getElementById('react-root-d8e9160572709d203973f6cbff3ddbbd').srcdoc = `
+ document.getElementById('react-root-29acc8974f3d77ac46947c21dd9917d2').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -63,7 +86,7 @@ this has always been &lt;code&gt;Vector3(0, 1, 0)&lt;/code&gt;. This is fine for
 slopes&lt;/strong&gt;, but it starts to fall apart when the track approaches angles
 close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-121ca989bd12a7fc4550e1a52256cd26"
+ id="react-root-2b24f0328d5bc0300a8975cf655ed72b"
  width="225px"
  height="285px"
  class="frame"
@@ -76,7 +99,7 @@ close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item>
  
 
  &lt;script&gt;
- document.getElementById('react-root-121ca989bd12a7fc4550e1a52256cd26').srcdoc = `
+ document.getElementById('react-root-2b24f0328d5bc0300a8975cf655ed72b').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -188,7 +211,7 @@ nicer API to work with.&lt;/p&gt;
 define a number of imports for &lt;strong&gt;WASI&lt;/strong&gt;, but all of them are empty.
 This looks suspicious at first, so let us talk about that.&lt;/p&gt;</description></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-7d12a9061ab0c99642c40585256fe98e"
+ id="react-root-6b572a67f35ab605ce12ae8b16dd5300"
  width="225px"
  height="285px"
  class="frame"
@@ -201,7 +224,7 @@ This looks suspicious at first, so let us talk about that.&lt;/p&gt;</descriptio
  
 
  &lt;script&gt;
- document.getElementById('react-root-7d12a9061ab0c99642c40585256fe98e').srcdoc = `
+ document.getElementById('react-root-6b572a67f35ab605ce12ae8b16dd5300').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -244,5 +267,5 @@ computations for real-time applications or mathematical operations.&lt;/p&gt;</d
 &lt;div class="avatar"&gt;
  &lt;img src="https://ercanakyuerek.de/avatar.jpeg"/&gt;
 &lt;/div&gt;
-I’m Ercan Akyürek, 34 years old, born and raised in Germany with roots in Turkey. From an early age, I was endlessly curious about how things worked, taking apart toys, motors, and gadgets just to see if I could rebuild them again. That curiosity for understanding and creating has been with me ever since.&lt;/p&gt;
+I’m Ercan Akyürek, 35 years old, born and raised in Germany with roots in Turkey. From an early age, I was endlessly curious about how things worked, taking apart toys, motors, and gadgets just to see if I could rebuild them again. That curiosity for understanding and creating has been with me ever since.&lt;/p&gt;
 &lt;p&gt;My first real dive into computers came with a VTech learning computer that had a BASIC interpreter. I didn’t know much back then, but I was fascinated by the idea that I could make the machine do something just by typing commands. That curiosity quickly turned into a passion for coding.&lt;/p&gt;</description></item></channel></rss>
