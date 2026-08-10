@@ -32,7 +32,7 @@ have ever built one in C++ around OpenGL, you know the options are thin. I come 
 used to React and CSS, and I missed them more than I expected. I tried a few things and none of them
 felt right.&lt;/p&gt;</description></item><item><title>Uniform Rational B-Spline curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</link><pubDate>Sun, 18 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-29acc8974f3d77ac46947c21dd9917d2"
+ id="react-root-ef7ac1ac03e4f26c8821c53ce8943c98"
  width="225px"
  height="285px"
  class="frame"
@@ -45,7 +45,7 @@ felt right.&lt;/p&gt;</description></item><item><title>Uniform Rational B-Spline
  
 
  &lt;script&gt;
- document.getElementById('react-root-29acc8974f3d77ac46947c21dd9917d2').srcdoc = `
+ document.getElementById('react-root-ef7ac1ac03e4f26c8821c53ce8943c98').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -86,7 +86,7 @@ this has always been &lt;code&gt;Vector3(0, 1, 0)&lt;/code&gt;. This is fine for
 slopes&lt;/strong&gt;, but it starts to fall apart when the track approaches angles
 close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-2b24f0328d5bc0300a8975cf655ed72b"
+ id="react-root-e2b2810ba5794268886d929925941c89"
  width="225px"
  height="285px"
  class="frame"
@@ -99,7 +99,7 @@ close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item>
  
 
  &lt;script&gt;
- document.getElementById('react-root-2b24f0328d5bc0300a8975cf655ed72b').srcdoc = `
+ document.getElementById('react-root-e2b2810ba5794268886d929925941c89').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -211,7 +211,7 @@ nicer API to work with.&lt;/p&gt;
 define a number of imports for &lt;strong&gt;WASI&lt;/strong&gt;, but all of them are empty.
 This looks suspicious at first, so let us talk about that.&lt;/p&gt;</description></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-6b572a67f35ab605ce12ae8b16dd5300"
+ id="react-root-3650b5c5f883e4846df1d96b2a1e2370"
  width="225px"
  height="285px"
  class="frame"
@@ -224,7 +224,7 @@ This looks suspicious at first, so let us talk about that.&lt;/p&gt;</descriptio
  
 
  &lt;script&gt;
- document.getElementById('react-root-6b572a67f35ab605ce12ae8b16dd5300').srcdoc = `
+ document.getElementById('react-root-3650b5c5f883e4846df1d96b2a1e2370').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
