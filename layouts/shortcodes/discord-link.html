@@ -1,0 +1,7 @@
+{{ $url := .Get "url" }}
+{{ $label := .Get "label" | default "Join the Discord" }}
+
+<a class="discord-link" href="{{ $url }}" target="_blank" rel="noopener">
+  {{ partial "svg.html" (dict "name" "discord") }}
+  <span>{{ $label }}</span>
+</a>

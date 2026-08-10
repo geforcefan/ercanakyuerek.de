@@ -16,34 +16,34 @@
   border: 1px solid $highlight-color;
 }
 
+.bottom-controls {
+  position: absolute;
+  right: 1em;
+  bottom: 1em;
+  z-index: 3000;
+
+  button {
+    background: #3b3d42;
+    padding: 5px;
+    margin: 0;
+    transition: 0.2s linear all;
+
+    &:hover {
+      background-color: lighten(#3b3d42, 10%);
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      pointer-events: none;
+    }
+  }
+}
+
 .content-component {
   border-radius: 8px;
   overflow: hidden;
   background-color: $embedded-frame-background;
-
-  .bottom-controls {
-    position: absolute;
-    right: 1em;
-    bottom: 1em;
-    z-index: 3000;
-
-    button {
-      background: #3b3d42;
-      padding: 5px;
-      margin: 0;
-      transition: 0.2s linear all;
-
-      &:hover {
-        background-color: lighten(#3b3d42, 10%);
-      }
-
-      svg {
-        width: 24px;
-        height: 24px;
-        pointer-events: none;
-      }
-    }
-  }
 }
 
 .loading-screen {

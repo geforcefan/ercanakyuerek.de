@@ -16,6 +16,26 @@
   border: 0;
   position: relative;
 
+  .embedded-frame {
+    position: relative;
+    display: block;
+    line-height: 0;
+
+    .icon-exit-fullscreen {
+      display: none;
+    }
+
+    &.is-fullscreen {
+      .icon-enter-fullscreen {
+        display: none;
+      }
+
+      .icon-exit-fullscreen {
+        display: inline;
+      }
+    }
+  }
+
   .frame {
     border: 0;
     border-radius: 8px;
@@ -42,6 +62,7 @@
 
     .description,
     .openInNewTab,
+    .embedded-frame,
     .frame {
       width: 100% !important;
     }
@@ -67,5 +88,87 @@ figure.right-floated {
     img {
       margin: 20px auto;
     }
+  }
+}
+.section-intro {
+  margin-bottom: 60px;
+}
+
+.discord-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.home {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px 20px 30px;
+  text-align: center;
+
+  .home-intro h1 {
+    margin-bottom: 10px;
+  }
+
+  .home-feature {
+    display: block;
+    margin-top: 30px;
+    text-align: left;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid rgba(128, 128, 128, 0.25);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: rgba(128, 128, 128, 0.5);
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .home-feature-body {
+    padding: 18px 26px 22px;
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 2rem;
+    }
+
+    p {
+      margin: 0 0 16px;
+    }
+
+    @media #{$media-size-phone} {
+      padding: 18px 18px 22px;
+
+      h2 {
+        font-size: 1.6rem;
+      }
+    }
+  }
+
+  .home-feature-label {
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 8px;
+  }
+
+  .home-feature-action {
+    font-weight: 600;
+    text-decoration: underline;
   }
 }

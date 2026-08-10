@@ -1,0 +1,6 @@
+{{- $birth := time.AsTime (.Get "birth") -}}
+{{- $now := now -}}
+{{- $years := int (sub $now.Year $birth.Year) -}}
+{{- $hadBirthday := or (gt $now.Month $birth.Month) (and (eq $now.Month $birth.Month) (ge $now.Day $birth.Day)) -}}
+{{- if not $hadBirthday -}}{{- $years = sub $years 1 -}}{{- end -}}
+{{- $years -}}

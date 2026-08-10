@@ -2,7 +2,7 @@
 title: About me
 ---
 {{< avatar >}}
-I’m Ercan Akyürek, 34 years old, born and raised in Germany with roots in Turkey. From an early age, I was endlessly curious about how things worked, taking apart toys, motors, and gadgets just to see if I could rebuild them again. That curiosity for understanding and creating has been with me ever since.
+I’m Ercan Akyürek, {{< age birth="1991-07-17" >}} years old, born and raised in Germany with roots in Turkey. From an early age, I was endlessly curious about how things worked, taking apart toys, motors, and gadgets just to see if I could rebuild them again. That curiosity for understanding and creating has been with me ever since.
 
 My first real dive into computers came with a VTech learning computer that had a BASIC interpreter. I didn’t know much back then, but I was fascinated by the idea that I could make the machine do something just by typing commands. That curiosity quickly turned into a passion for coding.
 

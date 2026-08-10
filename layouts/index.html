@@ -1,0 +1,36 @@
+{{ define "body" }}
+    <body class="{{ if .Site.Params.backgroundImage }} background-image" style="background-image: url('{{ .Site.Params.backgroundImage }}');" {{ else }}"{{ end }}>
+{{ end }}
+
+{{ define "main" }}
+    <main aria-role="main" class="home">
+        <div class="home-intro">
+            {{ if .Site.Params.Portrait.Path }}
+               <img src="{{ .Site.Params.Portrait.Path }}" class="circle" alt="{{ .Site.Params.Portrait.Alt }}" style="max-width:{{ .Site.Params.Portrait.MaxWidth }}" />
+            {{ end }}
+
+            <h1>{{ .Site.Title }}</h1>
+
+            {{ partial "subtitle.html" . }}
+
+            {{- with .Site.Params.social }}
+                <div>
+                    {{ partial "social-icons.html" . }}
+                </div>
+            {{- end }}
+        </div>
+
+        {{ with .Site.Params.featured }}
+        <a class="home-feature" href="{{ .url }}">
+            {{ with .image }}<img src="{{ . }}" alt="{{ $.Site.Params.featured.title }}" />{{ end }}
+
+            <div class="home-feature-body">
+                {{ with .label }}<span class="home-feature-label">{{ . }}</span>{{ end }}
+                <h2>{{ .title }}</h2>
+                <p>{{ .description }}</p>
+                {{ with .action }}<span class="home-feature-action">{{ . }}</span>{{ end }}
+            </div>
+        </a>
+        {{ end }}
+    </main>
+{{ end }}
