@@ -2,7 +2,7 @@
 title: 'The user interface, written once'
 date: 2026-08-10T07:30:00+01:00
 type: posts
-tags: ['coaster studio', 'c++react']
+tags: ['coaster lab', 'c++react']
 aliases: ['/coaster-studio/user-interface/']
 ---
 

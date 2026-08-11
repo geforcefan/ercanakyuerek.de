@@ -2,7 +2,7 @@
 title: 'One core, two and a half engines'
 date: 2026-08-10T08:00:00+01:00
 type: posts
-tags: ['coaster studio', 'c++react']
+tags: ['coaster lab', 'c++react']
 aliases: ['/coaster-studio/one-core-two-engines/']
 ---
 

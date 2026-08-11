@@ -2,7 +2,7 @@
 title: 'Exporting a whole park as animated glTF'
 date: 2026-08-10T11:00:00+01:00
 type: posts
-tags: ['coaster studio']
+tags: ['coaster lab']
 aliases: ['/coaster-studio/glb-export/']
 ---
 
