@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>C++react on Ercan Akyürek</title><link>https://ercanakyuerek.de/tags/c++react/</link><description>Recent content in C++react on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 10 Aug 2026 08:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/tags/c++react/index.xml" rel="self" type="application/rss+xml"/><item><title>One core, two and a half engines</title><link>https://ercanakyuerek.de/coaster-studio/one-core-two-engines/</link><pubDate>Mon, 10 Aug 2026 08:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/coaster-studio/one-core-two-engines/</guid><description>&lt;p&gt;Coaster Studio runs on Unreal Engine 5 and on Google Filament, in the browser and on the desktop.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>C++react on Ercan Akyürek</title><link>https://ercanakyuerek.de/tags/c++react/</link><description>Recent content in C++react on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 10 Aug 2026 08:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/tags/c++react/index.xml" rel="self" type="application/rss+xml"/><item><title>One core, two and a half engines</title><link>https://ercanakyuerek.de/coaster-lab/one-core-two-engines/</link><pubDate>Mon, 10 Aug 2026 08:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/coaster-lab/one-core-two-engines/</guid><description>&lt;p&gt;Coaster Lab runs on Unreal Engine 5 and on Google Filament, in the browser and on the desktop.
 Same application, same user interface. Two engines, and the glTF exporter as the half one, because
 it hosts the same scene without rendering a single pixel.&lt;/p&gt;
 &lt;p&gt;Everything that matters lives in one portable C++ core: math, curves, force vector design, physics,
 the data model, saving and loading, the scene and the whole user interface. A host only brings an
-engine, a window and the input.&lt;/p&gt;</description></item><item><title>The user interface, written once</title><link>https://ercanakyuerek.de/coaster-studio/user-interface/</link><pubDate>Mon, 10 Aug 2026 07:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/coaster-studio/user-interface/</guid><description>&lt;p&gt;The user interface of Coaster Studio is not written per host. It is C++ in the core, like everything
+engine, a window and the input.&lt;/p&gt;</description></item><item><title>The user interface, written once</title><link>https://ercanakyuerek.de/coaster-lab/user-interface/</link><pubDate>Mon, 10 Aug 2026 07:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/coaster-lab/user-interface/</guid><description>&lt;p&gt;The user interface of Coaster Lab is not written per host. It is C++ in the core, like everything
 else, and every host shows the same one. Not a rebuilt copy, the same components and the same
 stylesheets.&lt;/p&gt;
 &lt;p&gt;Here is the same toolbar, once in Unreal Engine 5 and once in the Filament build:&lt;/p&gt;
-&lt;figure&gt;&lt;img src="https://ercanakyuerek.de/coaster-studio/user-interface/ue5.png"
- alt="the Coaster Studio toolbar in Unreal Engine 5"&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src="https://ercanakyuerek.de/coaster-lab/user-interface/ue5.png"
+ alt="the Coaster Lab toolbar in Unreal Engine 5"&gt;&lt;figcaption&gt;
  &lt;p&gt;Unreal Engine 5&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;figure&gt;&lt;img src="https://ercanakyuerek.de/coaster-studio/user-interface/filament.png"
- alt="the Coaster Studio toolbar in the Filament build"&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src="https://ercanakyuerek.de/coaster-lab/user-interface/filament.png"
+ alt="the Coaster Lab toolbar in the Filament build"&gt;&lt;figcaption&gt;
  &lt;p&gt;Google Filament&lt;/p&gt;</description></item><item><title>A React framework in C++</title><link>https://ercanakyuerek.de/posts/cppreact/</link><pubDate>Wed, 08 Jul 2026 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/cppreact/</guid><description>&lt;figure class="right-floated"&gt;&lt;img src="https://ercanakyuerek.de/posts/cppreact/demo.gif"
  alt="the todo demo, c&amp;#43;&amp;#43;react driving RmlUi through OpenGL" width="300"&gt;
 &lt;/figure&gt;

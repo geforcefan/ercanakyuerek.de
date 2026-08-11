@@ -1,26 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ercan Akyürek</title><link>https://ercanakyuerek.de/</link><description>Recent content on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 10 Aug 2026 11:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/index.xml" rel="self" type="application/rss+xml"/><item><title>Exporting a whole park as animated glTF</title><link>https://ercanakyuerek.de/coaster-studio/glb-export/</link><pubDate>Mon, 10 Aug 2026 11:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/coaster-studio/glb-export/</guid><description>&lt;p&gt;Coaster Studio can write a whole park into a binary glTF file: track, supports, train, cameras, the
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ercan Akyürek</title><link>https://ercanakyuerek.de/</link><description>Recent content on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 10 Aug 2026 11:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/index.xml" rel="self" type="application/rss+xml"/><item><title>Exporting a whole park as animated glTF</title><link>https://ercanakyuerek.de/coaster-lab/glb-export/</link><pubDate>Mon, 10 Aug 2026 11:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/coaster-lab/glb-export/</guid><description>&lt;p&gt;Coaster Lab can write a whole park into a binary glTF file: track, supports, train, cameras, the
 sun, and the ride itself as animation. That works because the exporter is not really an exporter, it
 is just another host.&lt;/p&gt;
 &lt;p&gt;The scene is the React style component tree from
-&lt;a href="https://ercanakyuerek.de/coaster-studio/one-core-two-engines/"&gt;one core, two and a half engines&lt;/a&gt;, written in
+&lt;a href="https://ercanakyuerek.de/coaster-lab/one-core-two-engines/"&gt;one core, two and a half engines&lt;/a&gt;, written in
 C++ on &lt;a href="https://github.com/geforcefan/cppreact"&gt;cppreact&lt;/a&gt;. Components build the park out of engine
-elements, a mesh, a camera, a light, and what such an element means is up to the host.&lt;/p&gt;</description></item><item><title>One core, two and a half engines</title><link>https://ercanakyuerek.de/coaster-studio/one-core-two-engines/</link><pubDate>Mon, 10 Aug 2026 08:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/coaster-studio/one-core-two-engines/</guid><description>&lt;p&gt;Coaster Studio runs on Unreal Engine 5 and on Google Filament, in the browser and on the desktop.
+elements, a mesh, a camera, a light, and what such an element means is up to the host.&lt;/p&gt;</description></item><item><title>One core, two and a half engines</title><link>https://ercanakyuerek.de/coaster-lab/one-core-two-engines/</link><pubDate>Mon, 10 Aug 2026 08:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/coaster-lab/one-core-two-engines/</guid><description>&lt;p&gt;Coaster Lab runs on Unreal Engine 5 and on Google Filament, in the browser and on the desktop.
 Same application, same user interface. Two engines, and the glTF exporter as the half one, because
 it hosts the same scene without rendering a single pixel.&lt;/p&gt;
 &lt;p&gt;Everything that matters lives in one portable C++ core: math, curves, force vector design, physics,
 the data model, saving and loading, the scene and the whole user interface. A host only brings an
-engine, a window and the input.&lt;/p&gt;</description></item><item><title>The user interface, written once</title><link>https://ercanakyuerek.de/coaster-studio/user-interface/</link><pubDate>Mon, 10 Aug 2026 07:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/coaster-studio/user-interface/</guid><description>&lt;p&gt;The user interface of Coaster Studio is not written per host. It is C++ in the core, like everything
+engine, a window and the input.&lt;/p&gt;</description></item><item><title>The user interface, written once</title><link>https://ercanakyuerek.de/coaster-lab/user-interface/</link><pubDate>Mon, 10 Aug 2026 07:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/coaster-lab/user-interface/</guid><description>&lt;p&gt;The user interface of Coaster Lab is not written per host. It is C++ in the core, like everything
 else, and every host shows the same one. Not a rebuilt copy, the same components and the same
 stylesheets.&lt;/p&gt;
 &lt;p&gt;Here is the same toolbar, once in Unreal Engine 5 and once in the Filament build:&lt;/p&gt;
-&lt;figure&gt;&lt;img src="https://ercanakyuerek.de/coaster-studio/user-interface/ue5.png"
- alt="the Coaster Studio toolbar in Unreal Engine 5"&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src="https://ercanakyuerek.de/coaster-lab/user-interface/ue5.png"
+ alt="the Coaster Lab toolbar in Unreal Engine 5"&gt;&lt;figcaption&gt;
  &lt;p&gt;Unreal Engine 5&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;figure&gt;&lt;img src="https://ercanakyuerek.de/coaster-studio/user-interface/filament.png"
- alt="the Coaster Studio toolbar in the Filament build"&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src="https://ercanakyuerek.de/coaster-lab/user-interface/filament.png"
+ alt="the Coaster Lab toolbar in the Filament build"&gt;&lt;figcaption&gt;
  &lt;p&gt;Google Filament&lt;/p&gt;</description></item><item><title>A React framework in C++</title><link>https://ercanakyuerek.de/posts/cppreact/</link><pubDate>Wed, 08 Jul 2026 22:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/cppreact/</guid><description>&lt;figure class="right-floated"&gt;&lt;img src="https://ercanakyuerek.de/posts/cppreact/demo.gif"
  alt="the todo demo, c&amp;#43;&amp;#43;react driving RmlUi through OpenGL" width="300"&gt;
 &lt;/figure&gt;
@@ -32,7 +32,7 @@ have ever built one in C++ around OpenGL, you know the options are thin. I come 
 used to React and CSS, and I missed them more than I expected. I tried a few things and none of them
 felt right.&lt;/p&gt;</description></item><item><title>Uniform Rational B-Spline curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</link><pubDate>Sun, 18 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-1294e50d12d3d17a4fe25b8c80b81088"
+ id="react-root-22e0153bf31f986e9226cb5674458934"
  width="225px"
  height="285px"
  class="frame"
@@ -45,7 +45,7 @@ felt right.&lt;/p&gt;</description></item><item><title>Uniform Rational B-Spline
  
 
  &lt;script&gt;
- document.getElementById('react-root-1294e50d12d3d17a4fe25b8c80b81088').srcdoc = `
+ document.getElementById('react-root-22e0153bf31f986e9226cb5674458934').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -86,7 +86,7 @@ this has always been &lt;code&gt;Vector3(0, 1, 0)&lt;/code&gt;. This is fine for
 slopes&lt;/strong&gt;, but it starts to fall apart when the track approaches angles
 close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-1b1c803a28b38afb329cda43018c665c"
+ id="react-root-ba394f7900cc22489e7c8b957b40a1b3"
  width="225px"
  height="285px"
  class="frame"
@@ -99,7 +99,7 @@ close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item>
  
 
  &lt;script&gt;
- document.getElementById('react-root-1b1c803a28b38afb329cda43018c665c').srcdoc = `
+ document.getElementById('react-root-ba394f7900cc22489e7c8b957b40a1b3').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -211,7 +211,7 @@ nicer API to work with.&lt;/p&gt;
 define a number of imports for &lt;strong&gt;WASI&lt;/strong&gt;, but all of them are empty.
 This looks suspicious at first, so let us talk about that.&lt;/p&gt;</description></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-f8c2ed272598f5973360aad37e406242"
+ id="react-root-a56053944611e0b2dfd9e236b15da510"
  width="225px"
  height="285px"
  class="frame"
@@ -224,7 +224,7 @@ This looks suspicious at first, so let us talk about that.&lt;/p&gt;</descriptio
  
 
  &lt;script&gt;
- document.getElementById('react-root-f8c2ed272598f5973360aad37e406242').srcdoc = `
+ document.getElementById('react-root-a56053944611e0b2dfd9e236b15da510').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
