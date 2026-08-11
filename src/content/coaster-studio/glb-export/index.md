@@ -32,7 +32,7 @@ an Intamin style launch coaster.
 This is the real application, compiled to WebAssembly and drawn by Filament. You start in the train
 with the simulation paused. Press play.
 
-{{< embedded-iframe src="https://geforcefan.github.io/roller-coaster-simulator/demo/2026-08-10/?park=keltan-kemp&pov=1&history=0" height="650px" >}}
+{{< embedded-iframe src="https://geforcefan.github.io/roller-coaster-simulator/latest/?park=keltan-kemp&editor=0&start_simulation=1" height="650px" >}}
 
 ## The same scene, in Blender
 

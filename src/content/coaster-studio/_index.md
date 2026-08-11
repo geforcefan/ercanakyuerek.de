@@ -29,14 +29,17 @@ So I thought: let us do this in a more modern way.
 
 ## Try it right now
 
-Here is the latest build, the actual application, running in your browser.
+Here is the latest build, the actual application, running in your browser. Whatever state the
+development is in, this is it, and it will always show the newest state, so stay tuned.
 
-Fly around. This is an FVD scene, so you can build an FVD track right now. Whatever state the
-development is in, this is it.
+{{< embedded-iframe src="https://geforcefan.github.io/roller-coaster-simulator/latest/?park=hybris&editor=0&start_simulation=1" height="650px" >}}
 
-And it will always show the newest state, so stay tuned.
+## Play around with FVD
 
-{{< embedded-iframe src="https://geforcefan.github.io/roller-coaster-simulator/latest/?park=fvd" height="650px" >}}
+If you feel like building something yourself, there is a version with an FVD park preloaded. Draw
+the forces, watch the track follow, break it as much as you like.
+
+[Open the FVD sandbox](https://geforcefan.github.io/roller-coaster-simulator/latest/?park=fvd)
 
 ## Two targets, one code base
 
