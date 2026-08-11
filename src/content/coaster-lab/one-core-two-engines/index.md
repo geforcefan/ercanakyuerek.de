@@ -3,9 +3,10 @@ title: 'One core, two and a half engines'
 date: 2026-08-10T08:00:00+01:00
 type: posts
 tags: ['coaster studio', 'c++react']
+aliases: ['/coaster-studio/one-core-two-engines/']
 ---
 
-Coaster Studio runs on Unreal Engine 5 and on Google Filament, in the browser and on the desktop.
+Coaster Lab runs on Unreal Engine 5 and on Google Filament, in the browser and on the desktop.
 Same application, same user interface. Two engines, and the glTF exporter as the half one, because
 it hosts the same scene without rendering a single pixel.
 
@@ -38,7 +39,7 @@ inline const Element<CameraProps> Camera{"Camera"};
 ```
 
 A camera, three props, nothing else. Every host writes one function for it, Filament, Unreal
-Engine 5 and the [glTF exporter]({{< ref "/coaster-studio/glb-export" >}}):
+Engine 5 and the [glTF exporter]({{< ref "/coaster-lab/glb-export" >}}):
 
 ```cpp
 object.camera_entity = utils::EntityManager::get().create();

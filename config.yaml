@@ -13,10 +13,10 @@ services:
 params:
   featured:
     label: Current project
-    title: Coaster Studio
+    title: Coaster Lab
     description: A roller coaster simulator I am building from scratch. One C++ core, running in Unreal Engine 5 and in your browser with the Google Filament engine.
-    image: /images/coaster-studio-hero.jpg
-    url: /coaster-studio
+    image: /images/coaster-lab-hero.jpg
+    url: /coaster-lab
     action: Have a look and try it out
   homeSubtitle: Discover my world of creative web development, roller coaster simulations, and 3D graphics.
   disableReadOtherPosts: false
@@ -46,9 +46,9 @@ menu:
     - identifier: aboutme
       name: About me
       url: /about
-    - identifier: coasterstudio
-      name: Coaster Studio
-      url: /coaster-studio
+    - identifier: coasterlab
+      name: Coaster Lab
+      url: /coaster-lab
     - identifier: posts
       name: Posts
       url: /posts

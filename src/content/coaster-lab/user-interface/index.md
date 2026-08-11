@@ -3,17 +3,18 @@ title: 'The user interface, written once'
 date: 2026-08-10T07:30:00+01:00
 type: posts
 tags: ['coaster studio', 'c++react']
+aliases: ['/coaster-studio/user-interface/']
 ---
 
-The user interface of Coaster Studio is not written per host. It is C++ in the core, like everything
+The user interface of Coaster Lab is not written per host. It is C++ in the core, like everything
 else, and every host shows the same one. Not a rebuilt copy, the same components and the same
 stylesheets.
 
 Here is the same toolbar, once in Unreal Engine 5 and once in the Filament build:
 
-{{< figure src="ue5.png" alt="the Coaster Studio toolbar in Unreal Engine 5" caption="Unreal Engine 5" >}}
+{{< figure src="ue5.png" alt="the Coaster Lab toolbar in Unreal Engine 5" caption="Unreal Engine 5" >}}
 
-{{< figure src="filament.png" alt="the Coaster Studio toolbar in the Filament build" caption="Google Filament" >}}
+{{< figure src="filament.png" alt="the Coaster Lab toolbar in the Filament build" caption="Google Filament" >}}
 
 Same padding, same radius, same blur behind the panel, same icons. Nobody keeps those two in sync,
 they cannot drift apart, because there is only one of them.
@@ -97,4 +98,4 @@ At some point I will probably release that part as open source. And I will proba
 Reddit again, because how dare I bring web principles into C++.
 
 How the scene side of the same idea works is in
-[one core, two and a half engines]({{< ref "/coaster-studio/one-core-two-engines" >}}).
+[one core, two and a half engines]({{< ref "/coaster-lab/one-core-two-engines" >}}).

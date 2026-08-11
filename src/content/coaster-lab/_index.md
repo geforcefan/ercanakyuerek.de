@@ -1,10 +1,11 @@
 ---
-title: Coaster Studio
+title: Coaster Lab
+aliases: ['/coaster-studio/']
 ---
 
-{{< figure src="/images/coaster-studio-hero.jpg" alt="Coaster Studio, a train in an inversion at low sun" >}}
+{{< figure src="/images/coaster-lab-hero.jpg" alt="Coaster Lab, a train in an inversion at low sun" >}}
 
-Welcome to Coaster Studio, and to its workshop. I always wanted to write my own coaster simulator,
+Welcome to Coaster Lab, and to its workshop. I always wanted to write my own coaster simulator,
 not a tool around somebody else's but my own, and this is me finally doing it. On this page I show
 what I build, what breaks, and what I throw away again.
 
@@ -43,7 +44,7 @@ the forces, watch the track follow, break it as much as you like.
 
 ## Two targets, one code base
 
-Coaster Studio runs in the browser and in Unreal Engine 5.
+Coaster Lab runs in the browser and in Unreal Engine 5.
 
 The browser version is a bit selfish, I have to say. I am a Mac guy, I love macOS, and our GPU
 options are bad. I wanted something that runs smooth and still looks good on my MacBook M4 Pro.
@@ -85,6 +86,6 @@ a lot of work into that project: he made the application modern again and got ri
 for that, and special thanks.
 
 The group was made to collect feedback for the new openFVD version, and it is now also the place for
-Coaster Studio feedback. Come in and tell me what is wrong with it.
+Coaster Lab feedback. Come in and tell me what is wrong with it.
 
 {{< discord-link url="https://discord.gg/b5eQ5EFdjY" >}}

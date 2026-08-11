@@ -3,14 +3,15 @@ title: 'Exporting a whole park as animated glTF'
 date: 2026-08-10T11:00:00+01:00
 type: posts
 tags: ['coaster studio']
+aliases: ['/coaster-studio/glb-export/']
 ---
 
-Coaster Studio can write a whole park into a binary glTF file: track, supports, train, cameras, the
+Coaster Lab can write a whole park into a binary glTF file: track, supports, train, cameras, the
 sun, and the ride itself as animation. That works because the exporter is not really an exporter, it
 is just another host.
 
 The scene is the React style component tree from
-[one core, two and a half engines]({{< ref "/coaster-studio/one-core-two-engines" >}}), written in
+[one core, two and a half engines]({{< ref "/coaster-lab/one-core-two-engines" >}}), written in
 C++ on [cppreact](https://github.com/geforcefan/cppreact). Components build the park out of engine
 elements, a mesh, a camera, a light, and what such an element means is up to the host.
 
