@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ercan Akyürek</title><link>https://ercanakyuerek.de/</link><description>Recent content on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 10 Aug 2026 11:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/index.xml" rel="self" type="application/rss+xml"/><item><title>Exporting a whole park as animated glTF</title><link>https://ercanakyuerek.de/coaster-lab/glb-export/</link><pubDate>Mon, 10 Aug 2026 11:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/coaster-lab/glb-export/</guid><description>&lt;p&gt;Coaster Lab can write a whole park into a binary glTF file: track, supports, train, cameras, the
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ercan Akyürek</title><link>https://ercanakyuerek.de/</link><description>Recent content on Ercan Akyürek</description><generator>Hugo</generator><language>en</language><lastBuildDate>Sun, 06 Sep 2026 20:00:00 +0100</lastBuildDate><atom:link href="https://ercanakyuerek.de/index.xml" rel="self" type="application/rss+xml"/><item><title>NoLimits 2 Utilities for Blender</title><link>https://ercanakyuerek.de/posts/blender-nolimits2-utilities/</link><pubDate>Sun, 06 Sep 2026 20:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/blender-nolimits2-utilities/</guid><description>&lt;p&gt;I finally figured out how NoLimits 2 builds its track. Not roughly, exactly: the NURBS from the
+vertices, the frames along it, the roll between the roll points and the heartline on top. That
+has been on my list for years, as a side project, and because
+&lt;a href="https://ercanakyuerek.de/coaster-lab/"&gt;Coaster Lab&lt;/a&gt; has its own curve library and I wanted to know how
+close I am.&lt;/p&gt;
+&lt;p&gt;Then it hit me. Back in 2015 I wrote
+&lt;a href="https://github.com/geforcefan/BlenderNoLimitsCSVImporter"&gt;BlenderNoLimitsCSVImporter&lt;/a&gt;, a small
+extension that turns exactly that csv export into a Blender curve. People still use it, and it has
+one big catch: the csv export only exists in the Professional version of NoLimits 2. With the
+normal version you were out.&lt;/p&gt;</description></item><item><title>Exporting a whole park as animated glTF</title><link>https://ercanakyuerek.de/coaster-lab/glb-export/</link><pubDate>Mon, 10 Aug 2026 11:00:00 +0100</pubDate><guid>https://ercanakyuerek.de/coaster-lab/glb-export/</guid><description>&lt;p&gt;Coaster Lab can write a whole park into a binary glTF file: track, supports, train, cameras, the
 sun, and the ride itself as animation. That works because the exporter is not really an exporter, it
 is just another host.&lt;/p&gt;
 &lt;p&gt;The scene is the React style component tree from
@@ -32,7 +41,7 @@ have ever built one in C++ around OpenGL, you know the options are thin. I come 
 used to React and CSS, and I missed them more than I expected. I tried a few things and none of them
 felt right.&lt;/p&gt;</description></item><item><title>Uniform Rational B-Spline curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</link><pubDate>Sun, 18 Jan 2026 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/b-spline-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-0ae6c73edff82228df5076aeb450f040"
+ id="react-root-cde02e70b70d4f127241a6152250c6e4"
  width="225px"
  height="285px"
  class="frame"
@@ -45,7 +54,7 @@ felt right.&lt;/p&gt;</description></item><item><title>Uniform Rational B-Spline
  
 
  &lt;script&gt;
- document.getElementById('react-root-0ae6c73edff82228df5076aeb450f040').srcdoc = `
+ document.getElementById('react-root-cde02e70b70d4f127241a6152250c6e4').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -86,7 +95,7 @@ this has always been &lt;code&gt;Vector3(0, 1, 0)&lt;/code&gt;. This is fine for
 slopes&lt;/strong&gt;, but it starts to fall apart when the track approaches angles
 close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Bézier curve</title><link>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</link><pubDate>Thu, 25 Dec 2025 14:30:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/writing-a-roller-coaster-simulation/bezier-curve/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-01192fc51357c2451fcbd0f216752268"
+ id="react-root-655cd891b112d0da3bd8668c92530538"
  width="225px"
  height="285px"
  class="frame"
@@ -99,7 +108,7 @@ close to &lt;strong&gt;90 degrees&lt;/strong&gt;.&lt;/p&gt;</description></item>
  
 
  &lt;script&gt;
- document.getElementById('react-root-01192fc51357c2451fcbd0f216752268').srcdoc = `
+ document.getElementById('react-root-655cd891b112d0da3bd8668c92530538').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
@@ -211,7 +220,7 @@ nicer API to work with.&lt;/p&gt;
 define a number of imports for &lt;strong&gt;WASI&lt;/strong&gt;, but all of them are empty.
 This looks suspicious at first, so let us talk about that.&lt;/p&gt;</description></item><item><title>Implementing library functions</title><link>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</link><pubDate>Fri, 24 Feb 2023 00:19:00 +0100</pubDate><guid>https://ercanakyuerek.de/posts/wasi/implementing-library-functions/</guid><description>&lt;div class="embedded float-right"&gt;
  &lt;iframe
- id="react-root-b281a55c647285b95bd89af6c7c21e01"
+ id="react-root-977375935019152726216fd80d2c892e"
  width="225px"
  height="285px"
  class="frame"
@@ -224,7 +233,7 @@ This looks suspicious at first, so let us talk about that.&lt;/p&gt;</descriptio
  
 
  &lt;script&gt;
- document.getElementById('react-root-b281a55c647285b95bd89af6c7c21e01').srcdoc = `
+ document.getElementById('react-root-977375935019152726216fd80d2c892e').srcdoc = `
  &lt;!DOCTYPE html&gt;
  &lt;html lang="en" data-theme="dark"&gt;
  &lt;head&gt;
