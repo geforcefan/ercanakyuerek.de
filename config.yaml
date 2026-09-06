@@ -12,12 +12,24 @@ services:
     id: G-WCX2MRFT7Z
 params:
   featured:
-    label: Current project
-    title: Coaster Lab
-    description: A roller coaster simulator I am building from scratch. One C++ core, running in Unreal Engine 5 and in your browser with the Google Filament engine.
-    image: /images/coaster-lab-hero.jpg
-    url: /coaster-lab
-    action: Have a look and try it out
+    - label: Current project
+      title: Coaster Lab
+      description: A roller coaster simulator I am building from scratch. One C++ core, running in Unreal Engine 5 and in your browser with the Google Filament engine.
+      image: /images/coaster-lab-hero.jpg
+      url: /coaster-lab
+      action: Have a look and try it out
+    - label: Blender extension
+      title: NoLimits 2 Utilities
+      description: A Blender extension with utilities for NoLimits 2. Reads tracks straight from the park file, no csv export and no Professional version needed.
+      image: /posts/blender-nolimits2-utilities/hero.jpg
+      url: /posts/blender-nolimits2-utilities
+      action: Details and installation instructions here
+    - label: C++ library
+      title: c++react
+      description: A virtual DOM implementation for C++, modelled after React. Makes life easier when you have to build a proper user interface for CAD like software in C++.
+      image: /posts/cppreact/hero.jpg
+      url: /posts/cppreact
+      action: Details here
   homeSubtitle: Discover my world of creative web development, roller coaster simulations, and 3D graphics.
   disableReadOtherPosts: false
   enableSharingButtons: true

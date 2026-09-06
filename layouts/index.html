@@ -20,9 +20,9 @@
             {{- end }}
         </div>
 
-        {{ with .Site.Params.featured }}
+        {{ range $card := .Site.Params.featured }}
         <a class="home-feature" href="{{ .url }}">
-            {{ with .image }}<img src="{{ . }}" alt="{{ $.Site.Params.featured.title }}" />{{ end }}
+            {{ with .image }}<img src="{{ . }}" alt="{{ $card.title }}" />{{ end }}
 
             <div class="home-feature-body">
                 {{ with .label }}<span class="home-feature-label">{{ . }}</span>{{ end }}
